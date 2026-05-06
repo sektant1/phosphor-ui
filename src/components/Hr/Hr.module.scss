@@ -1,0 +1,13 @@
+.rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--phosphor-fade) 12%,
+    var(--phosphor) 50%,
+    var(--phosphor-fade) 88%,
+    transparent
+  );
+  margin: 1.2rem 0;
+}

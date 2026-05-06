@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.cell { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.demo { width: 100%; height: 80px; background: var(--bg-raise); border: 1px solid var(--phosphor-fade); display: flex; align-items: center; justify-content: center; }
+.lab { font-family: var(--font-code); font-size: 10.5px; color: var(--phosphor-dim); text-align: center; }
+.glow-em { color: var(--phosphor); text-shadow: var(--glow-emerald); font-family: var(--font-heading); font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+.glow-mg { color: #62ff9a; text-shadow: var(--glow-magenta); font-family: var(--font-heading); font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+.glow-am { color: var(--moss); text-shadow: var(--glow-amber); font-family: var(--font-heading); font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+.inset-glow { box-shadow: inset 0 0 80px rgba(44,255,122,0.18), inset 0 0 0 1px var(--phosphor-fade); }
+.outer-glow { box-shadow: 0 0 24px rgba(44,255,122,0.3), 0 0 60px rgba(44,255,122,0.1); border-color: var(--phosphor); }
+</style></head>
+<body>
+<div class="grid">
+  <div class="cell"><div class="demo"><span class="glow-em">EMERALD</span></div><div class="lab">--glow-emerald</div></div>
+  <div class="cell"><div class="demo"><span class="glow-mg">ACCENT</span></div><div class="lab">--glow-magenta</div></div>
+  <div class="cell"><div class="demo"><span class="glow-am">MOSS</span></div><div class="lab">--glow-amber</div></div>
+  <div class="cell"><div class="demo inset-glow"><span class="glow-em">INSET</span></div><div class="lab">inset bloom</div></div>
+  <div class="cell"><div class="demo outer-glow"><span class="glow-em">OUTER</span></div><div class="lab">outer bloom</div></div>
+  <div class="cell"><div class="demo" style="border-radius:0;outline:1px dashed var(--phosphor-fade);outline-offset:-6px"><span class="glow-em">STENCIL</span></div><div class="lab">stencil chrome</div></div>
+</div>
+</body></html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }
+.cell { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px; background: var(--bg-raise); border: 1px solid var(--phosphor-fade); }
+.glyph { font-family: var(--font-code); font-size: 22px; color: var(--phosphor); text-shadow: var(--glow-emerald); line-height: 1; }
+.name { font-family: var(--font-terminal); font-size: 10px; color: var(--phosphor-fade); letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+</style></head>
+<body>
+<div class="grid">
+  <div class="cell"><div class="glyph">▌</div><div class="name">bullet</div></div>
+  <div class="cell"><div class="glyph">▸</div><div class="name">closed</div></div>
+  <div class="cell"><div class="glyph">▾</div><div class="name">open</div></div>
+  <div class="cell"><div class="glyph">▮</div><div class="name">caret</div></div>
+  <div class="cell"><div class="glyph">█</div><div class="name">block</div></div>
+  <div class="cell"><div class="glyph">▓</div><div class="name">75%</div></div>
+  <div class="cell"><div class="glyph">▒</div><div class="name">50%</div></div>
+  <div class="cell"><div class="glyph">░</div><div class="name">25%</div></div>
+  <div class="cell"><div class="glyph">☢</div><div class="name">rad</div></div>
+  <div class="cell"><div class="glyph">◇</div><div class="name">div</div></div>
+  <div class="cell"><div class="glyph">+</div><div class="name">stencil</div></div>
+  <div class="cell"><div class="glyph">└─</div><div class="name">branch</div></div>
+  <div class="cell"><div class="glyph">┌─</div><div class="name">corner</div></div>
+  <div class="cell"><div class="glyph">│</div><div class="name">pipe</div></div>
+  <div class="cell"><div class="glyph">═</div><div class="name">double</div></div>
+  <div class="cell"><div class="glyph">//</div><div class="name">slash</div></div>
+</div>
+</body></html>

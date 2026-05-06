@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.pda {
+  border: 1px solid var(--phosphor);
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--phosphor-fade), 0 0 24px rgba(44,255,122,0.18);
+  position: relative;
+  overflow: hidden;
+}
+.pda::before {
+  content: ""; position: absolute; inset: 4px; border: 1px dashed var(--phosphor-fade); pointer-events: none;
+}
+.bar {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phosphor-dim);
+  background: var(--bg-raise);
+  border-bottom: 1px solid var(--phosphor-fade);
+}
+.led { width: 8px; height: 8px; border-radius: 50%; box-shadow: 0 0 4px currentColor, 0 0 10px currentColor; display: inline-block; }
+.led.rec { color: #d6ffe2; background: currentColor; }
+.led.rx  { color: #62ff9a; background: currentColor; }
+.led.pwr { color: var(--phosphor); background: currentColor; }
+.title { color: var(--phosphor); text-shadow: var(--glow-emerald); font-weight: 700; flex: 1; }
+.meta { color: var(--phosphor-dim); }
+.body { padding: 14px 16px; font-family: var(--font-code); font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+.prompt { color: #62ff9a; text-shadow: var(--glow-magenta); }
+.typed { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+</style></head>
+<body>
+<div class="pda">
+  <div class="bar">
+    <span class="led rec"></span>
+    <span class="led rx"></span>
+    <span class="led pwr"></span>
+    <span class="title">PDA-3M :: /operator/dossier.txt</span>
+    <span class="meta">CH 0x4C · γ-2 · NORM</span>
+  </div>
+  <div class="body">
+    <div><span class="prompt">~/zone-net $</span> <span class="typed">cat ./operator/dossier.txt</span></div>
+    <div style="margin-top:6px;color:var(--phosphor-bright)">callsign   :: sektant1</div>
+    <div style="color:var(--phosphor-bright)">clearance  :: ОДИНОЧКА</div>
+    <div style="color:var(--phosphor-bright)">faction    :: вольный сталкер · без альянса</div>
+  </div>
+</div>
+</body></html>

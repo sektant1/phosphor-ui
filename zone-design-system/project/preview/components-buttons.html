@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.btn-prompt {
+  font-family: var(--font-terminal);
+  font-size: 17px;
+  background: transparent;
+  border: 1px solid var(--phosphor);
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  padding: 6px 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.btn-prompt.alt { border-color: var(--phosphor-fade); color: var(--phosphor-dim); text-shadow: none; }
+.btn-prompt.invert { background: var(--phosphor); color: var(--bg); text-shadow: none; }
+.link {
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: #62ff9a;
+  text-shadow: var(--glow-magenta);
+  text-decoration: none;
+  border-bottom: 1px dashed #62ff9a;
+  padding-bottom: 1px;
+}
+.link.hover { background: #62ff9a; color: var(--bg); text-shadow: none; border-bottom-color: #d6ffe2; }
+.lab { font-family: var(--font-terminal); font-size: 11px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; width: 100%; margin-top: 4px; }
+</style></head>
+<body>
+<div class="lab">Buttons — primary / secondary / pressed</div>
+<div class="row">
+  <button class="btn-prompt">&gt; CONFIRM</button>
+  <button class="btn-prompt alt">&gt; CANCEL</button>
+  <button class="btn-prompt invert">&gt; PRESSED</button>
+</div>
+<div class="lab">Links — default / hover</div>
+<div class="row">
+  <a class="link">&gt;&gt; back to long-wave feed</a>
+  <a class="link hover">&gt;&gt; back to long-wave feed</a>
+</div>
+</body></html>

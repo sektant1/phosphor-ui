@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.tape {
+  background: linear-gradient(90deg, transparent, rgba(44,255,122,0.06) 12%, rgba(44,255,122,0.06) 88%, transparent);
+  border-top: 1px dashed var(--phosphor-fade);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding: 6px 12px;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tape + .tape { margin-top: 12px; }
+.classified { color: var(--phosphor-bright); }
+.lab { font-family: var(--font-terminal); font-size: 11px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; margin: 12px 0 4px; }
+.lab:first-child { margin-top: 0; }
+</style></head>
+<body>
+<div class="lab">Classification tape</div>
+<div class="tape classified">// СЕКРЕТНО // ЧЕРНОБЫЛЬСКАЯ ЗОНА ОТЧУЖДЕНИЯ // ТОЛЬКО ДЛЯ ГЛАЗ //</div>
+<div class="lab">Stamp / report id</div>
+<div class="tape">▌ ОТЧЁТ // SECTOR-7 :: REPORT/HOW-TO-SETUP-NEOVIM</div>
+<div class="lab">Telemetry strip</div>
+<div class="tape">// СЕКТОР-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ // 2026-05-04 // ОПЕРАТОР sektant1 //</div>
+</body></html>

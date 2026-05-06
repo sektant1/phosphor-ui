@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="sektant.dev — передачи из припяти-9">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#082416"></stop>
+      <stop offset="55%" stop-color="#04140a"></stop>
+      <stop offset="100%" stop-color="#010604"></stop>
+    </radialGradient>
+    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="transparent"></rect>
+      <rect width="6" height="1" fill="#2cff7a" fill-opacity="0.06"></rect>
+    </pattern>
+    <pattern id="hatch" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="22" height="22" fill="transparent"></rect>
+      <rect width="2" height="22" fill="#1fb854" fill-opacity="0.05"></rect>
+    </pattern>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"></rect>
+  <rect width="1200" height="630" fill="url(#hatch)"></rect>
+  <rect width="1200" height="630" fill="url(#scan)"></rect>
+
+  
+  <rect x="22" y="22" width="1156" height="586" fill="none" stroke="#1fb854" stroke-width="2"></rect>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#0a4d22" stroke-width="1" stroke-dasharray="6 6"></rect>
+
+  
+  <g font-family="ui-monospace, monospace" font-size="22" letter-spacing="6" fill="#0a4d22">
+    <text x="60" y="78">// СЕКРЕТНО // ЧЕРНОБЫЛЬСКАЯ ЗОНА ОТЧУЖДЕНИЯ // ТОЛЬКО ДЛЯ ГЛАЗ //</text>
+  </g>
+
+  
+  <g transform="translate(140 270) scale(3.2)" fill="#2cff7a" filter="url(#glow)">
+    <path d="M27 23.34 A10 10 0 0 1 37 23.34 L45 9.48 A26 26 0 0 0 19 9.48 Z"></path>
+    <path d="M42 32 A10 10 0 0 1 37 40.66 L45 54.52 A26 26 0 0 0 58 32 Z"></path>
+    <path d="M27 40.66 A10 10 0 0 1 22 32 L6 32 A26 26 0 0 0 19 54.52 Z"></path>
+    <circle cx="32" cy="32" r="5"></circle>
+  </g>
+
+  
+  <g font-family="ui-monospace, monospace" fill="#2cff7a" filter="url(#glow)">
+    <text x="450" y="290" font-size="120" font-weight="700" letter-spacing="8">SEKTANT1</text>
+  </g>
+  <g font-family="ui-monospace, monospace" fill="#1fb854">
+    <text x="452" y="345" font-size="26" letter-spacing="3">// передачи из припяти-9 :: сигнал пойман</text>
+  </g>
+
+  
+  <line x1="60" y1="500" x2="1140" y2="500" stroke="#0a4d22" stroke-width="1" stroke-dasharray="3 5"></line>
+
+  <g font-family="ui-monospace, monospace" font-size="24" fill="#1fb854">
+    <text x="60" y="545">[одиночка@вч-сеть://припять-9]$</text>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="22" fill="#0a4d22" letter-spacing="4">
+    <text x="60" y="585">// ОБЪЕКТ-4 · 51.389° N · 30.099° E · γ-2 · sektant.dev</text>
+  </g>
+
+  
+  <g fill="#2cff7a" font-family="ui-monospace, monospace" font-size="32">
+    <text x="40" y="55">+</text>
+    <text x="1144" y="55">+</text>
+    <text x="40" y="600">+</text>
+    <text x="1144" y="600">+</text>
+  </g>
+</svg>

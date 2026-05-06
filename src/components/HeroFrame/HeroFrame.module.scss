@@ -1,0 +1,103 @@
+.frame {
+  position: relative;
+  border: 1px solid var(--phosphor);
+  background:
+    radial-gradient(ellipse 120% 70% at 50% 0%, rgba(44,255,122,0.08) 0%, transparent 70%),
+    var(--bg);
+  box-shadow:
+    0 0 0 1px var(--phosphor-fade) inset,
+    0 0 24px rgba(44, 255, 122, 0.18),
+    0 0 60px rgba(44, 255, 122, 0.06);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phosphor-dim);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(44,255,122,0.05) 6px 7px),
+    var(--bg-raise);
+}
+.hudTop { border-bottom: 1px solid var(--phosphor-fade); }
+.hudBot { border-top: 1px solid var(--phosphor-fade); }
+.label  { color: var(--phosphor); text-shadow: var(--glow-emerald); font-weight: 700; }
+.spacer { flex: 1 1 auto; }
+.text   { color: var(--phosphor-dim); font-variant-numeric: tabular-nums; }
+.bars   { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.led {
+  width: 8px; height: 8px; border-radius: 50%;
+  box-shadow: 0 0 4px currentColor, 0 0 10px currentColor;
+  display: inline-block;
+}
+.ledRec { color: var(--magenta-bright); background: currentColor; animation: phosphorHudBlink 1.4s steps(2,end) infinite; }
+.ledPwr { color: var(--phosphor); background: currentColor; animation: phosphorHudPulse 2.6s ease-in-out infinite; }
+.tape {
+  flex: 1 1 auto; min-width: 0; overflow: hidden;
+  border-left: 1px dashed var(--phosphor-fade);
+  border-right: 1px dashed var(--phosphor-fade);
+  padding: 0 0.6rem;
+}
+.tapeRun {
+  display: inline-block; white-space: nowrap;
+  animation: phosphorTapeRoll linear infinite;
+  color: var(--phosphor-fade);
+  letter-spacing: 0.18em;
+}
+.artWrap {
+  position: relative;
+  padding: 1.4rem 1rem;
+  display: flex; justify-content: center; align-items: center;
+  overflow: hidden; min-height: 14em; isolation: isolate;
+}
+.art {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(4px, 0.85vw, 8px);
+  line-height: 1.15;
+  margin: 0;
+  white-space: pre;
+  color: var(--phosphor-bright);
+  text-shadow: 0 0 1px var(--phosphor), 0 0 8px rgba(44,255,122,0.55), 0 0 20px rgba(44,255,122,0.25);
+  animation: phosphorHeroBreathe 4.2s ease-in-out infinite;
+  position: relative; z-index: 1;
+}
+@media (max-width: 640px) {
+  .hud {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 11px;
+    padding: 0.3rem 0.5rem;
+  }
+  .tape {
+    flex-basis: 100%;
+    border-left: none;
+    border-right: none;
+    border-top: 1px dashed var(--phosphor-fade);
+    padding: 0.2rem 0;
+  }
+  .artWrap {
+    min-height: 9em;
+    padding: 1rem 0.6rem;
+  }
+  .art { font-size: clamp(3.2px, 1.4vw, 6px); }
+}
+.scanline {
+  position: absolute; left: 0; right: 0; top: 0; height: 14%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(182,255,206,0.18) 45%,
+    rgba(44,255,122,0.28) 50%,
+    rgba(182,255,206,0.18) 55%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: phosphorHeroScan 5.5s ease-in-out infinite;
+  pointer-events: none; z-index: 2;
+}

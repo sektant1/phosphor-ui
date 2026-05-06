@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>sektant's hideout :: zone</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  overflow-x: clip;
+}
+body {
+  background:
+    radial-gradient(ellipse 110% 80% at 50% 25%, var(--bg-raise) 0%, var(--bg) 60%, var(--bg-deep) 100%);
+  background-attachment: fixed;
+}
+/* CRT overlay stack */
+.crt-shell { position: relative; isolation: isolate; min-height: 100vh; }
+.crt-scanlines, .crt-noise, .crt-vignette, .crt-frame {
+  position: fixed; inset: 0; pointer-events: none;
+}
+.crt-scanlines {
+  z-index: 9000;
+  background: repeating-linear-gradient(to bottom,
+    rgba(44,255,122,0.09) 0, rgba(44,255,122,0.09) 1px,
+    transparent 1px, transparent 3px);
+  mix-blend-mode: screen;
+}
+.crt-noise {
+  z-index: 9001; opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17  0 0 0 0 1  0 0 0 0 0.48  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 160px 160px;
+  animation: noiseShift 1.2s steps(6) infinite;
+}
+.crt-vignette {
+  z-index: 9002;
+  background:
+    radial-gradient(ellipse 95% 85% at 50% 50%, transparent 50%, rgba(0,0,0,0.55) 100%),
+    repeating-linear-gradient(135deg, rgba(31,184,84,0.04) 0, rgba(31,184,84,0.04) 2px, transparent 2px, transparent 8px);
+}
+.crt-frame {
+  z-index: 9003;
+  border: 2px solid var(--phosphor-dim);
+  outline: 1px dashed var(--phosphor-fade);
+  outline-offset: -8px;
+  box-shadow: inset 0 0 80px rgba(44,255,122,0.08), inset 0 0 0 6px var(--bg);
+}
+@keyframes noiseShift {
+  0% { transform: translate(0,0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -1px); }
+  80% { transform: translate(1px, 3px); }
+  100% { transform: translate(0,0); }
+}
+@keyframes geigerTick {
+  0%,70% { opacity: 0; }
+  71%,72% { opacity: 0.75; }
+  73%,81% { opacity: 0; }
+  82% { opacity: 0.4; }
+  83%,100% { opacity: 0; }
+}
+.crt-tick {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9004;
+  background: rgba(44,255,122,0.025);
+  animation: geigerTick 2.4s steps(1,end) infinite;
+}
+
+/* Layout shell */
+.zone-shell {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 240px;
+  gap: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (max-width: 1180px) {
+  .zone-shell { grid-template-columns: 220px minmax(0, 1fr); }
+  .sysinfo { display: none; }
+}
+@media (max-width: 760px) {
+  .zone-shell { grid-template-columns: 1fr; }
+  .nerdtree { display: none; }
+}
+.container {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2rem) 4rem;
+  position: relative;
+  z-index: 10;
+  min-width: 0;
+}
+
+/* Sidebar (NERDTree) */
+.nerdtree {
+  border-right: 1px dashed var(--phosphor-fade);
+  padding: 1.2rem 0.9rem;
+  font-family: var(--font-code);
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow: auto;
+}
+.nt-header { margin-bottom: 0.8rem; }
+.nt-buf { margin: 0; color: var(--phosphor-fade); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+.nt-led { width: 7px; height: 7px; border-radius: 50%; background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor); animation: ledPulse 2s ease-in-out infinite; }
+@keyframes ledPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.nt-title { margin: 0.4rem 0 0.2rem; font-family: var(--font-heading); font-size: 13px; color: var(--phosphor); text-shadow: var(--glow-emerald); letter-spacing: 0.04em; }
+.nt-status { margin: 0; font-size: 10.5px; color: var(--phosphor-fade); }
+.nt-status kbd { font-family: var(--font-code); border: 1px solid var(--phosphor-fade); padding: 0 4px; }
+.nt-tree { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+.nt-row { padding: 1px 0; }
+.nt-fold-btn { background: none; border: none; color: inherit; padding: 0; cursor: pointer; font: inherit; text-align: left; }
+.nt-fold { color: var(--phosphor); }
+.nt-dir { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.nt-meta { color: var(--phosphor-fade); font-size: 10.5px; margin-left: 4px; }
+.nt-children { list-style: none; margin: 0; padding: 0 0 0 1.4rem; }
+.nt-leaf { padding: 1px 0; }
+.nt-link { display: block; color: var(--ink); text-decoration: none; padding: 1px 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nt-link:hover { background: var(--magenta); color: var(--bg); text-shadow: none; }
+.nt-active .nt-link { background: rgba(44,255,122,0.12); color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.nt-footer { margin-top: 1rem; border-top: 1px dashed var(--phosphor-fade); padding-top: 0.6rem; }
+.nt-cmd { color: var(--phosphor); text-shadow: var(--glow-emerald); margin: 0; font-size: 11px; }
+.nt-meta-foot { color: var(--phosphor-fade); margin: 0.2rem 0 0; font-size: 10.5px; }
+
+/* Header */
+.classification {
+  margin: 0 0 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 1px dashed var(--phosphor-fade);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding: 4px 0;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+}
+.cls-tape { display: inline-block; animation: tapeRoll 32s linear infinite; }
+@keyframes tapeRoll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.banner-link { display: block; text-align: center; text-decoration: none; color: inherit; container-type: inline-size; overflow: hidden; }
+.banner {
+  margin: 0;
+  font-family: var(--font-code);
+  font-weight: 700;
+  font-size: clamp(10px, 1.3cqw, 18px);
+  line-height: 1.05;
+  color: var(--phosphor-bright);
+  text-shadow: 0 0 1px var(--phosphor), 0 0 8px rgba(44,255,122,0.55), 0 0 18px rgba(44,255,122,0.32);
+  white-space: pre;
+  letter-spacing: 0;
+  padding: 1.2em 0;
+  animation: hsyncJitter 4s steps(1,end) infinite;
+}
+@keyframes hsyncJitter {
+  0%,94%,100% { transform: translateX(0); }
+  95% { transform: translateX(-2px); filter: blur(0.3px); }
+  96% { transform: translateX(2px); filter: blur(0.4px); }
+  97% { transform: translateX(-1px); filter: blur(0.15px); }
+}
+
+.boot-nav { font-family: var(--font-terminal); font-size: 1.2em; line-height: 1.2; }
+.boot-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.4rem; }
+.boot-nav .nav-item a {
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+  text-decoration: none; padding: 0 2px; border-bottom: 1px dashed transparent;
+}
+.boot-nav .nav-item a:hover { background: var(--magenta); color: var(--bg); text-shadow: none; border-bottom-color: var(--magenta-bright); }
+.rule {
+  border: none; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--phosphor-fade) 12%, var(--phosphor) 50%, var(--phosphor-fade) 88%, transparent);
+  margin: 1.2rem 0;
+}
+
+/* Hero */
+.hero-frame {
+  position: relative;
+  border: 1px solid var(--phosphor);
+  background: radial-gradient(ellipse 120% 70% at 50% 0%, rgba(44,255,122,0.08) 0%, transparent 70%), var(--bg);
+  box-shadow: 0 0 0 1px var(--phosphor-fade) inset, 0 0 24px rgba(44,255,122,0.18), 0 0 60px rgba(44,255,122,0.06);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.hero-hud {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phosphor-dim);
+  background: repeating-linear-gradient(90deg, transparent 0 6px, rgba(44,255,122,0.05) 6px 7px), var(--bg-raise);
+}
+.hero-hud-top { border-bottom: 1px solid var(--phosphor-fade); }
+.hero-hud-bot { border-top: 1px solid var(--phosphor-fade); }
+.hud-label { color: var(--phosphor); text-shadow: var(--glow-emerald); font-weight: 700; }
+.hud-spacer { flex: 1 1 auto; }
+.hud-text { color: var(--phosphor-dim); font-variant-numeric: tabular-nums; }
+.hud-bars { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.hud-led { width: 8px; height: 8px; border-radius: 50%; box-shadow: 0 0 4px currentColor, 0 0 10px currentColor; }
+.hud-led-rec { color: var(--magenta-bright); background: currentColor; animation: hudBlink 1.4s steps(2,end) infinite; }
+.hud-led-pwr { color: var(--phosphor); background: currentColor; animation: hudPulse 2.6s ease-in-out infinite; }
+@keyframes hudBlink { 0%,60% { opacity: 1; } 61%,100% { opacity: 0.18; } }
+@keyframes hudPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.85); } }
+.hud-tape {
+  flex: 1 1 auto; min-width: 0; overflow: hidden;
+  border-left: 1px dashed var(--phosphor-fade); border-right: 1px dashed var(--phosphor-fade);
+  padding: 0 0.6rem;
+}
+.hud-tape-run { display: inline-block; white-space: nowrap; animation: tapeRoll 22s linear infinite; color: var(--phosphor-fade); letter-spacing: 0.18em; }
+
+.hero-art-wrap {
+  position: relative;
+  padding: 1.4rem 1rem;
+  display: flex; justify-content: center; align-items: center;
+  overflow: hidden; min-height: 14em; isolation: isolate;
+}
+.hero-art {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(4px, 0.85vw, 8px);
+  line-height: 1.15;
+  margin: 0;
+  white-space: pre;
+  color: var(--phosphor-bright);
+  text-shadow: 0 0 1px var(--phosphor), 0 0 8px rgba(44,255,122,0.55), 0 0 20px rgba(44,255,122,0.25);
+  animation: heroBreathe 4.2s ease-in-out infinite;
+  position: relative; z-index: 1;
+}
+@keyframes heroBreathe {
+  0%,100% { opacity: 0.95; }
+  50% { opacity: 1; text-shadow: 0 0 1px var(--phosphor), 0 0 14px rgba(44,255,122,0.85), 0 0 28px rgba(44,255,122,0.4); }
+}
+.hero-scanline {
+  position: absolute; left: 0; right: 0; top: 0; height: 14%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(182,255,206,0.18) 45%, rgba(44,255,122,0.28) 50%, rgba(182,255,206,0.18) 55%, transparent 100%);
+  mix-blend-mode: screen;
+  animation: heroScan 5.5s ease-in-out infinite;
+  pointer-events: none; z-index: 2;
+}
+@keyframes heroScan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(820%); opacity: 0; }
+}
+
+/* Listing */
+.terminal-prompt {
+  margin-bottom: 0.6rem;
+  font-family: var(--font-terminal);
+  font-size: 1.1em;
+  color: var(--phosphor-bright);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding-bottom: 0.3rem;
+}
+.terminal-prompt .prompt { color: var(--magenta-bright); text-shadow: var(--glow-magenta); font-weight: 700; }
+.terminal-prompt .typed { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+
+:root { --row-cols: 2ch 11ch 2ch 1fr 8ch; --row-gap: 0.9ch; --row-pad-x: 0.6rem; }
+.listing-header {
+  display: grid;
+  grid-template-columns: var(--row-cols);
+  gap: var(--row-gap);
+  padding: 0.3rem var(--row-pad-x);
+  background: var(--bg-raise);
+  border: 1px solid var(--phosphor-fade);
+  border-bottom: none;
+  color: var(--phosphor-dim);
+  font-size: 0.78em; letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: var(--font-code);
+}
+.listing-header .h-glyph, .listing-header .h-sep { visibility: hidden; }
+.post-list { list-style: none; margin: 0 0 2rem; padding: 0; border: 1px solid var(--phosphor-fade); }
+.post-row { border-top: 1px dashed var(--magenta-fade); animation: bootline 280ms steps(14) backwards; animation-delay: calc(var(--i,0) * 60ms + 200ms); }
+.post-row:first-child { border-top: none; }
+.post-row > a {
+  display: grid; grid-template-columns: var(--row-cols);
+  align-items: baseline; gap: var(--row-gap);
+  padding: 0.55rem var(--row-pad-x);
+  text-decoration: none; color: var(--ink);
+  font-family: var(--font-code); font-size: 0.92em;
+}
+.post-row > a:hover { background: var(--magenta); color: var(--bg); text-shadow: none; outline: none; }
+.post-row > a:hover .row-title,
+.post-row > a:hover .row-glyph,
+.post-row > a:hover .row-date,
+.post-row > a:hover .row-sep,
+.post-row > a:hover .row-meta { color: var(--bg-raise); text-shadow: none; }
+.row-glyph { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.row-date { color: var(--phosphor-dim); font-size: 0.9em; }
+.row-sep { color: var(--magenta-deep); }
+.row-title { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); letter-spacing: 0.04em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.row-meta { color: var(--phosphor-fade); font-size: 0.85em; }
+@keyframes bootline { from { clip-path: inset(0 100% 0 0); opacity: 0; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+
+/* Sysinfo */
+.sysinfo {
+  border-left: 1px dashed var(--phosphor-fade);
+  padding: 1.2rem 0.9rem;
+  font-family: var(--font-code);
+  font-size: 11.5px;
+  position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto;
+}
+.si-head { margin-bottom: 0.8rem; }
+.si-buf { margin: 0; color: var(--phosphor-fade); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+.si-title { margin: 0.3rem 0 0; font-family: var(--font-heading); font-size: 13px; color: var(--phosphor); text-shadow: var(--glow-emerald); letter-spacing: 0.06em; text-transform: uppercase; }
+.si-block { margin-bottom: 1rem; }
+.si-h { margin: 0 0 0.4rem; font-size: 10.5px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-terminal); }
+.si-row { margin: 0.15rem 0; display: flex; gap: 0.4rem; align-items: baseline; }
+.si-k { color: var(--phosphor-fade); }
+.si-v { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); margin-left: auto; }
+.si-bars { color: var(--phosphor); text-shadow: var(--glow-emerald); margin: 0; flex: 1; }
+.si-list { list-style: none; margin: 0; padding: 0; }
+.si-list li { display: flex; align-items: baseline; gap: 4px; padding: 1px 0; }
+.si-dots { flex: 1; border-bottom: 1px dotted var(--phosphor-fade); margin: 0 4px; }
+.si-feed { list-style: none; margin: 0; padding: 0; }
+.si-feed li { padding: 3px 0; border-bottom: 1px dashed var(--phosphor-fade); }
+.si-feed li:last-child { border-bottom: none; }
+.si-link { text-decoration: none; color: var(--ink); display: block; }
+.si-date { display: block; color: var(--phosphor-fade); font-size: 10px; }
+.si-title-row { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.si-link:hover .si-title-row { background: var(--phosphor); color: var(--bg); text-shadow: none; }
+.si-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.si-tag { color: var(--magenta); text-shadow: var(--glow-magenta); text-decoration: none; border: 1px dashed var(--magenta-deep); padding: 1px 6px; font-size: 10.5px; }
+.si-tag-n { color: var(--phosphor-fade); margin-left: 3px; }
+.si-led { width: 6px; height: 6px; background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor); animation: ledPulse 2s ease-in-out infinite; display: inline-block; }
+
+/* Footer */
+.zf {
+  margin-top: 3rem;
+  border-top: 1px dashed var(--phosphor-fade);
+  padding-top: 1rem;
+}
+.zf-tape { overflow: hidden; border-bottom: 1px dashed var(--phosphor-fade); padding: 4px 0; }
+.zf-tape-run { display: inline-block; white-space: nowrap; animation: tapeRoll 28s linear infinite; color: var(--phosphor-fade); font-family: var(--font-terminal); font-size: 13px; letter-spacing: 0.16em; }
+.zf-stencil { position: relative; padding: 1.4rem 1rem; border: 1px dashed var(--phosphor-fade); margin-top: 1rem; }
+.zf-stencil-corner { position: absolute; color: var(--phosphor); text-shadow: var(--glow-emerald); font-family: var(--font-code); font-size: 14px; background: var(--bg); padding: 0 4px; }
+.zf-c-tl { top: -10px; left: 6px; }
+.zf-c-tr { top: -10px; right: 6px; }
+.zf-c-bl { bottom: -10px; left: 6px; }
+.zf-c-br { bottom: -10px; right: 6px; }
+.zf-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 1.5rem; }
+@media (max-width: 720px) { .zf-grid { grid-template-columns: 1fr; } }
+.zf-h { margin: 0 0 0.6rem; font-family: var(--font-terminal); font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.zf-trefoil { margin: 0 0 0.4rem; font-family: var(--font-code); font-size: 10px; line-height: 1; color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.zf-stamp { margin: 0; font-family: var(--font-heading); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.zf-coord { margin: 0.2rem 0; font-family: var(--font-code); font-size: 11px; color: var(--phosphor-dim); }
+.zf-mini { margin: 0.4rem 0 0; font-family: var(--font-terminal); font-size: 11px; color: var(--phosphor-fade); letter-spacing: 0.16em; }
+.zf-dl { margin: 0; font-family: var(--font-code); font-size: 11.5px; display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.6rem; }
+.zf-dl dt { color: var(--phosphor-fade); }
+.zf-dl dd { margin: 0; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.zf-links { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 4px; }
+.zf-links a { text-decoration: none; color: var(--magenta); text-shadow: var(--glow-magenta); display: flex; gap: 6px; align-items: center; font-family: var(--font-code); font-size: 11.5px; }
+.zf-link-glyph { color: var(--phosphor); }
+.zf-links a:hover .zf-link-text { background: var(--magenta); color: var(--bg); text-shadow: none; }
+.zf-row { margin: 0.2rem 0; display: flex; align-items: baseline; gap: 0.5rem; font-family: var(--font-code); font-size: 11.5px; }
+.zf-k { color: var(--phosphor-fade); min-width: 4em; }
+.zf-bars { color: var(--phosphor); text-shadow: var(--glow-emerald); flex: 1; }
+.zf-v { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.zf-led-row { margin: 0.4rem 0 0; display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-code); font-size: 11.5px; }
+.zf-led { width: 7px; height: 7px; background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor); animation: ledPulse 2s ease-in-out infinite; }
+.zf-bar { margin-top: 1rem; padding-top: 0.6rem; border-top: 1px dashed var(--phosphor-fade); }
+.zf-prompt { margin: 0; font-family: var(--font-terminal); font-size: 1em; }
+.zf-prompt .prompt { color: var(--magenta); text-shadow: var(--glow-magenta); }
+.zf-prompt .cursor { color: var(--phosphor); text-shadow: var(--glow-emerald); animation: blink 1.05s steps(2) infinite; }
+.zf-eof { margin: 0.4rem 0 0; font-family: var(--font-code); font-size: 11px; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.zf-eof-mark { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.zf-eof-text { color: var(--phosphor-fade); }
+@keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+::selection { background: var(--magenta); color: var(--bg); text-shadow: none; }
+
+/* ───────── Sysinfo rail · instrument rack ───────── */
+.rk {
+  border-left: 1px dashed var(--phosphor-fade);
+  padding: 0.6rem 0.7rem 1.2rem;
+  font-family: var(--font-code);
+  font-size: 11.5px;
+  color: var(--ink);
+  position: sticky; top: 0; align-self: start;
+  max-height: 100vh; overflow: auto;
+  display: grid; gap: 0.6rem;
+}
+.rk-head {
+  position: relative;
+  border: 1px solid var(--phosphor-dim);
+  padding: 10px 22px 8px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(44,255,122,0.08), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 4px, rgba(44,255,122,0.04) 4px 5px),
+    var(--bg-raise);
+}
+.rk-screw { position: absolute; top: 4px; color: var(--phosphor-dim); font-size: 11px; opacity: 0.7; }
+.rk-screw-l { left: 6px; }
+.rk-screw-r { right: 6px; }
+.rk-id { margin: 0; font-family: var(--font-heading); font-weight: 700; color: var(--phosphor); text-shadow: var(--glow-emerald); letter-spacing: 0.18em; font-size: 12px; }
+.rk-sub { margin: 2px 0 0; font-family: var(--font-terminal); font-size: 12px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; }
+
+.rk-mod {
+  border: 1px solid var(--phosphor-fade);
+  background: rgba(8,36,22,0.55);
+  padding: 6px 8px 8px;
+  position: relative;
+}
+.rk-mod-h {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-terminal);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding-bottom: 3px; margin-bottom: 6px;
+}
+.rk-mod-h-t { flex: 1; }
+.rk-led { width: 7px; height: 7px; border-radius: 50%; background: var(--phosphor-fade); display: inline-block; flex-shrink: 0; }
+.rk-led-on { background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor); }
+.rk-led-blink { background: var(--magenta-bright); box-shadow: 0 0 4px var(--magenta-bright), 0 0 10px var(--magenta-bright); animation: hudBlink 1.4s steps(2,end) infinite; }
+
+/* Geiger gauge */
+.rk-gauge { position: relative; height: 80px; display: flex; align-items: flex-end; justify-content: center; }
+.rk-gauge-arc {
+  position: relative; width: 160px; height: 80px;
+  border-top-left-radius: 80px; border-top-right-radius: 80px;
+  border: 1px solid var(--phosphor-dim);
+  border-bottom: none;
+  background: radial-gradient(ellipse at 50% 100%, rgba(44,255,122,0.08), transparent 70%), rgba(3,17,10,0.6);
+  overflow: hidden;
+}
+.rk-tick {
+  position: absolute; left: 50%; bottom: 0;
+  width: 1px; height: 70px;
+  background: linear-gradient(to top, transparent 60%, var(--phosphor-dim) 60%, var(--phosphor-dim) 75%, transparent 75%);
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(var(--a));
+}
+.rk-tick-hot { background: linear-gradient(to top, transparent 60%, var(--magenta) 60%, var(--magenta) 75%, transparent 75%); box-shadow: 0 0 4px var(--magenta); }
+.rk-needle {
+  position: absolute; left: 50%; bottom: 0;
+  width: 2px; height: 70px;
+  background: linear-gradient(to top, var(--phosphor) 0%, var(--phosphor-bright) 100%);
+  box-shadow: 0 0 6px var(--phosphor);
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(-55deg);
+  animation: needleJitter 3s ease-in-out infinite;
+}
+@keyframes needleJitter {
+  0%,100% { transform: translateX(-50%) rotate(-55deg); }
+  30% { transform: translateX(-50%) rotate(-48deg); }
+  55% { transform: translateX(-50%) rotate(-52deg); }
+  78% { transform: translateX(-50%) rotate(-44deg); }
+}
+.rk-pivot { position: absolute; left: 50%; bottom: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--phosphor-dim); transform: translateX(-50%); box-shadow: 0 0 4px var(--phosphor); }
+.rk-gauge-scale { display: flex; justify-content: space-between; font-family: var(--font-terminal); font-size: 10.5px; color: var(--phosphor-fade); letter-spacing: 0.1em; padding: 2px 4px 0; }
+.rk-readout {
+  margin: 6px 0 0; padding: 4px 6px;
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-deep);
+  font-family: var(--font-heading); font-weight: 700;
+  display: flex; align-items: baseline; gap: 6px;
+}
+.rk-num { font-size: 22px; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); font-variant-numeric: tabular-nums; line-height: 1; }
+.rk-unit { font-size: 10.5px; color: var(--phosphor-dim); letter-spacing: 0.1em; }
+.rk-tag { margin-left: auto; font-size: 10px; padding: 1px 5px; border: 1px solid var(--phosphor); color: var(--phosphor); letter-spacing: 0.16em; }
+
+/* VU strip */
+.rk-vu { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; padding: 4px 0; }
+.rk-vu-cell { height: 14px; background: rgba(44,255,122,0.06); border: 1px solid var(--phosphor-fade); }
+.rk-vu-cell.on { background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), inset 0 0 3px var(--phosphor-bright); border-color: var(--phosphor); }
+.rk-vu-cell.hot { background: var(--magenta); box-shadow: 0 0 4px var(--magenta); border-color: var(--magenta); }
+.rk-readout-sm { margin: 4px 0 0; font-family: var(--font-code); font-size: 10.5px; display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 4px; }
+.rk-k { color: var(--phosphor-fade); letter-spacing: 0.1em; text-transform: uppercase; font-size: 10px; }
+.rk-v { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+
+/* Oscilloscope */
+.rk-osc-svg { display: block; width: 100%; height: 70px; background: var(--bg-deep); border: 1px solid var(--phosphor-fade); }
+
+/* Counter grid */
+.rk-counter-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+.rk-counter {
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-deep);
+  padding: 4px 4px 3px; text-align: center;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.rk-cnum { font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.rk-clab { font-family: var(--font-terminal); font-size: 10.5px; color: var(--phosphor-fade); letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Feed */
+.rk-feed { list-style: none; margin: 0; padding: 0; counter-reset: rk; }
+.rk-feed li { padding: 0; }
+.rk-feed a {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 6px; align-items: center;
+  padding: 4px 2px;
+  border-bottom: 1px dashed var(--phosphor-fade);
+  text-decoration: none;
+}
+.rk-feed li:last-child a { border-bottom: none; }
+.rk-feed-i { color: var(--magenta); text-shadow: var(--glow-magenta); font-size: 10px; letter-spacing: 0.05em; }
+.rk-feed-t { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rk-feed-d { color: var(--phosphor-fade); font-size: 10px; font-variant-numeric: tabular-nums; }
+.rk-feed a:hover { background: rgba(44,255,122,0.08); }
+.rk-feed a:hover .rk-feed-t { color: var(--phosphor); }
+
+/* Chips */
+.rk-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.rk-chip {
+  font-family: var(--font-terminal);
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--magenta); text-shadow: var(--glow-magenta);
+  text-decoration: none;
+  border: 1px dashed var(--magenta-deep);
+  padding: 1px 6px;
+  background: rgba(98,255,154,0.04);
+}
+.rk-chip i { color: var(--phosphor-fade); font-style: normal; margin-left: 3px; font-size: 10px; }
+.rk-chip:hover { background: var(--magenta); color: var(--bg); text-shadow: none; }
+.rk-chip:hover i { color: var(--bg); }
+
+/* Footer status */
+.rk-foot {
+  border-top: 1px solid var(--phosphor-dim);
+  padding-top: 6px;
+  display: grid; gap: 2px;
+}
+.rk-foot-row { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 10.5px; }
+.rk-foot-row .rk-v { margin-left: auto; }
+
+/* ───────── Footer · zone stencil (original style) ───────── */
+.zf { margin-top: 3rem; position: relative; font-family: var(--font-code); color: var(--ink); }
+.zf-tape {
+  overflow: hidden; white-space: nowrap;
+  border-top: 1px dashed var(--phosphor-fade);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding: 4px 0;
+  font-family: var(--font-terminal);
+  font-size: 13px; letter-spacing: 0.18em;
+  color: var(--phosphor-dim);
+  background: rgba(8,36,22,0.35);
+}
+.zf-tape-run { display: inline-block; animation: hudTapeRoll 26s linear infinite; }
+@keyframes hudTapeRoll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.zf-stencil {
+  position: relative;
+  border: 2px solid var(--phosphor-dim);
+  outline: 1px dashed var(--phosphor-fade);
+  outline-offset: -8px;
+  padding: 1.6rem 1.4rem 1.2rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(44,255,122,0.05), transparent 70%),
+    rgba(4,20,10,0.4);
+  margin-top: 0.6rem;
+}
+.zf-stencil-corner {
+  position: absolute; color: var(--phosphor); text-shadow: var(--glow-emerald);
+  font-family: var(--font-terminal); font-size: 16px; line-height: 1;
+  background: var(--bg); padding: 0 4px;
+}
+.zf-c-tl { top: -10px; left: 8px; }
+.zf-c-tr { top: -10px; right: 8px; }
+.zf-c-bl { bottom: -10px; left: 8px; }
+.zf-c-br { bottom: -10px; right: 8px; }
+
+.zf-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+@media (max-width: 780px) { .zf-grid { grid-template-columns: 1fr; } }
+
+.zf-cell { min-width: 0; }
+.zf-h {
+  margin: 0 0 10px;
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--phosphor-bright); text-shadow: var(--glow-emerald);
+  padding-bottom: 5px;
+  border-bottom: 1px dashed var(--phosphor-fade);
+}
+
+/* object cell */
+.zf-object { display: grid; gap: 4px; }
+.zf-trefoil {
+  margin: 0 0 4px;
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: 13px; line-height: 1.05;
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+  white-space: pre;
+}
+.zf-stamp {
+  margin: 0; display: inline-block;
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: 13px; letter-spacing: 0.3em;
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+  border: 1px solid var(--phosphor-dim);
+  padding: 2px 8px;
+  width: max-content;
+}
+.zf-mini-dl {
+  margin: 8px 0 0; padding: 0;
+  display: grid; grid-template-columns: auto 1fr; gap: 2px 10px;
+  font-size: 11px;
+}
+.zf-mini-dl dt { color: var(--phosphor-fade); font-family: var(--font-terminal); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+.zf-mini-dl dd { margin: 0; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+
+/* dossier */
+.zf-dl {
+  margin: 0 0 10px; padding: 0;
+  display: grid; grid-template-columns: auto 1fr; gap: 3px 12px;
+  font-size: 11.5px;
+}
+.zf-dl dt {
+  font-family: var(--font-terminal);
+  font-size: 12.5px;
+  color: var(--phosphor-fade);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.zf-dl dd { margin: 0; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+
+.zf-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+.zf-links a {
+  display: flex; gap: 8px; align-items: baseline;
+  text-decoration: none;
+  font-size: 11.5px;
+  border-bottom: 1px dashed var(--phosphor-fade);
+  padding: 3px 2px;
+}
+.zf-link-glyph { color: var(--magenta); text-shadow: var(--glow-magenta); }
+.zf-link-text { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.zf-links a:hover { background: rgba(44,255,122,0.08); }
+.zf-links a:hover .zf-link-text { color: var(--phosphor); }
+
+/* RX channel */
+.zf-rx { display: grid; gap: 4px; }
+.zf-row {
+  margin: 0;
+  display: grid; grid-template-columns: 60px 1fr auto;
+  gap: 8px; align-items: center;
+  font-size: 11.5px;
+  font-family: var(--font-code);
+}
+.zf-k { color: var(--phosphor-fade); font-family: var(--font-terminal); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; }
+.zf-v { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); font-variant-numeric: tabular-nums; text-align: right; }
+.zf-bars { color: var(--phosphor); text-shadow: var(--glow-emerald); font-family: var(--font-heading); font-size: 12px; letter-spacing: 0.05em; }
+.zf-led-row {
+  margin: 6px 0 0; padding-top: 6px;
+  display: flex; align-items: center; gap: 8px;
+  border-top: 1px dashed var(--phosphor-fade);
+  font-size: 11.5px;
+}
+.zf-led {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--phosphor); box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor);
+  animation: hudPulse 2.6s ease-in-out infinite;
+}
+.zf-led-row .zf-v { margin-left: auto; }
+
+/* footer bar */
+.zf-bar {
+  margin-top: 1rem; padding-top: 8px;
+  border-top: 1px dashed var(--phosphor-fade);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;
+}
+.zf-prompt { margin: 0; font-family: var(--font-terminal); font-size: 14px; }
+.zf-eof { margin: 0; font-family: var(--font-terminal); font-size: 13px; letter-spacing: 0.14em; }
+.zf-eof-mark { color: var(--magenta); text-shadow: var(--glow-magenta); font-weight: 700; margin-right: 6px; }
+.zf-eof-text { color: var(--phosphor-fade); }
+</style>
+</head>
+<body>
+<div class="crt-shell">
+  <div class="crt-noise" aria-hidden="true"></div>
+  <div class="crt-scanlines" aria-hidden="true"></div>
+  <div class="crt-vignette" aria-hidden="true"></div>
+  <div class="crt-frame" aria-hidden="true"></div>
+  <div class="crt-tick" aria-hidden="true"></div>
+
+  <div class="zone-shell">
+    <!-- ───── NERDTree sidebar ───── -->
+    <aside class="nerdtree" aria-label="content tree">
+      <header class="nt-header">
+        <p class="nt-buf"><span class="nt-led" aria-hidden="true"></span> [content/]</p>
+        <h2 class="nt-title">~/sektant's hideout</h2>
+        <p class="nt-status">press <kbd>\</kbd> · click ▸/▾ to fold</p>
+      </header>
+      <ul class="nt-tree" role="tree">
+        <li class="nt-row"><span class="nt-fold">▾</span> <span class="nt-dir">content/</span></li>
+        <li class="nt-row" data-depth="1"><button type="button" class="nt-fold-btn"><span class="nt-fold">▾</span> <span class="nt-dir">posts/</span> <span class="nt-meta">(4)</span></button>
+          <ul class="nt-children">
+            <li class="nt-leaf nt-active"><a class="nt-link" href="#">neovim zero to hero ide</a></li>
+            <li class="nt-leaf"><a class="nt-link" href="#">touch-typing &amp; the wrist pain doctrine</a></li>
+            <li class="nt-leaf"><a class="nt-link" href="#">building a static site generator in 600 LOC</a></li>
+            <li class="nt-leaf"><a class="nt-link" href="#">notes from припять-9, week 14</a></li>
+          </ul>
+        </li>
+        <li class="nt-row"><button type="button" class="nt-fold-btn"><span class="nt-fold">▾</span> <span class="nt-dir">pages/</span> <span class="nt-meta">(1)</span></button>
+          <ul class="nt-children">
+            <li class="nt-leaf"><a class="nt-link" href="#">about</a></li>
+          </ul>
+        </li>
+        <li class="nt-row"><button type="button" class="nt-fold-btn"><span class="nt-fold">▸</span> <span class="nt-dir">projects/</span> <span class="nt-meta">(2)</span></button></li>
+      </ul>
+      <footer class="nt-footer">
+        <p class="nt-cmd">:NERDTree</p>
+        <p class="nt-meta-foot">7 entries · sektant1</p>
+      </footer>
+    </aside>
+
+    <!-- ───── Main ───── -->
+    <main class="container">
+      <header class="site-header">
+        <p class="classification"><span class="cls-tape" style="font-family: JetBrains Mono">// СЕКРЕТНО // ЧЕРНОБЫЛЬСКАЯ ЗОНА ОТЧУЖДЕНИЯ // ТОЛЬКО ДЛЯ ГЛАЗ // СЕКРЕТНО // ЧЕРНОБЫЛЬСКАЯ ЗОНА ОТЧУЖДЕНИЯ // ТОЛЬКО ДЛЯ ГЛАЗ //&nbsp;</span></p>
+
+        <a href="#" class="banner-link" aria-label="sektant home">
+<pre class="banner" aria-hidden="true" style="font-family: monospace">           __                __                __     
+   _______ / /__ ___ ____  __/ /____ ____  ___/ /____ 
+  / __/ -_)  '_// _ '/ _ \/ ___/ -_) __/ / _  / __/ -_)
+ /__/\__/_/\_\ \_,_/_//_/\__/\__/_/    \_,_/\__/\__/  </pre>
+        </a>
+
+        <nav class="boot-nav" aria-label="primary">
+          <ul>
+            <li class="nav-item" style="--i:1"><a href="#">&gt; home</a></li>
+            <li class="nav-item" style="--i:2"><a href="#">&gt; about</a></li>
+            <li class="nav-item" style="--i:3"><a href="#">&gt; tags</a></li>
+            <li class="nav-item" style="--i:4"><a href="#">&gt; search</a></li>
+            <li class="nav-item" style="--i:5"><a href="#" style="font-family: VT323">&gt; feed</a></li>
+          </ul>
+        </nav>
+        <hr class="rule">
+      </header>
+
+      <!-- Hero -->
+      <section class="hero-zone">
+        <div class="hero-frame">
+          <div class="hero-hud hero-hud-top" aria-hidden="true" style="font-family: JetBrains Mono">
+            <span class="hud-led hud-led-rec"></span>
+            <span class="hud-label">ОПЕРАТОР · НЕИЗВ.</span>
+            <span class="hud-spacer"></span>
+            <span class="hud-text">CH 0x1D</span>
+            <span class="hud-led hud-led-pwr"></span>
+          </div>
+          <div class="hero-art-wrap">
+<pre class="hero-art">         ███████████   ███████   ███████████
+        ████████████  █████████  ████████████
+       █████████        █████        █████████
+      █████████   ████   ███   ████   █████████
+     █████████    ████   ███   ████    █████████
+    █████   ███   ████   ███   ████   ███   █████
+   █████    ████  ████   ███   ████  ████    █████
+  █████      ████ ████   ███   ████ ████      █████
+ █████        ████████   ███   ████████        █████
+█████         ████████   ███   ████████         █████
+██████        ████████   ███   ████████        ██████
+██████          █████   ████    █████          ██████
+ █████   ████   ████  ████ ████  ████   ████   █████ 
+  █████  █████        ███████████        █████  █████
+   █████ █████████████████████████████████████ █████
+    ████████████████████████████████████████████████ 
+     ██   ███████████████████████████████████   ██   
+          ███████████████████████████████████        
+          ████ █████████████████████████ ████        
+          ████ ████  ███   ███   ███  ████ ████      
+          ████ ████  ███   ███   ███  ████ ████      
+          ████ ████ █████ █████ █████ ████ ████      
+                ███ █████ █████ █████ ███
+                     █████   █     █████
+                       █     ███     █
+                              █</pre>
+            <span class="hero-scanline" aria-hidden="true"></span>
+          </div>
+          <div class="hero-hud hero-hud-bot" aria-hidden="true">
+            <span class="hud-text">SIG&nbsp;<span class="hud-bars">▮▮▮▮▮▯▯</span></span>
+            <span class="hud-tape"><span class="hud-tape-run">// СЕКТОР-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ // 2026-05-04 // ОПЕРАТОР sektant1 // СЕКТОР-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ // 2026-05-04 // ОПЕРАТОР sektant1 // </span></span>
+            <span class="hud-text">RAD&nbsp;14μ</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Listing -->
+      <section class="home-listing">
+        <div class="terminal-prompt">
+          <span class="prompt">~/zone-net $</span> <span class="typed">grep -r 'transmission' ./reports/ | sort -r --by=date</span>
+        </div>
+        <div class="listing-header">
+          <span class="h-glyph">▌</span><span>DATA</span><span class="h-sep">::</span><span>POST</span><span>LENGTH</span>
+        </div>
+        <ul class="post-list">
+          <li class="post-row" style="--i:0"><a href="#"><span class="row-glyph">▌</span><span class="row-date">2026-03-31</span><span class="row-sep">::</span><span class="row-title">neovim zero to hero ide</span><span class="row-meta">~9 м</span></a></li>
+          <li class="post-row" style="--i:1"><a href="#"><span class="row-glyph">▌</span><span class="row-date">2026-02-14</span><span class="row-sep">::</span><span class="row-title">touch-typing &amp; the wrist pain doctrine</span><span class="row-meta">~4 м</span></a></li>
+          <li class="post-row" style="--i:2"><a href="#"><span class="row-glyph">▌</span><span class="row-date">2026-01-05</span><span class="row-sep">::</span><span class="row-title">building a static site generator in 600 LOC</span><span class="row-meta">~12 м</span></a></li>
+          <li class="post-row" style="--i:3"><a href="#"><span class="row-glyph">▌</span><span class="row-date">2025-12-20</span><span class="row-sep">::</span><span class="row-title">notes from припять-9, week 14</span><span class="row-meta">~6 м</span></a></li>
+        </ul>
+      </section>
+
+      <!-- Footer — zone stencil (original style, cleaner layout) -->
+      <footer class="zf">
+        <div class="zf-tape" aria-hidden="true">
+          <span class="zf-tape-run">// КОНЕЦ ПЕРЕДАЧИ // EOF // ОБЪЕКТ-4 // СЕКТОР-7 // ЗОНА ОТЧУЖДЕНИЯ // КОНЕЦ ПЕРЕДАЧИ // EOF // ОБЪЕКТ-4 // СЕКТОР-7 // ЗОНА ОТЧУЖДЕНИЯ // </span>
+        </div>
+        <div class="zf-stencil">
+          <span class="zf-stencil-corner zf-c-tl">+</span>
+          <span class="zf-stencil-corner zf-c-tr">+</span>
+          <span class="zf-stencil-corner zf-c-bl">+</span>
+          <span class="zf-stencil-corner zf-c-br">+</span>
+
+          <div class="zf-grid">
+            <section class="zf-cell zf-object" aria-label="объект">
+<pre class="zf-trefoil" aria-hidden="true">   ▄▄▄
+ ▄█████▄
+███████▌
+▐██████▌
+ ▀█▄█▄█▀
+    ▀</pre>
+              <p class="zf-stamp">BEAR-4</p>
+              <dl class="zf-mini-dl">
+                <dt>зона</dt><dd>51.389° N · 30.099° E</dd>
+                <dt>период</dt><dd>УССР · 1986 — ∞</dd>
+                <dt>статус</dt><dd>have kappa: true</dd>
+              </dl>
+            </section>
+
+            <section class="zf-cell zf-dossier" aria-label="досье оператора">
+              <h3 class="zf-h">// досье оператора</h3>
+              <dl class="zf-dl">
+                <dt>callsign</dt><dd>sektant1</dd>
+                <dt>country</dt><dd>Brazil</dd>
+                <dt>roles</dt><dd>SWE / Render / Backend</dd>
+                <dt>build</dt><dd>2026-05-04</dd>
+              </dl>
+              <ul class="zf-links" aria-label="каналы связи">
+                <li><a href="#"><span class="zf-link-glyph">▌</span><span class="zf-link-text">RSS Feed</span></a></li>
+                <li><a href="#"><span class="zf-link-glyph">▌</span><span class="zf-link-text">Github / sektant1</span></a></li>
+                <li><a href="#"><span class="zf-link-glyph">▌</span><span class="zf-link-text">Youtube / @sektant1swe</span></a></li>
+                <li><a href="#"><span class="zf-link-glyph">▌</span><span class="zf-link-text">contact@sektant.dev</span></a></li>
+              </ul>
+            </section>
+
+            <section class="zf-cell zf-rx" aria-label="канал приёма">
+              <h3 class="zf-h">// канал RX</h3>
+              <p class="zf-row"><span class="zf-k">полоса</span><span class="zf-bars" aria-hidden="true">██████░░</span><span class="zf-v">VLF</span></p>
+              <p class="zf-row"><span class="zf-k">фон</span><span class="zf-bars" aria-hidden="true">███░░░░░</span><span class="zf-v">14&nbsp;мкР/ч</span></p>
+              <p class="zf-row"><span class="zf-k">реактор</span><span class="zf-bars" aria-hidden="true">█████░░░</span><span class="zf-v">стаб.</span></p>
+              <p class="zf-row"><span class="zf-k">UTC</span><span class="zf-v">2026-05-04 12:00</span></p>
+              <p class="zf-led-row"><span class="zf-led" aria-hidden="true"></span><span class="zf-k">связь</span><span class="zf-v">ПРИНЯТО</span></p>
+            </section>
+          </div>
+        </div>
+        <div class="zf-bar">
+          <p class="zf-prompt"><span class="prompt">[sektant1@вч-сеть://припять-9]$</span> <span class="cursor">▮</span></p>
+          <p class="zf-eof">
+            <span class="zf-eof-mark">// EOF //</span>
+            <span class="zf-eof-text">конец передачи. удачной ходки, сталкер.</span>
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <!-- ───── Sysinfo rail — instrument stack ───── -->
+    <aside class="rk" aria-label="zone telemetry">
+      <header class="rk-head">
+        <span class="rk-screw rk-screw-l" aria-hidden="true">⊕</span>
+        <span class="rk-screw rk-screw-r" aria-hidden="true">⊕</span>
+        <p class="rk-id">PDA-3M / RACK-7</p>
+        <p class="rk-sub">телеметрия зоны</p>
+      </header>
+
+      <!-- Geiger gauge -->
+      <section class="rk-mod rk-geiger">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">DOSE / γ-фон</span><span class="rk-led rk-led-on"></span></div>
+        <div class="rk-gauge" aria-hidden="true">
+          <div class="rk-gauge-arc">
+            <span class="rk-tick" style="--a:-70deg"></span>
+            <span class="rk-tick" style="--a:-50deg"></span>
+            <span class="rk-tick" style="--a:-30deg"></span>
+            <span class="rk-tick" style="--a:-10deg"></span>
+            <span class="rk-tick" style="--a:10deg"></span>
+            <span class="rk-tick rk-tick-hot" style="--a:30deg"></span>
+            <span class="rk-tick rk-tick-hot" style="--a:50deg"></span>
+            <span class="rk-tick rk-tick-hot" style="--a:70deg"></span>
+            <span class="rk-needle"></span>
+            <span class="rk-pivot"></span>
+          </div>
+          <div class="rk-gauge-scale">
+            <span>0</span><span>50</span><span>200</span><span>500</span>
+          </div>
+        </div>
+        <p class="rk-readout"><span class="rk-num">14</span><span class="rk-unit">мкР/ч</span><span class="rk-tag">NORM</span></p>
+      </section>
+
+      <!-- VU meter strip -->
+      <section class="rk-mod">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">SIG // VLF 14.230</span><span class="rk-led rk-led-on"></span></div>
+        <div class="rk-vu" aria-hidden="true">
+          <span class="rk-vu-cell on"></span><span class="rk-vu-cell on"></span><span class="rk-vu-cell on"></span>
+          <span class="rk-vu-cell on"></span><span class="rk-vu-cell on"></span><span class="rk-vu-cell on"></span>
+          <span class="rk-vu-cell on"></span><span class="rk-vu-cell on"></span>
+          <span class="rk-vu-cell"></span><span class="rk-vu-cell"></span>
+          <span class="rk-vu-cell hot"></span><span class="rk-vu-cell hot"></span>
+        </div>
+        <p class="rk-readout-sm"><span class="rk-k">SNR</span><span class="rk-v">−18 dB</span><span class="rk-k">band</span><span class="rk-v">ОНЧ</span></p>
+      </section>
+
+      <!-- Oscilloscope -->
+      <section class="rk-mod rk-osc">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">TRACE // CH-0x1D</span><span class="rk-led rk-led-on"></span></div>
+        <svg class="rk-osc-svg" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <pattern id="osc-grid" width="20" height="15" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 15" fill="none" stroke="#0a4d22" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="200" height="60" fill="url(#osc-grid)"/>
+          <line x1="0" y1="30" x2="200" y2="30" stroke="#157a3b" stroke-width="0.4" stroke-dasharray="2 2"/>
+          <path d="M0 30 L10 28 L18 34 L24 22 L30 38 L36 14 L42 46 L48 18 L56 30 L66 26 L74 34 L82 30 L92 24 L100 36 L108 30 L118 28 L126 32 L136 22 L144 38 L152 30 L162 28 L172 32 L182 30 L192 28 L200 30"
+                fill="none" stroke="#2cff7a" stroke-width="1.2" stroke-linejoin="round"
+                style="filter: drop-shadow(0 0 2px #2cff7a) drop-shadow(0 0 5px rgba(44,255,122,0.6));"/>
+        </svg>
+        <p class="rk-readout-sm"><span class="rk-k">freq</span><span class="rk-v">14.230 MHz</span><span class="rk-k">amp</span><span class="rk-v">0.42 V</span></p>
+      </section>
+
+      <!-- Archive counters -->
+      <section class="rk-mod">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">АРХИВ</span></div>
+        <div class="rk-counter-grid">
+          <div class="rk-counter"><span class="rk-cnum">004</span><span class="rk-clab">записи</span></div>
+          <div class="rk-counter"><span class="rk-cnum">001</span><span class="rk-clab">страницы</span></div>
+          <div class="rk-counter"><span class="rk-cnum">002</span><span class="rk-clab">проекты</span></div>
+        </div>
+      </section>
+
+      <!-- Last transmission ticker -->
+      <section class="rk-mod">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">RX // INCOMING</span><span class="rk-led rk-led-blink"></span></div>
+        <ol class="rk-feed">
+          <li><a href="#"><span class="rk-feed-i">01</span><span class="rk-feed-t">neovim zero to hero ide</span><span class="rk-feed-d">03·31</span></a></li>
+          <li><a href="#"><span class="rk-feed-i">02</span><span class="rk-feed-t">touch-typing &amp; wrist pain</span><span class="rk-feed-d">02·14</span></a></li>
+          <li><a href="#"><span class="rk-feed-i">03</span><span class="rk-feed-t">SSG in 600 LOC</span><span class="rk-feed-d">01·05</span></a></li>
+        </ol>
+      </section>
+
+      <!-- Artifact tags -->
+      <section class="rk-mod">
+        <div class="rk-mod-h"><span class="rk-mod-h-t">АРТЕФАКТЫ</span></div>
+        <div class="rk-chips">
+          <a class="rk-chip" href="#">vim<i>·3</i></a>
+          <a class="rk-chip" href="#">setup<i>·2</i></a>
+          <a class="rk-chip" href="#">plugin<i>·2</i></a>
+          <a class="rk-chip" href="#">zone<i>·1</i></a>
+        </div>
+      </section>
+
+      <!-- Status footer -->
+      <footer class="rk-foot">
+        <p class="rk-foot-row"><span class="rk-led rk-led-on"></span><span class="rk-k">LINK</span><span class="rk-v">ПРИНЯТО</span></p>
+        <p class="rk-foot-row"><span class="rk-k">UTC</span><span class="rk-v">2026-05-04 12:00</span></p>
+        <p class="rk-foot-row"><span class="rk-k">NODE</span><span class="rk-v">припять-9</span></p>
+      </footer>
+    </aside>
+  </div>
+</div>
+
+<script>
+// fold/unfold tree groups
+document.querySelectorAll('.nt-fold-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const row = btn.parentElement;
+    const fold = btn.querySelector('.nt-fold');
+    const kids = row.querySelector('.nt-children');
+    if (!kids) return;
+    const open = kids.style.display !== 'none';
+    kids.style.display = open ? 'none' : '';
+    fold.textContent = open ? '▸' : '▾';
+  });
+});
+</script>
+</body>
+</html>

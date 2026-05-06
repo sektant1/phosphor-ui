@@ -1,0 +1,33 @@
+.pho-pagination {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+  padding: 0.6rem 0.8rem;
+  border-top: 1px dashed var(--phosphor-fade);
+  border-bottom: 1px dashed var(--phosphor-fade);
+  font-family: var(--font-code);
+  font-size: 0.95em;
+}
+
+.pho-pagination__link {
+  color: var(--magenta);
+  text-shadow: var(--glow-magenta);
+  text-decoration: none;
+}
+
+.pho-pagination__link:hover {
+  color: var(--magenta-bright);
+}
+
+.pho-pagination__link.disabled {
+  color: var(--phosphor-fade);
+  text-shadow: none;
+  cursor: not-allowed;
+}
+
+.pho-pagination__marker {
+  color: var(--phosphor-dim);
+  font-style: italic;
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
+@import url('../colors_and_type.css');
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+body {
+  width: 700px;
+  padding: 18px 22px;
+  background:
+    radial-gradient(ellipse 110% 80% at 50% 25%, var(--bg-raise) 0%, var(--bg) 60%, var(--bg-deep) 100%);
+  position: relative;
+}
+/* faint scanlines on every card so they read as "tube" surfaces */
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(44,255,122,0.05) 0,
+    rgba(44,255,122,0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: screen;
+}
+.row { display: flex; gap: 10px; align-items: stretch; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.label {
+  font-family: var(--font-terminal);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--phosphor-fade);
+}
+.mono { font-family: var(--font-code); font-size: 11px; }
+.glow { color: var(--phosphor); text-shadow: var(--glow-emerald); }

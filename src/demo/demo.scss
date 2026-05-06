@@ -1,0 +1,63 @@
+.demo-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(0.6rem, 3vw, 2rem);
+}
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  gap: clamp(0.8rem, 2.5vw, 2rem);
+  align-items: start;
+}
+
+.demo-aside {
+  position: sticky;
+  top: 12px;
+}
+
+.demo-main {
+  min-width: 0;
+  padding-bottom: 3rem;
+}
+
+.demo-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  align-items: start;
+}
+
+.demo-split-aside {
+  position: sticky;
+  top: 16px;
+}
+
+.demo-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 880px) {
+  .demo-layout {
+    grid-template-columns: 1fr;
+  }
+  .demo-aside {
+    position: static;
+  }
+  .demo-split {
+    grid-template-columns: 1fr;
+  }
+  .demo-split-aside {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 540px) {
+  .demo-card-grid {
+    grid-template-columns: 1fr;
+  }
+}

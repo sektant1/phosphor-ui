@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.frame {
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-raise);
+  padding: 12px 14px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.frame + .frame { margin-top: 10px; }
+.frame.q {
+  border-left: 3px double var(--phosphor);
+  background: rgba(44,255,122,0.04);
+  color: var(--phosphor-bright);
+  font-style: italic;
+}
+.frame.q::before { content: "$ cat > "; color: #d6ffe2; font-style: normal; }
+.callout-h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+  border-bottom: 1px solid var(--phosphor-fade);
+  border-left: 3px solid var(--phosphor);
+  background: linear-gradient(90deg, rgba(44,255,122,0.08), transparent 60%);
+  padding: 4px 0 4px 10px;
+  margin: 0 0 12px;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  padding-right: 24px;
+}
+.callout-h2::before { content: "// "; color: var(--phosphor); text-shadow: var(--glow-emerald); }
+</style></head>
+<body>
+<div class="callout-h2">transmission log</div>
+<div class="frame q">let them come, frostmourne hungers...</div>
+<div class="frame">> grind skills irl<br>> minimize copes, maximize reps<br>> clarity > comfort</div>
+</body></html>

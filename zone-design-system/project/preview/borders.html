@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.cell { display: flex; flex-direction: column; gap: 8px; }
+.demo { height: 70px; background: var(--bg-raise); display: flex; align-items: center; justify-content: center; color: var(--phosphor-bright); font-family: var(--font-terminal); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+.tok { font-family: var(--font-code); font-size: 10.5px; color: var(--phosphor-dim); }
+.frame { border: 2px solid var(--phosphor-dim); }
+.line { border: 1px solid var(--phosphor-fade); }
+.dash { border: 1px dashed var(--phosphor-fade); }
+.dot { border: 1px dotted var(--phosphor-fade); }
+.rail { border-left: 2px solid var(--phosphor); border-top: none; border-right: none; border-bottom: none; padding-left: 12px; justify-content: flex-start; }
+.quote { border-left: 3px double var(--phosphor); border-top: none; border-right: none; border-bottom: none; padding-left: 12px; justify-content: flex-start; }
+</style></head>
+<body>
+<div class="grid">
+  <div class="cell"><div class="demo frame">2px solid</div><span class="tok">--border-frame</span></div>
+  <div class="cell"><div class="demo line">1px solid</div><span class="tok">--border-line</span></div>
+  <div class="cell"><div class="demo dash">1px dashed</div><span class="tok">--border-dash</span></div>
+  <div class="cell"><div class="demo dot">1px dotted</div><span class="tok">--border-dot</span></div>
+  <div class="cell"><div class="demo rail">2px rail / phosphor</div><span class="tok">--rail-strong</span></div>
+  <div class="cell"><div class="demo quote">3px double / quote</div><span class="tok">--rail-quote</span></div>
+</div>
+</body></html>

@@ -1,0 +1,243 @@
+/* ─────────────────────────────────────────────────────────────
+   Zone Design System :: colors + type tokens
+   Single-channel green phosphor — Pip-Boy 3000 / STALKER GAMMA
+   Lifted verbatim from sektant1.github.io / themes/zone
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── primary phosphor column ───────────────────────────── */
+  --phosphor:        #2cff7a;   /* primary tube glow */
+  --phosphor-bright: #b6ffce;   /* paper-mint highlight */
+  --phosphor-dim:    #1fb854;   /* mid-green */
+  --phosphor-fade:   #0a4d22;   /* deep forest */
+
+  /* ── accent phosphor (slightly cooler / paler) ─────────── */
+  --magenta:         #62ff9a;   /* accent green (legacy var name) */
+  --magenta-bright:  #d6ffe2;
+  --magenta-deep:    #157a3b;
+  --magenta-fade:    #06321a;
+
+  /* ── extra single-channel hues ─────────────────────────── */
+  --moss:   #00cec8;
+  --spring: #00ff7f;
+  --rose:   #88ffae;
+
+  /* ── tube body / surfaces ──────────────────────────────── */
+  --bg:       #04140a;   /* near-black w/ green undertone */
+  --bg-raise: #082416;   /* raised surface */
+  --bg-deep:  #010604;   /* tube-back */
+  --ink:      #d8ffe7;   /* default text */
+
+  /* ── glow utilities ────────────────────────────────────── */
+  --glow-emerald:
+    0 0 1px var(--phosphor),
+    0 0 6px rgba(44, 255, 122, 0.55),
+    0 0 14px rgba(44, 255, 122, 0.25);
+  --glow-magenta:
+    0 0 1px var(--magenta),
+    0 0 8px rgba(98, 255, 154, 0.5),
+    0 0 18px rgba(98, 255, 154, 0.2);
+  --glow-amber:
+    0 0 1px var(--moss),
+    0 0 8px rgba(170, 255, 82, 0.5);
+
+  /* ── typography stacks ─────────────────────────────────── */
+  --font-display:  "Space Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-heading:  "JetBrains Mono", "Space Mono", ui-monospace, monospace;
+  --font-body:     "JetBrains Mono", "Space Mono", ui-monospace, monospace;
+  --font-code:     "JetBrains Mono", "Space Mono", ui-monospace, monospace;
+  --font-terminal: "VT323", "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── code-block tokens (all greens, no warm channels) ──── */
+  --code-bg:       #03110a;
+  --code-fn:       #b6ffce;
+  --code-comment:  #3a7a52;
+  --code-keyword:  #62ff9a;
+  --code-string:   #00d4b5;
+  --code-number:   #aaff66;
+  --code-var:      #d6ffe2;
+  --code-type:     #5cf5d4;
+  --code-punct:    #4d8a6e;
+  --code-tag:      #62ff9a;
+  --code-attr:     #aaff66;
+  --code-builtin:  #5cf5d4;
+  --code-operator: #b6ffce;
+
+  /* ── borders ───────────────────────────────────────────── */
+  --border-frame: 2px solid var(--phosphor-dim);
+  --border-line:  1px solid var(--phosphor-fade);
+  --border-dash:  1px dashed var(--phosphor-fade);
+  --border-dot:   1px dotted var(--phosphor-fade);
+  --rail-strong:  2px solid var(--phosphor);
+  --rail-quote:   3px double var(--phosphor);
+  --border-magenta-strong: 1.5px solid var(--magenta);
+  --border-magenta-dash:   1px dashed var(--magenta-deep);
+
+  /* ── spacing scale (modular) ───────────────────────────── */
+  --space-0: 0.1rem;
+  --space-1: 0.2rem;
+  --space-2: 0.4rem;
+  --space-3: 0.6rem;
+  --space-4: 0.8rem;
+  --space-5: 1rem;
+  --space-6: 1.4rem;
+  --space-7: 2rem;
+
+  /* ── z-index ramp ──────────────────────────────────────── */
+  --z-deep: 0;
+  --z-default: 1;
+  --z-raised: 2;
+  --z-fx-noise: 6;
+  --z-fx-vignette: 7;
+  --z-fx-frame: 8;
+  --z-fx-flicker: 9;
+  --z-shell: 10;
+  --z-backdrop: 49;
+  --z-drawer: 50;
+
+  /* ── semantic type roles ───────────────────────────────── */
+  --type-h1-size:   clamp(1.8rem, 3.4vw, 2.4rem);
+  --type-h2-size:   clamp(1.4rem, 2.6vw, 1.85rem);
+  --type-h3-size:   clamp(1.15rem, 2vw, 1.4rem);
+  --type-h4-size:   clamp(1rem, 1.6vw, 1.15rem);
+  --type-body-size: clamp(15px, 0.4vw + 13px, 17px);
+  --type-mono-size: 0.86em;
+
+  --type-line-tight:  1.05;
+  --type-line-snug:   1.15;
+  --type-line-normal: 1.6;
+  --type-line-prose:  1.7;
+
+  --tracking-tight:  -0.05em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.06em;
+  --tracking-wider:  0.14em;
+  --tracking-stamp:  0.22em;
+}
+
+/* ─── Fonts ─────────────────────────────────────────────────
+   VT323 — local brand file (uploaded by user, see fonts/)
+   Space Mono + JetBrains Mono — Google Fonts (no local files attached)
+*/
+@font-face {
+  font-family: "VT323";
+  src: url("./fonts/VT323-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
+
+/* ─── semantic helpers (lift these into prose, not raw HTML) ─── */
+.t-h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--type-h1-size);
+  line-height: var(--type-line-snug);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+}
+.t-h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--type-h2-size);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+}
+.t-h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--type-h3-size);
+  color: var(--magenta);
+  text-shadow: var(--glow-magenta);
+  letter-spacing: 0.04em;
+}
+.t-h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--type-h4-size);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--phosphor);
+}
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--type-body-size);
+  line-height: var(--type-line-prose);
+  color: var(--ink);
+}
+.t-mono {
+  font-family: var(--font-code);
+  font-size: var(--type-mono-size);
+}
+.t-terminal {
+  font-family: var(--font-terminal);
+  font-size: 1.15em;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+.t-stamp {
+  font-family: var(--font-terminal);
+  font-size: 0.78em;
+  letter-spacing: var(--tracking-stamp);
+  text-transform: uppercase;
+  color: var(--phosphor-fade);
+}
+.t-prompt {
+  color: var(--magenta-bright);
+  text-shadow: var(--glow-magenta);
+  font-family: var(--font-terminal);
+  font-weight: 700;
+}
+.t-glow      { color: var(--phosphor);        text-shadow: var(--glow-emerald); }
+.t-glow-pale { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.t-dim       { color: var(--phosphor-dim);    text-shadow: none; }
+.t-faded     { color: var(--phosphor-fade);   text-shadow: none; }
+
+/* ─── selection + component animations (phosphor-ui migration) ─── */
+::selection { background: var(--magenta); color: var(--bg); text-shadow: none; }
+
+@keyframes phosphorLedPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes phosphorHudBlink  { 0%,60% { opacity: 1; } 61%,100% { opacity: 0.18; } }
+@keyframes phosphorHudPulse  { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.85); } }
+@keyframes phosphorTapeRoll  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes phosphorBlink     { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+@keyframes phosphorNoiseShift {
+  0% { transform: translate(0,0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -1px); }
+  80% { transform: translate(1px, 3px); }
+  100% { transform: translate(0,0); }
+}
+@keyframes phosphorGeigerTick {
+  0%,70% { opacity: 0; }
+  71%,72% { opacity: 0.75; }
+  73%,81% { opacity: 0; }
+  82% { opacity: 0.4; }
+  83%,100% { opacity: 0; }
+}
+@keyframes phosphorHsync {
+  0%,94%,100% { transform: translateX(0); }
+  95% { transform: translateX(-2px); filter: blur(0.3px); }
+  96% { transform: translateX(2px); filter: blur(0.4px); }
+  97% { transform: translateX(-1px); filter: blur(0.15px); }
+}
+@keyframes phosphorHeroBreathe {
+  0%,100% { opacity: 0.95; }
+  50% { opacity: 1; text-shadow: 0 0 1px var(--phosphor), 0 0 14px rgba(44,255,122,0.85), 0 0 28px rgba(44,255,122,0.4); }
+}
+@keyframes phosphorHeroScan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(820%); opacity: 0; }
+}
+@keyframes phosphorBootline {
+  from { clip-path: inset(0 100% 0 0); opacity: 0; }
+  to   { clip-path: inset(0 0 0 0); opacity: 1; }
+}

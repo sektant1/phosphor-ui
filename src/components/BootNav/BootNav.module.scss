@@ -1,0 +1,30 @@
+.nav {
+  font-family: var(--font-terminal);
+  font-size: 1.2em;
+  line-height: 1.2;
+}
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.4rem;
+}
+.item a {
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  text-decoration: none;
+  padding: 0 2px;
+  border-bottom: 1px dashed transparent;
+}
+.item a:hover {
+  background: var(--magenta);
+  color: var(--bg);
+  text-shadow: none;
+  border-bottom-color: var(--magenta-bright);
+}
+.active a {
+  background: rgba(44, 255, 122, 0.12);
+  color: var(--phosphor-bright);
+}

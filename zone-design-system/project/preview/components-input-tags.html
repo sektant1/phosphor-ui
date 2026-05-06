@@ -1,0 +1,47 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.input-wrap {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-raise);
+  border: 1px solid var(--phosphor-dim);
+}
+.input-wrap .prompt-inline { color: #62ff9a; text-shadow: var(--glow-magenta); font-family: var(--font-code); font-size: 13px; }
+.input-wrap input {
+  flex: 1; background: transparent; border: none;
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+  font-family: var(--font-code); font-size: 13px;
+  outline: none; caret-color: #d6ffe2;
+}
+.input-wrap input::placeholder { color: var(--phosphor-fade); }
+.tag-chip {
+  border: 1px dashed var(--magenta-deep);
+  padding: 2px 8px;
+  color: #62ff9a;
+  text-shadow: var(--glow-magenta);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  font-family: var(--font-code);
+}
+.tag-chip:hover, .tag-chip.hover { background: #62ff9a; color: var(--bg); text-shadow: none; border-color: #d6ffe2; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+.lab { font-family: var(--font-terminal); font-size: 11px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; }
+</style></head>
+<body>
+<div class="lab">Search input</div>
+<div class="input-wrap">
+  <span class="prompt-inline">~/zone-net $</span>
+  <input type="text" value="grep -r 'transmission'">
+  <span style="color:var(--phosphor);text-shadow:var(--glow-emerald);font-family:var(--font-code)">▮</span>
+</div>
+<div class="lab">Tag chips</div>
+<div class="row">
+  <span class="tag-chip">vim</span>
+  <span class="tag-chip">setup</span>
+  <span class="tag-chip">plugin</span>
+  <span class="tag-chip hover">artifact</span>
+</div>
+</body></html>

@@ -1,0 +1,68 @@
+.vp {
+  border: 1px solid var(--phosphor);
+  background: var(--bg-deep);
+  font-family: var(--font-code);
+  position: relative;
+  margin: 0;
+}
+.stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(44, 255, 122, 0.04) 3px 4px),
+    radial-gradient(ellipse at 50% 50%, rgba(44, 255, 122, 0.08), transparent 70%),
+    var(--bg-deep);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.tag {
+  position: absolute; top: 8px; left: 10px;
+  font-family: var(--font-terminal); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--phosphor-fade);
+}
+.tc {
+  position: absolute; top: 8px; right: 10px;
+  font-family: var(--font-terminal); font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--phosphor-bright); text-shadow: var(--glow-emerald);
+  font-variant-numeric: tabular-nums;
+}
+.play {
+  width: 56px; height: 56px;
+  border: 2px solid var(--phosphor);
+  display: grid; place-items: center;
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+  font-size: 22px;
+  background: rgba(44, 255, 122, 0.06);
+  cursor: pointer;
+}
+.scan {
+  position: absolute; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(44, 255, 122, 0.5), transparent);
+  animation: vpScan 5s linear infinite;
+  pointer-events: none;
+}
+@keyframes vpScan { 0% { top: 0%; } 100% { top: 100%; } }
+
+.bar {
+  display: grid; grid-template-columns: 16px 1fr auto 16px;
+  gap: 12px; align-items: center;
+  padding: 6px 10px;
+  background: var(--bg-raise);
+  border-top: 1px solid var(--phosphor-fade);
+}
+.btn { color: var(--phosphor); text-shadow: var(--glow-emerald); font-family: var(--font-terminal); font-size: 14px; cursor: pointer; }
+.track {
+  height: 6px;
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-deep);
+  position: relative;
+}
+.fill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--phosphor);
+  box-shadow: 0 0 4px var(--phosphor);
+}
+.time { font-family: var(--font-terminal); font-size: 11.5px; color: var(--phosphor-dim); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }

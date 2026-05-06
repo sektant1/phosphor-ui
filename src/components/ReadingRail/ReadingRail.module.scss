@@ -1,0 +1,17 @@
+.rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--phosphor) 0%, var(--magenta) 100%);
+  box-shadow: 0 0 8px var(--phosphor), 0 0 14px rgba(98, 255, 154, 0.4);
+  transform-origin: 0 0;
+  z-index: 60;
+  pointer-events: none;
+  transition: transform 80ms linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail { transition: none; }
+}

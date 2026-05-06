@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: center; }
+.logo-cell { background: var(--bg-deep); padding: 22px; border: 1px solid var(--phosphor-fade); display: flex; align-items: center; justify-content: center; }
+.logo-cell svg { filter: drop-shadow(0 0 6px rgba(44,255,122,0.55)) drop-shadow(0 0 14px rgba(44,255,122,0.25)); }
+.cap { font-family: var(--font-terminal); font-size: 11px; color: var(--phosphor-fade); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 8px; text-align: center; }
+.banner {
+  font-family: var(--font-code); font-weight: 700; color: #d6ffe2;
+  text-shadow: 0 0 1px var(--phosphor), 0 0 8px rgba(44,255,122,0.55), 0 0 18px rgba(44,255,122,0.32);
+  font-size: 11px; line-height: 1.05; white-space: pre; overflow: hidden;
+  text-align: center;
+}
+</style></head>
+<body>
+<div class="grid">
+  <div>
+    <div class="logo-cell">
+      <svg width="80" height="80" viewBox="0 0 64 64" role="img" aria-label="radiation trefoil">
+        <g fill="#2cff7a">
+          <path d="M27 23.34 A10 10 0 0 1 37 23.34 L45 9.48 A26 26 0 0 0 19 9.48 Z"/>
+          <path d="M42 32 A10 10 0 0 1 37 40.66 L45 54.52 A26 26 0 0 0 58 32 Z"/>
+          <path d="M27 40.66 A10 10 0 0 1 22 32 L6 32 A26 26 0 0 0 19 54.52 Z"/>
+          <circle cx="32" cy="32" r="5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="cap">/assets/favicon.svg</div>
+  </div>
+  <div>
+    <pre class="banner">  ____ _____ _  ___________   _   _ _____ 
+ / ___|| ____|/ |/ |_ _|/ _ \ | \ | |_   _|
+ \___ \|  _|  | || | | || |_| ||  \| | | |  
+  ___) | |___ | || |_| ||  _  || |\  | | |  
+ |____/|_____||_|\___|_||_| |_||_| \_| |_|  </pre>
+    <div class="cap">figlet "sektant" / Slant</div>
+  </div>
+</div>
+</body></html>

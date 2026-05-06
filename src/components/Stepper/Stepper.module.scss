@@ -1,0 +1,59 @@
+.stp {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+  font-family: var(--font-terminal);
+  font-size: 13px;
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-raise);
+  padding: 6px 8px;
+}
+.item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 2px 6px;
+  color: var(--phosphor-fade);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+}
+.done { color: var(--phosphor-dim); }
+.current { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.current::before { content: "▸ "; color: var(--phosphor); }
+.num {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: 11px;
+  border: 1px solid currentColor;
+  padding: 0 4px;
+  letter-spacing: 0.1em;
+}
+.done .num { background: var(--phosphor); color: var(--bg); border-color: var(--phosphor); }
+.sep {
+  color: var(--phosphor-fade);
+  margin: 0 2px;
+  font-family: var(--font-terminal);
+  font-size: 14px;
+}
+
+.foot {
+  display: flex; justify-content: space-between; align-items: stretch; gap: 12px;
+  margin-top: 18px;
+  font-family: var(--font-code);
+}
+.foot a {
+  flex: 1;
+  display: grid; grid-template-columns: 12px 1fr; gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid var(--phosphor-fade);
+  padding: 10px 12px;
+  background: var(--bg-raise);
+}
+.foot a:hover { border-color: var(--phosphor); background: rgba(44, 255, 122, 0.08); }
+.arrow {
+  font-family: var(--font-terminal); font-size: 18px;
+  color: var(--phosphor); text-shadow: var(--glow-emerald);
+}
+.metaCol { display: grid; gap: 1px; min-width: 0; }
+.alignRight { text-align: right; }
+.isNext a:last-child { grid-template-columns: 1fr 12px; }
+.isNext a:last-child .arrow { order: 2; }
+
+.kind { font-family: var(--font-terminal); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--phosphor-fade); }
+.name { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
