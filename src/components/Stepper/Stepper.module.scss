@@ -57,3 +57,9 @@
 
 .kind { font-family: var(--font-terminal); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--phosphor-fade); }
 .name { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 480px) {
+  .foot { gap: 8px; margin-top: 12px; }
+  .foot a { padding: 8px 10px; gap: 6px; }
+  .kind { display: none; }
+}

@@ -1,0 +1,31 @@
+.wrap {
+  width: 100%;
+  font-family: var(--font-code);
+  font-size: 13px;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-terminal);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--phosphor-fade);
+  margin-bottom: 0.4rem;
+}
+
+.results {
+  margin-top: 0.2rem;
+  border: 1px dashed var(--phosphor-fade);
+  border-top: none;
+  padding: 0.4rem 0.7rem 0.6rem;
+  background: var(--bg-raise);
+}
+
+.count {
+  margin: 0 0 0.2rem;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  color: var(--phosphor-fade);
+  min-height: 1.2em;
+}

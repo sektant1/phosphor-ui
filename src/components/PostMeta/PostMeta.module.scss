@@ -1,0 +1,70 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5ch 1ch;
+  font-family: var(--font-code);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.sep {
+  color: var(--phosphor-fade);
+  user-select: none;
+}
+
+.date {
+  color: var(--phosphor-dim);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.readTime {
+  color: var(--phosphor-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25ch;
+}
+
+.clock {
+  color: var(--phosphor-fade);
+}
+
+.wordCount {
+  color: var(--phosphor-fade);
+}
+
+.updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4ch;
+  color: var(--magenta);
+  font-variant-numeric: tabular-nums;
+}
+
+.updBadge {
+  color: var(--magenta);
+  text-shadow: var(--glow-magenta);
+  letter-spacing: 0.04em;
+}
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6ch;
+}
+
+.tag {
+  font-size: 11px;
+  color: var(--magenta);
+  font-family: var(--font-code);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 520px) {
+  .root {
+    gap: 0.4ch 0.8ch;
+    font-size: 11px;
+  }
+}

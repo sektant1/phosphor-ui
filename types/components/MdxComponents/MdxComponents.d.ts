@@ -25,6 +25,7 @@ export declare const mdxComponents: {
     blockquote: React.FC<AnyProps>;
     img: React.FC<React.ImgHTMLAttributes<HTMLImageElement>>;
     a: React.FC<React.AnchorHTMLAttributes<HTMLAnchorElement>>;
+    Exercise: React.FC<import("../Exercise").ExerciseProps>;
 };
 export declare type MdxComponents = typeof mdxComponents;
 export interface PostBodyProps {

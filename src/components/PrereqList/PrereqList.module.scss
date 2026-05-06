@@ -82,3 +82,8 @@
 .met .statusLabel { color: var(--phosphor); text-shadow: var(--glow-emerald); }
 .missing .statusLabel { color: #ff8aa1; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4); }
 .soft .statusLabel { color: var(--phosphor-fade); }
+
+@media (max-width: 480px) {
+  .li { grid-template-columns: 28px 1fr; }
+  .statusLabel { display: none; }
+}

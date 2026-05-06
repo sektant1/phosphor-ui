@@ -149,3 +149,9 @@
 .eof { margin: 0; font-family: var(--font-terminal); font-size: 13px; letter-spacing: 0.14em; }
 .eofMark { color: var(--magenta); text-shadow: var(--glow-magenta); font-weight: 700; margin-right: 6px; }
 .eofText { color: var(--phosphor-fade); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tapeRun { animation: none; }
+  .led { animation: none; }
+  .cursor { animation: none; }
+}

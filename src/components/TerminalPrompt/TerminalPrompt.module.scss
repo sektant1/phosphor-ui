@@ -21,3 +21,7 @@
   margin-left: 4px;
   animation: phosphorBlink 1.05s steps(2) infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+}

@@ -52,3 +52,9 @@
   padding: 0.6rem 0;
   font-family: var(--font-code);
 }
+
+@media (max-width: 520px) {
+  .pho-search-hit a { grid-template-columns: 1fr auto; }
+  .pho-search-hit .hit-date { display: none; }
+  .pho-search-hit .hit-snippet { grid-column: 1 / -1; }
+}

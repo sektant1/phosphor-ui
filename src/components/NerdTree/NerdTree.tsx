@@ -33,27 +33,45 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   command = ":NERDTree",
   footerMeta,
   className,
-}) => (
-  <aside className={[styles.tree, className ?? ""].join(" ")} aria-label="content tree">
-    <header className={styles.header}>
-      <p className={styles.buf}>
+}) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  return (
+    <aside
+      className={[styles.tree, mobileOpen ? styles.mobileOpen : "", className ?? ""].join(" ")}
+      aria-label="content tree"
+    >
+      <button
+        type="button"
+        className={styles.toggleBtn}
+        aria-expanded={mobileOpen}
+        onClick={() => setMobileOpen((o) => !o)}
+      >
         <span className={styles.led} aria-hidden="true" />
-        {bufferLabel}
-      </p>
-      <h2 className={styles.title}>{title}</h2>
-      {hint && <p className={styles.status}>{hint}</p>}
-    </header>
-    <ul className={styles.list} role="tree">
-      {tree.map((n, i) => (
-        <Node key={i} node={n} />
-      ))}
-    </ul>
-    <footer className={styles.footer}>
-      <p className={styles.cmd}>{command}</p>
-      {footerMeta && <p className={styles.metaFoot}>{footerMeta}</p>}
-    </footer>
-  </aside>
-);
+        <span className={styles.toggleGlyph} aria-hidden="true">{mobileOpen ? "[-]" : "[+]"}</span>
+        <span className={styles.toggleLabel}>{command}</span>
+      </button>
+      <div className={styles.body}>
+        <header className={styles.header}>
+          <p className={styles.buf}>
+            <span className={styles.led} aria-hidden="true" />
+            {bufferLabel}
+          </p>
+          <h2 className={styles.title}>{title}</h2>
+          {hint && <p className={styles.status}>{hint}</p>}
+        </header>
+        <ul className={styles.list} role="tree">
+          {tree.map((n, i) => (
+            <Node key={i} node={n} />
+          ))}
+        </ul>
+        <footer className={styles.footer}>
+          <p className={styles.cmd}>{command}</p>
+          {footerMeta && <p className={styles.metaFoot}>{footerMeta}</p>}
+        </footer>
+      </div>
+    </aside>
+  );
+};
 
 const Node: React.FC<{ node: NerdTreeNode }> = ({ node }) => {
   if (node.kind === "leaf") {

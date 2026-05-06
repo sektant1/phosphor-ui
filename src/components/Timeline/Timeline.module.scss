@@ -1,0 +1,109 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 0 0.8rem;
+}
+
+.dotCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 2px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.done {
+  background: var(--phosphor-dim);
+  box-shadow: none;
+}
+
+.active {
+  background: var(--phosphor);
+  box-shadow: 0 0 6px var(--phosphor);
+  animation: phosphorLedPulse 2s ease-in-out infinite;
+}
+
+.upcoming {
+  background: none;
+  border: 1px dashed var(--phosphor-fade);
+}
+
+.line {
+  flex: 1;
+  border-left: 1px dashed var(--phosphor-fade);
+  margin-left: 3px;
+  min-height: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+}
+
+.date {
+  font-family: var(--font-code);
+  font-size: 10.5px;
+  color: var(--phosphor-fade);
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+}
+
+.title {
+  font-family: var(--font-code);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.title.done {
+  color: var(--phosphor-dim);
+  background: none;
+  box-shadow: none;
+  border: none;
+  animation: none;
+}
+
+.title.active {
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  background: none;
+  box-shadow: none;
+  border: none;
+  animation: none;
+}
+
+.title.upcoming {
+  color: var(--ink);
+  background: none;
+  box-shadow: none;
+  border: none;
+  animation: none;
+}
+
+.body {
+  color: var(--phosphor-dim);
+  font-size: 12px;
+  margin-top: 0.2rem;
+  font-family: var(--font-code);
+}
+
+@keyframes phosphorLedPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active {
+    animation: none;
+  }
+}

@@ -86,3 +86,7 @@
 .slim .head {
   font-size: 11px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .current { animation: none; }
+}

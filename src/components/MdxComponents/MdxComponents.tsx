@@ -3,6 +3,8 @@ import { MDXProvider } from "@mdx-js/react";
 import Prose from "../Prose";
 import { Callout } from "../Callout";
 import { Hr } from "../Hr";
+import { Exercise } from "../Exercise";
+import { CodeBlock, extractMdxCode } from "../CodeBlock";
 
 type AnyProps = React.HTMLAttributes<HTMLElement> & { [key: string]: unknown };
 
@@ -10,6 +12,15 @@ const Pass = (tag: keyof JSX.IntrinsicElements) => {
   const C: React.FC<AnyProps> = (props) => React.createElement(tag, props);
   C.displayName = `Md${String(tag)}`;
   return C;
+};
+
+const MdPre: React.FC<AnyProps> = ({ children }) => {
+  try {
+    const { code, lang } = extractMdxCode(children);
+    return <CodeBlock code={code} lang={lang} />;
+  } catch {
+    return <pre>{children}</pre>;
+  }
 };
 
 const MdBlockquote: React.FC<AnyProps> = ({ children, ...rest }) => (
@@ -61,7 +72,7 @@ export const mdxComponents = {
   ul: Pass("ul"),
   ol: Pass("ol"),
   li: Pass("li"),
-  pre: Pass("pre"),
+  pre: MdPre,
   code: Pass("code"),
   table: Pass("table"),
   thead: Pass("thead"),
@@ -73,6 +84,7 @@ export const mdxComponents = {
   blockquote: MdBlockquote,
   img: MdImg,
   a: MdA,
+  Exercise,
 };
 
 export type MdxComponents = typeof mdxComponents;

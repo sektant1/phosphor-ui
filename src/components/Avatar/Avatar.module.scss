@@ -1,0 +1,70 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px dashed var(--phosphor-dim);
+  background: var(--bg-deep);
+}
+
+.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.md {
+  width: 48px;
+  height: 48px;
+}
+
+.lg {
+  width: 64px;
+  height: 64px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.initials {
+  font-family: var(--font-terminal);
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  line-height: 1;
+  user-select: none;
+
+  .sm & {
+    font-size: 14px;
+  }
+
+  .md & {
+    font-size: 20px;
+  }
+
+  .lg & {
+    font-size: 26px;
+  }
+}
+
+.fallback {
+  font-family: var(--font-terminal);
+  color: var(--phosphor-fade);
+  line-height: 1;
+  user-select: none;
+
+  .sm & {
+    font-size: 14px;
+  }
+
+  .md & {
+    font-size: 20px;
+  }
+
+  .lg & {
+    font-size: 26px;
+  }
+}

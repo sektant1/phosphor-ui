@@ -51,3 +51,8 @@
   background: rgba(44, 255, 122, 0.025);
   animation: phosphorGeigerTick 2.4s steps(1, end) infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .noise { animation: none; }
+  .tick { animation: none; }
+}

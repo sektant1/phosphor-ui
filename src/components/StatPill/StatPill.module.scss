@@ -1,0 +1,42 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.label {
+  background: var(--bg-deep);
+  border: 1px solid var(--phosphor-fade);
+  border-right: none;
+  padding: 1px 6px;
+  font-family: var(--font-terminal);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phosphor-fade);
+}
+
+.value {
+  border: 1px solid var(--phosphor-fade);
+  border-left: 1px dashed var(--phosphor-fade);
+  padding: 1px 8px;
+  font-family: var(--font-code);
+  font-size: 12px;
+}
+
+.phosphor {
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  background: rgba(44, 255, 122, 0.06);
+}
+
+.magenta {
+  color: var(--magenta-bright);
+  text-shadow: var(--glow-magenta);
+  background: rgba(232, 92, 200, 0.06);
+}
+
+.dim {
+  color: var(--phosphor-dim);
+  background: var(--bg-raise);
+}

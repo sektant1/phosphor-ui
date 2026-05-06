@@ -1,0 +1,190 @@
+.block {
+  border: 1px solid var(--phosphor-fade);
+  background: var(--bg-deep);
+  margin: 1.4rem 0;
+  overflow: hidden;
+  font-family: var(--font-code);
+}
+
+/* ── title bar ─────────────────────────────────────────── */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 5px 10px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(44, 255, 122, 0.03) 6px 7px),
+    var(--bg-raise);
+  border-bottom: 1px solid var(--phosphor-fade);
+  min-height: 32px;
+}
+
+.leds {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.led {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--phosphor-fade);
+  box-shadow: 0 0 3px var(--phosphor-fade);
+}
+
+.leds .led:first-child  { background: var(--phosphor);       box-shadow: 0 0 4px var(--phosphor); }
+.leds .led:nth-child(2) { background: var(--phosphor-dim);   box-shadow: 0 0 3px var(--phosphor-dim); }
+.leds .led:nth-child(3) { background: var(--phosphor-fade);  box-shadow: none; }
+
+.filename {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.fileglyph {
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  flex-shrink: 0;
+}
+
+.spacer { flex: 1; }
+
+.lang {
+  font-family: var(--font-terminal);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--phosphor-dim);
+  border: 1px solid var(--phosphor-fade);
+  padding: 1px 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.copy {
+  font-family: var(--font-terminal);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--phosphor-dim);
+  background: transparent;
+  border: 1px solid var(--phosphor-fade);
+  padding: 1px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  outline: none;
+  transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.copy:hover {
+  color: var(--phosphor);
+  border-color: var(--phosphor-dim);
+}
+
+.copy:focus-visible {
+  box-shadow: 0 0 0 2px rgba(44, 255, 122, 0.3);
+}
+
+.copied {
+  color: var(--phosphor-bright);
+  border-color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  animation: copiedFlash 200ms ease-out;
+}
+
+@keyframes copiedFlash {
+  0%   { box-shadow: 0 0 0 rgba(44, 255, 122, 0); }
+  40%  { box-shadow: 0 0 10px rgba(44, 255, 122, 0.55); }
+  100% { box-shadow: none; }
+}
+
+/* ── code area ─────────────────────────────────────────── */
+
+/* Shiki outputs <pre><code><span class="line">...</span></code></pre>  */
+.code :global(pre) {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  font-family: var(--font-code) !important;
+  font-size: 15px;
+  line-height: 1.65;
+  /* Shiki sets inline background-color from theme.bg — we keep it */
+}
+
+.code :global(code) {
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  display: block;
+}
+
+.code :global(.line) {
+  display: block;
+  min-height: 1.65em;
+}
+
+/* scanline overlay — very subtle, just enough texture */
+.code::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(3, 17, 10, 0.06) 3px,
+    rgba(3, 17, 10, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: multiply;
+}
+
+.code { position: relative; }
+
+/* ── plain fallback (before shiki loads) ─────────────────── */
+.fallback {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--phosphor-dim);
+  background: var(--bg-deep);
+}
+
+.fallback code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ── mobile ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .bar { padding: 4px 8px; gap: 0.4rem; }
+  .lang { display: none; }
+  .copy { font-size: 10px; padding: 1px 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy { transition: none; }
+  .copied { animation: none; }
+}

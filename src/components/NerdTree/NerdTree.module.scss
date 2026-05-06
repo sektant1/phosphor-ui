@@ -1,52 +1,92 @@
 .tree {
   border-right: 1px dashed var(--phosphor-fade);
-  padding: 1.2rem 0.9rem;
   font-family: var(--font-code);
   font-size: 12px;
   position: sticky;
   top: 0;
   align-self: start;
   max-height: 100vh;
-  overflow: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--phosphor-dim) transparent;
-}
-.tree::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.tree::-webkit-scrollbar-track {
-  background: var(--bg-deep);
-  border-left: 1px dashed var(--phosphor-fade);
-}
-.tree::-webkit-scrollbar-thumb {
-  background: var(--phosphor-fade);
-  border: 1px solid var(--bg-deep);
-  border-radius: 0;
-  box-shadow: inset 0 0 0 1px var(--phosphor-dim);
-}
-.tree::-webkit-scrollbar-thumb:hover {
-  background: var(--phosphor-dim);
-  box-shadow: inset 0 0 0 1px var(--phosphor), 0 0 6px rgba(44, 255, 122, 0.4);
-}
-.tree::-webkit-scrollbar-thumb:active {
-  background: var(--phosphor);
-  box-shadow: 0 0 8px var(--phosphor);
-}
-.tree::-webkit-scrollbar-corner {
-  background: var(--bg-deep);
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 880px) {
   .tree {
     position: static;
-    max-height: 280px;
+    max-height: none;
     border-right: none;
     border-bottom: 1px dashed var(--phosphor-fade);
-    padding: 0.8rem;
+    padding: 0;
+  }
+  .toggleBtn {
+    display: flex !important;
+  }
+  .body {
+    display: none;
+  }
+  .mobileOpen .body {
+    display: block;
   }
 }
+.toggleBtn {
+  display: none;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--phosphor);
+  font: inherit;
+  font-family: var(--font-code);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  gap: 8px;
+  align-items: center;
+  letter-spacing: 0.06em;
+}
+.toggleBtn:hover { background: rgba(44, 255, 122, 0.06); }
+.toggleGlyph {
+  font-family: var(--font-code);
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+  letter-spacing: -0.02em;
+}
+.toggleLabel { color: var(--phosphor-dim); letter-spacing: 0.08em; }
+
+.body {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--phosphor-dim) transparent;
+  padding: 1.2rem 0.9rem;
+}
+.body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.body::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+  border-left: 1px dashed var(--phosphor-fade);
+}
+.body::-webkit-scrollbar-thumb {
+  background: var(--phosphor-fade);
+  border: 1px solid var(--bg-deep);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 1px var(--phosphor-dim);
+}
+.body::-webkit-scrollbar-thumb:hover {
+  background: var(--phosphor-dim);
+  box-shadow: inset 0 0 0 1px var(--phosphor), 0 0 6px rgba(44, 255, 122, 0.4);
+}
+.body::-webkit-scrollbar-thumb:active {
+  background: var(--phosphor);
+  box-shadow: 0 0 8px var(--phosphor);
+}
+.body::-webkit-scrollbar-corner {
+  background: var(--bg-deep);
+}
+
 .header { margin-bottom: 0.8rem; }
 .buf {
   margin: 0; color: var(--phosphor-fade); font-size: 10.5px;

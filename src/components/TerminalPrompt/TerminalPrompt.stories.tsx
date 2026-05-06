@@ -1,23 +1,21 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TerminalPrompt } from "./TerminalPrompt";
+import type { TerminalPromptProps } from "./TerminalPrompt";
 
-const meta: Meta<typeof TerminalPrompt> = {
+const meta: Meta<TerminalPromptProps> = {
   title: "Components/TerminalPrompt",
   component: TerminalPrompt,
+  argTypes: {
+    prompt:  { control: "text" },
+    command: { control: "text" },
+    cursor:  { control: "boolean" },
+  },
+  args: {
+    prompt:  "~/$",
+    command: "decode --signal phosphor.zone",
+    cursor:  true,
+  },
 };
 export default meta;
 
-type Story = StoryObj<typeof TerminalPrompt>;
-
-export const Default: Story = {
-  args: { command: "decode --signal phosphor.zone" },
-};
-
-export const WithCursor: Story = {
-  args: { command: "ls -la /zone-net", cursor: true },
-};
-
-export const CustomPrompt: Story = {
-  args: { prompt: "root@phosphor #", command: "shutdown -r now" },
-};
+export const Default: StoryObj<TerminalPromptProps> = {};

@@ -1,0 +1,88 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.4ch;
+}
+
+.headingGlyph {
+  color: var(--phosphor);
+  font-family: var(--font-terminal);
+  font-size: 10.5px;
+  line-height: 1;
+}
+
+.headingLabel {
+  color: var(--phosphor-fade);
+  font-family: var(--font-terminal);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 160px;
+  flex: 1 1 160px;
+  max-width: 280px;
+  padding: 0.6rem 0.8rem;
+  border: 1px dashed var(--phosphor-fade);
+  background: var(--bg-raise);
+  text-decoration: none;
+  transition: border-color 120ms, background 120ms, box-shadow 120ms;
+
+  &:hover {
+    border-color: var(--phosphor);
+    background: rgba(44, 255, 122, 0.06);
+    box-shadow: 0 0 12px rgba(44, 255, 122, 0.1);
+  }
+}
+
+.date {
+  color: var(--phosphor-fade);
+  font-family: var(--font-code);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  color: var(--phosphor);
+  font-family: var(--font-code);
+  font-size: 13px;
+  text-shadow: var(--glow-emerald);
+  line-height: 1.35;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3ch;
+}
+
+.tag {
+  color: var(--magenta);
+  font-family: var(--font-code);
+  font-size: 11px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}

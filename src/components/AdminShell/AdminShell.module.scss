@@ -1,0 +1,155 @@
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  background: var(--bg-deep);
+  border-right: 1px solid var(--phosphor-fade);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeader {
+  padding: 1rem 0.9rem 0.8rem;
+  border-bottom: 1px dashed var(--phosphor-fade);
+}
+
+.sidebarTitle {
+  font-family: var(--font-terminal);
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+}
+
+.nav {
+  flex: 1;
+}
+
+.navList {
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  flex: 1;
+}
+
+.navItem {
+  display: block;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  border-left: 2px solid transparent;
+
+  &:hover:not(.navLinkActive) {
+    background: rgba(44, 255, 122, 0.04);
+    color: var(--phosphor-dim);
+  }
+}
+
+.navLinkActive {
+  background: rgba(44, 255, 122, 0.08);
+  color: var(--phosphor);
+  border-left: 2px solid var(--phosphor);
+}
+
+.navGlyph {
+  color: var(--phosphor-fade);
+  font-size: 10px;
+}
+
+.userSection {
+  padding: 0.7rem 0.9rem;
+  border-top: 1px dashed var(--phosphor-fade);
+}
+
+.userName {
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--phosphor-dim);
+}
+
+.userRole {
+  font-size: 10px;
+  color: var(--phosphor-fade);
+}
+
+.logoutBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--phosphor-fade);
+  padding: 0.3rem 0;
+  margin-top: 0.4rem;
+  letter-spacing: 0.06em;
+
+  &:hover {
+    color: var(--magenta);
+  }
+}
+
+.main {
+  grid-column: 2;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    position: static;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--phosphor-fade);
+  }
+
+  .nav {
+    flex: unset;
+  }
+
+  .navList {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0;
+  }
+
+  .navLink {
+    padding: 0.35rem 0.6rem;
+    white-space: nowrap;
+  }
+
+  .userSection {
+    display: none;
+  }
+
+  .main {
+    grid-column: 1;
+  }
+}

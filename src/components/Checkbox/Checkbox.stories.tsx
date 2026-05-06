@@ -1,16 +1,23 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
+import type { CheckboxProps } from "./Checkbox";
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<CheckboxProps> = {
   title: "Components/Checkbox",
   component: Checkbox,
+  argTypes: {
+    label:          { control: "text" },
+    defaultChecked: { control: "boolean" },
+    disabled:       { control: "boolean" },
+    error:          { control: "boolean" },
+  },
+  args: {
+    label:          "engage shields",
+    defaultChecked: false,
+    disabled:       false,
+    error:          false,
+  },
 };
 export default meta;
 
-type Story = StoryObj<typeof Checkbox>;
-
-export const Default: Story = { args: { label: "engage shields" } };
-export const Checked: Story = { args: { label: "shields up", defaultChecked: true } };
-export const Disabled: Story = { args: { label: "offline", disabled: true } };
-export const Error: Story = { args: { label: "fault", error: true } };
+export const Default: StoryObj<CheckboxProps> = {};

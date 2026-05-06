@@ -1,23 +1,24 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
+import type { ButtonProps } from "./Button";
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<ButtonProps> = {
   title: "Components/Button",
   component: Button,
   argTypes: {
-    variant: { control: "inline-radio", options: ["primary", "ghost", "danger"] },
-    size: { control: "inline-radio", options: ["sm", "md"] },
+    variant:  { control: "inline-radio", options: ["primary", "ghost", "danger"] },
+    size:     { control: "inline-radio", options: ["sm", "md"] },
+    disabled: { control: "boolean" },
+    pressed:  { control: "boolean" },
   },
-  args: { children: "Engage" },
+  args: {
+    children: "Engage",
+    variant:  "primary",
+    size:     "md",
+    disabled: false,
+    pressed:  false,
+  },
 };
 export default meta;
 
-type Story = StoryObj<typeof Button>;
-
-export const Primary: Story = { args: { variant: "primary" } };
-export const Ghost: Story = { args: { variant: "ghost" } };
-export const Danger: Story = { args: { variant: "danger" } };
-export const Small: Story = { args: { size: "sm" } };
-export const Pressed: Story = { args: { pressed: true } };
-export const Disabled: Story = { args: { disabled: true } };
+export const Default: StoryObj<ButtonProps> = {};

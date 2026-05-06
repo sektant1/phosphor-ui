@@ -96,11 +96,11 @@
   --z-drawer: 50;
 
   /* ── semantic type roles ───────────────────────────────── */
-  --type-h1-size:   clamp(1.8rem, 3.4vw, 2.4rem);
-  --type-h2-size:   clamp(1.4rem, 2.6vw, 1.85rem);
-  --type-h3-size:   clamp(1.15rem, 2vw, 1.4rem);
-  --type-h4-size:   clamp(1rem, 1.6vw, 1.15rem);
-  --type-body-size: clamp(15px, 0.4vw + 13px, 17px);
+  --type-h1-size:   clamp(2rem, 3.6vw, 2.6rem);
+  --type-h2-size:   clamp(1.55rem, 2.8vw, 2rem);
+  --type-h3-size:   clamp(1.25rem, 2.1vw, 1.5rem);
+  --type-h4-size:   clamp(1.05rem, 1.7vw, 1.2rem);
+  --type-body-size: clamp(16px, 0.4vw + 14px, 18px);
   --type-mono-size: 0.86em;
 
   --type-line-tight:  1.05;
