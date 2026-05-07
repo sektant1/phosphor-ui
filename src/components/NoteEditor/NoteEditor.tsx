@@ -16,6 +16,7 @@ export interface NoteData {
 export interface NoteEditorProps {
   initial?: Partial<NoteData>;
   onSave?: (data: NoteData) => void;
+  onChange?: (data: NoteData) => void;
   onDiscard?: () => void;
   saving?: boolean;
   className?: string;
@@ -24,15 +25,29 @@ export interface NoteEditorProps {
 export const NoteEditor: React.FC<NoteEditorProps> = ({
   initial = {},
   onSave,
+  onChange,
   onDiscard,
   saving = false,
   className,
 }) => {
-  const [title, setTitle] = useState(initial.title ?? "");
-  const [body, setBody] = useState(initial.body ?? "");
-  const [tags, setTags] = useState<string[]>(initial.tags ?? []);
-  const [status, setStatus] = useState<ContentStatus>(initial.status ?? "draft");
+  const [title, setTitleState] = useState(initial.title ?? "");
+  const [body, setBodyState] = useState(initial.body ?? "");
+  const [tags, setTagsState] = useState<string[]>(initial.tags ?? []);
+  const [status, setStatusState] = useState<ContentStatus>(initial.status ?? "draft");
   const [tagInput, setTagInput] = useState("");
+
+  const emit = (next: { title?: string; body?: string; tags?: string[]; status?: ContentStatus }) => {
+    onChange?.({
+      title: next.title ?? title,
+      body: next.body ?? body,
+      tags: next.tags ?? tags,
+      status: next.status ?? status,
+    });
+  };
+  const setTitle = (v: string) => { setTitleState(v); emit({ title: v }); };
+  const setBody = (v: string) => { setBodyState(v); emit({ body: v }); };
+  const setTags = (v: string[]) => { setTagsState(v); emit({ tags: v }); };
+  const setStatus = (v: ContentStatus) => { setStatusState(v); emit({ status: v }); };
 
   const handleTagKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

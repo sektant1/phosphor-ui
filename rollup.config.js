@@ -23,7 +23,10 @@ export default [
         inlineDynamicImports: true,
       },
     ],
-    external: ["react", "react-dom", "react/jsx-runtime", "@mdx-js/react"],
+    external: (id) =>
+      ["react", "react-dom", "react/jsx-runtime", "@mdx-js/react"].includes(id) ||
+      id === "shiki" ||
+      id.startsWith("shiki/"),
     plugins: [
       peerDepsExternal(),
 

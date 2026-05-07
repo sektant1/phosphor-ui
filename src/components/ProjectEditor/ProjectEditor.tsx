@@ -24,6 +24,7 @@ export interface ProjectData {
 export interface ProjectEditorProps {
   initial?: Partial<ProjectData>;
   onSave?: (data: ProjectData) => void;
+  onChange?: (data: ProjectData) => void;
   onDiscard?: () => void;
   saving?: boolean;
   className?: string;
@@ -40,26 +41,50 @@ function slugify(value: string): string {
 export const ProjectEditor: React.FC<ProjectEditorProps> = ({
   initial = {},
   onSave,
+  onChange,
   onDiscard,
   saving = false,
   className,
 }) => {
-  const [title, setTitle] = useState(initial.title ?? "");
-  const [slug, setSlug] = useState(initial.slug ?? "");
+  const [title, setTitleState] = useState(initial.title ?? "");
+  const [slug, setSlugState] = useState(initial.slug ?? "");
   const [slugTouched, setSlugTouched] = useState(!!initial.slug);
-  const [description, setDescription] = useState(initial.description ?? "");
-  const [body, setBody] = useState(initial.body ?? "");
-  const [tags, setTags] = useState<string[]>(initial.tags ?? []);
+  const [description, setDescriptionState] = useState(initial.description ?? "");
+  const [body, setBodyState] = useState(initial.body ?? "");
+  const [tags, setTagsState] = useState<string[]>(initial.tags ?? []);
   const [tagInput, setTagInput] = useState("");
-  const [links, setLinks] = useState<ProjectLink[]>(initial.links ?? []);
-  const [status, setStatus] = useState<ContentStatus>(initial.status ?? "draft");
-  const [featured, setFeatured] = useState(initial.featured ?? false);
+  const [links, setLinksState] = useState<ProjectLink[]>(initial.links ?? []);
+  const [status, setStatusState] = useState<ContentStatus>(initial.status ?? "draft");
+  const [featured, setFeaturedState] = useState(initial.featured ?? false);
+
+  const emit = (next: Partial<ProjectData>) => {
+    onChange?.({
+      title: next.title ?? title,
+      slug: next.slug ?? slug,
+      description: next.description ?? description,
+      body: next.body ?? body,
+      tags: next.tags ?? tags,
+      links: next.links ?? links,
+      status: next.status ?? status,
+      featured: next.featured ?? featured,
+    });
+  };
+  const setTitle = (v: string) => { setTitleState(v); emit({ title: v }); };
+  const setSlug = (v: string) => { setSlugState(v); emit({ slug: v }); };
+  const setDescription = (v: string) => { setDescriptionState(v); emit({ description: v }); };
+  const setBody = (v: string) => { setBodyState(v); emit({ body: v }); };
+  const setTags = (v: string[]) => { setTagsState(v); emit({ tags: v }); };
+  const setLinks = (v: ProjectLink[]) => { setLinksState(v); emit({ links: v }); };
+  const setStatus = (v: ContentStatus) => { setStatusState(v); emit({ status: v }); };
+  const setFeatured = (v: boolean) => { setFeaturedState(v); emit({ featured: v }); };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setTitle(val);
     if (!slugTouched) {
-      setSlug(slugify(val));
+      const newSlug = slugify(val);
+      setSlugState(newSlug);
+      onChange?.({ title: val, slug: newSlug, description, body, tags, links, status, featured });
     }
   };
 
