@@ -244,6 +244,46 @@ const Z_INDEX: Array<[string, string, string]> = [
   ["--z-drawer", "50", "off-canvas drawer"],
 ];
 
+const SCROLLBAR: Array<[string, string, string]> = [
+  ["--scrollbar-size", "8px", "track + thumb thickness"],
+  ["--scrollbar-track", "var(--bg-deep)", "groove background"],
+  ["--scrollbar-track-border", "1px dashed var(--phosphor-fade)", "left edge of track"],
+  ["--scrollbar-thumb", "var(--phosphor-fade)", "default thumb fill"],
+  ["--scrollbar-thumb-edge", "var(--phosphor-dim)", "inset 1px ring on thumb"],
+  ["--scrollbar-thumb-hover", "var(--phosphor-dim)", "hover thumb fill"],
+  ["--scrollbar-thumb-active", "var(--phosphor)", "drag thumb fill"],
+  ["--scrollbar-glow", "0 0 6px rgba(44,255,122,0.4)", "hover bloom"],
+];
+
+const ScrollbarDemo: React.FC<{ axis: "y" | "x" }> = ({ axis }) => {
+  const isY = axis === "y";
+  return (
+    <div
+      style={{
+        width: isY ? 220 : "100%",
+        height: isY ? 160 : 80,
+        background: "var(--bg-raise)",
+        border: "1px solid var(--phosphor-fade)",
+        padding: 10,
+        overflow: isY ? "auto" : "auto",
+        whiteSpace: isY ? "normal" : "nowrap",
+        fontFamily: "var(--font-code)",
+        fontSize: 11,
+        color: "var(--ink)",
+        lineHeight: 1.7,
+      }}
+    >
+      {isY
+        ? Array.from({ length: 24 }).map((_, i) => (
+            <div key={i}>
+              [{String(i).padStart(3, "0")}] transmission fragment // СЕКТОР-7
+            </div>
+          ))
+        : "▌ долгий горизонтальный сигнал ░░░ ".repeat(20)}
+    </div>
+  );
+};
+
 const TRACKING: Array<[string, string]> = [
   ["--tracking-tight", "-0.05em"],
   ["--tracking-normal", "0"],
@@ -450,6 +490,30 @@ export const All = () => (
       ))}
     </div>
 
+    <SectionTitle>Scrollbar</SectionTitle>
+    <Caption>unified phosphor scrollbar — global, token-driven</Caption>
+    <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 8, fontFamily: "var(--font-code)", fontSize: 12, marginBottom: 16 }}>
+      {SCROLLBAR.map(([name, val, desc]) => (
+        <React.Fragment key={name}>
+          <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
+          <div>
+            <span style={{ color: "var(--phosphor-bright)" }}>{val}</span>
+            <span style={{ color: "var(--phosphor-fade)", marginLeft: 8 }}>// {desc}</span>
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+    <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 14, alignItems: "start" }}>
+      <div>
+        <Caption>vertical</Caption>
+        <ScrollbarDemo axis="y" />
+      </div>
+      <div>
+        <Caption>horizontal</Caption>
+        <ScrollbarDemo axis="x" />
+      </div>
+    </div>
+
     <SectionTitle>Z-index ramp</SectionTitle>
     <div style={{ display: "grid", gridTemplateColumns: "200px 80px 1fr", gap: 8, fontFamily: "var(--font-code)", fontSize: 12 }}>
       <div style={{ color: "var(--phosphor-dim)", textTransform: "uppercase", letterSpacing: "0.12em" }}>token</div>
@@ -462,6 +526,34 @@ export const All = () => (
           <div style={{ color: "var(--ink)" }}>{desc}</div>
         </React.Fragment>
       ))}
+    </div>
+  </Page>
+);
+
+export const Scrollbar = () => (
+  <Page>
+    <SectionTitle>Scrollbar</SectionTitle>
+    <Caption>unified phosphor scrollbar — global, token-driven</Caption>
+    <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 8, fontFamily: "var(--font-code)", fontSize: 12, marginBottom: 24 }}>
+      {SCROLLBAR.map(([name, val, desc]) => (
+        <React.Fragment key={name}>
+          <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
+          <div>
+            <span style={{ color: "var(--phosphor-bright)" }}>{val}</span>
+            <span style={{ color: "var(--phosphor-fade)", marginLeft: 8 }}>// {desc}</span>
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+    <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 14, alignItems: "start" }}>
+      <div>
+        <Caption>vertical</Caption>
+        <ScrollbarDemo axis="y" />
+      </div>
+      <div>
+        <Caption>horizontal</Caption>
+        <ScrollbarDemo axis="x" />
+      </div>
     </div>
   </Page>
 );
