@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { PostBody } from "../MdxComponents";
 import { PostHeader } from "../PostHeader";
@@ -40,7 +39,15 @@ export const Default: Story = {
         />
       }
     >
-      <PostBody>
+      <PostBody
+        frontmatter={{
+          title: "boot the terminal",
+          date: "2026-05-06",
+          readTime: "6m",
+          tags: ["operations", "field"],
+          draft: false,
+        }}
+      >
         <h2 id="cold-start">Cold start</h2>
         <p>The terminal arrived in a sealed crate, tube-out and stenciled for field repair.</p>
         <h2 id="wiring">Wiring</h2>

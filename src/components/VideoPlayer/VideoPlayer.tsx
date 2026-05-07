@@ -1,48 +1,109 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import videojs from "video.js";
+import type Player from "video.js/dist/types/player";
+import "video.js/dist/video-js.css";
 import styles from "./VideoPlayer.module.scss";
 import { cx } from "../../utils/classNames";
 
-export interface VideoPlayerProps {
-  tag?: React.ReactNode;
-  timecode?: React.ReactNode;
-  progress?: number;
-  time?: React.ReactNode;
-  onPlay?: () => void;
-  onFullscreen?: () => void;
-  scanline?: boolean;
-  className?: string;
-  children?: React.ReactNode;
+export interface VideoSource {
+  src: string;
+  type?: string;
 }
 
+export interface VideoPlayerProps {
+  src: string | VideoSource | VideoSource[];
+  poster?: string;
+  autoplay?: boolean | "muted" | "play" | "any";
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  preload?: "auto" | "metadata" | "none";
+  fluid?: boolean;
+  options?: Record<string, unknown>;
+  onReady?: (player: Player) => void;
+  tag?: React.ReactNode;
+  timecode?: React.ReactNode;
+  className?: string;
+}
+
+const toSources = (
+  src: VideoPlayerProps["src"],
+): VideoSource[] => {
+  if (typeof src === "string") return [{ src }];
+  if (Array.isArray(src)) return src;
+  return [src];
+};
+
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({
+  src,
+  poster,
+  autoplay = false,
+  loop = false,
+  muted = false,
+  controls = true,
+  preload = "auto",
+  fluid = true,
+  options,
+  onReady,
   tag,
   timecode,
-  progress = 0,
-  time,
-  onPlay,
-  onFullscreen,
-  scanline = true,
   className,
-  children,
-}) => (
-  <figure className={cx(styles.vp, className)}>
-    <div className={styles.stage}>
-      {tag && <span className={styles.tag}>{tag}</span>}
-      {timecode && <span className={styles.tc}>{timecode}</span>}
-      {children ?? (
-        <button className={styles.play} aria-label="play" onClick={onPlay} type="button">
-          ▶
-        </button>
-      )}
-      {scanline && <span className={styles.scan} aria-hidden="true" />}
-    </div>
-    <div className={styles.bar}>
-      <button className={styles.btn} aria-label="play" onClick={onPlay} type="button">▶</button>
-      <div className={styles.track}>
-        <span className={styles.fill} style={{ width: `${Math.max(0, Math.min(100, progress))}%` }} />
+}) => {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<Player | null>(null);
+  const sources = toSources(src);
+
+  useEffect(() => {
+    if (playerRef.current) return;
+    const host = hostRef.current;
+    if (!host) return;
+
+    const videoEl = document.createElement("video-js");
+    videoEl.classList.add("vjs-big-play-centered", styles.video);
+    host.appendChild(videoEl);
+
+    const player = videojs(
+      videoEl,
+      {
+        controls,
+        autoplay,
+        loop,
+        muted,
+        preload,
+        fluid,
+        poster,
+        sources,
+        ...options,
+      },
+      () => {
+        onReady?.(player);
+      },
+    );
+    playerRef.current = player;
+    return () => {
+      if (player && !player.isDisposed()) {
+        player.dispose();
+      }
+      playerRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.src(sources);
+    if (poster !== undefined) player.poster(poster);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(sources), poster]);
+
+  return (
+    <figure className={cx(styles.vp, className)}>
+      <div className={styles.stage}>
+        <div ref={hostRef} className={styles.host} data-vjs-player />
+        {tag && <span className={styles.tag}>{tag}</span>}
+        {timecode && <span className={styles.tc}>{timecode}</span>}
       </div>
-      {time && <span className={styles.time}>{time}</span>}
-      <button className={styles.btn} aria-label="fullscreen" onClick={onFullscreen} type="button">⛶</button>
-    </div>
-  </figure>
-);
+    </figure>
+  );
+};

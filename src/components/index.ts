@@ -150,7 +150,7 @@ export { TerminalPrompt } from "./TerminalPrompt";
 export type { TerminalPromptProps } from "./TerminalPrompt";
 
 export { VideoPlayer } from "./VideoPlayer";
-export type { VideoPlayerProps } from "./VideoPlayer";
+export type { VideoPlayerProps, VideoSource } from "./VideoPlayer";
 
 export { Exercise } from "./Exercise";
 export type { ExerciseProps, ExerciseTask } from "./Exercise";

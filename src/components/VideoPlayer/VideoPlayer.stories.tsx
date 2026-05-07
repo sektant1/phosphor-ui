@@ -6,20 +6,36 @@ const meta: Meta<VideoPlayerProps> = {
   title: "Components/VideoPlayer",
   component: VideoPlayer,
   argTypes: {
+    src:      { control: "text" },
+    poster:   { control: "text" },
     tag:      { control: "text" },
     timecode: { control: "text" },
-    progress: { control: { type: "range", min: 0, max: 100, step: 1 } },
-    time:     { control: "text" },
-    scanline: { control: "boolean" },
+    autoplay: { control: "boolean" },
+    loop:     { control: "boolean" },
+    muted:    { control: "boolean" },
+    controls: { control: "boolean" },
   },
   args: {
-    tag:      "REC",
+    src: "https://vjs.zencdn.net/v/oceans.mp4",
+    poster: "https://vjs.zencdn.net/v/oceans.png",
+    tag: "REC",
     timecode: "00:42:17",
-    progress: 35,
-    time:     "01:12 / 03:24",
-    scanline: true,
+    controls: true,
+    muted: true,
   },
 };
 export default meta;
 
 export const Default: StoryObj<VideoPlayerProps> = {};
+
+export const HlsStream: StoryObj<VideoPlayerProps> = {
+  args: {
+    src: {
+      src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
+      type: "application/x-mpegURL",
+    },
+    poster: undefined,
+    tag: "LIVE",
+    timecode: undefined,
+  },
+};
