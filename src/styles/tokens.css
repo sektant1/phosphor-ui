@@ -115,6 +115,16 @@
   --tracking-wide:   0.06em;
   --tracking-wider:  0.14em;
   --tracking-stamp:  0.22em;
+
+  /* ── scrollbar ─────────────────────────────────────────── */
+  --scrollbar-size:         8px;
+  --scrollbar-track:        var(--bg-deep);
+  --scrollbar-track-border: 1px dashed var(--phosphor-fade);
+  --scrollbar-thumb:        var(--phosphor-fade);
+  --scrollbar-thumb-edge:   var(--phosphor-dim);
+  --scrollbar-thumb-hover:  var(--phosphor-dim);
+  --scrollbar-thumb-active: var(--phosphor);
+  --scrollbar-glow:         0 0 6px rgba(44, 255, 122, 0.4);
 }
 
 /* ─── Fonts ─────────────────────────────────────────────────

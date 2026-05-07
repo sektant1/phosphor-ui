@@ -57,34 +57,7 @@
   flex: 1;
   overflow: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--phosphor-dim) transparent;
   padding: 1.2rem 0.9rem;
-}
-.body::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.body::-webkit-scrollbar-track {
-  background: var(--bg-deep);
-  border-left: 1px dashed var(--phosphor-fade);
-}
-.body::-webkit-scrollbar-thumb {
-  background: var(--phosphor-fade);
-  border: 1px solid var(--bg-deep);
-  border-radius: 0;
-  box-shadow: inset 0 0 0 1px var(--phosphor-dim);
-}
-.body::-webkit-scrollbar-thumb:hover {
-  background: var(--phosphor-dim);
-  box-shadow: inset 0 0 0 1px var(--phosphor), 0 0 6px rgba(44, 255, 122, 0.4);
-}
-.body::-webkit-scrollbar-thumb:active {
-  background: var(--phosphor);
-  box-shadow: 0 0 8px var(--phosphor);
-}
-.body::-webkit-scrollbar-corner {
-  background: var(--bg-deep);
 }
 
 .header { margin-bottom: 0.8rem; }
