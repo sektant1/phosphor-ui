@@ -34,9 +34,20 @@
   box-shadow: 0 0 3px var(--phosphor-fade);
 }
 
-.leds .led:first-child  { background: var(--phosphor);       box-shadow: 0 0 4px var(--phosphor); }
-.leds .led:nth-child(2) { background: var(--phosphor-dim);   box-shadow: 0 0 3px var(--phosphor-dim); }
-.leds .led:nth-child(3) { background: var(--phosphor-fade);  box-shadow: none; }
+.leds .led:first-child {
+  background: var(--phosphor);
+  box-shadow: 0 0 4px var(--phosphor);
+}
+
+.leds .led:nth-child(2) {
+  background: var(--phosphor-dim);
+  box-shadow: 0 0 3px var(--phosphor-dim);
+}
+
+.leds .led:nth-child(3) {
+  background: var(--phosphor-fade);
+  box-shadow: none;
+}
 
 .filename {
   display: flex;
@@ -59,7 +70,9 @@
   flex-shrink: 0;
 }
 
-.spacer { flex: 1; }
+.spacer {
+  flex: 1;
+}
 
 .lang {
   font-family: var(--font-terminal);
@@ -106,9 +119,17 @@
 }
 
 @keyframes copiedFlash {
-  0%   { box-shadow: 0 0 0 rgba(44, 255, 122, 0); }
-  40%  { box-shadow: 0 0 10px rgba(44, 255, 122, 0.55); }
-  100% { box-shadow: none; }
+  0% {
+    box-shadow: 0 0 0 rgba(44, 255, 122, 0);
+  }
+
+  40% {
+    box-shadow: 0 0 10px rgba(44, 255, 122, 0.55);
+  }
+
+  100% {
+    box-shadow: none;
+  }
 }
 
 /* ── code area ─────────────────────────────────────────── */
@@ -121,7 +142,7 @@
   -webkit-overflow-scrolling: touch;
   font-family: var(--font-code) !important;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 0.25;
   /* Shiki sets inline background-color from theme.bg — we keep it */
 }
 
@@ -144,19 +165,19 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 3px,
-    rgba(3, 17, 10, 0.06) 3px,
-    rgba(3, 17, 10, 0.06) 4px
-  );
+  background: repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent 3px,
+      rgba(3, 17, 10, 0.06) 3px,
+      rgba(3, 17, 10, 0.06) 4px);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: multiply;
 }
 
-.code { position: relative; }
+.code {
+  position: relative;
+}
 
 /* ── plain fallback (before shiki loads) ─────────────────── */
 .fallback {
@@ -179,12 +200,27 @@
 
 /* ── mobile ──────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  .bar { padding: 4px 8px; gap: 0.4rem; }
-  .lang { display: none; }
-  .copy { font-size: 10px; padding: 1px 6px; }
+  .bar {
+    padding: 4px 8px;
+    gap: 0.4rem;
+  }
+
+  .lang {
+    display: none;
+  }
+
+  .copy {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .copy { transition: none; }
-  .copied { animation: none; }
+  .copy {
+    transition: none;
+  }
+
+  .copied {
+    animation: none;
+  }
 }
