@@ -1,9 +1,5 @@
 <div align="center">
-
-<!-- Replace with actual logo asset -->
-<img src=".github/assets/logo.png" alt="phosphor-ui logo" width="120" height="120" />
-
-<h1>phosphor-ui</h1>
+<h1>phosphor-ui</h1
 
 <p>Single-channel green-phosphor React component library.<br/>Retro · military · cyberpunk CRT aesthetic.</p>
 
@@ -17,20 +13,10 @@
 
 ---
 
-<!-- Replace with actual screenshots -->
-<div align="center">
-  <img src=".github/assets/screenshot-hero.png" alt="Hero frame and post listing" width="100%" />
-</div>
-
-<br/>
 
 <div align="center">
-  <img src=".github/assets/screenshot-codeblock.png" alt="CodeBlock with phosphor syntax theme" width="48%" />
-  &nbsp;
-  <img src=".github/assets/screenshot-components.png" alt="Component grid — buttons, callouts, inputs" width="48%" />
+  <img src="./assets/output.gif" alt="Hero frame and post listing" width="100%" />
 </div>
-
----
 
 ## Install
 
