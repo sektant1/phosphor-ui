@@ -22,6 +22,14 @@ export type { PostListingProps, PostRowProps } from "./PostListing";
 export { PostMeta } from "./PostMeta";
 export type { PostMetaProps } from "./PostMeta";
 
+export { PostFrontmatter } from "./PostFrontmatter";
+export type {
+  FrontmatterScalar,
+  FrontmatterValue,
+  PostFrontmatterData,
+  PostFrontmatterProps,
+} from "./PostFrontmatter";
+
 export { default as Text } from "./Text";
 export type { TextProps, TextVariant } from "./Text";
 
@@ -61,6 +69,30 @@ export type { BootNavProps, BootNavItem } from "./BootNav";
 export { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
 
+export { Switch } from "./Switch";
+export type { SwitchProps } from "./Switch";
+
+export { Select } from "./Select";
+export type { SelectOption, SelectProps } from "./Select";
+
+export { Tabs } from "./Tabs";
+export type { TabItem, TabsProps } from "./Tabs";
+
+export { Tooltip } from "./Tooltip";
+export type { TooltipPlacement, TooltipProps } from "./Tooltip";
+
+export { DropdownMenu } from "./DropdownMenu";
+export type { DropdownMenuItem, DropdownMenuProps } from "./DropdownMenu";
+
+export { Breadcrumbs } from "./Breadcrumbs";
+export type { BreadcrumbItem, BreadcrumbsProps } from "./Breadcrumbs";
+
+export { PostHeader } from "./PostHeader";
+export type { PostHeaderProps } from "./PostHeader";
+
+export { PostLayout } from "./PostLayout";
+export type { PostLayoutProps } from "./PostLayout";
+
 export { CourseCard } from "./CourseCard";
 export type { CourseCardProps } from "./CourseCard";
 
@@ -80,6 +112,12 @@ export { default as Header } from "./Header";
 export type { HeaderProps, HeaderNavItem, HeaderLocale } from "./Header";
 
 export { Hr } from "./Hr";
+
+export { Glyphs, Glyph, DEFAULT_GLYPHS } from "./Glyphs";
+export type { GlyphsProps, GlyphProps, GlyphItem } from "./Glyphs";
+
+export { Heading, H1, H2, H3, H4 } from "./Headings";
+export type { HeadingProps, HeadingLevel } from "./Headings";
 
 export { LessonRow, LessonList } from "./LessonRow";
 export type { LessonRowProps, LessonState, LessonKind, LessonListProps } from "./LessonRow";
@@ -159,8 +197,21 @@ export type { FormFieldProps, ContentStatusBadgeProps, ContentStatus } from "./F
 export { AdminShell } from "./AdminShell";
 export type { AdminShellProps, AdminNavItem, AdminUser } from "./AdminShell";
 
+export { ContentEditor } from "./ContentEditor";
+export type {
+  ContentEditorProps,
+  FieldSpec,
+  PairColumn,
+} from "./ContentEditor";
+
 export { NoteEditor } from "./NoteEditor";
 export type { NoteEditorProps, NoteData } from "./NoteEditor";
 
 export { ProjectEditor } from "./ProjectEditor";
 export type { ProjectEditorProps, ProjectData, ProjectLink } from "./ProjectEditor";
+
+export { CourseEditor } from "./CourseEditor";
+export type { CourseEditorProps, CourseData, CourseModule } from "./CourseEditor";
+
+export { LessonEditor } from "./LessonEditor";
+export type { LessonEditorProps, LessonData, LessonResource } from "./LessonEditor";

@@ -12,7 +12,16 @@ type Story = StoryObj<typeof PostBody>;
 
 export const Default: Story = {
   render: () => (
-    <PostBody>
+    <PostBody
+      frontmatter={{
+        title: "boot the terminal",
+        date: "2026-05-06",
+        readTime: "6m",
+        log: "0042",
+        tags: ["operations", "field"],
+        draft: false,
+      }}
+    >
       <h1>// boot the terminal</h1>
       <p>
         The terminal arrived in a sealed crate, tube-out and stenciled

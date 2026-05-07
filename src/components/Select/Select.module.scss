@@ -1,0 +1,67 @@
+.root {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.label {
+  color: var(--phosphor-dim);
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.control {
+  align-items: center;
+  background: var(--bg-raise);
+  border: 1px solid var(--phosphor-dim);
+  display: flex;
+  gap: 0.55rem;
+  min-width: 0;
+  padding: 0.45rem 0.65rem;
+}
+
+.control:focus-within {
+  border-color: var(--phosphor);
+  box-shadow: 0 0 8px rgba(44, 255, 122, 0.3);
+}
+
+.prompt {
+  color: var(--magenta);
+  flex: 0 0 auto;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  text-shadow: var(--glow-magenta);
+}
+
+.select {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--phosphor);
+  flex: 1;
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  min-width: 0;
+  outline: 0;
+  text-shadow: var(--glow-emerald);
+}
+
+.select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  text-shadow: none;
+}
+
+.select option {
+  background: var(--bg-deep);
+  color: var(--ink);
+}
+
+.chev {
+  color: var(--phosphor-fade);
+  flex: 0 0 auto;
+  font-family: var(--font-code);
+  pointer-events: none;
+}

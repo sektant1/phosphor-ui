@@ -1,0 +1,48 @@
+.root {
+  margin-inline: auto;
+  max-width: 76rem;
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.withSidebar {
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
+}
+
+.main {
+  min-width: 0;
+}
+
+.sidebar {
+  min-width: 0;
+}
+
+.sidebar > * {
+  position: sticky;
+  top: 1rem;
+}
+
+.footer {
+  border-top: 1px dashed var(--phosphor-fade);
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+}
+
+@media (max-width: 860px) {
+  .withSidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar > * {
+    position: static;
+  }
+}

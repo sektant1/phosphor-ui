@@ -1,5 +1,3 @@
-@import "./tokens.css";
-
 html, body {
   background: var(--bg);
   color: var(--ink);

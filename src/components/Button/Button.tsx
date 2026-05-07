@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Button.module.scss";
+import { cx } from "../../utils/classNames";
 
 export type ButtonVariant = "primary" | "ghost" | "danger";
 export type ButtonSize = "sm" | "md";
@@ -17,18 +18,23 @@ const variantClass: Record<ButtonVariant, string> = {
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "md", pressed, className, children, ...rest }, ref) => {
-    const cls = [
-      styles.btn,
-      variantClass[variant],
-      size === "sm" ? styles.sm : "",
-      pressed ? styles.pressed : "",
-      className ?? "",
-    ]
-      .filter(Boolean)
-      .join(" ");
+  (
+    { variant = "primary", size = "md", pressed, className, children, type = "button", ...rest },
+    ref
+  ) => {
     return (
-      <button ref={ref} className={cls} {...rest}>
+      <button
+        ref={ref}
+        className={cx(
+          styles.btn,
+          variantClass[variant],
+          size === "sm" && styles.sm,
+          pressed && styles.pressed,
+          className
+        )}
+        type={type}
+        {...rest}
+      >
         {children}
       </button>
     );

@@ -38,6 +38,11 @@
 
 .icon { color: var(--phosphor); font-family: var(--font-terminal); font-size: 16px; text-shadow: var(--glow-emerald); }
 .iconVideo { color: var(--magenta); text-shadow: var(--glow-magenta); }
+.video .tag {
+  border-color: rgba(255, 62, 210, 0.45);
+  color: var(--magenta);
+  text-shadow: var(--glow-magenta);
+}
 
 .num { font-family: var(--font-terminal); font-size: 13px; color: var(--phosphor-fade); letter-spacing: 0.1em; }
 .title {

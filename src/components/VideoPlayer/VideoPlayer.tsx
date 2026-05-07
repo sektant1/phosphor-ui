@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./VideoPlayer.module.scss";
+import { cx } from "../../utils/classNames";
 
 export interface VideoPlayerProps {
   tag?: React.ReactNode;
@@ -24,24 +25,24 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   className,
   children,
 }) => (
-  <figure className={[styles.vp, className ?? ""].join(" ")}>
+  <figure className={cx(styles.vp, className)}>
     <div className={styles.stage}>
       {tag && <span className={styles.tag}>{tag}</span>}
       {timecode && <span className={styles.tc}>{timecode}</span>}
       {children ?? (
-        <button className={styles.play} aria-label="play" onClick={onPlay}>
+        <button className={styles.play} aria-label="play" onClick={onPlay} type="button">
           ▶
         </button>
       )}
       {scanline && <span className={styles.scan} aria-hidden="true" />}
     </div>
     <div className={styles.bar}>
-      <span className={styles.btn} role="button" aria-label="play" onClick={onPlay}>▶</span>
+      <button className={styles.btn} aria-label="play" onClick={onPlay} type="button">▶</button>
       <div className={styles.track}>
         <span className={styles.fill} style={{ width: `${Math.max(0, Math.min(100, progress))}%` }} />
       </div>
       {time && <span className={styles.time}>{time}</span>}
-      <span className={styles.btn} role="button" aria-label="fullscreen" onClick={onFullscreen}>⛶</span>
+      <button className={styles.btn} aria-label="fullscreen" onClick={onFullscreen} type="button">⛶</button>
     </div>
   </figure>
 );

@@ -1,6 +1,7 @@
 import React from "react";
-import { bannerSync } from "../../ascii";
+import { bannerSync, type BannerFontName } from "../../ascii";
 import { AsciiBanner } from "../AsciiBanner";
+import type { CssVars } from "../../utils/browser";
 import "./Header.scss";
 
 export interface HeaderNavItem {
@@ -19,7 +20,7 @@ export interface HeaderLocale {
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   homeHref?: string;
-  bannerFont?: string;
+  bannerFont?: BannerFontName;
   tagline?: React.ReactNode;
   nav?: HeaderNavItem[];
   locales?: HeaderLocale[];
@@ -47,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
     .filter(Boolean)
     .join(" ");
 
-  const art = bannerSync(title, bannerFont as never);
+  const art = bannerSync(title, bannerFont);
 
   return (
     <header className={cls} {...rest}>
@@ -72,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({
                     className={["nav-item", n.active ? "nav-item--active" : ""]
                       .filter(Boolean)
                       .join(" ")}
-                    style={{ ["--i" as never]: i + 1 }}
+                    style={{ "--i": i + 1 } as CssVars}
                   >
                     <a href={n.href}>&gt; {n.label}</a>
                   </li>

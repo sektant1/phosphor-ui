@@ -1,6 +1,9 @@
 import React from "react";
+import type { BundledLanguage } from "shiki";
 import styles from "./CodeBlock.module.scss";
 import { phosphorTheme } from "./phosphorTheme";
+import { copyText } from "../../utils/browser";
+import { cx } from "../../utils/classNames";
 
 export interface CodeBlockProps {
   code: string;
@@ -21,27 +24,45 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   const [html, setHtml] = React.useState(htmlProp ?? "");
   const [copied, setCopied] = React.useState(false);
 
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
   React.useEffect(() => {
-    if (htmlProp) { setHtml(htmlProp); return; }
+    if (htmlProp) {
+      setHtml(htmlProp);
+      return;
+    }
     let cancelled = false;
+    setHtml("");
     import("shiki")
       .then(({ codeToHtml }) =>
-        codeToHtml(code, { lang, theme: phosphorTheme as never })
+        codeToHtml(code, { lang: lang as BundledLanguage, theme: phosphorTheme })
       )
-      .then((result) => { if (!cancelled) setHtml(result); })
+      .then((result) => {
+        if (!cancelled) setHtml(result);
+      })
       .catch(() => {});
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [code, lang, htmlProp]);
 
-  const copy = () => {
-    navigator.clipboard?.writeText(code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    });
+  React.useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    []
+  );
+
+  const copy = async () => {
+    const didCopy = await copyText(code);
+    if (!didCopy) return;
+    setCopied(true);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setCopied(false), 1800);
   };
 
   return (
-    <div className={[styles.block, className ?? ""].filter(Boolean).join(" ")}>
+    <div className={cx(styles.block, className)}>
       <div className={styles.bar}>
         <span className={styles.leds} aria-hidden="true">
           <span className={styles.led} />
@@ -60,9 +81,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         )}
         <button
           type="button"
-          className={[styles.copy, copied ? styles.copied : ""]
-            .filter(Boolean)
-            .join(" ")}
+          className={cx(styles.copy, copied && styles.copied)}
           onClick={copy}
           aria-label={copied ? "Copied" : "Copy code"}
         >

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./LessonRow.module.scss";
+import { cx } from "../../utils/classNames";
 
 export type LessonState = "default" | "done" | "current" | "locked";
 export type LessonKind = "read" | "video" | "lab" | "quiz" | "locked";
@@ -26,7 +27,7 @@ export interface LessonListProps {
 }
 
 export const LessonList: React.FC<LessonListProps> = ({ children, className }) => (
-  <ul className={[styles.list, className ?? ""].join(" ")}>{children}</ul>
+  <ul className={cx(styles.list, className)}>{children}</ul>
 );
 
 export const LessonRow: React.FC<LessonRowProps> = ({
@@ -38,18 +39,24 @@ export const LessonRow: React.FC<LessonRowProps> = ({
   href = "#",
   icon,
 }) => {
-  const cls = [
+  const locked = state === "locked";
+  const cls = cx(
     styles.lr,
-    state === "done" ? styles.done : "",
-    state === "current" ? styles.current : "",
-    state === "locked" ? styles.locked : "",
-    kind === "video" ? styles.video : "",
-  ].join(" ");
+    state === "done" && styles.done,
+    state === "current" && styles.current,
+    locked && styles.locked,
+    kind === "video" && styles.video
+  );
   return (
     <li>
-      <a className={cls} href={href} aria-disabled={state === "locked"}>
+      <a
+        className={cls}
+        href={href}
+        aria-disabled={locked || undefined}
+        onClick={locked ? (event) => event.preventDefault() : undefined}
+      >
         <span className={styles.cb} />
-        <span className={[styles.icon, kind === "video" ? styles.iconVideo : ""].join(" ")}>
+        <span className={cx(styles.icon, kind === "video" && styles.iconVideo)}>
           {icon ?? kindIcon(kind)}
         </span>
         <span className={styles.num}>{num}</span>

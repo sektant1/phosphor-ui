@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentMeta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 export default {
   title: "Zone/Introduction",
@@ -7,7 +7,7 @@ export default {
     layout: "fullscreen",
     options: { showPanel: false },
   },
-} as ComponentMeta<any>;
+} satisfies Meta;
 
 const PALETTE: Array<[string, string]> = [
   ["--phosphor", "#2cff7a"],

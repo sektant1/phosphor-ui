@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./Toast.module.scss";
+import { cx } from "../../utils/classNames";
 
 export type ToastVariant = "info" | "success" | "warn" | "error";
 
@@ -27,21 +28,26 @@ export const Toast: React.FC<ToastProps> = ({
   onDismiss,
   className,
 }) => {
-  const cls = [
-    styles.toast,
-    styles[variant],
-    inline ? styles.inline : (!visible ? styles.hidden : ""),
-    className ?? "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={cls} role="status" aria-live="polite">
+    <div
+      className={cx(
+        styles.toast,
+        styles[variant],
+        inline ? styles.inline : !visible && styles.hidden,
+        className
+      )}
+      role="status"
+      aria-live="polite"
+    >
       <span className={styles.glyph}>{glyphs[variant]}</span>
       <span className={styles.message}>{message}</span>
       {onDismiss && (
-        <button className={styles.dismiss} onClick={onDismiss} aria-label="Dismiss">
+        <button
+          className={styles.dismiss}
+          onClick={onDismiss}
+          aria-label="Dismiss"
+          type="button"
+        >
           ×
         </button>
       )}
@@ -60,6 +66,13 @@ export function useToast(duration = 2400): {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState<ToastVariant>("info");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    []
+  );
 
   const dismiss = () => {
     if (timer.current) {

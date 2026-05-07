@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./TableOfContents.module.scss";
+import { isBrowser, type CssVars } from "../../utils/browser";
+import { cx } from "../../utils/classNames";
 
 export interface TocItem {
   label: React.ReactNode;
@@ -62,29 +64,26 @@ const TocLi: React.FC<TocLiProps> = ({ item, sub, activeId, smoothScroll, index 
   const isActive =
     item.state === "active" ||
     (!hasExplicit && id !== null && id === activeId);
-  const cls = [
-    styles.li,
-    isActive ? styles.active : "",
-    item.state === "done" ? styles.done : "",
-  ].join(" ");
+  const cls = cx(styles.li, isActive && styles.active, item.state === "done" && styles.done);
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!smoothScroll || !id) return;
+    if (!isBrowser()) return;
     const el = document.getElementById(id);
     if (!el) return;
     e.preventDefault();
     el.scrollIntoView({ behavior: "smooth", block: "start" });
-    if (history.replaceState) history.replaceState(null, "", `#${id}`);
+    if (window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
   };
 
   return (
-    <li className={cls} style={{ ["--i" as never]: index }}>
+    <li className={cls} style={{ "--i": index } as CssVars}>
       <a href={item.href} onClick={onClick}>
         <span className={styles.glyph}>{item.glyph ?? (sub ? "·" : "▌")}</span>
         <span>{item.label}</span>
       </a>
       {item.children && item.children.length > 0 && (
-        <ul className={[styles.list, styles.subList].join(" ")}>
+        <ul className={cx(styles.list, styles.subList)}>
           {item.children.map((c, i) => (
             <TocLi
               key={c.href + i}
@@ -114,7 +113,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!spy || ids.length === 0 || typeof window === "undefined") return;
+    if (!spy || ids.length === 0 || !isBrowser()) return;
     const elements = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
@@ -141,7 +140,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   }, [ids, spy, spyOffset]);
 
   return (
-    <aside className={[styles.toc, className ?? ""].join(" ")} aria-label="on this page">
+    <aside className={cx(styles.toc, className)} aria-label="on this page">
       {heading && <p className={styles.head}>{heading}</p>}
       <ul className={styles.list}>
         {items.map((it, i) => (

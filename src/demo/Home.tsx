@@ -5,54 +5,62 @@ import {
   PostRow,
   Hr,
   Tag,
+  H2,
   CourseCard,
   AsciiBanner,
 } from "../components";
 import { Page } from "./shared";
+import type { CssVars } from "../utils/browser";
 
 const HERO_ART = `
-   ███████╗ ██████╗ ███╗   ██╗███████╗   ███╗   ██╗███████╗████████╗
-   ╚══███╔╝██╔═══██╗████╗  ██║██╔════╝   ████╗  ██║██╔════╝╚══██╔══╝
-     ███╔╝ ██║   ██║██╔██╗ ██║█████╗     ██╔██╗ ██║█████╗     ██║
-    ███╔╝  ██║   ██║██║╚██╗██║██╔══╝     ██║╚██╗██║██╔══╝     ██║
-   ███████╗╚██████╔╝██║ ╚████║███████╗   ██║ ╚████║███████╗   ██║
-   ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝  ╚═══╝╚══════╝   ╚═╝
+███████╗ ██████╗ ███╗   ██╗███████╗   ███╗   ██╗███████╗████████╗
+╚══███╔╝██╔═══██╗████╗  ██║██╔════╝   ████╗  ██║██╔════╝╚══██╔══╝
+  ███╔╝ ██║   ██║██╔██╗ ██║█████╗     ██╔██╗ ██║█████╗     ██║
+ ███╔╝  ██║   ██║██║╚██╗██║██╔══╝     ██║╚██╗██║██╔══╝     ██║
+███████╗╚██████╔╝██║ ╚████║███████╗   ██║ ╚████║███████╗   ██║
+╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝  ╚═══╝╚══════╝   ╚═╝
 `;
 
 const SMALL_BANNER = `
-  // SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ
-  // CHANNEL 0x4C // γ-2 // NORM
+// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ
+// CHANNEL 0x4C // γ-2 // NORM
 `;
 
 export const Home: React.FC = () => (
   <Page active="home" routeKey="home">
     <div className="pho-flicker-in">
-    <HeroFrame
-      art={HERO_ART}
-      topHud={
-        <>
-          <HeroFrame.HudLed variant="rec" />
-          <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
-          <HeroFrame.HudText>CH 0x4C · γ-2 · NORM</HeroFrame.HudText>
-          <HeroFrame.HudSpacer />
-          <HeroFrame.HudBars value={5} />
-          <HeroFrame.HudLabel>5/7</HeroFrame.HudLabel>
-        </>
-      }
-      bottomHud={
-        <>
-          <HeroFrame.HudLed variant="pwr" />
-          <HeroFrame.HudLabel>PWR</HeroFrame.HudLabel>
-          <HeroFrame.HudSpacer />
-          <HeroFrame.HudTape text="// СЕКРЕТНО // single-channel transmissions //" />
-        </>
-      }
-    />
+      <HeroFrame
+        art={HERO_ART}
+        topHud={
+          <>
+            <HeroFrame.HudLed variant="rec" />
+            <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
+            <HeroFrame.HudText>CH 0x4C · γ-2 · NORM</HeroFrame.HudText>
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudBars value={5} />
+            <HeroFrame.HudLabel>5/7</HeroFrame.HudLabel>
+          </>
+        }
+        bottomHud={
+          <>
+            <HeroFrame.HudLed variant="pwr" />
+            <HeroFrame.HudLabel>PWR</HeroFrame.HudLabel>
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudTape text="// СЕКРЕТНО // single-channel transmissions //" />
+          </>
+        }
+      />
     </div>
 
-    <section className="pho-fade-up" style={{ marginTop: "2rem", ["--i" as never]: 1 }}>
-      <h2 className="t-h2">▸ latest transmissions</h2>
-      <p className="t-body" style={{ color: "var(--phosphor-dim)", marginTop: 4 }}>
+    <section
+      className="pho-fade-up"
+      style={{ marginTop: "2rem", "--i": 1 } as CssVars}
+    >
+      <H2>latest transmissions</H2>
+      <p
+        className="t-body"
+        style={{ color: "var(--phosphor-dim)", marginTop: 4 }}
+      >
         Field reports from the perimeter. Most recent first.
       </p>
       <div style={{ marginTop: "1rem" }}>
@@ -115,8 +123,11 @@ export const Home: React.FC = () => (
 
     <Hr />
 
-    <section className="pho-fade-up" style={{ marginTop: "2rem", ["--i" as never]: 2 }}>
-      <h2 className="t-h2">▸ courses on rotation</h2>
+    <section
+      className="pho-fade-up"
+      style={{ marginTop: "2rem", "--i": 2 } as CssVars}
+    >
+      <H2>▸ courses on rotation</H2>
       <div className="demo-card-grid pho-stagger" style={{ marginTop: "1rem" }}>
         <CourseCard
           stamp="COURSE-01"
@@ -152,7 +163,16 @@ export const Home: React.FC = () => (
 
     <Hr />
 
-    <section className="pho-fade-up pho-stagger" style={{ marginTop: "2rem", display: "flex", gap: 12, flexWrap: "wrap", ["--i" as never]: 3 }}>
+    <section
+      className="pho-fade-up pho-stagger"
+      style={{
+        marginTop: "2rem",
+        display: "flex",
+        gap: 12,
+        flexWrap: "wrap",
+        "--i": 3,
+      } as CssVars}
+    >
       <Tag>operations</Tag>
       <Tag>signals</Tag>
       <Tag color="magenta">anomaly</Tag>

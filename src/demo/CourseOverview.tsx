@@ -10,6 +10,8 @@ import {
   ProgressBar,
   Callout,
   Prose,
+  H2,
+  Heading,
 } from "../components";
 import { Page } from "./shared";
 
@@ -62,7 +64,7 @@ export const CourseOverview: React.FC = () => (
 
         <Hr />
 
-        <h2 className="t-h2 pho-fade-up" style={{ marginTop: "1.5rem" }}>▸ modules</h2>
+        <H2 className="pho-fade-up" style={{ marginTop: "1.5rem" }}>▸ modules</H2>
         <div className="pho-stagger" style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: "1rem" }}>
           <ModuleAccordion
             num="01"
@@ -143,7 +145,7 @@ export const CourseOverview: React.FC = () => (
 
       <aside className="demo-split-aside pho-fade-up" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div>
-          <h3 className="t-h4">// progress //</h3>
+          <Heading level={4} as="h3">// progress //</Heading>
           <ProgressBar value={4} total={6} segments={20} showPercent label="modules" current />
         </div>
 

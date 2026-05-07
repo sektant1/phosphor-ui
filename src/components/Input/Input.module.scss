@@ -30,6 +30,11 @@
   min-width: 0;
 }
 .input::placeholder { color: var(--phosphor-fade); }
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  text-shadow: none;
+}
 .cursor {
   color: var(--phosphor);
   text-shadow: var(--glow-emerald);
@@ -46,6 +51,15 @@
   font-size: 13px;
   outline: none;
   caret-color: var(--magenta-bright);
+}
+.textarea:focus {
+  border-color: var(--phosphor);
+  box-shadow: 0 0 8px rgba(44, 255, 122, 0.3);
+}
+.textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

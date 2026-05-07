@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { isBrowser } from "../utils/browser";
 
 export type HashRouteMatchers<R extends string> = Record<R, RegExp | ((hash: string) => boolean)>;
 
@@ -24,6 +25,7 @@ export const useHashRoute = <R extends string>({
   const [route, setRoute] = useState<R>(parse);
 
   useEffect(() => {
+    if (!isBrowser()) return;
     const onHash = () => setRoute(parse());
     onHash();
     window.addEventListener("hashchange", onHash);
@@ -31,6 +33,7 @@ export const useHashRoute = <R extends string>({
   }, [parse]);
 
   const go = useCallback((hash: string) => {
+    if (!isBrowser()) return;
     window.location.hash = hash;
   }, []);
 

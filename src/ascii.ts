@@ -1,6 +1,8 @@
-import figlet from "figlet";
+import figlet, { type FontName } from "figlet";
 import slantFont from "figlet/importable-fonts/Slant.js";
 import standardFont from "figlet/importable-fonts/Standard.js";
+
+export type BannerFontName = FontName;
 
 let registered = false;
 const registerFonts = () => {
@@ -18,7 +20,7 @@ const cache = new Map<string, string>();
 
 export function bannerSync(
   text: string,
-  font: figlet.FontName = "Slant"
+  font: FontName = "Slant"
 ): string {
   const key = `${font}::${text}`;
   if (cache.has(key)) return cache.get(key)!;

@@ -1,13 +1,21 @@
 .ma { border: 1px solid var(--phosphor-fade); margin-bottom: 12px; font-family: var(--font-code); }
 .head {
+  appearance: none;
   display: grid;
+  width: 100%;
   grid-template-columns: 24px 4ch 1fr auto auto;
   gap: 10px;
   align-items: center;
   padding: 10px 12px;
+  border: 0;
   background: var(--bg-raise);
   cursor: pointer;
   border-bottom: 1px dashed var(--phosphor-fade);
+  text-align: left;
+}
+.head:focus-visible {
+  outline: 2px solid var(--phosphor-bright);
+  outline-offset: 2px;
 }
 .collapsed .head { border-bottom: none; }
 

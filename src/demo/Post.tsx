@@ -11,6 +11,7 @@ import {
   Stepper,
   StepperFoot,
   TerminalPrompt,
+  H1,
 } from "../components";
 import { Page, useReadingProgress } from "./shared";
 
@@ -48,9 +49,9 @@ export const Post: React.FC = () => {
           <Tag>operations</Tag>
           <Tag color="magenta">field</Tag>
         </div>
-        <h1 className="t-h1" style={{ margin: 0 }}>
+        <H1 style={{ margin: 0 }}>
           // boot the terminal //
-        </h1>
+        </H1>
         <p
           className="t-stamp"
           style={{ color: "var(--phosphor-dim)", marginTop: 6 }}
@@ -69,7 +70,16 @@ export const Post: React.FC = () => {
       />
 
       <div className="demo-split pho-fade-up" style={{ marginTop: "1.5rem" }}>
-        <PostBody>
+        <PostBody
+          frontmatter={{
+            title: "boot the terminal",
+            date: "2026-05-06",
+            readTime: "6m",
+            log: "0042",
+            tags: ["operations", "field"],
+            draft: false,
+          }}
+        >
           <h2 id="cold-start">Cold start</h2>
           <p>
             The terminal arrived in a sealed crate, tube-out and stenciled

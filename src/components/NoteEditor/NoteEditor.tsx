@@ -1,10 +1,8 @@
-import React, { useState, KeyboardEvent } from "react";
-import styles from "./NoteEditor.module.scss";
-import { Input, Textarea } from "../Input/Input";
-import { Button } from "../Button/Button";
-import { Tag } from "../Tag/Tag";
+import React from "react";
+import { ContentEditor } from "../ContentEditor/ContentEditor";
+import type { ContentStatus, FieldSpec } from "../ContentEditor/ContentEditor";
 
-export type ContentStatus = "draft" | "published" | "archived";
+export type { ContentStatus };
 
 export interface NoteData {
   title: string;
@@ -22,120 +20,18 @@ export interface NoteEditorProps {
   className?: string;
 }
 
-export const NoteEditor: React.FC<NoteEditorProps> = ({
-  initial = {},
-  onSave,
-  onChange,
-  onDiscard,
-  saving = false,
-  className,
-}) => {
-  const [title, setTitleState] = useState(initial.title ?? "");
-  const [body, setBodyState] = useState(initial.body ?? "");
-  const [tags, setTagsState] = useState<string[]>(initial.tags ?? []);
-  const [status, setStatusState] = useState<ContentStatus>(initial.status ?? "draft");
-  const [tagInput, setTagInput] = useState("");
+const FIELDS: FieldSpec[] = [
+  { kind: "text", key: "title", prompt: "title >", placeholder: "note title..." },
+  { kind: "textarea", key: "body", rows: 8, placeholder: "write here..." },
+  { kind: "tags", key: "tags", chip: "tag" },
+];
 
-  const emit = (next: { title?: string; body?: string; tags?: string[]; status?: ContentStatus }) => {
-    onChange?.({
-      title: next.title ?? title,
-      body: next.body ?? body,
-      tags: next.tags ?? tags,
-      status: next.status ?? status,
-    });
-  };
-  const setTitle = (v: string) => { setTitleState(v); emit({ title: v }); };
-  const setBody = (v: string) => { setBodyState(v); emit({ body: v }); };
-  const setTags = (v: string[]) => { setTagsState(v); emit({ tags: v }); };
-  const setStatus = (v: ContentStatus) => { setStatusState(v); emit({ status: v }); };
-
-  const handleTagKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const trimmed = tagInput.trim();
-      if (trimmed && !tags.includes(trimmed)) {
-        setTags([...tags, trimmed]);
-      }
-      setTagInput("");
-    }
-  };
-
-  const removeTag = (tag: string) => {
-    setTags(tags.filter((t) => t !== tag));
-  };
-
-  const handleSave = () => {
-    onSave?.({ title, body, tags, status });
-  };
-
-  return (
-    <div className={[styles.card, className ?? ""].filter(Boolean).join(" ")}>
-      <div className={styles.header}>
-        <span className={styles.label}>NOTE</span>
-        <select
-          className={styles.statusSelect}
-          value={status}
-          onChange={(e) => setStatus(e.target.value as ContentStatus)}
-        >
-          <option value="draft">draft</option>
-          <option value="published">published</option>
-          <option value="archived">archived</option>
-        </select>
-      </div>
-
-      <Input
-        prompt="title >"
-        cursor={false}
-        placeholder="note title..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <Textarea
-        rows={8}
-        placeholder="write here..."
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-      />
-
-      <div className={styles.tagsSection}>
-        <div className={styles.tagsRow}>
-          {tags.map((tag) => (
-            <Tag key={tag} color="phosphor">
-              {tag}
-              <button
-                className={styles.removeTag}
-                onClick={() => removeTag(tag)}
-                type="button"
-              >
-                ×
-              </button>
-            </Tag>
-          ))}
-          <input
-            className={styles.tagInput}
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            onKeyDown={handleTagKeyDown}
-            placeholder="add tag..."
-          />
-        </div>
-      </div>
-
-      <div className={styles.footer}>
-        <Button variant="ghost" size="sm" onClick={onDiscard} type="button">
-          discard
-        </Button>
-        <Button
-          variant="primary"
-          size="sm"
-          onClick={handleSave}
-          disabled={saving}
-          type="button"
-        >
-          {saving ? "saving..." : "save note"}
-        </Button>
-      </div>
-    </div>
-  );
-};
+export const NoteEditor: React.FC<NoteEditorProps> = (props) => (
+  <ContentEditor<NoteData>
+    kindLabel="NOTE"
+    saveLabel="save note"
+    fields={FIELDS}
+    variant="compact"
+    {...props}
+  />
+);

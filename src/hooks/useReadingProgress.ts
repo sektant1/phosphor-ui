@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { isBrowser } from "../utils/browser";
 
 export const useReadingProgress = <T extends HTMLElement = HTMLElement>() => {
   const ref = useRef<T | null>(null);
   const [pct, setPct] = useState(0);
   useEffect(() => {
+    if (!isBrowser()) return;
     const onScroll = () => {
       const el = ref.current;
       if (!el) return;

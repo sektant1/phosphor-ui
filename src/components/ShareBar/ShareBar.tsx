@@ -1,5 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ShareBar.module.scss";
+import { copyText, getCurrentHref } from "../../utils/browser";
+import { cx } from "../../utils/classNames";
 
 export interface ShareLink {
   label: string;
@@ -22,21 +24,28 @@ export const ShareBar: React.FC<ShareBarProps> = ({
   const [copied, setCopied] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCopy = () => {
-    const target = url ?? window.location.href;
-    try {
-      navigator.clipboard.writeText(target);
-    } catch {}
+  useEffect(
+    () => () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    },
+    []
+  );
+
+  const handleCopy = async () => {
+    const target = url ?? getCurrentHref();
+    if (!target) return;
+    const didCopy = await copyText(target);
+    if (!didCopy) return;
     setCopied(true);
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setCopied(false), 1800);
   };
 
   return (
-    <div className={[styles.bar, className ?? ""].filter(Boolean).join(" ")}>
+    <div className={cx(styles.bar, className)}>
       <span className={styles.label}>▌{label.toUpperCase()}</span>
       <button
-        className={[styles.copy, copied ? styles.copyActive : ""].filter(Boolean).join(" ")}
+        className={cx(styles.copy, copied && styles.copyActive)}
         onClick={handleCopy}
         type="button"
       >

@@ -11,9 +11,19 @@
   cursor: pointer;
   border-radius: 0;
 }
+.btn:focus-visible {
+  outline: 2px solid var(--phosphor-bright);
+  outline-offset: 2px;
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+  text-shadow: none;
+}
 .sm { font-size: 14px; padding: 4px 10px; }
+.pressed {}
 
-.primary:hover, .primary.pressed {
+.primary:hover:not(:disabled), .primary.pressed {
   background: var(--phosphor); color: var(--bg); text-shadow: none;
 }
 
@@ -22,7 +32,7 @@
   color: var(--phosphor-dim);
   text-shadow: none;
 }
-.ghost:hover, .ghost.pressed {
+.ghost:hover:not(:disabled), .ghost.pressed {
   background: var(--phosphor-dim); color: var(--bg);
 }
 
@@ -39,6 +49,6 @@
       rgba(255, 58, 58, 0.08) 6px 7px),
     transparent;
 }
-.danger:hover, .danger.pressed {
+.danger:hover:not(:disabled), .danger.pressed {
   background: #ff3a3a; color: #1a0606; text-shadow: none;
 }

@@ -16,7 +16,7 @@
 }
 .tapeRun {
   display: inline-block;
-  animation: phosphorTapeRoll linear infinite;
+  animation: phosphorTapeRoll var(--footer-tape-speed, 26s) linear infinite;
 }
 
 .stencil {
@@ -59,6 +59,7 @@
 }
 
 .object { display: grid; gap: 4px; }
+.dossier { display: grid; gap: 4px; }
 .trefoil {
   margin: 0 0 4px;
   font-family: var(--font-heading); font-weight: 700;

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Checkbox.module.scss";
+import { cx } from "../../utils/classNames";
 
 export interface CheckboxProps {
   checked?: boolean;
@@ -25,44 +26,38 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   const [internal, setInternal] = React.useState(defaultChecked ?? false);
   const isControlled = checked !== undefined;
   const value = isControlled ? !!checked : internal;
-  const toggle = () => {
+  const inputId = React.useId();
+  const resolvedId = id ?? inputId;
+  const handleChange = () => {
     if (disabled) return;
     const next = !value;
     if (!isControlled) setInternal(next);
     onChange?.(next);
   };
-  const cls = [
+  const cls = cx(
     styles.row,
-    value ? styles.checkedRow : "",
-    disabled ? styles.disabledRow : "",
-    className ?? "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-  const boxCls = [
+    value && styles.checkedRow,
+    disabled && styles.disabledRow,
+    className
+  );
+  const boxCls = cx(
     styles.cb,
-    value ? styles.checked : "",
-    disabled ? styles.disabled : "",
-    error ? styles.error : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+    value && styles.checked,
+    disabled && styles.disabled,
+    error && styles.error
+  );
   return (
-    <label className={cls} htmlFor={id}>
-      <span
-        className={boxCls}
-        role="checkbox"
-        aria-checked={value}
-        aria-disabled={disabled}
-        tabIndex={disabled ? -1 : 0}
-        onClick={toggle}
-        onKeyDown={(e) => {
-          if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
-            toggle();
-          }
-        }}
+    <label className={cls} htmlFor={resolvedId}>
+      <input
+        id={resolvedId}
+        className={styles.native}
+        type="checkbox"
+        checked={value}
+        disabled={disabled}
+        aria-invalid={error || undefined}
+        onChange={handleChange}
       />
+      <span className={boxCls} aria-hidden="true" />
       {label && <span className={styles.label}>{label}</span>}
     </label>
   );

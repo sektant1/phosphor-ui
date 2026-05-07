@@ -53,7 +53,21 @@
   background: var(--bg-raise);
   border-top: 1px solid var(--phosphor-fade);
 }
-.btn { color: var(--phosphor); text-shadow: var(--glow-emerald); font-family: var(--font-terminal); font-size: 14px; cursor: pointer; }
+.btn {
+  background: transparent;
+  border: 0;
+  color: var(--phosphor);
+  text-shadow: var(--glow-emerald);
+  font-family: var(--font-terminal);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+.btn:focus-visible,
+.play:focus-visible {
+  outline: 2px solid var(--phosphor-bright);
+  outline-offset: 2px;
+}
 .track {
   height: 6px;
   border: 1px solid var(--phosphor-fade);

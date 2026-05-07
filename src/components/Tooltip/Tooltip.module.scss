@@ -1,0 +1,85 @@
+.root {
+  display: inline-flex;
+  position: relative;
+}
+
+.tip {
+  background: var(--bg-deep);
+  border: 1px solid var(--phosphor-dim);
+  color: var(--phosphor-bright);
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  max-width: min(18rem, calc(100vw - 2rem));
+  opacity: 0;
+  padding: 0.4rem 0.55rem;
+  pointer-events: none;
+  position: absolute;
+  text-shadow: var(--glow-emerald);
+  transition: opacity 120ms ease, transform 120ms ease;
+  visibility: hidden;
+  white-space: normal;
+  width: max-content;
+  z-index: var(--z-drawer);
+}
+
+.root:hover .tip,
+.root:focus-within .tip {
+  opacity: 1;
+  transform: translate3d(var(--tip-x, 0), var(--tip-y, 0), 0);
+  visibility: visible;
+}
+
+.top .tip {
+  --tip-y: -0.15rem;
+  bottom: calc(100% + 0.45rem);
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.top:hover .tip,
+.top:focus-within .tip {
+  transform: translate3d(-50%, var(--tip-y), 0);
+}
+
+.bottom .tip {
+  --tip-y: 0.15rem;
+  left: 50%;
+  top: calc(100% + 0.45rem);
+  transform: translate3d(-50%, 0, 0);
+}
+
+.bottom:hover .tip,
+.bottom:focus-within .tip {
+  transform: translate3d(-50%, var(--tip-y), 0);
+}
+
+.right .tip {
+  --tip-x: 0.15rem;
+  left: calc(100% + 0.45rem);
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.right:hover .tip,
+.right:focus-within .tip {
+  transform: translate3d(var(--tip-x), -50%, 0);
+}
+
+.left .tip {
+  --tip-x: -0.15rem;
+  right: calc(100% + 0.45rem);
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.left:hover .tip,
+.left:focus-within .tip {
+  transform: translate3d(var(--tip-x), -50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tip {
+    transition: none;
+  }
+}

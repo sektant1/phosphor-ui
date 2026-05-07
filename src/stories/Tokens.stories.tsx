@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentMeta } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 export default {
   title: "Zone/Tokens",
-} as ComponentMeta<any>;
+} satisfies Meta;
 
 const COLORS: Array<[label: string, group: string, vars: Array<[string, string]>]> = [
   [

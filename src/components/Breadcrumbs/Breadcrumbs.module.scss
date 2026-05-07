@@ -1,0 +1,51 @@
+.root {
+  color: var(--phosphor-dim);
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  min-width: 0;
+}
+
+.list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.li {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.item {
+  color: inherit;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+a.item:hover,
+a.item:focus-visible {
+  color: var(--phosphor-bright);
+  outline: 0;
+  text-shadow: var(--glow-emerald);
+}
+
+a.item:focus-visible {
+  outline: 2px solid var(--phosphor-bright);
+  outline-offset: 2px;
+}
+
+.current {
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-emerald);
+}
+
+.sep {
+  color: var(--phosphor-fade);
+  user-select: none;
+}

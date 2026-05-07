@@ -31,12 +31,9 @@ const variantTag: Record<TextVariant, keyof JSX.IntrinsicElements> = {
   faded: "span",
 };
 
-export interface TextProps {
+export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;
   as?: keyof JSX.IntrinsicElements;
-  className?: string;
-  children?: React.ReactNode;
-  [key: string]: any;
 }
 
 const Text: React.FC<TextProps> = ({

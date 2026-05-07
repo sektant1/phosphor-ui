@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./FooterStencil.module.scss";
+import type { CssVars } from "../../utils/browser";
+import { cx } from "../../utils/classNames";
 
 export interface FooterObject {
   trefoil?: string;
@@ -45,24 +47,27 @@ export const FooterStencil: React.FC<FooterStencilProps> = ({
   eofText,
   className,
 }) => (
-  <footer className={[styles.zf, className ?? ""].join(" ")}>
+  <footer className={cx(styles.zf, className)}>
     {tape && (
       <div className={styles.tape} aria-hidden="true">
-        <span className={styles.tapeRun} style={{ animationDuration: `${tapeSpeed}s` }}>
+        <span
+          className={styles.tapeRun}
+          style={{ "--footer-tape-speed": `${tapeSpeed}s` } as CssVars}
+        >
           {tape} {tape}{" "}
         </span>
       </div>
     )}
 
     <div className={styles.stencil}>
-      <span className={[styles.corner, styles.cTl].join(" ")}>+</span>
-      <span className={[styles.corner, styles.cTr].join(" ")}>+</span>
-      <span className={[styles.corner, styles.cBl].join(" ")}>+</span>
-      <span className={[styles.corner, styles.cBr].join(" ")}>+</span>
+      <span className={cx(styles.corner, styles.cTl)}>+</span>
+      <span className={cx(styles.corner, styles.cTr)}>+</span>
+      <span className={cx(styles.corner, styles.cBl)}>+</span>
+      <span className={cx(styles.corner, styles.cBr)}>+</span>
 
       <div className={styles.grid}>
         {object && (
-          <section className={[styles.cell, styles.object].join(" ")} aria-label="object">
+          <section className={cx(styles.cell, styles.object)} aria-label="object">
             {object.trefoil && (
               <pre className={styles.trefoil} aria-hidden="true">
                 {object.trefoil}
@@ -83,7 +88,7 @@ export const FooterStencil: React.FC<FooterStencilProps> = ({
         )}
 
         {dossier && (
-          <section className={[styles.cell, styles.dossier].join(" ")} aria-label="dossier">
+          <section className={cx(styles.cell, styles.dossier)} aria-label="dossier">
             {dossier.heading && <h3 className={styles.h}>{dossier.heading}</h3>}
             {dossier.fields && (
               <dl className={styles.dl}>
@@ -111,7 +116,7 @@ export const FooterStencil: React.FC<FooterStencilProps> = ({
         )}
 
         {rx && (
-          <section className={[styles.cell, styles.rx].join(" ")} aria-label="rx">
+          <section className={cx(styles.cell, styles.rx)} aria-label="rx">
             {rx.heading && <h3 className={styles.h}>{rx.heading}</h3>}
             {rx.rows?.map((r) => (
               <p key={r.label} className={styles.row}>

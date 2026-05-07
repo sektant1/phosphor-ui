@@ -1,15 +1,18 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
+import type { MDXComponents as ProviderComponents } from "mdx/types.js";
 import Prose from "../Prose";
 import { Callout } from "../Callout";
 import { Hr } from "../Hr";
 import { Exercise } from "../Exercise";
 import { CodeBlock, extractMdxCode } from "../CodeBlock";
+import { PostFrontmatter } from "../PostFrontmatter";
+import type { PostFrontmatterData } from "../PostFrontmatter";
 
-type AnyProps = React.HTMLAttributes<HTMLElement> & { [key: string]: unknown };
+type AnyProps = React.HTMLAttributes<HTMLElement>;
 
-const Pass = (tag: keyof JSX.IntrinsicElements) => {
-  const C: React.FC<AnyProps> = (props) => React.createElement(tag, props);
+const Pass = <K extends keyof JSX.IntrinsicElements>(tag: K) => {
+  const C = (props: JSX.IntrinsicElements[K]) => React.createElement(tag, props);
   C.displayName = `Md${String(tag)}`;
   return C;
 };
@@ -61,7 +64,7 @@ const MdA: React.FC<React.AnchorHTMLAttributes<HTMLAnchorElement>> = ({
   );
 };
 
-export const mdxComponents = {
+export const mdxComponents: ProviderComponents = {
   h1: Pass("h1"),
   h2: Pass("h2"),
   h3: Pass("h3"),
@@ -92,10 +95,20 @@ export type MdxComponents = typeof mdxComponents;
 export interface PostBodyProps {
   children: React.ReactNode;
   className?: string;
+  frontmatter?: PostFrontmatterData;
+  frontmatterLabel?: React.ReactNode;
 }
 
-export const PostBody: React.FC<PostBodyProps> = ({ children, className }) => (
-  <MDXProvider components={mdxComponents as never}>
+export const PostBody: React.FC<PostBodyProps> = ({
+  children,
+  className,
+  frontmatter,
+  frontmatterLabel,
+}) => (
+  <MDXProvider components={mdxComponents}>
+    {frontmatter ? (
+      <PostFrontmatter data={frontmatter} label={frontmatterLabel} />
+    ) : null}
     <Prose className={className}>{children}</Prose>
   </MDXProvider>
 );
