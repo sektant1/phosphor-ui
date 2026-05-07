@@ -2,6 +2,28 @@
 
 Recipe: simple but scalable. Next.js (App Router) + SQLite/Prisma + NextAuth (single admin) + admin CMS using this lib's `AdminShell` / `ContentEditor`.
 
+## Install
+
+Public package on npm: [`@sektant1/phosphor-ui`](https://www.npmjs.com/package/@sektant1/phosphor-ui).
+
+```bash
+npm install @sektant1/phosphor-ui
+# or
+yarn add @sektant1/phosphor-ui
+# or
+pnpm add @sektant1/phosphor-ui
+```
+
+Peer deps: `react`, `react-dom` (^17 || ^18). Optional: `@mdx-js/react` (for MDX rendering).
+
+Import styles once at app root:
+
+```ts
+import "@sektant1/phosphor-ui/tokens.css";
+import "@sektant1/phosphor-ui/global.css";
+```
+
+
 Stack reasons:
 - **Next.js**: SSR, file routing, API routes, middleware. Migrate DB to Postgres later — code unchanged.
 - **Prisma**: typed schema, migrations, swap SQLite → Postgres by changing `provider`.
