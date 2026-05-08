@@ -119,6 +119,15 @@ export const Home: React.FC = () => (
           />
         </PostListing>
       </div>
+      <Hr />
+
+      <Tag>operations</Tag>
+      <Tag>signals</Tag>
+      <Tag color="magenta">anomaly</Tag>
+      <Tag count={42}>archive</Tag>
+      <Tag count={7} color="magenta">
+        live
+      </Tag>
     </section>
 
     <Hr />
@@ -165,22 +174,16 @@ export const Home: React.FC = () => (
 
     <section
       className="pho-fade-up pho-stagger"
-      style={{
-        marginTop: "2rem",
-        display: "flex",
-        gap: 12,
-        flexWrap: "wrap",
-        "--i": 3,
-      } as CssVars}
-    >
-      <Tag>operations</Tag>
-      <Tag>signals</Tag>
-      <Tag color="magenta">anomaly</Tag>
-      <Tag count={42}>archive</Tag>
-      <Tag count={7} color="magenta">
-        live
-      </Tag>
-    </section>
+      style={
+        {
+          marginTop: "2rem",
+          display: "flex",
+          gap: 12,
+          flexWrap: "wrap",
+          "--i": 3,
+        } as CssVars
+      }
+    ></section>
 
     <div style={{ marginTop: "2rem" }}>
       <AsciiBanner art={SMALL_BANNER} fallback="ZONE-NET" />

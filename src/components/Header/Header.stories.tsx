@@ -31,7 +31,7 @@ Full.args = {
 export const Minimal = Template.bind({});
 Minimal.args = {
   title: "phosphor ui",
-  align: "left",
+  align: "center",
   nav: [
     { label: "home", href: "#" },
     { label: "posts", href: "#" },
