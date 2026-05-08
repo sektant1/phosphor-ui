@@ -40,7 +40,7 @@
 }
 
 .withSidebar.postBody {
-  --pho-grid-columns: minmax(0, 1fr) 14rem;
+  --pho-grid-columns: minmax(0, 1fr) minmax(14rem, 18rem);
 }
 
 .withSidebar.projectBody {
