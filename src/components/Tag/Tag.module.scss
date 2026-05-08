@@ -1,5 +1,8 @@
 .tag {
   display: inline-block;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
   border: 1px dashed var(--magenta-deep);
   padding: 2px 8px;
   font-size: 12px;

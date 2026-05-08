@@ -50,7 +50,7 @@
   min-width: 0;
 }
 
-.stickySidebar > * {
+.stickySidebar>* {
   position: sticky;
   top: 1rem;
 }
@@ -63,12 +63,13 @@
 }
 
 @media (max-width: 860px) {
+
   .withSidebar.postBody,
   .withSidebar.projectBody {
     --pho-grid-columns: 1fr;
   }
 
-  .stickySidebar > * {
+  .stickySidebar>* {
     position: static;
   }
 
@@ -84,6 +85,7 @@
 }
 
 @media (max-width: 560px) {
+
   .post,
   .project {
     max-width: 100%;
@@ -106,4 +108,12 @@
   .footer {
     margin-top: var(--space-5);
   }
+}
+
+.sidebarLeft.postBody {
+  --pho-grid-columns: 14rem minmax(0, 1fr);
+}
+
+.sidebarLeft.projectBody {
+  --pho-grid-columns: minmax(16rem, 22rem) minmax(0, 1fr);
 }

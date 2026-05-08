@@ -1,5 +1,6 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
+import { cx } from "../../utils/classNames";
 import type { MDXComponents as ProviderComponents } from "mdx/types.js";
 import Prose from "../Prose";
 import { Callout } from "../Callout";
@@ -12,7 +13,8 @@ import type { PostFrontmatterData } from "../PostFrontmatter";
 type AnyProps = React.HTMLAttributes<HTMLElement>;
 
 const Pass = <K extends keyof JSX.IntrinsicElements>(tag: K) => {
-  const C = (props: JSX.IntrinsicElements[K]) => React.createElement(tag, props);
+  const C = (props: JSX.IntrinsicElements[K]) =>
+    React.createElement(tag, props);
   C.displayName = `Md${String(tag)}`;
   return C;
 };
@@ -95,6 +97,7 @@ export type MdxComponents = typeof mdxComponents;
 export interface PostBodyProps {
   children: React.ReactNode;
   className?: string;
+  rootClassName?: string;
   frontmatter?: PostFrontmatterData;
   frontmatterLabel?: React.ReactNode;
 }
@@ -102,13 +105,21 @@ export interface PostBodyProps {
 export const PostBody: React.FC<PostBodyProps> = ({
   children,
   className,
+  rootClassName,
   frontmatter,
   frontmatterLabel,
 }) => (
   <MDXProvider components={mdxComponents}>
-    {frontmatter ? (
-      <PostFrontmatter data={frontmatter} label={frontmatterLabel} />
-    ) : null}
-    <Prose className={className}>{children}</Prose>
+    <div className={cx("pho-post-body", rootClassName)}>
+      {frontmatter ? (
+        <PostFrontmatter
+          className="pho-post-body-frontmatter"
+          data={frontmatter}
+          label={frontmatterLabel}
+        />
+      ) : null}
+
+      <Prose className={className}>{children}</Prose>
+    </div>
   </MDXProvider>
 );

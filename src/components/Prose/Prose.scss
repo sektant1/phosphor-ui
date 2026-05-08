@@ -1,3 +1,19 @@
+.pho-post-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.pho-post-body-frontmatter {
+  margin-bottom: 0;
+}
+
+.pho-post-body>.pho-prose {
+  min-width: 0;
+}
+
+
 .pho-prose {
   max-width: 68ch;
   color: var(--ink);
@@ -171,6 +187,7 @@
   display: grid;
   gap: 6px;
 }
+
 .pho-prose figure img,
 .pho-prose .pho-mdx-figure img {
   display: block;
@@ -178,6 +195,7 @@
   margin: 0;
   border: none;
 }
+
 .pho-prose figcaption,
 .pho-prose .pho-mdx-figure figcaption {
   font-family: var(--font-terminal);

@@ -4,16 +4,8 @@
   padding: 0 clamp(0.6rem, 3vw, 2rem);
 }
 
-.demo-layout {
-  display: grid;
-  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-  gap: clamp(0.8rem, 2.5vw, 2rem);
-  align-items: start;
-}
-
-.demo-aside {
-  position: sticky;
-  top: 12px;
+.demo-page-layout {
+  width: 100%;
 }
 
 .demo-main {
@@ -33,58 +25,12 @@
   margin-top: var(--space-7);
 }
 
-.demo-section {
-  display: grid;
-  min-width: 0;
-}
-
-.demo-stack {
-  display: flex;
-  flex-direction: column;
-}
-
-.demo-cluster {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.demo-section--xs,
-.demo-stack--xs,
-.demo-cluster--xs,
-.demo-card-grid--xs,
-.demo-split--xs {
-  gap: var(--space-2);
-}
-
-.demo-section--sm,
-.demo-stack--sm,
-.demo-cluster--sm,
-.demo-card-grid--sm,
-.demo-split--sm {
-  gap: var(--space-3);
-}
-
-.demo-section--md,
-.demo-stack--md,
-.demo-cluster--md,
-.demo-card-grid--md,
-.demo-split--md {
-  gap: var(--space-5);
-}
-
-.demo-section--lg,
-.demo-stack--lg,
-.demo-cluster--lg,
-.demo-card-grid--lg,
-.demo-split--lg {
-  gap: var(--space-6);
-}
-
+.demo-section,
+.demo-stack,
+.demo-cluster,
+.demo-card-grid,
 .demo-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
-  align-items: start;
+  min-width: 0;
 }
 
 .demo-split-aside {
@@ -92,30 +38,30 @@
   top: 16px;
 }
 
-.demo-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  align-items: stretch;
-}
-
 @media (max-width: 880px) {
-  .demo-layout {
-    grid-template-columns: 1fr;
-  }
-  .demo-aside {
-    position: static;
-  }
-  .demo-split {
-    grid-template-columns: 1fr;
-  }
   .demo-split-aside {
     position: static;
     order: -1;
   }
 }
 
-@media (max-width: 540px) {
-  .demo-card-grid {
-    grid-template-columns: 1fr;
+.demo-layout {
+  margin-top: var(--space-6);
+}
+
+.demo-aside {
+  min-width: 0;
+  position: sticky;
+  top: 12px;
+}
+
+@media (max-width: 880px) {
+  .demo-aside {
+    position: static;
   }
+}
+
+.demo-cluster {
+  width: fit-content;
+  max-width: 100%;
 }

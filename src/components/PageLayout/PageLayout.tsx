@@ -5,11 +5,14 @@ import { Grid } from "../Layout";
 
 export type PageLayoutVariant = "post" | "project";
 
+export type PageLayoutSidebarPosition = "left" | "right";
+
 export interface PageLayoutProps extends React.HTMLAttributes<HTMLElement> {
   variant?: PageLayoutVariant;
   header?: React.ReactNode;
   hero?: React.ReactNode;
   sidebar?: React.ReactNode;
+  sidebarPosition?: "left" | "right";
   footer?: React.ReactNode;
   children: React.ReactNode;
   sidebarLabel?: string;
@@ -23,6 +26,7 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
       header,
       hero,
       sidebar,
+      sidebarPosition = "left",
       footer,
       children,
       sidebarLabel,
@@ -33,7 +37,8 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
     ref,
   ) => {
     const resolvedSidebarLabel =
-      sidebarLabel ?? (variant === "project" ? "project sidebar" : "post sidebar");
+      sidebarLabel ??
+      (variant === "project" ? "project sidebar" : "post sidebar");
 
     return (
       <article
@@ -49,15 +54,33 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
             styles.body,
             variant === "project" ? styles.projectBody : styles.postBody,
             !!sidebar && styles.withSidebar,
+            sidebar && sidebarPosition === "left" && styles.sidebarLeft,
           )}
           gap={variant === "project" ? "2rem" : "1.5rem"}
           mobileColumns="1fr"
           mobileGap="md"
         >
           <div className={styles.main}>{children}</div>
-          {sidebar ? (
+          {sidebar && sidebarPosition === "left" ? (
             <aside
-              className={cx(styles.sidebar, stickySidebar && styles.stickySidebar)}
+              className={cx(
+                styles.sidebar,
+                stickySidebar && styles.stickySidebar,
+              )}
+              aria-label={resolvedSidebarLabel}
+            >
+              {sidebar}
+            </aside>
+          ) : null}
+
+          <div className={styles.main}>{children}</div>
+
+          {sidebar && sidebarPosition === "right" ? (
+            <aside
+              className={cx(
+                styles.sidebar,
+                stickySidebar && styles.stickySidebar,
+              )}
               aria-label={resolvedSidebarLabel}
             >
               {sidebar}

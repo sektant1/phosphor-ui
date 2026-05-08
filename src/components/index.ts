@@ -88,7 +88,11 @@ export { Breadcrumbs } from "./Breadcrumbs";
 export type { BreadcrumbItem, BreadcrumbsProps } from "./Breadcrumbs";
 
 export { PageLayout } from "./PageLayout";
-export type { PageLayoutProps, PageLayoutVariant } from "./PageLayout";
+export type {
+  PageLayoutProps,
+  PageLayoutVariant,
+  PageLayoutSidebarPosition,
+} from "./PageLayout";
 
 export { PostHeader } from "./PostHeader";
 export type { PostHeaderProps } from "./PostHeader";
@@ -123,10 +127,19 @@ export { Glyphs, Glyph, DEFAULT_GLYPHS } from "./Glyphs";
 export type { GlyphsProps, GlyphProps, GlyphItem } from "./Glyphs";
 
 export { Heading, H1, H2, H3, H4, H5, H6 } from "./Headings";
-export type { HeadingGlyphPosition, HeadingProps, HeadingLevel } from "./Headings";
+export type {
+  HeadingGlyphPosition,
+  HeadingProps,
+  HeadingLevel,
+} from "./Headings";
 
 export { LessonRow, LessonList } from "./LessonRow";
-export type { LessonRowProps, LessonState, LessonKind, LessonListProps } from "./LessonRow";
+export type {
+  LessonRowProps,
+  LessonState,
+  LessonKind,
+  LessonListProps,
+} from "./LessonRow";
 
 export { ModuleAccordion } from "./ModuleAccordion";
 export type { ModuleAccordionProps, ModuleLesson } from "./ModuleAccordion";
@@ -147,7 +160,12 @@ export { Footer } from "./Footer";
 export type { FooterProps, FooterLink } from "./Footer";
 
 export { Stepper, StepperFoot } from "./Stepper";
-export type { StepperProps, StepperItem, StepperFootProps, StepperFootLink } from "./Stepper";
+export type {
+  StepperProps,
+  StepperItem,
+  StepperFootProps,
+  StepperFootLink,
+} from "./Stepper";
 
 export { TableOfContents } from "./TableOfContents";
 export type { TableOfContentsProps, TocItem } from "./TableOfContents";
@@ -180,7 +198,11 @@ export { StatPill } from "./StatPill";
 export type { StatPillProps, StatPillColor } from "./StatPill";
 
 export { Timeline } from "./Timeline";
-export type { TimelineProps, TimelineItem, TimelineItemStatus } from "./Timeline";
+export type {
+  TimelineProps,
+  TimelineItem,
+  TimelineItemStatus,
+} from "./Timeline";
 
 export { Avatar } from "./Avatar";
 export type { AvatarProps, AvatarSize } from "./Avatar";
@@ -198,7 +220,11 @@ export { LoginForm } from "./LoginForm";
 export type { LoginFormProps } from "./LoginForm";
 
 export { FormField, ContentStatusBadge } from "./FormField";
-export type { FormFieldProps, ContentStatusBadgeProps, ContentStatus } from "./FormField";
+export type {
+  FormFieldProps,
+  ContentStatusBadgeProps,
+  ContentStatus,
+} from "./FormField";
 
 export { AdminShell } from "./AdminShell";
 export type { AdminShellProps, AdminNavItem, AdminUser } from "./AdminShell";
@@ -214,10 +240,22 @@ export { NoteEditor } from "./NoteEditor";
 export type { NoteEditorProps, NoteData } from "./NoteEditor";
 
 export { ProjectEditor } from "./ProjectEditor";
-export type { ProjectEditorProps, ProjectData, ProjectLink } from "./ProjectEditor";
+export type {
+  ProjectEditorProps,
+  ProjectData,
+  ProjectLink,
+} from "./ProjectEditor";
 
 export { CourseEditor } from "./CourseEditor";
-export type { CourseEditorProps, CourseData, CourseModule } from "./CourseEditor";
+export type {
+  CourseEditorProps,
+  CourseData,
+  CourseModule,
+} from "./CourseEditor";
 
 export { LessonEditor } from "./LessonEditor";
-export type { LessonEditorProps, LessonData, LessonResource } from "./LessonEditor";
+export type {
+  LessonEditorProps,
+  LessonData,
+  LessonResource,
+} from "./LessonEditor";
