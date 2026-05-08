@@ -36,6 +36,8 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
     },
     ref,
   ) => {
+    const hasSidebar =
+      sidebar !== null && sidebar !== undefined && sidebar !== false;
     const resolvedSidebarLabel =
       sidebarLabel ??
       (variant === "project" ? "project sidebar" : "post sidebar");
@@ -52,8 +54,10 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
           className={cx(
             styles.body,
             variant === "project" ? styles.projectBody : styles.postBody,
-            !!sidebar && styles.withSidebar,
-            sidebar && sidebarPosition === "left" && styles.sidebarLeft,
+            hasSidebar && styles.withSidebar,
+            hasSidebar && sidebarPosition === "left"
+              ? styles.sidebarLeft
+              : undefined,
           )}
           gap={variant === "project" ? "2rem" : "1.5rem"}
           mobileColumns="1fr"
