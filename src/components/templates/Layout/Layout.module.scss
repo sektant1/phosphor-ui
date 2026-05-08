@@ -14,10 +14,6 @@
 
 .grid {
   display: grid;
-  grid-template-columns: var(
-    --pho-grid-columns,
-    repeat(auto-fit, minmax(var(--pho-grid-min, 16rem), 1fr))
-  );
   align-items: var(--pho-align, stretch);
   justify-content: var(--pho-justify, stretch);
   gap: var(--pho-gap, var(--space-5));
@@ -53,10 +49,8 @@
   }
 
   .grid {
-    grid-template-columns: var(
-      --pho-mobile-grid-columns,
-      repeat(auto-fit, minmax(var(--pho-mobile-grid-min, min(100%, 14rem)), 1fr))
-    );
+    grid-template-columns: var(--pho-mobile-grid-columns,
+        repeat(auto-fit, minmax(var(--pho-mobile-grid-min, min(100%, 14rem)), 1fr)));
     align-items: var(--pho-mobile-align, var(--pho-align, stretch));
     justify-content: var(--pho-mobile-justify, var(--pho-justify, stretch));
     gap: var(--pho-mobile-gap, var(--pho-gap, var(--space-5)));

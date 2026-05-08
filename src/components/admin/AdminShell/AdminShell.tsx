@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./AdminShell.module.scss";
 import { cx } from "../../../utils/classNames";
-import { Flex, Grid } from "../../templates/Layout";
 
 export interface AdminNavItem {
   label: string;
@@ -32,29 +31,33 @@ export const AdminShell: React.FC<AdminShellProps> = ({
   children,
   className,
 }) => (
-  <Grid className={cx(styles.shell, className)} gap={0}>
-    <Flex as="aside" className={styles.sidebar} direction="column" gap={0}>
+  <div className={cx(styles.shell, className)}>
+    <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         <span className={styles.sidebarTitle}>{title}</span>
       </div>
+
       <nav className={styles.nav} aria-label="admin navigation">
         <ul className={styles.navList}>
           {nav.map((item) => (
             <li key={item.href + item.label} className={styles.navItem}>
-              <Flex
-                as="a"
+              <a
                 href={item.href}
-                className={cx(styles.navLink, item.active && styles.navLinkActive)}
-                align="center"
-                gap="0.5rem"
+                className={cx(
+                  styles.navLink,
+                  item.active && styles.navLinkActive,
+                )}
               >
-                {item.glyph && <span className={styles.navGlyph}>{item.glyph}</span>}
-                {item.label}
-              </Flex>
+                {item.glyph && (
+                  <span className={styles.navGlyph}>{item.glyph}</span>
+                )}
+                <span className={styles.navLabel}>{item.label}</span>
+              </a>
             </li>
           ))}
         </ul>
       </nav>
+
       {(user || onLogout) && (
         <div className={styles.userSection}>
           {user && (
@@ -63,16 +66,22 @@ export const AdminShell: React.FC<AdminShellProps> = ({
               {user.role && <div className={styles.userRole}>{user.role}</div>}
             </>
           )}
+
           {onLogout && (
-            <button className={styles.logoutBtn} onClick={onLogout} type="button">
+            <button
+              className={styles.logoutBtn}
+              onClick={onLogout}
+              type="button"
+            >
               [logout]
             </button>
           )}
         </div>
       )}
-    </Flex>
-    <Flex as="main" className={styles.main} direction="column" gap="1rem">
-      {children}
-    </Flex>
-  </Grid>
+    </aside>
+
+    <main className={styles.main}>{children}</main>
+  </div>
 );
+
+AdminShell.displayName = "AdminShell";
