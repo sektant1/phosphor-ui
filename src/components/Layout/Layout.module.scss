@@ -42,3 +42,29 @@
 .gapXl {
   --pho-gap: var(--space-7);
 }
+
+@media (max-width: 720px) {
+  .flex {
+    flex-direction: var(--pho-mobile-flex-direction, var(--pho-flex-direction, row));
+    align-items: var(--pho-mobile-align, var(--pho-align, stretch));
+    justify-content: var(--pho-mobile-justify, var(--pho-justify, flex-start));
+    flex-wrap: var(--pho-mobile-wrap, var(--pho-wrap, nowrap));
+    gap: var(--pho-mobile-gap, var(--pho-gap, var(--space-5)));
+  }
+
+  .grid {
+    grid-template-columns: var(
+      --pho-mobile-grid-columns,
+      repeat(auto-fit, minmax(var(--pho-mobile-grid-min, min(100%, 14rem)), 1fr))
+    );
+    align-items: var(--pho-mobile-align, var(--pho-align, stretch));
+    justify-content: var(--pho-mobile-justify, var(--pho-justify, stretch));
+    gap: var(--pho-mobile-gap, var(--pho-gap, var(--space-5)));
+  }
+}
+
+@media (max-width: 460px) {
+  .grid {
+    grid-template-columns: var(--pho-mobile-grid-columns, minmax(0, 1fr));
+  }
+}

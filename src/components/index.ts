@@ -87,6 +87,9 @@ export type { DropdownMenuItem, DropdownMenuProps } from "./DropdownMenu";
 export { Breadcrumbs } from "./Breadcrumbs";
 export type { BreadcrumbItem, BreadcrumbsProps } from "./Breadcrumbs";
 
+export { PageLayout } from "./PageLayout";
+export type { PageLayoutProps, PageLayoutVariant } from "./PageLayout";
+
 export { PostHeader } from "./PostHeader";
 export type { PostHeaderProps } from "./PostHeader";
 

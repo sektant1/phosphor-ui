@@ -1,16 +1,28 @@
 .link {
   display: block;
+  position: relative;
   width: 100%;
   text-align: center;
   text-decoration: none;
   color: inherit;
   background: none;
   max-width: 100%;
+  overflow: hidden;
+}
+
+.bannerFrame {
+  width: 100%;
+  height: var(--ascii-height, auto);
+  min-height: 1px;
+  overflow: hidden;
+  text-align: center;
 }
 
 .banner {
   margin: 0 auto;
   display: inline-block;
+  transform: scale(var(--ascii-scale, 1));
+  transform-origin: top center;
   text-align: left;
   font-family: var(--font-code);
   font-weight: 700;
@@ -18,7 +30,8 @@
   line-height: 1;
   color: var(--magenta-bright);
   white-space: pre;
-  max-width: 100%;
+  max-width: none;
+  overflow: hidden;
   padding: 0.6em 0 0.4em;
   letter-spacing: 0;
   background: none;
@@ -33,47 +46,44 @@
 }
 
 .fallback {
-  display: none;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2rem, 6vw, 3.4rem);
-  letter-spacing: -0.02em;
-  color: var(--magenta);
-  margin: 0;
-  animation:
-    hsyncJitter 4s steps(1, end) infinite,
-    neonFlicker 5.4s steps(1, end) infinite,
-    neonBuzz 7s steps(1, end) infinite,
-    neonHum 3.2s ease-in-out infinite;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @keyframes hsyncJitter {
   0%, 94%, 100% {
-    transform: translateX(0);
+    transform: scale(var(--ascii-scale, 1)) translateX(0);
   }
   95% {
-    transform: translateX(-2px);
+    transform: scale(var(--ascii-scale, 1)) translateX(-2px);
     filter:
       drop-shadow(2px 0 0 rgba(0, 255, 156, 0.32))
       drop-shadow(-2px 0 0 rgba(232, 92, 200, 0.32))
       blur(0.3px);
   }
   96% {
-    transform: translateX(2px);
+    transform: scale(var(--ascii-scale, 1)) translateX(2px);
     filter:
       drop-shadow(2px 0 0 rgba(0, 255, 156, 0.32))
       drop-shadow(-2px 0 0 rgba(232, 92, 200, 0.32))
       blur(0.4px);
   }
   97% {
-    transform: translateX(-1px);
+    transform: scale(var(--ascii-scale, 1)) translateX(-1px);
     filter:
       drop-shadow(2px 0 0 rgba(0, 255, 156, 0.32))
       drop-shadow(-2px 0 0 rgba(232, 92, 200, 0.32))
       blur(0.15px);
   }
   98% {
-    transform: translateX(0);
+    transform: scale(var(--ascii-scale, 1)) translateX(0);
   }
 }
 
@@ -119,13 +129,8 @@
   46% { opacity: 0.25; }
 }
 
-@media (max-width: 520px) {
-  .banner { display: none; }
-  .fallback { display: block; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .banner, .fallback {
+  .banner {
     animation: none;
     text-shadow: var(--glow-magenta);
   }

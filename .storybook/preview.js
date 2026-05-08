@@ -10,6 +10,12 @@ export const parameters = {
       { name: "deep", value: "#010604" },
     ],
   },
+  docs: {
+    source: {
+      type: "code",
+      excludeDecorators: true,
+    },
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -22,3 +28,5 @@ export const parameters = {
     },
   },
 };
+
+export const tags = ["autodocs"];

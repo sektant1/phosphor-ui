@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./NerdTree.module.scss";
+import { cx } from "../../utils/classNames";
+import { Drawer } from "../Modal";
 
 export interface NerdTreeLeaf {
   kind: "leaf";
@@ -35,9 +37,31 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   className,
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const content = (
+    <>
+      <header className={styles.header}>
+        <p className={styles.buf}>
+          <span className={styles.led} aria-hidden="true" />
+          {bufferLabel}
+        </p>
+        <h2 className={styles.title}>{title}</h2>
+        {hint && <p className={styles.status}>{hint}</p>}
+      </header>
+      <ul className={styles.list} role="tree">
+        {tree.map((n, i) => (
+          <Node key={i} node={n} />
+        ))}
+      </ul>
+      <footer className={styles.footer}>
+        <p className={styles.cmd}>{command}</p>
+        {footerMeta && <p className={styles.metaFoot}>{footerMeta}</p>}
+      </footer>
+    </>
+  );
+
   return (
     <aside
-      className={[styles.tree, mobileOpen ? styles.mobileOpen : "", className ?? ""].join(" ")}
+      className={cx(styles.tree, className)}
       aria-label="content tree"
     >
       <button
@@ -50,25 +74,19 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
         <span className={styles.toggleGlyph} aria-hidden="true">{mobileOpen ? "[-]" : "[+]"}</span>
         <span className={styles.toggleLabel}>{command}</span>
       </button>
-      <div className={styles.body}>
-        <header className={styles.header}>
-          <p className={styles.buf}>
-            <span className={styles.led} aria-hidden="true" />
-            {bufferLabel}
-          </p>
-          <h2 className={styles.title}>{title}</h2>
-          {hint && <p className={styles.status}>{hint}</p>}
-        </header>
-        <ul className={styles.list} role="tree">
-          {tree.map((n, i) => (
-            <Node key={i} node={n} />
-          ))}
-        </ul>
-        <footer className={styles.footer}>
-          <p className={styles.cmd}>{command}</p>
-          {footerMeta && <p className={styles.metaFoot}>{footerMeta}</p>}
-        </footer>
+      <div className={cx(styles.body, styles.desktopBody)}>
+        {content}
       </div>
+      <Drawer
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        title={title}
+        side="left"
+        width="min(88vw, 22rem)"
+        className={styles.drawerPanel}
+      >
+        <div className={styles.drawerContent}>{content}</div>
+      </Drawer>
     </aside>
   );
 };

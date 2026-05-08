@@ -20,3 +20,28 @@ const meta: Meta<AsciiBannerProps> = {
 export default meta;
 
 export const Default: StoryObj<AsciiBannerProps> = {};
+Default.parameters = {
+  docs: {
+    source: {
+      code: `<AsciiBanner art={art} />`,
+    },
+  },
+};
+
+export const WithFallback: StoryObj<AsciiBannerProps> = {
+  args: {
+    fallback: "PHOSPHOR",
+    label: "Phosphor home",
+  },
+};
+WithFallback.parameters = {
+  docs: {
+    source: {
+      code: `<AsciiBanner
+  art={art}
+  fallback="PHOSPHOR"
+  label="Phosphor home"
+/>`,
+    },
+  },
+};
