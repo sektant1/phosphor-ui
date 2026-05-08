@@ -6,8 +6,8 @@
   color: var(--ink);
 }
 
-.sidebar {
-  flex: 0 0 220px;
+.sidePanel {
+  flex: 0 0 280px;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -16,99 +16,25 @@
   border-right: 1px solid var(--phosphor-fade);
 }
 
-.sidebarHeader {
-  flex: 0 0 auto;
-  padding: 1rem 0.9rem 0.8rem;
-  border-bottom: 1px dashed var(--phosphor-fade);
-}
-
-.sidebarTitle {
-  display: block;
-  overflow: hidden;
-  font-family: var(--font-terminal);
-  font-size: 16px;
-  letter-spacing: 0.12em;
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
-  text-transform: lowercase;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.nav {
+.tree {
   flex: 1 1 auto;
-  min-height: 0;
-}
-
-.navList {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  padding: 0.5rem 0;
-  margin: 0;
-}
-
-.navItem {
-  display: block;
-  min-width: 0;
-}
-
-.navLink {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.5rem;
   width: 100%;
-  min-width: 0;
-  padding: 0.55rem 0.9rem;
-  font-family: var(--font-code);
-  font-size: 12px;
-  line-height: 1.2;
-  color: var(--ink);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  border-left: 2px solid transparent;
-}
-
-.navLink:hover:not(.navLinkActive) {
-  background: rgba(44, 255, 122, 0.04);
-  color: var(--phosphor-dim);
-}
-
-.navLink:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
-  outline-offset: -2px;
-}
-
-.navLinkActive {
-  background: rgba(44, 255, 122, 0.08);
-  color: var(--phosphor);
-  border-left-color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
-}
-
-.navGlyph {
-  flex: 0 0 auto;
-  display: inline-flex;
-  width: 1ch;
-  justify-content: center;
-  color: var(--phosphor-fade);
-  font-size: 10px;
-  line-height: 1;
-}
-
-.navLabel {
-  overflow: hidden;
-  min-width: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  min-height: 0;
+  max-height: none;
+  position: static;
+  align-self: stretch;
+  border-right: none;
 }
 
 .userSection {
   flex: 0 0 auto;
   padding: 0.7rem 0.9rem;
   border-top: 1px dashed var(--phosphor-fade);
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.userBlock {
+  min-width: 0;
 }
 
 .userName {
@@ -188,45 +114,16 @@
   margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 880px) {
   .shell {
     display: block;
   }
 
-  .sidebar {
-    min-height: auto;
+  .sidePanel {
+    min-height: 0;
     border-right: none;
-    border-bottom: 1px solid var(--phosphor-fade);
-  }
-
-  .sidebarHeader {
-    padding: 0.8rem 1rem;
-  }
-
-  .nav {
-    flex: 0 0 auto;
-  }
-
-  .navList {
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 0;
-  }
-
-  .navItem {
-    flex: 0 0 auto;
-  }
-
-  .navLink {
-    width: auto;
-    padding: 0.55rem 0.75rem;
-    white-space: nowrap;
-    border-left: none;
-    border-bottom: 2px solid transparent;
-  }
-
-  .navLinkActive {
-    border-bottom-color: var(--phosphor);
+    border-bottom: none;
+    background: transparent;
   }
 
   .userSection {
