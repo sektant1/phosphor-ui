@@ -1,6 +1,6 @@
 .shell {
-  display: grid;
-  grid-template-columns: 220px 1fr;
+  --pho-grid-columns: 220px 1fr;
+
   grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
@@ -10,8 +10,6 @@
   grid-row: 1 / -1;
   background: var(--bg-deep);
   border-right: 1px solid var(--phosphor-fade);
-  display: flex;
-  flex-direction: column;
 }
 
 .sidebarHeader {
@@ -43,9 +41,6 @@
 }
 
 .navLink {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   padding: 0.45rem 0.9rem;
   font-family: var(--font-code);
   font-size: 12px;
@@ -112,10 +107,7 @@
   min-height: 100vh;
   max-height: 100vh;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
   padding: 1.25rem 1.5rem 2rem;
-  gap: 1rem;
   font-family: var(--font-body);
   color: var(--ink);
   position: relative;
@@ -150,7 +142,8 @@
 
 @media (max-width: 768px) {
   .shell {
-    grid-template-columns: 1fr;
+    --pho-grid-columns: 1fr;
+
     grid-template-rows: auto 1fr;
   }
 

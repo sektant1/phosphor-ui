@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./PostLayout.module.scss";
 import { cx } from "../../utils/classNames";
+import { Grid } from "../Layout";
 
 export interface PostLayoutProps extends React.HTMLAttributes<HTMLElement> {
   header?: React.ReactNode;
@@ -25,14 +26,14 @@ export const PostLayout = React.forwardRef<HTMLElement, PostLayoutProps>(
   ) => (
     <article ref={ref} className={cx(styles.root, className)} {...rest}>
       {header ? <div className={styles.header}>{header}</div> : null}
-      <div className={cx(styles.grid, !!sidebar && styles.withSidebar)}>
+      <Grid className={cx(styles.grid, !!sidebar && styles.withSidebar)} gap="1.5rem">
         <div className={styles.main}>{children}</div>
         {sidebar ? (
           <aside className={styles.sidebar} aria-label={sidebarLabel}>
             {sidebar}
           </aside>
         ) : null}
-      </div>
+      </Grid>
       {footer ? <footer className={styles.footer}>{footer}</footer> : null}
     </article>
   ),

@@ -9,13 +9,11 @@
 }
 
 .grid {
-  display: grid;
-  gap: 1.5rem;
   min-width: 0;
 }
 
 .withSidebar {
-  grid-template-columns: minmax(0, 1fr) 14rem;
+  --pho-grid-columns: minmax(0, 1fr) 14rem;
 }
 
 .main {
@@ -39,7 +37,7 @@
 
 @media (max-width: 860px) {
   .withSidebar {
-    grid-template-columns: 1fr;
+    --pho-grid-columns: 1fr;
   }
 
   .sidebar > * {

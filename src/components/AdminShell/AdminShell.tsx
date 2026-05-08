@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./AdminShell.module.scss";
+import { cx } from "../../utils/classNames";
+import { Flex, Grid } from "../Layout";
 
 export interface AdminNavItem {
   label: string;
@@ -30,8 +32,8 @@ export const AdminShell: React.FC<AdminShellProps> = ({
   children,
   className,
 }) => (
-  <div className={[styles.shell, className ?? ""].join(" ")}>
-    <aside className={styles.sidebar}>
+  <Grid className={cx(styles.shell, className)} gap={0}>
+    <Flex as="aside" className={styles.sidebar} direction="column" gap={0}>
       <div className={styles.sidebarHeader}>
         <span className={styles.sidebarTitle}>{title}</span>
       </div>
@@ -39,13 +41,16 @@ export const AdminShell: React.FC<AdminShellProps> = ({
         <ul className={styles.navList}>
           {nav.map((item) => (
             <li key={item.href + item.label} className={styles.navItem}>
-              <a
+              <Flex
+                as="a"
                 href={item.href}
-                className={[styles.navLink, item.active ? styles.navLinkActive : ""].join(" ")}
+                className={cx(styles.navLink, item.active && styles.navLinkActive)}
+                align="center"
+                gap="0.5rem"
               >
                 {item.glyph && <span className={styles.navGlyph}>{item.glyph}</span>}
                 {item.label}
-              </a>
+              </Flex>
             </li>
           ))}
         </ul>
@@ -65,7 +70,9 @@ export const AdminShell: React.FC<AdminShellProps> = ({
           )}
         </div>
       )}
-    </aside>
-    <main className={styles.main}>{children}</main>
-  </div>
+    </Flex>
+    <Flex as="main" className={styles.main} direction="column" gap="1rem">
+      {children}
+    </Flex>
+  </Grid>
 );
