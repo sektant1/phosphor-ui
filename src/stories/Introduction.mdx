@@ -1,0 +1,49 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Foundations/Introduction" />
+
+# Phosphor UI
+
+Phosphor UI is a single-channel green-phosphor React component library with a retro CRT, military terminal, Pip-Boy, and STALKER-inspired visual identity. Keep the hard edges, mono typography, glow effects, scanline-friendly contrast, phosphor palette, and existing component animations intact when adding or changing stories.
+
+## Importing Styles
+
+Applications should load the design tokens before global defaults:
+
+```ts
+import "@sektant1/phosphor-ui/tokens.css";
+import "@sektant1/phosphor-ui/global.css";
+```
+
+Storybook imports the source equivalents globally from `.storybook/preview.ts`:
+
+```ts
+import "../src/styles/tokens.css";
+import "../src/styles/global.css";
+```
+
+## Atomic Structure
+
+Stories are grouped by design-system layer:
+
+- `Foundations`: tokens, typography, color, spacing, motion, usage guidance.
+- `Atoms`: indivisible controls and primitives such as `Button`, `Input`, `Tag`, `Text`, and `Tooltip`.
+- `Molecules`: composed UI pieces such as `Callout`, `PostMeta`, `Tabs`, `Modal`, and `Pagination`.
+- `Organisms`: larger sections such as `Header`, `Footer`, `Search`, `PostHeader`, and listing components.
+- `Templates`: layout scaffolds such as `Flex`, `Grid`, `Page`, and page-layout wrappers.
+- `Pages`: complete page-level compositions.
+- `Legacy`: old compatibility stories that have not been rehomed yet.
+
+## Adding Stories
+
+Put each story next to the component it documents and title it by layer:
+
+```ts
+export default {
+  title: "Atoms/Button",
+  component: Button,
+  tags: ["autodocs"],
+};
+```
+
+Use MDX in `src/**/*.mdx` for narrative docs and `src/**/*.stories.tsx` for component examples. Prefer keeping examples close to production composition while preserving the phosphor CRT styling already defined by component SCSS modules.

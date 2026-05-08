@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 
 export default {
-  title: "Zone/Tokens",
+  title: "Foundations/Tokens",
 } satisfies Meta;
 
 const COLORS: Array<[label: string, group: string, vars: Array<[string, string]>]> = [

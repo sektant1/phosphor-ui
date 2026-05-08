@@ -1,261 +1,292 @@
-export { Button } from "./Button";
-export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
+export * as admin from "./admin";
+export * as atoms from "./atoms";
+export * as content from "./content";
+export * as legacy from "./legacy";
+export * as molecules from "./molecules";
+export * as organisms from "./organisms";
+export * as pages from "./pages";
+export * as templates from "./templates";
 
-export { default as Link } from "./Link";
-export type { LinkProps } from "./Link";
+export { Button } from "./atoms/Button";
+export type { ButtonProps, ButtonVariant, ButtonSize } from "./atoms/Button";
 
-export { Callout, CalloutHeading } from "./Callout";
-export type { CalloutProps, CalloutVariant } from "./Callout";
+export { default as Link } from "./atoms/Link";
+export type { LinkProps } from "./atoms/Link";
 
-export { Input, Textarea } from "./Input";
-export type { InputProps, TextareaProps } from "./Input";
+export { Callout, CalloutHeading } from "./molecules/Callout";
+export type { CalloutProps, CalloutVariant } from "./molecules/Callout";
 
-export { Tag } from "./Tag";
-export type { TagProps } from "./Tag";
+export { Input, Textarea } from "./atoms/Input";
+export type { InputProps, TextareaProps } from "./atoms/Input";
 
-export { PdaWindow } from "./PdaWindow";
-export type { PdaWindowProps } from "./PdaWindow";
+export { Tag } from "./atoms/Tag";
+export type { TagProps } from "./atoms/Tag";
 
-export { PostListing, PostRow } from "./PostListing";
-export type { PostListingProps, PostRowProps } from "./PostListing";
+export { PdaWindow } from "./molecules/PdaWindow";
+export type { PdaWindowProps } from "./molecules/PdaWindow";
 
-export { PostMeta } from "./PostMeta";
-export type { PostMetaProps } from "./PostMeta";
+export { PostListing, PostRow } from "./organisms/PostListing";
+export type { PostListingProps, PostRowProps } from "./organisms/PostListing";
 
-export { PostFrontmatter } from "./PostFrontmatter";
+export { PostMeta } from "./molecules/PostMeta";
+export type { PostMetaProps } from "./molecules/PostMeta";
+
+export { PostFrontmatter } from "./molecules/PostFrontmatter";
 export type {
   FrontmatterScalar,
   FrontmatterValue,
   PostFrontmatterData,
   PostFrontmatterProps,
-} from "./PostFrontmatter";
+} from "./molecules/PostFrontmatter";
 
-export { default as Text } from "./Text";
-export type { TextProps, TextVariant } from "./Text";
+export { default as Text } from "./atoms/Text";
+export type { TextProps, TextVariant } from "./atoms/Text";
 
-export { default as Pagination } from "./Pagination";
-export type { PaginationProps } from "./Pagination";
+export { default as Pagination } from "./molecules/Pagination";
+export type { PaginationProps } from "./molecules/Pagination";
 
-export { default as SearchResultList, SearchResult } from "./SearchResult";
+export { default as SearchResultList, SearchResult } from "./molecules/SearchResult";
 export type {
   SearchHit,
   SearchResultProps,
   SearchResultListProps,
-} from "./SearchResult";
+} from "./molecules/SearchResult";
 
-export { Search } from "./Search";
-export type { SearchProps } from "./Search";
+export { Search } from "./organisms/Search";
+export type { SearchProps } from "./organisms/Search";
 
-export { CrtShell } from "./CrtShell";
-export type { CrtShellProps } from "./CrtShell";
+export { CrtShell } from "./organisms/CrtShell";
+export type { CrtShellProps } from "./organisms/CrtShell";
 
-export { default as Prose } from "./Prose";
-export type { ProseProps } from "./Prose";
+export { default as Prose } from "./content/Prose";
+export type { ProseProps } from "./content/Prose";
 
-export { NerdTree } from "./NerdTree";
+export { NerdTree } from "./organisms/NerdTree";
 export type {
   NerdTreeProps,
   NerdTreeNode,
   NerdTreeDir,
   NerdTreeLeaf,
-} from "./NerdTree";
+} from "./organisms/NerdTree";
 
-export { AsciiBanner } from "./AsciiBanner";
-export type { AsciiBannerProps } from "./AsciiBanner";
+export { AsciiBanner } from "./molecules/AsciiBanner";
+export type { AsciiBannerProps } from "./molecules/AsciiBanner";
 
-export { BootNav } from "./BootNav";
-export type { BootNavProps, BootNavItem } from "./BootNav";
+export { BootNav } from "./molecules/BootNav";
+export type { BootNavProps, BootNavItem } from "./molecules/BootNav";
 
-export { Checkbox } from "./Checkbox";
-export type { CheckboxProps } from "./Checkbox";
+export { Checkbox } from "./atoms/Checkbox";
+export type { CheckboxProps } from "./atoms/Checkbox";
 
-export { Switch } from "./Switch";
-export type { SwitchProps } from "./Switch";
+export { Switch } from "./atoms/Switch";
+export type { SwitchProps } from "./atoms/Switch";
 
-export { Select } from "./Select";
-export type { SelectOption, SelectProps } from "./Select";
+export { Select } from "./atoms/Select";
+export type { SelectOption, SelectProps } from "./atoms/Select";
 
-export { Tabs } from "./Tabs";
-export type { TabItem, TabsProps } from "./Tabs";
+export { Tabs } from "./molecules/Tabs";
+export type { TabItem, TabsProps } from "./molecules/Tabs";
 
-export { Tooltip } from "./Tooltip";
-export type { TooltipPlacement, TooltipProps } from "./Tooltip";
+export { Tooltip } from "./molecules/Tooltip";
+export type { TooltipPlacement, TooltipProps } from "./molecules/Tooltip";
 
-export { DropdownMenu } from "./DropdownMenu";
-export type { DropdownMenuItem, DropdownMenuProps } from "./DropdownMenu";
+export { DropdownMenu } from "./molecules/DropdownMenu";
+export type { DropdownMenuItem, DropdownMenuProps } from "./molecules/DropdownMenu";
 
-export { Breadcrumbs } from "./Breadcrumbs";
-export type { BreadcrumbItem, BreadcrumbsProps } from "./Breadcrumbs";
+export { Breadcrumbs } from "./molecules/Breadcrumbs";
+export type { BreadcrumbItem, BreadcrumbsProps } from "./molecules/Breadcrumbs";
 
-export { PageLayout } from "./PageLayout";
+export { PageLayout } from "./templates/PageLayout";
 export type {
   PageLayoutProps,
   PageLayoutVariant,
   PageLayoutSidebarPosition,
-} from "./PageLayout";
+} from "./templates/PageLayout";
 
-export { PostHeader } from "./PostHeader";
-export type { PostHeaderProps } from "./PostHeader";
+export { Page } from "./templates/Page";
+export type { PageProps, PageSidebarPosition, PageVariant } from "./templates/Page";
 
-export { PostLayout } from "./PostLayout";
-export type { PostLayoutProps } from "./PostLayout";
+export { PostHeader } from "./organisms/PostHeader";
+export type { PostHeaderProps } from "./organisms/PostHeader";
 
-export { CourseCard } from "./CourseCard";
-export type { CourseCardProps } from "./CourseCard";
+export { PostLayout } from "./templates/PostLayout";
+export type { PostLayoutProps } from "./templates/PostLayout";
 
-export { FooterStencil } from "./FooterStencil";
+export { Post } from "./pages/Post";
+export type { PostProps } from "./pages/Post";
+
+export { CourseCard } from "./organisms/CourseCard";
+export type { CourseCardProps } from "./organisms/CourseCard";
+
+export { FooterStencil } from "./organisms/FooterStencil";
 export type {
   FooterStencilProps,
   FooterObject,
   FooterDossier,
   FooterRx,
   FooterRxRow,
-} from "./FooterStencil";
+} from "./organisms/FooterStencil";
 
-export { HeroFrame } from "./HeroFrame";
-export type { HeroFrameProps } from "./HeroFrame";
+export { HeroFrame } from "./organisms/HeroFrame";
+export type { HeroFrameProps } from "./organisms/HeroFrame";
 
-export { default as Header } from "./Header";
-export type { HeaderProps, HeaderNavItem, HeaderLocale } from "./Header";
+export { default as Header } from "./organisms/Header";
+export type { HeaderProps, HeaderNavItem, HeaderLocale } from "./organisms/Header";
 
-export { Hr } from "./Hr";
+export { Hr } from "./atoms/Hr";
 
-export { Flex, Grid } from "./Layout";
-export type { FlexProps, GridProps } from "./Layout";
+export { Flex, Grid } from "./templates/Layout";
+export type { FlexProps, GridProps } from "./templates/Layout";
 
-export { Glyphs, Glyph, DEFAULT_GLYPHS } from "./Glyphs";
-export type { GlyphsProps, GlyphProps, GlyphItem } from "./Glyphs";
+export { Glyph } from "./atoms/Glyph";
+export type { GlyphProps } from "./atoms/Glyph";
+export { Glyphs, DEFAULT_GLYPHS } from "./organisms/Glyphs";
+export type { GlyphsProps, GlyphItem } from "./organisms/Glyphs";
 
-export { Heading, H1, H2, H3, H4, H5, H6 } from "./Headings";
+export { Heading, H1, H2, H3, H4, H5, H6 } from "./atoms/Headings";
 export type {
   HeadingGlyphPosition,
   HeadingProps,
   HeadingLevel,
-} from "./Headings";
+} from "./atoms/Headings";
 
-export { LessonRow, LessonList } from "./LessonRow";
+export { LessonRow, LessonList } from "./molecules/LessonRow";
 export type {
   LessonRowProps,
   LessonState,
   LessonKind,
   LessonListProps,
-} from "./LessonRow";
+} from "./molecules/LessonRow";
 
-export { ModuleAccordion } from "./ModuleAccordion";
-export type { ModuleAccordionProps, ModuleLesson } from "./ModuleAccordion";
+export { ModuleAccordion } from "./organisms/ModuleAccordion";
+export type { ModuleAccordionProps, ModuleLesson } from "./organisms/ModuleAccordion";
 
-export { PrereqList } from "./PrereqList";
-export type { PrereqListProps, PrereqItem, PrereqStatus } from "./PrereqList";
+export { PrereqList } from "./molecules/PrereqList";
+export type { PrereqListProps, PrereqItem, PrereqStatus } from "./molecules/PrereqList";
 
-export { ProgressBar } from "./ProgressBar";
-export type { ProgressBarProps } from "./ProgressBar";
+export { ProgressBar } from "./atoms/ProgressBar";
+export type { ProgressBarProps } from "./atoms/ProgressBar";
 
-export { ReadingRail } from "./ReadingRail";
-export type { ReadingRailProps } from "./ReadingRail";
+export { ReadingRail } from "./atoms/ReadingRail";
+export type { ReadingRailProps } from "./atoms/ReadingRail";
 
-export { mdxComponents, PostBody } from "./MdxComponents";
-export type { MdxComponents, PostBodyProps } from "./MdxComponents";
+export { mdxComponents, PostBody } from "./content/MdxComponents";
+export type { MdxComponents, PostBodyProps } from "./content/MdxComponents";
 
-export { Footer } from "./Footer";
-export type { FooterProps, FooterLink } from "./Footer";
+export { Footer } from "./organisms/Footer";
+export type { FooterProps, FooterLink } from "./organisms/Footer";
 
-export { Stepper, StepperFoot } from "./Stepper";
+export { Stepper, StepperFoot } from "./molecules/Stepper";
 export type {
   StepperProps,
   StepperItem,
   StepperFootProps,
   StepperFootLink,
-} from "./Stepper";
+} from "./molecules/Stepper";
 
-export { TableOfContents } from "./TableOfContents";
-export type { TableOfContentsProps, TocItem } from "./TableOfContents";
+export { TableOfContents } from "./organisms/TableOfContents";
+export type { TableOfContentsProps, TocItem } from "./organisms/TableOfContents";
 
-export { TerminalPrompt } from "./TerminalPrompt";
-export type { TerminalPromptProps } from "./TerminalPrompt";
+export { TerminalPrompt } from "./atoms/TerminalPrompt";
+export type { TerminalPromptProps } from "./atoms/TerminalPrompt";
 
-export { VideoPlayer } from "./VideoPlayer";
-export type { VideoPlayerProps, VideoSource } from "./VideoPlayer";
+export { VideoPlayer } from "./organisms/VideoPlayer";
+export type { VideoPlayerProps, VideoSource } from "./organisms/VideoPlayer";
 
-export { Exercise } from "./Exercise";
-export type { ExerciseProps, ExerciseTask } from "./Exercise";
+export { Exercise } from "./organisms/Exercise";
+export type { ExerciseProps, ExerciseTask } from "./organisms/Exercise";
 
-export { CodeBlock, extractMdxCode, phosphorTheme } from "./CodeBlock";
-export type { CodeBlockProps } from "./CodeBlock";
+export { CodeBlock, extractMdxCode, phosphorTheme } from "./content/CodeBlock";
+export type { CodeBlockProps } from "./content/CodeBlock";
 
-export { AuthorCard } from "./AuthorCard";
-export type { AuthorCardProps, AuthorLink } from "./AuthorCard";
+export { AuthorCard } from "./organisms/AuthorCard";
+export type { AuthorCardProps, AuthorLink } from "./organisms/AuthorCard";
 
-export { SeriesNav } from "./SeriesNav";
-export type { SeriesNavProps, SeriesNavItem } from "./SeriesNav";
+export { SeriesNav } from "./molecules/SeriesNav";
+export type { SeriesNavProps, SeriesNavItem } from "./molecules/SeriesNav";
 
-export { ShareBar } from "./ShareBar";
-export type { ShareBarProps, ShareLink } from "./ShareBar";
+export { ShareBar } from "./molecules/ShareBar";
+export type { ShareBarProps, ShareLink } from "./molecules/ShareBar";
 
-export { RelatedPosts } from "./RelatedPosts";
-export type { RelatedPostsProps, RelatedPost } from "./RelatedPosts";
+export { RelatedPosts } from "./organisms/RelatedPosts";
+export type { RelatedPostsProps, RelatedPost } from "./organisms/RelatedPosts";
 
-export { StatPill } from "./StatPill";
-export type { StatPillProps, StatPillColor } from "./StatPill";
+export { StatPill } from "./molecules/StatPill";
+export type { StatPillProps, StatPillColor } from "./molecules/StatPill";
 
-export { Timeline } from "./Timeline";
+export { Timeline } from "./molecules/Timeline";
 export type {
   TimelineProps,
   TimelineItem,
   TimelineItemStatus,
-} from "./Timeline";
+} from "./molecules/Timeline";
 
-export { Avatar } from "./Avatar";
-export type { AvatarProps, AvatarSize } from "./Avatar";
+export { Avatar } from "./atoms/Avatar";
+export type { AvatarProps, AvatarSize } from "./atoms/Avatar";
 
-export { Modal, Drawer } from "./Modal";
-export type { ModalProps, DrawerProps, DrawerSide } from "./Modal";
+export { Modal, Drawer } from "./molecules/Modal";
+export type { ModalProps, DrawerProps, DrawerSide } from "./molecules/Modal";
 
-export { Toast, useToast } from "./Toast";
-export type { ToastProps, ToastVariant } from "./Toast";
+export { Toast, useToast } from "./molecules/Toast";
+export type { ToastProps, ToastVariant } from "./molecules/Toast";
 
-export { EmptyState } from "./EmptyState";
-export type { EmptyStateProps } from "./EmptyState";
+export { EmptyState } from "./molecules/EmptyState";
+export type { EmptyStateProps } from "./molecules/EmptyState";
 
-export { LoginForm } from "./LoginForm";
-export type { LoginFormProps } from "./LoginForm";
+export { LoginForm } from "./organisms/LoginForm";
+export type { LoginFormProps } from "./organisms/LoginForm";
 
-export { FormField, ContentStatusBadge } from "./FormField";
+export { FormField, ContentStatusBadge } from "./molecules/FormField";
 export type {
   FormFieldProps,
   ContentStatusBadgeProps,
   ContentStatus,
-} from "./FormField";
+} from "./molecules/FormField";
 
-export { AdminShell } from "./AdminShell";
-export type { AdminShellProps, AdminNavItem, AdminUser } from "./AdminShell";
+export { AdminShell } from "./admin/AdminShell";
+export type { AdminShellProps, AdminNavItem, AdminUser } from "./admin/AdminShell";
 
-export { ContentEditor } from "./ContentEditor";
+export {
+  ContentEditor,
+  EditorShell,
+  PairListField,
+  RepeaterField,
+  StatusSelect,
+  TagInput,
+} from "./admin/ContentEditor";
 export type {
   ContentEditorProps,
   FieldSpec,
+  EditorShellProps,
+  PairListFieldProps,
+  PairRow,
   PairColumn,
-} from "./ContentEditor";
+  ListRow,
+  RepeaterFieldProps,
+  StatusSelectProps,
+  TagInputProps,
+} from "./admin/ContentEditor";
 
-export { NoteEditor } from "./NoteEditor";
-export type { NoteEditorProps, NoteData } from "./NoteEditor";
+export { NoteEditor } from "./admin/NoteEditor";
+export type { NoteEditorProps, NoteData } from "./admin/NoteEditor";
 
-export { ProjectEditor } from "./ProjectEditor";
+export { ProjectEditor } from "./admin/ProjectEditor";
 export type {
   ProjectEditorProps,
   ProjectData,
   ProjectLink,
-} from "./ProjectEditor";
+} from "./admin/ProjectEditor";
 
-export { CourseEditor } from "./CourseEditor";
+export { CourseEditor } from "./admin/CourseEditor";
 export type {
   CourseEditorProps,
   CourseData,
   CourseModule,
-} from "./CourseEditor";
+} from "./admin/CourseEditor";
 
-export { LessonEditor } from "./LessonEditor";
+export { LessonEditor } from "./admin/LessonEditor";
 export type {
   LessonEditorProps,
   LessonData,
   LessonResource,
-} from "./LessonEditor";
+} from "./admin/LessonEditor";

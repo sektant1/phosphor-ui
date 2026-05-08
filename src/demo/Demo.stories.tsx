@@ -6,7 +6,7 @@ import { CourseOverview } from "./CourseOverview";
 import { Site } from "./Site";
 
 const meta: Meta = {
-  title: "Pages/Demo Site",
+  title: "Legacy/Demo",
   parameters: { layout: "fullscreen" },
 };
 export default meta;
