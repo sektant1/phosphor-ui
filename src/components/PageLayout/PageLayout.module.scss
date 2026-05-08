@@ -15,6 +15,11 @@
 .header {
   margin-bottom: var(--space-6);
   min-width: 0;
+
+  .tags {
+    flex-direction: row;
+  }
+
 }
 
 .hero {
@@ -40,6 +45,14 @@
 
 .withSidebar.projectBody {
   --pho-grid-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+}
+
+.sidebarLeft.postBody {
+  --pho-grid-columns: 14rem minmax(0, 1fr);
+}
+
+.sidebarLeft.projectBody {
+  --pho-grid-columns: minmax(16rem, 22rem) minmax(0, 1fr);
 }
 
 .main {
@@ -108,12 +121,4 @@
   .footer {
     margin-top: var(--space-5);
   }
-}
-
-.sidebarLeft.postBody {
-  --pho-grid-columns: 14rem minmax(0, 1fr);
-}
-
-.sidebarLeft.projectBody {
-  --pho-grid-columns: minmax(16rem, 22rem) minmax(0, 1fr);
 }

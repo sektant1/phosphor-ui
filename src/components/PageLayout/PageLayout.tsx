@@ -26,7 +26,7 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
       header,
       hero,
       sidebar,
-      sidebarPosition = "left",
+      sidebarPosition = "right",
       footer,
       children,
       sidebarLabel,
@@ -48,7 +48,6 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
       >
         {header ? <div className={styles.header}>{header}</div> : null}
         {hero ? <div className={styles.hero}>{hero}</div> : null}
-
         <Grid
           className={cx(
             styles.body,
@@ -60,7 +59,6 @@ export const PageLayout = React.forwardRef<HTMLElement, PageLayoutProps>(
           mobileColumns="1fr"
           mobileGap="md"
         >
-          <div className={styles.main}>{children}</div>
           {sidebar && sidebarPosition === "left" ? (
             <aside
               className={cx(
