@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta } from "@storybook/react";
 
 export default {
-  title: "Zone/Introduction",
+  title: "Legacy/Introduction",
   parameters: {
     layout: "fullscreen",
     options: { showPanel: false },
