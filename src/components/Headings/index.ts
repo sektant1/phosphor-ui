@@ -1,2 +1,2 @@
-export { Heading, H1, H2, H3, H4 } from "./Headings";
-export type { HeadingProps, HeadingLevel } from "./Headings";
+export { Heading, H1, H2, H3, H4, H5, H6 } from "./Headings";
+export type { HeadingGlyphPosition, HeadingProps, HeadingLevel } from "./Headings";

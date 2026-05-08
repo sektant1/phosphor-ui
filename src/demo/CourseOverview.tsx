@@ -13,7 +13,13 @@ import {
   H2,
   Heading,
 } from "../components";
-import { Page } from "./shared";
+import {
+  DemoCluster,
+  DemoSection,
+  DemoSplit,
+  DemoStack,
+  Page,
+} from "./shared";
 
 export const CourseOverview: React.FC = () => (
   <Page active="courses" routeKey="course">
@@ -25,13 +31,13 @@ export const CourseOverview: React.FC = () => (
       ]}
     />
 
-    <header className="pho-fade-up pho-stagger" style={{ marginTop: "1.5rem", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+    <DemoCluster as="header" className="pho-fade-up pho-stagger" space="md">
       <Tag color="phosphor">course</Tag>
       <Tag>entry</Tag>
       <Tag count={6}>modules</Tag>
-    </header>
+    </DemoCluster>
 
-    <div className="demo-split" style={{ marginTop: "1rem" }}>
+    <DemoSplit space="md">
       <div>
         <div className="pho-fade-up">
         <CourseCard
@@ -49,7 +55,7 @@ export const CourseOverview: React.FC = () => (
         <Hr />
 
         <Prose>
-          <h2>// objective //</h2>
+          <h2>Objective</h2>
           <p>
             By the end of this course, you will be able to take a sealed,
             dormant CRT terminal and bring it to a stable carrier-locked state
@@ -64,8 +70,10 @@ export const CourseOverview: React.FC = () => (
 
         <Hr />
 
-        <H2 className="pho-fade-up" style={{ marginTop: "1.5rem" }}>▸ modules</H2>
-        <div className="pho-stagger" style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: "1rem" }}>
+        <DemoSection className="pho-fade-up" space="md">
+          <H2 glyph="▸">modules</H2>
+        </DemoSection>
+        <DemoStack className="pho-stagger" gap="sm">
           <ModuleAccordion
             num="01"
             title="Pre-flight"
@@ -140,12 +148,14 @@ export const CourseOverview: React.FC = () => (
               { num: "6.4", title: "Final quiz", length: "10m", state: "locked" },
             ]}
           />
-        </div>
+        </DemoStack>
       </div>
 
-      <aside className="demo-split-aside pho-fade-up" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <DemoStack as="aside" className="demo-split-aside pho-fade-up">
         <div>
-          <Heading level={4} as="h3">// progress //</Heading>
+          <Heading level={4} as="h3">
+            progress
+          </Heading>
           <ProgressBar value={4} total={6} segments={20} showPercent label="modules" current />
         </div>
 
@@ -159,8 +169,8 @@ export const CourseOverview: React.FC = () => (
             { title: "Clearance γ-2", sub: "current: γ-1", status: "missing" },
           ]}
         />
-      </aside>
-    </div>
+      </DemoStack>
+    </DemoSplit>
 
     <Hr />
 

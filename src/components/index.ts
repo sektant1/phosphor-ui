@@ -113,11 +113,14 @@ export type { HeaderProps, HeaderNavItem, HeaderLocale } from "./Header";
 
 export { Hr } from "./Hr";
 
+export { Flex, Grid } from "./Layout";
+export type { FlexProps, GridProps } from "./Layout";
+
 export { Glyphs, Glyph, DEFAULT_GLYPHS } from "./Glyphs";
 export type { GlyphsProps, GlyphProps, GlyphItem } from "./Glyphs";
 
-export { Heading, H1, H2, H3, H4 } from "./Headings";
-export type { HeadingProps, HeadingLevel } from "./Headings";
+export { Heading, H1, H2, H3, H4, H5, H6 } from "./Headings";
+export type { HeadingGlyphPosition, HeadingProps, HeadingLevel } from "./Headings";
 
 export { LessonRow, LessonList } from "./LessonRow";
 export type { LessonRowProps, LessonState, LessonKind, LessonListProps } from "./LessonRow";

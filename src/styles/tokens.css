@@ -212,6 +212,21 @@
   letter-spacing: var(--tracking-wide);
   color: var(--phosphor);
 }
+.pho-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55ch;
+}
+.pho-heading__glyph {
+  color: var(--phosphor);
+  font-family: var(--font-code);
+  text-shadow: var(--glow-emerald);
+  line-height: 1;
+  flex: 0 0 auto;
+}
+.pho-heading__text {
+  min-width: 0;
+}
 .t-body {
   font-family: var(--font-body);
   font-size: var(--type-body-size);

@@ -13,7 +13,13 @@ import {
   TerminalPrompt,
   H1,
 } from "../components";
-import { Page, useReadingProgress } from "./shared";
+import {
+  DemoCluster,
+  DemoSection,
+  DemoSplit,
+  Page,
+  useReadingProgress,
+} from "./shared";
 
 const TOC_ITEMS = [
   { label: "Cold start", href: "#cold-start", glyph: "▸" },
@@ -43,22 +49,22 @@ export const Post: React.FC = () => {
       ]}
     />
 
-    <article ref={ref} style={{ marginTop: "1.5rem" }}>
-      <header className="pho-fade-up" style={{ marginBottom: "1.5rem" }}>
-        <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+    <article ref={ref} className="demo-stack demo-stack--lg demo-space--md">
+      <DemoSection as="header" className="pho-fade-up" gap="sm">
+        <DemoCluster gap="xs">
           <Tag>operations</Tag>
           <Tag color="magenta">field</Tag>
-        </div>
-        <H1 style={{ margin: 0 }}>
-          // boot the terminal //
+        </DemoCluster>
+        <H1 glyph="▌" style={{ margin: 0 }}>
+          boot the terminal
         </H1>
         <p
           className="t-stamp"
-          style={{ color: "var(--phosphor-dim)", marginTop: 6 }}
+          style={{ color: "var(--phosphor-dim)", margin: 0 }}
         >
           2026-05-06 · 6m read · log#0042
         </p>
-      </header>
+      </DemoSection>
 
       <ProgressBar
         value={Math.round(pct * 100)}
@@ -69,7 +75,7 @@ export const Post: React.FC = () => {
         current
       />
 
-      <div className="demo-split pho-fade-up" style={{ marginTop: "1.5rem" }}>
+      <DemoSplit className="pho-fade-up">
         <PostBody
           frontmatter={{
             title: "boot the terminal",
@@ -145,7 +151,7 @@ export const Post: React.FC = () => {
         <aside className="demo-split-aside">
           <TableOfContents heading="ON THIS PAGE" items={TOC_ITEMS} />
         </aside>
-      </div>
+      </DemoSplit>
 
       <Hr />
 
@@ -158,9 +164,9 @@ export const Post: React.FC = () => {
         next={{ href: "#/posts/phosphor-protocol-intro", kind: "NEXT", name: "phosphor protocol intro" }}
       />
 
-      <div style={{ marginTop: "1.5rem" }}>
+      <DemoSection>
         <Pagination defaultPage={2} totalPages={6} />
-      </div>
+      </DemoSection>
     </article>
   </Page>
   );

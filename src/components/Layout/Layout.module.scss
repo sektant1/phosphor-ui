@@ -1,0 +1,44 @@
+.flex,
+.grid {
+  min-width: 0;
+}
+
+.flex {
+  display: flex;
+  flex-direction: var(--pho-flex-direction, row);
+  align-items: var(--pho-align, stretch);
+  justify-content: var(--pho-justify, flex-start);
+  flex-wrap: var(--pho-wrap, nowrap);
+  gap: var(--pho-gap, var(--space-5));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: var(
+    --pho-grid-columns,
+    repeat(auto-fit, minmax(var(--pho-grid-min, 16rem), 1fr))
+  );
+  align-items: var(--pho-align, stretch);
+  justify-content: var(--pho-justify, stretch);
+  gap: var(--pho-gap, var(--space-5));
+}
+
+.gapXs {
+  --pho-gap: var(--space-2);
+}
+
+.gapSm {
+  --pho-gap: var(--space-3);
+}
+
+.gapMd {
+  --pho-gap: var(--space-5);
+}
+
+.gapLg {
+  --pho-gap: var(--space-6);
+}
+
+.gapXl {
+  --pho-gap: var(--space-7);
+}

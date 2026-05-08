@@ -9,7 +9,7 @@ import {
   CourseCard,
   AsciiBanner,
 } from "../components";
-import { Page } from "./shared";
+import { DemoCluster, DemoGrid, DemoSection, Page } from "./shared";
 import type { CssVars } from "../utils/browser";
 
 const HERO_ART = `
@@ -52,92 +52,94 @@ export const Home: React.FC = () => (
       />
     </div>
 
-    <section
+    <DemoSection
       className="pho-fade-up"
-      style={{ marginTop: "2rem", "--i": 1 } as CssVars}
+      space="lg"
+      style={{ "--i": 1 } as CssVars}
     >
       <H2>latest transmissions</H2>
       <p
         className="t-body"
-        style={{ color: "var(--phosphor-dim)", marginTop: 4 }}
+        style={{ color: "var(--phosphor-dim)", margin: 0 }}
       >
         Field reports from the perimeter. Most recent first.
       </p>
-      <div style={{ marginTop: "1rem" }}>
-        <PostListing>
-          <PostRow
-            date="2026-05-06"
-            title="boot the terminal"
-            meta="6m"
-            href="#/posts/boot-the-terminal"
-            thumbSrc="https://picsum.photos/seed/zone-boot/320/200"
-            thumbAlt="boot screen"
-            index={0}
-          />
-          <PostRow
-            date="2026-05-04"
-            title="decode the signal"
-            meta="12m"
-            href="#/posts/decode-the-signal"
-            thumbSrc="https://picsum.photos/seed/zone-signal/320/200"
-            thumbAlt="oscilloscope"
-            index={1}
-          />
-          <PostRow
-            date="2026-05-01"
-            title="phosphor protocol intro"
-            meta="9m"
-            href="#/posts/phosphor-protocol-intro"
-            index={2}
-            glyph="◈"
-          />
-          <PostRow
-            date="2026-04-28"
-            title="anomaly catalog: vol. 1"
-            meta="14m"
-            href="#/posts/anomaly-catalog-1"
-            index={3}
-            glyph="▶"
-          />
-          <PostRow
-            date="2026-04-22"
-            title="cold-cathode field guide"
-            meta="11m"
-            href="#/posts/cold-cathode"
-            thumbSrc="https://picsum.photos/seed/zone-cathode/320/200"
-            thumbAlt="cathode"
-            index={4}
-          />
-          <PostRow
-            date="2026-04-18"
-            title="static loop // live capture"
-            meta="3m"
-            href="#/posts/static-loop"
-            thumbSrc="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif"
-            thumbAlt="static loop animation"
-            index={5}
-          />
-        </PostListing>
-      </div>
+      <PostListing>
+        <PostRow
+          date="2026-05-06"
+          title="boot the terminal"
+          meta="6m"
+          href="#/posts/boot-the-terminal"
+          thumbSrc="https://picsum.photos/seed/zone-boot/320/200"
+          thumbAlt="boot screen"
+          index={0}
+        />
+        <PostRow
+          date="2026-05-04"
+          title="decode the signal"
+          meta="12m"
+          href="#/posts/decode-the-signal"
+          thumbSrc="https://picsum.photos/seed/zone-signal/320/200"
+          thumbAlt="oscilloscope"
+          index={1}
+        />
+        <PostRow
+          date="2026-05-01"
+          title="phosphor protocol intro"
+          meta="9m"
+          href="#/posts/phosphor-protocol-intro"
+          index={2}
+          glyph="◈"
+        />
+        <PostRow
+          date="2026-04-28"
+          title="anomaly catalog: vol. 1"
+          meta="14m"
+          href="#/posts/anomaly-catalog-1"
+          index={3}
+          glyph="▶"
+        />
+        <PostRow
+          date="2026-04-22"
+          title="cold-cathode field guide"
+          meta="11m"
+          href="#/posts/cold-cathode"
+          thumbSrc="https://picsum.photos/seed/zone-cathode/320/200"
+          thumbAlt="cathode"
+          index={4}
+        />
+        <PostRow
+          date="2026-04-18"
+          title="static loop // live capture"
+          meta="3m"
+          href="#/posts/static-loop"
+          thumbSrc="https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif"
+          thumbAlt="static loop animation"
+          index={5}
+        />
+      </PostListing>
       <Hr />
 
-      <Tag>operations</Tag>
-      <Tag>signals</Tag>
-      <Tag color="magenta">anomaly</Tag>
-      <Tag count={42}>archive</Tag>
-      <Tag count={7} color="magenta">
-        live
-      </Tag>
-    </section>
+      <DemoCluster>
+        <Tag>operations</Tag>
+        <Tag>signals</Tag>
+        <Tag color="magenta">anomaly</Tag>
+        <Tag count={42}>archive</Tag>
+        <Tag count={7} color="magenta">
+          live
+        </Tag>
+      </DemoCluster>
+    </DemoSection>
 
     <Hr />
 
-    <section
+    <DemoSection
       className="pho-fade-up"
-      style={{ marginTop: "2rem", "--i": 2 } as CssVars}
+      space="lg"
+      style={{ "--i": 2 } as CssVars}
     >
-      <H2>▸ courses on rotation</H2>
-      <div className="demo-card-grid pho-stagger" style={{ marginTop: "1rem" }}>
+      <H2 glyph="▸">courses on rotation</H2>
+      <DemoGrid className="pho-stagger">
         <CourseCard
           stamp="COURSE-01"
           coverMeta="entry · 6 modules"
@@ -167,26 +169,17 @@ export const Home: React.FC = () => (
           locked
           cta={{ label: "LOCKED", href: "#/courses/anomaly-triage" }}
         />
-      </div>
-    </section>
+      </DemoGrid>
+    </DemoSection>
 
     <Hr />
 
-    <section
+    <DemoSection
       className="pho-fade-up pho-stagger"
-      style={
-        {
-          marginTop: "2rem",
-          display: "flex",
-          gap: 12,
-          flexWrap: "wrap",
-          "--i": 3,
-        } as CssVars
-      }
-    ></section>
-
-    <div style={{ marginTop: "2rem" }}>
+      space="lg"
+      style={{ "--i": 3 } as CssVars}
+    >
       <AsciiBanner art={SMALL_BANNER} fallback="ZONE-NET" />
-    </div>
+    </DemoSection>
   </Page>
 );

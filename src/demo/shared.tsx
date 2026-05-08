@@ -7,6 +7,7 @@ import {
 } from "../components";
 import type { NerdTreeNode } from "../components";
 import { useHashRoute as useLibHashRoute, useReadingProgress } from "../hooks";
+import { cx } from "../utils/classNames";
 import "./demo.scss";
 
 export type Route = "home" | "post" | "course";
@@ -130,6 +131,60 @@ export const SiteTree: React.FC<{ active?: string }> = ({ active }) => (
     tree={buildTree(active)}
   />
 );
+
+type DemoGap = "xs" | "sm" | "md" | "lg";
+type DemoSpace = "none" | "sm" | "md" | "lg";
+type DemoContainerTag = "div" | "section" | "article" | "header" | "aside";
+
+interface DemoContainerProps extends React.HTMLAttributes<HTMLElement> {
+  as?: DemoContainerTag;
+  gap?: DemoGap;
+  space?: DemoSpace;
+  fade?: boolean;
+  stagger?: boolean;
+}
+
+const demoContainer = (
+  baseClass: string,
+  defaultTag: DemoContainerTag,
+  defaultGap: DemoGap,
+) => {
+  const C: React.FC<DemoContainerProps> = ({
+    as,
+    gap = defaultGap,
+    space = "none",
+    fade = false,
+    stagger = false,
+    className,
+    children,
+    ...rest
+  }) => {
+    const Tag = as ?? defaultTag;
+    return React.createElement(
+      Tag,
+      {
+        className: cx(
+          baseClass,
+          `${baseClass}--${gap}`,
+          space !== "none" && `demo-space--${space}`,
+          fade && "pho-fade-up",
+          stagger && "pho-stagger",
+          className,
+        ),
+        ...rest,
+      },
+      children,
+    );
+  };
+  C.displayName = baseClass;
+  return C;
+};
+
+export const DemoSection = demoContainer("demo-section", "section", "md");
+export const DemoStack = demoContainer("demo-stack", "div", "md");
+export const DemoCluster = demoContainer("demo-cluster", "div", "sm");
+export const DemoGrid = demoContainer("demo-card-grid", "div", "md");
+export const DemoSplit = demoContainer("demo-split", "div", "lg");
 
 export const Page: React.FC<{
   active?: string;

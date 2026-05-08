@@ -22,7 +22,7 @@ export const Default: Story = {
         draft: false,
       }}
     >
-      <h1>// boot the terminal</h1>
+      <h1>boot the terminal</h1>
       <p>
         The terminal arrived in a sealed crate, tube-out and stenciled
         <strong> γ-2 / SECTOR-7</strong>.

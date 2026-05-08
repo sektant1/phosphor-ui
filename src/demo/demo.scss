@@ -21,10 +21,69 @@
   padding-bottom: 3rem;
 }
 
+.demo-space--sm {
+  margin-top: var(--space-4);
+}
+
+.demo-space--md {
+  margin-top: var(--space-6);
+}
+
+.demo-space--lg {
+  margin-top: var(--space-7);
+}
+
+.demo-section {
+  display: grid;
+  min-width: 0;
+}
+
+.demo-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-cluster {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.demo-section--xs,
+.demo-stack--xs,
+.demo-cluster--xs,
+.demo-card-grid--xs,
+.demo-split--xs {
+  gap: var(--space-2);
+}
+
+.demo-section--sm,
+.demo-stack--sm,
+.demo-cluster--sm,
+.demo-card-grid--sm,
+.demo-split--sm {
+  gap: var(--space-3);
+}
+
+.demo-section--md,
+.demo-stack--md,
+.demo-cluster--md,
+.demo-card-grid--md,
+.demo-split--md {
+  gap: var(--space-5);
+}
+
+.demo-section--lg,
+.demo-stack--lg,
+.demo-cluster--lg,
+.demo-card-grid--lg,
+.demo-split--lg {
+  gap: var(--space-6);
+}
+
 .demo-split {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
-  gap: clamp(1rem, 2.5vw, 2.5rem);
   align-items: start;
 }
 
@@ -36,7 +95,6 @@
 .demo-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 18px;
   align-items: stretch;
 }
 
