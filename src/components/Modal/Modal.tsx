@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.scss";
 import { cx } from "../../utils/classNames";
@@ -12,17 +12,27 @@ export interface ModalProps {
   className?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children, className }) => {
+export const Modal: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  title,
+  children,
+  className,
+}) => {
   useEffect(() => {
     if (!open || !isBrowser()) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   useEffect(() => {
     if (!open || !isBrowser()) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [open, onClose]);
@@ -40,14 +50,19 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, title, children, cl
       >
         <div className={styles.header}>
           {title && <span className={styles.title}>{title}</span>}
-          <button className={styles.close} onClick={onClose} aria-label="Close" type="button">
+          <button
+            className={styles.close}
+            onClick={onClose}
+            aria-label="Close"
+            type="button"
+          >
             [×]
           </button>
         </div>
         <div className={styles.body}>{children}</div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
 
@@ -72,21 +87,31 @@ export const Drawer: React.FC<DrawerProps> = ({
   children,
   className,
 }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!open || !isBrowser()) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   useEffect(() => {
     if (!open || !isBrowser()) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [open, onClose]);
 
-  if (!isBrowser()) return null;
+  if (!mounted || !open || !isBrowser()) return null;
 
   return ReactDOM.createPortal(
     <div
@@ -99,7 +124,7 @@ export const Drawer: React.FC<DrawerProps> = ({
           styles.panel,
           side === "left" ? styles.panelLeft : styles.panelRight,
           open && styles.panelOpen,
-          className
+          className,
         )}
         style={{ "--drawer-width": width } as CssVars}
         onClick={(e) => e.stopPropagation()}
@@ -108,13 +133,18 @@ export const Drawer: React.FC<DrawerProps> = ({
       >
         <div className={styles.header}>
           {title && <span className={styles.title}>{title}</span>}
-          <button className={styles.close} onClick={onClose} aria-label="Close" type="button">
+          <button
+            className={styles.close}
+            onClick={onClose}
+            aria-label="Close"
+            type="button"
+          >
             [×]
           </button>
         </div>
         <div className={styles.body}>{children}</div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
