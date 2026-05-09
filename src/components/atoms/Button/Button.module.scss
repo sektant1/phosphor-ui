@@ -4,7 +4,7 @@
   display: inline-flex;
   gap: 0.45rem;
   justify-content: center;
-  min-height: var(--pho-size-touch-target);
+  // min-height: var(--pho-size-touch-target);
   font-family: var(--pho-font-terminal);
   font-size: 17px;
   line-height: 1;
@@ -53,17 +53,20 @@
 
 .sm {
   font-size: 14px;
-  min-height: 2rem;
+  // min-height: 2rem;
   padding: 4px 10px;
 }
 
 .lg {
   font-size: 20px;
-  min-height: 3rem;
+  // min-height: 3rem;
   padding: 8px 18px;
 }
 
-.fullWidth { width: 100%; }
+.fullWidth {
+  width: 100%;
+}
+
 .pressed {}
 
 .loader {
