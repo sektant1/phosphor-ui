@@ -1,70 +1,70 @@
 .root {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5ch 1ch;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   font-size: 12px;
   line-height: 1.4;
 }
 
 .sep {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   user-select: none;
 }
 
 .date {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
 }
 
 .readTime {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   display: inline-flex;
   align-items: center;
   gap: 0.25ch;
 }
 
 .clock {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
 }
 
 .wordCount {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
 }
 
 .updated {
   display: inline-flex;
   align-items: center;
   gap: 0.4ch;
-  color: var(--magenta);
+  color: var(--pho-color-accent);
   font-variant-numeric: tabular-nums;
 }
 
 .updBadge {
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
   letter-spacing: 0.04em;
 }
 
 .tags {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6ch;
+  display: contents;
 }
 
 .tag {
   font-size: 11px;
-  color: var(--magenta);
-  font-family: var(--font-code);
+  color: var(--pho-color-accent);
+  font-family: var(--pho-font-code);
   letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+a.tag:hover {
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
 }
 
 @media (max-width: 520px) {
   .root {
-    gap: 0.4ch 0.8ch;
+    --pho-row-gap: 0.4ch;
+    --pho-column-gap: 0.8ch;
     font-size: 11px;
   }
 }

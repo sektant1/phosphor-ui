@@ -202,3 +202,11 @@ Add or update tests for:
 - Preserve root public exports for this refactor pass.
 - Old duplicated components should become aliases or wrappers first, not hard removals, unless they are purely internal.
 - Generated `types/` and `dist/` should not be edited manually; rebuild them through the package scripts.
+
+
+consider that I will publish this UI library to use on personal wiki/blogs/websites/second-brain/; how can you improve
+  this UI library components? in all aspects (code structure/easy of use/duplicated logic) for the consumers of the UI?
+  now do with the pages/templates/content dirs (feel free to add more or remove duplicated logic / unused(folders/files
+  aswell) and or add them to other components etc)
+
+codex resume 019e0d83-90d2-7400-b353-200443c44d75

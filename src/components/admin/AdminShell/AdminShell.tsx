@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./AdminShell.module.scss";
 import { cx } from "../../../utils/classNames";
 import { NerdTree, type NerdTreeNode } from "../../organisms/NerdTree";
+import { Cluster, Stack } from "../../templates/Layout";
+import Text from "../../atoms/Text";
 
 export interface AdminNavItem {
   label: string;
@@ -15,12 +17,22 @@ export interface AdminUser {
   role?: string;
 }
 
+export interface AdminStat {
+  label: string;
+  value: React.ReactNode;
+  tone?: "default" | "good" | "warn";
+}
+
 export interface AdminShellProps {
   nav?: AdminNavItem[];
   tree?: NerdTreeNode[];
   user?: AdminUser;
   onLogout?: () => void | Promise<void>;
   title?: string;
+  heading?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode;
+  stats?: AdminStat[];
   treeTitle?: string;
   treeBufferLabel?: string;
   treeHint?: React.ReactNode;
@@ -52,6 +64,10 @@ export const AdminShell: React.FC<AdminShellProps> = ({
   user,
   onLogout,
   title = "// admin",
+  heading,
+  description,
+  actions,
+  stats,
   treeTitle,
   treeBufferLabel = "[admin/]",
   treeHint,
@@ -64,10 +80,12 @@ export const AdminShell: React.FC<AdminShellProps> = ({
   const footerMeta =
     treeFooterMeta ??
     (user ? `${user.name}${user.role ? ` :: ${user.role}` : ""}` : undefined);
+  const mainHeading = heading ?? title.replace(/^\/\/\s*/, "");
+  const hasHeader = !!(mainHeading || description || actions || stats?.length);
 
   return (
     <div className={cx(styles.shell, className)}>
-      <div className={styles.sidePanel}>
+      <Stack className={styles.sidePanel} gap="none">
         <NerdTree
           className={styles.tree}
           tree={resolvedTree}
@@ -79,14 +97,14 @@ export const AdminShell: React.FC<AdminShellProps> = ({
         />
 
         {(user || onLogout) && (
-          <div className={styles.userSection}>
+          <Stack className={styles.userSection} gap="sm">
             {user && (
-              <div className={styles.userBlock}>
-                <div className={styles.userName}>{user.name}</div>
+              <Stack className={styles.userBlock} gap="xs">
+                <Text variant="code" className={styles.userName} truncate>{user.name}</Text>
                 {user.role && (
-                  <div className={styles.userRole}>{user.role}</div>
+                  <Text variant="caption" className={styles.userRole}>{user.role}</Text>
                 )}
-              </div>
+              </Stack>
             )}
 
             {onLogout && (
@@ -98,11 +116,48 @@ export const AdminShell: React.FC<AdminShellProps> = ({
                 [logout]
               </button>
             )}
-          </div>
+          </Stack>
         )}
-      </div>
+      </Stack>
 
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        {hasHeader && (
+          <Stack className={styles.mainHeader} gap="md">
+            <Cluster className={styles.mainHeaderTop} justify="space-between" gap="md">
+              <Stack className={styles.mainTitleBlock} gap="xs">
+                <Text variant="stamp" className={styles.eyebrow}>cms control</Text>
+                {mainHeading && (
+                  <Text variant="h2" as="h1" className={styles.mainTitle}>
+                    {mainHeading}
+                  </Text>
+                )}
+                {description && (
+                  <Text variant="muted" className={styles.mainDescription}>
+                    {description}
+                  </Text>
+                )}
+              </Stack>
+              {actions && <Cluster className={styles.mainActions} gap="sm">{actions}</Cluster>}
+            </Cluster>
+
+            {!!stats?.length && (
+              <div className={styles.statsGrid} aria-label="Admin summary">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className={cx(styles.statCard, stat.tone === "good" && styles.statGood, stat.tone === "warn" && styles.statWarn)}
+                  >
+                    <Text variant="caption" className={styles.statLabel}>{stat.label}</Text>
+                    <Text variant="code" className={styles.statValue}>{stat.value}</Text>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Stack>
+        )}
+
+        {children}
+      </main>
     </div>
   );
 };

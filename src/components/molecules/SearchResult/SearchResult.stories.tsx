@@ -1,46 +1,47 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import SearchResultList, { SearchResult } from "./SearchResult";
 import { basicUsage } from "../../../stories/basicUsage";
 
-export default {
+const meta: Meta<typeof SearchResultList> = {
   title: "Molecules/SearchResult",
   component: SearchResultList,
-} as ComponentMeta<typeof SearchResultList>;
-
-const Template: ComponentStory<typeof SearchResultList> = (args) => (
-  <SearchResultList {...args} />
-);
-
-export const Default = Template.bind({});
-Default.args = {
-  hits: [
-    {
-      href: "/posts/vim-quickstart",
-      title: "Vim quickstart",
-      date: "2025-08-12",
-      tags: ["vim", "setup"],
-      snippet: (
-        <>
-          Configure <mark>vim</mark> with sane defaults and a minimal init.lua.
-        </>
-      ),
-    },
-    {
-      href: "/posts/zone-design",
-      title: "Zone design notes",
-      date: "2025-09-01",
-      tags: ["design"],
-      snippet: <>CRT phosphor + magenta accents on dark background.</>,
-    },
-  ],
 };
-Default.parameters = { docs: { source: { code: basicUsage.SearchResultList } } };
 
-export const Empty = Template.bind({});
-Empty.args = { hits: [] };
+export default meta;
+type Story = StoryObj<typeof SearchResultList>;
 
-export const Single = {
+export const Default: Story = {
+  args: {
+    hits: [
+      {
+        href: "/posts/vim-quickstart",
+        title: "Vim quickstart",
+        date: "2025-08-12",
+        tags: ["vim", "setup"],
+        snippet: (
+          <>
+            Configure <mark>vim</mark> with sane defaults and a minimal init.lua.
+          </>
+        ),
+      },
+      {
+        href: "/posts/zone-design",
+        title: "Zone design notes",
+        date: "2025-09-01",
+        tags: ["design"],
+        snippet: <>CRT phosphor + magenta accents on dark background.</>,
+      },
+    ],
+  },
+  parameters: { docs: { source: { code: basicUsage.SearchResultList } } },
+};
+
+export const Empty: Story = {
+  args: { hits: [] },
+};
+
+export const Single: StoryObj = {
   parameters: { docs: { source: { code: basicUsage.SearchResult } } },
   render: () => (
     <ul className="pho-search-list search-list">

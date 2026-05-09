@@ -1,16 +1,23 @@
-import React, { useState, useMemo, useId } from "react";
-import { Input } from "../../atoms/Input/Input";
+import React, { useMemo, useId } from "react";
+import { Input } from "../../atoms/Input";
 import SearchResultList from "../../molecules/SearchResult/SearchResult";
-import type { SearchHit } from "../../molecules/SearchResult/SearchResult";
+import type { SearchHit, SearchResultListProps } from "../../molecules/SearchResult/SearchResult";
+import { cx } from "../../../utils/classNames";
 import styles from "./Search.module.scss";
 
-export interface SearchProps {
+export interface SearchProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   hits: SearchHit[];
+  query?: string;
+  defaultQuery?: string;
+  onQueryChange?: (query: string) => void;
   placeholder?: string;
   prompt?: string;
   label?: string;
   emptyMessage?: React.ReactNode;
-  className?: string;
+  minQueryLength?: number;
+  maxResults?: number;
+  filterHit?: (hit: SearchHit, query: string) => boolean;
+  resultListProps?: Omit<SearchResultListProps, "hits" | "emptyMessage">;
 }
 
 function normalize(s: React.ReactNode): string {
@@ -50,25 +57,42 @@ function highlightHit(hit: SearchHit, query: string): SearchHit {
 
 export const Search: React.FC<SearchProps> = ({
   hits,
+  query: queryProp,
+  defaultQuery = "",
+  onQueryChange,
   placeholder = "search transmissions...",
   prompt = "/>",
   label = "search",
   emptyMessage,
+  minQueryLength = 1,
+  maxResults,
+  filterHit = matches,
+  resultListProps,
   className,
+  ...rest
 }) => {
-  const [query, setQuery] = useState("");
+  const [internalQuery, setInternalQuery] = React.useState(defaultQuery);
+  const query = queryProp ?? internalQuery;
+  const isControlled = queryProp !== undefined;
   const id = useId();
   const results = useMemo(
-    () =>
-      query.trim()
-        ? hits.filter((h) => matches(h, query)).map((h) => highlightHit(h, query))
-        : [],
-    [hits, query]
+    () => {
+      const trimmed = query.trim();
+      if (trimmed.length < minQueryLength) return [];
+      const filtered = hits.filter((h) => filterHit(h, trimmed));
+      const sliced = typeof maxResults === "number" ? filtered.slice(0, maxResults) : filtered;
+      return sliced.map((h) => highlightHit(h, trimmed));
+    },
+    [filterHit, hits, maxResults, minQueryLength, query],
   );
-  const showResults = query.trim().length > 0;
+  const showResults = query.trim().length >= minQueryLength;
+  const setQuery = (next: string) => {
+    if (!isControlled) setInternalQuery(next);
+    onQueryChange?.(next);
+  };
 
   return (
-    <div className={[styles.wrap, className ?? ""].join(" ")} role="search">
+    <div className={cx(styles.wrap, className)} role="search" {...rest}>
       <label htmlFor={id} className={styles.label}>
         {label}
       </label>
@@ -78,7 +102,7 @@ export const Search: React.FC<SearchProps> = ({
         placeholder={placeholder}
         cursor={false}
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onValueChange={setQuery}
         aria-controls={`${id}-results`}
         aria-autocomplete="list"
         autoComplete="off"
@@ -92,6 +116,7 @@ export const Search: React.FC<SearchProps> = ({
               : null}
           </p>
           <SearchResultList
+            {...resultListProps}
             hits={results}
             emptyMessage={emptyMessage ?? "no transmissions found."}
           />

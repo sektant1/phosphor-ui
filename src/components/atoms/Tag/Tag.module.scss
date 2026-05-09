@@ -7,9 +7,12 @@
   letter-spacing: 0.05em;
   font-family: var(--font-code);
   text-decoration: none;
-  cursor: pointer;
+  cursor: default;
   background: rgba(98, 255, 154, 0.04);
+  white-space: nowrap;
 }
+
+.link { cursor: pointer; }
 
 .magenta {
   color: var(--magenta);
@@ -20,6 +23,12 @@
   color: var(--phosphor);
   text-shadow: var(--glow-emerald);
   border-color: var(--phosphor-fade);
+}
+
+.dim {
+  border-color: var(--pho-color-primary-faint);
+  color: var(--pho-color-text-faint);
+  text-shadow: none;
 }
 
 .tag:hover,
@@ -40,4 +49,21 @@
   font-style: normal;
   margin-left: 3px;
   font-size: 10px;
+}
+
+.remove {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: currentColor;
+  cursor: pointer;
+  font: inherit;
+  margin: 0 0 0 6px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.remove:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: 2px;
 }

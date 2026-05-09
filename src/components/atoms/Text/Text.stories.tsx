@@ -1,9 +1,9 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Text from "./Text";
 import { basicUsage } from "../../../stories/basicUsage";
 
-export default {
+const meta: Meta<typeof Text> = {
   title: "Atoms/Text",
   component: Text,
   argTypes: {
@@ -14,28 +14,48 @@ export default {
         "h2",
         "h3",
         "h4",
+        "lead",
         "body",
+        "small",
+        "caption",
         "mono",
+        "code",
         "terminal",
         "stamp",
         "prompt",
         "glow",
         "glow-pale",
+        "muted",
         "dim",
         "faded",
       ],
     },
   },
-} as ComponentMeta<typeof Text>;
+};
 
-const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
+export default meta;
+type Story = StoryObj<typeof Text>;
 
-export const Default = Template.bind({});
-Default.args = { variant: "body", children: "// pool reuse open DB connections" };
-Default.parameters = { docs: { source: { code: basicUsage.Text } } };
+export const Default: Story = {
+  args: { variant: "body", children: "// pool reuse open DB connections" },
+  parameters: { docs: { source: { code: basicUsage.Text } } },
+};
 
-export const H2 = Template.bind({});
-H2.args = { variant: "h2", children: "transmission log" };
+export const H2: Story = {
+  args: { variant: "h2", children: "transmission log" },
+};
 
-export const Stamp = Template.bind({});
-Stamp.args = { variant: "stamp", children: "// LAST CONTACT //" };
+export const Lead: Story = {
+  args: {
+    variant: "lead",
+    children: "Readable intro copy for posts, wiki entries, and project pages.",
+  },
+};
+
+export const Caption: Story = {
+  args: { variant: "caption", children: "updated 2026-05-09" },
+};
+
+export const Stamp: Story = {
+  args: { variant: "stamp", children: "// LAST CONTACT //" },
+};

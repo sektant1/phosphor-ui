@@ -3,12 +3,14 @@ import styles from "./Button.module.scss";
 import { cx } from "../../../utils/classNames";
 
 export type ButtonVariant = "primary" | "ghost" | "danger";
-export type ButtonSize = "sm" | "md";
+export type ButtonSize = "sm" | "md" | "lg";
 
 type ButtonBaseProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   pressed?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
   className?: string;
   children?: React.ReactNode;
 };
@@ -47,13 +49,16 @@ function getClassName(
   variant: ButtonVariant,
   size: ButtonSize,
   pressed: boolean | undefined,
+  fullWidth: boolean | undefined,
   className: string | undefined,
 ): string {
   return cx(
     styles.btn,
     variantClass[variant],
     size === "sm" && styles.sm,
+    size === "lg" && styles.lg,
     pressed && styles.pressed,
+    fullWidth && styles.fullWidth,
     className,
   );
 }
@@ -67,6 +72,8 @@ export const Button = React.forwardRef<
       variant = "primary",
       size = "md",
       pressed,
+      loading,
+      fullWidth,
       className,
       children,
       href,
@@ -91,8 +98,9 @@ export const Button = React.forwardRef<
       <a
         ref={ref as React.ForwardedRef<HTMLAnchorElement>}
         href={disabled ? undefined : href}
-        className={getClassName(variant, size, pressed, className)}
+        className={getClassName(variant, size, pressed, fullWidth, className)}
         aria-disabled={disabled ? true : undefined}
+        aria-busy={loading || undefined}
         tabIndex={disabled ? -1 : tabIndex}
         target={target}
         rel={safeRel}
@@ -106,6 +114,7 @@ export const Button = React.forwardRef<
         }}
         {...anchorProps}
       >
+        {loading ? <span className={styles.loader} aria-hidden="true">▮</span> : null}
         {children}
       </a>
     );
@@ -115,19 +124,25 @@ export const Button = React.forwardRef<
     variant = "primary",
     size = "md",
     pressed,
+    loading,
+    fullWidth,
     className,
     children,
     type = "button",
+    disabled,
     ...buttonProps
   } = props;
 
   return (
     <button
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
-      className={getClassName(variant, size, pressed, className)}
+      className={getClassName(variant, size, pressed, fullWidth, className)}
       type={type}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...buttonProps}
     >
+      {loading ? <span className={styles.loader} aria-hidden="true">▮</span> : null}
       {children}
     </button>
   );

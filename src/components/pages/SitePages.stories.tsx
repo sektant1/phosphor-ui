@@ -28,14 +28,6 @@ export default meta;
 
 type Story = StoryObj;
 
-const pageChrome = {
-  style: {
-    maxWidth: "1120px",
-    margin: "0 auto",
-    padding: "2rem",
-  },
-};
-
 const tagRow = (...tags: string[]) => (
   <Flex gap="xs" wrap="wrap" align="center">
     {tags.map((tag, index) => (
@@ -72,7 +64,7 @@ const searchHits = [
 
 export const Home: Story = {
   render: () => (
-    <main {...pageChrome}>
+    <main>
       <Page
         variant="project"
         header={
@@ -128,7 +120,7 @@ export const Home: Story = {
 
 export const Course: Story = {
   render: () => (
-    <main {...pageChrome}>
+    <main>
       <Page
         variant="project"
         header={
@@ -166,7 +158,7 @@ export const Course: Story = {
 
 export const About: Story = {
   render: () => (
-    <main {...pageChrome}>
+    <main>
       <Page
         variant="project"
         header={
@@ -198,7 +190,7 @@ export const About: Story = {
 
 export const SearchPage: Story = {
   render: () => (
-    <main {...pageChrome}>
+    <main>
       <Page
         variant="post"
         header={
@@ -224,7 +216,7 @@ export const SearchPage: Story = {
 
 export const Archive: Story = {
   render: () => (
-    <main {...pageChrome}>
+    <main>
       <Page
         variant="post"
         header={

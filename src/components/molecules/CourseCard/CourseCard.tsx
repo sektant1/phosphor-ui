@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./CourseCard.module.scss";
+import { cx } from "../../../utils/classNames";
+import { Button } from "../../atoms/Button";
+import { ProgressBar } from "../../atoms/ProgressBar";
 
-export interface CourseCardProps {
+export interface CourseCardProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   stamp?: string;
   art?: string;
   coverMeta?: React.ReactNode;
@@ -12,7 +15,6 @@ export interface CourseCardProps {
   progress?: { value: number; total?: number; cells?: number };
   cta?: { label: string; href: string };
   locked?: boolean;
-  className?: string;
 }
 
 export const CourseCard: React.FC<CourseCardProps> = ({
@@ -27,18 +29,10 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   cta,
   locked,
   className,
+  ...rest
 }) => {
-  let cells: React.ReactNode = null;
-  if (progress) {
-    const total = progress.total ?? 100;
-    const count = progress.cells ?? 13;
-    const filled = Math.round((Math.max(0, Math.min(progress.value, total)) / total) * count);
-    cells = Array.from({ length: count }).map((_, i) => (
-      <span key={i} className={i < filled ? styles.pbOn : ""} />
-    ));
-  }
   return (
-    <article className={[styles.cc, locked ? styles.locked : "", className ?? ""].join(" ")}>
+    <article className={cx(styles.cc, locked && styles.locked, className)} {...rest}>
       <div className={styles.cover}>
         {stamp && <span className={styles.stamp}>{stamp}</span>}
         {art && (
@@ -55,11 +49,20 @@ export const CourseCard: React.FC<CourseCardProps> = ({
         {stats && <p className={styles.stats}>{stats}</p>}
         {(progress || cta) && (
           <div className={styles.foot}>
-            {progress && <div className={styles.pb}>{cells}</div>}
+            {progress ? (
+              <ProgressBar
+                className={styles.progress}
+                value={progress.value}
+                total={progress.total}
+                segments={progress.cells ?? 13}
+                showPercent={false}
+                slim
+              />
+            ) : null}
             {cta && (
-              <a className={styles.cta} href={cta.href}>
+              <Button className={styles.cta} href={cta.href} size="sm" variant="ghost">
                 {cta.label}
-              </a>
+              </Button>
             )}
           </div>
         )}

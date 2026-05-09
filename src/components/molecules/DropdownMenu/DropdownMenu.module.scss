@@ -63,17 +63,20 @@
   font-size: 0.82rem;
   padding: 0.55rem 0.65rem;
   text-align: left;
+  text-decoration: none;
 }
 
 .item:hover:not(:disabled),
-.item:focus-visible {
+.item:focus-visible,
+.item[aria-disabled="true"]:focus-visible {
   background: rgba(44, 255, 122, 0.1);
   color: var(--phosphor-bright);
   outline: 0;
   text-shadow: var(--glow-emerald);
 }
 
-.item:disabled {
+.item:disabled,
+.item[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.45;
 }

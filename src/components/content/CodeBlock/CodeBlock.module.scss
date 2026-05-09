@@ -1,9 +1,9 @@
 .block {
-  border: 1px solid var(--phosphor-fade);
-  background: var(--bg-deep);
+  border: var(--pho-border-line);
+  background: var(--pho-color-background-deep);
   margin: 1.4rem 0;
   overflow: hidden;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
 }
 
 /* ── title bar ─────────────────────────────────────────── */
@@ -14,8 +14,8 @@
   padding: 5px 10px;
   background:
     repeating-linear-gradient(90deg, transparent 0 6px, rgba(44, 255, 122, 0.03) 6px 7px),
-    var(--bg-raise);
-  border-bottom: 1px solid var(--phosphor-fade);
+    var(--pho-color-background-raised);
+  border-bottom: var(--pho-border-line);
   min-height: 32px;
 }
 
@@ -30,22 +30,22 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--phosphor-fade);
-  box-shadow: 0 0 3px var(--phosphor-fade);
+  background: var(--pho-color-primary-faint);
+  box-shadow: 0 0 3px var(--pho-color-primary-faint);
 }
 
 .leds .led:first-child {
-  background: var(--phosphor);
-  box-shadow: 0 0 4px var(--phosphor);
+  background: var(--pho-color-primary);
+  box-shadow: 0 0 4px var(--pho-color-primary);
 }
 
 .leds .led:nth-child(2) {
-  background: var(--phosphor-dim);
-  box-shadow: 0 0 3px var(--phosphor-dim);
+  background: var(--pho-color-primary-muted);
+  box-shadow: 0 0 3px var(--pho-color-primary-muted);
 }
 
 .leds .led:nth-child(3) {
-  background: var(--phosphor-fade);
+  background: var(--pho-color-primary-faint);
   box-shadow: none;
 }
 
@@ -53,10 +53,10 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   font-size: 12px;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   letter-spacing: 0.04em;
   white-space: nowrap;
   overflow: hidden;
@@ -65,8 +65,8 @@
 }
 
 .fileglyph {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   flex-shrink: 0;
 }
 
@@ -75,25 +75,25 @@
 }
 
 .lang {
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--phosphor-dim);
-  border: 1px solid var(--phosphor-fade);
+  color: var(--pho-color-primary-muted);
+  border: var(--pho-border-line);
   padding: 1px 6px;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .copy {
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   background: transparent;
-  border: 1px solid var(--phosphor-fade);
+  border: var(--pho-border-line);
   padding: 1px 8px;
   cursor: pointer;
   white-space: nowrap;
@@ -103,8 +103,8 @@
 }
 
 .copy:hover {
-  color: var(--phosphor);
-  border-color: var(--phosphor-dim);
+  color: var(--pho-color-primary);
+  border-color: var(--pho-color-primary-muted);
 }
 
 .copy:focus-visible {
@@ -112,9 +112,9 @@
 }
 
 .copied {
-  color: var(--phosphor-bright);
-  border-color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  border-color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   animation: copiedFlash 200ms ease-out;
 }
 
@@ -137,11 +137,13 @@
 /* Shiki outputs <pre><code><span class="line">...</span></code></pre>  */
 .code :global(pre) {
   margin: 0;
-  padding: 1rem 1.1rem;
+  padding: 0.9rem 1.05rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  font-family: var(--font-code) !important;
+  font-family: var(--pho-font-code) !important;
   font-size: 13px;
+  line-height: 1.38;
+  tab-size: 2;
   /* Shiki sets inline background-color from theme.bg — we keep it */
 }
 
@@ -152,11 +154,17 @@
   padding: 0;
   font-size: inherit;
   display: block;
+  line-height: inherit;
 }
 
 .code :global(.line) {
   display: block;
-  min-height: 1.65em;
+  min-height: 1.38em;
+  line-height: inherit;
+}
+
+.code :global(.line:empty::before) {
+  content: " ";
 }
 
 /* scanline overlay — very subtle, just enough texture */
@@ -181,13 +189,14 @@
 /* ── plain fallback (before shiki loads) ─────────────────── */
 .fallback {
   margin: 0;
-  padding: 1rem 1.1rem;
+  padding: 0.9rem 1.05rem;
   overflow-x: auto;
-  font-family: var(--font-code);
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--phosphor-dim);
-  background: var(--bg-deep);
+  font-family: var(--pho-font-code);
+  font-size: 13px;
+  line-height: 1.38;
+  tab-size: 2;
+  color: var(--pho-color-primary-muted);
+  background: var(--pho-color-background-deep);
 }
 
 .fallback code {
@@ -195,6 +204,10 @@
   border: none;
   padding: 0;
   color: inherit;
+}
+
+.loading {
+  color: var(--pho-color-text-faint);
 }
 
 /* ── mobile ──────────────────────────────────────────────── */

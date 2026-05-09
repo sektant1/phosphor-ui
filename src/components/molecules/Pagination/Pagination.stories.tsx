@@ -1,37 +1,41 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Pagination from "./Pagination";
 import { basicUsage } from "../../../stories/basicUsage";
 
-export default {
+const meta: Meta<typeof Pagination> = {
   title: "Molecules/Pagination",
   component: Pagination,
-} as ComponentMeta<typeof Pagination>;
+};
 
-const Template: ComponentStory<typeof Pagination> = (args) => (
-  <Pagination {...args} />
-);
+export default meta;
+type Story = StoryObj<typeof Pagination>;
 
-export const Default = Template.bind({});
-Default.args = { page: 3, totalPages: 7, prevHref: "#", nextHref: "#" };
-Default.parameters = { docs: { source: { code: basicUsage.Pagination } } };
+export const Default: Story = {
+  args: { page: 3, totalPages: 7, prevHref: "#", nextHref: "#" },
+  parameters: { docs: { source: { code: basicUsage.Pagination } } },
+};
 
-export const First = Template.bind({});
-First.args = { page: 1, totalPages: 5, nextHref: "#" };
+export const First: Story = {
+  args: { page: 1, totalPages: 5, nextHref: "#" },
+};
 
-export const Last = Template.bind({});
-Last.args = { page: 5, totalPages: 5, prevHref: "#" };
+export const Last: Story = {
+  args: { page: 5, totalPages: 5, prevHref: "#" },
+};
 
-export const Single = Template.bind({});
-Single.args = { page: 1, totalPages: 1 };
+export const Single: Story = {
+  args: { page: 1, totalPages: 1 },
+};
 
-export const Uncontrolled = Template.bind({});
-Uncontrolled.args = { defaultPage: 1, totalPages: 6 };
-Uncontrolled.parameters = {
-  docs: {
-    description: {
-      story:
-        "No `page` prop — Pagination tracks its own state via `defaultPage`. Click prev/next to advance.",
+export const Uncontrolled: Story = {
+  args: { defaultPage: 1, totalPages: 6 },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "No `page` prop — Pagination tracks its own state via `defaultPage`. Click prev/next to advance.",
+      },
     },
   },
 };

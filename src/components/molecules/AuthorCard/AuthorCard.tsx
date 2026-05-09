@@ -1,18 +1,21 @@
 import React from "react";
 import styles from "./AuthorCard.module.scss";
+import { cx } from "../../../utils/classNames";
+import { Avatar } from "../../atoms/Avatar";
+import Link from "../../atoms/Link";
+import { Cluster, Stack } from "../../templates/Layout";
 
 export interface AuthorLink {
   label: string;
   href: string;
 }
 
-export interface AuthorCardProps {
+export interface AuthorCardProps extends React.HTMLAttributes<HTMLElement> {
   name: string;
   role?: string;
-  bio?: string;
+  bio?: React.ReactNode;
   avatarSrc?: string;
   links?: AuthorLink[];
-  className?: string;
 }
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({
@@ -22,40 +25,38 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
   avatarSrc,
   links,
   className,
+  ...rest
 }) => {
-  const initials = name.slice(0, 2).toUpperCase();
-
   return (
-    <div className={[styles.card, className ?? ""].filter(Boolean).join(" ")}>
-      <div className={styles.avatar}>
-        {avatarSrc ? (
-          <img src={avatarSrc} alt={name} className={styles.avatarImg} />
-        ) : (
-          <span className={styles.initials}>{initials}</span>
-        )}
-      </div>
-      <div className={styles.body}>
+    <Cluster
+      as="article"
+      className={cx(styles.card, className)}
+      gap="md"
+      align="flex-start"
+      {...rest}
+    >
+      <Avatar className={styles.avatar} src={avatarSrc} name={name} alt={name} />
+      <Stack className={styles.body} gap="xs">
         <div className={styles.name}>{name}</div>
         {role && <div className={styles.role}>{role}</div>}
         {bio && <div className={styles.bio}>{bio}</div>}
         {links && links.length > 0 && (
-          <div className={styles.links}>
+          <Cluster className={styles.links} gap="sm">
             {links.map((link, i) => (
               <React.Fragment key={link.href}>
-                {i > 0 && <span className={styles.sep}> </span>}
-                <a
+                {i > 0 && <span className={styles.sep} aria-hidden="true">·</span>}
+                <Link
                   href={link.href}
                   className={styles.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  external
                 >
                   {link.label}
-                </a>
+                </Link>
               </React.Fragment>
             ))}
-          </div>
+          </Cluster>
         )}
-      </div>
-    </div>
+      </Stack>
+    </Cluster>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Prose.scss";
+import { cx } from "../../../utils/classNames";
 
 export interface ProseProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: keyof JSX.IntrinsicElements;
@@ -11,8 +12,7 @@ const Prose: React.FC<ProseProps> = ({
   children,
   ...rest
 }) => {
-  const cls = ["pho-prose prose", className].filter(Boolean).join(" ");
-  return React.createElement(as, { className: cls, ...rest }, children);
+  return React.createElement(as, { className: cx("pho-prose prose", className), ...rest }, children);
 };
 
 export default Prose;

@@ -128,6 +128,15 @@
   animation: footerBlink 1s steps(2) infinite;
 }
 
+.meta {
+  max-width: 1280px;
+  margin: 0.45rem auto 0;
+  color: var(--pho-color-text-faint);
+  font-family: var(--pho-font-code);
+  font-size: 11px;
+  line-height: var(--pho-line-normal);
+}
+
 @keyframes footerLedPulse {
   0%, 100% { opacity: 0.55; }
   50%      { opacity: 1; }

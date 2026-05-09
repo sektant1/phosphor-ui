@@ -5,46 +5,93 @@ import { phosphorTheme } from "./phosphorTheme";
 import { copyText } from "../../../utils/browser";
 import { cx } from "../../../utils/classNames";
 
+type HighlightState = {
+  html: string;
+  failed: boolean;
+};
+
+const highlightCache = new Map<string, Promise<string>>();
+
+const getHighlightKey = (code: string, lang: string) => `${lang}\u0000${code}`;
+
+export async function codeToPhosphorHtml(
+  code: string,
+  lang = "text",
+): Promise<string> {
+  const normalizedLang = lang || "text";
+  const key = getHighlightKey(code, normalizedLang);
+  const cached = highlightCache.get(key);
+  if (cached) return cached;
+
+  const promise = import("shiki")
+    .then(({ codeToHtml }) =>
+      codeToHtml(code, {
+        lang: normalizedLang as BundledLanguage,
+        theme: phosphorTheme,
+      }),
+    )
+    .catch((error) => {
+      highlightCache.delete(key);
+      throw error;
+    });
+
+  highlightCache.set(key, promise);
+  return promise;
+}
+
 export interface CodeBlockProps {
   code: string;
   lang?: string;
+  language?: string;
   filename?: string;
   /** Pre-rendered Shiki HTML (for SSR/SSG — skips client-side highlight). */
   html?: string;
+  copyable?: boolean;
+  copyLabel?: React.ReactNode;
+  copiedLabel?: React.ReactNode;
   className?: string;
+  "aria-label"?: string;
 }
 
 export const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
-  lang = "text",
+  lang,
+  language,
   filename,
   html: htmlProp,
+  copyable = true,
+  copyLabel = "⎘ copy",
+  copiedLabel = "✓ copied",
   className,
+  "aria-label": ariaLabel,
 }) => {
-  const [html, setHtml] = React.useState(htmlProp ?? "");
+  const resolvedLang = lang ?? language ?? "text";
+  const [highlight, setHighlight] = React.useState<HighlightState>({
+    html: "",
+    failed: false,
+  });
   const [copied, setCopied] = React.useState(false);
 
   const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => {
     if (htmlProp) {
-      setHtml(htmlProp);
+      setHighlight({ html: "", failed: false });
       return;
     }
     let cancelled = false;
-    setHtml("");
-    import("shiki")
-      .then(({ codeToHtml }) =>
-        codeToHtml(code, { lang: lang as BundledLanguage, theme: phosphorTheme })
-      )
+    setHighlight({ html: "", failed: false });
+    codeToPhosphorHtml(code, resolvedLang)
       .then((result) => {
-        if (!cancelled) setHtml(result);
+        if (!cancelled) setHighlight({ html: result, failed: false });
       })
-      .catch(() => {});
+      .catch(() => {
+        if (!cancelled) setHighlight({ html: "", failed: true });
+      });
     return () => {
       cancelled = true;
     };
-  }, [code, lang, htmlProp]);
+  }, [code, resolvedLang, htmlProp]);
 
   React.useEffect(
     () => () => {
@@ -53,16 +100,24 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     []
   );
 
-  const copy = async () => {
+  const copy = React.useCallback(async () => {
     const didCopy = await copyText(code);
     if (!didCopy) return;
     setCopied(true);
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setCopied(false), 1800);
-  };
+  }, [code]);
+
+  const highlightedHtml = htmlProp ?? highlight.html;
+  const isHighlighting = !htmlProp && !highlightedHtml && !highlight.failed;
+  const regionLabel =
+    ariaLabel ??
+    [filename, resolvedLang !== "text" ? resolvedLang : undefined, "code"]
+      .filter(Boolean)
+      .join(" ");
 
   return (
-    <div className={cx(styles.block, className)}>
+    <figure className={cx(styles.block, className)} aria-label={regionLabel}>
       <div className={styles.bar}>
         <span className={styles.leds} aria-hidden="true">
           <span className={styles.led} />
@@ -76,30 +131,35 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           </span>
         )}
         <span className={styles.spacer} />
-        {lang !== "text" && (
-          <span className={styles.lang}>{lang}</span>
+        {resolvedLang !== "text" && (
+          <span className={styles.lang}>{resolvedLang}</span>
         )}
-        <button
-          type="button"
-          className={cx(styles.copy, copied && styles.copied)}
-          onClick={copy}
-          aria-label={copied ? "Copied" : "Copy code"}
-        >
-          {copied ? "✓ copied" : "⎘ copy"}
-        </button>
+        {copyable ? (
+          <button
+            type="button"
+            className={cx(styles.copy, copied && styles.copied)}
+            onClick={copy}
+            aria-label={copied ? "Copied" : "Copy code"}
+          >
+            {copied ? copiedLabel : copyLabel}
+          </button>
+        ) : null}
       </div>
 
-      {html ? (
+      {highlightedHtml ? (
         <div
           className={styles.code}
-          dangerouslySetInnerHTML={{ __html: html }}
+          dangerouslySetInnerHTML={{ __html: highlightedHtml }}
         />
       ) : (
-        <pre className={styles.fallback}>
+        <pre
+          className={cx(styles.fallback, isHighlighting && styles.loading)}
+          aria-busy={isHighlighting || undefined}
+        >
           <code>{code}</code>
         </pre>
       )}
-    </div>
+    </figure>
   );
 };
 

@@ -1,6 +1,4 @@
-export * from "./AsciiBanner";
 export * from "./AuthorCard";
-export * from "./BootNav";
 export * from "./Breadcrumbs";
 export * from "./Callout";
 export * from "./CourseCard";
@@ -9,7 +7,6 @@ export * from "./EmptyState";
 export * from "./FormField";
 export * from "./LessonRow";
 export * from "./Modal";
-export * from "./PdaWindow";
 export { default as Pagination } from "./Pagination";
 export type { PaginationProps } from "./Pagination";
 export * from "./PostFrontmatter";
@@ -22,10 +19,8 @@ export type {
   SearchResultProps,
 } from "./SearchResult";
 export * from "./ShareBar";
-export * from "./SeriesNav";
-export * from "./StatPill";
 export * from "./Stepper";
+export * from "./TableOfContents";
 export * from "./Tabs";
-export * from "./Tooltip";
 export * from "./Timeline";
 export * from "./Toast";

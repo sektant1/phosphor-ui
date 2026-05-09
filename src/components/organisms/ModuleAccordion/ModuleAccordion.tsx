@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "./ModuleAccordion.module.scss";
 import { cx } from "../../../utils/classNames";
+import { ProgressBar } from "../../atoms/ProgressBar";
 
 export interface ModuleLesson {
+  id?: string;
   num: string;
   title: React.ReactNode;
   href?: string;
@@ -10,14 +12,15 @@ export interface ModuleLesson {
   state?: "default" | "done" | "locked";
 }
 
-export interface ModuleAccordionProps {
+export interface ModuleAccordionProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   num: string;
   title: React.ReactNode;
   intro?: React.ReactNode;
   lessons?: ModuleLesson[];
   progress?: { value: number; total?: number; cells?: number };
   defaultOpen?: boolean;
-  className?: string;
+  onOpenChange?: (open: boolean) => void;
+  renderLesson?: (lesson: ModuleLesson, index: number) => React.ReactNode;
 }
 
 export const ModuleAccordion: React.FC<ModuleAccordionProps> = ({
@@ -28,35 +31,45 @@ export const ModuleAccordion: React.FC<ModuleAccordionProps> = ({
   progress,
   defaultOpen = true,
   className,
+  onOpenChange,
+  renderLesson,
+  ...rest
 }) => {
   const [open, setOpen] = useState(defaultOpen);
   const pct = progress
     ? Math.round((progress.value / (progress.total ?? 100)) * 100)
     : null;
-  const cells = progress?.cells ?? 4;
-  const filled = progress
-    ? Math.round((Math.max(0, Math.min(progress.value, progress.total ?? 100)) / (progress.total ?? 100)) * cells)
-    : 0;
   const contentId = React.useId();
+  const toggleOpen = () => {
+    setOpen((current) => {
+      const next = !current;
+      onOpenChange?.(next);
+      return next;
+    });
+  };
+
   return (
-    <section className={cx(styles.ma, !open && styles.collapsed, className)}>
+    <section className={cx(styles.ma, !open && styles.collapsed, className)} {...rest}>
       <button
         className={styles.head}
         type="button"
         aria-expanded={open}
         aria-controls={contentId}
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggleOpen}
       >
         <span className={styles.glyph}>{open ? "▾" : "▸"}</span>
         <span className={styles.num}>{num}</span>
         <span className={styles.title}>{title}</span>
-        {progress && (
-          <span className={styles.progress} aria-hidden="true">
-            {Array.from({ length: cells }).map((_, i) => (
-              <span key={i} className={i < filled ? styles.on : ""} />
-            ))}
-          </span>
-        )}
+        {progress ? (
+          <ProgressBar
+            className={styles.progress}
+            value={progress.value}
+            total={progress.total}
+            segments={progress.cells ?? 4}
+            showPercent={false}
+            slim
+          />
+        ) : null}
         {pct !== null && <span className={styles.pct}>{pct}%</span>}
       </button>
       {open && (intro || lessons.length > 0) && (
@@ -64,29 +77,35 @@ export const ModuleAccordion: React.FC<ModuleAccordionProps> = ({
           {intro && <p className={styles.intro}>{intro}</p>}
           {lessons.length > 0 && (
             <ul className={styles.list}>
-              {lessons.map((l, i) => (
-                <li
-                  key={i}
-                  className={cx(
-                    styles.li,
-                    l.state === "done" && styles.done,
-                    l.state === "locked" && styles.locked
-                  )}
-                >
-                  <span className={styles.cb} />
-                  <span className={styles.liNum}>{l.num}</span>
-                  <a
-                    href={l.href ?? "#"}
-                    aria-disabled={l.state === "locked" || undefined}
-                    onClick={
-                      l.state === "locked" ? (event) => event.preventDefault() : undefined
-                    }
+              {lessons.map((l, i) =>
+                renderLesson ? (
+                  <React.Fragment key={l.id ?? l.href ?? `${l.num}-${i}`}>
+                    {renderLesson(l, i)}
+                  </React.Fragment>
+                ) : (
+                  <li
+                    key={l.id ?? l.href ?? `${l.num}-${i}`}
+                    className={cx(
+                      styles.li,
+                      l.state === "done" && styles.done,
+                      l.state === "locked" && styles.locked
+                    )}
                   >
-                    {l.title}
-                  </a>
-                  {l.length && <span className={styles.len}>{l.length}</span>}
-                </li>
-              ))}
+                    <span className={styles.cb} />
+                    <span className={styles.liNum}>{l.num}</span>
+                    <a
+                      href={l.href ?? "#"}
+                      aria-disabled={l.state === "locked" || undefined}
+                      onClick={
+                        l.state === "locked" ? (event) => event.preventDefault() : undefined
+                      }
+                    >
+                      {l.title}
+                    </a>
+                    {l.length && <span className={styles.len}>{l.length}</span>}
+                  </li>
+                ),
+              )}
             </ul>
           )}
         </div>

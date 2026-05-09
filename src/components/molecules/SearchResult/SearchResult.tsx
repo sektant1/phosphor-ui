@@ -1,7 +1,9 @@
 import React from "react";
 import "./SearchResult.scss";
+import { EmptyState } from "../EmptyState";
 
 export interface SearchHit {
+  id?: string;
   href: string;
   title: React.ReactNode;
   date?: React.ReactNode;
@@ -44,26 +46,38 @@ export interface SearchResultListProps
   extends React.HTMLAttributes<HTMLUListElement> {
   hits: SearchHit[];
   emptyMessage?: React.ReactNode;
+  emptyState?: React.ReactNode;
+  getHitKey?: (hit: SearchHit, index: number) => React.Key;
+  renderHit?: (hit: SearchHit, index: number) => React.ReactNode;
 }
 
 const SearchResultList: React.FC<SearchResultListProps> = ({
   hits,
   emptyMessage = "no matches found.",
+  emptyState,
+  getHitKey = (hit, index) => hit.id ?? hit.href ?? index,
+  renderHit,
   className,
   ...rest
 }) => {
   const cls = ["pho-search-list search-list", className].filter(Boolean).join(" ");
   if (hits.length === 0) {
-    return (
-      <p className="pho-search-miss search-miss" role="status">
-        {emptyMessage}
-      </p>
+    return emptyState ? (
+      <>{emptyState}</>
+    ) : (
+      <div className="pho-search-miss search-miss" role="status">
+        <EmptyState glyph="[ ? ]" title={emptyMessage} status />
+      </div>
     );
   }
   return (
     <ul className={cls} {...rest}>
-      {hits.map((hit, i) => (
-        <SearchResult key={i} hit={hit} />
+      {hits.map((hit, index) => (
+        renderHit ? (
+          <React.Fragment key={getHitKey(hit, index)}>{renderHit(hit, index)}</React.Fragment>
+        ) : (
+          <SearchResult key={getHitKey(hit, index)} hit={hit} />
+        )
       ))}
     </ul>
   );

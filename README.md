@@ -1,7 +1,7 @@
 <div align="center">
-<h1>phosphor-ui</h1
+<h1>phosphor-ui</h1>
 
-<p>Single-channel green-phosphor React component library.<br/>Retro · military · cyberpunk CRT aesthetic.</p>
+<p>Single-channel green-phosphor React UI for personal wikis, blogs, digital gardens, project logs, and second brains.</p>
 
 [![npm version](https://img.shields.io/npm/v/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
 [![npm downloads](https://img.shields.io/npm/dm/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
@@ -24,52 +24,129 @@
 npm install @sektant1/phosphor-ui
 ```
 
-Peer deps: `react ^17||^18`, `react-dom ^17||^18`.  
-`@mdx-js/react ^2` is optional — only needed for `<PostBody>` MDX rendering.
+Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.  
+`@mdx-js/react ^2 || ^3` is optional and only needed for `<PostBody>` / MDX rendering.
 
 ## Setup
 
-Import once at the app root:
+Import the full stylesheet once at your app root:
 
 ```tsx
-import "@sektant1/phosphor-ui/tokens.css";  // CSS custom properties + fonts
-import "@sektant1/phosphor-ui/global.css";  // base resets + animation utilities
+import "@sektant1/phosphor-ui/phosphor.css";
+```
+
+If you need finer control, import `tokens.css` and `global.css` separately.
+
+## Tokens
+
+Use the `--pho-*` tokens for app-level customization. The older raw tokens
+(`--phosphor`, `--bg`, `--magenta`, etc.) still work, but the semantic names are
+the stable consumer API.
+
+```css
+:root {
+  --pho-color-background: #04140a;
+  --pho-color-primary: #2cff7a;
+  --pho-color-accent: #62ff9a;
+  --pho-size-prose: 72ch;
+}
+
+.noteShell {
+  max-width: var(--pho-size-prose);
+  color: var(--pho-color-text);
+  border: var(--pho-border-line);
+  box-shadow: var(--pho-glow-primary-soft);
+}
+```
+
+For TypeScript tooling, token names are exported from the package:
+
+```ts
+import { PHOSPHOR_TOKEN_GROUPS, phosphorVar } from "@sektant1/phosphor-ui";
+
+const linkColor = phosphorVar("--pho-color-link");
 ```
 
 ## Quick start
 
 ```tsx
-import {
-  CrtShell, Header, Footer,
-  NerdTree, HeroFrame, CourseCard,
-  PostBody, Callout,
-} from "@sektant1/phosphor-ui";
+import { SiteShell, Post, Callout } from "@sektant1/phosphor-ui";
+import "@sektant1/phosphor-ui/phosphor.css";
 
 export default function App() {
   return (
-    <CrtShell>
-      <Header title="phosphor ui" nav={[{ label: "log", href: "/log" }]} />
-      <HeroFrame title="boot sequence" subtitle="signal acquired." />
-      <Footer
-        brand="phosphor ui"
-        links={[{ label: "github", href: "https://github.com/sektant1/phosphor" }]}
-        status={{ label: "link", value: "STABLE" }}
-      />
-    </CrtShell>
+    <SiteShell
+      title="field notes"
+      tagline="personal wiki / project log"
+      nav={[
+        { label: "notes", href: "/notes", active: true },
+        { label: "projects", href: "/projects" },
+      ]}
+      footerLinks={[{ label: "rss", href: "/rss.xml" }]}
+    >
+      <Post
+        title="Boot sequence"
+        headerProps={{
+          eyebrow: "log / systems",
+          meta: { date: "2026-05-09", readTime: "3 min", tags: ["wiki"] },
+        }}
+      >
+        <p>Use normal React or MDX content inside the post body.</p>
+        <Callout title="signal">
+          The shell includes a CRT frame, accessible skip link, header, content
+          region, and footer.
+        </Callout>
+      </Post>
+    </SiteShell>
   );
 }
 ```
+
+## Import Model
+
+Use the root package for application code:
+
+```tsx
+import { SiteShell, Post, Button, Callout, TableOfContents } from "@sektant1/phosphor-ui";
+```
+
+The physical folders are organized for maintainers. Consumers should prefer the stable root exports so components can move internally without breaking your site.
 
 ## Components
 
 | Group | Components |
 |---|---|
-| **Layout** | `CrtShell` `Header` `Footer` `FooterStencil` `HeroFrame` `NerdTree` `PdaWindow` |
+| **Presets** | `SiteShell` |
+| **Layout** | `CrtShell` `Header` `Footer` `FooterStencil` `HeroFrame` `NerdTree` `PdaWindow` `Page` `Post` |
 | **Content** | `Prose` `PostBody` `Callout` `CodeBlock` `Hr` `Tag` `Text` `AsciiBanner` `TerminalPrompt` |
 | **Lists** | `PostListing` `PostRow` `CourseCard` `LessonRow` `ModuleAccordion` `PrereqList` `Exercise` |
-| **Nav** | `BootNav` `Pagination` `Stepper` `TableOfContents` `Link` |
-| **Form** | `Button` `Input` `Textarea` `Checkbox` |
-| **Feedback** | `ProgressBar` `ReadingRail` `VideoPlayer` |
+| **Nav** | `BootNav` `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
+| **Form** | `Button` `Input` `Textarea` `Checkbox` `Select` `Switch` |
+| **Feedback** | `ProgressBar` `ReadingRail` `StatPill` `Toast` `Tooltip` `VideoPlayer` |
+
+## Personal Site Pattern
+
+For blogs, digital gardens, and second brains, start with `SiteShell` and add pages with `Post`:
+
+```tsx
+<SiteShell title="notes" nav={navItems}>
+  <Post title="Now page" sidebar={<TableOfContents items={toc} />}>
+    <NowPageMdx />
+  </Post>
+</SiteShell>
+```
+
+Reach for lower-level components when you need custom app structure:
+
+```tsx
+<CrtShell>
+  <Header title="lab" />
+  <Page variant="project" sidebar={<NerdTree nodes={nodes} />}>
+    <Prose>{children}</Prose>
+  </Page>
+  <Footer brand="lab" />
+</CrtShell>
+```
 
 ## MDX posts
 

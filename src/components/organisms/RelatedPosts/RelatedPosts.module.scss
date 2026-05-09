@@ -1,25 +1,13 @@
-.wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.heading {
-  display: flex;
-  align-items: center;
-  gap: 0.4ch;
-}
-
 .headingGlyph {
-  color: var(--phosphor);
-  font-family: var(--font-terminal);
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-terminal);
   font-size: 10.5px;
   line-height: 1;
 }
 
 .headingLabel {
-  color: var(--phosphor-fade);
-  font-family: var(--font-terminal);
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-terminal);
   font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -27,62 +15,41 @@
 }
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  --pho-grid-columns: repeat(auto-fit, minmax(min(100%, 10rem), 17.5rem));
+  justify-content: start;
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  min-width: 160px;
-  flex: 1 1 160px;
-  max-width: 280px;
   padding: 0.6rem 0.8rem;
-  border: 1px dashed var(--phosphor-fade);
-  background: var(--bg-raise);
+  border: var(--pho-border-dashed);
+  background: var(--pho-color-background-raised);
   text-decoration: none;
   transition: border-color 120ms, background 120ms, box-shadow 120ms;
 
   &:hover {
-    border-color: var(--phosphor);
+    border-color: var(--pho-color-primary);
     background: rgba(44, 255, 122, 0.06);
     box-shadow: 0 0 12px rgba(44, 255, 122, 0.1);
   }
 }
 
 .date {
-  color: var(--phosphor-fade);
-  font-family: var(--font-code);
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-code);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
 }
 
 .title {
-  color: var(--phosphor);
-  font-family: var(--font-code);
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-code);
   font-size: 13px;
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
   line-height: 1.35;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3ch;
-}
-
 .tag {
-  color: var(--magenta);
-  font-family: var(--font-code);
+  color: var(--pho-color-accent);
+  font-family: var(--pho-font-code);
   font-size: 11px;
-}
-
-@media (max-width: 480px) {
-  .card {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
 }

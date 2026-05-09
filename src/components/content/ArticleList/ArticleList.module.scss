@@ -1,0 +1,37 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  border-left: var(--pho-rail-strong);
+  padding-left: var(--pho-space-4);
+}
+
+.link {
+  color: var(--pho-color-text-strong);
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: var(--pho-glow-primary);
+}
+
+.link:hover {
+  color: var(--pho-color-primary);
+}
+
+.meta {
+  color: var(--pho-color-text-faint);
+  font-family: var(--pho-font-code);
+  font-size: 0.78rem;
+  line-height: var(--pho-line-normal);
+}
+
+.description {
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-body);
+  font-size: 0.92rem;
+  line-height: var(--pho-line-normal);
+  margin: 0;
+}

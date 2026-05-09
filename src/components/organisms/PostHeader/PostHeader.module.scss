@@ -1,14 +1,9 @@
 .root {
-  border-bottom: 1px dashed var(--phosphor-fade);
-  margin-bottom: 1.25rem;
-  padding-bottom: 1.25rem;
+  border-bottom: var(--pho-border-dashed);
+  padding-bottom: var(--pho-space-6);
 }
 
 .top {
-  align-items: flex-start;
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
   min-width: 0;
 }
 
@@ -17,20 +12,12 @@
 }
 
 .eyebrow {
-  color: var(--phosphor-fade);
-  font-family: var(--font-terminal);
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-terminal);
   font-size: 1rem;
-  letter-spacing: var(--tracking-stamp);
-  margin: 0 0 0.45rem;
+  letter-spacing: var(--pho-tracking-stamp);
+  margin: 0;
   text-transform: uppercase;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  flex-direction: row;
-  margin-bottom: 0.65rem;
 }
 
 .title {
@@ -39,35 +26,18 @@
 }
 
 .subtitle {
-  color: var(--phosphor-dim);
-  font-family: var(--font-body);
+  color: var(--pho-color-text-muted);
+  font-family: var(--pho-font-body);
   font-size: 1rem;
-  line-height: 1.55;
-  margin: 0.65rem 0 0;
-  max-width: 68ch;
+  line-height: var(--pho-line-normal);
+  margin: 0;
+  max-width: var(--pho-size-prose);
 }
 
 .actions {
-  align-items: center;
-  display: flex;
   flex: 0 0 auto;
-  gap: 0.5rem;
-}
-
-.meta {
-  margin-top: 0.75rem;
 }
 
 .extra {
-  margin-top: 1rem;
-}
-
-@media (max-width: 720px) {
-  .top {
-    display: grid;
-  }
-
-  .actions {
-    justify-content: flex-start;
-  }
+  min-width: 0;
 }

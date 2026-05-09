@@ -2,18 +2,16 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--pho-color-background);
+  color: var(--pho-color-text);
 }
 
 .sidePanel {
   flex: 0 0 280px;
-  display: flex;
-  flex-direction: column;
   min-width: 0;
   min-height: 100vh;
-  background: var(--bg-deep);
-  border-right: 1px solid var(--phosphor-fade);
+  background: var(--pho-color-background-deep);
+  border-right: 1px solid var(--pho-color-primary-faint);
 }
 
 .tree {
@@ -29,7 +27,7 @@
 .userSection {
   flex: 0 0 auto;
   padding: 0.7rem 0.9rem;
-  border-top: 1px dashed var(--phosphor-fade);
+  border-top: var(--pho-border-dashed);
   background: rgba(0, 0, 0, 0.16);
 }
 
@@ -38,21 +36,13 @@
 }
 
 .userName {
-  overflow: hidden;
-  font-family: var(--font-code);
   font-size: 11px;
-  color: var(--phosphor-dim);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: var(--pho-color-primary-muted);
 }
 
 .userRole {
-  margin-top: 0.15rem;
-  font-family: var(--font-code);
   font-size: 10px;
-  color: var(--phosphor-fade);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: var(--pho-color-primary-faint);
 }
 
 .logoutBtn {
@@ -62,17 +52,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   font-size: 11px;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   padding: 0.3rem 0;
-  margin-top: 0.4rem;
   letter-spacing: 0.06em;
 }
 
 .logoutBtn:hover,
 .logoutBtn:focus-visible {
-  color: var(--magenta);
+  color: var(--pho-color-accent);
   outline: none;
 }
 
@@ -82,11 +71,11 @@
   min-height: 100vh;
   max-height: 100vh;
   overflow-y: auto;
-  padding: 1.25rem 1.75rem 2rem;
-  font-family: var(--font-body);
-  color: var(--ink);
+  padding: 1.25rem 1.75rem 2.5rem;
+  font-family: var(--pho-font-body);
+  color: var(--pho-color-text);
   position: relative;
-  background-color: var(--bg);
+  background-color: var(--pho-color-background);
   background-image: linear-gradient(180deg,
       rgba(44, 255, 122, 0.02) 0px,
       rgba(44, 255, 122, 0.02) 1px,
@@ -101,7 +90,7 @@
   z-index: 1;
   display: block;
   height: 1px;
-  background: var(--phosphor-fade);
+  background: var(--pho-color-primary-faint);
   margin: 0 -1.75rem 0.25rem;
   opacity: 0.4;
 }
@@ -112,6 +101,84 @@
 
 .main> :last-child {
   margin-bottom: 0;
+}
+
+.mainHeader {
+  border-bottom: var(--pho-border-dashed);
+  margin: 0 -1.75rem 1.25rem;
+  padding: 0.2rem 1.75rem 1.25rem;
+}
+
+.mainHeaderTop,
+.mainTitleBlock,
+.mainActions {
+  min-width: 0;
+}
+
+.mainHeaderTop {
+  align-items: flex-start;
+}
+
+.eyebrow {
+  color: var(--pho-color-primary-faint);
+  font-size: 10px;
+}
+
+.mainTitle {
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-terminal);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  line-height: 0.95;
+  margin: 0;
+  text-shadow: var(--pho-glow-primary);
+  text-transform: uppercase;
+}
+
+.mainDescription {
+  max-width: 62rem;
+}
+
+.mainActions {
+  justify-content: flex-end;
+}
+
+.statsGrid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.statCard {
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.07), rgba(44, 255, 122, 0.02)),
+    var(--pho-color-background-raised);
+  border: 1px solid var(--pho-color-primary-faint);
+  min-width: 0;
+  padding: 0.75rem 0.85rem;
+}
+
+.statGood {
+  border-color: var(--pho-color-primary-muted);
+}
+
+.statWarn {
+  border-color: var(--pho-color-accent);
+}
+
+.statLabel {
+  color: var(--pho-color-primary-faint);
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.statValue {
+  color: var(--pho-color-primary);
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1.1;
 }
 
 @media (max-width: 880px) {
@@ -139,5 +206,15 @@
 
   .main::before {
     margin: 0 -1rem 0.25rem;
+  }
+
+  .mainHeader {
+    margin: 0 -1rem 1rem;
+    padding: 0.2rem 1rem 1rem;
+  }
+
+  .mainActions {
+    justify-content: flex-start;
+    width: 100%;
   }
 }

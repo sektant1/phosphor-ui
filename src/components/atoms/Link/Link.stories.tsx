@@ -1,15 +1,17 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Link from "./Link";
 import { basicUsage } from "../../../stories/basicUsage";
 
-export default {
+const meta: Meta<typeof Link> = {
   title: "Atoms/Link",
   component: Link,
-} as ComponentMeta<typeof Link>;
+};
 
-const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
+export default meta;
+type Story = StoryObj<typeof Link>;
 
-export const Default = Template.bind({});
-Default.args = { href: "#", children: ">> back to long-wave feed" };
-Default.parameters = { docs: { source: { code: basicUsage.Link } } };
+export const Default: Story = {
+  args: { href: "#", children: ">> back to long-wave feed" },
+  parameters: { docs: { source: { code: basicUsage.Link } } },
+};

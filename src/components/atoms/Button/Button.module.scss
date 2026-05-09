@@ -1,39 +1,52 @@
 .btn {
-  font-family: var(--font-terminal);
+  align-items: center;
+  display: inline-flex;
+  gap: 0.45rem;
+  justify-content: center;
+  font-family: var(--pho-font-terminal);
   font-size: 17px;
   background: transparent;
-  border: 1px solid var(--phosphor);
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  border: 1px solid var(--pho-color-primary);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   padding: 6px 14px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 0;
+  text-decoration: none;
 }
 .btn:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
-  outline-offset: 2px;
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
-.btn:disabled {
+.btn:disabled,
+.btn[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.48;
   text-shadow: none;
 }
 .sm { font-size: 14px; padding: 4px 10px; }
+.lg { font-size: 20px; padding: 8px 18px; }
+.fullWidth { width: 100%; }
 .pressed {}
+.loader {
+  animation: phosphorBlink 1.05s steps(2) infinite;
+  color: currentColor;
+  line-height: 1;
+}
 
-.primary:hover:not(:disabled), .primary.pressed {
-  background: var(--phosphor); color: var(--bg); text-shadow: none;
+.primary:hover:not(:disabled):not([aria-disabled="true"]), .primary.pressed {
+  background: var(--pho-color-primary); color: var(--pho-color-background); text-shadow: none;
 }
 
 .ghost {
-  border-color: var(--phosphor-fade);
-  color: var(--phosphor-dim);
+  border-color: var(--pho-color-primary-faint);
+  color: var(--pho-color-primary-muted);
   text-shadow: none;
 }
-.ghost:hover:not(:disabled), .ghost.pressed {
-  background: var(--phosphor-dim); color: var(--bg);
+.ghost:hover:not(:disabled):not([aria-disabled="true"]), .ghost.pressed {
+  background: var(--pho-color-primary-muted); color: var(--pho-color-background);
 }
 
 .danger {
@@ -49,6 +62,10 @@
       rgba(255, 58, 58, 0.08) 6px 7px),
     transparent;
 }
-.danger:hover:not(:disabled), .danger.pressed {
+.danger:hover:not(:disabled):not([aria-disabled="true"]), .danger.pressed {
   background: #ff3a3a; color: #1a0606; text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader { animation: none; }
 }

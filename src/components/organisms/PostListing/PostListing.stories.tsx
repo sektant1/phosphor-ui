@@ -62,3 +62,31 @@ export const AllFallback: Story = {
     </PostListing>
   ),
 };
+
+export const FromData: Story = {
+  args: {
+    posts: [
+      {
+        date: "2026-05-06",
+        title: "boot the terminal",
+        meta: "6m",
+        href: "#boot",
+        thumbSrc: "https://picsum.photos/seed/zone-boot/320/200",
+        thumbAlt: "boot screen",
+      },
+      {
+        date: "2026-05-04",
+        title: "decode the signal",
+        meta: "12m",
+        href: "#signal",
+        glyph: "◈",
+      },
+      {
+        date: "2026-05-01",
+        title: "phosphor protocol intro",
+        meta: "9m",
+        href: "#protocol",
+      },
+    ],
+  },
+};

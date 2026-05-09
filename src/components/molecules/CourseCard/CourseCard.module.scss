@@ -99,25 +99,14 @@
 }
 .stats :global(b) { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); font-weight: 700; }
 .foot { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
-.pb {
+.progress {
   flex: 1;
-  display: flex; gap: 2px; padding: 2px;
-  border: 1px solid var(--phosphor-fade);
-  background: var(--bg-deep);
-  height: 12px;
+  min-width: 8rem;
 }
-.pb span { flex: 1; background: rgba(44, 255, 122, 0.06); }
-.pbOn { background: var(--phosphor) !important; box-shadow: 0 0 3px var(--phosphor); }
 .cta {
   font-family: var(--font-heading); font-weight: 700;
   font-size: 12px; letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--phosphor); text-shadow: var(--glow-emerald);
-  border: 1px solid var(--phosphor);
-  padding: 4px 10px;
-  text-decoration: none;
 }
-.cta:hover { background: var(--phosphor); color: var(--bg); text-shadow: none; }
 
 .locked { opacity: 0.65; }
 .locked .stamp { border-color: var(--phosphor-fade); color: var(--phosphor-fade); text-shadow: none; }

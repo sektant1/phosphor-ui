@@ -5,6 +5,8 @@ import type { MDXComponents as ProviderComponents } from "mdx/types.js";
 import Prose from "../../content/Prose";
 import { Callout } from "../../molecules/Callout";
 import { Hr } from "../../atoms/Hr";
+import Link from "../../atoms/Link";
+import { Kbd } from "../../atoms/Kbd";
 import { Exercise } from "../../organisms/Exercise";
 import { CodeBlock, extractMdxCode } from "../../content/CodeBlock";
 import { PostFrontmatter } from "../../molecules/PostFrontmatter";
@@ -55,14 +57,13 @@ const MdA: React.FC<React.AnchorHTMLAttributes<HTMLAnchorElement>> = ({
 }) => {
   const isExternal = !!href && /^https?:\/\//.test(href);
   return (
-    <a
+    <Link
       href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
+      external={isExternal}
       {...rest}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
@@ -89,6 +90,9 @@ export const mdxComponents: ProviderComponents = {
   blockquote: MdBlockquote,
   img: MdImg,
   a: MdA,
+  kbd: Kbd,
+  Callout,
+  CodeBlock,
   Exercise,
 };
 
@@ -98,19 +102,26 @@ export interface PostBodyProps {
   children: React.ReactNode;
   className?: string;
   rootClassName?: string;
+  components?: ProviderComponents;
   frontmatter?: PostFrontmatterData;
   frontmatterLabel?: React.ReactNode;
+  before?: React.ReactNode;
+  after?: React.ReactNode;
 }
 
 export const PostBody: React.FC<PostBodyProps> = ({
   children,
   className,
   rootClassName,
+  components,
   frontmatter,
   frontmatterLabel,
+  before,
+  after,
 }) => (
-  <MDXProvider components={mdxComponents}>
+  <MDXProvider components={components ? { ...mdxComponents, ...components } : mdxComponents}>
     <div className={cx("pho-post-body", rootClassName)}>
+      {before}
       {frontmatter ? (
         <PostFrontmatter
           className="pho-post-body-frontmatter"
@@ -120,6 +131,7 @@ export const PostBody: React.FC<PostBodyProps> = ({
       ) : null}
 
       <Prose className={className}>{children}</Prose>
+      {after}
     </div>
   </MDXProvider>
 );

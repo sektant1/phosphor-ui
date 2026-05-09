@@ -15,7 +15,12 @@ export interface TabsProps {
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   ariaLabel?: string;
+  orientation?: "horizontal" | "vertical";
+  lazy?: boolean;
   className?: string;
+  listClassName?: string;
+  tabClassName?: string;
+  panelClassName?: string;
 }
 
 export const Tabs: React.FC<TabsProps> = ({
@@ -24,8 +29,14 @@ export const Tabs: React.FC<TabsProps> = ({
   defaultValue,
   onValueChange,
   ariaLabel = "tabs",
+  orientation = "horizontal",
+  lazy = true,
   className,
+  listClassName,
+  tabClassName,
+  panelClassName,
 }) => {
+  const baseId = React.useId();
   const firstEnabled = items.find((item) => !item.disabled)?.id;
   const [internal, setInternal] = React.useState(defaultValue ?? firstEnabled ?? "");
   const selected = value ?? internal;
@@ -41,7 +52,9 @@ export const Tabs: React.FC<TabsProps> = ({
     const current = enabled.findIndex((item) => item.id === selectedItem?.id);
     if (current < 0) return;
 
-    const dir = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+    const forwardKey = orientation === "vertical" ? "ArrowDown" : "ArrowRight";
+    const backKey = orientation === "vertical" ? "ArrowUp" : "ArrowLeft";
+    const dir = event.key === forwardKey ? 1 : event.key === backKey ? -1 : 0;
     if (dir === 0) return;
     event.preventDefault();
     const next = enabled[(current + dir + enabled.length) % enabled.length];
@@ -50,20 +63,28 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <div className={cx(styles.root, className)}>
-      <div className={styles.list} role="tablist" aria-label={ariaLabel} onKeyDown={handleKeyDown}>
+      <div
+        className={cx(styles.list, orientation === "vertical" && styles.vertical, listClassName)}
+        role="tablist"
+        aria-label={ariaLabel}
+        aria-orientation={orientation}
+        onKeyDown={handleKeyDown}
+      >
         {items.map((item) => {
           const active = item.id === selectedItem?.id;
+          const tabId = `${baseId}-${item.id}-tab`;
+          const panelId = `${baseId}-${item.id}-panel`;
           return (
             <button
               key={item.id}
-              id={`${item.id}-tab`}
+              id={tabId}
               type="button"
               role="tab"
               aria-selected={active}
-              aria-controls={`${item.id}-panel`}
+              aria-controls={panelId}
               disabled={item.disabled}
               tabIndex={active ? 0 : -1}
-              className={cx(styles.tab, active && styles.active)}
+              className={cx(styles.tab, active && styles.active, tabClassName)}
               onClick={() => setSelected(item.id)}
             >
               {item.label}
@@ -71,16 +92,22 @@ export const Tabs: React.FC<TabsProps> = ({
           );
         })}
       </div>
-      {selectedItem ? (
-        <div
-          id={`${selectedItem.id}-panel`}
-          role="tabpanel"
-          aria-labelledby={`${selectedItem.id}-tab`}
-          className={styles.panel}
-        >
-          {selectedItem.content}
-        </div>
-      ) : null}
+      {items.map((item) => {
+        const active = item.id === selectedItem?.id;
+        if (lazy && !active) return null;
+        return (
+          <div
+            key={item.id}
+            id={`${baseId}-${item.id}-panel`}
+            role="tabpanel"
+            aria-labelledby={`${baseId}-${item.id}-tab`}
+            className={cx(styles.panel, panelClassName)}
+            hidden={!active}
+          >
+            {item.content}
+          </div>
+        );
+      })}
     </div>
   );
 };

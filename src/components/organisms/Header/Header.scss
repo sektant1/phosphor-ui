@@ -281,7 +281,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: clamp(0.72rem, 2.65vw, 0.95rem);
+      font-size: 0.86rem;
       letter-spacing: 0.03em;
       box-shadow: inset 0 0 12px rgba(44, 255, 122, 0.035);
     }
@@ -322,7 +322,7 @@
     .boot-nav .nav-item a {
       min-height: 2rem;
       padding: 0.28rem 0.18rem;
-      font-size: clamp(0.62rem, 2.7vw, 0.8rem);
+      font-size: 0.72rem;
       letter-spacing: 0;
     }
 

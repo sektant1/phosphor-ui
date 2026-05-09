@@ -9,7 +9,7 @@ const meta: Meta<typeof Page> = {
     docs: {
       description: {
         component:
-          "Page is the low-level page composition primitive. Prefer PageLayout when you need the standard titled template.",
+          "Page is the layout primitive for posts, project pages, wiki entries, and custom second-brain views.",
       },
     },
   },

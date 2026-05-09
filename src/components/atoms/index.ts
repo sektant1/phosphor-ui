@@ -5,6 +5,7 @@ export * from "./Glyph";
 export * from "./Headings";
 export * from "./Hr";
 export * from "./Input";
+export * from "./Kbd";
 export { default as Link } from "./Link";
 export type { LinkProps } from "./Link";
 export * from "./ProgressBar";

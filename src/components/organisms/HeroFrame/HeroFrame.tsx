@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./HeroFrame.module.scss";
+import { cx } from "../../../utils/classNames";
 
-export interface HeroFrameProps {
+export interface HeroFrameProps extends React.HTMLAttributes<HTMLDivElement> {
   art: string;
   topHud?: React.ReactNode;
   bottomHud?: React.ReactNode;
   scanline?: boolean;
-  className?: string;
 }
 
 export const HeroFrame: React.FC<HeroFrameProps> & {
@@ -17,8 +17,8 @@ export const HeroFrame: React.FC<HeroFrameProps> & {
   HudSpacer: typeof HudSpacer;
   HudTape: typeof HudTape;
   HudBars: typeof HudBars;
-} = ({ art, topHud, bottomHud, scanline = true, className }) => (
-  <div className={[styles.frame, className ?? ""].join(" ")}>
+} = ({ art, topHud, bottomHud, scanline = true, className, ...rest }) => (
+  <div className={cx(styles.frame, className)} {...rest}>
     {topHud && <Hud position="top">{topHud}</Hud>}
     <div className={styles.artWrap}>
       <pre className={styles.art}>{art}</pre>
@@ -32,13 +32,13 @@ const Hud: React.FC<{ position?: "top" | "bottom"; children: React.ReactNode }> 
   position = "top",
   children,
 }) => (
-  <div className={[styles.hud, position === "top" ? styles.hudTop : styles.hudBot].join(" ")}>
+  <div className={cx(styles.hud, position === "top" ? styles.hudTop : styles.hudBot)}>
     {children}
   </div>
 );
 
 const HudLed: React.FC<{ variant?: "rec" | "pwr" }> = ({ variant = "pwr" }) => (
-  <span className={[styles.led, variant === "rec" ? styles.ledRec : styles.ledPwr].join(" ")} />
+  <span className={cx(styles.led, variant === "rec" ? styles.ledRec : styles.ledPwr)} />
 );
 
 const HudLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (

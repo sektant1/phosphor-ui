@@ -5,6 +5,8 @@
    ───────────────────────────────────────────────────────────── */
 
 :root {
+  color-scheme: dark;
+
   /* ── primary phosphor column ───────────────────────────── */
   --phosphor: #2cff7a; /* primary tube glow */
   --phosphor-bright: #b6ffce; /* paper-mint highlight */
@@ -28,6 +30,33 @@
   --bg-deep: #010604; /* tube-back */
   --ink: #d8ffe7; /* default text */
 
+  /* ── public semantic color aliases ───────────────────────
+     Prefer these --pho-* tokens in consumer apps. The legacy
+     raw variables above stay supported for existing sites. */
+  --pho-color-background: var(--bg);
+  --pho-color-background-raised: var(--bg-raise);
+  --pho-color-background-deep: var(--bg-deep);
+  --pho-color-text: var(--ink);
+  --pho-color-text-strong: var(--phosphor-bright);
+  --pho-color-text-muted: var(--phosphor-dim);
+  --pho-color-text-faint: var(--phosphor-fade);
+  --pho-color-primary: var(--phosphor);
+  --pho-color-primary-strong: var(--phosphor-bright);
+  --pho-color-primary-muted: var(--phosphor-dim);
+  --pho-color-primary-faint: var(--phosphor-fade);
+  --pho-color-accent: var(--magenta);
+  --pho-color-accent-strong: var(--magenta-bright);
+  --pho-color-accent-muted: var(--magenta-deep);
+  --pho-color-accent-faint: var(--magenta-fade);
+  --pho-color-info: var(--moss);
+  --pho-color-success: var(--spring);
+  --pho-color-highlight: var(--rose);
+  --pho-color-link: var(--pho-color-accent);
+  --pho-color-link-hover: var(--pho-color-accent-strong);
+  --pho-color-inverse: var(--bg);
+  --pho-color-selection-bg: var(--pho-color-primary);
+  --pho-color-selection-text: var(--pho-color-background);
+
   /* ── glow utilities ────────────────────────────────────── */
   --glow-emerald:
     0 0 1px var(--phosphor), 0 0 6px rgba(44, 255, 122, 0.55),
@@ -45,12 +74,26 @@
 
   --glow-readable: none;
 
+  /* ── public effect aliases ─────────────────────────────── */
+  --pho-glow-primary: var(--glow-emerald);
+  --pho-glow-accent: var(--glow-magenta);
+  --pho-glow-info: var(--glow-amber);
+  --pho-glow-primary-soft: var(--glow-soft-emerald);
+  --pho-glow-accent-soft: var(--glow-soft-magenta);
+  --pho-glow-readable: var(--glow-readable);
+
   /* ── typography stacks ─────────────────────────────────── */
   --font-display: "Space Mono", "JetBrains Mono", ui-monospace, monospace;
   --font-heading: "JetBrains Mono", "Space Mono", ui-monospace, monospace;
   --font-body: "JetBrains Mono", "Space Mono", ui-monospace, monospace;
   --font-code: "JetBrains Mono", "Space Mono", ui-monospace, monospace;
   --font-terminal: "VT323", "JetBrains Mono", ui-monospace, monospace;
+
+  --pho-font-display: var(--font-display);
+  --pho-font-heading: var(--font-heading);
+  --pho-font-body: var(--font-body);
+  --pho-font-code: var(--font-code);
+  --pho-font-terminal: var(--font-terminal);
 
   /* ── code-block tokens (all greens, no warm channels) ──── */
   --code-bg: #03110a;
@@ -77,6 +120,20 @@
   --border-magenta-strong: 1.5px solid var(--magenta);
   --border-magenta-dash: 1px dashed var(--magenta-deep);
 
+  --pho-border-frame: var(--border-frame);
+  --pho-border-line: var(--border-line);
+  --pho-border-dashed: var(--border-dash);
+  --pho-border-dotted: var(--border-dot);
+  --pho-border-accent: var(--border-magenta-strong);
+  --pho-border-accent-dashed: var(--border-magenta-dash);
+  --pho-rail-strong: var(--rail-strong);
+  --pho-rail-quote: var(--rail-quote);
+  --pho-focus-ring: 2px solid var(--pho-color-primary-strong);
+  --pho-focus-offset: 2px;
+  --pho-radius-none: 0;
+  --pho-radius-sm: 0;
+  --pho-radius-md: 0;
+
   /* ── spacing scale (modular) ───────────────────────────── */
   --space-0: 0.1rem;
   --space-1: 0.2rem;
@@ -86,6 +143,18 @@
   --space-5: 1rem;
   --space-6: 1.4rem;
   --space-7: 2rem;
+
+  --pho-space-0: var(--space-0);
+  --pho-space-1: var(--space-1);
+  --pho-space-2: var(--space-2);
+  --pho-space-3: var(--space-3);
+  --pho-space-4: var(--space-4);
+  --pho-space-5: var(--space-5);
+  --pho-space-6: var(--space-6);
+  --pho-space-7: var(--space-7);
+  --pho-size-touch-target: 2.5rem;
+  --pho-size-content: 72rem;
+  --pho-size-prose: 68ch;
 
   /* ── z-index ramp ──────────────────────────────────────── */
   --z-deep: 0;
@@ -98,6 +167,17 @@
   --z-shell: 10;
   --z-backdrop: 49;
   --z-drawer: 50;
+
+  --pho-z-deep: var(--z-deep);
+  --pho-z-default: var(--z-default);
+  --pho-z-raised: var(--z-raised);
+  --pho-z-fx-noise: var(--z-fx-noise);
+  --pho-z-fx-vignette: var(--z-fx-vignette);
+  --pho-z-fx-frame: var(--z-fx-frame);
+  --pho-z-fx-flicker: var(--z-fx-flicker);
+  --pho-z-shell: var(--z-shell);
+  --pho-z-backdrop: var(--z-backdrop);
+  --pho-z-drawer: var(--z-drawer);
 
   /* ── semantic type roles ───────────────────────────────── */
   --type-h1-size: clamp(2rem, 3.6vw, 2.6rem);
@@ -118,6 +198,22 @@
   --tracking-wider: 0.14em;
   --tracking-stamp: 0.22em;
 
+  --pho-type-h1-size: var(--type-h1-size);
+  --pho-type-h2-size: var(--type-h2-size);
+  --pho-type-h3-size: var(--type-h3-size);
+  --pho-type-h4-size: var(--type-h4-size);
+  --pho-type-body-size: var(--type-body-size);
+  --pho-type-mono-size: var(--type-mono-size);
+  --pho-line-tight: var(--type-line-tight);
+  --pho-line-snug: var(--type-line-snug);
+  --pho-line-normal: var(--type-line-normal);
+  --pho-line-prose: var(--type-line-prose);
+  --pho-tracking-tight: var(--tracking-tight);
+  --pho-tracking-normal: var(--tracking-normal);
+  --pho-tracking-wide: var(--tracking-wide);
+  --pho-tracking-wider: var(--tracking-wider);
+  --pho-tracking-stamp: var(--tracking-stamp);
+
   /* ── scrollbar ─────────────────────────────────────────── */
   --scrollbar-size: 8px;
   --scrollbar-track: var(--bg-deep);
@@ -127,6 +223,12 @@
   --scrollbar-thumb-hover: var(--phosphor-dim);
   --scrollbar-thumb-active: var(--phosphor);
   --scrollbar-glow: 0 0 6px rgba(44, 255, 122, 0.4);
+
+  --pho-scrollbar-size: var(--scrollbar-size);
+  --pho-scrollbar-track: var(--scrollbar-track);
+  --pho-scrollbar-thumb: var(--scrollbar-thumb);
+  --pho-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
+  --pho-scrollbar-thumb-active: var(--scrollbar-thumb-active);
 }
 
 /* ─── Fonts ───────────────────────────────────────────────── */
@@ -182,39 +284,39 @@
 
 /* ─── semantic helpers (lift these into prose, not raw HTML) ─── */
 .t-h1 {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: var(--type-h1-size);
-  line-height: var(--type-line-snug);
-  letter-spacing: var(--tracking-wide);
+  font-size: var(--pho-type-h1-size);
+  line-height: var(--pho-line-snug);
+  letter-spacing: var(--pho-tracking-wide);
   text-transform: uppercase;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-text-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 .t-h2 {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: var(--type-h2-size);
+  font-size: var(--pho-type-h2-size);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-text-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 .t-h3 {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: var(--type-h3-size);
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  font-size: var(--pho-type-h3-size);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
   letter-spacing: 0.04em;
 }
 .t-h4 {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: var(--type-h4-size);
+  font-size: var(--pho-type-h4-size);
   text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--phosphor);
+  letter-spacing: var(--pho-tracking-wide);
+  color: var(--pho-color-primary);
 }
 .pho-heading {
   display: flex;
@@ -222,9 +324,9 @@
   gap: 0.55ch;
 }
 .pho-heading__glyph {
-  color: var(--phosphor);
-  font-family: var(--font-code);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-code);
+  text-shadow: var(--pho-glow-primary);
   line-height: 1;
   flex: 0 0 auto;
 }
@@ -232,52 +334,90 @@
   min-width: 0;
 }
 .t-body {
-  font-family: var(--font-body);
-  font-size: var(--type-body-size);
-  line-height: var(--type-line-prose);
-  color: var(--ink);
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-body-size);
+  line-height: var(--pho-line-prose);
+  color: var(--pho-color-text);
+}
+.t-lead {
+  font-family: var(--pho-font-body);
+  font-size: clamp(1.05rem, 0.3vw + 1rem, 1.2rem);
+  line-height: var(--pho-line-prose);
+  color: var(--pho-color-text-strong);
+}
+.t-small {
+  font-family: var(--pho-font-body);
+  font-size: 0.875rem;
+  line-height: var(--pho-line-normal);
+  color: var(--pho-color-text);
+}
+.t-caption {
+  font-family: var(--pho-font-code);
+  font-size: 0.78rem;
+  line-height: var(--pho-line-normal);
+  color: var(--pho-color-text-faint);
+  letter-spacing: var(--pho-tracking-wide);
+  text-transform: uppercase;
 }
 .t-mono {
-  font-family: var(--font-code);
-  font-size: var(--type-mono-size);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+}
+.t-code {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+  color: var(--pho-color-text-strong);
 }
 .t-terminal {
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
   font-size: 1.3em;
-  letter-spacing: var(--tracking-wider);
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
 }
 .t-stamp {
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
   font-size: 0.78em;
-  letter-spacing: var(--tracking-stamp);
+  letter-spacing: var(--pho-tracking-stamp);
   text-transform: uppercase;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-text-faint);
 }
 .t-prompt {
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
-  font-family: var(--font-terminal);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
+  font-family: var(--pho-font-terminal);
   font-weight: 700;
 }
 .t-glow {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
 }
 .t-glow-pale {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+}
+.t-muted {
+  color: var(--pho-color-text-muted);
+  text-shadow: none;
 }
 .t-dim {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-text-muted);
   text-shadow: none;
 }
 .t-faded {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-text-faint);
   text-shadow: none;
+}
+.t-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.t-balance {
+  text-wrap: balance;
 }
 .t-dim,
-.t-faded {
+.t-faded,
+.t-muted {
   text-shadow: none;
   filter: none;
 }

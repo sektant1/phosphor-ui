@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./ContentEditor.module.scss";
 import { Button } from "../../atoms/Button/Button";
+import { Cluster, Stack } from "../../templates/Layout";
+import Text from "../../atoms/Text";
 
 export type ListRow = Record<string, unknown> & { id?: string };
 
@@ -27,13 +29,26 @@ export const RepeaterField: React.FC<RepeaterFieldProps> = ({
   getString,
   onChange,
 }) => (
-  <div className={styles.listSection}>
-    <span className={styles.fieldLabel}>{label}</span>
+  <Stack className={styles.listSection} gap="sm">
+    <Cluster className={styles.fieldHeader} justify="space-between" gap="sm">
+      <Text variant="caption" className={styles.fieldLabel}>{label}</Text>
+      <Button
+        variant="ghost"
+        size="sm"
+        type="button"
+        onClick={() => onChange([...rows, createRow()])}
+      >
+        {addLabel}
+      </Button>
+    </Cluster>
+    {!rows.length && <div className={styles.emptyField}>No items yet.</div>}
     {rows.map((row, index) => (
-      <div key={row.id ?? index} className={styles.listRow}>
+      <Cluster key={row.id ?? index} className={styles.listRow} gap="sm" align="center">
+        <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
         {leading && <span className={styles.leading}>{leading}</span>}
         <input
           className={styles.listInput}
+          aria-label={`${label} item ${index + 1}`}
           placeholder={placeholder}
           value={getString(row[itemKey])}
           onChange={(e) =>
@@ -52,17 +67,9 @@ export const RepeaterField: React.FC<RepeaterFieldProps> = ({
           onClick={() => onChange(rows.filter((_, itemIndex) => itemIndex !== index))}
           aria-label={`Remove ${label.toLowerCase()} item ${index + 1}`}
         >
-          ×
+          remove
         </button>
-      </div>
+      </Cluster>
     ))}
-    <Button
-      variant="ghost"
-      size="sm"
-      type="button"
-      onClick={() => onChange([...rows, createRow()])}
-    >
-      {addLabel}
-    </Button>
-  </div>
+  </Stack>
 );

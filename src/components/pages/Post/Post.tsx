@@ -5,6 +5,7 @@ import { PostHeader } from "../../organisms/PostHeader";
 import type { PostHeaderProps } from "../../organisms/PostHeader";
 import { Page } from "../../templates/Page";
 import type { PageProps } from "../../templates/Page";
+import type { PostFrontmatterData } from "../../molecules/PostFrontmatter";
 
 export interface PostProps
   extends Omit<PageProps, "children" | "header" | "title" | "variant"> {
@@ -14,6 +15,10 @@ export interface PostProps
   headerProps?: Omit<PostHeaderProps, "title" | "children">;
   headerExtra?: React.ReactNode;
   bodyProps?: Omit<PostBodyProps, "children">;
+  frontmatter?: PostFrontmatterData;
+  frontmatterLabel?: React.ReactNode;
+  beforeBody?: React.ReactNode;
+  afterBody?: React.ReactNode;
 }
 
 export const Post = React.forwardRef<HTMLElement, PostProps>(
@@ -25,6 +30,10 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
       headerProps,
       headerExtra,
       bodyProps,
+      frontmatter,
+      frontmatterLabel,
+      beforeBody,
+      afterBody,
       sidebarLabel = "post sidebar",
       ...pageProps
     },
@@ -45,7 +54,15 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
         sidebarLabel={sidebarLabel}
         {...pageProps}
       >
-        <PostBody {...bodyProps}>{children}</PostBody>
+        <PostBody
+          frontmatter={frontmatter}
+          frontmatterLabel={frontmatterLabel}
+          before={beforeBody}
+          after={afterBody}
+          {...bodyProps}
+        >
+          {children}
+        </PostBody>
       </Page>
     );
   },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./ContentEditor.module.scss";
 import { Checkbox } from "../../atoms/Checkbox";
 import { Input, Textarea } from "../../atoms/Input/Input";
@@ -9,6 +9,8 @@ import { RepeaterField, type ListRow } from "./RepeaterField";
 import { StatusSelect } from "./StatusSelect";
 import { TagInput } from "./TagInput";
 import { slugify } from "../../../foundations/utils";
+import { Stack } from "../../templates/Layout";
+import Text from "../../atoms/Text";
 
 export type ContentStatus = "draft" | "published" | "archived";
 type EditorState = Record<string, unknown>;
@@ -70,6 +72,7 @@ export interface ContentEditorProps<T extends object = Record<string, unknown>> 
   fields: FieldSpec[];
   status?: boolean;
   autoSlug?: { from: string; to: string };
+  preview?: (data: T) => React.ReactNode;
   onSave?: (data: T) => void;
   onChange?: (data: T) => void;
   onDiscard?: () => void;
@@ -101,6 +104,18 @@ const asListRows = (value: unknown): ListRow[] =>
           !!item && typeof item === "object" && !Array.isArray(item)
       )
     : [];
+
+const countFilledFields = (fields: FieldSpec[], data: EditorState) =>
+  fields.reduce((count, field) => {
+    const value = data[field.key];
+    if (Array.isArray(value)) return count + (value.length > 0 ? 1 : 0);
+    if (typeof value === "boolean") return count + (value ? 1 : 0);
+    if (typeof value === "string") return count + (value.trim() ? 1 : 0);
+    return count + (value ? 1 : 0);
+  }, 0);
+
+const getFieldLabel = (field: FieldSpec) =>
+  "label" in field && field.label ? field.label : field.key.replace(/([A-Z])/g, " $1").toUpperCase();
 
 const seedState = (fields: FieldSpec[], initial: Partial<EditorState>) => {
   const state: EditorState = {};
@@ -142,6 +157,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
   fields,
   status = true,
   autoSlug,
+  preview,
   onSave,
   onChange,
   onDiscard,
@@ -155,19 +171,28 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
     isContentStatus(initialState.status) ? initialState.status : "draft"
   );
   const [tagInputs, setTagInputs] = useState<Record<string, string>>({});
+  const [copiedRaw, setCopiedRaw] = useState(false);
   const slugTouched = useRef(autoSlug ? !!initialState[autoSlug.to] : false);
   const didMount = useRef(false);
 
-  const toPayload = (next: EditorState, nextStatus: ContentStatus) =>
-    ({ ...(next as T), ...(status ? { status: nextStatus } : {}) } as T);
+  const toPayload = useCallback(
+    (next: EditorState, nextStatus: ContentStatus) =>
+      ({ ...(next as T), ...(status ? { status: nextStatus } : {}) } as T),
+    [status],
+  );
+
+  const payload = useMemo(() => toPayload(data, statusValue), [data, statusValue, toPayload]);
+  const rawJson = useMemo(() => JSON.stringify(payload, null, 2), [payload]);
+  const filledFields = useMemo(() => countFilledFields(fields, data), [data, fields]);
+  const totalFields = fields.length + (status ? 1 : 0);
 
   useEffect(() => {
     if (!didMount.current) {
       didMount.current = true;
       return;
     }
-    onChange?.(toPayload(data, statusValue));
-  }, [data, onChange, status, statusValue]);
+    onChange?.(payload);
+  }, [onChange, payload]);
 
   const update = (key: string, value: unknown) => {
     setData((prev) => {
@@ -188,7 +213,14 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
   };
 
   const handleSave = () => {
-    onSave?.(toPayload(data, statusValue));
+    onSave?.(payload);
+  };
+
+  const copyRaw = async () => {
+    if (typeof navigator === "undefined" || !navigator.clipboard) return;
+    await navigator.clipboard.writeText(rawJson);
+    setCopiedRaw(true);
+    window.setTimeout(() => setCopiedRaw(false), 1200);
   };
 
   const renderField = (f: FieldSpec) => {
@@ -208,10 +240,10 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
       );
       if (!f.label) return <React.Fragment key={f.key}>{inputEl}</React.Fragment>;
       return (
-        <div key={f.key} className={styles.field}>
-          <span className={styles.fieldLabel}>{f.label}</span>
+        <Stack key={f.key} className={styles.field} gap="xs">
+          <Text variant="caption" className={styles.fieldLabel}>{f.label}</Text>
           {inputEl}
-        </div>
+        </Stack>
       );
     }
 
@@ -226,10 +258,10 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
       );
       if (!f.label) return <React.Fragment key={f.key}>{ta}</React.Fragment>;
       return (
-        <div key={f.key} className={styles.field}>
-          <span className={styles.fieldLabel}>{f.label}</span>
+        <Stack key={f.key} className={styles.field} gap="xs">
+          <Text variant="caption" className={styles.fieldLabel}>{f.label}</Text>
           {ta}
-        </div>
+        </Stack>
       );
     }
 
@@ -299,6 +331,85 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
     return null;
   };
 
+  const renderPreviewValue = (f: FieldSpec) => {
+    const value = data[f.key];
+
+    if (f.kind === "tags") {
+      const tags = asStringArray(value);
+      return tags.length ? (
+        <div className={styles.previewTags}>
+          {tags.map((tag) => <span key={tag} className={styles.previewTag}>{tag}</span>)}
+        </div>
+      ) : (
+        <span className={styles.previewEmpty}>No tags</span>
+      );
+    }
+
+    if (f.kind === "checkbox") {
+      return <span className={styles.previewBoolean}>{value ? "enabled" : "disabled"}</span>;
+    }
+
+    if (f.kind === "pairs") {
+      const rows = asPairRows(value);
+      return rows.length ? (
+        <div className={styles.previewList}>
+          {rows.map((row, index) => (
+            <div key={index} className={styles.previewRow}>
+              {f.columns.map((column) => (
+                <span key={column.key}>{row[column.key] || column.placeholder}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <span className={styles.previewEmpty}>No rows</span>
+      );
+    }
+
+    if (f.kind === "list") {
+      const rows = asListRows(value);
+      const itemKey = f.itemKey ?? "title";
+      return rows.length ? (
+        <ol className={styles.previewOrdered}>
+          {rows.map((row, index) => (
+            <li key={row.id ?? index}>{asString(row[itemKey]) || f.placeholder}</li>
+          ))}
+        </ol>
+      ) : (
+        <span className={styles.previewEmpty}>No items</span>
+      );
+    }
+
+    const text = asString(value);
+    if (!text.trim()) return <span className={styles.previewEmpty}>Empty</span>;
+    return f.kind === "textarea" ? (
+      <p className={styles.previewBody}>{text}</p>
+    ) : (
+      <span>{text}</span>
+    );
+  };
+
+  const defaultPreview = (
+    <div className={styles.previewSurface}>
+      <Stack className={styles.previewHero} gap="xs">
+        <Text variant="stamp" className={styles.previewKind}>{kindLabel}</Text>
+        <Text variant="h3" className={styles.previewTitle}>
+          {asString(data.title) || asString(data.name) || "Untitled content"}
+        </Text>
+        {status && <span className={styles.previewStatus}>{statusValue}</span>}
+      </Stack>
+
+      <div className={styles.previewGrid}>
+        {fields.map((field) => (
+          <section key={field.key} className={styles.previewField}>
+            <Text variant="caption" className={styles.previewLabel}>{getFieldLabel(field)}</Text>
+            <div className={styles.previewValue}>{renderPreviewValue(field)}</div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <EditorShell
       kindLabel={kindLabel}
@@ -306,6 +417,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
       saving={saving}
       variant={variant}
       className={className}
+      meta={`${filledFields}/${totalFields} fields`}
       onDiscard={onDiscard}
       onSave={handleSave}
       statusControl={
@@ -319,17 +431,28 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
         className={styles.tabs}
         items={[
           {
-            id: "editor",
-            label: "editor",
-            content: <div className={styles.editorPane}>{fields.map(renderField)}</div>,
+            id: "edit",
+            label: "edit",
+            content: <Stack className={styles.editorPane} gap="lg">{fields.map(renderField)}</Stack>,
           },
           {
             id: "preview",
             label: "preview",
+            content: preview ? preview(payload) : defaultPreview,
+          },
+          {
+            id: "raw",
+            label: "raw",
             content: (
-              <pre className={styles.previewPane}>
-                {JSON.stringify(toPayload(data, statusValue), null, 2)}
-              </pre>
+              <Stack className={styles.rawPane} gap="sm">
+                <div className={styles.rawToolbar}>
+                  <Text variant="caption" className={styles.rawLabel}>JSON payload</Text>
+                  <button type="button" className={styles.rawCopy} onClick={copyRaw}>
+                    {copiedRaw ? "copied" : "copy"}
+                  </button>
+                </div>
+                <pre className={styles.previewPane}>{rawJson}</pre>
+              </Stack>
             ),
           },
         ]}

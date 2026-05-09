@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Callout.module.scss";
 import { cx } from "../../../utils/classNames";
+import { hasVisibleContent } from "../../atoms/primitive";
 
 export type CalloutVariant =
   | "info"
@@ -73,11 +74,11 @@ export const Callout: React.FC<CalloutProps> = ({
       {...alertProps}
       {...rest}
     >
-      {!hideGlyph && <div className={styles.glyph} aria-hidden="true">{glyph ?? defaultGlyph[variant]}</div>}
+      {!hideGlyph ? <div className={styles.glyph} aria-hidden="true">{glyph ?? defaultGlyph[variant]}</div> : null}
       <div className={styles.body}>
-        {title && <div className={styles.title}>{title}</div>}
+        {hasVisibleContent(title) ? <div className={styles.title}>{title}</div> : null}
         <div className={styles.content}>{children}</div>
-        {actions && <div className={styles.actions}>{actions}</div>}
+        {hasVisibleContent(actions) ? <div className={styles.actions}>{actions}</div> : null}
       </div>
     </div>
   );

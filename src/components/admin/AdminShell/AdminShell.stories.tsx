@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { AdminShell } from "./AdminShell";
 import type { AdminShellProps } from "./AdminShell";
 import { basicUsage } from "../../../stories/basicUsage";
+import { Button } from "../../atoms/Button";
+import Text from "../../atoms/Text";
 
 const meta: Meta<AdminShellProps> = {
   title: "Templates/AdminShell",
@@ -17,6 +19,18 @@ export const Default: Story = {
   parameters: { docs: { source: { code: basicUsage.AdminShell } } },
   args: {
     title: "// admin",
+    description: "Manage drafts, published content, projects, and course modules from one operator surface.",
+    actions: (
+      <>
+        <Button size="sm" variant="ghost">new draft</Button>
+        <Button size="sm">publish</Button>
+      </>
+    ),
+    stats: [
+      { label: "drafts", value: "12" },
+      { label: "published", value: "48", tone: "good" },
+      { label: "needs review", value: "03", tone: "warn" },
+    ],
     user: { name: "sektant1", role: "admin" },
     nav: [
       { label: "dashboard", href: "#", active: true, glyph: "◈" },
@@ -31,10 +45,6 @@ export const Default: Story = {
     React.createElement(
       AdminShell,
       args,
-      React.createElement(
-        "div",
-        { style: { padding: "2rem", fontFamily: "var(--font-code)", color: "var(--phosphor-dim)" } },
-        "[ main content area ]"
-      )
+      React.createElement(Text, { variant: "code" }, "[ select content from the tree or create a new draft ]")
     ),
 };

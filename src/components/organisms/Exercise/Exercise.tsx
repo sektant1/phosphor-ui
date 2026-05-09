@@ -1,18 +1,21 @@
 import React from "react";
 import styles from "./Exercise.module.scss";
 import { Checkbox } from "../../atoms/Checkbox";
+import { ProgressBar } from "../../atoms/ProgressBar";
+import { cx } from "../../../utils/classNames";
 
 export interface ExerciseTask {
+  id?: string;
   label: React.ReactNode;
+  description?: React.ReactNode;
   done?: boolean;
 }
 
-export interface ExerciseProps {
+export interface ExerciseProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   n?: number;
-  title?: string;
+  title?: React.ReactNode;
   tasks?: ExerciseTask[];
   onTaskChange?: (index: number, done: boolean) => void;
-  className?: string;
   children?: React.ReactNode;
 }
 
@@ -23,6 +26,7 @@ export const Exercise: React.FC<ExerciseProps> = ({
   onTaskChange,
   className,
   children,
+  ...rest
 }) => {
   const tasks = tasksProp ?? [];
   const isControlled = tasksProp !== undefined && onTaskChange !== undefined;
@@ -48,9 +52,8 @@ export const Exercise: React.FC<ExerciseProps> = ({
 
   return (
     <div
-      className={[styles.ex, allDone ? styles.allDone : "", className ?? ""]
-        .filter(Boolean)
-        .join(" ")}
+      className={cx(styles.ex, allDone && styles.allDone, className)}
+      {...rest}
     >
       <div className={styles.head}>
         <span className={styles.badge}>exercise</span>
@@ -69,12 +72,13 @@ export const Exercise: React.FC<ExerciseProps> = ({
       </div>
 
       {tasks.length > 0 && (
-        <div className={styles.track} aria-hidden="true">
-          <div
-            className={styles.fill}
-            style={{ width: `${(doneCount / tasks.length) * 100}%` }}
-          />
-        </div>
+        <ProgressBar
+          className={styles.track}
+          value={doneCount}
+          total={tasks.length}
+          showPercent={false}
+          slim
+        />
       )}
 
       <div className={styles.body}>
@@ -83,11 +87,12 @@ export const Exercise: React.FC<ExerciseProps> = ({
         {tasks.length > 0 && (
           <ul className={styles.tasks}>
             {tasks.map((t, i) => (
-              <li key={i}>
+              <li key={t.id ?? i}>
                 <Checkbox
                   checked={doneStates[i]}
                   label={t.label}
-                  onChange={(next) => toggle(i, next)}
+                  description={t.description}
+                  onCheckedChange={(next) => toggle(i, next)}
                 />
               </li>
             ))}

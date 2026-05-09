@@ -1,1 +1,1 @@
-export * from "../../organisms/ReadingRail";
+export * from "./ReadingRail";

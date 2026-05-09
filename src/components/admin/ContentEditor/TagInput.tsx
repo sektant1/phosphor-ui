@@ -1,6 +1,8 @@
 import React, { KeyboardEvent } from "react";
 import styles from "./ContentEditor.module.scss";
 import { Tag } from "../../atoms/Tag/Tag";
+import { Cluster, Stack } from "../../templates/Layout";
+import Text from "../../atoms/Text";
 
 export interface TagInputProps {
   label?: string;
@@ -22,9 +24,7 @@ export const TagInput: React.FC<TagInputProps> = ({
   onChange,
 }) => {
   const remove = (tag: string) => onChange(value.filter((item) => item !== tag));
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter") return;
-    e.preventDefault();
+  const addCurrent = () => {
     const current = inputValue.trim();
     if (!current) return;
     if (!value.includes(current)) {
@@ -32,11 +32,16 @@ export const TagInput: React.FC<TagInputProps> = ({
     }
     onInputChange("");
   };
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    addCurrent();
+  };
 
   return (
-    <div className={styles.tagsSection}>
-      {label && <span className={styles.fieldLabel}>{label}</span>}
-      <div className={styles.tagsRow}>
+    <Stack className={styles.tagsSection} gap="sm">
+      {label && <Text variant="caption" className={styles.fieldLabel}>{label}</Text>}
+      <Cluster className={styles.tagsRow} gap="xs">
         {value.map((tag) =>
           chip === "tag" ? (
             <Tag key={tag} color="phosphor">
@@ -69,7 +74,15 @@ export const TagInput: React.FC<TagInputProps> = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder ?? "add tag..."}
         />
-      </div>
-    </div>
+        <button
+          type="button"
+          className={styles.addInline}
+          onClick={addCurrent}
+          disabled={!inputValue.trim()}
+        >
+          add
+        </button>
+      </Cluster>
+    </Stack>
   );
 };

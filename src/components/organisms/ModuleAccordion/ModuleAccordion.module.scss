@@ -62,23 +62,7 @@
 }
 
 .progress {
-  display: flex;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid var(--phosphor-fade);
-  background: var(--bg-deep);
-  height: 10px;
   width: 64px;
-}
-
-.progress span {
-  flex: 1;
-  background: rgba(44, 255, 122, 0.06);
-}
-
-.on {
-  background: var(--phosphor) !important;
-  box-shadow: 0 0 3px var(--phosphor);
 }
 
 .pct {

@@ -1,1 +1,1 @@
-export { phosphorTheme } from "../../components/content/CodeBlock";
+export { codeToPhosphorHtml, phosphorTheme } from "../../components/content/CodeBlock";

@@ -1,0 +1,51 @@
+.shell {
+  min-height: 100vh;
+}
+
+.frame {
+  width: min(100%, var(--pho-site-max-width, 88rem));
+  margin-inline: auto;
+  padding: var(--pho-site-padding, clamp(1rem, 2vw, 1.75rem));
+}
+
+.skipLink {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10000;
+  transform: translateY(-150%);
+  background: var(--phosphor);
+  border: 1px solid var(--phosphor-bright);
+  color: var(--bg);
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  padding: 0.45rem 0.65rem;
+  text-decoration: none;
+  text-shadow: none;
+  transition: transform 120ms ease;
+}
+
+.skipLink:focus-visible {
+  outline: 2px solid var(--magenta-bright);
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
+.main {
+  min-width: 0;
+}
+
+.main:focus {
+  outline: none;
+}
+
+.main:focus-visible {
+  outline: 1px dashed var(--phosphor-dim);
+  outline-offset: 0.5rem;
+}
+
+@media (max-width: 560px) {
+  .frame {
+    padding: var(--pho-site-padding-mobile, 0.8rem);
+  }
+}

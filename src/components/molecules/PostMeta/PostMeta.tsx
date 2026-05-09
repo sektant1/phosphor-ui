@@ -1,30 +1,39 @@
 import React from "react";
 import styles from "./PostMeta.module.scss";
+import { cx } from "../../../utils/classNames";
+import { Cluster } from "../../templates/Layout";
 
-export interface PostMetaProps {
+export interface PostMetaTag {
+  label: React.ReactNode;
+  href?: string;
+}
+
+export interface PostMetaProps extends React.HTMLAttributes<HTMLDivElement> {
   date?: string;
+  dateTime?: string;
   readTime?: string;
   wordCount?: number;
-  tags?: string[];
+  tags?: Array<string | PostMetaTag>;
   updated?: string;
-  className?: string;
 }
 
 const Sep: React.FC = () => <span className={styles.sep} aria-hidden="true">·</span>;
 
 export const PostMeta: React.FC<PostMetaProps> = ({
   date,
+  dateTime,
   readTime,
   wordCount,
   tags,
   updated,
   className,
+  ...rest
 }) => {
   const items: React.ReactNode[] = [];
 
   if (date) {
     items.push(
-      <span key="date" className={styles.date}>{date}</span>
+      <time key="date" className={styles.date} dateTime={dateTime ?? date}>{date}</time>
     );
   }
 
@@ -54,9 +63,15 @@ export const PostMeta: React.FC<PostMetaProps> = ({
   if (tags && tags.length > 0) {
     items.push(
       <span key="tags" className={styles.tags}>
-        {tags.map((tag) => (
-          <span key={tag} className={styles.tag}>#{tag}</span>
-        ))}
+        {tags.map((tag) => {
+          const label = typeof tag === "string" ? tag : tag.label;
+          const href = typeof tag === "string" ? undefined : tag.href;
+          return href ? (
+            <a key={String(label)} className={styles.tag} href={href}>#{label}</a>
+          ) : (
+            <span key={String(label)} className={styles.tag}>#{label}</span>
+          );
+        })}
       </span>
     );
   }
@@ -68,8 +83,13 @@ export const PostMeta: React.FC<PostMetaProps> = ({
   }, []);
 
   return (
-    <div className={[styles.root, className ?? ""].filter(Boolean).join(" ")}>
+    <Cluster
+      className={cx(styles.root, className)}
+      rowGap="0.5ch"
+      columnGap="1ch"
+      {...rest}
+    >
       {withSeps}
-    </div>
+    </Cluster>
   );
 };

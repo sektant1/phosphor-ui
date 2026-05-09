@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./ContentEditor.module.scss";
 import { Button } from "../../atoms/Button/Button";
 import type { PairColumn } from "./ContentEditor";
+import { Cluster, Stack } from "../../templates/Layout";
+import Text from "../../atoms/Text";
 
 export type PairRow = Record<string, string>;
 
@@ -26,15 +28,28 @@ export const PairListField: React.FC<PairListFieldProps> = ({
   }, {});
 
   return (
-    <div className={styles.pairsSection}>
-      <span className={styles.fieldLabel}>{label}</span>
+    <Stack className={styles.pairsSection} gap="sm">
+      <Cluster className={styles.fieldHeader} justify="space-between" gap="sm">
+        <Text variant="caption" className={styles.fieldLabel}>{label}</Text>
+        <Button
+          variant="ghost"
+          size="sm"
+          type="button"
+          onClick={() => onChange([...rows, blank])}
+        >
+          {addLabel}
+        </Button>
+      </Cluster>
+      {!rows.length && <div className={styles.emptyField}>No rows yet.</div>}
       {rows.map((row, index) => (
-        <div key={index} className={styles.pairRow}>
+        <Cluster key={index} className={styles.pairRow} gap="sm" align="center">
+          <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
           {columns.map((column) => (
             <input
               key={column.key}
               className={styles.pairInput}
               style={{ flex: column.flex ?? 1 }}
+              aria-label={`${label} ${column.placeholder} ${index + 1}`}
               placeholder={column.placeholder}
               value={row[column.key] ?? ""}
               onChange={(e) =>
@@ -54,18 +69,10 @@ export const PairListField: React.FC<PairListFieldProps> = ({
             onClick={() => onChange(rows.filter((_, itemIndex) => itemIndex !== index))}
             aria-label={`Remove ${label.toLowerCase()} row ${index + 1}`}
           >
-            ×
+            remove
           </button>
-        </div>
+        </Cluster>
       ))}
-      <Button
-        variant="ghost"
-        size="sm"
-        type="button"
-        onClick={() => onChange([...rows, blank])}
-      >
-        {addLabel}
-      </Button>
-    </div>
+    </Stack>
   );
 };

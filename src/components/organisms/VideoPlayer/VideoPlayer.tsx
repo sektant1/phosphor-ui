@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import videojs from "video.js";
 import type Player from "video.js/dist/types/player";
 import "video.js/dist/video-js.css";
@@ -51,7 +51,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
   const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
-  const sources = toSources(src);
+  const sources = useMemo(() => toSources(src), [src]);
 
   useEffect(() => {
     if (playerRef.current) return;
@@ -94,8 +94,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (!player) return;
     player.src(sources);
     if (poster !== undefined) player.poster(poster);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(sources), poster]);
+  }, [sources, poster]);
 
   return (
     <figure className={cx(styles.vp, className)}>

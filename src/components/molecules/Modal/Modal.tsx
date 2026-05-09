@@ -4,21 +4,34 @@ import styles from "./Modal.module.scss";
 import { cx } from "../../../utils/classNames";
 import { isBrowser, type CssVars } from "../../../utils/browser";
 
-export interface ModalProps {
+type OverlayCommonProps = {
   open: boolean;
   onClose: () => void;
-  title?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  closeLabel?: string;
+  closeOnEscape?: boolean;
+  closeOnOverlayClick?: boolean;
+  footer?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
+};
+
+export interface ModalProps extends OverlayCommonProps {
+  overlayClassName?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({
-  open,
-  onClose,
-  title,
-  children,
-  className,
-}) => {
+function useMounted(): boolean {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return mounted;
+}
+
+function useOverlayDismiss(
+  open: boolean,
+  onClose: () => void,
+  closeOnEscape: boolean,
+): void {
   useEffect(() => {
     if (!open || !isBrowser()) return;
     const prev = document.body.style.overflow;
@@ -29,37 +42,62 @@ export const Modal: React.FC<ModalProps> = ({
   }, [open]);
 
   useEffect(() => {
-    if (!open || !isBrowser()) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    if (!open || !isBrowser() || !closeOnEscape) return;
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [open, onClose]);
+  }, [closeOnEscape, onClose, open]);
+}
+
+export const Modal: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  title,
+  description,
+  closeLabel = "Close",
+  closeOnEscape = true,
+  closeOnOverlayClick = true,
+  footer,
+  children,
+  className,
+  overlayClassName,
+}) => {
+  const titleId = React.useId();
+  const descriptionId = React.useId();
+  useOverlayDismiss(open, onClose, closeOnEscape);
 
   if (!open) return null;
   if (!isBrowser()) return null;
 
   return ReactDOM.createPortal(
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      className={cx(styles.overlay, overlayClassName)}
+      onClick={closeOnOverlayClick ? onClose : undefined}
+    >
       <div
         className={cx(styles.dialog, className)}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        aria-describedby={description ? descriptionId : undefined}
       >
         <div className={styles.header}>
-          {title && <span className={styles.title}>{title}</span>}
+          {title ? <span id={titleId} className={styles.title}>{title}</span> : null}
           <button
             className={styles.close}
             onClick={onClose}
-            aria-label="Close"
+            aria-label={closeLabel}
             type="button"
           >
             [×]
           </button>
         </div>
+        {description ? <p id={descriptionId} className={styles.description}>{description}</p> : null}
         <div className={styles.body}>{children}</div>
+        {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,
     document.body,
@@ -68,55 +106,38 @@ export const Modal: React.FC<ModalProps> = ({
 
 export type DrawerSide = "left" | "right";
 
-export interface DrawerProps {
-  open: boolean;
-  onClose: () => void;
-  title?: string;
+export interface DrawerProps extends OverlayCommonProps {
   side?: DrawerSide;
   width?: string;
-  children?: React.ReactNode;
-  className?: string;
+  overlayClassName?: string;
 }
 
 export const Drawer: React.FC<DrawerProps> = ({
   open,
   onClose,
   title,
+  description,
+  closeLabel = "Close",
+  closeOnEscape = true,
+  closeOnOverlayClick = true,
+  footer,
   side = "right",
   width = "320px",
   children,
   className,
+  overlayClassName,
 }) => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!open || !isBrowser()) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
-
-  useEffect(() => {
-    if (!open || !isBrowser()) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [open, onClose]);
+  const mounted = useMounted();
+  const titleId = React.useId();
+  const descriptionId = React.useId();
+  useOverlayDismiss(open, onClose, closeOnEscape);
 
   if (!mounted || !open || !isBrowser()) return null;
 
   return ReactDOM.createPortal(
     <div
-      className={cx(styles.drawerOverlay, open && styles.drawerOverlayVisible)}
-      onClick={onClose}
+      className={cx(styles.drawerOverlay, open && styles.drawerOverlayVisible, overlayClassName)}
+      onClick={closeOnOverlayClick ? onClose : undefined}
       aria-hidden={!open}
     >
       <div
@@ -130,19 +151,23 @@ export const Drawer: React.FC<DrawerProps> = ({
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        aria-describedby={description ? descriptionId : undefined}
       >
         <div className={styles.header}>
-          {title && <span className={styles.title}>{title}</span>}
+          {title ? <span id={titleId} className={styles.title}>{title}</span> : null}
           <button
             className={styles.close}
             onClick={onClose}
-            aria-label="Close"
+            aria-label={closeLabel}
             type="button"
           >
             [×]
           </button>
         </div>
+        {description ? <p id={descriptionId} className={styles.description}>{description}</p> : null}
         <div className={styles.body}>{children}</div>
+        {footer ? <div className={styles.footer}>{footer}</div> : null}
       </div>
     </div>,
     document.body,

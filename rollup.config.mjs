@@ -6,6 +6,18 @@ import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
+const externalPackages = [
+  /^react($|\/)/,
+  /^react-dom($|\/)/,
+  /^@mdx-js\/react$/,
+  /^shiki($|\/)/,
+  /^figlet($|\/)/,
+  /^video\.js$/,
+  /^video\.js\/dist\/types\//,
+];
+
+const isExternal = (id) => externalPackages.some((pattern) => pattern.test(id));
+
 export default [
   {
     input: "src/index.ts",
@@ -23,10 +35,7 @@ export default [
         inlineDynamicImports: true,
       },
     ],
-    external: (id) =>
-      ["react", "react-dom", "react/jsx-runtime", "@mdx-js/react"].includes(id) ||
-      id === "shiki" ||
-      id.startsWith("shiki/"),
+    external: isExternal,
     plugins: [
       peerDepsExternal(),
 

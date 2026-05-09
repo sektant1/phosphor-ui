@@ -12,6 +12,11 @@
     "retro",
     "cyberpunk",
     "terminal",
+    "second-brain",
+    "digital-garden",
+    "blog",
+    "wiki",
+    "mdx",
     "storybook"
   ],
   "author": "sektant1",
@@ -30,6 +35,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
+  "style": "dist/phosphor.css",
   "files": [
     "dist",
     "README.md",
@@ -45,8 +51,10 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
+    "./phosphor.css": "./dist/phosphor.css",
     "./tokens.css": "./dist/tokens.css",
     "./global.css": "./dist/global.css",
+    "./package.json": "./package.json",
     "./fonts/JetBrainsMono-Regular.woff2": "./dist/fonts/JetBrainsMono-Regular.woff2",
     "./fonts/JetBrainsMono-Bold.woff2": "./dist/fonts/JetBrainsMono-Bold.woff2",
     "./fonts/JetBrainsMono-Italic.woff2": "./dist/fonts/JetBrainsMono-Italic.woff2",
@@ -56,15 +64,21 @@
     "./fonts/VT323-Regular.ttf": "./dist/fonts/VT323-Regular.ttf"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.mjs && npm run build:types && npm run copy-styles",
+    "build": "npm run clean && rollup -c rollup.config.mjs && npm run build:types && npm run copy-styles",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "rollup": "rollup -c rollup.config.mjs",
     "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist/esm --outDir dist/esm",
-    "copy-styles": "mkdir -p dist/fonts && cp src/styles/tokens.css dist/tokens.css && cp src/styles/global.css dist/global.css && cp src/styles/fonts/* dist/fonts/",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "copy-styles": "mkdir -p dist/fonts && cp src/styles/tokens.css dist/tokens.css && cp src/styles/global.css dist/global.css && cp src/styles/phosphor.css dist/phosphor.css && cp src/styles/fonts/* dist/fonts/",
+    "typecheck": "npm run typecheck:src && npm run typecheck:storybook && npm run typecheck:tests",
+    "typecheck:src": "tsc --noEmit -p tsconfig.json",
+    "typecheck:storybook": "tsc -p tsconfig.storybook.json",
+    "typecheck:tests": "tsc -p tsconfig.test.json",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepublishOnly": "npm run typecheck && npm run build",
+    "validate": "npm run typecheck && npm test -- --runInBand && npm run build-storybook -- --quiet && npm run build",
+    "validate:package": "npm run typecheck && npm test -- --runInBand && npm run build",
+    "prepublishOnly": "npm run validate:package",
     "release": "npm publish --access public"
   },
   "peerDependencies": {
@@ -100,7 +114,6 @@
     "babel-jest": "30.3.0",
     "babel-loader": "10.1.1",
     "css-loader": "7.1.4",
-    "figlet": "1.11.0",
     "html-webpack-plugin": "5.6.7",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.3.0",
@@ -120,6 +133,7 @@
     "@storybook/addon-docs": "10.3.6"
   },
   "dependencies": {
+    "figlet": "1.11.0",
     "shiki": "4.0.2",
     "video.js": "^8.23.7"
   }

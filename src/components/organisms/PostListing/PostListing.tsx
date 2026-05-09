@@ -1,28 +1,41 @@
 import React from "react";
 import styles from "./PostListing.module.scss";
+import { cx } from "../../../utils/classNames";
+import { EmptyState } from "../../molecules/EmptyState";
 
-export interface PostRowProps {
-  date: string;
-  title: string;
-  meta?: string;
+export interface PostRowProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "title"> {
+  date?: React.ReactNode;
+  dateTime?: string;
+  title: React.ReactNode;
+  meta?: React.ReactNode;
   href: string;
-  glyph?: string;
+  glyph?: React.ReactNode;
   thumb?: React.ReactNode;
   thumbSrc?: string;
   thumbAlt?: string;
   index?: number;
 }
 
-export interface PostListingProps {
-  children: React.ReactNode;
-  className?: string;
+export interface PostListingProps extends React.HTMLAttributes<HTMLDivElement> {
+  children?: React.ReactNode;
+  posts?: PostRowProps[];
   headerLabels?: { glyph?: string; date?: string; post?: string; length?: string; thumb?: string };
+  emptyMessage?: React.ReactNode;
+  emptyState?: React.ReactNode;
+  getPostKey?: (post: PostRowProps, index: number) => React.Key;
+  renderPost?: (post: PostRowProps, index: number) => React.ReactNode;
 }
 
 export const PostListing: React.FC<PostListingProps> = ({
   children,
+  posts,
   className,
   headerLabels,
+  emptyMessage = "no posts found.",
+  emptyState,
+  getPostKey = (post, index) => post.href || index,
+  renderPost,
+  ...rest
 }) => {
   const labels = {
     glyph: "▌",
@@ -32,8 +45,11 @@ export const PostListing: React.FC<PostListingProps> = ({
     thumb: "FRAME",
     ...(headerLabels ?? {}),
   };
+  const hasPosts = posts !== undefined;
+  const isEmpty = hasPosts && posts.length === 0;
+
   return (
-    <div className={[styles.wrap, className ?? ""].join(" ")}>
+    <div className={cx(styles.wrap, className)} {...rest}>
       <div className={styles.header}>
         <span className={styles.hGlyph}>{labels.glyph}</span>
         <span className={styles.hThumb}>{labels.thumb}</span>
@@ -41,13 +57,34 @@ export const PostListing: React.FC<PostListingProps> = ({
         <span className={styles.hLen}>{labels.length}</span>
         <span className={styles.hDate}>{labels.date}</span>
       </div>
-      <ul className={styles.list}>{children}</ul>
+      {isEmpty ? (
+        emptyState ?? <EmptyState glyph="[ 0 ]" title={emptyMessage} status />
+      ) : (
+        <ul className={styles.list}>
+          {hasPosts
+            ? posts.map((post, index) =>
+                renderPost ? (
+                  <React.Fragment key={getPostKey(post, index)}>
+                    {renderPost(post, index)}
+                  </React.Fragment>
+                ) : (
+                  <PostRow
+                    key={getPostKey(post, index)}
+                    index={post.index ?? index}
+                    {...post}
+                  />
+                ),
+              )
+            : children}
+        </ul>
+      )}
     </div>
   );
 };
 
 export const PostRow: React.FC<PostRowProps> = ({
   date,
+  dateTime,
   title,
   meta,
   href,
@@ -56,6 +93,9 @@ export const PostRow: React.FC<PostRowProps> = ({
   thumbSrc,
   thumbAlt,
   index = 0,
+  className,
+  style,
+  ...rest
 }) => {
   const thumbContent = thumbSrc ? (
     <img src={thumbSrc} alt={thumbAlt ?? ""} loading="lazy" />
@@ -68,15 +108,20 @@ export const PostRow: React.FC<PostRowProps> = ({
   );
   return (
     <li
-      className={styles.row}
-      style={{ ["--i" as string]: index }}
+      className={cx(styles.row, className)}
+      style={{ ...style, ["--i" as string]: index }}
+      {...rest}
     >
       <a href={href}>
         <span className={styles.glyph}>{glyph}</span>
         <span className={styles.thumb}>{thumbContent}</span>
         <span className={styles.title}>{title}</span>
         {meta && <span className={styles.meta}>{meta}</span>}
-        <span className={styles.date}>{date}</span>
+        {date ? (
+          <time className={styles.date} dateTime={dateTime}>
+            {date}
+          </time>
+        ) : null}
       </a>
     </li>
   );

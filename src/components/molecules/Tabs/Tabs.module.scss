@@ -1,13 +1,23 @@
 .root {
   display: grid;
   gap: 0.85rem;
+  min-width: 0;
 }
 
 .list {
   border-bottom: 1px solid var(--phosphor-fade);
   display: flex;
   gap: 0.35rem;
+  min-width: 0;
   overflow-x: auto;
+}
+
+.vertical {
+  align-items: stretch;
+  border-bottom: 0;
+  border-right: 1px solid var(--phosphor-fade);
+  flex-direction: column;
+  overflow-x: visible;
 }
 
 .tab {
@@ -22,6 +32,12 @@
   letter-spacing: 0.08em;
   padding: 0.45rem 0.75rem;
   text-transform: uppercase;
+}
+
+.vertical .tab {
+  border-bottom: 1px solid transparent;
+  border-right: 0;
+  text-align: left;
 }
 
 .tab:hover:not(:disabled) {

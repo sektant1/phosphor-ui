@@ -1,10 +1,10 @@
 html,
 body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: var(--type-body-size);
-  line-height: var(--type-line-prose);
+  background: var(--pho-color-background);
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-body-size);
+  line-height: var(--pho-line-prose);
   margin: 0;
   padding: 0;
 }
@@ -16,62 +16,66 @@ body {
 }
 
 a {
-  color: var(--magenta);
+  color: var(--pho-color-link);
   text-shadow: none;
+}
+
+a:hover {
+  color: var(--pho-color-link-hover);
 }
 
 code,
 pre,
 kbd,
 samp {
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   background: var(--code-bg);
   color: var(--code-var);
 }
 
 ::selection {
-  background: var(--phosphor);
-  color: var(--bg);
+  background: var(--pho-color-selection-bg);
+  color: var(--pho-color-selection-text);
   text-shadow: none;
 }
 
 /* ── unified phosphor scrollbar ──────────────────────────── */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-color: var(--pho-scrollbar-thumb) var(--pho-scrollbar-track);
 }
 
 *::-webkit-scrollbar {
-  width: var(--scrollbar-size);
-  height: var(--scrollbar-size);
+  width: var(--pho-scrollbar-size);
+  height: var(--pho-scrollbar-size);
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
+  background: var(--pho-scrollbar-track);
   border-left: var(--scrollbar-track-border);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb);
-  border: 1px solid var(--scrollbar-track);
+  background: var(--pho-scrollbar-thumb);
+  border: 1px solid var(--pho-scrollbar-track);
   border-radius: 0;
   box-shadow: inset 0 0 0 1px var(--scrollbar-thumb-edge);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover);
+  background: var(--pho-scrollbar-thumb-hover);
   box-shadow:
-    inset 0 0 0 1px var(--phosphor),
+    inset 0 0 0 1px var(--pho-color-primary),
     var(--scrollbar-glow);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: var(--scrollbar-thumb-active);
-  box-shadow: 0 0 8px var(--phosphor);
+  background: var(--pho-scrollbar-thumb-active);
+  box-shadow: 0 0 8px var(--pho-color-primary);
 }
 
 *::-webkit-scrollbar-corner {
-  background: var(--scrollbar-track);
+  background: var(--pho-scrollbar-track);
 }
 
 .pho-page-enter {
@@ -112,7 +116,7 @@ samp {
   content: "▮";
   display: inline-block;
   margin-left: 0.2em;
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
   animation: phoBlink 1s steps(2) infinite;
 }
 

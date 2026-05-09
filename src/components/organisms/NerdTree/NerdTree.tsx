@@ -5,26 +5,29 @@ import { Drawer } from "../../molecules/Modal";
 
 export interface NerdTreeLeaf {
   kind: "leaf";
+  id?: string;
   label: string;
   href?: string;
   active?: boolean;
 }
 export interface NerdTreeDir {
   kind: "dir";
+  id?: string;
   label: string;
   children?: NerdTreeNode[];
   defaultOpen?: boolean;
 }
 export type NerdTreeNode = NerdTreeLeaf | NerdTreeDir;
 
-export interface NerdTreeProps {
+export interface NerdTreeProps extends React.HTMLAttributes<HTMLElement> {
   tree: NerdTreeNode[];
   bufferLabel?: string;
   title?: string;
   hint?: React.ReactNode;
   command?: string;
   footerMeta?: string;
-  className?: string;
+  ariaLabel?: string;
+  mobileToggleLabel?: string;
 }
 
 export const NerdTree: React.FC<NerdTreeProps> = ({
@@ -34,7 +37,10 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   hint,
   command = ":NERDTree",
   footerMeta,
+  ariaLabel = "content tree",
+  mobileToggleLabel = "content tree",
   className,
+  ...rest
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const renderContent = (onNavigate?: () => void) => (
@@ -50,7 +56,7 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
 
       <ul className={styles.list} role="tree">
         {tree.map((n, i) => (
-          <Node key={i} node={n} onNavigate={onNavigate} />
+          <Node key={getNodeKey(n, i)} node={n} index={i} onNavigate={onNavigate} />
         ))}
       </ul>
 
@@ -62,12 +68,12 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   );
 
   return (
-    <aside className={cx(styles.tree, className)} aria-label="content tree">
+    <aside className={cx(styles.tree, className)} aria-label={ariaLabel} {...rest}>
       <button
         type="button"
         className={styles.toggleBtn}
         aria-expanded={mobileOpen}
-        aria-label={mobileOpen ? "Close content tree" : "Open content tree"}
+        aria-label={`${mobileOpen ? "Close" : "Open"} ${mobileToggleLabel}`}
         onClick={() => setMobileOpen((o) => !o)}
       >
         <span className={styles.toggleGlyph} aria-hidden="true">
@@ -94,30 +100,41 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   );
 };
 
+function getNodeKey(node: NerdTreeNode, index: number): string {
+  return node.id ?? ("href" in node && node.href ? node.href : `${node.kind}-${node.label}-${index}`);
+}
+
 const Node: React.FC<{
   node: NerdTreeNode;
+  index: number;
   onNavigate?: () => void;
-}> = ({ node, onNavigate }) => {
+}> = ({ node, index, onNavigate }) => {
   if (node.kind === "leaf") {
     return (
-      <li className={[styles.leaf, node.active ? styles.active : ""].join(" ")}>
+      <li
+        className={cx(styles.leaf, node.active && styles.active)}
+        role="treeitem"
+        aria-selected={node.active || undefined}
+      >
         <a className={styles.link} href={node.href ?? "#"} onClick={onNavigate}>
           {node.label}
         </a>
       </li>
     );
   }
-  return <Dir node={node} onNavigate={onNavigate} />;
+  return <Dir node={node} index={index} onNavigate={onNavigate} />;
 };
 
 const Dir: React.FC<{
   node: NerdTreeDir;
+  index: number;
   onNavigate?: () => void;
-}> = ({ node, onNavigate }) => {
+}> = ({ node, index, onNavigate }) => {
   const [open, setOpen] = useState(node.defaultOpen ?? true);
   const count = node.children?.length ?? 0;
+  const groupId = React.useId();
   return (
-    <li className={styles.row}>
+    <li className={styles.row} role="treeitem" aria-expanded={open} aria-controls={groupId}>
       <button
         type="button"
         className={styles.foldBtn}
@@ -128,9 +145,9 @@ const Dir: React.FC<{
         {count > 0 && <span className={styles.meta}>({count})</span>}
       </button>
       {open && node.children && (
-        <ul className={styles.children}>
+        <ul id={groupId} className={styles.children} role="group">
           {node.children.map((c, i) => (
-            <Node key={i} node={c} onNavigate={onNavigate} />
+            <Node key={getNodeKey(c, i)} node={c} index={i} onNavigate={onNavigate} />
           ))}
         </ul>
       )}

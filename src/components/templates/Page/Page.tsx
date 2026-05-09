@@ -1,7 +1,8 @@
 import React from "react";
-import styles from "../PageLayout/PageLayout.module.scss";
+import styles from "./Page.module.scss";
 import { cx } from "../../../utils/classNames";
-import { Grid } from "../Layout";
+import { Container, Grid } from "../Layout";
+import type { ContainerProps } from "../Layout";
 
 export type PageVariant = "post" | "project";
 
@@ -9,6 +10,11 @@ export type PageSidebarPosition = "left" | "right";
 
 export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   variant?: PageVariant;
+  contained?: boolean;
+  containerWidth?: ContainerProps["width"];
+  containerPadding?: ContainerProps["padding"];
+  mobileContainerPadding?: ContainerProps["mobilePadding"];
+  containerCenter?: boolean;
   header?: React.ReactNode;
   hero?: React.ReactNode;
   sidebar?: React.ReactNode;
@@ -17,12 +23,19 @@ export interface PageProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   sidebarLabel?: string;
   stickySidebar?: boolean;
+  mainProps?: React.HTMLAttributes<HTMLDivElement>;
+  sidebarProps?: React.HTMLAttributes<HTMLElement>;
 }
 
 export const Page = React.forwardRef<HTMLElement, PageProps>(
   (
     {
       variant = "post",
+      contained = true,
+      containerWidth = "88rem",
+      containerPadding = "xl",
+      mobileContainerPadding = "md",
+      containerCenter = true,
       header,
       hero,
       sidebar,
@@ -31,6 +44,8 @@ export const Page = React.forwardRef<HTMLElement, PageProps>(
       children,
       sidebarLabel,
       stickySidebar = true,
+      mainProps,
+      sidebarProps,
       className,
       ...rest
     },
@@ -42,12 +57,8 @@ export const Page = React.forwardRef<HTMLElement, PageProps>(
       sidebarLabel ??
       (variant === "project" ? "project sidebar" : "post sidebar");
 
-    return (
-      <article
-        ref={ref}
-        className={cx(styles.root, styles[variant], className)}
-        {...rest}
-      >
+    const content = (
+      <>
         {header ? <div className={styles.header}>{header}</div> : null}
         {hero ? <div className={styles.hero}>{hero}</div> : null}
         <Grid
@@ -65,9 +76,11 @@ export const Page = React.forwardRef<HTMLElement, PageProps>(
         >
           {sidebar && sidebarPosition === "left" ? (
             <aside
+              {...sidebarProps}
               className={cx(
                 styles.sidebar,
                 stickySidebar && styles.stickySidebar,
+                sidebarProps?.className,
               )}
               aria-label={resolvedSidebarLabel}
             >
@@ -75,13 +88,15 @@ export const Page = React.forwardRef<HTMLElement, PageProps>(
             </aside>
           ) : null}
 
-          <div className={styles.main}>{children}</div>
+          <div {...mainProps} className={cx(styles.main, mainProps?.className)}>{children}</div>
 
           {sidebar && sidebarPosition === "right" ? (
             <aside
+              {...sidebarProps}
               className={cx(
                 styles.sidebar,
                 stickySidebar && styles.stickySidebar,
+                sidebarProps?.className,
               )}
               aria-label={resolvedSidebarLabel}
             >
@@ -91,6 +106,27 @@ export const Page = React.forwardRef<HTMLElement, PageProps>(
         </Grid>
 
         {footer ? <footer className={styles.footer}>{footer}</footer> : null}
+      </>
+    );
+
+    const rootClassName = cx(styles.root, styles[variant], className);
+
+    return contained ? (
+      <Container
+        as="article"
+        ref={ref}
+        width={containerWidth}
+        padding={containerPadding}
+        mobilePadding={mobileContainerPadding}
+        center={containerCenter}
+        className={rootClassName}
+        {...rest}
+      >
+        {content}
+      </Container>
+    ) : (
+      <article ref={ref} className={rootClassName} {...rest}>
+        {content}
       </article>
     );
   },

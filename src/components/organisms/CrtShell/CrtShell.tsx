@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./CrtShell.module.scss";
+import { cx } from "../../../utils/classNames";
 
-export interface CrtShellProps {
+export interface CrtShellProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   disableTick?: boolean;
   disableNoise?: boolean;
   disableScanlines?: boolean;
   disableVignette?: boolean;
   disableFrame?: boolean;
-  className?: string;
 }
 
 export const CrtShell: React.FC<CrtShellProps> = ({
@@ -19,8 +19,9 @@ export const CrtShell: React.FC<CrtShellProps> = ({
   disableVignette,
   disableFrame,
   className,
+  ...rest
 }) => (
-  <div className={[styles.shell, className ?? ""].join(" ")}>
+  <div className={cx(styles.shell, className)} {...rest}>
     {!disableNoise && <div className={styles.noise} aria-hidden="true" />}
     {!disableScanlines && <div className={styles.scanlines} aria-hidden="true" />}
     {!disableVignette && <div className={styles.vignette} aria-hidden="true" />}

@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./SeriesNav.module.scss";
+import { cx } from "../../../utils/classNames";
+import { Cluster, Grid, Stack } from "../../templates/Layout";
 
 export interface SeriesNavItem {
   title: string;
@@ -25,35 +27,42 @@ export const SeriesNav: React.FC<SeriesNavProps> = ({
   next,
   className,
 }) => (
-  <nav
-    className={[styles.root, className ?? ""].join(" ")}
+  <Stack
+    as="nav"
+    gap="sm"
+    className={cx(styles.root, className)}
     aria-label="series navigation"
   >
-    <div className={styles.header}>
+    <Cluster className={styles.header} rowGap="0.4ch" columnGap="1ch" align="baseline">
       <span className={styles.seriesLabel}>SERIES</span>
       <span className={styles.seriesTitle}>{seriesTitle}</span>
       <span className={styles.progress}>
         [{pad(current)} / {pad(total)}]
       </span>
-    </div>
+    </Cluster>
 
-    <div className={styles.links}>
+    <Grid className={styles.links} columns="1fr 1fr" gap="sm" mobileColumns="1fr">
       <div className={styles.prevSlot}>
         {prev && (
-          <a href={prev.href} className={styles.link}>
+          <Stack as="a" href={prev.href} gap="xs" className={styles.link}>
             <span className={styles.dir}>&#9666; prev</span>
             <span className={styles.linkTitle}>{prev.title}</span>
-          </a>
+          </Stack>
         )}
       </div>
       <div className={styles.nextSlot}>
         {next && (
-          <a href={next.href} className={[styles.link, styles.linkNext].join(" ")}>
+          <Stack
+            as="a"
+            href={next.href}
+            gap="xs"
+            className={cx(styles.link, styles.linkNext)}
+          >
             <span className={styles.dir}>next &#9656;</span>
             <span className={styles.linkTitle}>{next.title}</span>
-          </a>
+          </Stack>
         )}
       </div>
-    </div>
-  </nav>
+    </Grid>
+  </Stack>
 );

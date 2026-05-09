@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { CourseCard } from "../../molecules/CourseCard";
 import { Tag } from "../../atoms/Tag";
-import { Flex, Grid } from "./Layout";
+import { Cluster, Container, Flex, Grid, Stack } from "./Layout";
 import { basicUsage } from "../../../stories/basicUsage";
 
 const meta: Meta = {
@@ -30,8 +30,7 @@ export const Default: Story = {
 
 export const FlexColumn: Story = {
   render: () => (
-    <Flex
-      direction="column"
+    <Stack
       align="stretch"
       gap="md"
       style={{ width: "min(420px, 90vw)" }}
@@ -39,7 +38,33 @@ export const FlexColumn: Story = {
       <Button>Primary action</Button>
       <Button variant="ghost">Ghost action</Button>
       <Button variant="danger">Danger action</Button>
-    </Flex>
+    </Stack>
+  ),
+};
+
+export const ClusteredActions: Story = {
+  parameters: { docs: { source: { code: basicUsage.Cluster } } },
+  render: () => (
+    <Cluster gap="xs" justify="center" style={{ width: "min(520px, 90vw)" }}>
+      <Tag>notes</Tag>
+      <Tag>daily-log</Tag>
+      <Tag color="magenta">published</Tag>
+      <Button size="sm">Open</Button>
+    </Cluster>
+  ),
+};
+
+export const BoundedContainer: Story = {
+  parameters: { docs: { source: { code: basicUsage.Container } } },
+  render: () => (
+    <Container width="prose">
+      <Stack gap="sm">
+        <Tag>container</Tag>
+        <p style={{ margin: 0 }}>
+          A bounded layout shell for posts, indexes, project notes, and wiki pages.
+        </p>
+      </Stack>
+    </Container>
   ),
 };
 

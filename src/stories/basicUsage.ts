@@ -15,6 +15,16 @@ export function Example() {
   return <AdminShell nav={nav}>Admin content</AdminShell>;
 }`,
   AsciiBanner: example("AsciiBanner", `<AsciiBanner text="PHOSPHOR" />`),
+  ArticleList: `import { ArticleList } from "${pkg}";
+
+const items = [
+  { title: "Daily note", href: "/notes/daily", meta: "updated today" },
+  { title: "Project log", href: "/projects/log", description: "Open questions and next steps." },
+];
+
+export function Example() {
+  return <ArticleList items={items} />;
+}`,
   AuthorCard: `import { AuthorCard } from "${pkg}";
 
 export function Example() {
@@ -88,8 +98,8 @@ export function Example() {
   DropdownMenu: `import { DropdownMenu } from "${pkg}";
 
 const items = [
-  { label: "Edit", onSelect: () => {} },
-  { label: "Archive", onSelect: () => {} },
+  { label: "Edit", value: "edit" },
+  { label: "Archive", value: "archive" },
 ];
 
 export function Example() {
@@ -176,28 +186,23 @@ export function Example() {
 }`,
   ModuleAccordion: `import { ModuleAccordion } from "${pkg}";
 
-const modules = [{ title: "Boot sequence", lessons: [] }];
+const lessons = [{ num: "01", title: "Boot sequence", href: "/lessons/boot" }];
 
 export function Example() {
-  return <ModuleAccordion modules={modules} />;
+  return <ModuleAccordion num="01" title="Operations" lessons={lessons} />;
 }`,
   NerdTree: `import { NerdTree } from "${pkg}";
 
-const nodes = [{ type: "file", name: "README.md", href: "/readme" }];
+const tree = [{ kind: "leaf", label: "README.md", href: "/readme" }];
 
 export function Example() {
-  return <NerdTree nodes={nodes} />;
+  return <NerdTree tree={tree} />;
 }`,
   NoteEditor: example("NoteEditor", `<NoteEditor />`),
   Page: `import { Page } from "${pkg}";
 
 export function Example() {
   return <Page header={<h1>Field notes</h1>}>Page content</Page>;
-}`,
-  PageLayout: `import { PageLayout } from "${pkg}";
-
-export function Example() {
-  return <PageLayout title="Field notes">Page content</PageLayout>;
 }`,
   Pagination: example("Pagination", `<Pagination page={3} totalPages={7} />`),
   PdaWindow: example("PdaWindow", `<PdaWindow title="STATUS">Online</PdaWindow>`),
@@ -213,11 +218,6 @@ export function Example() {
   return <PostFrontmatter data={{ title: "Field notes", status: "draft" }} />;
 }`,
   PostHeader: example("PostHeader", `<PostHeader title="Field notes" />`),
-  PostLayout: `import { PostLayout } from "${pkg}";
-
-export function Example() {
-  return <PostLayout header={<h1>Field notes</h1>}>Post body</PostLayout>;
-}`,
   PostListing: `import { PostListing, PostRow } from "${pkg}";
 
 export function Example() {
@@ -361,5 +361,20 @@ export function Example() {
 
 export function Example() {
   return <Grid minItemWidth="12rem"><Tag>alpha</Tag><Tag>beta</Tag></Grid>;
+}`,
+  Stack: `import { Stack, Button } from "${pkg}";
+
+export function Example() {
+  return <Stack gap="sm"><Button>Save</Button><Button variant="ghost">Cancel</Button></Stack>;
+}`,
+  Cluster: `import { Cluster, Tag } from "${pkg}";
+
+export function Example() {
+  return <Cluster gap="xs"><Tag>notes</Tag><Tag>wiki</Tag><Tag>published</Tag></Cluster>;
+}`,
+  Container: `import { Container, Prose } from "${pkg}";
+
+export function Example() {
+  return <Container width="prose"><Prose><p>Readable page content.</p></Prose></Container>;
 }`,
 };

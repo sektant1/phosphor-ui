@@ -23,4 +23,16 @@ describe("Text", () => {
     );
     expect((container.firstChild as HTMLElement).tagName).toBe("SPAN");
   });
+
+  test("supports utility typography flags", () => {
+    const { container } = render(
+      <Text variant="caption" truncate balance>
+        long caption
+      </Text>,
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.className).toContain("t-caption");
+    expect(el.className).toContain("t-truncate");
+    expect(el.className).toContain("t-balance");
+  });
 });

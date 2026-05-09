@@ -56,6 +56,18 @@
   color: var(--phosphor-dim);
 }
 
+.text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.description {
+  color: var(--pho-color-text-faint);
+  font-size: 0.75rem;
+  line-height: var(--pho-line-normal);
+}
+
 .disabled {
   cursor: not-allowed;
   opacity: 0.5;
