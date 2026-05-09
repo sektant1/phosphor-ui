@@ -6,6 +6,8 @@ export * from "./DropdownMenu";
 export * from "./EmptyState";
 export * from "./FormField";
 export * from "./LessonRow";
+export * from "./List";
+export * from "./LocaleSwitch";
 export * from "./Modal";
 export { default as Pagination } from "./Pagination";
 export type { PaginationProps } from "./Pagination";

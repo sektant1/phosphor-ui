@@ -27,3 +27,23 @@ export default meta;
 export const Default: StoryObj<AuthorCardProps> = {
   parameters: { docs: { source: { code: basicUsage.AuthorCard } } },
 };
+
+export const LinkRows: StoryObj<AuthorCardProps> = {
+  args: {
+    name: "Ada Signal",
+    role: "field operator",
+    bio: "Keeps relay notes, repair logs, and diagnostics readable under pressure.",
+    links: [
+      { label: "github", href: "#" },
+      { label: "field notes archive", href: "#" },
+      { label: "very long telemetry profile link that should stay in one row", href: "#long" },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "22rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};

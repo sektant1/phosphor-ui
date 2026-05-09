@@ -1,43 +1,111 @@
 .btn {
   align-items: center;
+  appearance: none;
   display: inline-flex;
   gap: 0.45rem;
   justify-content: center;
+  min-height: var(--pho-size-touch-target);
   font-family: var(--pho-font-terminal);
   font-size: 17px;
+  line-height: 1;
   background: transparent;
   border: 1px solid var(--pho-color-primary);
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   padding: 6px 14px;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-wide);
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: var(--pho-cursor-pointer);
   border-radius: 0;
   text-decoration: none;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    color 140ms ease,
+    opacity 140ms ease,
+    transform 140ms ease;
+  user-select: none;
+  white-space: nowrap;
 }
+
+.btn:hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow:
+    inset 0 0 0 1px currentColor,
+    0 0 12px rgba(44, 255, 122, 0.18);
+}
+
+.btn:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(1px);
+}
+
 .btn:focus-visible {
   outline: var(--pho-focus-ring);
   outline-offset: var(--pho-focus-offset);
 }
+
 .btn:disabled,
 .btn[aria-disabled="true"] {
-  cursor: not-allowed;
+  cursor: var(--pho-cursor-disabled);
   opacity: 0.48;
   text-shadow: none;
 }
-.sm { font-size: 14px; padding: 4px 10px; }
-.lg { font-size: 20px; padding: 8px 18px; }
+
+.sm {
+  font-size: 14px;
+  min-height: 2rem;
+  padding: 4px 10px;
+}
+
+.lg {
+  font-size: 20px;
+  min-height: 3rem;
+  padding: 8px 18px;
+}
+
 .fullWidth { width: 100%; }
 .pressed {}
+
 .loader {
   animation: phosphorBlink 1.05s steps(2) infinite;
   color: currentColor;
   line-height: 1;
 }
 
-.primary:hover:not(:disabled):not([aria-disabled="true"]), .primary.pressed {
-  background: var(--pho-color-primary); color: var(--pho-color-background); text-shadow: none;
+.primary:hover:not(:disabled):not([aria-disabled="true"]),
+.primary.pressed {
+  background: var(--pho-color-primary);
+  color: var(--pho-color-background);
+  text-shadow: none;
+}
+
+.secondary {
+  border-color: var(--pho-color-primary-muted);
+  background:
+    linear-gradient(90deg, rgba(44, 255, 122, 0.12), transparent 70%),
+    rgba(44, 255, 122, 0.04);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
+}
+
+.secondary:hover:not(:disabled):not([aria-disabled="true"]),
+.secondary.pressed {
+  border-color: var(--pho-color-primary);
+  background: rgba(44, 255, 122, 0.18);
+  color: var(--pho-color-primary-strong);
+}
+
+.accent {
+  border-color: var(--pho-color-info);
+  color: var(--pho-color-info);
+  text-shadow: var(--pho-glow-info);
+}
+
+.accent:hover:not(:disabled):not([aria-disabled="true"]),
+.accent.pressed {
+  background: var(--pho-color-info);
+  color: var(--pho-color-background-deep);
+  text-shadow: none;
 }
 
 .ghost {
@@ -45,8 +113,24 @@
   color: var(--pho-color-primary-muted);
   text-shadow: none;
 }
-.ghost:hover:not(:disabled):not([aria-disabled="true"]), .ghost.pressed {
-  background: var(--pho-color-primary-muted); color: var(--pho-color-background);
+
+.ghost:hover:not(:disabled):not([aria-disabled="true"]),
+.ghost.pressed {
+  background: var(--pho-color-primary-muted);
+  color: var(--pho-color-background);
+}
+
+.quiet {
+  border-color: transparent;
+  color: var(--pho-color-text-muted);
+  text-shadow: none;
+}
+
+.quiet:hover:not(:disabled):not([aria-disabled="true"]),
+.quiet.pressed {
+  background: rgba(44, 255, 122, 0.08);
+  border-color: var(--pho-color-primary-faint);
+  color: var(--pho-color-primary);
 }
 
 .danger {
@@ -62,10 +146,24 @@
       rgba(255, 58, 58, 0.08) 6px 7px),
     transparent;
 }
-.danger:hover:not(:disabled):not([aria-disabled="true"]), .danger.pressed {
-  background: #ff3a3a; color: #1a0606; text-shadow: none;
+
+.danger:hover:not(:disabled):not([aria-disabled="true"]),
+.danger.pressed {
+  background: #ff3a3a;
+  color: #1a0606;
+  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .loader { animation: none; }
+  .btn {
+    transition: none;
+  }
+
+  .btn:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: none;
+  }
+
+  .loader {
+    animation: none;
+  }
 }

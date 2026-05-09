@@ -93,6 +93,10 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-glow-primary-soft",
     "--pho-glow-accent-soft",
     "--pho-glow-readable",
+    "--pho-cursor-default",
+    "--pho-cursor-pointer",
+    "--pho-cursor-text",
+    "--pho-cursor-disabled",
   ],
   layer: [
     "--pho-z-deep",

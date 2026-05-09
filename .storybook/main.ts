@@ -19,7 +19,11 @@ const excludeCssModules = (rules: unknown[]) => {
     }
 
     const test = candidate.test?.toString() ?? "";
-    if (!test.includes("css") && !test.includes("scss") && !test.includes("sass")) {
+    if (
+      !test.includes("css") &&
+      !test.includes("scss") &&
+      !test.includes("sass")
+    ) {
       continue;
     }
 
@@ -33,17 +37,19 @@ const excludeCssModules = (rules: unknown[]) => {
 };
 
 const config: StorybookConfig = {
-  stories: [
-    "../src/**/*.stories.@(ts|tsx|mdx)",
-    "../src/stories/**/*.mdx",
+  stories: ["../src/**/*.stories.@(ts|tsx|mdx)", "../src/stories/**/*.mdx"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-docs",
+    "@storybook/addon-themes",
+    "@storybook/addon-styling-webpack",
   ],
-  addons: ["@storybook/addon-links", "@storybook/addon-docs"],
   framework: {
     name: "@storybook/react-webpack5",
     options: {},
   },
   docs: {
-    defaultName: "Docs"
+    defaultName: "Docs",
   },
   staticDirs: [],
   webpackFinal: async (config) => {

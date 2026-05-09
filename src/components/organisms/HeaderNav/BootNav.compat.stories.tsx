@@ -1,18 +1,25 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { BootNav } from "./BootNav";
+import { HeaderNav } from "./HeaderNav";
 import { basicUsage } from "../../../stories/basicUsage";
 
-const meta: Meta<typeof BootNav> = {
+const meta: Meta<typeof HeaderNav> = {
   title: "Molecules/BootNav",
-  component: BootNav,
+  component: HeaderNav,
+  parameters: {
+    docs: {
+      description: {
+        component: "Compatibility story for old BootNav docs links. Use HeaderNav in code.",
+      },
+    },
+  },
 };
 export default meta;
 
-type Story = StoryObj<typeof BootNav>;
+type Story = StoryObj<typeof HeaderNav>;
 
 export const Default: Story = {
-  parameters: { docs: { source: { code: basicUsage.BootNav } } },
+  name: "HeaderNav",
+  parameters: { docs: { source: { code: basicUsage.HeaderNav } } },
   args: {
     items: [
       { label: "home", href: "#", active: true },

@@ -124,12 +124,19 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
           <span className={styles.led} />
           <span className={styles.led} />
         </span>
-        {filename && (
-          <span className={styles.filename}>
-            <span className={styles.fileglyph} aria-hidden="true">▸</span>
-            {filename}
-          </span>
-        )}
+        <span className={styles.identity}>
+          {filename ? (
+            <span className={styles.filename}>
+              <span className={styles.fileglyph} aria-hidden="true">▸</span>
+              {filename}
+            </span>
+          ) : (
+            <span className={styles.filename}>
+              <span className={styles.fileglyph} aria-hidden="true">▸</span>
+              code buffer
+            </span>
+          )}
+        </span>
         <span className={styles.spacer} />
         {resolvedLang !== "text" && (
           <span className={styles.lang}>{resolvedLang}</span>
@@ -146,19 +153,22 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         ) : null}
       </div>
 
-      {highlightedHtml ? (
-        <div
-          className={styles.code}
-          dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-        />
-      ) : (
-        <pre
-          className={cx(styles.fallback, isHighlighting && styles.loading)}
-          aria-busy={isHighlighting || undefined}
-        >
-          <code>{code}</code>
-        </pre>
-      )}
+      <div className={styles.viewport}>
+        <span className={styles.rail} aria-hidden="true" />
+        {highlightedHtml ? (
+          <div
+            className={styles.code}
+            dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+          />
+        ) : (
+          <pre
+            className={cx(styles.fallback, isHighlighting && styles.loading)}
+            aria-busy={isHighlighting || undefined}
+          >
+            <code>{code}</code>
+          </pre>
+        )}
+      </div>
     </figure>
   );
 };

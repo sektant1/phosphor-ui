@@ -2,7 +2,13 @@ import React from "react";
 import styles from "./Button.module.scss";
 import { cx } from "../../../utils/classNames";
 
-export type ButtonVariant = "primary" | "ghost" | "danger";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "ghost"
+  | "quiet"
+  | "danger";
 export type ButtonSize = "sm" | "md" | "lg";
 
 type ButtonBaseProps = {
@@ -37,7 +43,10 @@ export type ButtonProps = ButtonElementProps | AnchorElementProps;
 
 const variantClass: Record<ButtonVariant, string> = {
   primary: styles.primary,
+  secondary: styles.secondary,
+  accent: styles.accent,
   ghost: styles.ghost,
+  quiet: styles.quiet,
   danger: styles.danger,
 };
 
@@ -114,7 +123,11 @@ export const Button = React.forwardRef<
         }}
         {...anchorProps}
       >
-        {loading ? <span className={styles.loader} aria-hidden="true">▮</span> : null}
+        {loading ? (
+          <span className={styles.loader} aria-hidden="true">
+            ▮
+          </span>
+        ) : null}
         {children}
       </a>
     );
@@ -142,7 +155,11 @@ export const Button = React.forwardRef<
       aria-busy={loading || undefined}
       {...buttonProps}
     >
-      {loading ? <span className={styles.loader} aria-hidden="true">▮</span> : null}
+      {loading ? (
+        <span className={styles.loader} aria-hidden="true">
+          ▮
+        </span>
+      ) : null}
       {children}
     </button>
   );

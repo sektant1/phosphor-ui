@@ -4,9 +4,14 @@ import { cx } from "../../../utils/classNames";
 import { Button } from "../../atoms/Button";
 import { ProgressBar } from "../../atoms/ProgressBar";
 
-export interface CourseCardProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+export interface CourseCardProps extends Omit<
+  React.HTMLAttributes<HTMLElement>,
+  "title"
+> {
   stamp?: string;
-  art?: string;
+  thumb?: React.ReactNode;
+  thumbSrc?: string;
+  thumbAlt?: string;
   coverMeta?: React.ReactNode;
   tag?: React.ReactNode;
   title: React.ReactNode;
@@ -19,7 +24,6 @@ export interface CourseCardProps extends Omit<React.HTMLAttributes<HTMLElement>,
 
 export const CourseCard: React.FC<CourseCardProps> = ({
   stamp,
-  art,
   coverMeta,
   tag,
   title,
@@ -32,20 +36,24 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   ...rest
 }) => {
   return (
-    <article className={cx(styles.cc, locked && styles.locked, className)} {...rest}>
+    <article
+      className={cx(styles.cc, locked && styles.locked, className)}
+      {...rest}
+    >
       <div className={styles.cover}>
+        <span className={styles.coverRail} aria-hidden="true" />
         {stamp && <span className={styles.stamp}>{stamp}</span>}
-        {art && (
-          <pre className={styles.art} aria-hidden="true">
-            {art}
-          </pre>
-        )}
         {coverMeta && <p className={styles.metaCover}>{coverMeta}</p>}
       </div>
       <div className={styles.body}>
-        {tag && <span className={styles.tag}>{tag}</span>}
-        <h2 className={styles.title}>{title}</h2>
-        {description && <p className={styles.desc}>{description}</p>}
+        <div className={styles.header}>
+          {tag && <span className={styles.tag}>{tag}</span>}
+          {locked && <span className={styles.lockBadge}>locked</span>}
+        </div>
+        <div className={styles.main}>
+          <h2 className={styles.title}>{title}</h2>
+          {description && <p className={styles.desc}>{description}</p>}
+        </div>
         {stats && <p className={styles.stats}>{stats}</p>}
         {(progress || cta) && (
           <div className={styles.foot}>
@@ -60,7 +68,12 @@ export const CourseCard: React.FC<CourseCardProps> = ({
               />
             ) : null}
             {cta && (
-              <Button className={styles.cta} href={cta.href} size="sm" variant="ghost">
+              <Button
+                className={styles.cta}
+                href={cta.href}
+                size="sm"
+                variant="ghost"
+              >
                 {cta.label}
               </Button>
             )}

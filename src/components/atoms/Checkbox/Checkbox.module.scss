@@ -27,6 +27,7 @@
   outline: none;
 }
 .native:focus-visible + .cb { box-shadow: 0 0 0 2px rgba(44,255,122,0.4); }
+.native:focus-visible + .error { box-shadow: 0 0 0 2px rgba(255, 58, 58, 0.35); }
 .cb::before {
   content: "";
   position: absolute;
@@ -45,7 +46,33 @@
 .checked { box-shadow: inset 0 0 0 1px rgba(44, 255, 122, 0.15); }
 .disabled { border-color: var(--phosphor-fade); cursor: not-allowed; }
 .disabled::before { border-color: var(--phosphor-fade); filter: none; }
-.error { border-color: #ff3a3a; }
+.error {
+  --checkbox-error: #ff3a3a;
+  border-color: var(--checkbox-error);
+}
+.error.checked {
+  box-shadow: inset 0 0 0 1px rgba(255, 58, 58, 0.14);
+}
+.error.checked::before,
+.error.checked::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72%;
+  height: 2.5px;
+  background: var(--checkbox-error);
+  border: 0;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(255, 58, 58, 0.65));
+  pointer-events: none;
+}
+.error.checked::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.error.checked::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
 .label { font-family: var(--font-code); }
 .text {
   display: grid;
@@ -63,6 +90,11 @@
   text-shadow: var(--glow-emerald);
   text-decoration: line-through;
   text-decoration-color: var(--phosphor-fade);
+}
+.errorRow.checkedRow .label {
+  color: #ff8a8a;
+  text-shadow: 0 0 1px #ff3a3a, 0 0 6px rgba(255, 58, 58, 0.35);
+  text-decoration-color: rgba(255, 58, 58, 0.55);
 }
 .disabledRow .label { color: var(--phosphor-fade); }
 .disabledRow { cursor: not-allowed; }

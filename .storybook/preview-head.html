@@ -7,4 +7,28 @@
   #storybook-docs {
     background: #04140a;
   }
+
+  [data-phosphor-theme="tube"] {
+    --bg: #04140a;
+    --surface: #082416;
+    --surface-2: #0c2d1c;
+  }
+
+  [data-phosphor-theme="raised"] {
+    --bg: #082416;
+    --surface: #0d2d1c;
+    --surface-2: #103924;
+  }
+
+  [data-phosphor-theme="deep"] {
+    --bg: #010604;
+    --surface: #04140a;
+    --surface-2: #082416;
+  }
+
+  [data-phosphor-theme="tube"],
+  [data-phosphor-theme="raised"],
+  [data-phosphor-theme="deep"] {
+    background: var(--bg);
+  }
 </style>

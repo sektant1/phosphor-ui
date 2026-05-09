@@ -47,6 +47,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const cls = cx(
       styles.row,
       value && styles.checkedRow,
+      error && styles.errorRow,
       disabled && styles.disabledRow,
       className,
     );

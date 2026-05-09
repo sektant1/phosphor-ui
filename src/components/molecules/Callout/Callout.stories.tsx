@@ -103,6 +103,43 @@ export const Sizes: StoryObj<CalloutProps> = {
   ),
 };
 
+export const SizeMatrix: StoryObj<CalloutProps> = {
+  render: () => (
+    <div style={{ display: "grid", gap: 12, maxWidth: 840 }}>
+      {(["sm", "md", "lg"] as const).map((size) => (
+        <div key={size} style={{ display: "grid", gap: 8 }}>
+          <Callout size={size} variant="info" title={`${size} info`}>
+            Signal acquired. Decode is running against the current payload.
+          </Callout>
+          <Callout size={size} variant="warn" title={`${size} warning`}>
+            Export a checkpoint before writing new data to the live index.
+          </Callout>
+          <Callout size={size} variant="terminal" title={`${size} terminal`}>
+            ~/zone-net $ ./sync --verify --channel alpha
+          </Callout>
+        </div>
+      ))}
+    </div>
+  ),
+};
+
+export const Narrow: StoryObj<CalloutProps> = {
+  args: {
+    size: "lg",
+    variant: "danger",
+    title: "Long mobile warning title",
+    children:
+      "Critical notices should remain readable when the frame collapses to a narrow column.",
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "18rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
 export const WithActions: StoryObj<CalloutProps> = {
   args: {
     variant: "warn",

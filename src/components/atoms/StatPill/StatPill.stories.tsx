@@ -20,3 +20,38 @@ export default meta;
 export const Default: StoryObj<StatPillProps> = {
   parameters: { docs: { source: { code: basicUsage.StatPill } } },
 };
+
+export const Tones: StoryObj<StatPillProps> = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+      <StatPill label="status" value="STABLE" color="phosphor" />
+      <StatPill label="signal" value="ACTIVE" color="magenta" />
+      <StatPill label="sync" value="IDLE" color="dim" />
+    </div>
+  ),
+};
+
+export const LongValue: StoryObj<StatPillProps> = {
+  args: {
+    label: "route",
+    value: "FIELD-OPERATIONS-EXTENDED",
+    color: "phosphor",
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: "17rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+export const StatusRow: StoryObj<StatPillProps> = {
+  render: () => (
+    <div style={{ display: "grid", gap: "0.6rem", maxWidth: "24rem" }}>
+      <StatPill label="build" value="PASS" color="phosphor" />
+      <StatPill label="deploy" value="QUEUED" color="magenta" />
+      <StatPill label="archive" value="COLD" color="dim" />
+    </div>
+  ),
+};

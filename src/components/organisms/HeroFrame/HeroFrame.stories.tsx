@@ -3,15 +3,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { HeroFrame } from "./HeroFrame";
 import { basicUsage } from "../../../stories/basicUsage";
 
-const art = `      .-""""""-.
-    .'          '.
-   /   O      O   \\
-  :           \`    :
-  |                |
-  :    .------.    :
-   \\  '        '  /
-    '.          .'
-      '-......-'`;
+const art = [
+  "      .-======-.",
+  "   .- PHOSPHOR -.",
+  "  /   SIGNAL LOCK \\",
+  "  |    CH 0x4C    |",
+  "  \\_______________/",
+].join("\\n");
 
 const meta: Meta<typeof HeroFrame> = {
   title: "Organisms/HeroFrame",

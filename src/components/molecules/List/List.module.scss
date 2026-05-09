@@ -1,0 +1,202 @@
+.list {
+  display: grid;
+  font-family: var(--pho-font-code);
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.item {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-width: 0;
+  padding: 0.62rem 0;
+}
+
+.marker {
+  align-items: center;
+  color: var(--pho-color-accent);
+  display: inline-flex;
+  font-family: var(--pho-font-terminal);
+  justify-content: center;
+  line-height: 1;
+  min-height: 1.35rem;
+  min-width: 1.1rem;
+  text-shadow: var(--pho-glow-accent-soft);
+}
+
+.content {
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.line {
+  align-items: baseline;
+  display: flex;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.title {
+  color: var(--pho-color-primary-strong);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  text-shadow: var(--pho-glow-primary-soft);
+}
+
+a.title:hover,
+a.title:focus-visible {
+  color: var(--pho-color-accent-strong);
+  outline: none;
+  text-decoration: underline;
+  text-shadow: var(--pho-glow-accent-soft);
+  text-underline-offset: 0.22em;
+}
+
+a.title:focus-visible {
+  box-shadow: 0 1px 0 var(--pho-color-accent);
+}
+
+.meta {
+  color: var(--pho-color-text-faint);
+  flex: 0 0 auto;
+  font-family: var(--pho-font-terminal);
+  font-size: 0.72rem;
+  letter-spacing: var(--pho-tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.description {
+  color: var(--pho-color-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.action {
+  align-self: center;
+  min-width: max-content;
+}
+
+.ruled .item {
+  border-top: var(--pho-border-dashed);
+}
+
+.ruled .item:first-child {
+  border-top: 0;
+}
+
+.terminal {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 7px,
+      rgba(44, 255, 122, 0.035) 7px 8px
+    ),
+    rgba(1, 6, 4, 0.42);
+  border: var(--pho-border-line);
+}
+
+.terminal .item {
+  border-top: 1px dotted var(--pho-color-primary-faint);
+  padding-inline: 0.75rem;
+}
+
+.terminal .item:first-child {
+  border-top: 0;
+}
+
+.terminal .title {
+  text-transform: uppercase;
+}
+
+.compact .item {
+  gap: 0.45rem;
+  padding-block: 0.38rem;
+}
+
+.compact .description {
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.markerDot .marker::before {
+  background: currentColor;
+  box-shadow: 0 0 7px currentColor;
+  content: "";
+  height: 0.42rem;
+  width: 0.42rem;
+}
+
+.markerDash .marker::before {
+  content: "-";
+}
+
+.markerChevron .marker::before {
+  content: ">";
+}
+
+.markerIndex {
+  counter-reset: pho-list;
+}
+
+.markerIndex .item {
+  counter-increment: pho-list;
+}
+
+.markerIndex .marker {
+  border: 1px solid var(--pho-color-primary-faint);
+  color: var(--pho-color-primary);
+  font-size: 0.72rem;
+  min-width: 1.45rem;
+  text-shadow: var(--pho-glow-primary-soft);
+}
+
+.markerIndex .marker:empty::before {
+  content: counter(pho-list, decimal-leading-zero);
+}
+
+.markerNone .item {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.markerNone .content {
+  grid-column: 1;
+}
+
+@media (max-width: 560px) {
+  .item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .line {
+    align-items: start;
+    display: grid;
+    gap: 0.16rem;
+  }
+
+  .meta {
+    white-space: normal;
+  }
+
+  .action {
+    grid-column: 2;
+    justify-self: start;
+    min-width: 0;
+  }
+
+  .markerNone .item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .markerNone .action {
+    grid-column: 1;
+  }
+}

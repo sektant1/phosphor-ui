@@ -37,7 +37,7 @@ export function Example() {
   );
 }`,
   Avatar: example("Avatar", `<Avatar name="Ada Signal" />`),
-  BootNav: `import { BootNav } from "${pkg}";
+  HeaderNav: `import { HeaderNav } from "${pkg}";
 
 const items = [
   { label: "Docs", href: "/docs" },
@@ -45,7 +45,28 @@ const items = [
 ];
 
 export function Example() {
-  return <BootNav items={items} />;
+  return <HeaderNav items={items} />;
+}`,
+  LocaleSwitch: `import { LocaleSwitch } from "${pkg}";
+
+const locales = [
+  { code: "en", label: "EN", href: "/", active: true },
+  { code: "pt-BR", label: "PT", href: "/pt/" },
+];
+
+export function Example() {
+  return <LocaleSwitch locales={locales} />;
+}`,
+  List: `import { List } from "${pkg}";
+
+const items = [
+  { title: "Boot sequence", meta: "00:04", href: "/boot" },
+  { title: "Sync field notes", meta: "queued" },
+  { title: "Publish packet", meta: "ready" },
+];
+
+export function Example() {
+  return <List items={items} />;
 }`,
   Breadcrumbs: `import { Breadcrumbs } from "${pkg}";
 
@@ -58,7 +79,7 @@ const items = [
 export function Example() {
   return <Breadcrumbs items={items} />;
 }`,
-  Button: example("Button", `<Button>Execute</Button>`),
+  Button: example("Button", `<Button>Engage</Button>`),
   Callout: `import { Callout } from "${pkg}";
 
 export function Example() {
@@ -69,11 +90,17 @@ export function Example() {
   );
 }`,
   CalloutHeading: example("CalloutHeading", `<CalloutHeading>Signal notes</CalloutHeading>`),
-  Checkbox: example("Checkbox", `<Checkbox label="Enable telemetry" />`),
+  Checkbox: example("Checkbox", `<Checkbox label="engage shields" />`),
   CodeBlock: `import { CodeBlock } from "${pkg}";
 
 export function Example() {
-  return <CodeBlock code={'npm run build'} language="bash" />;
+  return (
+    <CodeBlock
+      filename="example.ts"
+      lang="typescript"
+      code={'import { useState } from "react";'}
+    />
+  );
 }`,
   ContentEditor: `import { ContentEditor } from "${pkg}";
 
@@ -115,12 +142,41 @@ export function Example() {
 }`,
   Footer: example("Footer", `<Footer />`),
   FooterStencil: example("FooterStencil", `<FooterStencil />`),
+  Form: `import { Button, Form } from "${pkg}";
+
+const fields = [
+  {
+    name: "title",
+    label: "Title",
+    required: true,
+    inputProps: { placeholder: "Signal report" },
+  },
+  {
+    name: "status",
+    label: "Status",
+    type: "select",
+    options: [
+      { label: "Draft", value: "draft" },
+      { label: "Published", value: "published" },
+    ],
+  },
+];
+
+export function Example() {
+  return (
+    <Form
+      title="Content form"
+      fields={fields}
+      actions={<Button type="submit">Save</Button>}
+    />
+  );
+}`,
   FormField: `import { FormField, Input } from "${pkg}";
 
 export function Example() {
   return (
-    <FormField label="Title">
-      <Input placeholder="Post title" />
+    <FormField label="Username" hint="Letters and numbers only.">
+      <Input placeholder="e.g. phosphor_user" />
     </FormField>
   );
 }`,
@@ -131,7 +187,7 @@ export function Example() {
 const nav = [{ label: "Docs", href: "/docs" }];
 
 export function Example() {
-  return <Header title="Phosphor" nav={nav} />;
+  return <Header title="Phosphor" nav={nav} variant="compact" />;
 }`,
   Heading: example("Heading", `<Heading level={2}>Transmission log</Heading>`),
   HeadingLevels: `import { H1, H2, H3 } from "${pkg}";
@@ -147,8 +203,36 @@ export function Example() {
 }`,
   HeroFrame: `import { HeroFrame } from "${pkg}";
 
+const art = [
+  "      .-======-.",
+  "   .- PHOSPHOR -.",
+  "  /   SIGNAL LOCK \\",
+  "  |    CH 0x4C    |",
+  "  \\_______________/",
+].join("\\n");
+
 export function Example() {
-  return <HeroFrame art={"PHOSPHOR"} topHud={<HeroFrame.HudText>ONLINE</HeroFrame.HudText>} />;
+  return (
+    <HeroFrame
+      art={art}
+      topHud={
+        <>
+          <HeroFrame.HudLed variant="rec" />
+          <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
+          <HeroFrame.HudSpacer />
+          <HeroFrame.HudText>00:42:17</HeroFrame.HudText>
+        </>
+      }
+      bottomHud={
+        <>
+          <HeroFrame.HudLabel>SIG</HeroFrame.HudLabel>
+          <HeroFrame.HudBars value={5} />
+          <HeroFrame.HudSpacer />
+          <HeroFrame.HudTape text="// PHOSPHOR ZONE //" />
+        </>
+      }
+    />
+  );
 }`,
   Hr: example("Hr", `<Hr />`),
   Input: example("Input", `<Input placeholder="callsign" />`),
@@ -308,7 +392,7 @@ export function Example() {
     />
   );
 }`,
-  Switch: example("Switch", `<Switch label="Enable sync" />`),
+  Switch: example("Switch", `<Switch label="publish draft" defaultChecked />`),
   TableOfContents: `import { TableOfContents } from "${pkg}";
 
 const items = [{ id: "intro", label: "Intro", href: "#intro" }];

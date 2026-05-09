@@ -1,88 +1,118 @@
 .field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
 }
 
 .labelRow {
+  align-items: center;
   display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .label {
-  font-family: var(--font-terminal);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  color: var(--pho-color-text-muted);
+  font-family: var(--pho-font-code);
+  font-size: 0.76rem;
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1.2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-transform: uppercase;
-  color: var(--phosphor-dim);
+  white-space: nowrap;
 }
 
-.asterisk {
-  color: var(--magenta);
-  margin-left: 2px;
+.required {
+  border: 1px solid var(--pho-color-accent-muted);
+  color: var(--pho-color-accent);
+  flex: 0 0 auto;
+  font-family: var(--pho-font-terminal);
+  font-size: 0.68rem;
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1;
+  padding: 0.14rem 0.32rem 0.1rem;
+  text-transform: uppercase;
 }
 
-.children {
+.control {
+  min-width: 0;
 }
 
-.childrenError {
-  border-left: 2px solid var(--magenta);
-  padding-left: 0.5rem;
+.controlError {
+  border-left: 2px solid #ff3a3a;
+  padding-left: 0.55rem;
+}
+
+.hint,
+.error {
+  font-family: var(--pho-font-code);
+  font-size: 0.75rem;
+  line-height: var(--pho-line-normal);
 }
 
 .hint {
-  font-family: var(--font-code);
-  font-size: 11px;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-text-faint);
 }
 
 .error {
-  font-family: var(--font-code);
-  font-size: 11px;
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  color: #ff6a6a;
+  text-shadow: 0 0 1px #ff3a3a, 0 0 6px rgba(255, 58, 58, 0.35);
 }
 
 .badge {
-  display: inline-flex;
   align-items: center;
-  gap: 0;
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+  vertical-align: middle;
+}
+
+.badgeLabel,
+.badgeValue {
+  align-items: center;
+  display: inline-flex;
+  min-height: 1.55rem;
+  min-width: 0;
 }
 
 .badgeLabel {
-  background: var(--bg-deep);
-  border: 1px solid var(--phosphor-fade);
+  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
   border-right: none;
-  padding: 1px 6px;
-  font-family: var(--font-terminal);
-  font-size: 11px;
-  letter-spacing: 0.14em;
+  color: var(--pho-color-text-faint);
+  font-family: var(--pho-font-terminal);
+  font-size: 0.7rem;
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1;
+  padding: 0.22rem 0.46rem 0.18rem;
   text-transform: uppercase;
-  color: var(--phosphor-fade);
 }
 
 .badgeValue {
-  border: 1px solid;
-  border-left: 1px dashed;
-  padding: 1px 8px;
-  font-family: var(--font-code);
-  font-size: 12px;
-  background: var(--bg-deep);
+  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
+  color: var(--pho-color-primary-muted);
+  font-family: var(--pho-font-code);
+  font-size: 0.76rem;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.22rem 0.58rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .valueDraft {
-  color: var(--phosphor-dim);
-  border-color: var(--phosphor-fade);
+  color: var(--pho-color-primary-muted);
 }
 
 .valuePublished {
-  color: var(--phosphor-bright);
-  border-color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  border-color: var(--pho-color-primary);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
 }
 
 .valueArchived {
-  color: var(--phosphor-fade);
-  border-color: var(--phosphor-fade);
+  color: var(--pho-color-text-faint);
 }

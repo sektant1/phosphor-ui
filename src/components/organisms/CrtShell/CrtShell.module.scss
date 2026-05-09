@@ -11,6 +11,20 @@
   background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-body);
+  cursor: var(--pho-cursor-default);
+}
+
+.shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 8998;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 56% at 50% 16%, rgba(44, 255, 122, 0.08) 0%, rgba(44, 255, 122, 0.04) 26%, transparent 72%),
+    linear-gradient(180deg, rgba(44, 255, 122, 0.025) 0%, transparent 28%, rgba(44, 255, 122, 0.015) 100%);
+  mix-blend-mode: screen;
+  animation: phosphorShellFlicker 7.5s ease-in-out infinite;
 }
 .scanlines, .noise, .vignette, .frame, .tick {
   position: fixed; inset: 0; pointer-events: none;
@@ -53,6 +67,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .shell::before {
+    animation: none;
+  }
   .noise { animation: none; }
   .tick { animation: none; }
 }

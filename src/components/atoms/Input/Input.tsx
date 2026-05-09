@@ -15,7 +15,10 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   state?: FieldState;
   inputClassName?: string;
   rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
-  onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onValueChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => void;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -24,8 +27,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       helpText,
       error,
-      prompt = "~/zone-net $",
-      cursor = true,
+      prompt = "~/ $",
+      cursor = false,
       className,
       inputClassName,
       rootProps,
@@ -43,13 +46,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const resolvedId = id ?? generatedId;
     const helpId = `${resolvedId}-help`;
     const errorId = `${resolvedId}-error`;
-    const describedBy = [
-      ariaDescribedBy,
-      hasVisibleContent(helpText) ? helpId : undefined,
-      hasVisibleContent(error) ? errorId : undefined,
-    ]
-      .filter(Boolean)
-      .join(" ") || undefined;
+    const describedBy =
+      [
+        ariaDescribedBy,
+        hasVisibleContent(helpText) ? helpId : undefined,
+        hasVisibleContent(error) ? errorId : undefined,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     return (
       <label
@@ -63,7 +67,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         htmlFor={resolvedId}
       >
-        {hasVisibleContent(label) ? <span className={styles.label}>{label}</span> : null}
+        {hasVisibleContent(label) ? (
+          <span className={styles.label}>{label}</span>
+        ) : null}
         <span className={styles.wrap}>
           {prompt ? <span className={styles.prompt}>{prompt}</span> : null}
           <input
@@ -81,8 +87,16 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           {cursor ? <span className={styles.cursor}>▮</span> : null}
         </span>
-        {hasVisibleContent(helpText) ? <span id={helpId} className={styles.help}>{helpText}</span> : null}
-        {hasVisibleContent(error) ? <span id={errorId} className={styles.error}>{error}</span> : null}
+        {hasVisibleContent(helpText) ? (
+          <span id={helpId} className={styles.help}>
+            {helpText}
+          </span>
+        ) : null}
+        {hasVisibleContent(error) ? (
+          <span id={errorId} className={styles.error}>
+            {error}
+          </span>
+        ) : null}
       </label>
     );
   },
@@ -96,7 +110,10 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   state?: FieldState;
   textareaClassName?: string;
   rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
-  onValueChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onValueChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -121,13 +138,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const resolvedId = id ?? generatedId;
     const helpId = `${resolvedId}-help`;
     const errorId = `${resolvedId}-error`;
-    const describedBy = [
-      ariaDescribedBy,
-      hasVisibleContent(helpText) ? helpId : undefined,
-      hasVisibleContent(error) ? errorId : undefined,
-    ]
-      .filter(Boolean)
-      .join(" ") || undefined;
+    const describedBy =
+      [
+        ariaDescribedBy,
+        hasVisibleContent(helpText) ? helpId : undefined,
+        hasVisibleContent(error) ? errorId : undefined,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     return (
       <label
@@ -141,7 +159,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         htmlFor={resolvedId}
       >
-        {hasVisibleContent(label) ? <span className={styles.label}>{label}</span> : null}
+        {hasVisibleContent(label) ? (
+          <span className={styles.label}>{label}</span>
+        ) : null}
         <textarea
           {...rest}
           ref={ref}
@@ -154,8 +174,16 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             onValueChange?.(event.currentTarget.value, event);
           }}
         />
-        {hasVisibleContent(helpText) ? <span id={helpId} className={styles.help}>{helpText}</span> : null}
-        {hasVisibleContent(error) ? <span id={errorId} className={styles.error}>{error}</span> : null}
+        {hasVisibleContent(helpText) ? (
+          <span id={helpId} className={styles.help}>
+            {helpText}
+          </span>
+        ) : null}
+        {hasVisibleContent(error) ? (
+          <span id={errorId} className={styles.error}>
+            {error}
+          </span>
+        ) : null}
       </label>
     );
   },

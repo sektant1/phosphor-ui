@@ -76,7 +76,11 @@ export const Callout: React.FC<CalloutProps> = ({
     >
       {!hideGlyph ? <div className={styles.glyph} aria-hidden="true">{glyph ?? defaultGlyph[variant]}</div> : null}
       <div className={styles.body}>
-        {hasVisibleContent(title) ? <div className={styles.title}>{title}</div> : null}
+        {hasVisibleContent(title) ? (
+          <div className={styles.header}>
+            <div className={styles.title}>{title}</div>
+          </div>
+        ) : null}
         <div className={styles.content}>{children}</div>
         {hasVisibleContent(actions) ? <div className={styles.actions}>{actions}</div> : null}
       </div>

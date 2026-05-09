@@ -53,9 +53,11 @@ export const FormField: React.FC<FormFieldProps> = ({
         <label className={styles.label} htmlFor={resolvedId}>
           {label}
         </label>
-        {required ? <span className={styles.asterisk} aria-hidden="true">*</span> : null}
+        {required ? (
+          <span className={styles.required} aria-hidden="true">required</span>
+        ) : null}
       </div>
-      <div className={hasVisibleContent(error) ? styles.childrenError : styles.children}>
+      <div className={cx(styles.control, hasVisibleContent(error) && styles.controlError)}>
         {fieldChild}
       </div>
       {hasVisibleContent(error) ? (

@@ -36,6 +36,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       selectClassName,
       rootProps,
       id,
+      disabled,
       "aria-describedby": ariaDescribedBy,
       onChange,
       onValueChange,
@@ -61,6 +62,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         className={cx(
           styles.root,
           hasVisibleContent(error) && styles.errorField,
+          disabled && styles.disabledField,
           rootProps?.className,
           className,
         )}
@@ -68,13 +70,14 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       >
         {hasVisibleContent(label) ? <span className={styles.label}>{label}</span> : null}
         <span className={cx(styles.control, controlClassName)}>
-          {hasVisibleContent(prompt) ? <span className={styles.prompt}>{prompt}</span> : null}
+          {hasVisibleContent(prompt) ? <span className={styles.prompt}>[{prompt}]</span> : null}
           <select
             ref={ref}
             id={resolvedId}
             className={cx(styles.select, selectClassName)}
             aria-invalid={hasVisibleContent(error) || undefined}
             aria-describedby={describedBy}
+            disabled={disabled}
             onChange={(event) => {
               onChange?.(event);
               onValueChange?.(event.currentTarget.value, event);
@@ -87,7 +90,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             ))}
           </select>
-          <span className={styles.chev} aria-hidden="true">v</span>
+          <span className={styles.chev} aria-hidden="true" />
         </span>
         {hasVisibleContent(helpText) ? <span id={helpId} className={styles.help}>{helpText}</span> : null}
         {hasVisibleContent(error) ? <span id={errorId} className={styles.error}>{error}</span> : null}

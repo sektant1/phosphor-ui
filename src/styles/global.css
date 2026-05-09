@@ -9,6 +9,10 @@ body {
   padding: 0;
 }
 
+body {
+  cursor: var(--pho-cursor-default);
+}
+
 *,
 *::before,
 *::after {
@@ -22,6 +26,29 @@ a {
 
 a:hover {
   color: var(--pho-color-link-hover);
+}
+
+a,
+button,
+[role="button"],
+summary,
+select {
+  cursor: var(--pho-cursor-pointer);
+}
+
+input,
+textarea,
+[contenteditable="true"],
+[role="textbox"] {
+  cursor: var(--pho-cursor-text);
+}
+
+button:disabled,
+[aria-disabled="true"],
+select:disabled,
+input:disabled,
+textarea:disabled {
+  cursor: var(--pho-cursor-disabled);
 }
 
 code,
@@ -120,6 +147,91 @@ samp {
   animation: phoBlink 1s steps(2) infinite;
 }
 
+.pho-phosphor-glow {
+  text-shadow: var(--pho-glow-primary);
+}
+
+.pho-phosphor-glow-soft {
+  text-shadow: var(--pho-glow-primary-soft);
+}
+
+.pho-crt,
+.pho-scanlines,
+.pho-noise,
+.pho-vignette {
+  position: relative;
+}
+
+.pho-crt::before,
+.pho-scanlines::before,
+.pho-crt::after,
+.pho-noise::before,
+.pho-vignette::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.pho-crt::before,
+.pho-scanlines::before {
+  z-index: var(--pho-z-fx-noise);
+  background:
+    linear-gradient(rgba(182, 255, 206, 0.045) 50%, rgba(1, 6, 4, 0.18) 50%),
+    linear-gradient(90deg, rgba(44, 255, 122, 0.035), rgba(98, 255, 154, 0.02), rgba(44, 255, 122, 0.035));
+  background-size: 100% 4px, 6px 100%;
+  mix-blend-mode: screen;
+}
+
+.pho-crt::before {
+  animation: phosphorShellFlicker 5.6s steps(8) infinite;
+}
+
+.pho-crt::after,
+.pho-vignette::after {
+  z-index: var(--pho-z-fx-vignette);
+  background:
+    radial-gradient(circle at center, transparent 45%, rgba(1, 6, 4, 0.42) 100%),
+    linear-gradient(rgba(44, 255, 122, 0.08), transparent 18%, transparent 82%, rgba(44, 255, 122, 0.08));
+  box-shadow: inset 0 0 42px rgba(1, 6, 4, 0.74);
+}
+
+.pho-noise::before {
+  z-index: var(--pho-z-fx-noise);
+  opacity: 0.16;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(182, 255, 206, 0.7) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 34%, rgba(44, 255, 122, 0.45) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 42% 74%, rgba(98, 255, 154, 0.42) 0 1px, transparent 1.5px);
+  background-size: 31px 29px, 43px 41px, 67px 61px;
+  animation: phosphorNoiseShift 620ms steps(3) infinite;
+  mix-blend-mode: screen;
+}
+
+.pho-hsync {
+  animation: phosphorHsync 8s steps(1) infinite;
+}
+
+.pho-bootline {
+  animation: phosphorBootline 520ms steps(16) backwards;
+}
+
+.pho-led-pulse {
+  animation: phosphorLedPulse 1.4s steps(2) infinite;
+}
+
+.pho-hud-blink {
+  animation: phosphorHudBlink 1.1s steps(2) infinite;
+}
+
+.pho-hud-pulse {
+  animation: phosphorHudPulse 1.8s ease-in-out infinite;
+}
+
+.pho-geiger-tick {
+  animation: phosphorGeigerTick 2.6s steps(1) infinite;
+}
+
 @keyframes phoPageEnter {
   0% {
     opacity: 0;
@@ -170,13 +282,142 @@ samp {
     opacity: 0;
   }
 }
+@keyframes phosphorLedPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes phosphorHudBlink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.18;
+  }
+}
+@keyframes phosphorHudPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+@keyframes phosphorNoiseShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-3px, 2px);
+  }
+  40% {
+    transform: translate(2px, -2px);
+  }
+  60% {
+    transform: translate(-2px, -1px);
+  }
+  80% {
+    transform: translate(1px, 3px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes phosphorGeigerTick {
+  0%,
+  70% {
+    opacity: 0;
+  }
+  71%,
+  72% {
+    opacity: 0.75;
+  }
+  73%,
+  81% {
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.4;
+  }
+  83%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes phosphorHsync {
+  0%,
+  94%,
+  100% {
+    transform: translateX(0);
+  }
+  95% {
+    transform: translateX(-2px);
+    filter: blur(0.3px);
+  }
+  96% {
+    transform: translateX(2px);
+    filter: blur(0.4px);
+  }
+  97% {
+    transform: translateX(-1px);
+    filter: blur(0.15px);
+  }
+}
+@keyframes phosphorBootline {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+@keyframes phosphorShellFlicker {
+  0%,
+  100% {
+    opacity: 0.14;
+    transform: translateY(0);
+  }
+  44% {
+    opacity: 0.1;
+  }
+  48% {
+    opacity: 0.18;
+    transform: translateY(0.15px);
+  }
+  52% {
+    opacity: 0.2;
+  }
+  56% {
+    opacity: 0.12;
+    transform: translateY(0);
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .pho-page-enter,
   .pho-fade-up,
   .pho-stagger > *,
   .pho-flicker-in,
-  .pho-blink::after {
+  .pho-blink::after,
+  .pho-crt::before,
+  .pho-noise::before,
+  .pho-hsync,
+  .pho-bootline,
+  .pho-led-pulse,
+  .pho-hud-blink,
+  .pho-hud-pulse,
+  .pho-geiger-tick {
     animation: none !important;
   }
 }

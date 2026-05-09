@@ -24,3 +24,18 @@ export default meta;
 export const Default: StoryObj<CheckboxProps> = {
   parameters: { docs: { source: { code: basicUsage.Checkbox } } },
 };
+
+export const ErrorChecked: StoryObj<CheckboxProps> = {
+  args: {
+    label:          "checksum mismatch",
+    defaultChecked: true,
+    error:          true,
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `<Checkbox label="checksum mismatch" defaultChecked error />`,
+      },
+    },
+  },
+};

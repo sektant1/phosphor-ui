@@ -1,5 +1,9 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../../atoms/Button";
+import { Input, Textarea } from "../../atoms/Input";
+import { Select } from "../../atoms/Select";
+import { Form } from "./Form";
 import { FormField } from "./FormField";
 import { ContentStatusBadge } from "./FormField";
 import type { FormFieldProps } from "./FormField";
@@ -27,13 +31,83 @@ export const Default: StoryObj<FormFieldProps> = {
   parameters: { docs: { source: { code: basicUsage.FormField } } },
   render: (args) => (
     <FormField {...args}>
-      <input placeholder="e.g. phosphor_user" />
+      <Input prompt="" placeholder="e.g. phosphor_user" />
     </FormField>
+  ),
+};
+
+export const WithTextarea: StoryObj<FormFieldProps> = {
+  args: {
+    label: "summary",
+    hint: "One or two short lines.",
+  },
+  render: (args) => (
+    <FormField {...args}>
+      <Textarea rows={4} placeholder="Write a compact summary..." />
+    </FormField>
+  ),
+};
+
+export const WithSelect: StoryObj<FormFieldProps> = {
+  args: {
+    label: "status",
+    required: true,
+  },
+  render: (args) => (
+    <FormField {...args}>
+      <Select
+        prompt=""
+        defaultValue="draft"
+        options={[
+          { label: "draft", value: "draft" },
+          { label: "published", value: "published" },
+          { label: "archived", value: "archived" },
+        ]}
+      />
+    </FormField>
+  ),
+};
+
+export const FormExample: StoryObj<typeof Form> = {
+  parameters: { docs: { source: { code: basicUsage.Form } } },
+  render: () => (
+    <Form
+      title="Content form"
+      description="Compact form shell using FormField internally."
+      columns={2}
+      fields={[
+        {
+          name: "title",
+          label: "title",
+          required: true,
+          inputProps: { prompt: "", placeholder: "Signal report" },
+        },
+        {
+          name: "status",
+          label: "status",
+          type: "select",
+          options: [
+            { label: "draft", value: "draft" },
+            { label: "published", value: "published" },
+          ],
+          selectProps: { prompt: "", defaultValue: "draft" },
+        },
+        {
+          name: "summary",
+          label: "summary",
+          type: "textarea",
+          hint: "Used in previews and cards.",
+          textareaProps: { rows: 4, placeholder: "Short summary..." },
+        },
+      ]}
+      actions={<Button type="submit">Save</Button>}
+    />
   ),
 };
 
 export const StatusBadges: StoryObj<FormFieldProps> = {
   parameters: { docs: { source: { code: basicUsage.ContentStatusBadge } } },
+
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
       <ContentStatusBadge status="draft" />

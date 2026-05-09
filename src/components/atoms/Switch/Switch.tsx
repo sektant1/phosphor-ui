@@ -61,6 +61,8 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           }}
         />
         <span className={styles.track} aria-hidden="true">
+          <span className={cx(styles.state, styles.stateOff)}>off</span>
+          <span className={cx(styles.state, styles.stateOn)}>on</span>
           <span className={styles.thumb} />
         </span>
         <span className={styles.text}>

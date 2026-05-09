@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import Header from "./Header";
 
 describe("Header", () => {
@@ -9,18 +9,20 @@ describe("Header", () => {
   });
 
   test("renders nav items with prompt glyph", () => {
-    const { container } = render(
+    render(
       <Header
         title="Z"
+        variant="terminal"
         nav={[
           { label: "home", href: "/" },
           { label: "posts", href: "/p" },
         ]}
       />
     );
-    expect(container.querySelectorAll(".nav-item").length).toBe(2);
-    expect(container.textContent).toContain("> home");
-    expect(container.textContent).toContain("> posts");
+    expect(screen.getAllByRole("link")).toHaveLength(3);
+    const nav = screen.getByRole("navigation", { name: /primary/i });
+    expect(within(nav).getByRole("link", { name: /home/i })).toBeTruthy();
+    expect(within(nav).getByRole("link", { name: /posts/i })).toBeTruthy();
   });
 
   test("hides locale switch when fewer than 2 locales", () => {

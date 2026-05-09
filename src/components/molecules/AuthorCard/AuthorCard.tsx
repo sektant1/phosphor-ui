@@ -41,10 +41,9 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
         {role && <div className={styles.role}>{role}</div>}
         {bio && <div className={styles.bio}>{bio}</div>}
         {links && links.length > 0 && (
-          <Cluster className={styles.links} gap="sm">
-            {links.map((link, i) => (
-              <React.Fragment key={link.href}>
-                {i > 0 && <span className={styles.sep} aria-hidden="true">·</span>}
+          <ul className={styles.links}>
+            {links.map((link) => (
+              <li key={link.href} className={styles.linkItem}>
                 <Link
                   href={link.href}
                   className={styles.link}
@@ -52,9 +51,9 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({
                 >
                   {link.label}
                 </Link>
-              </React.Fragment>
+              </li>
             ))}
-          </Cluster>
+          </ul>
         )}
       </Stack>
     </Cluster>
