@@ -3,14 +3,6 @@ import { CourseCard } from "./CourseCard";
 import type { CourseCardProps } from "./CourseCard";
 import { basicUsage } from "../../../stories/basicUsage";
 
-const art = `   .--.
-  |o_o |
-  |:_/ |
- //   \\ \\
-(|     | )
-/'\\_   _/\`\\
-\\___)=(___/`;
-
 const meta: Meta<CourseCardProps> = {
   title: "Molecules/CourseCard",
   component: CourseCard,
@@ -18,16 +10,15 @@ const meta: Meta<CourseCardProps> = {
     locked: { control: "boolean" },
   },
   args: {
-    stamp:       "MOD-001",
-    art,
-    coverMeta:   "// dossier",
-    tag:         "intro",
-    title:       "Phosphor protocol",
+    stamp: "MOD-001",
+    coverMeta: "// dossier",
+    tag: "intro",
+    title: "Phosphor protocol",
     description: "Boot the terminal. Decode the signal. Engage the zone.",
-    stats:       "08 lessons · 1h 42m",
-    progress:    { value: 40 },
-    cta:         { label: "resume ▸", href: "#" },
-    locked:      false,
+    stats: "08 lessons · 1h 42m",
+    progress: { value: 40 },
+    cta: { label: "resume ▸", href: "#" },
+    locked: false,
   },
 };
 export default meta;
@@ -51,7 +42,6 @@ export const Locked: StoryObj<CourseCardProps> = {
 export const Compact: StoryObj<CourseCardProps> = {
   args: {
     stamp: "MOD-002",
-    art,
     coverMeta: "field · 9 modules",
     tag: "field",
     title: "Signal decoding",
