@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SiteShell } from "./SiteShell";
-import { Post } from "../../pages/Post";
+import { Post } from "../PostTemplate";
 import { Callout } from "../../molecules/Callout";
 import { PostListing } from "../../organisms/PostListing";
 import { source, tsx } from "../../../stories/source";
 
 const meta = {
-  title: "Presets/SiteShell",
+  title: "Templates/SiteShell",
   component: SiteShell,
   parameters: {
     layout: "fullscreen",

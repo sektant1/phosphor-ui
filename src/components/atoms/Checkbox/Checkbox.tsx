@@ -13,7 +13,62 @@ export interface CheckboxProps
   onChange?: (checked: boolean) => void;
 }
 
-export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+export interface CheckboxControlProps
+  extends Omit<CheckboxProps, "label" | "description" | "strikethrough" | "children"> {}
+
+export const CheckboxControl = React.forwardRef<HTMLInputElement, CheckboxControlProps>(
+  (
+    {
+      checked,
+      defaultChecked,
+      disabled,
+      error,
+      onChange,
+      onCheckedChange,
+      id,
+      className,
+      ...rest
+    },
+    ref,
+  ) => {
+    const [internalChecked, setInternalChecked] = React.useState(defaultChecked ?? false);
+    const isControlled = checked !== undefined;
+    const value = isControlled ? checked : internalChecked;
+    const boxCls = cx(
+      styles.cb,
+      value && styles.checked,
+      disabled && styles.disabled,
+      error && styles.error,
+    );
+
+    return (
+      <span className={cx(styles.control, className)}>
+        <input
+          {...rest}
+          ref={ref}
+          id={id}
+          className={styles.native}
+          type="checkbox"
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          aria-invalid={error || undefined}
+          onChange={(event) => {
+            const next = event.currentTarget.checked;
+            if (!isControlled) setInternalChecked(next);
+            onChange?.(next);
+            onCheckedChange?.(next, event);
+          }}
+        />
+        <span className={boxCls} aria-hidden="true" />
+      </span>
+    );
+  },
+);
+
+CheckboxControl.displayName = "CheckboxControl";
+
+export const CheckboxField = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       checked,
@@ -54,34 +109,26 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       disabled && styles.disabledRow,
       className,
     );
-    const boxCls = cx(
-      styles.cb,
-      value && styles.checked,
-      disabled && styles.disabled,
-      error && styles.error,
-    );
 
     return (
       <label className={cls} htmlFor={resolvedId}>
-        <input
+        <CheckboxControl
           {...rest}
           ref={ref}
           id={resolvedId}
-          className={styles.native}
-          type="checkbox"
           checked={checked}
           defaultChecked={defaultChecked}
           disabled={disabled}
-          aria-invalid={error || undefined}
+          error={error}
           aria-describedby={describedBy}
-          onChange={(event) => {
-            const next = event.currentTarget.checked;
+          onChange={(next) => {
             if (!isControlled) setInternalChecked(next);
             onChange?.(next);
+          }}
+          onCheckedChange={(next, event) => {
             onCheckedChange?.(next, event);
           }}
         />
-        <span className={boxCls} aria-hidden="true" />
         <span className={styles.text}>
           {hasVisibleContent(visibleLabel) ? <span className={styles.label}>{visibleLabel}</span> : null}
           {hasVisibleContent(description) ? (
@@ -93,4 +140,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   },
 );
 
+CheckboxField.displayName = "CheckboxField";
+
+export const Checkbox = CheckboxField;
 Checkbox.displayName = "Checkbox";

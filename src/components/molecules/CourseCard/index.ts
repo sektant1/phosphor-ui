@@ -1,2 +1,2 @@
-export { CourseCard } from "./CourseCard";
-export type { CourseCardProps } from "./CourseCard";
+export { CourseCard } from "../../organisms/CourseCard";
+export type { CourseCardProps } from "../../organisms/CourseCard";

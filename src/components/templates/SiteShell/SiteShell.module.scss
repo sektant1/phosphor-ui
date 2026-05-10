@@ -3,9 +3,9 @@
 }
 
 .frame {
-  width: min(100%, var(--pho-site-max-width, 88rem));
+  width: min(100%, var(--pho-site-max-width, var(--pho-layout-site-max)));
   margin-inline: auto;
-  padding: var(--pho-site-padding, clamp(1rem, 2vw, 1.75rem));
+  padding: var(--pho-site-padding, var(--pho-layout-gutter));
 }
 
 .skipLink {
@@ -22,7 +22,7 @@
   padding: 0.45rem 0.65rem;
   text-decoration: none;
   text-shadow: none;
-  transition: transform 120ms ease;
+  transition: transform var(--pho-motion-fast) var(--pho-ease-out);
 }
 
 .skipLink:focus-visible {
@@ -44,7 +44,7 @@
   outline-offset: 0.5rem;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 520px) {
   .frame {
     padding: var(--pho-site-padding-mobile, 0.8rem);
   }

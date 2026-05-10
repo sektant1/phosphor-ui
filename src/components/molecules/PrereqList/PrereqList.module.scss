@@ -9,7 +9,7 @@
   padding: 8px 12px;
   border-bottom: 1px dashed var(--pho-color-primary-faint);
   background:
-    repeating-linear-gradient(90deg, transparent 0 6px, rgba(44, 255, 122, 0.04) 6px 7px),
+    repeating-linear-gradient(90deg, transparent 0 6px, var(--pho-alpha-primary-04) 6px 7px),
     var(--pho-color-background-raised);
 }
 .h {
@@ -50,13 +50,13 @@
   text-shadow: var(--pho-glow-primary);
   text-transform: uppercase;
 }
-.missing .mark { border-color: #ff5577; color: #ff5577; text-shadow: 0 0 4px rgba(255, 80, 120, 0.5); }
+.missing .mark { border-color: var(--pho-color-danger); color: var(--pho-color-danger); text-shadow: 0 0 4px var(--pho-color-danger-muted); }
 .soft .mark { border-color: var(--pho-color-primary-faint); color: var(--pho-color-primary-faint); text-shadow: none; }
 
 .name { display: grid; gap: 1px; min-width: 0; }
 .title { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); }
 .met .title { color: var(--pho-color-primary-muted); text-shadow: none; }
-.missing .title { color: #ff8aa1; }
+.missing .title { color: var(--pho-color-danger-strong); }
 .sub { font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size); letter-spacing: 0.12em; color: var(--pho-color-primary-faint); text-transform: uppercase; }
 
 .statusLabel {
@@ -68,7 +68,7 @@
   white-space: nowrap;
 }
 .met .statusLabel { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
-.missing .statusLabel { color: #ff8aa1; text-shadow: 0 0 4px rgba(255, 80, 120, 0.4); }
+.missing .statusLabel { color: var(--pho-color-danger-strong); text-shadow: 0 0 4px var(--pho-color-danger-muted); }
 .soft .statusLabel { color: var(--pho-color-primary-faint); }
 
 @media (max-width: 480px) {

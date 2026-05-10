@@ -1,2 +1,2 @@
-export { Post } from "./Post";
-export type { PostProps } from "./Post";
+export { Post, PostTemplate } from "../../templates/PostTemplate";
+export type { PostProps, PostTemplateProps } from "../../templates/PostTemplate";

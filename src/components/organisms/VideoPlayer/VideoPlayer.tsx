@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useRef } from "react";
-import videojs from "video.js";
 import type Player from "video.js/dist/types/player";
-import "video.js/dist/video-js.css";
 import styles from "./VideoPlayer.module.scss";
 import { cx } from "../../../utils/classNames";
 
@@ -57,34 +55,42 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (playerRef.current) return;
     const host = hostRef.current;
     if (!host) return;
+    let cancelled = false;
 
     const videoEl = document.createElement("video-js");
     videoEl.classList.add("vjs-big-play-centered", styles.video);
     host.appendChild(videoEl);
 
-    const player = videojs(
-      videoEl,
-      {
-        controls,
-        autoplay,
-        loop,
-        muted,
-        preload,
-        fluid,
-        poster,
-        sources,
-        ...options,
-      },
-      () => {
-        onReady?.(player);
-      },
-    );
-    playerRef.current = player;
+    import("video.js").then(({ default: videojs }) => {
+      if (cancelled) return;
+      const player = videojs(
+        videoEl,
+        {
+          controls,
+          autoplay,
+          loop,
+          muted,
+          preload,
+          fluid,
+          poster,
+          sources,
+          ...options,
+        },
+        () => {
+          onReady?.(player);
+        },
+      );
+      playerRef.current = player;
+    });
+
     return () => {
+      cancelled = true;
+      const player = playerRef.current;
       if (player && !player.isDisposed()) {
         player.dispose();
       }
       playerRef.current = null;
+      videoEl.remove();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

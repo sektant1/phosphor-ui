@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Switch } from "./Switch";
+import { Switch, SwitchControl } from "./Switch";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Switch> = {
@@ -81,6 +81,14 @@ export function Example() {
 }
 `;
 
+const controlSource = tsx`
+import { SwitchControl } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return <SwitchControl aria-label="Publish draft" defaultChecked />;
+}
+`;
+
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
@@ -128,4 +136,9 @@ export const Matrix: Story = {
       <Switch label="locked channel" description="requires elevated clearance" disabled />
     </div>
   ),
+};
+
+export const Control: StoryObj<typeof SwitchControl> = {
+  parameters: { docs: { source: source(controlSource) } },
+  render: () => <SwitchControl aria-label="Publish draft" defaultChecked />,
 };

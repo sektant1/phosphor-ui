@@ -1,0 +1,62 @@
+.field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.labelRow {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.label {
+  color: var(--pho-color-text-muted);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-label-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1.2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.required {
+  border: 1px solid var(--pho-color-accent-muted);
+  color: var(--pho-color-accent);
+  flex: 0 0 auto;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-micro-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1;
+  padding: 0.14rem 0.32rem 0.1rem;
+  text-transform: uppercase;
+}
+
+.control {
+  min-width: 0;
+}
+
+.controlError {
+  border-left: 2px solid var(--pho-color-danger-emphasis);
+  padding-left: 0.55rem;
+}
+
+.hint,
+.error {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  line-height: var(--pho-line-normal);
+}
+
+.hint {
+  color: var(--pho-color-text-faint);
+}
+
+.error {
+  color: var(--pho-color-danger);
+  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+}

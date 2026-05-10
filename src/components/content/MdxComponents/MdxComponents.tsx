@@ -1,5 +1,4 @@
 import React from "react";
-import { MDXProvider } from "@mdx-js/react";
 import { cx } from "../../../utils/classNames";
 import type { MDXComponents as ProviderComponents } from "mdx/types.js";
 import Prose from "../../content/Prose";
@@ -9,8 +8,8 @@ import Link from "../../atoms/Link";
 import { Kbd } from "../../atoms/Kbd";
 import { Exercise } from "../../organisms/Exercise";
 import { CodeBlock, extractMdxCode } from "../../content/CodeBlock";
-import { PostFrontmatter } from "../../molecules/PostFrontmatter";
-import type { PostFrontmatterData } from "../../molecules/PostFrontmatter";
+import { PostFrontmatter } from "../../content/PostFrontmatter";
+import type { PostFrontmatterData } from "../../content/PostFrontmatter";
 
 type AnyProps = React.HTMLAttributes<HTMLElement>;
 
@@ -118,9 +117,18 @@ export const PostBody: React.FC<PostBodyProps> = ({
   frontmatterLabel,
   before,
   after,
-}) => (
-  <MDXProvider components={components ? { ...mdxComponents, ...components } : mdxComponents}>
-    <div className={cx("pho-post-body", rootClassName)}>
+}) => {
+  const ComponentProvider =
+    React.useMemo(
+      () => components ? { ...mdxComponents, ...components } : mdxComponents,
+      [components],
+    );
+
+  return (
+    <div
+      className={cx("pho-post-body", rootClassName)}
+      data-mdx-components={Object.keys(ComponentProvider).join(" ")}
+    >
       {before}
       {frontmatter ? (
         <PostFrontmatter
@@ -133,5 +141,5 @@ export const PostBody: React.FC<PostBodyProps> = ({
       <Prose className={className}>{children}</Prose>
       {after}
     </div>
-  </MDXProvider>
-);
+  );
+};

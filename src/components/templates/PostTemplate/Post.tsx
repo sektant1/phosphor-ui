@@ -5,7 +5,7 @@ import { PostBody } from "../../content/MdxComponents";
 import type { PostBodyProps } from "../../content/MdxComponents";
 import { PostHeader } from "../../organisms/PostHeader";
 import type { PostHeaderProps } from "../../organisms/PostHeader";
-import type { PostFrontmatterData } from "../../molecules/PostFrontmatter";
+import type { PostFrontmatterData } from "../../content/PostFrontmatter";
 
 export interface PostProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
@@ -115,3 +115,6 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
 );
 
 Post.displayName = "Post";
+
+export const PostTemplate = Post;
+export type PostTemplateProps = PostProps;

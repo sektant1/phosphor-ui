@@ -13,7 +13,53 @@ export interface SwitchProps
   onChange?: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+export interface SwitchControlProps
+  extends Omit<SwitchProps, "label" | "description" | "children"> {}
+
+export const SwitchControl = React.forwardRef<HTMLInputElement, SwitchControlProps>(
+  (
+    {
+      checked,
+      defaultChecked,
+      disabled,
+      className,
+      id,
+      onChange,
+      onCheckedChange,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <span className={cx(styles.control, disabled && styles.disabled, className)}>
+        <input
+          {...rest}
+          ref={ref}
+          id={id}
+          type="checkbox"
+          role="switch"
+          className={styles.native}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          onChange={(event) => {
+            onChange?.(event.currentTarget.checked, event);
+            onCheckedChange?.(event.currentTarget.checked, event);
+          }}
+        />
+        <span className={styles.track} aria-hidden="true">
+          <span className={cx(styles.state, styles.stateOff)}>off</span>
+          <span className={cx(styles.state, styles.stateOn)}>on</span>
+          <span className={styles.thumb} />
+        </span>
+      </span>
+    );
+  },
+);
+
+SwitchControl.displayName = "SwitchControl";
+
+export const SwitchField = React.forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
       label,
@@ -31,6 +77,9 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     },
     ref,
   ) => {
+    const [internalChecked, setInternalChecked] = React.useState(defaultChecked ?? false);
+    const isControlled = checked !== undefined;
+    const value = isControlled ? checked : internalChecked;
     const generatedId = React.useId();
     const resolvedId = id ?? generatedId;
     const descriptionId = `${resolvedId}-description`;
@@ -43,28 +92,31 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       .join(" ") || undefined;
 
     return (
-      <label className={cx(styles.root, disabled && styles.disabled, className)} htmlFor={resolvedId}>
-        <input
+      <label
+        className={cx(
+          styles.root,
+          value && styles.checkedField,
+          disabled && styles.disabled,
+          className,
+        )}
+        htmlFor={resolvedId}
+      >
+        <SwitchControl
           {...rest}
           ref={ref}
           id={resolvedId}
-          type="checkbox"
-          role="switch"
-          className={styles.native}
           checked={checked}
           defaultChecked={defaultChecked}
           disabled={disabled}
           aria-describedby={describedBy}
-          onChange={(event) => {
-            onChange?.(event.currentTarget.checked, event);
-            onCheckedChange?.(event.currentTarget.checked, event);
+          onChange={(next, event) => {
+            if (!isControlled) setInternalChecked(next);
+            onChange?.(next, event);
+          }}
+          onCheckedChange={(next, event) => {
+            onCheckedChange?.(next, event);
           }}
         />
-        <span className={styles.track} aria-hidden="true">
-          <span className={cx(styles.state, styles.stateOff)}>off</span>
-          <span className={cx(styles.state, styles.stateOn)}>on</span>
-          <span className={styles.thumb} />
-        </span>
         <span className={styles.text}>
           {hasVisibleContent(visibleLabel) ? <span className={styles.label}>{visibleLabel}</span> : null}
           {hasVisibleContent(description) ? (
@@ -75,4 +127,8 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     );
   },
 );
+
+SwitchField.displayName = "SwitchField";
+
+export const Switch = SwitchField;
 Switch.displayName = "Switch";

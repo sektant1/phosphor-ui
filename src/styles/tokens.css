@@ -56,6 +56,56 @@
   --pho-color-inverse: var(--bg);
   --pho-color-selection-bg: var(--pho-color-primary);
   --pho-color-selection-text: var(--pho-color-background);
+  --pho-color-surface: var(--pho-color-background-raised);
+  --pho-color-surface-deep: var(--pho-color-background-deep);
+  --pho-color-border: var(--pho-color-primary-faint);
+  --pho-color-border-strong: var(--pho-color-primary-muted);
+  --pho-color-danger: #ff6a6a;
+  --pho-color-danger-strong: #ff8a8a;
+  --pho-color-danger-emphasis: #ff3a3a;
+  --pho-color-danger-contrast: #1a0606;
+  --pho-color-danger-muted: rgba(255, 58, 58, 0.35);
+  --pho-color-danger-faint: rgba(255, 58, 58, 0.12);
+  --pho-color-danger-subtle: rgba(255, 58, 58, 0.08);
+  --pho-color-danger-glow: rgba(255, 58, 58, 0.55);
+  --pho-color-danger-glow-soft: rgba(255, 58, 58, 0.25);
+  --pho-color-warning: #dfffaa;
+  --pho-color-warning-strong: #efffc9;
+  --pho-color-warning-muted: rgba(170, 255, 102, 0.42);
+  --pho-color-warning-faint: rgba(170, 255, 102, 0.07);
+  --pho-color-status-draft: var(--pho-color-text-muted);
+  --pho-color-status-published: var(--pho-color-success);
+  --pho-color-status-archived: var(--pho-color-text-faint);
+  --pho-color-status-locked: var(--pho-color-danger);
+  --pho-color-status-current: var(--pho-color-primary);
+  --pho-color-status-missing: var(--pho-color-danger-strong);
+
+  /* ── alpha overlays ───────────────────────────────────── */
+  --pho-alpha-primary-01: rgba(44, 255, 122, 0.01);
+  --pho-alpha-primary-02: rgba(44, 255, 122, 0.02);
+  --pho-alpha-primary-03: rgba(44, 255, 122, 0.03);
+  --pho-alpha-primary-04: rgba(44, 255, 122, 0.04);
+  --pho-alpha-primary-05: rgba(44, 255, 122, 0.05);
+  --pho-alpha-primary-06: rgba(44, 255, 122, 0.06);
+  --pho-alpha-primary-07: rgba(44, 255, 122, 0.07);
+  --pho-alpha-primary-08: rgba(44, 255, 122, 0.08);
+  --pho-alpha-primary-10: rgba(44, 255, 122, 0.1);
+  --pho-alpha-primary-12: rgba(44, 255, 122, 0.12);
+  --pho-alpha-primary-14: rgba(44, 255, 122, 0.14);
+  --pho-alpha-primary-16: rgba(44, 255, 122, 0.16);
+  --pho-alpha-primary-18: rgba(44, 255, 122, 0.18);
+  --pho-alpha-primary-22: rgba(44, 255, 122, 0.22);
+  --pho-alpha-primary-28: rgba(44, 255, 122, 0.28);
+  --pho-alpha-primary-35: rgba(44, 255, 122, 0.35);
+  --pho-alpha-primary-45: rgba(44, 255, 122, 0.45);
+  --pho-alpha-accent-04: rgba(98, 255, 154, 0.04);
+  --pho-alpha-accent-08: rgba(98, 255, 154, 0.08);
+  --pho-alpha-accent-12: rgba(98, 255, 154, 0.12);
+  --pho-alpha-accent-14: rgba(98, 255, 154, 0.14);
+  --pho-alpha-surface-45: rgba(1, 6, 4, 0.45);
+  --pho-alpha-surface-62: rgba(1, 6, 4, 0.62);
+  --pho-alpha-surface-72: rgba(1, 6, 4, 0.72);
+  --pho-alpha-surface-82: rgba(3, 17, 10, 0.82);
 
   /* ── glow utilities ────────────────────────────────────── */
   --glow-emerald:
@@ -155,6 +205,33 @@
   --pho-size-touch-target: 2.5rem;
   --pho-size-content: 72rem;
   --pho-size-prose: 68ch;
+  --pho-layout-site-max: 88rem;
+  --pho-layout-content-max: 72rem;
+  --pho-layout-prose-max: 68ch;
+  --pho-layout-sidebar-width: 18rem;
+  --pho-layout-toc-width: 17.5rem;
+  --pho-layout-admin-sidebar-width: clamp(18rem, 24vw, 22rem);
+  --pho-layout-gutter: clamp(1rem, 2vw, 1.75rem);
+  --pho-layout-sticky-top: 1rem;
+  --pho-bp-xs: 360px;
+  --pho-bp-sm: 520px;
+  --pho-bp-md: 720px;
+  --pho-bp-lg: 880px;
+  --pho-bp-xl: 1120px;
+  --pho-motion-fast: 120ms;
+  --pho-motion-base: 180ms;
+  --pho-motion-slow: 320ms;
+  --pho-ease-out: ease-out;
+  --pho-ease-terminal: steps(8);
+  --pho-card-border: 1px solid var(--pho-color-border);
+  --pho-card-bg: var(--pho-color-surface);
+  --pho-card-padding: var(--pho-space-5);
+  --pho-thumb-post-w: 160px;
+  --pho-thumb-post-h: 100px;
+  --pho-thumb-post-w-sm: 88px;
+  --pho-thumb-post-h-sm: 56px;
+  --pho-ascii-glow-pad-x: 1.5em;
+  --pho-ascii-glow-pad-y: 1.1em;
 
   /* ── z-index ramp ──────────────────────────────────────── */
   --z-deep: 0;

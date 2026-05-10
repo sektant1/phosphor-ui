@@ -5,7 +5,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
 [![npm downloads](https://img.shields.io/npm/dm/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
-[![license](https://img.shields.io/github/license/sektant1/phosphor?color=2cff7a&labelColor=03110a&style=flat-square)](./LICENSE)
+[![license](https://img.shields.io/github/license/sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](./LICENSE)
 [![Storybook](https://img.shields.io/badge/storybook-live-2cff7a?labelColor=03110a&style=flat-square)](https://sektant1.github.io/phosphor)
 [![TypeScript](https://img.shields.io/badge/typescript-strict-2cff7a?labelColor=03110a&style=flat-square)](https://www.typescriptlang.org)
 
@@ -25,7 +25,7 @@ npm install @sektant1/phosphor-ui
 ```
 
 Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.
-`@mdx-js/react ^2 || ^3` is optional and only needed for `<PostBody>` / MDX rendering.
+`@mdx-js/react ^2 || ^3` is optional for MDX applications, but the package root does not load it at module initialization.
 
 ## Setup
 
@@ -35,7 +35,7 @@ Import the full stylesheet once at your app root:
 import "@sektant1/phosphor-ui/phosphor.css";
 ```
 
-If you need finer control, import `tokens.css` and `global.css` separately.
+If you need finer control, import `tokens.css`, `global.css`, and `components.css` separately.
 
 ## Tokens
 
@@ -111,6 +111,16 @@ import { SiteShell, Post, Button, Callout, TableOfContents } from "@sektant1/pho
 ```
 
 The physical folders are organized for maintainers. Consumers should prefer the stable root exports so components can move internally without breaking your site.
+
+Category subpaths are available when you want smaller, explicit imports:
+
+```tsx
+import { Button, Tag } from "@sektant1/phosphor-ui/atoms";
+import { Callout, TableOfContents } from "@sektant1/phosphor-ui/molecules";
+import { PostListing } from "@sektant1/phosphor-ui/organisms";
+import { PostBody } from "@sektant1/phosphor-ui/content";
+import { VideoPlayer } from "@sektant1/phosphor-ui/video";
+```
 
 ## Components
 
@@ -196,7 +206,7 @@ import PostMdx from "./posts/boot.mdx";
 </PostBody>
 ```
 
-`PostBody` wraps content in `<Prose>` + `MDXProvider`. Native MDX tags (`h1–h6`, `pre`, `blockquote`, `img`, `hr`, `a`) render with full phosphor styling. Fenced code blocks render via `<CodeBlock>` with Shiki syntax highlighting.
+`PostBody` wraps content in `<Prose>`. Use `mdxComponents` with your MDX provider/compiler to map native MDX tags (`h1-h6`, `pre`, `blockquote`, `img`, `hr`, `a`) to phosphor components. Fenced code blocks render via `<CodeBlock>` with Shiki syntax highlighting.
 
 ## Hooks
 

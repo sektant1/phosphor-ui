@@ -11,6 +11,14 @@
   vertical-align: middle;
 }
 
+.checkedField {}
+
+.control {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+}
+
 .native {
   block-size: 1px;
   inline-size: 1px;
@@ -90,7 +98,8 @@
   outline-offset: var(--pho-focus-offset);
 }
 
-.native:checked ~ .text .label {
+.native:checked ~ .text .label,
+.checkedField .label {
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary-soft);
 }

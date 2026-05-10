@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Form.module.scss";
 import { cx } from "../../../utils/classNames";
-import { Input, Textarea } from "../../atoms/Input";
-import type { InputProps, TextareaProps } from "../../atoms/Input";
-import { Select } from "../../atoms/Select";
-import type { SelectOption, SelectProps } from "../../atoms/Select";
+import { InputControl, TextareaControl } from "../../atoms/Input";
+import type { InputControlProps, TextareaControlProps } from "../../atoms/Input";
+import { SelectControl } from "../../atoms/Select";
+import type { SelectControlProps, SelectOption } from "../../atoms/Select";
 import { FormField } from "./FormField";
 
 type FormFieldBase = {
@@ -19,16 +19,16 @@ type FormFieldBase = {
 export type FormFieldConfig =
   | (FormFieldBase & {
       type?: "input";
-      inputProps?: Omit<InputProps, "id" | "name" | "label" | "helpText" | "error" | "rootProps">;
+      inputProps?: Omit<InputControlProps, "id" | "name">;
     })
   | (FormFieldBase & {
       type: "textarea";
-      textareaProps?: Omit<TextareaProps, "id" | "name" | "label" | "helpText" | "error" | "rootProps">;
+      textareaProps?: Omit<TextareaControlProps, "id" | "name">;
     })
   | (FormFieldBase & {
       type: "select";
       options: SelectOption[];
-      selectProps?: Omit<SelectProps, "id" | "name" | "label" | "helpText" | "error" | "rootProps" | "options">;
+      selectProps?: Omit<SelectControlProps, "id" | "name" | "options">;
     })
   | (FormFieldBase & {
       type: "custom";
@@ -48,22 +48,23 @@ export interface FormProps extends Omit<React.FormHTMLAttributes<HTMLFormElement
 function renderFieldControl(field: FormFieldConfig, id: string): React.ReactNode {
   if (field.type === "textarea") {
     return (
-      <Textarea
+      <TextareaControl
         {...field.textareaProps}
         id={id}
         name={field.name}
-        state={field.error ? "error" : field.textareaProps?.state}
+        aria-invalid={field.error ? true : field.textareaProps?.["aria-invalid"]}
       />
     );
   }
 
   if (field.type === "select") {
     return (
-      <Select
+      <SelectControl
         {...field.selectProps}
         id={id}
         name={field.name}
         options={field.options}
+        aria-invalid={field.error ? true : field.selectProps?.["aria-invalid"]}
       />
     );
   }
@@ -73,11 +74,11 @@ function renderFieldControl(field: FormFieldConfig, id: string): React.ReactNode
   }
 
   return (
-    <Input
+    <InputControl
       {...field.inputProps}
       id={id}
       name={field.name}
-      state={field.error ? "error" : field.inputProps?.state}
+      aria-invalid={field.error ? true : field.inputProps?.["aria-invalid"]}
     />
   );
 }

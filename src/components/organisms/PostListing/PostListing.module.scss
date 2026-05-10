@@ -1,6 +1,6 @@
 .wrap {
-  --thumb-w: 160px;
-  --thumb-h: 100px;
+  --thumb-w: var(--pho-thumb-post-w);
+  --thumb-h: var(--pho-thumb-post-h);
   --row-cols: 2ch var(--thumb-w) 1fr 7ch 11ch;
   --row-gap: 1.1ch;
   --row-pad-x: 0.7rem;
@@ -31,7 +31,7 @@
 }
 .row {
   border-top: 1px dashed var(--pho-color-accent-faint);
-  animation: phosphorBootline 280ms steps(14) backwards;
+  animation: phosphorBootline var(--pho-motion-slow) steps(14) backwards;
   animation-delay: calc(var(--i, 0) * 60ms + 200ms);
 }
 .row:first-child { border-top: none; }
@@ -91,7 +91,7 @@
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(ellipse at 50% 40%, rgba(44,255,122,0.22), transparent 65%),
+    radial-gradient(ellipse at 50% 40%, var(--pho-alpha-primary-22), transparent 65%),
     linear-gradient(135deg, var(--pho-color-background-deep) 0%, var(--pho-color-background-raised) 100%);
 }
 .thumbFallback::before {
@@ -123,8 +123,8 @@
 }
 @media (max-width: 520px) {
   .wrap {
-    --thumb-w: 88px;
-    --thumb-h: 56px;
+    --thumb-w: var(--pho-thumb-post-w-sm);
+    --thumb-h: var(--pho-thumb-post-h-sm);
     --row-cols: var(--thumb-w) 1fr;
     --row-gap: 0.8ch;
   }

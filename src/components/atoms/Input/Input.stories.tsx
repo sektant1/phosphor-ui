@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input, Textarea } from "./Input";
+import { Input, InputControl, Textarea, TextareaControl } from "./Input";
 import type { InputProps, TextareaProps } from "./Input";
 import { source, tsx } from "../../../stories/source";
 
@@ -54,6 +54,19 @@ export function Example() {
 }
 `;
 
+const controlsSource = tsx`
+import { InputControl, TextareaControl } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <InputControl aria-label="Command" placeholder="type command" cursor />
+        <TextareaControl aria-label="Transmission" rows={3} placeholder="multi-line transmission..." />
+      </div>
+    );
+}
+`;
+
 export const Default: StoryObj<InputProps> = {
   parameters: { docs: { source: source(defaultSource) } },
 };
@@ -62,4 +75,14 @@ export const TextArea: StoryObj<TextareaProps> = {
   parameters: { docs: { source: source(textAreaSource) } },
   render: (args) => React.createElement(Textarea, args),
   args: { rows: 4, placeholder: "multi-line transmission..." },
+};
+
+export const Controls: StoryObj = {
+  parameters: { docs: { source: source(controlsSource) } },
+  render: () => (
+    <div style={{ display: "grid", gap: "0.75rem" }}>
+      <InputControl aria-label="Command" placeholder="type command" cursor />
+      <TextareaControl aria-label="Transmission" rows={3} placeholder="multi-line transmission..." />
+    </div>
+  ),
 };

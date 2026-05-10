@@ -12,7 +12,7 @@
 }
 
 .withSidebar {
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  grid-template-columns: minmax(0, 1fr) minmax(220px, var(--pho-layout-toc-width));
   align-items: start;
 }
 
@@ -28,7 +28,7 @@
 
 .stickySidebar > * {
   position: sticky;
-  top: 16px;
+  top: var(--pho-layout-sticky-top);
 }
 
 .footer {

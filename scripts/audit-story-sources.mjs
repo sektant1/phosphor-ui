@@ -8,8 +8,13 @@ const storyFilePattern = /\.(stories\.(tsx|ts)|mdx)$/;
 
 const relativeImportPattern =
   /from\s+["'](?:\.{1,2}\/|\/)|import\s*\(\s*["'](?:\.{1,2}\/|\/)/;
+const packagePrivateImportPattern =
+  /(?:from\s+["']|import\s*\(\s*["'])@sektant1\/phosphor-ui\/(?:src|dist|components)(?:\/|["'])/;
+const workspacePrivateImportPattern =
+  /(?:from\s+["']|import\s*\(\s*["'])(?:src|components|stories)\//;
+const cssModuleImportPattern = /\.module\.(?:css|scss|sass)\b/;
 const storyInternalsPattern =
-  /\b(export\s+const|StoryObj|Meta|args\s*:|render\s*:)\b/;
+  /\b(export\s+const|StoryObj|Meta|args\s*:|render\s*:|@storybook\/react)\b/;
 
 function walk(dir, files = []) {
   if (!fs.existsSync(dir)) return files;
@@ -92,6 +97,33 @@ function exportedStories(sourceFile) {
   return stories;
 }
 
+function stringConstants(sourceFile) {
+  const constants = new Map();
+
+  function visit(node) {
+    if (ts.isVariableStatement(node)) {
+      const isConst =
+        (node.declarationList.flags & ts.NodeFlags.Const) === ts.NodeFlags.Const;
+
+      if (isConst) {
+        for (const declaration of node.declarationList.declarations) {
+          if (!ts.isIdentifier(declaration.name) || !declaration.initializer) continue;
+
+          const value = inlineSnippet(declaration.initializer, constants);
+          if (typeof value === "string") {
+            constants.set(declaration.name.text, value);
+          }
+        }
+      }
+    }
+
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile);
+  return constants;
+}
+
 function containsNestedProperty(object, pathParts) {
   let current = object;
 
@@ -122,8 +154,12 @@ function expressionText(expression, sourceFile) {
   return expression ? expression.getText(sourceFile) : "";
 }
 
-function inlineSnippet(expression) {
+function inlineSnippet(expression, constants = new Map()) {
   if (!expression) return undefined;
+  if (ts.isIdentifier(expression)) return constants.get(expression.text);
+  if (ts.isTaggedTemplateExpression(expression)) {
+    return inlineSnippet(expression.template, constants);
+  }
   if (ts.isNoSubstitutionTemplateLiteral(expression)) return expression.text;
   if (ts.isStringLiteral(expression)) return expression.text;
   return undefined;
@@ -145,6 +181,7 @@ function isJsonOnly(snippet) {
 function analyzeFile(filePath) {
   const code = fs.readFileSync(filePath, "utf8");
   const sourceFile = ts.createSourceFile(filePath, code, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const snippets = stringConstants(sourceFile);
   const stories = exportedStories(sourceFile);
   const importsBasicUsage = /\bbasicUsage\b/.test(code);
   const basicUsageReferences = code.match(/\bbasicUsage\.[A-Za-z0-9_$]+/g) ?? [];
@@ -153,9 +190,10 @@ function analyzeFile(filePath) {
   for (const story of stories) {
     const codeExpression = sourceCodeExpression(story.node);
     const codeText = expressionText(codeExpression, sourceFile);
-    const snippet = inlineSnippet(codeExpression);
+    const snippet = inlineSnippet(codeExpression, snippets);
     const hasSourceCode =
       Boolean(codeExpression) &&
+      Boolean(snippet) &&
       !/\bbasicUsage\./.test(codeText) &&
       !/^\s*JSON\.stringify\b/.test(codeText);
     const hasRender = containsNestedProperty(story.node, ["render"]);
@@ -181,6 +219,15 @@ function analyzeFile(filePath) {
       issues.push(`${story.name}: source imports from a relative/private path`);
     }
 
+    if (
+      snippet &&
+      (packagePrivateImportPattern.test(snippet) ||
+        workspacePrivateImportPattern.test(snippet) ||
+        cssModuleImportPattern.test(snippet))
+    ) {
+      issues.push(`${story.name}: source imports internal package or workspace files`);
+    }
+
     if (snippet && storyInternalsPattern.test(snippet)) {
       issues.push(`${story.name}: source contains Storybook internals`);
     }
@@ -200,6 +247,8 @@ function analyzeFile(filePath) {
 
   return {
     filePath,
+    sourceFile,
+    snippets,
     stories,
     issues,
   };
@@ -220,7 +269,8 @@ for (const report of reports) {
       const codeExpression = sourceCodeExpression(story.node);
       const hasSourceCode =
         Boolean(codeExpression) &&
-        !/\bbasicUsage\./.test(expressionText(codeExpression, ts.createSourceFile(report.filePath, fs.readFileSync(report.filePath, "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)));
+        Boolean(inlineSnippet(codeExpression, report.snippets)) &&
+        !/\bbasicUsage\./.test(expressionText(codeExpression, report.sourceFile));
       console.log(`  ${story.name}: ${hasSourceCode ? "source" : "missing-source"}`);
     }
   }

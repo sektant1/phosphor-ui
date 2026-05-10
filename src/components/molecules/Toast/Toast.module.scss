@@ -14,7 +14,7 @@
   max-width: 320px;
   transform: translateY(0);
   opacity: 1;
-  transition: transform 200ms ease, opacity 200ms ease;
+  transition: transform var(--pho-motion-base) var(--pho-ease-out), opacity var(--pho-motion-base) var(--pho-ease-out);
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -38,9 +38,9 @@
 }
 
 .info    { border-color: var(--pho-color-primary-muted); color: var(--pho-color-primary); }
-.success { border-color: var(--pho-color-primary); color: var(--pho-color-primary-strong); box-shadow: 0 0 12px rgba(44, 255, 122, 0.2); }
-.warn    { border-color: var(--pho-color-accent); color: var(--pho-color-accent); }
-.error   { border-color: #ff4444; color: #ff6666; }
+.success { border-color: var(--pho-color-primary); color: var(--pho-color-primary-strong); box-shadow: 0 0 12px var(--pho-alpha-primary-22); }
+.warn    { border-color: var(--pho-color-warning-muted); color: var(--pho-color-warning); }
+.error   { border-color: var(--pho-color-danger-emphasis); color: var(--pho-color-danger); }
 
 .glyph   { font-weight: bold; flex-shrink: 0; }
 .message { flex: 1; min-width: 0; }

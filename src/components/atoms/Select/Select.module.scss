@@ -27,7 +27,7 @@
 
 .control:focus-within {
   border-color: var(--pho-color-primary);
-  box-shadow: 0 0 0 1px rgba(44, 255, 122, 0.18);
+  box-shadow: 0 0 0 1px var(--pho-alpha-primary-18);
 }
 
 .prompt {
@@ -99,23 +99,23 @@
 }
 
 .error {
-  color: #ff6a6a;
-  text-shadow: 0 0 1px #ff3a3a, 0 0 6px rgba(255, 58, 58, 0.35);
+  color: var(--pho-color-danger);
+  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
 }
 
 .errorField .label,
 .errorField .prompt,
 .errorField .select {
-  color: #ff8a8a;
+  color: var(--pho-color-danger-strong);
 }
 
 .errorField .control {
-  border-color: #ff3a3a;
-  box-shadow: 0 0 0 1px rgba(255, 58, 58, 0.12);
+  border-color: var(--pho-color-danger-emphasis);
+  box-shadow: 0 0 0 1px var(--pho-color-danger-faint);
 }
 
 .errorField .chev {
-  border-color: #ff6a6a;
+  border-color: var(--pho-color-danger);
 }
 
 @media (max-width: 480px) {

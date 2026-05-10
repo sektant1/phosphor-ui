@@ -132,6 +132,11 @@
   white-space: pre;
 }
 
+.rawError {
+  color: var(--pho-color-danger);
+  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+}
+
 .previewSurface {
   background:
     linear-gradient(180deg, rgba(44, 255, 122, 0.05), rgba(44, 255, 122, 0.015)),

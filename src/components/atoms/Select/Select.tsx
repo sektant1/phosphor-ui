@@ -23,23 +23,63 @@ export interface SelectProps
   onValueChange?: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+export interface SelectControlProps
+  extends Omit<SelectProps, "label" | "helpText" | "error" | "rootProps"> {}
+
+export const SelectControl = React.forwardRef<HTMLSelectElement, SelectControlProps>(
   (
     {
-      label,
-      helpText,
-      error,
       prompt = "select",
       options,
       className,
       controlClassName,
       selectClassName,
+      id,
+      disabled,
+      onChange,
+      onValueChange,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <span className={cx(styles.control, controlClassName, className)}>
+        {hasVisibleContent(prompt) ? <span className={styles.prompt}>[{prompt}]</span> : null}
+        <select
+          ref={ref}
+          id={id}
+          className={cx(styles.select, selectClassName)}
+          disabled={disabled}
+          onChange={(event) => {
+            onChange?.(event);
+            onValueChange?.(event.currentTarget.value, event);
+          }}
+          {...rest}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value} disabled={option.disabled}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        <span className={styles.chev} aria-hidden="true" />
+      </span>
+    );
+  },
+);
+SelectControl.displayName = "SelectControl";
+
+export const SelectField = React.forwardRef<HTMLSelectElement, SelectProps>(
+  (
+    {
+      label,
+      helpText,
+      error,
+      className,
       rootProps,
       id,
       disabled,
       "aria-describedby": ariaDescribedBy,
-      onChange,
-      onValueChange,
       ...rest
     },
     ref,
@@ -69,33 +109,22 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         htmlFor={resolvedId}
       >
         {hasVisibleContent(label) ? <span className={styles.label}>{label}</span> : null}
-        <span className={cx(styles.control, controlClassName)}>
-          {hasVisibleContent(prompt) ? <span className={styles.prompt}>[{prompt}]</span> : null}
-          <select
-            ref={ref}
-            id={resolvedId}
-            className={cx(styles.select, selectClassName)}
-            aria-invalid={hasVisibleContent(error) || undefined}
-            aria-describedby={describedBy}
-            disabled={disabled}
-            onChange={(event) => {
-              onChange?.(event);
-              onValueChange?.(event.currentTarget.value, event);
-            }}
-            {...rest}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value} disabled={option.disabled}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <span className={styles.chev} aria-hidden="true" />
-        </span>
+        <SelectControl
+          {...rest}
+          ref={ref}
+          id={resolvedId}
+          disabled={disabled}
+          aria-invalid={hasVisibleContent(error) || undefined}
+          aria-describedby={describedBy}
+        />
         {hasVisibleContent(helpText) ? <span id={helpId} className={styles.help}>{helpText}</span> : null}
         {hasVisibleContent(error) ? <span id={errorId} className={styles.error}>{error}</span> : null}
       </label>
     );
   },
 );
+
+SelectField.displayName = "SelectField";
+
+export const Select = SelectField;
 Select.displayName = "Select";

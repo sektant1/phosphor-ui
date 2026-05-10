@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Glyphs, Glyph, DEFAULT_GLYPHS } from "./Glyphs";
+import { Glyphs, DEFAULT_GLYPHS } from "./Glyphs";
+import { Glyph } from "../../atoms/Glyph";
 import type { GlyphsProps } from "./Glyphs";
 import { source, tsx } from "../../../stories/source";
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
-import { CourseCard } from "../../molecules/CourseCard";
+import { CourseCard } from "../../organisms/CourseCard";
 import { Tag } from "../../atoms/Tag";
 import { Cluster, Container, Flex, Grid, Stack } from "./Layout";
 import { source, tsx } from "../../../stories/source";

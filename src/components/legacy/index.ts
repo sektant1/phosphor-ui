@@ -1,2 +1,2 @@
-export { Post as PostLayout } from "../pages/Post";
-export type { PostProps as PostLayoutProps } from "../pages/Post";
+export { Post as PostLayout } from "../templates/PostTemplate";
+export type { PostProps as PostLayoutProps } from "../templates/PostTemplate";

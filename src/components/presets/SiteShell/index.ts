@@ -1,2 +1,2 @@
-export { SiteShell } from "./SiteShell";
-export type { SiteShellProps } from "./SiteShell";
+export { SiteShell } from "../../templates/SiteShell";
+export type { SiteShellProps } from "../../templates/SiteShell";

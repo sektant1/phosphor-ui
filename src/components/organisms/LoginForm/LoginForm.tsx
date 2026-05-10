@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./LoginForm.module.scss";
 import { Button } from "../../atoms/Button/Button";
-import { Input } from "../../atoms/Input/Input";
+import { InputControl } from "../../atoms/Input/Input";
 
 export interface LoginFormProps {
   onSubmit?: (data: { identifier: string; password: string }) => void;
@@ -48,10 +48,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.field}>
           <span className={styles.label}>{identifierLabel}</span>
-          <Input
+          <InputControl
             prompt=">>"
             cursor={false}
-            state={error ? "error" : "default"}
+            aria-invalid={!!error || undefined}
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
           />
@@ -59,10 +59,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
         <div className={styles.field}>
           <span className={styles.label}>{passwordLabel}</span>
-          <Input
+          <InputControl
             prompt=">>"
             cursor={false}
-            state={error ? "error" : "default"}
+            aria-invalid={!!error || undefined}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             {...{ type: "password" }}

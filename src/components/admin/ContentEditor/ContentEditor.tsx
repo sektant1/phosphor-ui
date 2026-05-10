@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./ContentEditor.module.scss";
 import { Checkbox } from "../../atoms/Checkbox";
-import { Input, Textarea } from "../../atoms/Input/Input";
+import { InputControl, TextareaControl } from "../../atoms/Input/Input";
 import { Tabs } from "../../molecules/Tabs";
 import { EditorShell } from "./EditorShell";
 import { PairListField, type PairRow } from "./PairListField";
@@ -389,7 +389,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
         ? (e: React.ChangeEvent<HTMLInputElement>) => updateSlug(e.target.value)
         : (e: React.ChangeEvent<HTMLInputElement>) => update(f.key, e.target.value);
       const inputEl = (
-        <Input
+        <InputControl
           prompt={f.prompt}
           cursor={false}
           placeholder={f.placeholder}
@@ -408,7 +408,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
 
     if (f.kind === "textarea") {
       const ta = (
-        <Textarea
+        <TextareaControl
           rows={f.rows ?? 6}
           placeholder={f.placeholder}
           value={asString(data[f.key])}
@@ -613,7 +613,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
                     {copiedRaw ? "copied" : "copy"}
                   </button>
                 </div>
-                <Textarea
+                <TextareaControl
                   className={styles.rawEditor}
                   textareaClassName={styles.rawTextarea}
                   aria-label="JSON payload"
@@ -629,8 +629,13 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
                   }}
                   onChange={(event) => updateRawDraft(event.currentTarget.value)}
                   onKeyDown={(event) => insertTabInTextarea(event, updateRawDraft)}
-                  error={rawError}
+                  aria-invalid={!!rawError || undefined}
                 />
+                {rawError ? (
+                  <Text variant="caption" className={styles.rawError}>
+                    [!] {rawError}
+                  </Text>
+                ) : null}
               </Stack>
             ),
           },

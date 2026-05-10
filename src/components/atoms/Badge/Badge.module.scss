@@ -1,7 +1,7 @@
 .badge {
   --badge-color: var(--pho-color-primary);
   --badge-border: var(--pho-color-primary-faint);
-  --badge-bg: rgba(44, 255, 122, 0.055);
+  --badge-bg: var(--pho-alpha-primary-06);
   --badge-glow: var(--pho-glow-primary-soft);
 
   align-items: center;
@@ -49,7 +49,7 @@
 .accent {
   --badge-color: var(--pho-color-accent);
   --badge-border: var(--pho-color-accent-muted);
-  --badge-bg: rgba(98, 255, 154, 0.06);
+  --badge-bg: var(--pho-alpha-accent-04);
   --badge-glow: var(--pho-glow-accent);
 }
 
@@ -60,22 +60,22 @@
 }
 
 .warn {
-  --badge-color: #dfffaa;
-  --badge-border: rgba(170, 255, 102, 0.42);
-  --badge-bg: rgba(170, 255, 102, 0.07);
+  --badge-color: var(--pho-color-warning);
+  --badge-border: var(--pho-color-warning-muted);
+  --badge-bg: var(--pho-color-warning-faint);
   --badge-glow: 0 0 8px rgba(170, 255, 102, 0.32);
 }
 
 .danger {
-  --badge-color: #ff8a8a;
-  --badge-border: rgba(255, 58, 58, 0.46);
-  --badge-bg: rgba(255, 58, 58, 0.07);
-  --badge-glow: 0 0 8px rgba(255, 58, 58, 0.32);
+  --badge-color: var(--pho-color-danger-strong);
+  --badge-border: var(--pho-color-danger-muted);
+  --badge-bg: var(--pho-color-danger-faint);
+  --badge-glow: 0 0 8px var(--pho-color-danger-muted);
 }
 
 .muted {
   --badge-color: var(--pho-color-text-faint);
   --badge-border: var(--pho-color-primary-faint);
-  --badge-bg: rgba(44, 255, 122, 0.025);
+  --badge-bg: var(--pho-alpha-primary-03);
   --badge-glow: none;
 }

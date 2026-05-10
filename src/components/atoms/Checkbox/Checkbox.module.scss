@@ -7,6 +7,12 @@
   color: var(--pho-color-text);
   cursor: pointer;
 }
+
+.control {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+}
 .native {
   position: absolute;
   inline-size: 1px;
@@ -26,8 +32,8 @@
   cursor: pointer;
   outline: none;
 }
-.native:focus-visible + .cb { box-shadow: 0 0 0 2px rgba(44,255,122,0.4); }
-.native:focus-visible + .error { box-shadow: 0 0 0 2px rgba(255, 58, 58, 0.35); }
+.native:focus-visible + .cb { box-shadow: 0 0 0 2px var(--pho-alpha-primary-45); }
+.native:focus-visible + .error { box-shadow: 0 0 0 2px var(--pho-color-danger-muted); }
 .cb::before {
   content: "";
   position: absolute;
@@ -43,15 +49,15 @@
   pointer-events: none;
 }
 .checked::before { opacity: 1; }
-.checked { box-shadow: inset 0 0 0 1px rgba(44, 255, 122, 0.15); }
+.checked { box-shadow: inset 0 0 0 1px var(--pho-alpha-primary-16); }
 .disabled { border-color: var(--pho-color-primary-faint); cursor: not-allowed; }
 .disabled::before { border-color: var(--pho-color-primary-faint); filter: none; }
 .error {
-  --checkbox-error: #ff3a3a;
+  --checkbox-error: var(--pho-color-danger-emphasis);
   border-color: var(--checkbox-error);
 }
 .error.checked {
-  box-shadow: inset 0 0 0 1px rgba(255, 58, 58, 0.14);
+  box-shadow: inset 0 0 0 1px var(--pho-color-danger-faint);
 }
 .error.checked::before,
 .error.checked::after {
@@ -64,7 +70,7 @@
   background: var(--checkbox-error);
   border: 0;
   opacity: 1;
-  filter: drop-shadow(0 0 4px rgba(255, 58, 58, 0.65));
+  filter: drop-shadow(0 0 4px var(--pho-color-danger-muted));
   pointer-events: none;
 }
 .error.checked::before {
@@ -94,11 +100,11 @@
   text-decoration-color: var(--pho-color-primary-faint);
 }
 .errorRow.checkedRow .label {
-  color: #ff8a8a;
-  text-shadow: 0 0 1px #ff3a3a, 0 0 6px rgba(255, 58, 58, 0.35);
+  color: var(--pho-color-danger-strong);
+  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
 }
 .errorRow.strikethroughRow .label {
-  text-decoration-color: rgba(255, 58, 58, 0.55);
+  text-decoration-color: var(--pho-color-danger-muted);
 }
 .disabledRow .label { color: var(--pho-color-primary-faint); }
 .disabledRow { cursor: not-allowed; }

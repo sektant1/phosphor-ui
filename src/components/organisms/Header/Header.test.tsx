@@ -5,7 +5,7 @@ import Header from "./Header";
 describe("Header", () => {
   test("renders title fallback heading", () => {
     render(<Header title="ZONE" />);
-    expect(screen.getByText("ZONE")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "ZONE home" })).toBeTruthy();
   });
 
   test("renders nav items with prompt glyph", () => {

@@ -4,7 +4,7 @@ import { PostFrontmatter } from "./PostFrontmatter";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof PostFrontmatter> = {
-  title: "Molecules/PostFrontmatter",
+  title: "Content/PostFrontmatter",
   component: PostFrontmatter,
 };
 export default meta;

@@ -19,12 +19,12 @@
   border-radius: 0;
   text-decoration: none;
   transition:
-    background-color 140ms ease,
-    border-color 140ms ease,
-    box-shadow 140ms ease,
-    color 140ms ease,
-    opacity 140ms ease,
-    transform 140ms ease;
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out),
+    color var(--pho-motion-fast) var(--pho-ease-out),
+    opacity var(--pho-motion-fast) var(--pho-ease-out),
+    transform var(--pho-motion-fast) var(--pho-ease-out);
   user-select: none;
   white-space: nowrap;
 }
@@ -32,7 +32,7 @@
 .btn:hover:not(:disabled):not([aria-disabled="true"]) {
   box-shadow:
     inset 0 0 0 1px currentColor,
-    0 0 12px rgba(44, 255, 122, 0.18);
+    0 0 12px var(--pho-alpha-primary-18);
 }
 
 .btn:active:not(:disabled):not([aria-disabled="true"]) {
@@ -86,7 +86,7 @@
   border-color: var(--pho-color-primary-muted);
   background:
     linear-gradient(90deg, rgba(44, 255, 122, 0.12), transparent 70%),
-    rgba(44, 255, 122, 0.04);
+    var(--pho-alpha-primary-04);
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary-soft);
 }
@@ -94,7 +94,7 @@
 .secondary:hover:not(:disabled):not([aria-disabled="true"]),
 .secondary.pressed {
   border-color: var(--pho-color-primary);
-  background: rgba(44, 255, 122, 0.18);
+  background: var(--pho-alpha-primary-18);
   color: var(--pho-color-primary-strong);
 }
 
@@ -131,29 +131,29 @@
 
 .quiet:hover:not(:disabled):not([aria-disabled="true"]),
 .quiet.pressed {
-  background: rgba(44, 255, 122, 0.08);
+  background: var(--pho-alpha-primary-08);
   border-color: var(--pho-color-primary-faint);
   color: var(--pho-color-primary);
 }
 
 .danger {
-  border-color: #ff3a3a;
-  color: #ff6a6a;
+  border-color: var(--pho-color-danger-emphasis);
+  color: var(--pho-color-danger);
   text-shadow:
-    0 0 1px #ff3a3a,
-    0 0 6px rgba(255, 58, 58, 0.55),
-    0 0 14px rgba(255, 58, 58, 0.25);
+    0 0 1px var(--pho-color-danger-emphasis),
+    0 0 6px var(--pho-color-danger-glow),
+    0 0 14px var(--pho-color-danger-glow-soft);
   background:
     repeating-linear-gradient(135deg,
       transparent 0 6px,
-      rgba(255, 58, 58, 0.08) 6px 7px),
+      var(--pho-color-danger-subtle) 6px 7px),
     transparent;
 }
 
 .danger:hover:not(:disabled):not([aria-disabled="true"]),
 .danger.pressed {
-  background: #ff3a3a;
-  color: #1a0606;
+  background: var(--pho-color-danger-emphasis);
+  color: var(--pho-color-danger-contrast);
   text-shadow: none;
 }
 

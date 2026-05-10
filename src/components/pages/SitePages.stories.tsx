@@ -7,14 +7,14 @@ import { ReadingRail } from "../atoms/ReadingRail";
 import { Tag } from "../atoms/Tag";
 import { TerminalPrompt } from "../atoms/TerminalPrompt";
 import { Callout } from "../molecules/Callout";
-import { CourseCard } from "../molecules/CourseCard";
+import { CourseCard } from "../organisms/CourseCard";
 import Pagination from "../molecules/Pagination";
 import { Stepper, StepperFoot } from "../molecules/Stepper";
 import { TableOfContents } from "../molecules/TableOfContents";
 import { AsciiBanner } from "../organisms/AsciiBanner";
 import { HeroFrame } from "../organisms/HeroFrame";
 import { PostListing, PostRow } from "../organisms/PostListing";
-import { Post } from "./Post";
+import { Post } from "../templates/PostTemplate";
 import {
   DemoCluster,
   DemoGrid,
@@ -26,7 +26,7 @@ import type { CssVars } from "../../utils/browser";
 import { source, tsx } from "../../stories/source";
 
 const meta: Meta = {
-  title: "Pages/Site Pages",
+  title: "Pages/Examples/Site Pages",
   parameters: {
     layout: "fullscreen",
   },

@@ -6,6 +6,19 @@ import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
+const input = {
+  index: "src/index.ts",
+  "admin/index": "src/admin/index.ts",
+  "atoms/index": "src/atoms/index.ts",
+  "content/index": "src/content/index.ts",
+  "foundations/index": "src/foundations/index.ts",
+  "hooks/index": "src/hooks/index.ts",
+  "molecules/index": "src/molecules/index.ts",
+  "organisms/index": "src/organisms/index.ts",
+  "templates/index": "src/templates/index.ts",
+  "video/index": "src/video/index.ts",
+};
+
 const externalPackages = [
   /^react($|\/)/,
   /^react-dom($|\/)/,
@@ -20,19 +33,22 @@ const isExternal = (id) => externalPackages.some((pattern) => pattern.test(id));
 
 export default [
   {
-    input: "src/index.ts",
+    input,
     output: [
       {
-        file: "dist/cjs/index.js",
+        dir: "dist/cjs",
+        entryFileNames: "[name].js",
+        chunkFileNames: "chunks/[name]-[hash].js",
         format: "cjs",
         sourcemap: true,
-        inlineDynamicImports: true,
+        exports: "named",
       },
       {
-        file: "dist/esm/index.js",
+        dir: "dist/esm",
+        entryFileNames: "[name].js",
+        chunkFileNames: "chunks/[name]-[hash].js",
         format: "esm",
         sourcemap: true,
-        inlineDynamicImports: true,
       },
     ],
     external: isExternal,
@@ -43,10 +59,19 @@ export default [
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
-        declaration: false,
-        declarationDir: undefined,
+        compilerOptions: {
+          declaration: false,
+          declarationDir: undefined,
+          outDir: undefined,
+        },
       }),
-      postcss({ extensions: [".css", ".scss"], use: ["sass"], inject: true }),
+      postcss({
+        extensions: [".css", ".scss"],
+        use: ["sass"],
+        modules: { auto: true },
+        inject: false,
+        extract: "styles/components.css",
+      }),
 
       terser(),
     ],

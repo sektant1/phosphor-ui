@@ -27,21 +27,18 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   ) => void;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export interface InputControlProps
+  extends Omit<InputProps, "label" | "helpText" | "error" | "rootProps" | "state"> {}
+
+export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps>(
   (
     {
-      label,
-      helpText,
-      error,
       prompt = "~/ $",
       cursor = false,
       className,
       inputClassName,
-      rootProps,
       id,
       type = "text",
-      state = error ? "error" : "default",
-      "aria-describedby": ariaDescribedBy,
       disabled,
       readOnly,
       value,
@@ -62,18 +59,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const rawVisibleValue = value === undefined ? localValue : String(value);
     const visibleValue =
       type === "password" ? "•".repeat(rawVisibleValue.length) : rawVisibleValue;
-    const generatedId = React.useId();
-    const resolvedId = id ?? generatedId;
-    const helpId = `${resolvedId}-help`;
-    const errorId = `${resolvedId}-error`;
-    const describedBy =
-      [
-        ariaDescribedBy,
-        hasVisibleContent(helpText) ? helpId : undefined,
-        hasVisibleContent(error) ? errorId : undefined,
-      ]
-        .filter(Boolean)
-        .join(" ") || undefined;
     const revealCursor = React.useCallback(() => {
       if (!cursor || disabled || readOnly) return;
       setCursorVisible(true);
@@ -92,106 +77,63 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
 
     return (
-      <label
-        {...rootProps}
-        className={cx(
-          styles.field,
-          state === "error" && styles.errorField,
-          state === "success" && styles.successField,
-          rootProps?.className,
-          className,
-        )}
-        htmlFor={resolvedId}
-      >
-        {hasVisibleContent(label) ? (
-          <span className={styles.label}>{label}</span>
-        ) : null}
-        <span className={styles.wrap}>
-          {prompt ? <span className={styles.prompt}>{prompt}</span> : null}
-          <span className={styles.inputCell}>
-            <input
-              {...rest}
-              ref={ref}
-              id={resolvedId}
-              type={type}
-              value={value}
-              defaultValue={defaultValue}
-              disabled={disabled}
-              readOnly={readOnly}
-              className={cx(styles.input, cursor && styles.inputWithCursor, inputClassName)}
-              aria-invalid={state === "error" || undefined}
-              aria-describedby={describedBy}
-              onKeyDown={(event) => {
-                if (shouldRevealCursor(event)) revealCursor();
-                onKeyDown?.(event);
-              }}
-              onBlur={(event) => {
-                if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current);
-                cursorTimeoutRef.current = null;
-                setCursorVisible(false);
-                onBlur?.(event);
-              }}
-              onChange={(event) => {
-                setLocalValue(event.currentTarget.value);
-                revealCursor();
-                onChange?.(event);
-                onValueChange?.(event.currentTarget.value, event);
-              }}
-            />
-            {cursor ? (
-              <span
-                className={cx(styles.cursorLayer, cursorVisible && styles.cursorLayerActive)}
-                aria-hidden="true"
-              >
-                <span className={styles.cursorMirror}>{visibleValue || "\u00a0"}</span>
-                <span className={styles.cursor}>▮</span>
-              </span>
-            ) : null}
-          </span>
+      <span className={cx(styles.wrap, className)}>
+        {prompt ? <span className={styles.prompt}>{prompt}</span> : null}
+        <span className={styles.inputCell}>
+          <input
+            {...rest}
+            ref={ref}
+            id={id}
+            type={type}
+            value={value}
+            defaultValue={defaultValue}
+            disabled={disabled}
+            readOnly={readOnly}
+            className={cx(styles.input, cursor && styles.inputWithCursor, inputClassName)}
+            onKeyDown={(event) => {
+              if (shouldRevealCursor(event)) revealCursor();
+              onKeyDown?.(event);
+            }}
+            onBlur={(event) => {
+              if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current);
+              cursorTimeoutRef.current = null;
+              setCursorVisible(false);
+              onBlur?.(event);
+            }}
+            onChange={(event) => {
+              setLocalValue(event.currentTarget.value);
+              revealCursor();
+              onChange?.(event);
+              onValueChange?.(event.currentTarget.value, event);
+            }}
+          />
+          {cursor ? (
+            <span
+              className={cx(styles.cursorLayer, cursorVisible && styles.cursorLayerActive)}
+              aria-hidden="true"
+            >
+              <span className={styles.cursorMirror}>{visibleValue || "\u00a0"}</span>
+              <span className={styles.cursor}>▮</span>
+            </span>
+          ) : null}
         </span>
-        {hasVisibleContent(helpText) ? (
-          <span id={helpId} className={styles.help}>
-            {helpText}
-          </span>
-        ) : null}
-        {hasVisibleContent(error) ? (
-          <span id={errorId} className={styles.error}>
-            {error}
-          </span>
-        ) : null}
-      </label>
+      </span>
     );
   },
 );
-Input.displayName = "Input";
+InputControl.displayName = "InputControl";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: React.ReactNode;
-  helpText?: React.ReactNode;
-  error?: React.ReactNode;
-  state?: FieldState;
-  textareaClassName?: string;
-  rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
-  onValueChange?: (
-    value: string,
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) => void;
-}
-
-export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const InputField = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
       helpText,
       error,
       className,
-      textareaClassName,
       rootProps,
       id,
       state = error ? "error" : "default",
       "aria-describedby": ariaDescribedBy,
-      onChange,
-      onValueChange,
       ...rest
     },
     ref,
@@ -224,17 +166,12 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         {hasVisibleContent(label) ? (
           <span className={styles.label}>{label}</span>
         ) : null}
-        <textarea
+        <InputControl
           {...rest}
           ref={ref}
           id={resolvedId}
-          className={cx(styles.wrap, styles.textarea, textareaClassName)}
           aria-invalid={state === "error" || undefined}
           aria-describedby={describedBy}
-          onChange={(event) => {
-            onChange?.(event);
-            onValueChange?.(event.currentTarget.value, event);
-          }}
         />
         {hasVisibleContent(helpText) ? (
           <span id={helpId} className={styles.help}>
@@ -250,4 +187,122 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   },
 );
+
+InputField.displayName = "InputField";
+
+export const Input = InputField;
+Input.displayName = "Input";
+
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: React.ReactNode;
+  helpText?: React.ReactNode;
+  error?: React.ReactNode;
+  state?: FieldState;
+  textareaClassName?: string;
+  rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
+  onValueChange?: (
+    value: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
+}
+
+export interface TextareaControlProps
+  extends Omit<TextareaProps, "label" | "helpText" | "error" | "rootProps" | "state"> {}
+
+export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaControlProps>(
+  (
+    {
+      className,
+      textareaClassName,
+      id,
+      onChange,
+      onValueChange,
+      ...rest
+    },
+    ref,
+  ) => {
+    return (
+      <textarea
+        {...rest}
+        ref={ref}
+        id={id}
+        className={cx(styles.wrap, styles.textarea, textareaClassName, className)}
+        onChange={(event) => {
+          onChange?.(event);
+          onValueChange?.(event.currentTarget.value, event);
+        }}
+      />
+    );
+  },
+);
+TextareaControl.displayName = "TextareaControl";
+
+export const TextareaField = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    {
+      label,
+      helpText,
+      error,
+      className,
+      rootProps,
+      id,
+      state = error ? "error" : "default",
+      "aria-describedby": ariaDescribedBy,
+      ...rest
+    },
+    ref,
+  ) => {
+    const generatedId = React.useId();
+    const resolvedId = id ?? generatedId;
+    const helpId = `${resolvedId}-help`;
+    const errorId = `${resolvedId}-error`;
+    const describedBy =
+      [
+        ariaDescribedBy,
+        hasVisibleContent(helpText) ? helpId : undefined,
+        hasVisibleContent(error) ? errorId : undefined,
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
+
+    return (
+      <label
+        {...rootProps}
+        className={cx(
+          styles.field,
+          state === "error" && styles.errorField,
+          state === "success" && styles.successField,
+          rootProps?.className,
+          className,
+        )}
+        htmlFor={resolvedId}
+      >
+        {hasVisibleContent(label) ? (
+          <span className={styles.label}>{label}</span>
+        ) : null}
+        <TextareaControl
+          {...rest}
+          ref={ref}
+          id={resolvedId}
+          aria-invalid={state === "error" || undefined}
+          aria-describedby={describedBy}
+        />
+        {hasVisibleContent(helpText) ? (
+          <span id={helpId} className={styles.help}>
+            {helpText}
+          </span>
+        ) : null}
+        {hasVisibleContent(error) ? (
+          <span id={errorId} className={styles.error}>
+            {error}
+          </span>
+        ) : null}
+      </label>
+    );
+  },
+);
+
+TextareaField.displayName = "TextareaField";
+
+export const Textarea = TextareaField;
 Textarea.displayName = "Textarea";

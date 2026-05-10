@@ -1,2 +1,2 @@
-export { Glyph } from "../../organisms/Glyphs";
-export type { GlyphProps } from "../../organisms/Glyphs";
+export { Glyph } from "./Glyph";
+export type { GlyphProps } from "./Glyph";

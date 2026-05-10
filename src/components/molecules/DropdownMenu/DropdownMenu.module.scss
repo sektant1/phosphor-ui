@@ -20,7 +20,7 @@
 
 .trigger:hover,
 .open {
-  background: rgba(44, 255, 122, 0.08);
+  background: var(--pho-alpha-primary-08);
   border-color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
 }
@@ -39,7 +39,7 @@
 .menu {
   background: var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-muted);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32), inset 0 0 18px rgba(44, 255, 122, 0.05);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32), inset 0 0 18px var(--pho-alpha-primary-05);
   display: grid;
   left: 0;
   min-width: 12rem;
@@ -69,7 +69,7 @@
 .item:hover:not(:disabled),
 .item:focus-visible,
 .item[aria-disabled="true"]:focus-visible {
-  background: rgba(44, 255, 122, 0.1);
+  background: var(--pho-alpha-primary-10);
   color: var(--pho-color-primary-strong);
   outline: 0;
   text-shadow: var(--pho-glow-primary);
@@ -82,5 +82,5 @@
 }
 
 .destructive {
-  color: #ff6a6a;
+  color: var(--pho-color-danger);
 }

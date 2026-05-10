@@ -4,7 +4,7 @@ import { HeaderNav } from "./HeaderNav";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof HeaderNav> = {
-  title: "Organisms/HeaderNav",
+  title: "Molecules/HeaderNav",
   component: HeaderNav,
   argTypes: {
     variant: { control: "inline-radio", options: ["plain", "tabs", "command", "mobile"] },

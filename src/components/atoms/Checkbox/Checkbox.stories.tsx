@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox } from "./Checkbox";
+import { Checkbox, CheckboxControl } from "./Checkbox";
 import type { CheckboxProps } from "./Checkbox";
 import { source, tsx } from "../../../stories/source";
 
@@ -64,6 +64,14 @@ export function Example() {
 }
 `;
 
+const controlSource = tsx`
+import { CheckboxControl } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return <CheckboxControl aria-label="Engage shields" defaultChecked />;
+}
+`;
+
 export const Default: StoryObj<CheckboxProps> = {
   parameters: { docs: { source: source(defaultSource) } },
 };
@@ -79,4 +87,9 @@ export const ErrorChecked: StoryObj<CheckboxProps> = {
       source: source(errorCheckedSource),
     },
   },
+};
+
+export const Control: StoryObj = {
+  parameters: { docs: { source: source(controlSource) } },
+  render: () => <CheckboxControl aria-label="Engage shields" defaultChecked />,
 };

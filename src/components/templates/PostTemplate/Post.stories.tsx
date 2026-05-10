@@ -3,7 +3,7 @@ import { Post } from "./Post";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Post> = {
-  title: "Pages/Post",
+  title: "Templates/PostTemplate",
   component: Post,
 };
 

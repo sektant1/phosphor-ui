@@ -4,7 +4,7 @@ import type { CourseCardProps } from "./CourseCard";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<CourseCardProps> = {
-  title: "Molecules/CourseCard",
+  title: "Organisms/CourseCard",
   component: CourseCard,
   argTypes: {
     locked: { control: "boolean" },

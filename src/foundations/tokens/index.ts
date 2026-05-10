@@ -1,8 +1,9 @@
-export const PHOSPHOR_TOKEN_CSS_PATH = "tokens.css";
-export const PHOSPHOR_FONTS_CSS_PATH = "fonts.css";
-export const PHOSPHOR_TYPOGRAPHY_CSS_PATH = "typography.css";
-export const PHOSPHOR_GLOBAL_CSS_PATH = "global.css";
-export const PHOSPHOR_FULL_CSS_PATH = "phosphor.css";
+export const PHOSPHOR_TOKEN_CSS_PATH = "styles/tokens.css";
+export const PHOSPHOR_FONTS_CSS_PATH = "styles/fonts.css";
+export const PHOSPHOR_TYPOGRAPHY_CSS_PATH = "styles/typography.css";
+export const PHOSPHOR_GLOBAL_CSS_PATH = "styles/global.css";
+export const PHOSPHOR_COMPONENTS_CSS_PATH = "styles/components.css";
+export const PHOSPHOR_FULL_CSS_PATH = "styles/phosphor.css";
 
 export const PHOSPHOR_CSS_ENTRYPOINTS = {
   full: PHOSPHOR_FULL_CSS_PATH,
@@ -10,6 +11,7 @@ export const PHOSPHOR_CSS_ENTRYPOINTS = {
   tokens: PHOSPHOR_TOKEN_CSS_PATH,
   typography: PHOSPHOR_TYPOGRAPHY_CSS_PATH,
   global: PHOSPHOR_GLOBAL_CSS_PATH,
+  components: PHOSPHOR_COMPONENTS_CSS_PATH,
 } as const;
 
 export const PHOSPHOR_TOKEN_GROUPS = {
@@ -37,6 +39,29 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-color-inverse",
     "--pho-color-selection-bg",
     "--pho-color-selection-text",
+    "--pho-color-surface",
+    "--pho-color-surface-deep",
+    "--pho-color-border",
+    "--pho-color-border-strong",
+    "--pho-color-danger",
+    "--pho-color-danger-strong",
+    "--pho-color-danger-emphasis",
+    "--pho-color-danger-contrast",
+    "--pho-color-danger-muted",
+    "--pho-color-danger-faint",
+    "--pho-color-danger-subtle",
+    "--pho-color-danger-glow",
+    "--pho-color-danger-glow-soft",
+    "--pho-color-warning",
+    "--pho-color-warning-strong",
+    "--pho-color-warning-muted",
+    "--pho-color-warning-faint",
+    "--pho-color-status-draft",
+    "--pho-color-status-published",
+    "--pho-color-status-archived",
+    "--pho-color-status-locked",
+    "--pho-color-status-current",
+    "--pho-color-status-missing",
   ],
   font: [
     "--pho-font-display",
@@ -91,6 +116,66 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-size-touch-target",
     "--pho-size-content",
     "--pho-size-prose",
+  ],
+  alpha: [
+    "--pho-alpha-primary-01",
+    "--pho-alpha-primary-02",
+    "--pho-alpha-primary-03",
+    "--pho-alpha-primary-04",
+    "--pho-alpha-primary-05",
+    "--pho-alpha-primary-06",
+    "--pho-alpha-primary-07",
+    "--pho-alpha-primary-08",
+    "--pho-alpha-primary-10",
+    "--pho-alpha-primary-12",
+    "--pho-alpha-primary-14",
+    "--pho-alpha-primary-16",
+    "--pho-alpha-primary-18",
+    "--pho-alpha-primary-22",
+    "--pho-alpha-primary-28",
+    "--pho-alpha-primary-35",
+    "--pho-alpha-primary-45",
+    "--pho-alpha-accent-04",
+    "--pho-alpha-accent-08",
+    "--pho-alpha-accent-12",
+    "--pho-alpha-accent-14",
+    "--pho-alpha-surface-45",
+    "--pho-alpha-surface-62",
+    "--pho-alpha-surface-72",
+    "--pho-alpha-surface-82",
+  ],
+  layout: [
+    "--pho-layout-site-max",
+    "--pho-layout-content-max",
+    "--pho-layout-prose-max",
+    "--pho-layout-sidebar-width",
+    "--pho-layout-toc-width",
+    "--pho-layout-admin-sidebar-width",
+    "--pho-layout-gutter",
+    "--pho-layout-sticky-top",
+    "--pho-bp-xs",
+    "--pho-bp-sm",
+    "--pho-bp-md",
+    "--pho-bp-lg",
+    "--pho-bp-xl",
+  ],
+  motion: [
+    "--pho-motion-fast",
+    "--pho-motion-base",
+    "--pho-motion-slow",
+    "--pho-ease-out",
+    "--pho-ease-terminal",
+  ],
+  component: [
+    "--pho-card-border",
+    "--pho-card-bg",
+    "--pho-card-padding",
+    "--pho-thumb-post-w",
+    "--pho-thumb-post-h",
+    "--pho-thumb-post-w-sm",
+    "--pho-thumb-post-h-sm",
+    "--pho-ascii-glow-pad-x",
+    "--pho-ascii-glow-pad-y",
   ],
   border: [
     "--pho-border-frame",

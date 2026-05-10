@@ -1,2 +1,2 @@
-export { HeaderNav } from "./HeaderNav";
-export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "./HeaderNav";
+export { HeaderNav } from "../../molecules/HeaderNav";
+export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "../../molecules/HeaderNav";

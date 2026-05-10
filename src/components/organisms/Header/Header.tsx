@@ -2,8 +2,8 @@ import React from "react";
 import { bannerSync, type BannerFontName } from "../../../ascii";
 import { AsciiBanner } from "../../organisms/AsciiBanner";
 import { cx } from "../../../utils/classNames";
-import { HeaderNav } from "../HeaderNav";
-import type { HeaderNavVariant } from "../HeaderNav";
+import { HeaderNav } from "../../molecules/HeaderNav";
+import type { HeaderNavVariant } from "../../molecules/HeaderNav";
 import { LocaleSwitch } from "../../molecules/LocaleSwitch";
 import type {
   LocaleSwitchItem,

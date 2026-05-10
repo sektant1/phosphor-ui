@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Select } from "./Select";
+import { Select, SelectControl } from "./Select";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Select> = {
@@ -91,6 +91,23 @@ export function Example() {
 }
 `;
 
+const controlSource = tsx`
+import { SelectControl } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+    <SelectControl
+      aria-label="Status"
+      defaultValue="draft"
+      options={[
+        { label: "draft", value: "draft" },
+        { label: "published", value: "published" },
+      ]}
+    />
+  );
+}
+`;
+
 type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {
@@ -151,4 +168,18 @@ export const LongValue: Story = {
       { label: "diagnostics", value: "diagnostics" },
     ],
   },
+};
+
+export const Control: StoryObj<typeof SelectControl> = {
+  parameters: { docs: { source: source(controlSource) } },
+  render: () => (
+    <SelectControl
+      aria-label="Status"
+      defaultValue="draft"
+      options={[
+        { label: "draft", value: "draft" },
+        { label: "published", value: "published" },
+      ]}
+    />
+  ),
 };
