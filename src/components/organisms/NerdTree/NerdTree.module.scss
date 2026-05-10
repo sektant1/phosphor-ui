@@ -11,6 +11,32 @@
   flex-direction: column;
 }
 
+.panel {
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.045), transparent 72%),
+    var(--bg-raise);
+  border: 1px solid var(--phosphor-fade);
+  max-height: none;
+  position: relative;
+}
+
+.compact {
+  font-size: 11px;
+}
+
+.compact .body {
+  padding: 0.75rem 0.65rem;
+}
+
+.compact .header {
+  margin-bottom: 0.55rem;
+}
+
+.compact .link,
+.compact .foldBtn {
+  line-height: 1.35;
+}
+
 @media (max-width: 880px) {
   .tree {
     position: static;

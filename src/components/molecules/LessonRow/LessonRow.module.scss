@@ -1,7 +1,7 @@
 .list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--phosphor-fade); }
 .lr {
   display: grid;
-  grid-template-columns: 30px 30px 4ch 1fr 7ch 6ch;
+  grid-template-columns: 1.15rem 1.5rem 4ch minmax(0, 1fr) 7ch minmax(4.8rem, auto);
   gap: 10px;
   align-items: center;
   padding: 8px 12px;
@@ -47,7 +47,10 @@
 .num { font-family: var(--font-terminal); font-size: 13px; color: var(--phosphor-fade); letter-spacing: 0.1em; }
 .title {
   color: var(--phosphor-bright); text-shadow: var(--glow-emerald);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .len { font-size: 11px; color: var(--phosphor-dim); font-variant-numeric: tabular-nums; text-align: right; }
 .tag {
@@ -71,16 +74,16 @@
 
 @media (max-width: 640px) {
   .lr {
-    grid-template-columns: 24px 24px 4ch 1fr;
+    grid-template-columns: 1rem 1.35rem 4ch minmax(0, 1fr) auto;
     gap: 8px;
     padding: 8px 10px;
     font-size: 12px;
   }
-  .len, .tag { display: none; }
+  .tag { display: none; }
 }
 @media (max-width: 380px) {
   .lr {
-    grid-template-columns: 22px 1fr;
+    grid-template-columns: 1rem minmax(0, 1fr) auto;
     row-gap: 4px;
   }
   .icon, .num { display: none; }

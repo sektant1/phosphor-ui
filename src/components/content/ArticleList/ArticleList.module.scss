@@ -5,20 +5,39 @@
 }
 
 .item {
-  border-left: var(--pho-rail-strong);
-  padding-left: var(--pho-space-4);
+  background: var(--pho-color-background-raised);
+  border: 1px solid var(--pho-color-primary-faint);
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
 }
 
 .link {
+  align-items: baseline;
   color: var(--pho-color-text-strong);
+  display: grid;
   font-family: var(--pho-font-heading);
   font-weight: 700;
+  gap: 0.55ch;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-width: 0;
   text-decoration: none;
   text-shadow: var(--pho-glow-primary);
 }
 
 .link:hover {
   color: var(--pho-color-primary);
+}
+
+.glyph {
+  color: var(--pho-color-accent);
+  font-family: var(--pho-font-terminal);
+}
+
+.title {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .meta {

@@ -11,12 +11,14 @@ const meta: Meta<CheckboxProps> = {
     defaultChecked: { control: "boolean" },
     disabled:       { control: "boolean" },
     error:          { control: "boolean" },
+    strikethrough:  { control: "boolean" },
   },
   args: {
     label:          "engage shields",
     defaultChecked: false,
     disabled:       false,
     error:          false,
+    strikethrough:  true,
   },
 };
 export default meta;

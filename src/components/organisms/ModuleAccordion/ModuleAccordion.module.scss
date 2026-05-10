@@ -16,7 +16,7 @@
   appearance: none;
   display: grid;
   width: 100%;
-  grid-template-columns: 24px 4ch 1fr auto auto;
+  grid-template-columns: 1.4rem 4ch minmax(0, 1fr) minmax(3.5rem, auto) 4ch;
   gap: 10px;
   align-items: center;
   padding: 10px 12px;
@@ -59,9 +59,12 @@
   text-shadow: var(--glow-emerald);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .progress {
+  justify-self: end;
   width: 64px;
 }
 
@@ -96,7 +99,7 @@
 
 .li {
   display: grid;
-  grid-template-columns: 16px 4ch 1fr auto;
+  grid-template-columns: 1rem 4ch minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
   padding: 4px 0;
@@ -150,6 +153,8 @@
   text-decoration: none;
   color: var(--phosphor-bright);
   text-shadow: var(--glow-emerald);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .done a {
@@ -173,7 +178,7 @@
 
 @media (max-width: 640px) {
   .head {
-    grid-template-columns: 22px 4ch 1fr auto;
+    grid-template-columns: 1.35rem 4ch minmax(0, 1fr) auto;
     gap: 8px;
     padding: 10px;
   }
@@ -187,20 +192,19 @@
   }
 
   .li {
-    grid-template-columns: 16px 4ch 1fr;
+    grid-template-columns: 1rem 4ch minmax(0, 1fr) auto;
     row-gap: 2px;
   }
 
   .li .len {
-    grid-column: 2 / -1;
-    text-align: left;
-    padding-left: 0;
+    grid-column: auto;
+    text-align: right;
   }
 }
 
 @media (max-width: 420px) {
   .head {
-    grid-template-columns: 22px 1fr auto;
+    grid-template-columns: 1.35rem minmax(0, 1fr) auto;
   }
 
   .num {

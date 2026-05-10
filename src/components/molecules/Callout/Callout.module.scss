@@ -7,8 +7,8 @@
   --callout-glow: rgba(44, 255, 122, 0.34);
   --callout-pad-block: 0.8rem;
   --callout-pad-inline: 0.9rem;
-  --callout-gap: 0.7rem;
-  --callout-glyph-size: 2rem;
+  --callout-gap: 0.55rem;
+  --callout-glyph-size: 1.25rem;
 
   align-items: stretch;
   background:
@@ -62,8 +62,8 @@
 .sm {
   --callout-pad-block: 0.55rem;
   --callout-pad-inline: 0.65rem;
-  --callout-gap: 0.55rem;
-  --callout-glyph-size: 1.45rem;
+  --callout-gap: 0.45rem;
+  --callout-glyph-size: 1rem;
   font-size: 0.72rem;
   line-height: 1.45;
 }
@@ -71,8 +71,8 @@
 .lg {
   --callout-pad-block: 1.05rem;
   --callout-pad-inline: 1.15rem;
-  --callout-gap: 0.9rem;
-  --callout-glyph-size: 2.65rem;
+  --callout-gap: 0.75rem;
+  --callout-glyph-size: 1.55rem;
   font-size: 0.86rem;
   line-height: 1.65;
 }
@@ -82,7 +82,7 @@
   color: var(--callout-accent-bright);
   display: grid;
   font-family: var(--pho-font-terminal);
-  font-size: 1.35rem;
+  font-size: 0.95rem;
   justify-items: center;
   line-height: 1;
   min-width: 0;
@@ -94,11 +94,11 @@
 }
 
 .sm .glyph {
-  font-size: 0.92rem;
+  font-size: 0.78rem;
 }
 
 .lg .glyph {
-  font-size: 1.55rem;
+  font-size: 1.12rem;
 }
 
 .body {
@@ -145,6 +145,7 @@
 
 .content {
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .content> :first-child {
@@ -262,7 +263,7 @@
 }
 
 .terminal .glyph {
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
@@ -303,27 +304,23 @@
 
 @media (max-width: 520px) {
   .frame {
-    grid-template-columns: minmax(0, 1fr);
+    --callout-glyph-size: 1.15rem;
+    grid-template-columns: var(--callout-glyph-size) minmax(0, 1fr);
   }
 
   .glyph {
-    align-items: center;
-    display: inline-grid;
-    grid-row: auto;
-    justify-self: start;
-    min-height: 1.8rem;
-    min-width: 1.8rem;
-    padding-inline: 0.35rem;
+    min-height: var(--callout-glyph-size);
+    min-width: 0;
   }
 
   .sm .glyph {
-    min-height: 1.45rem;
-    min-width: 1.45rem;
+    min-height: 1rem;
+    min-width: 1rem;
   }
 
   .lg .glyph {
-    min-height: 2.1rem;
-    min-width: 2.1rem;
+    min-height: 1.55rem;
+    min-width: 1.55rem;
   }
 
   .header {

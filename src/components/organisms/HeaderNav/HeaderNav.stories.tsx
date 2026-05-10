@@ -7,7 +7,7 @@ const meta: Meta<typeof HeaderNav> = {
   title: "Organisms/HeaderNav",
   component: HeaderNav,
   argTypes: {
-    variant: { control: "inline-radio", options: ["plain", "tabs", "command"] },
+    variant: { control: "inline-radio", options: ["plain", "tabs", "command", "mobile"] },
   },
 };
 export default meta;

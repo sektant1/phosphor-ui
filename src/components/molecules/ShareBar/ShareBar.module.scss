@@ -1,8 +1,11 @@
 .bar {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  background: var(--bg-raise);
+  border: 1px solid var(--phosphor-fade);
+  display: flex;
   flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.45rem;
 }
 
 .label {
@@ -21,6 +24,7 @@
   border: 1px dashed var(--phosphor-dim);
   color: var(--phosphor);
   cursor: pointer;
+  min-height: 1.8rem;
 
   &:hover {
     border-color: var(--phosphor);
@@ -41,6 +45,9 @@
   color: var(--magenta);
   text-shadow: var(--glow-magenta);
   text-decoration: none;
+  min-height: 1.8rem;
+  display: inline-flex;
+  align-items: center;
 
   &:hover {
     background: var(--magenta);

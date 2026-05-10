@@ -11,6 +11,9 @@ export * as templates from "./templates";
 export { Button } from "./atoms/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./atoms/Button";
 
+export { Badge } from "./atoms/Badge";
+export type { BadgeProps, BadgeSize, BadgeTone } from "./atoms/Badge";
+
 export { default as Link } from "./atoms/Link";
 export type { LinkProps } from "./atoms/Link";
 
@@ -128,15 +131,6 @@ export type { PostProps } from "./pages/Post";
 
 export { CourseCard } from "./molecules/CourseCard";
 export type { CourseCardProps } from "./molecules/CourseCard";
-
-export { FooterStencil } from "./organisms/FooterStencil";
-export type {
-  FooterStencilProps,
-  FooterObject,
-  FooterDossier,
-  FooterRx,
-  FooterRxRow,
-} from "./organisms/FooterStencil";
 
 export { HeroFrame } from "./organisms/HeroFrame";
 export type { HeroFrameProps } from "./organisms/HeroFrame";

@@ -12,6 +12,7 @@ export interface CourseCardProps extends Omit<
   thumb?: React.ReactNode;
   thumbSrc?: string;
   thumbAlt?: string;
+  showCover?: boolean;
   coverMeta?: React.ReactNode;
   tag?: React.ReactNode;
   title: React.ReactNode;
@@ -24,6 +25,10 @@ export interface CourseCardProps extends Omit<
 
 export const CourseCard: React.FC<CourseCardProps> = ({
   stamp,
+  thumb,
+  thumbSrc,
+  thumbAlt,
+  showCover = true,
   coverMeta,
   tag,
   title,
@@ -35,16 +40,36 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   className,
   ...rest
 }) => {
+  const thumbContent = thumbSrc ? (
+    <img src={thumbSrc} alt={thumbAlt ?? ""} loading="lazy" />
+  ) : thumb ? (
+    thumb
+  ) : (
+    <span className={styles.thumbFallback} aria-hidden="true">
+      <span className={styles.thumbFallbackGlyph}>▌</span>
+    </span>
+  );
+  const hasCover = showCover && (thumbSrc || thumb || stamp || coverMeta);
+  const showProgress = !locked && progress;
+
   return (
     <article
-      className={cx(styles.cc, locked && styles.locked, className)}
+      className={cx(
+        styles.cc,
+        !hasCover && styles.noCover,
+        locked && styles.locked,
+        className,
+      )}
       {...rest}
     >
-      <div className={styles.cover}>
-        <span className={styles.coverRail} aria-hidden="true" />
-        {stamp && <span className={styles.stamp}>{stamp}</span>}
-        {coverMeta && <p className={styles.metaCover}>{coverMeta}</p>}
-      </div>
+      {hasCover ? (
+        <div className={styles.cover}>
+          <span className={styles.coverRail} aria-hidden="true" />
+          {stamp && <span className={styles.stamp}>{stamp}</span>}
+          <span className={styles.thumb}>{thumbContent}</span>
+          {coverMeta && <p className={styles.metaCover}>{coverMeta}</p>}
+        </div>
+      ) : null}
       <div className={styles.body}>
         <div className={styles.header}>
           {tag && <span className={styles.tag}>{tag}</span>}
@@ -55,9 +80,9 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           {description && <p className={styles.desc}>{description}</p>}
         </div>
         {stats && <p className={styles.stats}>{stats}</p>}
-        {(progress || cta) && (
+        {(showProgress || cta) && (
           <div className={styles.foot}>
-            {progress ? (
+            {showProgress ? (
               <ProgressBar
                 className={styles.progress}
                 value={progress.value}
@@ -70,11 +95,12 @@ export const CourseCard: React.FC<CourseCardProps> = ({
             {cta && (
               <Button
                 className={styles.cta}
+                disabled={locked}
                 href={cta.href}
                 size="sm"
-                variant="ghost"
+                variant={locked ? "danger" : "ghost"}
               >
-                {cta.label}
+                {locked ? "locked" : cta.label}
               </Button>
             )}
           </div>

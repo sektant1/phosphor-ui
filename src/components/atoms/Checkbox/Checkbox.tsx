@@ -8,6 +8,7 @@ export interface CheckboxProps
   error?: boolean;
   label?: React.ReactNode;
   description?: React.ReactNode;
+  strikethrough?: boolean;
   onCheckedChange?: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (checked: boolean) => void;
 }
@@ -21,6 +22,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       error,
       label,
       description,
+      strikethrough = true,
       onChange,
       onCheckedChange,
       id,
@@ -47,6 +49,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const cls = cx(
       styles.row,
       value && styles.checkedRow,
+      value && strikethrough && styles.strikethroughRow,
       error && styles.errorRow,
       disabled && styles.disabledRow,
       className,

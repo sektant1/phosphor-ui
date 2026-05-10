@@ -43,7 +43,7 @@ export const RepeaterField: React.FC<RepeaterFieldProps> = ({
     </Cluster>
     {!rows.length && <div className={styles.emptyField}>No items yet.</div>}
     {rows.map((row, index) => (
-      <Cluster key={row.id ?? index} className={styles.listRow} gap="sm" align="center">
+      <div key={row.id ?? index} className={styles.listRow}>
         <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
         {leading && <span className={styles.leading}>{leading}</span>}
         <input
@@ -69,7 +69,7 @@ export const RepeaterField: React.FC<RepeaterFieldProps> = ({
         >
           remove
         </button>
-      </Cluster>
+      </div>
     ))}
   </Stack>
 );

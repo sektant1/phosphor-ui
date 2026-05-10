@@ -24,7 +24,7 @@
 npm install @sektant1/phosphor-ui
 ```
 
-Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.  
+Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.
 `@mdx-js/react ^2 || ^3` is optional and only needed for `<PostBody>` / MDX rendering.
 
 ## Setup
@@ -117,12 +117,48 @@ The physical folders are organized for maintainers. Consumers should prefer the 
 | Group | Components |
 |---|---|
 | **Presets** | `SiteShell` |
-| **Layout** | `CrtShell` `Header` `Footer` `FooterStencil` `HeroFrame` `NerdTree` `PdaWindow` `Page` `Post` |
+| **Layout** | `CrtShell` `Header` `Footer` `HeroFrame` `NerdTree` `PdaWindow` `Page` `Post` |
 | **Content** | `Prose` `PostBody` `Callout` `CodeBlock` `Hr` `Tag` `Text` `AsciiBanner` `TerminalPrompt` |
 | **Lists** | `PostListing` `PostRow` `CourseCard` `LessonRow` `ModuleAccordion` `PrereqList` `Exercise` |
-| **Nav** | `BootNav` `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
-| **Form** | `Button` `Input` `Textarea` `Checkbox` `Select` `Switch` |
+| **Nav** | `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
+| **Form** | `Button` `Input` `Textarea` `Checkbox` `Select` `Switch` `Badge` |
 | **Feedback** | `ProgressBar` `ReadingRail` `StatPill` `Toast` `Tooltip` `VideoPlayer` |
+
+## Recipes
+
+### Course cards
+
+```tsx
+<CourseCard
+  stamp="COURSE-01"
+  thumbSrc="/images/course-frame.png"
+  coverMeta="6 modules"
+  tag="entry"
+  title="Cold-boot operations"
+  progress={{ value: 4, total: 6 }}
+  cta={{ label: "resume", href: "/courses/cold-boot" }}
+/>
+```
+
+For a compact text-only card, remove the cover column:
+
+```tsx
+<CourseCard showCover={false} title="Reference index" cta={{ label: "open", href: "/ref" }} />
+```
+
+### Admin editors
+
+```tsx
+<ContentEditor
+  kindLabel="POST"
+  autoSlug={{ from: "title", to: "slug" }}
+  fields={[
+    { kind: "text", key: "title", label: "TITLE" },
+    { kind: "textarea", key: "body", label: "BODY", rows: 12 },
+    { kind: "tags", key: "tags", label: "TAGS" },
+  ]}
+/>
+```
 
 ## Personal Site Pattern
 

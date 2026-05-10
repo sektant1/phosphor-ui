@@ -98,6 +98,6 @@
     transparent 100%
   );
   mix-blend-mode: screen;
-  animation: phosphorHeroScan 5.5s ease-in-out infinite;
-  pointer-events: none; z-index: 2;
+  animation: phosphorHeroScan 3.8s linear infinite;
+  pointer-events: none; transform: translateY(-120%); will-change: transform, opacity; z-index: 2;
 }

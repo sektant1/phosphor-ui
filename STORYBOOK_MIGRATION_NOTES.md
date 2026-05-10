@@ -66,7 +66,6 @@ This audit is based on the current component source under `src/components`. The 
 
 - `Organisms/Exercise`: exercise block with header, progress, body, and checkbox task list.
 - `Organisms/Footer`: site footer landmark.
-- `Organisms/FooterStencil`: richer footer organism, separate from basic `Footer`.
 - `Organisms/Header`: site header composed from `AsciiBanner`, nav, locale links, and rule.
 - `Organisms/HeroFrame`: hero/media frame with HUD subcomponents.
 - `Organisms/LoginForm`: complete authentication form.
@@ -120,7 +119,7 @@ This audit is based on the current component source under `src/components`. The 
 - Deprecate `PostLayout` if `Pages/Post` becomes the canonical post page story.
 - Delete `Legacy/Demo` from design-system Storybook if demos are not part of the published component library.
 - Convert or delete `Legacy/Introduction` once Storybook docs move to MDX.
-- Consider deleting `FooterStencil` if the product only needs the simpler `Footer`; otherwise keep it as a distinct branded organism.
+- `FooterStencil` was removed; use `Footer` for footer composition.
 - Consider deleting `CrtShell` if CRT effects are only decorative and not a supported template surface.
 
 ## Story Coverage Gaps

@@ -88,12 +88,16 @@
 .checkedRow .label {
   color: var(--phosphor-bright);
   text-shadow: var(--glow-emerald);
+}
+.strikethroughRow .label {
   text-decoration: line-through;
   text-decoration-color: var(--phosphor-fade);
 }
 .errorRow.checkedRow .label {
   color: #ff8a8a;
   text-shadow: 0 0 1px #ff3a3a, 0 0 6px rgba(255, 58, 58, 0.35);
+}
+.errorRow.strikethroughRow .label {
   text-decoration-color: rgba(255, 58, 58, 0.55);
 }
 .disabledRow .label { color: var(--phosphor-fade); }

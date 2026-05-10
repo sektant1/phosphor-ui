@@ -1,130 +1,63 @@
 .pill {
-  --pill-edge: var(--pho-color-primary-muted);
-  --pill-text: var(--pho-color-primary-strong);
-  --pill-muted: var(--pho-color-primary-faint);
-  --pill-bg: rgba(44, 255, 122, 0.07);
-  --pill-glow: rgba(44, 255, 122, 0.32);
-  align-items: stretch;
-  background:
-    linear-gradient(90deg, var(--pill-bg), transparent 68%),
-    var(--pho-color-background-deep);
-  border: 1px solid var(--pill-edge);
-  box-shadow:
-    inset 0 0 0 1px rgba(216, 255, 231, 0.03),
-    0 0 10px rgba(44, 255, 122, 0.08);
-  color: var(--pill-text);
-  display: inline-grid;
-  grid-template-columns: 0.38rem minmax(0, auto) minmax(0, 1fr);
-  isolation: isolate;
+  --pill-border: var(--pho-color-primary-muted);
+  --pill-label: var(--pho-color-primary-faint);
+  --pill-value: var(--pho-color-primary-strong);
+  align-items: baseline;
+  background: var(--pho-color-background-raised);
+  border: 1px solid var(--pill-border);
+  color: var(--pill-value);
+  display: inline-flex;
+  gap: 0.45rem;
   max-width: 100%;
-  min-height: 1.85rem;
-  overflow: hidden;
-  position: relative;
+  min-width: 0;
+  padding: 0.32rem 0.55rem;
   vertical-align: middle;
-}
-
-.pill::before {
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(216, 255, 231, 0.06) 0,
-    rgba(216, 255, 231, 0.06) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  content: "";
-  inset: 0;
-  opacity: 0.42;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-}
-
-.pill::after {
-  background: var(--pill-edge);
-  box-shadow: 0 0 8px var(--pill-glow);
-  content: "";
-  height: 1px;
-  inset: auto 0 0;
-  opacity: 0.82;
-  position: absolute;
-}
-
-.signal {
-  background:
-    linear-gradient(180deg, var(--pill-text), var(--pill-edge)),
-    var(--pill-edge);
-  box-shadow: 0 0 8px var(--pill-glow);
-  min-width: 0.38rem;
 }
 
 .label,
 .value {
-  align-items: center;
-  display: inline-flex;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .label {
-  border-right: 1px dashed var(--pill-muted);
-  color: var(--pill-muted);
+  color: var(--pill-label);
   font-family: var(--pho-font-terminal);
   font-size: 0.72rem;
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1;
-  padding: 0.35rem 0.55rem 0.32rem;
   text-transform: uppercase;
 }
 
 .value {
-  color: var(--pill-text);
+  color: var(--pill-value);
   font-family: var(--pho-font-code);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 1.1;
-  overflow: hidden;
-  padding: 0.35rem 0.7rem 0.32rem;
-  text-overflow: ellipsis;
-  text-shadow: 0 0 1px var(--pill-text), 0 0 8px var(--pill-glow);
+  line-height: 1;
 }
 
 .phosphor {
-  --pill-edge: var(--pho-color-primary-muted);
-  --pill-text: var(--pho-color-primary-strong);
-  --pill-muted: var(--pho-color-primary-faint);
-  --pill-bg: rgba(44, 255, 122, 0.08);
-  --pill-glow: rgba(44, 255, 122, 0.36);
+  --pill-border: var(--pho-color-primary-muted);
+  --pill-label: var(--pho-color-primary-faint);
+  --pill-value: var(--pho-color-primary-strong);
 }
 
 .magenta {
-  --pill-edge: var(--pho-color-accent-muted);
-  --pill-text: var(--pho-color-accent-strong);
-  --pill-muted: var(--pho-color-accent-muted);
-  --pill-bg: rgba(98, 255, 154, 0.08);
-  --pill-glow: rgba(98, 255, 154, 0.32);
+  --pill-border: var(--pho-color-accent-muted);
+  --pill-label: var(--pho-color-accent-muted);
+  --pill-value: var(--pho-color-accent-strong);
 }
 
 .dim {
-  --pill-edge: var(--pho-color-primary-faint);
-  --pill-text: var(--pho-color-text-muted);
-  --pill-muted: var(--pho-color-text-faint);
-  --pill-bg: rgba(10, 77, 34, 0.2);
-  --pill-glow: rgba(31, 184, 84, 0.16);
-  box-shadow: inset 0 0 0 1px rgba(216, 255, 231, 0.02);
+  --pill-border: var(--pho-color-primary-faint);
+  --pill-label: var(--pho-color-text-faint);
+  --pill-value: var(--pho-color-text-muted);
 }
 
 .dim .value {
   font-weight: 600;
-  text-shadow: none;
-}
-
-@media (max-width: 420px) {
-  .pill {
-    grid-template-columns: 0.32rem minmax(0, 1fr);
-  }
-
-  .label {
-    display: none;
-  }
 }

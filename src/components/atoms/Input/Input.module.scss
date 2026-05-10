@@ -33,8 +33,15 @@
   font-size: 13px;
   flex: 0 0 auto;
 }
-.input {
+.inputCell {
   flex: 1;
+  display: grid;
+  min-width: 0;
+  position: relative;
+}
+
+.input {
+  grid-area: 1 / 1;
   background: transparent;
   border: none;
   color: var(--pho-color-primary);
@@ -44,6 +51,10 @@
   outline: none;
   caret-color: var(--pho-color-accent-strong);
   min-width: 0;
+  width: 100%;
+}
+.inputWithCursor {
+  caret-color: transparent;
 }
 .input::placeholder { color: var(--pho-color-primary-faint); }
 .input:disabled {
@@ -55,8 +66,31 @@
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   font-family: var(--pho-font-code);
-  animation: phosphorBlink 1.05s steps(2) infinite;
-  flex: 0 0 auto;
+  animation: inputCursorBlink 0.8s step-end infinite;
+  line-height: 1;
+}
+.cursorLayer {
+  align-items: center;
+  display: inline-flex;
+  grid-area: 1 / 1;
+  max-width: 100%;
+  min-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 90ms ease;
+  white-space: pre;
+}
+.cursorLayerActive {
+  opacity: 1;
+}
+.cursorMirror {
+  color: transparent;
+  font-family: var(--pho-font-code);
+  font-size: 13px;
+  min-width: 0;
+  overflow: hidden;
+  text-shadow: none;
 }
 .textarea {
   display: block;
@@ -105,4 +139,16 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cursor { animation: none; }
+}
+
+@keyframes inputCursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./FormField.module.scss";
 import { cx } from "../../../utils/classNames";
 import { hasVisibleContent } from "../../atoms/primitive";
+import { Badge, type BadgeTone } from "../../atoms/Badge";
 
 export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode;
@@ -79,11 +80,11 @@ export interface ContentStatusBadgeProps {
 
 const statusConfig: Record<
   ContentStatus,
-  { label: string; valueClass: string }
+  { label: string; valueClass: string; tone: BadgeTone; glyph: string }
 > = {
-  draft: { label: "STATUS", valueClass: styles.valueDraft },
-  published: { label: "STATUS", valueClass: styles.valuePublished },
-  archived: { label: "STATUS", valueClass: styles.valueArchived },
+  draft: { label: "STATUS", valueClass: styles.valueDraft, tone: "muted", glyph: "◇" },
+  published: { label: "STATUS", valueClass: styles.valuePublished, tone: "success", glyph: "▌" },
+  archived: { label: "STATUS", valueClass: styles.valueArchived, tone: "accent", glyph: "×" },
 };
 
 const statusText: Record<ContentStatus, string> = {
@@ -99,13 +100,16 @@ export const ContentStatusBadge: React.FC<ContentStatusBadgeProps> = ({
 }) => {
   const config = statusConfig[status];
   return (
-    <span
-      className={cx(styles.badge, className)}
-    >
+    <span className={cx(styles.badge, className)}>
       <span className={styles.badgeLabel}>{label ?? config.label}</span>
-      <span className={[styles.badgeValue, config.valueClass].join(" ")}>
+      <Badge
+        tone={config.tone}
+        size="sm"
+        leading={config.glyph}
+        className={cx(styles.badgeValue, config.valueClass)}
+      >
         {statusText[status]}
-      </span>
+      </Badge>
     </span>
   );
 };

@@ -11,6 +11,8 @@ const meta: Meta<CourseCardProps> = {
   },
   args: {
     stamp: "MOD-001",
+    thumbSrc: "/assets/og-image.png",
+    thumbAlt: "Phosphor terminal interface",
     coverMeta: "// dossier",
     tag: "intro",
     title: "Phosphor protocol",
@@ -30,6 +32,8 @@ export const Default: StoryObj<CourseCardProps> = {
 export const Locked: StoryObj<CourseCardProps> = {
   args: {
     stamp: "COURSE-03",
+    thumbSrc: "/assets/og-image.png",
+    thumbAlt: "",
     coverMeta: "restricted",
     tag: "gamma",
     title: "Anomaly triage",
@@ -42,6 +46,8 @@ export const Locked: StoryObj<CourseCardProps> = {
 export const Compact: StoryObj<CourseCardProps> = {
   args: {
     stamp: "MOD-002",
+    thumbSrc: "/assets/og-image.png",
+    thumbAlt: "",
     coverMeta: "field · 9 modules",
     tag: "field",
     title: "Signal decoding",
@@ -61,8 +67,7 @@ export const Compact: StoryObj<CourseCardProps> = {
 
 export const WithoutArt: StoryObj<CourseCardProps> = {
   args: {
-    stamp: "COURSE-01",
-    coverMeta: "entry · 6 modules",
+    showCover: false,
     tag: "entry",
     title: "Cold-boot operations",
     description:

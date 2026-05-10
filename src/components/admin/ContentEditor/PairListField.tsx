@@ -42,7 +42,7 @@ export const PairListField: React.FC<PairListFieldProps> = ({
       </Cluster>
       {!rows.length && <div className={styles.emptyField}>No rows yet.</div>}
       {rows.map((row, index) => (
-        <Cluster key={index} className={styles.pairRow} gap="sm" align="center">
+        <div key={index} className={styles.pairRow}>
           <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
           {columns.map((column) => (
             <input
@@ -71,7 +71,7 @@ export const PairListField: React.FC<PairListFieldProps> = ({
           >
             remove
           </button>
-        </Cluster>
+        </div>
       ))}
     </Stack>
   );

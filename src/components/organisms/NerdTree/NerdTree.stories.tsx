@@ -41,3 +41,23 @@ export const Default: Story = {
     ],
   },
 };
+
+export const CompactPanel: Story = {
+  args: {
+    ...Default.args,
+    density: "compact",
+    frame: "panel",
+    title: "mission index",
+    bufferLabel: "[ops/]",
+  },
+};
+
+export const MobileDrawer: Story = {
+  args: {
+    ...Default.args,
+    mobileToggleLabel: "mission tree",
+  },
+  parameters: {
+    viewport: { defaultViewport: "mobile1" },
+  },
+};

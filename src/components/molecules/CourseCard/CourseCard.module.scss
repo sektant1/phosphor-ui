@@ -17,6 +17,10 @@
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
+.noCover {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .cc::before {
   background: repeating-linear-gradient(
     180deg,
@@ -62,6 +66,7 @@
   border-right: 1px solid var(--pho-color-primary-faint);
   display: grid;
   gap: 0.75rem;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 11rem;
   min-width: 0;
   overflow: hidden;
@@ -77,6 +82,7 @@
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 1;
 }
 
 .coverRail {
@@ -106,22 +112,65 @@
   text-shadow: var(--pho-glow-primary-soft);
   text-transform: uppercase;
   white-space: nowrap;
-  z-index: 1;
+  z-index: 2;
 }
 
-.art {
-  color: var(--pho-color-primary);
-  font-family: var(--pho-font-heading);
-  font-size: 0.58rem;
-  font-weight: 700;
-  line-height: 1.05;
-  margin: 0.35rem 0;
-  min-width: 0;
+.thumb {
+  background: var(--pho-color-background-deep);
+  display: block;
+  image-rendering: pixelated;
+  inset: 0;
   overflow: hidden;
+  position: absolute;
+  z-index: 0;
+}
+
+.thumb::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(4, 20, 10, 0.35) 2px 3px
+  );
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.thumb img,
+.thumb svg {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.thumbFallback {
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(44, 255, 122, 0.22), transparent 65%),
+    linear-gradient(135deg, var(--pho-color-background-deep) 0%, var(--pho-color-background-raised) 100%);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.thumbFallback::before {
+  border: 1px dashed rgba(44, 255, 122, 0.18);
+  content: "";
+  inset: 0.85rem;
+  pointer-events: none;
+  position: absolute;
+}
+
+.thumbFallbackGlyph {
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-terminal);
+  font-size: 1.9rem;
+  letter-spacing: var(--pho-tracking-wide);
   position: relative;
   text-shadow: var(--pho-glow-primary-soft);
-  white-space: pre;
-  z-index: 1;
 }
 
 .metaCover {
@@ -136,7 +185,7 @@
   margin: 0;
   position: relative;
   text-transform: uppercase;
-  z-index: 1;
+  z-index: 2;
 }
 
 .metaCover :global(b) {
@@ -240,7 +289,9 @@
 }
 
 .progress {
+  align-self: center;
   flex: 1 1 8rem;
+  margin-bottom: 0;
   min-width: 7rem;
 }
 
@@ -250,6 +301,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: var(--pho-tracking-wide);
+  margin-left: auto;
 }
 
 .locked {
@@ -270,6 +322,10 @@
   box-shadow: 0 0 10px rgba(255, 58, 58, 0.34);
 }
 
+.locked .thumb {
+  filter: saturate(0.7);
+}
+
 .locked .stamp {
   border-color: var(--pho-color-primary-faint);
   color: var(--pho-color-text-faint);
@@ -287,17 +343,9 @@
     min-height: 8rem;
   }
 
-  .art {
-    font-size: 0.54rem;
-  }
-
-  .foot {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
   .progress {
-    min-width: 0;
+    flex-basis: 6rem;
+    min-width: 4.5rem;
   }
 }
 

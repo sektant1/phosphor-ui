@@ -1,6 +1,10 @@
 .root {
-  border-bottom: var(--pho-border-dashed);
-  padding-bottom: var(--pho-space-6);
+  background:
+    linear-gradient(90deg, rgba(44, 255, 122, 0.065), transparent 70%),
+    var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
+  box-shadow: inset 3px 0 0 var(--pho-color-primary);
+  padding: var(--pho-space-5);
 }
 
 .top {
@@ -18,6 +22,7 @@
   letter-spacing: var(--pho-tracking-stamp);
   margin: 0;
   text-transform: uppercase;
+  width: fit-content;
 }
 
 .title {
@@ -36,6 +41,12 @@
 
 .actions {
   flex: 0 0 auto;
+  justify-content: flex-end;
+}
+
+.meta {
+  border-top: 1px dashed var(--pho-color-primary-faint);
+  padding-top: var(--pho-space-3);
 }
 
 .extra {

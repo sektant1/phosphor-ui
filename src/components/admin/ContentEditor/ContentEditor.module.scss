@@ -69,6 +69,10 @@
   min-width: 0;
 }
 
+.rawEditor {
+  min-width: 0;
+}
+
 .rawToolbar {
   align-items: center;
   display: flex;
@@ -120,6 +124,12 @@
   padding: 1rem;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.rawTextarea {
+  min-height: 20rem;
+  tab-size: 2;
+  white-space: pre;
 }
 
 .previewSurface {
@@ -194,6 +204,11 @@
 .previewBody {
   margin: 0;
   white-space: pre-wrap;
+}
+
+.markdownPreview {
+  font-size: 0.92rem;
+  margin-top: 0.35rem;
 }
 
 .previewTags {
@@ -315,9 +330,13 @@
 }
 
 .pairRow {
-  min-width: 0;
+  align-items: center;
   background: rgba(0, 0, 0, 0.13);
   border: 1px solid rgba(44, 255, 122, 0.12);
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: auto minmax(5rem, 0.7fr) minmax(0, 1fr) auto;
+  min-width: 0;
   padding: 0.45rem;
 }
 
@@ -342,8 +361,13 @@
 }
 
 .listRow {
+  align-items: center;
   background: rgba(0, 0, 0, 0.13);
   border: 1px solid rgba(44, 255, 122, 0.12);
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  min-width: 0;
   padding: 0.45rem;
 }
 
@@ -423,16 +447,20 @@
   }
 
   .header,
-  .rawToolbar,
-  .pairRow,
-  .listRow {
+  .rawToolbar {
     align-items: stretch;
     flex-direction: column;
   }
 
+  .pairRow {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) auto;
+  }
+
+  .listRow {
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+  }
+
   .statusSelect,
-  .pairInput,
-  .listInput,
   .tagInput,
   .addInline {
     width: 100%;

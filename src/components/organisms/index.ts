@@ -2,7 +2,6 @@ export * from "./AsciiBanner";
 export * from "./CrtShell";
 export * from "./Exercise";
 export * from "./Footer";
-export * from "./FooterStencil";
 export * from "./Glyphs";
 export { default as Header } from "./Header";
 export type {

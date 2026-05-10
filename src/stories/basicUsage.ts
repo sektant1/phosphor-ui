@@ -141,7 +141,6 @@ export function Example() {
   return <Exercise title="Signal drill" tasks={tasks} />;
 }`,
   Footer: example("Footer", `<Footer />`),
-  FooterStencil: example("FooterStencil", `<FooterStencil />`),
   Form: `import { Button, Form } from "${pkg}";
 
 const fields = [

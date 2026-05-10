@@ -31,7 +31,7 @@ export type { NerdTreeProps, NerdTreeNode, NerdTreeDir, NerdTreeLeaf, } from "./
 export { AsciiBanner } from "./AsciiBanner";
 export type { AsciiBannerProps } from "./AsciiBanner";
 export { HeaderNav } from "./HeaderNav";
-export type { HeaderNavProps, HeaderNavLink } from "./HeaderNav";
+export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "./HeaderNav";
 export { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
 export { CourseCard } from "./CourseCard";
@@ -41,7 +41,7 @@ export type { FooterStencilProps, FooterObject, FooterDossier, FooterRx, FooterR
 export { HeroFrame } from "./HeroFrame";
 export type { HeroFrameProps } from "./HeroFrame";
 export { default as Header } from "./Header";
-export type { HeaderProps, HeaderNavItem, HeaderLocale } from "./Header";
+export type { HeaderProps, HeaderNavItem, HeaderLocale, HeaderVariant, HeaderMobileLayout } from "./Header";
 export { Hr } from "./Hr";
 export { LessonRow, LessonList } from "./LessonRow";
 export type { LessonRowProps, LessonState, LessonKind, LessonListProps } from "./LessonRow";

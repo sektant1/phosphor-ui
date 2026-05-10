@@ -74,7 +74,6 @@ Added missing basic stories for `ContentEditor`, `CourseEditor`, `LessonEditor`,
 | CrtShell | `src/components/organisms/CrtShell/CrtShell.stories.tsx` | Automatic source exposed fullscreen demo. | Added explicit basic source. |
 | Exercise | `src/components/organisms/Exercise/Exercise.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
 | Footer | `src/components/organisms/Footer/Footer.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
-| FooterStencil | `src/components/organisms/FooterStencil/FooterStencil.stories.tsx` | Automatic source exposed fullscreen demo. | Added explicit basic source. |
 | Glyphs | `src/components/organisms/Glyphs/Glyphs.stories.tsx` | Automatic source exposed story internals. | Added explicit basic source. |
 | Header | `src/components/organisms/Header/Header.stories.tsx` | Existing source omitted package import. | Replaced default source with package-import snippet. |
 | HeroFrame | `src/components/organisms/HeroFrame/HeroFrame.stories.tsx` | Automatic source exposed large visual demo. | Added explicit basic source. |

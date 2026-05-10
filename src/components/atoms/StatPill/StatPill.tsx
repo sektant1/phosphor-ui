@@ -22,7 +22,6 @@ export const StatPill: React.FC<StatPillProps> = ({
 
   return (
     <span className={cx(styles.pill, tone, className)}>
-      <span className={styles.signal} aria-hidden="true" />
       <span className={styles.label}>{label}</span>
       <span className={styles.value}>{value}</span>
     </span>

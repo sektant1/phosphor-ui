@@ -51,6 +51,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <Input
             prompt=">>"
             cursor={false}
+            state={error ? "error" : "default"}
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
           />
@@ -61,13 +62,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <Input
             prompt=">>"
             cursor={false}
+            state={error ? "error" : "default"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             {...{ type: "password" }}
           />
         </div>
 
-        {error && <p className={styles.error}>[!] {error}</p>}
+        {error && <p className={styles.error} role="alert">[!] {error}</p>}
 
         <Button
           variant="primary"

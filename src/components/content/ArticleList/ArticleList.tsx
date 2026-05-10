@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ArticleList.module.scss";
 import { cx } from "../../../utils/classNames";
-import { Cluster, Stack } from "../../templates/Layout";
+import { Stack } from "../../templates/Layout";
 
 export interface ArticleListItem {
   id?: string;
@@ -29,16 +29,16 @@ export const ArticleList: React.FC<ArticleListProps> = ({
       renderItem ? (
         <React.Fragment key={item.id ?? item.href}>{renderItem(item, index)}</React.Fragment>
       ) : (
-        <Stack as="li" key={item.id ?? item.href} gap="xs" className={styles.item}>
-          <Cluster as="a" className={styles.link} href={item.href} gap="0.45ch">
-            <span aria-hidden="true">{glyph}</span>
-            <span>{item.title}</span>
-          </Cluster>
+        <li key={item.id ?? item.href} className={styles.item}>
+          <a className={styles.link} href={item.href}>
+            <span className={styles.glyph} aria-hidden="true">{glyph}</span>
+            <span className={styles.title}>{item.title}</span>
+          </a>
           {item.meta ? <div className={styles.meta}>{item.meta}</div> : null}
           {item.description ? (
             <p className={styles.description}>{item.description}</p>
           ) : null}
-        </Stack>
+        </li>
       ),
     )}
   </Stack>

@@ -35,7 +35,11 @@ export const PrereqList: React.FC<PrereqListProps> = ({ heading, stamp, items, c
             it.status === "soft" ? styles.soft : "",
           ].join(" ")}
         >
-          <span className={styles.mark} aria-label={it.status} />
+          <span className={styles.mark} aria-hidden="true">
+            {it.status === "met" && "ok"}
+            {it.status === "missing" && "req"}
+            {it.status === "soft" && "opt"}
+          </span>
           <span className={styles.name}>
             <span className={styles.title}>{it.title}</span>
             {it.sub && <span className={styles.sub}>{it.sub}</span>}

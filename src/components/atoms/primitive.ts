@@ -30,5 +30,8 @@ export function callAll<E>(
 }
 
 export function hasVisibleContent(value: React.ReactNode): boolean {
-  return value !== undefined && value !== null && value !== false;
+  if (value === undefined || value === null || typeof value === "boolean") return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.some(hasVisibleContent);
+  return true;
 }

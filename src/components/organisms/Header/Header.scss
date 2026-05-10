@@ -91,6 +91,10 @@
     min-width: 0;
   }
 
+  .header-nav--mobile {
+    display: none;
+  }
+
   .locale-switch {
     min-width: 0;
   }
@@ -170,12 +174,18 @@
       overflow: hidden;
     }
 
-    .header-nav {
+    .header-nav--desktop {
+      display: none;
+    }
+
+    .header-nav--mobile {
+      display: block;
       flex: 1 1 auto;
+      width: 100%;
     }
 
     .locale-switch {
-      flex: 0 0 auto;
+      display: none;
     }
 
     &.pho-header--mobile-stack .header-toolbar,

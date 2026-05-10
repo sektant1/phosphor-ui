@@ -11,6 +11,7 @@ import { TagInput } from "./TagInput";
 import { slugify } from "../../../foundations/utils";
 import { Stack } from "../../templates/Layout";
 import Text from "../../atoms/Text";
+import Prose from "../../content/Prose";
 
 export type ContentStatus = "draft" | "published" | "archived";
 type EditorState = Record<string, unknown>;
@@ -117,6 +118,137 @@ const countFilledFields = (fields: FieldSpec[], data: EditorState) =>
 const getFieldLabel = (field: FieldSpec) =>
   "label" in field && field.label ? field.label : field.key.replace(/([A-Z])/g, " $1").toUpperCase();
 
+const imagePattern = /^!\[([^\]]*)]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/;
+
+const queueSelection = (
+  node: HTMLTextAreaElement,
+  start: number,
+  end: number,
+) => {
+  const queue =
+    typeof window !== "undefined" && window.requestAnimationFrame
+      ? window.requestAnimationFrame
+      : (callback: FrameRequestCallback) => window.setTimeout(callback, 0);
+  queue(() => node.setSelectionRange(start, end));
+};
+
+const insertTabInTextarea = (
+  event: React.KeyboardEvent<HTMLTextAreaElement>,
+  onValue: (value: string) => void,
+) => {
+  if (event.key !== "Tab") return;
+  event.preventDefault();
+  const target = event.currentTarget;
+  const tab = "  ";
+  const start = target.selectionStart;
+  const end = target.selectionEnd;
+  const next = `${target.value.slice(0, start)}${tab}${target.value.slice(end)}`;
+  onValue(next);
+  queueSelection(target, start + tab.length, start + tab.length);
+};
+
+const renderInlineMarkdown = (text: string) => {
+  const parts: React.ReactNode[] = [];
+  const pattern = /(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+]\([^)]+\))/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text))) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+    const token = match[0];
+    if (token.startsWith("`")) {
+      parts.push(<code key={match.index}>{token.slice(1, -1)}</code>);
+    } else if (token.startsWith("**")) {
+      parts.push(<strong key={match.index}>{token.slice(2, -2)}</strong>);
+    } else {
+      const link = /^\[([^\]]+)]\(([^)]+)\)$/.exec(token);
+      parts.push(link ? <a key={match.index} href={link[2]}>{link[1]}</a> : token);
+    }
+    lastIndex = match.index + token.length;
+  }
+
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts.length ? parts : text;
+};
+
+const MarkdownPreview: React.FC<{ value: string }> = ({ value }) => {
+  const lines = value.split(/\r?\n/);
+  const nodes: React.ReactNode[] = [];
+  let paragraph: string[] = [];
+  let list: string[] = [];
+  let listOrdered = false;
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    nodes.push(<p key={`p-${nodes.length}`}>{renderInlineMarkdown(paragraph.join(" "))}</p>);
+    paragraph = [];
+  };
+
+  const flushList = () => {
+    if (!list.length) return;
+    const items = list.map((item, index) => (
+      <li key={`${item}-${index}`}>{renderInlineMarkdown(item)}</li>
+    ));
+    nodes.push(
+      listOrdered ? (
+        <ol key={`ol-${nodes.length}`}>{items}</ol>
+      ) : (
+        <ul key={`ul-${nodes.length}`}>{items}</ul>
+      ),
+    );
+    list = [];
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const image = imagePattern.exec(trimmed);
+    if (image) {
+      flushParagraph();
+      flushList();
+      nodes.push(
+        <figure key={`img-${nodes.length}`} className="pho-mdx-figure">
+          <img src={image[2]} alt={image[1]} loading="lazy" />
+          {image[1] ? <figcaption>{image[1]}</figcaption> : null}
+        </figure>,
+      );
+      continue;
+    }
+
+    const heading = /^(#{1,3})\s+(.+)$/.exec(trimmed);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      const level = heading[1].length + 1;
+      nodes.push(React.createElement(`h${level}`, { key: `h-${nodes.length}` }, renderInlineMarkdown(heading[2])));
+      continue;
+    }
+
+    const unordered = /^[-*]\s+(.+)$/.exec(trimmed);
+    const ordered = /^\d+[.)]\s+(.+)$/.exec(trimmed);
+    if (unordered || ordered) {
+      flushParagraph();
+      if (list.length && listOrdered !== !!ordered) flushList();
+      listOrdered = !!ordered;
+      list.push((unordered ?? ordered)![1]);
+      continue;
+    }
+
+    flushList();
+    paragraph.push(trimmed);
+  }
+
+  flushParagraph();
+  flushList();
+
+  return <Prose className={styles.markdownPreview}>{nodes.length ? nodes : value}</Prose>;
+};
+
 const seedState = (fields: FieldSpec[], initial: Partial<EditorState>) => {
   const state: EditorState = {};
   for (const f of fields) {
@@ -172,8 +304,11 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
   );
   const [tagInputs, setTagInputs] = useState<Record<string, string>>({});
   const [copiedRaw, setCopiedRaw] = useState(false);
+  const [rawDraft, setRawDraft] = useState("");
+  const [rawError, setRawError] = useState<string>();
   const slugTouched = useRef(autoSlug ? !!initialState[autoSlug.to] : false);
   const didMount = useRef(false);
+  const rawFocused = useRef(false);
 
   const toPayload = useCallback(
     (next: EditorState, nextStatus: ContentStatus) =>
@@ -185,6 +320,10 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
   const rawJson = useMemo(() => JSON.stringify(payload, null, 2), [payload]);
   const filledFields = useMemo(() => countFilledFields(fields, data), [data, fields]);
   const totalFields = fields.length + (status ? 1 : 0);
+
+  useEffect(() => {
+    if (!rawFocused.current) setRawDraft(rawJson);
+  }, [rawJson]);
 
   useEffect(() => {
     if (!didMount.current) {
@@ -223,6 +362,26 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
     window.setTimeout(() => setCopiedRaw(false), 1200);
   };
 
+  const updateRawDraft = (value: string) => {
+    setRawDraft(value);
+    try {
+      const parsed = JSON.parse(value) as unknown;
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+        setRawError("Raw payload must be a JSON object.");
+        return;
+      }
+      const next = { ...(parsed as EditorState) };
+      if (status && isContentStatus(next.status)) {
+        setStatusValue(next.status);
+        delete next.status;
+      }
+      setData(next);
+      setRawError(undefined);
+    } catch {
+      setRawError("Invalid JSON.");
+    }
+  };
+
   const renderField = (f: FieldSpec) => {
     if (f.kind === "text") {
       const isAutoSlugTarget = autoSlug?.to === f.key;
@@ -254,6 +413,9 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
           placeholder={f.placeholder}
           value={asString(data[f.key])}
           onChange={(e) => update(f.key, e.target.value)}
+          onKeyDown={(e) =>
+            insertTabInTextarea(e, (value) => update(f.key, value))
+          }
         />
       );
       if (!f.label) return <React.Fragment key={f.key}>{ta}</React.Fragment>;
@@ -383,7 +545,7 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
     const text = asString(value);
     if (!text.trim()) return <span className={styles.previewEmpty}>Empty</span>;
     return f.kind === "textarea" ? (
-      <p className={styles.previewBody}>{text}</p>
+      <MarkdownPreview value={text} />
     ) : (
       <span>{text}</span>
     );
@@ -451,7 +613,24 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
                     {copiedRaw ? "copied" : "copy"}
                   </button>
                 </div>
-                <pre className={styles.previewPane}>{rawJson}</pre>
+                <Textarea
+                  className={styles.rawEditor}
+                  textareaClassName={styles.rawTextarea}
+                  aria-label="JSON payload"
+                  value={rawDraft}
+                  rows={16}
+                  spellCheck={false}
+                  onFocus={() => {
+                    rawFocused.current = true;
+                  }}
+                  onBlur={() => {
+                    rawFocused.current = false;
+                    if (!rawError) setRawDraft(rawJson);
+                  }}
+                  onChange={(event) => updateRawDraft(event.currentTarget.value)}
+                  onKeyDown={(event) => insertTabInTextarea(event, updateRawDraft)}
+                  error={rawError}
+                />
               </Stack>
             ),
           },

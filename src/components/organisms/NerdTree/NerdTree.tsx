@@ -21,6 +21,8 @@ export type NerdTreeNode = NerdTreeLeaf | NerdTreeDir;
 
 export interface NerdTreeProps extends React.HTMLAttributes<HTMLElement> {
   tree: NerdTreeNode[];
+  density?: "default" | "compact";
+  frame?: "rail" | "panel";
   bufferLabel?: string;
   title?: string;
   hint?: React.ReactNode;
@@ -32,6 +34,8 @@ export interface NerdTreeProps extends React.HTMLAttributes<HTMLElement> {
 
 export const NerdTree: React.FC<NerdTreeProps> = ({
   tree,
+  density = "default",
+  frame = "rail",
   bufferLabel = "[content/]",
   title = "~/sektant's hideout",
   hint,
@@ -68,7 +72,16 @@ export const NerdTree: React.FC<NerdTreeProps> = ({
   );
 
   return (
-    <aside className={cx(styles.tree, className)} aria-label={ariaLabel} {...rest}>
+    <aside
+      className={cx(
+        styles.tree,
+        density === "compact" && styles.compact,
+        frame === "panel" && styles.panel,
+        className,
+      )}
+      aria-label={ariaLabel}
+      {...rest}
+    >
       <button
         type="button"
         className={styles.toggleBtn}

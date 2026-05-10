@@ -3,7 +3,7 @@ import { Page } from "./Page";
 import { basicUsage } from "../../../stories/basicUsage";
 
 const meta: Meta<typeof Page> = {
-  title: "Templates/PageBase",
+  title: "Templates/Page",
   component: Page,
   parameters: {
     docs: {

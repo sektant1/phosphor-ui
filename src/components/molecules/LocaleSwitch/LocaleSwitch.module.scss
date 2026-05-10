@@ -64,7 +64,8 @@
 }
 
 .link:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--pho-color-primary);
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .active {
@@ -81,6 +82,11 @@
   border-right: 1px solid var(--pho-color-primary-faint);
 }
 
+.segmented .link:hover,
+.segmented .link:focus-visible {
+  background: transparent;
+}
+
 .segmented .item:last-child .link {
   border-right: 0;
 }
@@ -89,6 +95,11 @@
   background: var(--pho-color-primary-muted);
   color: var(--pho-color-background);
   text-shadow: none;
+}
+
+.segmented .active:hover,
+.segmented .active:focus-visible {
+  background: var(--pho-color-primary-muted);
 }
 
 .inline .list {

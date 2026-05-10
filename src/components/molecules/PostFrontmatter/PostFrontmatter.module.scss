@@ -34,24 +34,44 @@
 
 .block {
   color: var(--phosphor-bright);
+  display: grid;
+  gap: 0.35rem;
   font-family: var(--font-code);
   font-size: 0.82rem;
   line-height: 1.6;
   margin: 0;
   overflow: auto;
-  white-space: pre-wrap;
 }
 
-.marker,
-.punct {
+.marker {
   color: var(--phosphor-fade);
+}
+
+.row {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: minmax(6rem, 0.34fr) minmax(0, 1fr);
+  min-width: 0;
 }
 
 .key {
   color: var(--magenta-bright);
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .value {
   color: var(--phosphor-bright);
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
   text-shadow: var(--glow-emerald);
+}
+
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.1rem;
+  }
 }

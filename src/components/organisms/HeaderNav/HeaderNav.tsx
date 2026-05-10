@@ -9,7 +9,7 @@ export interface HeaderNavLink {
   active?: boolean;
 }
 
-export type HeaderNavVariant = "plain" | "tabs" | "command";
+export type HeaderNavVariant = "plain" | "tabs" | "command" | "mobile";
 
 export interface HeaderNavProps extends React.HTMLAttributes<HTMLElement> {
   items: HeaderNavLink[];
@@ -21,6 +21,7 @@ const variantClass: Record<HeaderNavVariant, string> = {
   plain: styles.plain,
   tabs: styles.tabs,
   command: styles.command,
+  mobile: styles.mobile,
 };
 
 export const HeaderNav: React.FC<HeaderNavProps> = ({

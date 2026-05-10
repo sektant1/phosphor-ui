@@ -4,25 +4,34 @@
 }
 
 .flex {
+  --pho-flex-direction: row;
+  --pho-align: stretch;
+  --pho-justify: flex-start;
+  --pho-wrap: nowrap;
+  --pho-row-gap: var(--pho-gap, var(--pho-space-5));
+  --pho-column-gap: var(--pho-gap, var(--pho-space-5));
+
   display: flex;
-  flex-direction: var(--pho-flex-direction, row);
-  align-items: var(--pho-align, stretch);
-  justify-content: var(--pho-justify, flex-start);
-  flex-wrap: var(--pho-wrap, nowrap);
-  gap: var(--pho-row-gap, var(--pho-gap, var(--pho-space-5)))
-    var(--pho-column-gap, var(--pho-gap, var(--pho-space-5)));
+  flex-direction: var(--pho-flex-direction);
+  align-items: var(--pho-align);
+  justify-content: var(--pho-justify);
+  flex-wrap: var(--pho-wrap);
+  gap: var(--pho-row-gap) var(--pho-column-gap);
 }
 
 .grid {
+  --pho-grid-min: min(100%, 14rem);
+  --pho-grid-columns: repeat(auto-fit, minmax(var(--pho-grid-min), 1fr));
+  --pho-align: stretch;
+  --pho-justify: stretch;
+  --pho-row-gap: var(--pho-gap, var(--pho-space-5));
+  --pho-column-gap: var(--pho-gap, var(--pho-space-5));
+
   display: grid;
-  grid-template-columns: var(
-    --pho-grid-columns,
-    repeat(auto-fit, minmax(var(--pho-grid-min, min(100%, 14rem)), 1fr))
-  );
-  align-items: var(--pho-align, stretch);
-  justify-content: var(--pho-justify, stretch);
-  gap: var(--pho-row-gap, var(--pho-gap, var(--pho-space-5)))
-    var(--pho-column-gap, var(--pho-gap, var(--pho-space-5)));
+  grid-template-columns: var(--pho-grid-columns);
+  align-items: var(--pho-align);
+  justify-content: var(--pho-justify);
+  gap: var(--pho-row-gap) var(--pho-column-gap);
 }
 
 .inline.flex {
@@ -62,11 +71,15 @@
 }
 
 .container {
+  --pho-container-width: var(--pho-size-content);
+  --pho-container-padding: var(--pho-space-5);
+  --pho-mobile-container-padding: var(--pho-space-3);
+
   box-sizing: border-box;
   width: 100%;
-  max-width: var(--pho-container-width, var(--pho-size-content));
+  max-width: var(--pho-container-width);
   min-width: 0;
-  padding-inline: var(--pho-container-padding, var(--pho-space-5));
+  padding-inline: var(--pho-container-padding);
 }
 
 .center {
@@ -75,45 +88,36 @@
 
 @media (max-width: 720px) {
   .flex {
-    flex-direction: var(--pho-mobile-flex-direction, var(--pho-flex-direction, row));
-    align-items: var(--pho-mobile-align, var(--pho-align, stretch));
-    justify-content: var(--pho-mobile-justify, var(--pho-justify, flex-start));
-    flex-wrap: var(--pho-mobile-wrap, var(--pho-wrap, nowrap));
+    flex-direction: var(--pho-mobile-flex-direction, var(--pho-flex-direction));
+    align-items: var(--pho-mobile-align, var(--pho-align));
+    justify-content: var(--pho-mobile-justify, var(--pho-justify));
+    flex-wrap: var(--pho-mobile-wrap, var(--pho-wrap));
     gap: var(
         --pho-mobile-row-gap,
-        var(--pho-mobile-gap, var(--pho-row-gap, var(--pho-gap, var(--pho-space-5))))
+        var(--pho-mobile-gap, var(--pho-row-gap))
       )
       var(
         --pho-mobile-column-gap,
-        var(--pho-mobile-gap, var(--pho-column-gap, var(--pho-gap, var(--pho-space-5))))
+        var(--pho-mobile-gap, var(--pho-column-gap))
       );
   }
 
   .grid {
     grid-template-columns: var(--pho-mobile-grid-columns,
-        repeat(auto-fit, minmax(var(--pho-mobile-grid-min, min(100%, 14rem)), 1fr)));
-    align-items: var(--pho-mobile-align, var(--pho-align, stretch));
-    justify-content: var(--pho-mobile-justify, var(--pho-justify, stretch));
+        repeat(auto-fit, minmax(var(--pho-mobile-grid-min, var(--pho-grid-min)), 1fr)));
+    align-items: var(--pho-mobile-align, var(--pho-align));
+    justify-content: var(--pho-mobile-justify, var(--pho-justify));
     gap: var(
         --pho-mobile-row-gap,
-        var(--pho-mobile-gap, var(--pho-row-gap, var(--pho-gap, var(--pho-space-5))))
+        var(--pho-mobile-gap, var(--pho-row-gap))
       )
       var(
         --pho-mobile-column-gap,
-        var(--pho-mobile-gap, var(--pho-column-gap, var(--pho-gap, var(--pho-space-5))))
+        var(--pho-mobile-gap, var(--pho-column-gap))
       );
   }
 
   .container {
-    padding-inline: var(
-      --pho-mobile-container-padding,
-      var(--pho-container-padding, var(--pho-space-3))
-    );
-  }
-}
-
-@media (max-width: 460px) {
-  .grid {
-    grid-template-columns: var(--pho-mobile-grid-columns, minmax(0, 1fr));
+    padding-inline: var(--pho-mobile-container-padding);
   }
 }

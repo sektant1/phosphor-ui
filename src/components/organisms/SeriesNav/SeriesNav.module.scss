@@ -1,5 +1,8 @@
 .root {
-  border: var(--pho-border-dashed);
+  background:
+    linear-gradient(90deg, rgba(44, 255, 122, 0.055), transparent 72%),
+    var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
   padding: var(--pho-space-4);
 }
 
@@ -35,6 +38,7 @@
 }
 
 .links {
+  --pho-grid-columns: repeat(2, minmax(0, 1fr));
   min-width: 0;
 }
 
@@ -44,7 +48,7 @@
 }
 
 .link {
-  border: var(--pho-border-dashed);
+  border: 1px solid var(--pho-color-primary-faint);
   padding: 0.5rem 0.7rem;
   background: var(--pho-color-background-raised);
   text-decoration: none;
@@ -69,7 +73,7 @@
   color: var(--pho-color-primary);
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .linkNext {
@@ -77,6 +81,14 @@
 }
 
 @media (max-width: 540px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .progress {
+    margin-left: 0;
+  }
+
   .nextSlot {
     order: 1;
   }

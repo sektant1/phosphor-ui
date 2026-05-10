@@ -5,20 +5,21 @@
 
 .item {
   display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 0 0.8rem;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0 0.85rem;
 }
 
 .dotCol {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  padding-top: 2px;
+  display: grid;
+  grid-template-rows: 0.75rem minmax(0.75rem, 1fr);
+  justify-items: center;
+  padding-top: 0.28rem;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  height: 0.55rem;
+  width: 0.55rem;
   flex-shrink: 0;
 }
 
@@ -39,15 +40,14 @@
 }
 
 .line {
-  flex: 1;
   border-left: 1px dashed var(--phosphor-fade);
-  margin-left: 3px;
   min-height: 12px;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 0.18rem;
+  min-width: 0;
   padding-bottom: 16px;
 }
 
@@ -56,12 +56,12 @@
   font-size: 10.5px;
   color: var(--phosphor-fade);
   letter-spacing: 0.1em;
-  margin-bottom: 2px;
 }
 
 .title {
   font-family: var(--font-code);
   font-size: 13px;
+  line-height: 1.35;
   text-decoration: none;
 }
 

@@ -10,7 +10,7 @@ const meta: Meta<typeof Header> = {
     align: { control: "inline-radio", options: ["left", "center"] },
     variant: { control: "inline-radio", options: ["masthead", "compact", "terminal"] },
     mobileLayout: { control: "inline-radio", options: ["scroll", "stack"] },
-    navVariant: { control: "inline-radio", options: ["plain", "tabs", "command"] },
+    navVariant: { control: "inline-radio", options: ["plain", "tabs", "command", "mobile"] },
     localeVariant: { control: "inline-radio", options: ["inline", "segmented", "terminal"] },
   },
 };

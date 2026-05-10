@@ -1,5 +1,5 @@
 .stp {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem;
   font-family: var(--font-terminal);
   font-size: 13px;
   border: 1px solid var(--phosphor-fade);
@@ -12,6 +12,7 @@
   color: var(--phosphor-fade);
   text-decoration: none;
   letter-spacing: 0.08em;
+  min-height: 1.65rem;
 }
 .done { color: var(--phosphor-dim); }
 .current { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
@@ -32,12 +33,11 @@
 }
 
 .foot {
-  display: flex; justify-content: space-between; align-items: stretch; gap: 12px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; gap: 12px;
   margin-top: 18px;
   font-family: var(--font-code);
 }
 .foot a {
-  flex: 1;
   display: grid; grid-template-columns: 12px 1fr; gap: 8px;
   align-items: center;
   text-decoration: none;
@@ -59,6 +59,7 @@
 .name { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--phosphor-bright); text-shadow: var(--glow-emerald); letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 @media (max-width: 480px) {
+  .foot { grid-template-columns: minmax(0, 1fr); }
   .foot { gap: 8px; margin-top: 12px; }
   .foot a { padding: 8px 10px; gap: 6px; }
   .kind { display: none; }

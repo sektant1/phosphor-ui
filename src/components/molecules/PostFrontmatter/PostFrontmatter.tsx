@@ -49,6 +49,13 @@ const formatValue = (value: FrontmatterValue) => {
   return formatScalar(value);
 };
 
+const isMeaningfulValue = (value: FrontmatterValue) => {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+};
+
 export const PostFrontmatter: React.FC<PostFrontmatterProps> = ({
   data,
   label = "frontmatter",
@@ -56,7 +63,7 @@ export const PostFrontmatter: React.FC<PostFrontmatterProps> = ({
   className,
   ...rest
 }) => {
-  const entries = Object.entries(data).filter(([, value]) => value !== undefined);
+  const entries = Object.entries(data).filter(([, value]) => isMeaningfulValue(value));
 
   if (entries.length === 0) {
     return null;
@@ -75,19 +82,16 @@ export const PostFrontmatter: React.FC<PostFrontmatterProps> = ({
         <span className={styles.label}>{label}</span>
       </div>
 
-      <pre className={styles.block}>
+      <dl className={styles.block}>
         <span className={styles.marker}>{marker}</span>
-        {"\n"}
         {entries.map(([key, value]) => (
-          <React.Fragment key={key}>
-            <span className={styles.key}>{key}</span>
-            <span className={styles.punct}>: </span>
-            <span className={styles.value}>{formatValue(value)}</span>
-            {"\n"}
-          </React.Fragment>
+          <div key={key} className={styles.row}>
+            <dt className={styles.key}>{key}</dt>
+            <dd className={styles.value}>{formatValue(value)}</dd>
+          </div>
         ))}
         <span className={styles.marker}>{marker}</span>
-      </pre>
+      </dl>
     </aside>
   );
 };

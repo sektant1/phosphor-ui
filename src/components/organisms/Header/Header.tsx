@@ -67,6 +67,11 @@ const Header: React.FC<HeaderProps> = ({
     navVariant ?? (variant === "terminal" ? "command" : variant === "compact" ? "tabs" : "plain");
   const resolvedLocaleVariant =
     localeVariant ?? (variant === "terminal" ? "terminal" : variant === "compact" ? "inline" : "segmented");
+  const showLocales = locales && locales.length > 1;
+  const mobileNavItems = nav.map((item) => ({
+    ...item,
+    glyph: item.active ? ">" : undefined,
+  }));
 
   return (
     <header
@@ -103,15 +108,23 @@ const Header: React.FC<HeaderProps> = ({
       {nav.length > 0 || (locales && locales.length > 1) ? (
         <div className="header-toolbar">
           {nav.length > 0 ? (
-            <HeaderNav
-              className="header-nav"
-              items={nav}
-              ariaLabel={navAriaLabel}
-              variant={resolvedNavVariant}
-            />
+            <>
+              <HeaderNav
+                className="header-nav header-nav--desktop"
+                items={nav}
+                ariaLabel={navAriaLabel}
+                variant={resolvedNavVariant}
+              />
+              <HeaderNav
+                className="header-nav header-nav--mobile"
+                items={mobileNavItems}
+                ariaLabel={navAriaLabel}
+                variant="mobile"
+              />
+            </>
           ) : null}
 
-          {locales && locales.length > 1 ? (
+          {showLocales ? (
             <LocaleSwitch
               className="locale-switch"
               locales={locales}
