@@ -18,7 +18,7 @@ export const Default: StoryObj<ModalProps> = {
       <div>
         <button onClick={() => setOpen(true)}>open modal</button>
         <Modal open={open} onClose={() => setOpen(false)} title="// transmission">
-          <p style={{ color: "var(--ink)" }}>Modal body content here.</p>
+          <p style={{ color: "var(--pho-color-text)" }}>Modal body content here.</p>
         </Modal>
       </div>
     );
@@ -33,7 +33,7 @@ export const DrawerRight: StoryObj<DrawerProps> = {
       <div>
         <button onClick={() => setOpen(true)}>open drawer</button>
         <Drawer open={open} onClose={() => setOpen(false)} title="// panel" side="right">
-          <p style={{ color: "var(--ink)" }}>Drawer body content here.</p>
+          <p style={{ color: "var(--pho-color-text)" }}>Drawer body content here.</p>
         </Drawer>
       </div>
     );

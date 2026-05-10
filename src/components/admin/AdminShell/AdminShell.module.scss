@@ -1,5 +1,6 @@
 .shell {
   display: flex;
+  flex-direction: row-reverse;
   width: 100%;
   min-height: 100vh;
   background: var(--pho-color-background);
@@ -7,11 +8,115 @@
 }
 
 .sidePanel {
-  flex: 0 0 280px;
+  flex: 0 0 clamp(18rem, 24vw, 22rem);
   min-width: 0;
   min-height: 100vh;
-  background: var(--pho-color-background-deep);
-  border-right: 1px solid var(--pho-color-primary-faint);
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.085), transparent 22rem),
+    linear-gradient(90deg, rgba(44, 255, 122, 0.035), transparent 42%),
+    var(--pho-color-background-deep);
+  border-left: 1px solid var(--pho-color-primary-faint);
+  box-shadow:
+    inset 1px 0 0 rgba(182, 255, 206, 0.08),
+    -18px 0 34px rgba(0, 0, 0, 0.22);
+  position: relative;
+  z-index: var(--pho-z-shell);
+}
+
+.sidePanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(44, 255, 122, 0.1) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(44, 255, 122, 0.035) 1px, transparent 1px);
+  background-size: 3.25rem 100%, 100% 2.2rem;
+  mask-image: linear-gradient(180deg, black, transparent 70%);
+  opacity: 0.36;
+}
+
+.panelHeader,
+.panelStatus,
+.treeFrame,
+.userSection {
+  position: relative;
+  z-index: 1;
+}
+
+.panelHeader {
+  flex: 0 0 auto;
+  padding: 1.05rem 1rem 0.85rem;
+  border-bottom: var(--pho-border-dashed);
+}
+
+.panelKicker {
+  display: block;
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
+  letter-spacing: 0.22em;
+  margin-bottom: 0.25rem;
+}
+
+.panelTitle {
+  color: var(--pho-color-primary-strong);
+  display: block;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-h2-size);
+  line-height: 0.85;
+  text-transform: uppercase;
+  text-shadow: var(--pho-glow-primary);
+}
+
+.panelStatus {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(5rem, 0.65fr);
+  gap: 1px;
+  border-bottom: var(--pho-border-dashed);
+  background: rgba(10, 77, 34, 0.32);
+}
+
+.statusRow {
+  min-width: 0;
+  padding: 0.65rem 0.85rem;
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.055), rgba(44, 255, 122, 0.018)),
+    rgba(1, 6, 4, 0.62);
+}
+
+.statusLabel,
+.statusValue {
+  display: block;
+  min-width: 0;
+}
+
+.statusLabel {
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
+  letter-spacing: 0.16em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.statusValue {
+  color: var(--pho-color-primary);
+  font-size: var(--pho-type-caption-size);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.statusWarn {
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent-soft);
+}
+
+.treeFrame {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0.75rem;
 }
 
 .tree {
@@ -22,27 +127,63 @@
   position: static;
   align-self: stretch;
   border-right: none;
+  border: 1px solid rgba(10, 77, 34, 0.9);
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.035), transparent 50%),
+    rgba(4, 20, 10, 0.58);
+  box-shadow: inset 0 0 18px rgba(44, 255, 122, 0.035);
 }
 
 .userSection {
   flex: 0 0 auto;
-  padding: 0.7rem 0.9rem;
+  padding: 0.85rem 1rem 1rem;
   border-top: var(--pho-border-dashed);
-  background: rgba(0, 0, 0, 0.16);
+  background:
+    linear-gradient(180deg, rgba(44, 255, 122, 0.06), rgba(44, 255, 122, 0.018)),
+    rgba(0, 0, 0, 0.22);
 }
 
 .userBlock {
   min-width: 0;
 }
 
+.userLabel {
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.userIdentity {
+  align-items: center;
+  display: flex;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.userPulse {
+  flex: 0 0 auto;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--pho-color-primary);
+  box-shadow:
+    0 0 4px var(--pho-color-primary),
+    0 0 14px rgba(44, 255, 122, 0.42);
+}
+
 .userName {
-  font-size: 11px;
-  color: var(--pho-color-primary-muted);
+  color: var(--pho-color-primary-strong);
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: 0.04em;
+  min-width: 0;
 }
 
 .userRole {
-  font-size: 10px;
+  font-size: var(--pho-type-micro-size);
   color: var(--pho-color-primary-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .logoutBtn {
@@ -51,11 +192,12 @@
   text-align: left;
   background: none;
   border: none;
+  border-top: 1px dotted rgba(10, 77, 34, 0.95);
   cursor: pointer;
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   color: var(--pho-color-primary-faint);
-  padding: 0.3rem 0;
+  padding: 0.55rem 0 0;
   letter-spacing: 0.06em;
 }
 
@@ -121,7 +263,7 @@
 
 .eyebrow {
   color: var(--pho-color-primary-faint);
-  font-size: 10px;
+  font-size: var(--pho-type-micro-size);
 }
 
 .mainTitle {
@@ -168,7 +310,7 @@
 .statLabel {
   color: var(--pho-color-primary-faint);
   display: block;
-  font-size: 10px;
+  font-size: var(--pho-type-micro-size);
   letter-spacing: 0.08em;
   margin-bottom: 0.35rem;
   text-transform: uppercase;
@@ -177,20 +319,38 @@
 .statValue {
   color: var(--pho-color-primary);
   display: block;
-  font-size: 1.1rem;
+  font-size: var(--pho-type-control-lg-size);
   line-height: 1.1;
 }
 
 @media (max-width: 880px) {
   .shell {
     display: block;
+    flex-direction: initial;
   }
 
   .sidePanel {
     min-height: 0;
-    border-right: none;
+    border-left: none;
     border-bottom: none;
     background: transparent;
+    box-shadow: none;
+  }
+
+  .sidePanel::before,
+  .treeFrame {
+    display: contents;
+  }
+
+  .panelHeader,
+  .panelStatus {
+    display: none;
+  }
+
+  .tree {
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   .userSection {

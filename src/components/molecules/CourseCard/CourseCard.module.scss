@@ -99,7 +99,7 @@
   border: 1px solid var(--pho-color-primary-muted);
   color: var(--pho-color-primary);
   font-family: var(--pho-font-heading);
-  font-size: 0.68rem;
+  font-size: var(--pho-type-micro-size);
   font-weight: 700;
   justify-self: start;
   letter-spacing: var(--pho-tracking-wide);
@@ -167,7 +167,7 @@
 .thumbFallbackGlyph {
   color: var(--pho-color-primary);
   font-family: var(--pho-font-terminal);
-  font-size: 1.9rem;
+  font-size: var(--pho-type-h2-size);
   letter-spacing: var(--pho-tracking-wide);
   position: relative;
   text-shadow: var(--pho-glow-primary-soft);
@@ -178,7 +178,7 @@
   display: flex;
   flex-wrap: wrap;
   font-family: var(--pho-font-terminal);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   gap: 0.45rem 0.75rem;
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1.2;
@@ -218,7 +218,7 @@
   border: 1px solid var(--pho-color-accent-muted);
   color: var(--pho-color-accent);
   font-family: var(--pho-font-terminal);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1;
   padding: 0.18rem 0.42rem;
@@ -253,7 +253,7 @@
 
 .desc {
   color: var(--pho-color-text);
-  font-size: 0.8rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: 1.58;
   margin: 0;
 }
@@ -264,7 +264,7 @@
   display: flex;
   flex-wrap: wrap;
   font-family: var(--pho-font-terminal);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   gap: 0.45rem 0.9rem;
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1.25;
@@ -298,7 +298,7 @@
 .cta {
   flex: 0 0 auto;
   font-family: var(--pho-font-heading);
-  font-size: 0.75rem;
+  font-size: var(--pho-type-caption-size);
   font-weight: 700;
   letter-spacing: var(--pho-tracking-wide);
   margin-left: auto;

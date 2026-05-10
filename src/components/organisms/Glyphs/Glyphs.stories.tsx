@@ -29,7 +29,7 @@ export const Interactive: Story = {
     const [picked, setPicked] = React.useState<string>("◈");
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        <div style={{ fontFamily: "var(--font-terminal)", color: "var(--phosphor-bright)" }}>
+        <div style={{ fontFamily: "var(--pho-font-terminal)", color: "var(--pho-color-primary-strong)" }}>
           picked: <Glyph char={picked} size={22} />
         </div>
         <Glyphs onSelect={(g) => setPicked(g.char)} />
@@ -51,7 +51,7 @@ export const Custom: Story = {
 
 export const InlineGlyph: Story = {
   render: () => (
-    <div style={{ fontFamily: "var(--font-body)", color: "var(--ink)", lineHeight: 1.7 }}>
+    <div style={{ fontFamily: "var(--pho-font-body)", color: "var(--pho-color-text)", lineHeight: 1.7 }}>
       transmission <Glyph char="▸" size={18} /> phase lock <Glyph char="◆" size={18} /> end-of-frame{" "}
       <Glyph char="█" size={18} />
     </div>
@@ -60,12 +60,12 @@ export const InlineGlyph: Story = {
 
 export const Catalog: Story = {
   render: () => (
-    <div style={{ padding: 24, background: "var(--bg)", minHeight: "100vh" }}>
+    <div style={{ padding: 24, background: "var(--pho-color-background)", minHeight: "100vh" }}>
       <h2
         style={{
-          fontFamily: "var(--font-heading)",
-          color: "var(--phosphor-bright)",
-          textShadow: "var(--glow-emerald)",
+          fontFamily: "var(--pho-font-heading)",
+          color: "var(--pho-color-primary-strong)",
+          textShadow: "var(--pho-glow-primary)",
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           marginBottom: 16,

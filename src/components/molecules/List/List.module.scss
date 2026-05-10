@@ -67,7 +67,7 @@ a.title:focus-visible {
   color: var(--pho-color-text-faint);
   flex: 0 0 auto;
   font-family: var(--pho-font-terminal);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
   text-transform: uppercase;
   white-space: nowrap;
@@ -75,7 +75,7 @@ a.title:focus-visible {
 
 .description {
   color: var(--pho-color-text-muted);
-  font-size: 0.84rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -123,7 +123,7 @@ a.title:focus-visible {
 }
 
 .compact .description {
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   line-height: 1.35;
 }
 
@@ -154,7 +154,7 @@ a.title:focus-visible {
 .markerIndex .marker {
   border: 1px solid var(--pho-color-primary-faint);
   color: var(--pho-color-primary);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   min-width: 1.45rem;
   text-shadow: var(--pho-glow-primary-soft);
 }

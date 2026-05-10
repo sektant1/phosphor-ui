@@ -1,46 +1,12 @@
 import React from "react";
+import {
+  TYPOGRAPHY_CLASS_BY_VARIANT,
+  TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT,
+} from "../../../foundations/typography/variants";
+import type { TypographyVariant } from "../../../foundations/typography/variants";
 import { cx } from "../../../utils/classNames";
 
-export type TextVariant =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "lead"
-  | "body"
-  | "small"
-  | "caption"
-  | "mono"
-  | "code"
-  | "terminal"
-  | "stamp"
-  | "prompt"
-  | "glow"
-  | "glow-pale"
-  | "muted"
-  | "dim"
-  | "faded";
-
-const variantTag: Record<TextVariant, keyof JSX.IntrinsicElements> = {
-  h1: "h1",
-  h2: "h2",
-  h3: "h3",
-  h4: "h4",
-  lead: "p",
-  body: "p",
-  small: "small",
-  caption: "span",
-  mono: "span",
-  code: "code",
-  terminal: "span",
-  stamp: "span",
-  prompt: "span",
-  glow: "span",
-  "glow-pale": "span",
-  muted: "span",
-  dim: "span",
-  faded: "span",
-};
+export type TextVariant = TypographyVariant;
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;
@@ -58,9 +24,9 @@ const Text: React.FC<TextProps> = ({
   children,
   ...rest
 }) => {
-  const Tag = (as ?? variantTag[variant]) as keyof JSX.IntrinsicElements;
+  const Tag = (as ?? TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT[variant]) as keyof JSX.IntrinsicElements;
   const cls = cx(
-    `t-${variant}`,
+    TYPOGRAPHY_CLASS_BY_VARIANT[variant],
     truncate && "t-truncate",
     balance && "t-balance",
     className,

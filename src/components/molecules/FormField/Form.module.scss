@@ -20,7 +20,7 @@
 .title {
   color: var(--pho-color-primary-strong);
   font-family: var(--pho-font-terminal);
-  font-size: 1.24rem;
+  font-size: var(--pho-type-h4-size);
   letter-spacing: var(--pho-tracking-wider);
   line-height: 1;
   margin: 0;
@@ -29,7 +29,7 @@
 
 .description {
   color: var(--pho-color-text-faint);
-  font-size: 0.84rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: var(--pho-line-normal);
   margin: 0;
 }

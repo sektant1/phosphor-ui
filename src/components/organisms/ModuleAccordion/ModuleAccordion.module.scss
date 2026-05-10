@@ -5,9 +5,9 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  border: 1px solid var(--phosphor-fade);
+  border: 1px solid var(--pho-color-primary-faint);
   margin-bottom: 12px;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   align-self: stretch;
 }
 
@@ -21,14 +21,14 @@
   align-items: center;
   padding: 10px 12px;
   border: 0;
-  background: var(--bg-raise);
+  background: var(--pho-color-background-raised);
   cursor: pointer;
-  border-bottom: 1px dashed var(--phosphor-fade);
+  border-bottom: 1px dashed var(--pho-color-primary-faint);
   text-align: left;
 }
 
 .head:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
+  outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
 
@@ -37,26 +37,26 @@
 }
 
 .glyph {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
-  font-family: var(--font-terminal);
-  font-size: 16px;
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-icon-sm-size);
   line-height: 1;
 }
 
 .num {
-  font-family: var(--font-terminal);
-  font-size: 13px;
-  color: var(--phosphor-dim);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-control-sm-size);
+  color: var(--pho-color-primary-muted);
   letter-spacing: 0.14em;
 }
 
 .title {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: 14px;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  font-size: var(--pho-type-control-sm-size);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   min-width: 0;
@@ -69,9 +69,9 @@
 }
 
 .pct {
-  font-family: var(--font-terminal);
-  font-size: 12px;
-  color: var(--phosphor-dim);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  color: var(--pho-color-primary-muted);
   width: 4ch;
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -86,8 +86,8 @@
 
 .intro {
   margin: 0 0 8px;
-  color: var(--phosphor-dim);
-  font-size: 12px;
+  color: var(--pho-color-primary-muted);
+  font-size: var(--pho-type-caption-size);
   line-height: 1.6;
 }
 
@@ -103,13 +103,13 @@
   gap: 10px;
   align-items: center;
   padding: 4px 0;
-  font-size: 12.5px;
+  font-size: var(--pho-type-caption-size);
 }
 
 .cb {
   width: 14px;
   height: 14px;
-  border: 2px solid var(--phosphor);
+  border: 2px solid var(--pho-color-primary);
   display: inline-grid;
   place-items: center;
   position: relative;
@@ -126,11 +126,11 @@
   top: 45%;
   width: 55%;
   height: 28%;
-  border-left: 2.5px solid var(--phosphor);
-  border-bottom: 2.5px solid var(--phosphor);
+  border-left: 2.5px solid var(--pho-color-primary);
+  border-bottom: 2.5px solid var(--pho-color-primary);
   transform: translate(-50%, -50%) rotate(-45deg);
   opacity: 0;
-  filter: drop-shadow(0 0 3px var(--phosphor));
+  filter: drop-shadow(0 0 3px var(--pho-color-primary));
   pointer-events: none;
 }
 
@@ -139,40 +139,40 @@
 }
 
 .locked .cb {
-  border-color: var(--phosphor-fade);
+  border-color: var(--pho-color-primary-faint);
 }
 
 .liNum {
-  font-family: var(--font-terminal);
-  font-size: 12px;
-  color: var(--phosphor-fade);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  color: var(--pho-color-primary-faint);
   letter-spacing: 0.1em;
 }
 
 .li a {
   text-decoration: none;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
 .done a {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   text-shadow: none;
   text-decoration: line-through;
-  text-decoration-color: var(--phosphor-fade);
+  text-decoration-color: var(--pho-color-primary-faint);
 }
 
 .locked a {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   text-shadow: none;
   cursor: not-allowed;
 }
 
 .len {
-  font-size: 11px;
-  color: var(--phosphor-fade);
+  font-size: var(--pho-type-ui-xs-size);
+  color: var(--pho-color-primary-faint);
   font-variant-numeric: tabular-nums;
 }
 
@@ -216,6 +216,6 @@
   }
 
   .title {
-    font-size: 13px;
+    font-size: var(--pho-type-control-sm-size);
   }
 }

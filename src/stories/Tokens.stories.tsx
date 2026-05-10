@@ -1,5 +1,9 @@
 import React from "react";
 import type { Meta } from "@storybook/react";
+import { Button } from "../components/atoms/Button";
+import { Input } from "../components/atoms/Input";
+import Header from "../components/organisms/Header";
+import { Footer } from "../components/organisms/Footer";
 
 export default {
   title: "Foundations/Tokens",
@@ -67,19 +71,25 @@ const COLORS: Array<[label: string, group: string, vars: Array<[string, string]>
 ];
 
 const TYPE_VARIANTS: Array<{ cls: string; label: string; sample: string }> = [
-  { cls: "t-h1", label: "// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ", sample: "Display heading — clamp(1.8rem, 3.4vw, 2.4rem)" },
-  { cls: "t-h2", label: "transmission log", sample: "Section heading — clamp(1.4rem, 2.6vw, 1.85rem)" },
-  { cls: "t-h3", label: "▸ artifact recovery", sample: "Subsection — clamp(1.15rem, 2vw, 1.4rem)" },
-  { cls: "t-h4", label: "└─ side note", sample: "Tertiary — clamp(1rem, 1.6vw, 1.15rem)" },
-  { cls: "t-body", label: "Pool reuse open DB connections. No new connection per request.", sample: "Body — clamp(15px, 0.4vw + 13px, 17px)" },
-  { cls: "t-mono", label: "grep -r 'transmission' .", sample: "Mono — 0.86em" },
-  { cls: "t-terminal", label: "CH 0x4C · γ-2 · NORM", sample: "Terminal (VT323) — 1.15em, tracking-wider" },
-  { cls: "t-stamp", label: "// LAST CONTACT //", sample: "Stamp — 0.78em, tracking-stamp" },
-  { cls: "t-prompt", label: "~/zone-net $", sample: "Prompt — VT323 + glow-magenta" },
-  { cls: "t-glow", label: "glowing emerald text", sample: "Glow — phosphor + glow-emerald" },
-  { cls: "t-glow-pale", label: "paper-mint highlight", sample: "Glow pale — phosphor-bright + glow-emerald" },
-  { cls: "t-dim", label: "dim phosphor, no glow", sample: "Dim — phosphor-dim, text-shadow: none" },
-  { cls: "t-faded", label: "deep forest, no glow", sample: "Faded — phosphor-fade, text-shadow: none" },
+  { cls: "t-h1", label: "// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ", sample: "Display heading — --pho-type-h1-size" },
+  { cls: "t-h2", label: "transmission log", sample: "Section heading — --pho-type-h2-size" },
+  { cls: "t-h3", label: "▸ artifact recovery", sample: "Subsection — --pho-type-h3-size" },
+  { cls: "t-h4", label: "└─ side note", sample: "Tertiary — --pho-type-h4-size" },
+  { cls: "t-h5", label: "dense subsection", sample: "Small heading — --pho-type-h5-size" },
+  { cls: "t-h6", label: "tertiary metadata", sample: "Smallest heading — --pho-type-h6-size" },
+  { cls: "t-lead", label: "Readable intro copy for posts, wiki entries, and project pages.", sample: "Lead — --pho-type-lead-size" },
+  { cls: "t-body", label: "Pool reuse open DB connections. No new connection per request.", sample: "Body — --pho-type-body-size" },
+  { cls: "t-small", label: "Small supporting copy remains legible in dense interfaces.", sample: "Small — --pho-type-small-size" },
+  { cls: "t-caption", label: "updated 2026-05-10", sample: "Caption — --pho-type-caption-size" },
+  { cls: "t-mono", label: "grep -r 'transmission' .", sample: "Mono — --pho-type-mono-size" },
+  { cls: "t-code", label: "npm run validate:package", sample: "Code — --pho-type-mono-size" },
+  { cls: "t-terminal", label: "CH 0x4C · NORM", sample: "Terminal — VT323 + tracking-wider" },
+  { cls: "t-stamp", label: "// LAST CONTACT //", sample: "Stamp — caption + tracking-stamp" },
+  { cls: "t-prompt", label: "~/zone-net $", sample: "Prompt — terminal + accent glow" },
+  { cls: "t-glow", label: "glowing emerald text", sample: "Glow — primary + token glow" },
+  { cls: "t-glow-pale", label: "paper-mint highlight", sample: "Glow pale — primary strong + token glow" },
+  { cls: "t-dim", label: "dim phosphor, no glow", sample: "Dim — secondary UI text" },
+  { cls: "t-faded", label: "deep forest, no glow", sample: "Faded — tertiary metadata" },
 ];
 
 const SPACING: Array<[string, string]> = [
@@ -300,25 +310,25 @@ const LINE: Array<[string, string]> = [
 ];
 
 const FONT_STACKS: Array<[string, string]> = [
-  ["--font-display", "Space Mono → JetBrains Mono → ui-monospace"],
-  ["--font-heading", "JetBrains Mono → Space Mono → ui-monospace"],
-  ["--font-body", "JetBrains Mono → Space Mono → ui-monospace"],
-  ["--font-code", "JetBrains Mono → Space Mono → ui-monospace"],
-  ["--font-terminal", "VT323 → JetBrains Mono → ui-monospace"],
+  ["--pho-font-display", "Space Mono -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-heading", "Space Mono -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-body", "JetBrains Mono -> Space Mono -> ui-monospace"],
+  ["--pho-font-code", "JetBrains Mono -> Space Mono -> ui-monospace"],
+  ["--pho-font-terminal", "VT323 -> JetBrains Mono -> ui-monospace"],
 ];
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2
     style={{
-      fontFamily: "var(--font-heading)",
+      fontFamily: "var(--pho-font-heading)",
       fontWeight: 700,
-      fontSize: 17,
+      fontSize: "var(--pho-type-control-size)",
       letterSpacing: "0.08em",
       textTransform: "uppercase",
-      color: "var(--phosphor-bright)",
-      textShadow: "var(--glow-emerald)",
-      borderLeft: "3px solid var(--phosphor)",
-      borderBottom: "1px solid var(--phosphor-fade)",
+      color: "var(--pho-color-primary-strong)",
+      textShadow: "var(--pho-glow-primary)",
+      borderLeft: "3px solid var(--pho-color-primary)",
+      borderBottom: "1px solid var(--pho-color-primary-faint)",
       background: "linear-gradient(90deg, rgba(44,255,122,0.08), transparent 60%)",
       padding: "4px 24px 4px 10px",
       margin: "32px 0 16px",
@@ -334,11 +344,11 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const Caption: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div
     style={{
-      fontFamily: "var(--font-terminal)",
-      fontSize: 11,
+      fontFamily: "var(--pho-font-terminal)",
+      fontSize: "var(--pho-type-caption-size)",
       letterSpacing: "0.18em",
       textTransform: "uppercase",
-      color: "var(--phosphor-fade)",
+      color: "var(--pho-color-primary-faint)",
       marginBottom: 8,
     }}
   >
@@ -349,12 +359,12 @@ const Caption: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 const Cell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div
     style={{
-      border: "1px solid var(--phosphor-fade)",
+      border: "1px solid var(--pho-color-primary-faint)",
       padding: 10,
-      fontFamily: "var(--font-code)",
-      fontSize: 11,
-      color: "var(--ink)",
-      background: "var(--bg-raise)",
+      fontFamily: "var(--pho-font-code)",
+      fontSize: "var(--pho-type-caption-size)",
+      color: "var(--pho-color-text)",
+      background: "var(--pho-color-background-raised)",
     }}
   >
     {children}
@@ -365,10 +375,10 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div
     style={{
       padding: 24,
-      background: "var(--bg)",
+      background: "var(--pho-color-background)",
       minHeight: "100vh",
-      color: "var(--ink)",
-      fontFamily: "var(--font-body)",
+      color: "var(--pho-color-text)",
+      fontFamily: "var(--pho-font-body)",
     }}
   >
     {children}
@@ -379,12 +389,12 @@ export const All = () => (
   <Page>
     <h1
       style={{
-        fontFamily: "var(--font-heading)",
-        fontSize: "clamp(1.8rem, 3.4vw, 2.4rem)",
+        fontFamily: "var(--pho-font-heading)",
+        fontSize: "var(--pho-type-h1-size)",
         letterSpacing: "0.06em",
         textTransform: "uppercase",
-        color: "var(--phosphor-bright)",
-        textShadow: "var(--glow-emerald)",
+        color: "var(--pho-color-primary-strong)",
+        textShadow: "var(--pho-glow-primary)",
         margin: 0,
       }}
     >
@@ -414,7 +424,7 @@ export const All = () => (
         <Cell key={name}>
           <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
           <div style={{ color: "var(--phosphor-dim)", marginTop: 4 }}>{stack}</div>
-          <div style={{ fontFamily: `var(${name})`, color: "var(--ink)", marginTop: 8, fontSize: 14 }}>
+              <div style={{ fontFamily: `var(${name})`, color: "var(--pho-color-text)", marginTop: 8, fontSize: "var(--pho-type-control-sm-size)" }}>
             The quick brown fox 0123456789 // СЕКРЕТНО
           </div>
         </Cell>
@@ -576,6 +586,19 @@ export const Colors = () => <Page>{COLORS.map(([label, group, vars]) => (
 
 export const Typography = () => (
   <Page>
+    <SectionTitle>Font roles</SectionTitle>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8 }}>
+      {FONT_STACKS.map(([name, stack]) => (
+        <Cell key={name}>
+          <div className="t-caption">{name}</div>
+          <div className="t-faded" style={{ marginTop: 4 }}>{stack}</div>
+          <div style={{ fontFamily: `var(${name})`, marginTop: 8 }}>
+            The quick brown fox 0123456789
+          </div>
+        </Cell>
+      ))}
+    </div>
+
     <SectionTitle>Variants</SectionTitle>
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       {TYPE_VARIANTS.map((v) => (
@@ -584,6 +607,60 @@ export const Typography = () => (
           <div className={v.cls}>{v.label}</div>
         </div>
       ))}
+    </div>
+  </Page>
+);
+
+export const TypographyUsage = () => (
+  <Page>
+    <SectionTitle>Real usage examples</SectionTitle>
+    <div style={{ display: "grid", gap: 18, maxWidth: 920 }}>
+      <Header
+        title="ZONE"
+        variant="terminal"
+        nav={[
+          { label: "home", href: "/", active: true },
+          { label: "posts", href: "/posts" },
+          { label: "archive", href: "/archive" },
+        ]}
+        tagline="lowercase and uppercase navigation scan"
+      />
+
+      <section>
+        <h3 className="t-h3">UI control cluster</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(220px, 1fr) auto auto", gap: 12, alignItems: "end" }}>
+          <Input label="Signal ID" defaultValue="phase-0x4c" helpText="Caption-sized help text stays readable." />
+          <Input label="Checksum" defaultValue="BAD" error="Checksum mismatch." />
+          <Button>Commit</Button>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="t-h3">Dense metadata list</h3>
+        <dl style={{ display: "grid", gridTemplateColumns: "12rem 1fr", gap: "0.35rem 1rem", margin: 0 }}>
+          {[
+            ["status", "nominal"],
+            ["last contact", "2026-05-10 14:32Z"],
+            ["module path", "/archive/sector-seven/long-lowercase-slug"],
+            ["operator", "night-shift"],
+          ].map(([term, value]) => (
+            <React.Fragment key={term}>
+              <dt className="t-caption">{term}</dt>
+              <dd className="t-small" style={{ margin: 0 }}>{value}</dd>
+            </React.Fragment>
+          ))}
+        </dl>
+      </section>
+
+      <Footer
+        brand="phosphor ui"
+        links={[
+          { label: "docs", href: "#" },
+          { label: "tokens", href: "#" },
+        ]}
+        status={{ label: "font", value: "google" }}
+        meta="Footer metadata uses compact tokenized typography."
+      />
     </div>
   </Page>
 );

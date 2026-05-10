@@ -6,12 +6,12 @@
 .trigger {
   align-items: center;
   background: transparent;
-  border: 1px solid var(--phosphor-fade);
-  color: var(--phosphor);
+  border: 1px solid var(--pho-color-primary-faint);
+  color: var(--pho-color-primary);
   cursor: pointer;
   display: inline-flex;
-  font-family: var(--font-terminal);
-  font-size: 1.05rem;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-control-lg-size);
   gap: 0.5rem;
   letter-spacing: 0.08em;
   padding: 0.35rem 0.65rem;
@@ -21,24 +21,24 @@
 .trigger:hover,
 .open {
   background: rgba(44, 255, 122, 0.08);
-  border-color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  border-color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
 }
 
 .trigger:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
+  outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
 
 .chev {
-  color: var(--phosphor-fade);
-  font-family: var(--font-code);
-  font-size: 0.75rem;
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
 }
 
 .menu {
-  background: var(--bg-deep);
-  border: 1px solid var(--phosphor-dim);
+  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-muted);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32), inset 0 0 18px rgba(44, 255, 122, 0.05);
   display: grid;
   left: 0;
@@ -57,10 +57,10 @@
 .item {
   background: transparent;
   border: 0;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   cursor: pointer;
-  font-family: var(--font-code);
-  font-size: 0.82rem;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-ui-sm-size);
   padding: 0.55rem 0.65rem;
   text-align: left;
   text-decoration: none;
@@ -70,9 +70,9 @@
 .item:focus-visible,
 .item[aria-disabled="true"]:focus-visible {
   background: rgba(44, 255, 122, 0.1);
-  color: var(--phosphor-bright);
+  color: var(--pho-color-primary-strong);
   outline: 0;
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
 }
 
 .item:disabled,

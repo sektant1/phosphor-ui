@@ -1,11 +1,11 @@
 .frame {
   position: relative;
-  border: 1px solid var(--phosphor);
+  border: 1px solid var(--pho-color-primary);
   background:
     radial-gradient(ellipse 120% 70% at 50% 0%, rgba(44,255,122,0.08) 0%, transparent 70%),
-    var(--bg);
+    var(--pho-color-background);
   box-shadow:
-    0 0 0 1px var(--phosphor-fade) inset,
+    0 0 0 1px var(--pho-color-primary-faint) inset,
     0 0 24px rgba(44, 255, 122, 0.18),
     0 0 60px rgba(44, 255, 122, 0.06);
   overflow: hidden;
@@ -16,38 +16,38 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.35rem 0.7rem;
-  font-family: var(--font-terminal);
-  font-size: 13px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-control-sm-size);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   background:
     repeating-linear-gradient(90deg, transparent 0 6px, rgba(44,255,122,0.05) 6px 7px),
-    var(--bg-raise);
+    var(--pho-color-background-raised);
 }
-.hudTop { border-bottom: 1px solid var(--phosphor-fade); }
-.hudBot { border-top: 1px solid var(--phosphor-fade); }
-.label  { color: var(--phosphor); text-shadow: var(--glow-emerald); font-weight: 700; }
+.hudTop { border-bottom: 1px solid var(--pho-color-primary-faint); }
+.hudBot { border-top: 1px solid var(--pho-color-primary-faint); }
+.label  { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); font-weight: 700; }
 .spacer { flex: 1 1 auto; }
-.text   { color: var(--phosphor-dim); font-variant-numeric: tabular-nums; }
-.bars   { color: var(--phosphor); text-shadow: var(--glow-emerald); }
+.text   { color: var(--pho-color-primary-muted); font-variant-numeric: tabular-nums; }
+.bars   { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
 .led {
   width: 8px; height: 8px; border-radius: 50%;
   box-shadow: 0 0 4px currentColor, 0 0 10px currentColor;
   display: inline-block;
 }
-.ledRec { color: var(--magenta-bright); background: currentColor; animation: phosphorHudBlink 1.4s steps(2,end) infinite; }
-.ledPwr { color: var(--phosphor); background: currentColor; animation: phosphorHudPulse 2.6s ease-in-out infinite; }
+.ledRec { color: var(--pho-color-accent-strong); background: currentColor; animation: phosphorHudBlink 1.4s steps(2,end) infinite; }
+.ledPwr { color: var(--pho-color-primary); background: currentColor; animation: phosphorHudPulse 2.6s ease-in-out infinite; }
 .tape {
   flex: 1 1 auto; min-width: 0; overflow: hidden;
-  border-left: 1px dashed var(--phosphor-fade);
-  border-right: 1px dashed var(--phosphor-fade);
+  border-left: 1px dashed var(--pho-color-primary-faint);
+  border-right: 1px dashed var(--pho-color-primary-faint);
   padding: 0 0.6rem;
 }
 .tapeRun {
   display: inline-block; white-space: nowrap;
   animation: phosphorTapeRoll linear infinite;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   letter-spacing: 0.18em;
 }
 .artWrap {
@@ -57,13 +57,13 @@
   overflow: hidden; min-height: 14em; isolation: isolate;
 }
 .art {
-  font-family: var(--font-heading); font-weight: 700;
+  font-family: var(--pho-font-heading); font-weight: 700;
   font-size: clamp(4px, 0.85vw, 8px);
   line-height: 1.15;
   margin: 0;
   white-space: pre;
-  color: var(--phosphor-bright);
-  text-shadow: 0 0 1px var(--phosphor), 0 0 8px rgba(44,255,122,0.55), 0 0 20px rgba(44,255,122,0.25);
+  color: var(--pho-color-primary-strong);
+  text-shadow: 0 0 1px var(--pho-color-primary), 0 0 8px rgba(44,255,122,0.55), 0 0 20px rgba(44,255,122,0.25);
   animation: phosphorHeroBreathe 4.2s ease-in-out infinite;
   position: relative; z-index: 1;
 }
@@ -71,14 +71,14 @@
   .hud {
     flex-wrap: wrap;
     gap: 0.4rem;
-    font-size: 11px;
+    font-size: var(--pho-type-ui-xs-size);
     padding: 0.3rem 0.5rem;
   }
   .tape {
     flex-basis: 100%;
     border-left: none;
     border-right: none;
-    border-top: 1px dashed var(--phosphor-fade);
+    border-top: 1px dashed var(--pho-color-primary-faint);
     padding: 0.2rem 0;
   }
   .artWrap {

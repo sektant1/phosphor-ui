@@ -1,57 +1,57 @@
 .bar {
   align-items: center;
-  background: var(--bg-raise);
-  border: 1px solid var(--phosphor-fade);
+  background: var(--pho-color-background-raised);
+  border: 1px solid var(--pho-color-primary-faint);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  padding: 0.45rem;
+  gap: 0.3rem;
+  padding: 0.28rem;
 }
 
 .label {
-  font-family: var(--font-terminal);
-  font-size: 10.5px;
-  color: var(--phosphor-fade);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-micro-size);
+  color: var(--pho-color-primary-faint);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
 }
 
 .copy {
-  font-family: var(--font-code);
-  font-size: 12px;
-  padding: 2px 8px;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-micro-size);
+  padding: 1px 6px;
   background: none;
-  border: 1px dashed var(--phosphor-dim);
-  color: var(--phosphor);
+  border: 1px dashed var(--pho-color-primary-muted);
+  color: var(--pho-color-primary);
   cursor: pointer;
-  min-height: 1.8rem;
+  min-height: 1.45rem;
 
   &:hover {
-    border-color: var(--phosphor);
+    border-color: var(--pho-color-primary);
     background: rgba(44, 255, 122, 0.08);
   }
 }
 
 .copyActive {
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
 }
 
 .link {
-  font-family: var(--font-code);
-  font-size: 12px;
-  padding: 2px 8px;
-  border: 1px dashed var(--phosphor-fade);
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-micro-size);
+  padding: 1px 6px;
+  border: 1px dashed var(--pho-color-primary-faint);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
   text-decoration: none;
-  min-height: 1.8rem;
+  min-height: 1.45rem;
   display: inline-flex;
   align-items: center;
 
   &:hover {
-    background: var(--magenta);
-    color: var(--bg);
+    background: var(--pho-color-accent);
+    color: var(--pho-color-background);
     text-shadow: none;
   }
 }

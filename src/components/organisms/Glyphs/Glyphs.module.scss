@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   gap: 8px;
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
 }
 
 .tile {
@@ -14,12 +14,12 @@
   gap: 4px;
   width: 100%;
   padding: 10px 4px;
-  border: 1px solid var(--phosphor-fade);
-  background: var(--bg-raise);
-  color: var(--phosphor);
+  border: 1px solid var(--pho-color-primary-faint);
+  background: var(--pho-color-background-raised);
+  color: var(--pho-color-primary);
   font: inherit;
   text-align: center;
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
   cursor: default;
   transition: background 0.08s linear, border-color 0.08s linear, color 0.08s linear;
 }
@@ -30,22 +30,22 @@
 
 .interactive:hover,
 .interactive:focus-visible {
-  background: var(--phosphor);
-  color: var(--bg);
+  background: var(--pho-color-primary);
+  color: var(--pho-color-background);
   text-shadow: none;
-  border-color: var(--phosphor-bright);
+  border-color: var(--pho-color-primary-strong);
   outline: none;
 }
 
 .glyph {
-  font-size: 28px;
+  font-size: var(--pho-type-icon-lg-size);
   line-height: 1;
 }
 
 .label {
-  font-family: var(--font-code);
-  font-size: 10px;
-  color: var(--phosphor-dim);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-micro-size);
+  color: var(--pho-color-primary-muted);
   text-shadow: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -53,14 +53,14 @@
 
 .interactive:hover .label,
 .interactive:focus-visible .label {
-  color: var(--bg);
+  color: var(--pho-color-background);
 }
 
 .inline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-terminal);
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  font-family: var(--pho-font-terminal);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
 }

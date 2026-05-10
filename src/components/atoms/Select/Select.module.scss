@@ -7,7 +7,7 @@
 .label {
   color: var(--pho-color-text-muted);
   font-family: var(--pho-font-code);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1.2;
   text-transform: uppercase;
@@ -33,7 +33,7 @@
 .prompt {
   color: var(--pho-color-accent);
   font-family: var(--pho-font-code);
-  font-size: 0.76rem;
+  font-size: var(--pho-type-caption-size);
   line-height: 1;
   text-transform: uppercase;
 }
@@ -45,7 +45,7 @@
   color: var(--pho-color-primary-strong);
   cursor: var(--pho-cursor-pointer);
   font-family: var(--pho-font-code);
-  font-size: 0.88rem;
+  font-size: var(--pho-type-control-sm-size);
   line-height: 1.2;
   min-width: 0;
   outline: 0;
@@ -90,7 +90,7 @@
 .help,
 .error {
   font-family: var(--pho-font-code);
-  font-size: 0.75rem;
+  font-size: var(--pho-type-caption-size);
   line-height: var(--pho-line-normal);
 }
 

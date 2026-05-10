@@ -14,11 +14,11 @@
   left: 0.75rem;
   z-index: 10000;
   transform: translateY(-150%);
-  background: var(--phosphor);
-  border: 1px solid var(--phosphor-bright);
-  color: var(--bg);
-  font-family: var(--font-code);
-  font-size: 0.85rem;
+  background: var(--pho-color-primary);
+  border: 1px solid var(--pho-color-primary-strong);
+  color: var(--pho-color-background);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-ui-sm-size);
   padding: 0.45rem 0.65rem;
   text-decoration: none;
   text-shadow: none;
@@ -26,7 +26,7 @@
 }
 
 .skipLink:focus-visible {
-  outline: 2px solid var(--magenta-bright);
+  outline: 2px solid var(--pho-color-accent-strong);
   outline-offset: 2px;
   transform: translateY(0);
 }
@@ -40,7 +40,7 @@
 }
 
 .main:focus-visible {
-  outline: 1px dashed var(--phosphor-dim);
+  outline: 1px dashed var(--pho-color-primary-muted);
   outline-offset: 0.5rem;
 }
 

@@ -1,7 +1,7 @@
 .root {
-  color: var(--phosphor-dim);
-  font-family: var(--font-code);
-  font-size: 0.78rem;
+  color: var(--pho-color-primary-muted);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
   min-width: 0;
 }
 
@@ -30,22 +30,22 @@
 
 a.item:hover,
 a.item:focus-visible {
-  color: var(--phosphor-bright);
+  color: var(--pho-color-primary-strong);
   outline: 0;
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
 }
 
 a.item:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
+  outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
 
 .current {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 
 .sep {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   user-select: none;
 }

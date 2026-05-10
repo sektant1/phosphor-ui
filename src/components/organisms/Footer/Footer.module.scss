@@ -1,16 +1,16 @@
 .footer {
-  --footer-fg: var(--phosphor-dim);
-  --footer-accent: var(--phosphor);
+  --footer-fg: var(--pho-color-primary-muted);
+  --footer-accent: var(--pho-color-primary);
   width: 100%;
   margin-top: 3rem;
   padding: 1rem clamp(0.8rem, 3vw, 2rem);
-  font-family: var(--font-code);
-  font-size: 12.5px;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
   color: var(--footer-fg);
-  border-top: 1px dashed var(--phosphor-fade);
+  border-top: 1px dashed var(--pho-color-primary-faint);
   background:
     repeating-linear-gradient(90deg, transparent 0 8px, rgba(44,255,122,0.03) 8px 9px),
-    var(--bg-deep);
+    var(--pho-color-background-deep);
   position: relative;
 }
 
@@ -47,12 +47,12 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: var(--font-terminal);
+  font-family: var(--pho-font-terminal);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
-  font-size: 12px;
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+  font-size: var(--pho-type-caption-size);
 }
 .led {
   width: 7px;
@@ -62,7 +62,7 @@
   box-shadow: 0 0 4px var(--footer-accent), 0 0 10px var(--footer-accent);
   animation: footerLedPulse 2.4s ease-in-out infinite;
 }
-.year { color: var(--phosphor-fade); font-family: var(--font-code); letter-spacing: 0.1em; }
+.year { color: var(--pho-color-primary-faint); font-family: var(--pho-font-code); letter-spacing: 0.1em; }
 
 .links {
   list-style: none;
@@ -73,8 +73,8 @@
   gap: 0.4rem 1rem;
 }
 .links a {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   text-decoration: none;
   letter-spacing: 0.06em;
   padding: 2px 4px;
@@ -83,48 +83,48 @@
 }
 .links a:hover,
 .links a:focus-visible {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--pho-color-accent);
+  color: var(--pho-color-background);
   text-shadow: none;
   outline: none;
-  border-bottom-color: var(--magenta-bright);
+  border-bottom-color: var(--pho-color-accent-strong);
 }
 
 .status {
-  font-family: var(--font-terminal);
-  font-size: 11px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }
 .status b {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   font-weight: 700;
 }
 
 .prompt {
   max-width: 1280px;
   margin: 0.8rem auto 0;
-  font-family: var(--font-terminal);
-  font-size: 12px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
   letter-spacing: 0.14em;
-  color: var(--phosphor-dim);
-  border-top: 1px dashed var(--phosphor-fade);
+  color: var(--pho-color-primary-muted);
+  border-top: 1px dashed var(--pho-color-primary-faint);
   padding-top: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
 .prompt .sym {
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
 }
 .prompt .cursor {
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
   animation: footerBlink 1s steps(2) infinite;
 }
 
@@ -133,7 +133,7 @@
   margin: 0.45rem auto 0;
   color: var(--pho-color-text-faint);
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   line-height: var(--pho-line-normal);
 }
 
@@ -158,7 +158,7 @@
 }
 
 @media (max-width: 380px) {
-  .footer { padding: 0.8rem 0.7rem; font-size: 12px; }
-  .brand { font-size: 11px; }
-  .prompt { font-size: 11px; }
+  .footer { padding: 0.8rem 0.7rem; font-size: var(--pho-type-caption-size); }
+  .brand { font-size: var(--pho-type-ui-xs-size); }
+  .prompt { font-size: var(--pho-type-ui-xs-size); }
 }

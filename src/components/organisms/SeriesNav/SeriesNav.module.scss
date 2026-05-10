@@ -12,7 +12,7 @@
 
 .seriesLabel {
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.12em;
   color: var(--pho-color-primary-faint);
   text-transform: uppercase;
@@ -21,7 +21,7 @@
 
 .seriesTitle {
   font-family: var(--pho-font-terminal);
-  font-size: 1.1em;
+  font-size: var(--pho-type-control-lg-size);
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   flex: 1;
@@ -29,7 +29,7 @@
 
 .progress {
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   color: var(--pho-color-primary-muted);
   letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
@@ -62,14 +62,14 @@
 
 .dir {
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.06em;
   color: var(--pho-color-primary-faint);
 }
 
 .linkTitle {
   font-family: var(--pho-font-code);
-  font-size: 12px;
+  font-size: var(--pho-type-caption-size);
   color: var(--pho-color-primary);
   overflow: hidden;
   text-overflow: ellipsis;

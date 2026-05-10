@@ -1,4 +1,9 @@
 export {
+  TYPOGRAPHY_CLASS_BY_VARIANT,
+  TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT,
+} from "./variants";
+export type { TypographyVariant } from "./variants";
+export {
   Heading,
   H1,
   H2,

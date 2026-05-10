@@ -4,13 +4,13 @@
   min-height: 100vh;
   background: radial-gradient(
     ellipse 110% 80% at 50% 25%,
-    var(--bg-raise) 0%,
-    var(--bg) 60%,
-    var(--bg-deep) 100%
+    var(--pho-color-background-raised) 0%,
+    var(--pho-color-background) 60%,
+    var(--pho-color-background-deep) 100%
   );
   background-attachment: fixed;
-  color: var(--ink);
-  font-family: var(--font-body);
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-body);
   cursor: var(--pho-cursor-default);
 }
 
@@ -55,10 +55,10 @@
 }
 .frame {
   z-index: 9003;
-  border: 2px solid var(--phosphor-dim);
-  outline: 1px dashed var(--phosphor-fade);
+  border: 2px solid var(--pho-color-primary-muted);
+  outline: 1px dashed var(--pho-color-primary-faint);
   outline-offset: -8px;
-  box-shadow: inset 0 0 80px rgba(44,255,122,0.08), inset 0 0 0 6px var(--bg);
+  box-shadow: inset 0 0 80px rgba(44,255,122,0.08), inset 0 0 0 6px var(--pho-color-background);
 }
 .tick {
   z-index: 9004;

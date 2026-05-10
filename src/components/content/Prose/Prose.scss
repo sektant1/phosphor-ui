@@ -1,7 +1,7 @@
 .pho-post-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-5);
+  gap: var(--pho-space-5);
   min-width: 0;
 }
 
@@ -9,15 +9,14 @@
   margin-bottom: 0;
 }
 
-.pho-post-body>.pho-prose {
+.pho-post-body > .pho-prose {
   min-width: 0;
 }
 
-
 .pho-prose {
-  color: var(--ink);
-  font-size: 1rem;
-  line-height: 1.7;
+  color: var(--pho-color-text);
+  font-size: var(--pho-type-body-size);
+  line-height: var(--pho-line-prose);
 }
 
 .pho-prose h1,
@@ -26,20 +25,29 @@
 .pho-prose h4,
 .pho-prose h5,
 .pho-prose h6 {
-  font-family: var(--font-display);
+  font-family: var(--pho-font-display);
   font-weight: 700;
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
   margin: 2.4rem 0 1rem;
-  letter-spacing: 0.04em;
-  line-height: 1.15;
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: var(--pho-line-snug);
   position: relative;
   padding-left: 0.2em;
   text-transform: uppercase;
 }
 
+.pho-prose h1 { font-size: var(--pho-type-h1-size); }
+.pho-prose h2 { font-size: var(--pho-type-h2-size); }
+.pho-prose h3 { font-size: var(--pho-type-h3-size); }
+.pho-prose h4 { font-size: var(--pho-type-h4-size); }
+.pho-prose h5 { font-size: var(--pho-type-h5-size); }
+.pho-prose h6 {
+  font-size: var(--pho-type-h6-size);
+  color: var(--pho-color-text-muted);
+}
+
 .pho-prose h2 {
-  font-size: 1.6em;
   display: flex;
   align-items: center;
   gap: 0.6ch;
@@ -47,30 +55,26 @@
 
 .pho-prose h2::before {
   content: "┌─[";
-  color: var(--magenta-deep);
+  color: var(--pho-color-accent-muted);
   text-shadow: none;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
 }
 
 .pho-prose h2::after {
   content: "]──";
-  color: var(--magenta-deep);
+  color: var(--pho-color-accent-muted);
   text-shadow: none;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   flex: 1;
   overflow: hidden;
-  letter-spacing: -1px;
-}
-
-.pho-prose h3 {
-  font-size: 1.25em;
+  letter-spacing: 0;
 }
 
 .pho-prose h3::before {
   content: "▸ ";
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
-  font-family: var(--font-code);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+  font-family: var(--pho-font-code);
 }
 
 .pho-prose p {
@@ -78,50 +82,50 @@
 }
 
 .pho-prose a {
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
   text-decoration: none;
-  border-bottom: 1px dashed var(--magenta);
+  border-bottom: 1px dashed var(--pho-color-accent);
   padding-bottom: 1px;
 }
 
 .pho-prose a:hover,
 .pho-prose a:focus-visible {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--pho-color-accent);
+  color: var(--pho-color-background);
   text-shadow: none;
-  border-bottom-color: var(--magenta-bright);
+  border-bottom-color: var(--pho-color-accent-strong);
   outline: none;
 }
 
 .pho-prose strong {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   font-weight: 700;
 }
 
 .pho-prose em {
-  color: var(--rose);
-  text-shadow: 0 0 8px rgba(255, 122, 217, 0.4);
-  font-family: var(--font-code);
+  color: var(--pho-color-highlight);
+  text-shadow: var(--pho-glow-primary-soft);
+  font-family: var(--pho-font-code);
   font-style: italic;
-  font-size: 0.95em;
+  font-size: var(--pho-type-small-size);
 }
 
 .pho-prose blockquote {
   margin: 1.4rem 0;
   padding: 0.6rem 1rem;
-  border-left: 3px solid var(--magenta);
-  background: rgba(106, 27, 154, 0.12);
-  color: var(--phosphor-bright);
-  font-family: var(--font-code);
+  border-left: 3px solid var(--pho-color-accent);
+  background: color-mix(in srgb, var(--pho-color-accent-faint) 30%, transparent);
+  color: var(--pho-color-primary-strong);
+  font-family: var(--pho-font-code);
   font-style: italic;
-  font-size: 0.95em;
+  font-size: var(--pho-type-small-size);
 }
 
 .pho-prose blockquote::before {
   content: "│ ";
-  color: var(--magenta);
+  color: var(--pho-color-accent);
   font-style: normal;
 }
 
@@ -139,8 +143,8 @@
 
 .pho-prose ul li::before {
   content: "▪   ";
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
 }
 
 .pho-prose ol {
@@ -153,17 +157,17 @@
 
 .pho-prose ol li::before {
   content: "[" counter(item, decimal-leading-zero) "] ";
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
-  font-family: var(--font-code);
-  font-size: 0.85em;
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
 }
 
 .pho-prose hr {
   border: none;
   text-align: center;
-  color: var(--magenta-deep);
-  font-family: var(--font-code);
+  color: var(--pho-color-accent-muted);
+  font-family: var(--pho-font-code);
   margin: 2rem 0;
 }
 
@@ -174,14 +178,14 @@
 .pho-prose img {
   max-width: 100%;
   filter: hue-rotate(280deg) saturate(0.6) contrast(1.1);
-  border: 1px solid var(--magenta-deep);
+  border: 1px solid var(--pho-color-accent-muted);
 }
 
 .pho-prose figure,
 .pho-prose .pho-mdx-figure {
   margin: 1.6rem 0;
-  border: 1px solid var(--phosphor-fade);
-  background: var(--bg-deep);
+  border: 1px solid var(--pho-color-primary-faint);
+  background: var(--pho-color-background-deep);
   padding: 6px;
   display: grid;
   gap: 6px;
@@ -197,51 +201,51 @@
 
 .pho-prose figcaption,
 .pho-prose .pho-mdx-figure figcaption {
-  font-family: var(--font-terminal);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   text-align: center;
   padding: 4px 0 2px;
 }
 
 .pho-prose code {
-  font-family: var(--font-code);
-  font-size: 0.84em;
-  background: var(--bg-raise);
-  color: var(--phosphor-bright);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+  background: var(--pho-color-background-raised);
+  color: var(--pho-color-primary-strong);
   text-shadow: 0 0 6px rgba(44, 255, 122, 0.18);
   padding: 0.1em 0.42em;
-  border: 1px solid var(--phosphor-fade);
+  border: 1px solid var(--pho-color-primary-faint);
   box-shadow: inset 0 0 0 1px rgba(44, 255, 122, 0.04);
 }
 
 .pho-prose pre,
 .pho-prose .code-block {
   margin: 1.4rem 0;
-  border: 1px solid var(--magenta-deep);
-  background: var(--bg-raise);
+  border: 1px solid var(--pho-color-accent-muted);
+  background: var(--pho-color-background-raised);
   overflow: hidden;
 }
 
 .pho-prose .code-bar {
-  background: var(--magenta-fade);
-  color: var(--magenta-bright);
-  font-family: var(--font-code);
-  font-size: 0.7em;
-  letter-spacing: 0.2em;
+  background: var(--pho-color-accent-faint);
+  color: var(--pho-color-accent-strong);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: var(--pho-tracking-stamp);
   padding: 0.25rem 0.6rem;
-  border-bottom: 1px solid var(--magenta-deep);
+  border-bottom: 1px solid var(--pho-color-accent-muted);
   text-shadow: none;
   text-transform: uppercase;
 }
 
 .pho-prose pre {
   padding: 0.85rem 1rem;
-  font-family: var(--font-code);
-  font-size: 0.85em;
-  line-height: 1.55;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+  line-height: var(--pho-line-normal);
   overflow-x: auto;
   text-shadow: none;
 }
@@ -258,20 +262,20 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1.4rem 0;
-  font-size: 0.9em;
+  font-size: var(--pho-type-small-size);
 }
 
 .pho-prose th,
 .pho-prose td {
-  border: 1px solid var(--magenta-deep);
+  border: 1px solid var(--pho-color-accent-muted);
   padding: 0.4rem 0.6rem;
   text-align: left;
 }
 
 .pho-prose th {
-  background: var(--magenta-fade);
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  background: var(--pho-color-accent-faint);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
 }
 
 @media (max-width: 600px) {

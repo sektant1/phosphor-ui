@@ -1,77 +1,77 @@
 .root {
-  border: 1px dashed var(--phosphor-fade);
+  border: 1px dashed var(--pho-color-primary-faint);
   background:
     linear-gradient(180deg, rgba(44, 255, 122, 0.045), transparent 70%),
     rgba(7, 12, 10, 0.78);
   box-shadow: inset 0 0 18px rgba(44, 255, 122, 0.05);
-  color: var(--ink);
-  font-family: var(--font-code);
-  margin-bottom: 1.25rem;
-  padding: 0.75rem 0.875rem;
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-code);
+  margin-bottom: 0.85rem;
+  padding: 0.45rem 0.6rem;
 }
 
 .head {
   align-items: center;
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
   display: flex;
-  font-family: var(--font-terminal);
-  font-size: 0.95rem;
-  gap: 0.5rem;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  gap: 0.35rem;
   line-height: 1;
-  margin-bottom: 0.625rem;
-  text-shadow: var(--glow-emerald);
+  margin-bottom: 0.35rem;
+  text-shadow: var(--pho-glow-primary);
   text-transform: uppercase;
 }
 
 .glyph {
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
 }
 
 .label {
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 .block {
-  color: var(--phosphor-bright);
+  color: var(--pho-color-primary-strong);
   display: grid;
-  gap: 0.35rem;
-  font-family: var(--font-code);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  gap: 0.16rem;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-ui-xs-size);
+  line-height: 1.35;
   margin: 0;
   overflow: auto;
 }
 
 .marker {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
 }
 
 .row {
   display: grid;
-  gap: 0.7rem;
-  grid-template-columns: minmax(6rem, 0.34fr) minmax(0, 1fr);
+  gap: 0.45rem;
+  grid-template-columns: minmax(4.8rem, 0.3fr) minmax(0, 1fr);
   min-width: 0;
 }
 
 .key {
-  color: var(--magenta-bright);
+  color: var(--pho-color-accent-strong);
   margin: 0;
   min-width: 0;
   overflow-wrap: anywhere;
 }
 
 .value {
-  color: var(--phosphor-bright);
+  color: var(--pho-color-primary-strong);
   margin: 0;
   min-width: 0;
   overflow-wrap: anywhere;
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
 }
 
 @media (max-width: 520px) {
   .row {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.1rem;
+    gap: 0;
   }
 }

@@ -22,9 +22,9 @@ export default meta;
 
 const btnStyle: React.CSSProperties = {
   background: "none",
-  border: "1px dashed var(--phosphor-dim)",
-  color: "var(--phosphor)",
-  fontFamily: "var(--font-code)",
+  border: "1px dashed var(--pho-color-primary-muted)",
+  color: "var(--pho-color-primary)",
+  fontFamily: "var(--pho-font-code)",
   fontSize: "12px",
   padding: "4px 12px",
   cursor: "pointer",

@@ -8,7 +8,7 @@ Primary architecture issues:
 
 - `src/components/index.ts` exports public UI components, page-level components, admin workflows, and compatibility aliases from one namespace.
 - `content/` components (`Prose`, `MdxComponents`, `PostBody`, `CodeBlock`) function as typography foundations, molecules, and organisms but sit outside the target taxonomy.
-- `Page`, `PageLayout`, and `PostLayout` overlap. `PageLayout` is already a deprecated alias for `Page`, while `PostLayout` mostly presets post semantics.
+- The generic page template has been removed; page-level composition now lives in concrete pages such as `Post`, while generic layout primitives remain in `templates/Layout`.
 - `PostListing` exports a nested `PostRow`; `RelatedPosts`, `SeriesNav`, `StepperFoot`, and `SearchResult` also render adjacent/list-style post links.
 - Admin/editor components are useful, but they are application/workflow specific. Shared editor subparts should be treated separately from the public design-system surface.
 - Visual identity logic is scattered across `CrtShell`, `HeroFrame`, `FooterStencil`, `PdaWindow`, `AsciiBanner`, `Glyphs`, `CodeBlock`, and `Prose`; shared animation/tape/HUD/glyph behavior should become foundations only after exact visual preservation is guaranteed.
@@ -119,12 +119,9 @@ src/
 | Search | src/components/organisms/Search | Organisms | KEEP | Organisms/Search | Input plus filtering/highlighting and result list. |
 | SeriesNav | src/components/organisms/SeriesNav | Molecules | MOVE/MERGE | Molecules/AdjacentNav or Molecules/SeriesNav | Focused adjacent navigation; overlaps with `StepperFoot`. |
 | VideoPlayer | src/components/organisms/VideoPlayer | Organisms | KEEP | Organisms/VideoPlayer | Large video.js integration and media figure. |
-| Post | src/components/pages/Post | Pages | KEEP | Pages/PostPage | Full page-level composition of `Page`, `PostHeader`, and `PostBody`. |
+| Post | src/components/pages/Post | Pages | KEEP | Pages/PostPage | Full page-level composition of `PostHeader` and `PostBody`. |
 | Flex | src/components/templates/Layout | Templates | KEEP | Templates/Layout/Flex | Layout primitive; template-level because it controls composition structure. |
 | Grid | src/components/templates/Layout | Templates | KEEP | Templates/Layout/Grid | Layout primitive; template-level because it controls composition structure. |
-| Page | src/components/templates/Page | Templates | KEEP | Templates/Page | Canonical generic page template. |
-| PageLayout | src/components/templates/PageLayout | Legacy | WRAP AS LEGACY | Templates/Page | Already a deprecated alias for `Page`; keep export temporarily. |
-| PostLayout | src/components/templates/PostLayout | Legacy | WRAP AS LEGACY | Templates/Page + Pages/PostPage | Post-specific wrapper around `PageLayout`; superseded by `Post` for full post pages. |
 
 ## Duplicate / Overlap Report
 
@@ -132,23 +129,17 @@ src/
 
 Components:
 
-- `Page`
-- `PageLayout`
-- `PostLayout`
 - `Post`
 
 Finding:
 
-`Page` is the canonical generic template. `PageLayout` is already a deprecated alias for `Page`. `PostLayout` forwards to `PageLayout` with `variant="post"` and post sidebar defaults. `Post` is the higher-level page that composes `Page`, `PostHeader`, and `PostBody`.
+The generic `Page` template was removed. `Post` is now the page-level component that composes `PostHeader` and `PostBody` directly.
 
 Recommendation:
 
-- Keep `Page` as `Templates/Page`.
 - Keep `Post` as `Pages/PostPage`.
-- Wrap `PageLayout` as legacy around `Page`.
-- Wrap `PostLayout` as legacy around `Post` only if it can preserve current props; otherwise wrap around `Page`.
 
-Migration risk: medium. Page layout changes can affect all content pages and sidebar/sticky behavior. Preserve `PageLayout.module.scss` behavior until visual parity is proven.
+Migration risk: medium. Page layout changes can affect content pages and sidebar/sticky behavior. Preserve legacy demo visual parity in Storybook.
 
 ### Post Content Rendering Overlap
 
@@ -414,8 +405,6 @@ Target categories: Molecules.
 
 | Source component | Target component | Why | Compatibility strategy |
 |---|---|---|---|
-| PageLayout | Page | `PageLayout` is a deprecated alias with no unique behavior. | Keep `PageLayout` export as a thin wrapper/alias until the next major release. |
-| PostLayout | Page or Post | It only fixes `variant="post"` and sidebar defaults; full post semantics now live in `Post`. | Keep `PostLayout` as legacy wrapper; migrate stories/docs to `Page` and `Post`. |
 | AuthorCard avatar rendering | Avatar | Duplicates image/initials fallback logic. | Keep `AuthorCard` API; internally compose `Avatar` later. |
 | CourseCard progress cells | ProgressBar | Hand-rolled segmented progress overlaps with `ProgressBar`. | Preserve visual class output or add a segmented variant to `ProgressBar` before replacing. |
 | ModuleAccordion lesson rows | LessonRow | Repeats row state, lock handling, numbers, title, length. | Compose `LessonRow` inside accordion while preserving class names or visual snapshots. |
@@ -430,8 +419,6 @@ Target categories: Molecules.
 
 | Legacy component | Replacement | Deprecation note to eventually add | Thin wrapper? |
 |---|---|---|---|
-| PageLayout | Page | `PageLayout is deprecated. Use Page from templates instead.` | Yes; already effectively an alias. |
-| PostLayout | Page or Post | `PostLayout is deprecated. Use Page for layout or Post for complete post pages.` | Yes, if prop compatibility is retained. |
 | StatPill current atom path | Molecules/StatPill | `Import StatPill from molecules or root export; atom path is compatibility only.` | Yes. |
 | Tooltip current atom path | Molecules/Tooltip | `Tooltip is a molecule; atom path is compatibility only.` | Yes. |
 | PdaWindow current organism path | Molecules/PdaWindow | `PdaWindow is a molecule; organism path is compatibility only.` | Yes. |
@@ -446,12 +433,10 @@ Target categories: Molecules.
 
 | Component | Why it is redundant | What must be migrated first | Risk level |
 |---|---|---|---|
-| PageLayout story/component file | `PageLayout` is already a deprecated alias for `Page`. | Consumers import `Page`; Storybook uses `Templates/Page`; root export remains until major. | Low |
-| PostLayout | Overlaps with `Page` and `Post`; little unique behavior. | Consumers choose `Page` for layout-only or `Post` for full post pages. | Medium |
 | Standalone duplicate editor SCSS modules | `CourseEditor.module.scss`, `NoteEditor.module.scss`, `ProjectEditor.module.scss` appear superseded by `ContentEditor.module.scss`-based implementations. | Confirm no imports, then remove in cleanup. | Low |
 | FooterStencil | Rich branded footer may be redundant if product standardizes on `Footer`. | Audit product usage and decide whether stencil footer is part of public brand system. | Medium |
 | CrtShell | Decorative full-shell effects may be unnecessary if templates own CRT effects. | Confirm app usage and preserve effect tokens elsewhere. | Medium |
-| StepperFoot | Redundant if `AdjacentNav` becomes canonical. | Migrate `PostLayout` and story usage to `AdjacentNav`/`SeriesNav`. | Low |
+| StepperFoot | Redundant if `AdjacentNav` becomes canonical. | Migrate post story usage to `AdjacentNav`/`SeriesNav`. | Low |
 | StatusSelect | Redundant if a typed `Select` wrapper is created. | Replace admin usage with `Select` plus status options. | Low |
 
 ## Proposed Migration Order
@@ -470,7 +455,7 @@ Move obvious atoms/molecules with no behavior changes. Preserve files, SCSS modu
 
 ### Phase 4
 
-Extract shared templates. Make `Page` canonical, keep `PageLayout` as a legacy wrapper, and decide whether `PostLayout` wraps `Page` or `Post`.
+Keep generic layout primitives in `templates/Layout`; build page-level screens from concrete page components such as `Post`.
 
 ### Phase 5
 

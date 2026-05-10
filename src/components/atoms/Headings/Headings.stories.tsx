@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Heading, H1, H2, H3, H4 } from "./Headings";
+import { Heading, H1, H2, H3, H4, H5, H6 } from "./Headings";
 import type { HeadingProps } from "./Headings";
 import { basicUsage } from "../../../stories/basicUsage";
 
@@ -34,6 +34,8 @@ export const Levels: Story = {
       <H2>transmission log</H2>
       <H3 glyph="▸">artifact recovery</H3>
       <H4 glyph="└─">side note</H4>
+      <H5 glyph=">">dense subsection</H5>
+      <H6 glyph="//">tertiary metadata</H6>
     </div>
   ),
 };
@@ -51,6 +53,25 @@ export const Stack: Story = {
       <p className="t-body">Watch for drift on channel 0x4C.</p>
       <H4 glyph="└─">note</H4>
       <p className="t-body">EOF marker is mandatory.</p>
+      <H5>calibration</H5>
+      <p className="t-body">Small headings now keep their own visual level.</p>
+      <H6>metadata</H6>
+      <p className="t-caption">lowercase and uppercase scan test</p>
+    </article>
+  ),
+};
+
+export const LongHeadings: Story = {
+  render: () => (
+    <article style={{ display: "grid", gap: 14, maxWidth: 380 }}>
+      <H1 glyph="◆">
+        extremely long sector heading wraps across a mobile-width column
+      </H1>
+      <H2>lowercase section heading keeps display rhythm</H2>
+      <H3 glyph="▸">UPPERCASE SUBSECTION CHECK</H3>
+      <H4>mixed Case operational note</H4>
+      <H5>small lowercase calibration heading</H5>
+      <H6>TERTIARY METADATA WRAP CHECK</H6>
     </article>
   ),
 };

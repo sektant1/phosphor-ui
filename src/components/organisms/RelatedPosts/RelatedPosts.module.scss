@@ -1,14 +1,14 @@
 .headingGlyph {
   color: var(--pho-color-primary);
   font-family: var(--pho-font-terminal);
-  font-size: 10.5px;
+  font-size: var(--pho-type-micro-size);
   line-height: 1;
 }
 
 .headingLabel {
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-terminal);
-  font-size: 10.5px;
+  font-size: var(--pho-type-micro-size);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   line-height: 1;
@@ -39,14 +39,14 @@
 .date {
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
   font-variant-numeric: tabular-nums;
 }
 
 .title {
   color: var(--pho-color-primary);
   font-family: var(--pho-font-code);
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   overflow-wrap: anywhere;
   text-shadow: var(--pho-glow-primary);
   line-height: 1.35;
@@ -55,5 +55,5 @@
 .tag {
   color: var(--pho-color-accent);
   font-family: var(--pho-font-code);
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
 }

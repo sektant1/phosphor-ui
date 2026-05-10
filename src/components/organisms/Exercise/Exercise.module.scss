@@ -1,13 +1,13 @@
 .ex {
-  border: 1px solid var(--phosphor);
-  border-left: 3px solid var(--phosphor);
+  border: 1px solid var(--pho-color-primary);
+  border-left: 3px solid var(--pho-color-primary);
   background:
     repeating-linear-gradient(90deg, transparent 0 6px, rgba(44, 255, 122, 0.03) 6px 7px),
-    var(--bg-raise);
-  font-family: var(--font-code);
-  font-size: 13px;
+    var(--pho-color-background-raised);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-control-sm-size);
   line-height: 1.6;
-  color: var(--ink);
+  color: var(--pho-color-text);
   margin: 1.4rem 0;
   animation: exIn 320ms ease-out both;
 }
@@ -18,8 +18,8 @@
 }
 
 .allDone {
-  border-color: var(--phosphor-bright);
-  box-shadow: 0 0 0 1px var(--phosphor-fade), 0 0 18px rgba(44, 255, 122, 0.12);
+  border-color: var(--pho-color-primary-strong);
+  box-shadow: 0 0 0 1px var(--pho-color-primary-faint), 0 0 18px rgba(44, 255, 122, 0.12);
 }
 
 .head {
@@ -29,17 +29,17 @@
   padding: 7px 12px;
   background:
     linear-gradient(90deg, rgba(44, 255, 122, 0.1), transparent 70%),
-    var(--bg-raise);
-  border-bottom: 1px solid var(--phosphor-fade);
+    var(--pho-color-background-raised);
+  border-bottom: 1px solid var(--pho-color-primary-faint);
 }
 
 .badge {
-  font-family: var(--font-terminal);
-  font-size: 11px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--bg);
-  background: var(--phosphor);
+  color: var(--pho-color-background);
+  background: var(--pho-color-primary);
   padding: 1px 7px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -51,25 +51,25 @@
 
 @keyframes badgePulse {
   0%, 100% { box-shadow: none; }
-  50%       { box-shadow: 0 0 8px var(--phosphor), 0 0 18px rgba(44, 255, 122, 0.5); }
+  50%       { box-shadow: 0 0 8px var(--pho-color-primary), 0 0 18px rgba(44, 255, 122, 0.5); }
 }
 
 .num {
-  font-family: var(--font-terminal);
-  font-size: 12px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
   letter-spacing: 0.2em;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   white-space: nowrap;
 }
 
 .title {
-  font-family: var(--font-heading);
+  font-family: var(--pho-font-heading);
   font-weight: 700;
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,10 +78,10 @@
 }
 
 .progress {
-  font-family: var(--font-terminal);
-  font-size: 11px;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.14em;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   white-space: nowrap;
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
@@ -105,7 +105,7 @@
   padding: 0;
   display: grid;
   gap: 2px;
-  border-top: 1px dashed var(--phosphor-fade);
+  border-top: 1px dashed var(--pho-color-primary-faint);
   padding-top: 8px;
 }
 

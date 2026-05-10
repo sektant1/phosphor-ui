@@ -1,23 +1,23 @@
 .row {
   margin-bottom: 0.6rem;
-  font-family: var(--font-terminal);
-  font-size: 1.1em;
-  color: var(--phosphor-bright);
-  border-bottom: 1px dashed var(--phosphor-fade);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-control-lg-size);
+  color: var(--pho-color-primary-strong);
+  border-bottom: 1px dashed var(--pho-color-primary-faint);
   padding-bottom: 0.3rem;
 }
 .prompt {
-  color: var(--magenta-bright);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
   font-weight: 700;
 }
 .typed {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
 }
 .cursor {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   margin-left: 4px;
   animation: phosphorBlink 1.05s steps(2) infinite;
 }

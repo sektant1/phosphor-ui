@@ -22,7 +22,7 @@
   color: var(--pho-color-text);
   display: grid;
   font-family: var(--pho-font-code);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   gap: var(--callout-gap);
   grid-template-columns: var(--callout-glyph-size) minmax(0, 1fr);
   line-height: 1.55;
@@ -64,7 +64,7 @@
   --callout-pad-inline: 0.65rem;
   --callout-gap: 0.45rem;
   --callout-glyph-size: 1rem;
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   line-height: 1.45;
 }
 
@@ -73,7 +73,7 @@
   --callout-pad-inline: 1.15rem;
   --callout-gap: 0.75rem;
   --callout-glyph-size: 1.55rem;
-  font-size: 0.86rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: 1.65;
 }
 
@@ -82,7 +82,7 @@
   color: var(--callout-accent-bright);
   display: grid;
   font-family: var(--pho-font-terminal);
-  font-size: 0.95rem;
+  font-size: var(--pho-type-control-size);
   justify-items: center;
   line-height: 1;
   min-width: 0;
@@ -94,11 +94,11 @@
 }
 
 .sm .glyph {
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
 }
 
 .lg .glyph {
-  font-size: 1.12rem;
+  font-size: var(--pho-type-control-lg-size);
 }
 
 .body {
@@ -127,7 +127,7 @@
 .title {
   color: var(--callout-accent-bright);
   font-family: var(--pho-font-terminal);
-  font-size: 0.82rem;
+  font-size: var(--pho-type-ui-sm-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1.05;
   overflow-wrap: anywhere;
@@ -136,11 +136,11 @@
 }
 
 .sm .title {
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
 }
 
 .lg .title {
-  font-size: 1rem;
+  font-size: var(--pho-type-body-size);
 }
 
 .content {
@@ -176,7 +176,7 @@
 .actions a,
 .actions button {
   font-family: var(--pho-font-terminal);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-wide);
   text-transform: uppercase;
 }
@@ -252,7 +252,7 @@
   --callout-bg: rgba(44, 255, 122, 0.07);
   --callout-glow: rgba(44, 255, 122, 0.44);
   border-style: dashed;
-  font-size: 0.8rem;
+  font-size: var(--pho-type-ui-sm-size);
   letter-spacing: 0;
   line-height: 1.65;
 }
@@ -263,7 +263,7 @@
 }
 
 .terminal .glyph {
-  font-size: 0.85rem;
+  font-size: var(--pho-type-ui-sm-size);
   font-weight: 700;
 }
 
@@ -285,7 +285,7 @@
   color: var(--pho-color-primary-strong);
   display: block;
   font-family: var(--pho-font-heading);
-  font-size: 1.06rem;
+  font-size: var(--pho-type-control-lg-size);
   font-weight: 700;
   letter-spacing: var(--pho-tracking-wide);
   margin: 0 0 0.75rem;

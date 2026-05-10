@@ -1,4 +1,5 @@
 import React from "react";
+import { TYPOGRAPHY_CLASS_BY_VARIANT } from "../../../foundations/typography/variants";
 import { cx } from "../../../utils/classNames";
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
@@ -31,7 +32,7 @@ export const Heading: React.FC<HeadingProps> = ({
   ...rest
 }) => {
   const Tag = (as ?? levelTag[level]) as keyof JSX.IntrinsicElements;
-  const typeClass = level <= 4 ? `t-h${level}` : "t-h4";
+  const typeClass = TYPOGRAPHY_CLASS_BY_VARIANT[`h${level}`];
   const hasGlyph = glyph !== undefined && glyph !== null && glyph !== false;
   const cls = cx(typeClass, hasGlyph && "pho-heading", className);
   const glyphNode = hasGlyph ? (

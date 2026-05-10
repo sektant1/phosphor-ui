@@ -82,28 +82,54 @@ export const AdminShell: React.FC<AdminShellProps> = ({
     (user ? `${user.name}${user.role ? ` :: ${user.role}` : ""}` : undefined);
   const mainHeading = heading ?? title.replace(/^\/\/\s*/, "");
   const hasHeader = !!(mainHeading || description || actions || stats?.length);
+  const activeNavItem = nav.find((item) => item.active);
+  const reviewStat = stats?.find((stat) => stat.tone === "warn") ?? stats?.[0];
 
   return (
     <div className={cx(styles.shell, className)}>
       <Stack className={styles.sidePanel} gap="none">
-        <NerdTree
-          className={styles.tree}
-          tree={resolvedTree}
-          title={treeTitle ?? title}
-          bufferLabel={treeBufferLabel}
-          hint={treeHint}
-          command={treeCommand}
-          footerMeta={footerMeta}
-        />
+        <div className={styles.panelHeader}>
+          <Text variant="stamp" className={styles.panelKicker}>right rail</Text>
+          <Text variant="terminal" className={styles.panelTitle}>{treeTitle ?? title}</Text>
+        </div>
+
+        <div className={styles.panelStatus} aria-label="Admin rail status">
+          <div className={styles.statusRow}>
+            <Text variant="caption" className={styles.statusLabel}>route</Text>
+            <Text variant="code" className={styles.statusValue}>
+              {activeNavItem?.label ?? "dashboard"}
+            </Text>
+          </div>
+          <div className={styles.statusRow}>
+            <Text variant="caption" className={styles.statusLabel}>queue</Text>
+            <Text variant="code" className={cx(styles.statusValue, reviewStat?.tone === "warn" && styles.statusWarn)}>
+              {reviewStat ? reviewStat.value : "00"}
+            </Text>
+          </div>
+        </div>
+
+        <div className={styles.treeFrame}>
+          <NerdTree
+            className={styles.tree}
+            tree={resolvedTree}
+            title={treeTitle ?? title}
+            bufferLabel={treeBufferLabel}
+            hint={treeHint}
+            command={treeCommand}
+            footerMeta={footerMeta}
+          />
+        </div>
 
         {(user || onLogout) && (
           <Stack className={styles.userSection} gap="sm">
             {user && (
               <Stack className={styles.userBlock} gap="xs">
-                <Text variant="code" className={styles.userName} truncate>{user.name}</Text>
-                {user.role && (
-                  <Text variant="caption" className={styles.userRole}>{user.role}</Text>
-                )}
+                <Text variant="caption" className={styles.userLabel}>operator</Text>
+                <div className={styles.userIdentity}>
+                  <span className={styles.userPulse} aria-hidden="true" />
+                  <Text variant="code" className={styles.userName} truncate>{user.name}</Text>
+                </div>
+                {user.role && <Text variant="caption" className={styles.userRole}>{user.role}</Text>}
               </Stack>
             )}
 

@@ -1,11 +1,11 @@
 .tag {
   display: inline-block;
   max-width: 100%;
-  border: 1px dashed var(--magenta-deep);
+  border: 1px dashed var(--pho-color-accent-muted);
   padding: 2px 8px;
-  font-size: 12px;
+  font-size: var(--pho-type-caption-size);
   letter-spacing: 0.05em;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   text-decoration: none;
   cursor: default;
   background: rgba(98, 255, 154, 0.04);
@@ -15,14 +15,14 @@
 .link { cursor: pointer; }
 
 .magenta {
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
 }
 
 .phosphor {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
-  border-color: var(--phosphor-fade);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+  border-color: var(--pho-color-primary-faint);
 }
 
 .dim {
@@ -33,22 +33,22 @@
 
 .tag:hover,
 .hover {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--pho-color-accent);
+  color: var(--pho-color-background);
   text-shadow: none;
-  border-color: var(--magenta-bright);
+  border-color: var(--pho-color-accent-strong);
 }
 
 .tag:hover .count,
 .hover .count {
-  color: var(--bg);
+  color: var(--pho-color-background);
 }
 
 .count {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   font-style: normal;
   margin-left: 3px;
-  font-size: 10px;
+  font-size: var(--pho-type-micro-size);
 }
 
 .remove {

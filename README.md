@@ -117,7 +117,7 @@ The physical folders are organized for maintainers. Consumers should prefer the 
 | Group | Components |
 |---|---|
 | **Presets** | `SiteShell` |
-| **Layout** | `CrtShell` `Header` `Footer` `HeroFrame` `NerdTree` `PdaWindow` `Page` `Post` |
+| **Layout** | `CrtShell` `Header` `Footer` `HeroFrame` `NerdTree` `PdaWindow` `Post` |
 | **Content** | `Prose` `PostBody` `Callout` `CodeBlock` `Hr` `Tag` `Text` `AsciiBanner` `TerminalPrompt` |
 | **Lists** | `PostListing` `PostRow` `CourseCard` `LessonRow` `ModuleAccordion` `PrereqList` `Exercise` |
 | **Nav** | `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
@@ -177,9 +177,10 @@ Reach for lower-level components when you need custom app structure:
 ```tsx
 <CrtShell>
   <Header title="lab" />
-  <Page variant="project" sidebar={<NerdTree nodes={nodes} />}>
+  <main>
+    <NerdTree nodes={nodes} />
     <Prose>{children}</Prose>
-  </Page>
+  </main>
   <Footer brand="lab" />
 </CrtShell>
 ```

@@ -19,8 +19,8 @@ describe("Header", () => {
         ]}
       />
     );
-    expect(screen.getAllByRole("link")).toHaveLength(3);
-    const nav = screen.getByRole("navigation", { name: /primary/i });
+    expect(screen.getAllByRole("link")).toHaveLength(5);
+    const nav = screen.getAllByRole("navigation", { name: /primary/i })[0];
     expect(within(nav).getByRole("link", { name: /home/i })).toBeTruthy();
     expect(within(nav).getByRole("link", { name: /posts/i })).toBeTruthy();
   });

@@ -42,7 +42,7 @@
     color: var(--pho-color-accent);
     flex: 0 0 auto;
     font-family: var(--pho-font-terminal);
-    font-size: 1.3em;
+    font-size: var(--pho-type-h3-size);
     line-height: 1;
   }
 
@@ -55,25 +55,25 @@
   }
 
   .tagline {
-    border-bottom: 1px dashed var(--phosphor-fade);
-    border-top: 1px dashed var(--phosphor-fade);
-    color: var(--phosphor-bright);
-    font-family: var(--font-terminal);
-    font-size: 0.95em;
+    border-bottom: 1px dashed var(--pho-color-primary-faint);
+    border-top: 1px dashed var(--pho-color-primary-faint);
+    color: var(--pho-color-primary-strong);
+    font-family: var(--pho-font-terminal);
+    font-size: var(--pho-type-control-size);
     letter-spacing: 0.18em;
     margin: 0;
     max-width: 100%;
     overflow-wrap: anywhere;
     padding: 0.15em 0.4em;
-    text-shadow: var(--glow-emerald);
+    text-shadow: var(--pho-glow-primary);
     text-transform: uppercase;
   }
 
   .header-toolbar {
     align-items: center;
     background: rgba(44, 255, 122, 0.04);
-    border-bottom: 1px dashed var(--phosphor-fade);
-    border-top: 1px dashed var(--phosphor-fade);
+    border-bottom: 1px dashed var(--pho-color-primary-faint);
+    border-top: 1px dashed var(--pho-color-primary-faint);
     display: flex;
     gap: 0.8rem;
     justify-content: center;
@@ -103,9 +103,9 @@
     background: linear-gradient(
       90deg,
       transparent,
-      var(--magenta-deep) 12%,
-      var(--magenta) 50%,
-      var(--magenta-deep) 88%,
+      var(--pho-color-accent-muted) 12%,
+      var(--pho-color-accent) 50%,
+      var(--pho-color-accent-muted) 88%,
       transparent
     );
     border: none;
@@ -123,7 +123,7 @@
     border: 0;
     color: var(--pho-color-text-muted);
     font-family: var(--pho-font-code);
-    font-size: 0.82rem;
+    font-size: var(--pho-type-ui-sm-size);
     letter-spacing: var(--pho-tracking-wide);
     padding: 0;
     text-shadow: none;
@@ -163,7 +163,7 @@
     margin-bottom: 1.4rem;
 
     .tagline {
-      font-size: 0.85em;
+      font-size: var(--pho-type-ui-sm-size);
       letter-spacing: 0.12em;
       line-height: 1.25;
       padding-inline: 0.2em;
@@ -207,7 +207,7 @@
     }
 
     .pho-header__title {
-      font-size: 1rem;
+      font-size: var(--pho-type-body-size);
       letter-spacing: var(--pho-tracking-wide);
     }
   }

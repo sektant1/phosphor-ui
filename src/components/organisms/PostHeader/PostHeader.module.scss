@@ -18,7 +18,7 @@
 .eyebrow {
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-terminal);
-  font-size: 1rem;
+  font-size: var(--pho-type-body-size);
   letter-spacing: var(--pho-tracking-stamp);
   margin: 0;
   text-transform: uppercase;
@@ -33,7 +33,7 @@
 .subtitle {
   color: var(--pho-color-text-muted);
   font-family: var(--pho-font-body);
-  font-size: 1rem;
+  font-size: var(--pho-type-body-size);
   line-height: var(--pho-line-normal);
   margin: 0;
   max-width: var(--pho-size-prose);

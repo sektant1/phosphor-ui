@@ -1,13 +1,13 @@
 .vp {
-  border: 1px solid var(--phosphor);
-  background: var(--bg-deep);
-  font-family: var(--font-code);
+  border: 1px solid var(--pho-color-primary);
+  background: var(--pho-color-background-deep);
+  font-family: var(--pho-font-code);
   position: relative;
   margin: 0;
 }
 .stage {
   position: relative;
-  background: var(--bg-deep);
+  background: var(--pho-color-background-deep);
   overflow: hidden;
 }
 .host {
@@ -20,46 +20,46 @@
   background:
     repeating-linear-gradient(0deg, transparent 0 3px, rgba(44, 255, 122, 0.04) 3px 4px),
     radial-gradient(ellipse at 50% 50%, rgba(44, 255, 122, 0.08), transparent 70%),
-    var(--bg-deep);
-  font-family: var(--font-terminal);
-  color: var(--phosphor);
+    var(--pho-color-background-deep);
+  font-family: var(--pho-font-terminal);
+  color: var(--pho-color-primary);
 }
 .host :global(.vjs-big-play-button) {
-  border: 2px solid var(--phosphor);
+  border: 2px solid var(--pho-color-primary);
   background: rgba(44, 255, 122, 0.06);
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
-  box-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+  box-shadow: var(--pho-glow-primary);
 }
 .host :global(.vjs-control-bar) {
-  background: var(--bg-raise);
-  border-top: 1px solid var(--phosphor-fade);
-  color: var(--phosphor);
-  font-family: var(--font-terminal);
+  background: var(--pho-color-background-raised);
+  border-top: 1px solid var(--pho-color-primary-faint);
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-terminal);
 }
 .host :global(.vjs-play-progress),
 .host :global(.vjs-volume-level) {
-  background: var(--phosphor);
-  box-shadow: 0 0 4px var(--phosphor);
+  background: var(--pho-color-primary);
+  box-shadow: 0 0 4px var(--pho-color-primary);
 }
 .host :global(.vjs-load-progress),
 .host :global(.vjs-load-progress div) {
   background: rgba(44, 255, 122, 0.15);
 }
 .host :global(.vjs-progress-holder) {
-  background: var(--bg-deep);
-  border: 1px solid var(--phosphor-fade);
+  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
 }
 .host :global(.vjs-mute-control) {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
 }
 .host :global(.vjs-mute-control .vjs-icon-placeholder)::before {
-  text-shadow: var(--glow-emerald);
+  text-shadow: var(--pho-glow-primary);
 }
 .host :global(.vjs-volume-bar) {
-  background: var(--bg-deep);
-  border: 1px solid var(--phosphor-fade);
+  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-color-primary-faint);
   margin: 1.35em 0.45em;
 }
 .host :global(.vjs-volume-bar.vjs-slider-horizontal) {
@@ -70,13 +70,13 @@
   width: 0.45em;
 }
 .host :global(.vjs-volume-level) {
-  background: var(--phosphor);
-  box-shadow: 0 0 4px var(--phosphor);
+  background: var(--pho-color-primary);
+  box-shadow: 0 0 4px var(--pho-color-primary);
 }
 .host :global(.vjs-volume-level)::before {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
-  font-size: 0.9em;
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+  font-size: var(--pho-type-control-sm-size);
 }
 .host :global(.vjs-volume-panel.vjs-hover .vjs-volume-control.vjs-volume-horizontal),
 .host :global(.vjs-volume-panel:focus .vjs-volume-control.vjs-volume-horizontal),
@@ -88,28 +88,28 @@
 .host :global(.vjs-current-time),
 .host :global(.vjs-duration),
 .host :global(.vjs-remaining-time) {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.08em;
 }
 .host :global(.vjs-button:focus-visible) {
-  outline: 2px solid var(--phosphor-bright);
+  outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
 
 .tag {
   position: absolute; top: 8px; left: 10px;
-  font-family: var(--font-terminal); font-size: 11px;
+  font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   pointer-events: none;
   z-index: 2;
 }
 .tc {
   position: absolute; top: 8px; right: 10px;
-  font-family: var(--font-terminal); font-size: 11px;
+  font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size);
   letter-spacing: 0.14em;
-  color: var(--phosphor-bright); text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
   font-variant-numeric: tabular-nums;
   pointer-events: none;
   z-index: 2;

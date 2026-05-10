@@ -4,8 +4,8 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  border: 1px dashed var(--phosphor-dim);
-  background: var(--bg-deep);
+  border: 1px dashed var(--pho-color-primary-muted);
+  background: var(--pho-color-background-deep);
 }
 
 .sm {
@@ -31,40 +31,40 @@
 }
 
 .initials {
-  font-family: var(--font-terminal);
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  font-family: var(--pho-font-terminal);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   line-height: 1;
   user-select: none;
 
   .sm & {
-    font-size: 14px;
+    font-size: var(--pho-type-control-sm-size);
   }
 
   .md & {
-    font-size: 20px;
+    font-size: var(--pho-type-icon-md-size);
   }
 
   .lg & {
-    font-size: 26px;
+    font-size: var(--pho-type-icon-lg-size);
   }
 }
 
 .fallback {
-  font-family: var(--font-terminal);
-  color: var(--phosphor-fade);
+  font-family: var(--pho-font-terminal);
+  color: var(--pho-color-primary-faint);
   line-height: 1;
   user-select: none;
 
   .sm & {
-    font-size: 14px;
+    font-size: var(--pho-type-control-sm-size);
   }
 
   .md & {
-    font-size: 20px;
+    font-size: var(--pho-type-icon-md-size);
   }
 
   .lg & {
-    font-size: 26px;
+    font-size: var(--pho-type-icon-lg-size);
   }
 }

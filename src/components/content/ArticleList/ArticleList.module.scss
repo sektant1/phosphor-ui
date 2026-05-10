@@ -43,14 +43,14 @@
 .meta {
   color: var(--pho-color-text-faint);
   font-family: var(--pho-font-code);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   line-height: var(--pho-line-normal);
 }
 
 .description {
   color: var(--pho-color-text);
   font-family: var(--pho-font-body);
-  font-size: 0.92rem;
+  font-size: var(--pho-type-control-sm-size);
   line-height: var(--pho-line-normal);
   margin: 0;
 }

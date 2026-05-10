@@ -6,7 +6,7 @@ Audited public exports from `src/components/index.ts` against component stories 
 
 Most component stories were visually useful but relied on Storybook's automatic source generation, which exposed relative imports, args-only examples, or large demo render functions. The fixed stories now provide explicit `parameters.docs.source.code` snippets that show simple package imports from `@sektant1/phosphor-ui`.
 
-Added missing basic stories for `ContentEditor`, `CourseEditor`, `LessonEditor`, `Glyph`, `Page`, and `Post`. Validation passed with `npm run typecheck` and `npm run build-storybook`.
+Added missing basic stories for `ContentEditor`, `CourseEditor`, `LessonEditor`, `Glyph`, and `Post`. Validation passed with `npm run typecheck` and `npm run build-storybook`.
 
 ## Fixed Components
 
@@ -87,9 +87,6 @@ Added missing basic stories for `ContentEditor`, `CourseEditor`, `LessonEditor`,
 | Search | `src/components/organisms/Search/Search.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
 | SeriesNav | `src/components/organisms/SeriesNav/SeriesNav.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
 | VideoPlayer | `src/components/organisms/VideoPlayer/VideoPlayer.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
-| Page | `src/components/templates/Page/Page.stories.tsx` | Missing public component story. | Added default story and explicit source. |
-| PageLayout | `src/components/templates/PageLayout/PageLayout.stories.tsx` | No default story and generated source was large. | Added explicit source to the main page story. |
-| PostLayout | `src/components/templates/PostLayout/PostLayout.stories.tsx` | Existing source was large and omitted package import. | Replaced default source with compact package-import snippet. |
 | Post | `src/components/pages/Post/Post.stories.tsx` | Missing public page component story. | Added default story and explicit source. |
 | Flex | `src/components/templates/Layout/Layout.stories.tsx` | No default story for layout primitive. | Renamed row layout story to `Default` and added explicit source. |
 | Grid | `src/components/templates/Layout/Layout.stories.tsx` | Secondary layout primitive lacked clean source. | Added explicit source to grid story. |

@@ -29,11 +29,11 @@
   transform: scale(var(--ascii-scale, 1));
   transform-origin: top center;
   text-align: left;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   font-weight: 700;
   font-size: clamp(8px, 1.4vw, 16px);
   line-height: 1;
-  color: var(--magenta-bright);
+  color: var(--pho-color-accent-strong);
   white-space: pre;
   max-width: none;
   overflow: visible;
@@ -98,8 +98,8 @@
   0%,
   100% {
     text-shadow:
-      0 0 1px var(--magenta-bright),
-      0 0 4px var(--magenta-bright),
+      0 0 1px var(--pho-color-accent-strong),
+      0 0 4px var(--pho-color-accent-strong),
       0 0 12px rgba(98, 255, 154, 0.65),
       0 0 22px rgba(98, 255, 154, 0.4),
       0 0 38px rgba(232, 92, 200, 0.25);
@@ -107,8 +107,8 @@
 
   50% {
     text-shadow:
-      0 0 1px var(--magenta-bright),
-      0 0 6px var(--magenta-bright),
+      0 0 1px var(--pho-color-accent-strong),
+      0 0 6px var(--pho-color-accent-strong),
       0 0 18px rgba(98, 255, 154, 0.85),
       0 0 32px rgba(98, 255, 154, 0.55),
       0 0 56px rgba(232, 92, 200, 0.4);
@@ -125,7 +125,7 @@
   79%,
   100% {
     opacity: 1;
-    color: var(--magenta-bright);
+    color: var(--pho-color-accent-strong);
   }
 
   20% {
@@ -176,6 +176,6 @@
 @media (prefers-reduced-motion: reduce) {
   .banner {
     animation: none;
-    text-shadow: var(--glow-magenta);
+    text-shadow: var(--pho-glow-accent);
   }
 }

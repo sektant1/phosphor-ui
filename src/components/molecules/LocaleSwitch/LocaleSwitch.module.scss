@@ -12,7 +12,7 @@
 .prompt {
   color: var(--pho-color-accent);
   flex: 0 0 auto;
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-wide);
   text-shadow: var(--pho-glow-accent-soft);
   text-transform: uppercase;
@@ -51,7 +51,7 @@
 }
 
 .code {
-  font-size: 0.75rem;
+  font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1;
 }
@@ -147,7 +147,7 @@
 
 .sm .code,
 .sm .prompt {
-  font-size: 0.68rem;
+  font-size: var(--pho-type-micro-size);
   letter-spacing: 0.04em;
 }
 

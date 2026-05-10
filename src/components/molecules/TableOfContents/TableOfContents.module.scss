@@ -1,22 +1,22 @@
 .toc {
-  border-left: 1px dashed var(--phosphor-fade);
+  border-left: 1px dashed var(--pho-color-primary-faint);
   padding: 6px 10px 10px 14px;
-  font-family: var(--font-code);
+  font-family: var(--pho-font-code);
   background: rgba(8, 36, 22, 0.25);
   position: relative;
 }
 .head {
   margin: 0 0 8px;
-  font-family: var(--font-terminal);
-  font-size: 11px; letter-spacing: 0.22em;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size); letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--phosphor-fade);
-  border-bottom: 1px dashed var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
+  border-bottom: 1px dashed var(--pho-color-primary-faint);
   padding-bottom: 4px;
 }
 .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
 .li {
-  font-size: 12px;
+  font-size: var(--pho-type-caption-size);
   line-height: 1.5;
   animation: tocItemIn 320ms ease-out backwards;
   animation-delay: calc(var(--i, 0) * 40ms + 80ms);
@@ -29,16 +29,16 @@
   align-items: baseline;
   text-decoration: none;
   padding: 2px 4px;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   border-left: 2px solid transparent;
   transition: color 140ms ease, background 140ms ease, border-left-color 140ms ease, text-shadow 140ms ease;
 }
-.li > a:hover { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); }
+.li > a:hover { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); }
 .active > a {
-  color: var(--phosphor-bright); text-shadow: var(--glow-emerald);
-  border-left-color: var(--phosphor);
+  color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
+  border-left-color: var(--pho-color-primary);
   background: rgba(44, 255, 122, 0.08);
-  box-shadow: inset 2px 0 6px -2px var(--phosphor);
+  box-shadow: inset 2px 0 6px -2px var(--pho-color-primary);
 }
 .active > a .glyph {
   animation: tocActiveBlink 1.6s steps(2) infinite;
@@ -55,25 +55,25 @@
   .li, .active > a .glyph { animation: none; }
   .li > a { transition: none; }
 }
-.done > a { color: var(--phosphor-fade); }
-.done > a > span:last-child { text-decoration: line-through; text-decoration-color: var(--phosphor-fade); }
-.glyph { color: var(--magenta); font-family: var(--font-terminal); font-size: 12px; }
-.active .glyph { color: var(--phosphor); text-shadow: var(--glow-emerald); }
-.done .glyph { color: var(--phosphor-fade); }
+.done > a { color: var(--pho-color-primary-faint); }
+.done > a > span:last-child { text-decoration: line-through; text-decoration-color: var(--pho-color-primary-faint); }
+.glyph { color: var(--pho-color-accent); font-family: var(--pho-font-terminal); font-size: var(--pho-type-caption-size); }
+.active .glyph { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
+.done .glyph { color: var(--pho-color-primary-faint); }
 
 .subList { padding-left: 18px; }
-.subList .li { font-size: 11.5px; }
-.subList .li > a { color: var(--phosphor-fade); }
-.subList .active > a { color: var(--phosphor); text-shadow: var(--glow-emerald); border-left-color: var(--phosphor); }
+.subList .li { font-size: var(--pho-type-ui-xs-size); }
+.subList .li > a { color: var(--pho-color-primary-faint); }
+.subList .active > a { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); border-left-color: var(--pho-color-primary); }
 
 .foot {
   margin-top: 10px;
-  border-top: 1px dashed var(--phosphor-fade);
+  border-top: 1px dashed var(--pho-color-primary-faint);
   padding-top: 6px;
   display: grid; gap: 2px;
-  font-family: var(--font-terminal);
-  font-size: 11px; letter-spacing: 0.14em;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size); letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
 }
-.foot :global(b) { color: var(--phosphor-bright); text-shadow: var(--glow-emerald); font-weight: 700; }
+.foot :global(b) { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); font-weight: 700; }

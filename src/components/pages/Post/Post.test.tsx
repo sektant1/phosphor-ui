@@ -7,7 +7,7 @@ jest.mock("@mdx-js/react", () => ({
 }));
 
 describe("Post", () => {
-  test("composes a post header and body inside the page template", () => {
+  test("composes a post header and body inside the post layout", () => {
     render(
       <Post
         title="Signal report"

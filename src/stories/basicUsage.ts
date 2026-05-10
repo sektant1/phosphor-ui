@@ -282,11 +282,6 @@ export function Example() {
   return <NerdTree tree={tree} />;
 }`,
   NoteEditor: example("NoteEditor", `<NoteEditor />`),
-  Page: `import { Page } from "${pkg}";
-
-export function Example() {
-  return <Page header={<h1>Field notes</h1>}>Page content</Page>;
-}`,
   Pagination: example("Pagination", `<Pagination page={3} totalPages={7} />`),
   PdaWindow: example("PdaWindow", `<PdaWindow title="STATUS">Online</PdaWindow>`),
   Post: `import { Post } from "${pkg}";

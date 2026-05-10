@@ -4,7 +4,7 @@
   cursor: var(--pho-cursor-pointer);
   display: inline-grid;
   font-family: var(--pho-font-code);
-  font-size: 0.85rem;
+  font-size: var(--pho-type-ui-sm-size);
   gap: 0.65rem;
   grid-template-columns: auto minmax(0, 1fr);
   max-width: 100%;
@@ -39,7 +39,7 @@
 .state {
   color: var(--pho-color-text-faint);
   font-family: var(--pho-font-terminal);
-  font-size: 0.72rem;
+  font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1;
   position: relative;
@@ -111,7 +111,7 @@
 
 .description {
   color: var(--pho-color-text-faint);
-  font-size: 0.75rem;
+  font-size: var(--pho-type-caption-size);
   line-height: var(--pho-line-normal);
 }
 

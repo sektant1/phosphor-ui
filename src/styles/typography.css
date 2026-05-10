@@ -1,0 +1,160 @@
+/* ─── semantic typography utilities ───────────────────────── */
+.t-h1 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h1-size);
+  line-height: var(--pho-line-snug);
+  letter-spacing: var(--pho-tracking-wide);
+  text-transform: uppercase;
+  color: var(--pho-color-text-strong);
+  text-shadow: var(--pho-glow-primary);
+}
+.t-h2 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h2-size);
+  line-height: var(--pho-line-snug);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pho-color-text-strong);
+  text-shadow: var(--pho-glow-primary);
+}
+.t-h3 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h3-size);
+  line-height: var(--pho-line-snug);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
+  letter-spacing: 0.04em;
+}
+.t-h4 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h4-size);
+  line-height: var(--pho-line-snug);
+  text-transform: uppercase;
+  letter-spacing: var(--pho-tracking-wide);
+  color: var(--pho-color-primary);
+}
+.t-h5 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h5-size);
+  line-height: var(--pho-line-snug);
+  letter-spacing: var(--pho-tracking-wide);
+  text-transform: uppercase;
+  color: var(--pho-color-primary);
+}
+.t-h6 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: var(--pho-type-h6-size);
+  line-height: var(--pho-line-snug);
+  letter-spacing: var(--pho-tracking-wider);
+  text-transform: uppercase;
+  color: var(--pho-color-text-muted);
+}
+.pho-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55ch;
+}
+.pho-heading__glyph {
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-code);
+  text-shadow: var(--pho-glow-primary);
+  line-height: 1;
+  flex: 0 0 auto;
+}
+.pho-heading__text {
+  min-width: 0;
+}
+.t-body {
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-body-size);
+  line-height: var(--pho-line-prose);
+  color: var(--pho-color-text);
+}
+.t-lead {
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-lead-size);
+  line-height: var(--pho-line-prose);
+  color: var(--pho-color-text-strong);
+}
+.t-small {
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-small-size);
+  line-height: var(--pho-line-normal);
+  color: var(--pho-color-text);
+}
+.t-caption {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  line-height: var(--pho-line-caption);
+  color: var(--pho-color-text-faint);
+  letter-spacing: var(--pho-tracking-wide);
+  text-transform: uppercase;
+}
+.t-mono {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+}
+.t-code {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+  color: var(--pho-color-text-strong);
+}
+.t-terminal {
+  font-family: var(--pho-font-terminal);
+  font-size: 1.3em;
+  letter-spacing: var(--pho-tracking-wider);
+  text-transform: uppercase;
+}
+.t-stamp {
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: var(--pho-tracking-stamp);
+  text-transform: uppercase;
+  color: var(--pho-color-text-faint);
+}
+.t-prompt {
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
+  font-family: var(--pho-font-terminal);
+  font-weight: 700;
+}
+.t-glow {
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+}
+.t-glow-pale {
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+}
+.t-muted {
+  color: var(--pho-color-text-muted);
+  text-shadow: none;
+}
+.t-dim {
+  color: var(--pho-color-text-muted);
+  text-shadow: none;
+}
+.t-faded {
+  color: var(--pho-color-text-faint);
+  text-shadow: none;
+}
+.t-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.t-balance {
+  text-wrap: balance;
+}
+.t-dim,
+.t-faded,
+.t-muted {
+  text-shadow: none;
+  filter: none;
+}

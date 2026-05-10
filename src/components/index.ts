@@ -120,9 +120,6 @@ export type {
   ListVariant,
 } from "./molecules/List";
 
-export { Page } from "./templates/Page";
-export type { PageProps, PageSidebarPosition, PageVariant } from "./templates/Page";
-
 export { PostHeader } from "./organisms/PostHeader";
 export type { PostHeaderProps } from "./organisms/PostHeader";
 

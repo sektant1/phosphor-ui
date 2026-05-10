@@ -26,6 +26,9 @@ export const Default: Story = {
           chip styling.
         </p>
         <h3>Subsection</h3>
+        <h4>Fourth Level</h4>
+        <h5>Fifth Level</h5>
+        <h6>Sixth Level Metadata</h6>
         <ul>
           <li>Unordered item alpha</li>
           <li>Unordered item beta</li>
@@ -64,4 +67,32 @@ export const Default: Story = {
     ),
   },
   parameters: { docs: { source: { code: basicUsage.Prose } } },
+};
+
+export const NestedMobileWidth: Story = {
+  render: () => (
+    <div style={{ maxWidth: 360 }}>
+      <Prose>
+        <h1>long article heading wraps at mobile width without overlap</h1>
+        <p>
+          Intro paragraph with lowercase text, UPPERCASE markers,{" "}
+          <code>inlineCode()</code>, and a captioned code block below.
+        </p>
+        <h2>nested prose section</h2>
+        <blockquote>
+          Nested prose keeps code, captions, and small text readable in a narrow
+          column.
+        </blockquote>
+        <pre>
+          <code>{`const typography = {\n  h5: "t-h5",\n  h6: "t-h6",\n};`}</code>
+        </pre>
+        <figure>
+          <div style={{ aspectRatio: "16 / 9", border: "1px dashed var(--pho-color-primary-faint)" }} />
+          <figcaption>mobile figure caption readability</figcaption>
+        </figure>
+        <h5>dense subsection</h5>
+        <p>Small headings are distinct from H4 and do not collapse visually.</p>
+      </Prose>
+    </div>
+  ),
 };

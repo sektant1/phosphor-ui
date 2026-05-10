@@ -17,11 +17,23 @@ describe("Text", () => {
     expect(el.className).toContain("t-h2");
   });
 
+  test("h5 and h6 variants render matching semantic tags and classes", () => {
+    const h5 = render(<Text variant="h5">five</Text>).container.firstChild as HTMLElement;
+    const h6 = render(<Text variant="h6">six</Text>).container.firstChild as HTMLElement;
+
+    expect(h5.tagName).toBe("H5");
+    expect(h5.className).toContain("t-h5");
+    expect(h6.tagName).toBe("H6");
+    expect(h6.className).toContain("t-h6");
+  });
+
   test("as prop overrides tag", () => {
     const { container } = render(
-      <Text variant="body" as="span">y</Text>
+      <Text variant="h2" as="span">y</Text>
     );
-    expect((container.firstChild as HTMLElement).tagName).toBe("SPAN");
+    const el = container.firstChild as HTMLElement;
+    expect(el.tagName).toBe("SPAN");
+    expect(el.className).toContain("t-h2");
   });
 
   test("supports utility typography flags", () => {

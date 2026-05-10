@@ -1,10 +1,10 @@
 .pho-link {
-  font-family: var(--font-code);
-  font-size: 13px;
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-control-sm-size);
+  color: var(--pho-color-link);
+  text-shadow: var(--pho-glow-accent);
   text-decoration: none;
-  border-bottom: 1px dashed var(--magenta);
+  border-bottom: 1px dashed var(--pho-color-link);
   padding-bottom: 1px;
   cursor: pointer;
   transition: none;
@@ -12,9 +12,9 @@
 
 .pho-link:hover,
 .pho-link:focus-visible {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--pho-color-link);
+  color: var(--pho-color-background);
   text-shadow: none;
-  border-bottom: 1px solid var(--magenta-bright);
+  border-bottom: 1px solid var(--pho-color-link-hover);
   outline: none;
 }

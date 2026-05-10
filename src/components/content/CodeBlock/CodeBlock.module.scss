@@ -105,7 +105,7 @@
   color: var(--pho-color-primary-strong);
   display: flex;
   font-family: var(--pho-font-code);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-caption-size);
   gap: 0.35rem;
   letter-spacing: 0;
   min-width: 0;
@@ -133,7 +133,7 @@
   display: inline-grid;
   flex-shrink: 0;
   font-family: var(--pho-font-terminal);
-  font-size: 0.68rem;
+  font-size: var(--pho-type-micro-size);
   height: var(--code-chip-height);
   justify-content: center;
   letter-spacing: var(--pho-tracking-wide);
@@ -152,7 +152,7 @@
   display: inline-grid;
   flex-shrink: 0;
   font-family: var(--pho-font-terminal);
-  font-size: 0.68rem;
+  font-size: var(--pho-type-micro-size);
   height: var(--code-chip-height);
   justify-content: center;
   letter-spacing: var(--pho-tracking-wide);
@@ -238,7 +238,7 @@
 
 .code :global(pre) {
   font-family: var(--pho-font-code) !important;
-  font-size: 0.82rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: 1.42;
   margin: 0;
   overflow-x: auto;
@@ -273,7 +273,7 @@
     var(--pho-color-background-deep);
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
-  font-size: 0.82rem;
+  font-size: var(--pho-type-ui-sm-size);
   line-height: 1.42;
   margin: 0;
   min-width: 0;
@@ -306,7 +306,7 @@
   }
 
   .copy {
-    font-size: 0.68rem;
+    font-size: var(--pho-type-micro-size);
   }
 
   .viewport {
@@ -319,7 +319,7 @@
 
   .code :global(pre),
   .fallback {
-    font-size: 0.78rem;
+    font-size: var(--pho-type-caption-size);
     padding: 0.85rem;
   }
 }

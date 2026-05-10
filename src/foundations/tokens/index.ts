@@ -1,10 +1,14 @@
 export const PHOSPHOR_TOKEN_CSS_PATH = "tokens.css";
+export const PHOSPHOR_FONTS_CSS_PATH = "fonts.css";
+export const PHOSPHOR_TYPOGRAPHY_CSS_PATH = "typography.css";
 export const PHOSPHOR_GLOBAL_CSS_PATH = "global.css";
 export const PHOSPHOR_FULL_CSS_PATH = "phosphor.css";
 
 export const PHOSPHOR_CSS_ENTRYPOINTS = {
   full: PHOSPHOR_FULL_CSS_PATH,
+  fonts: PHOSPHOR_FONTS_CSS_PATH,
   tokens: PHOSPHOR_TOKEN_CSS_PATH,
+  typography: PHOSPHOR_TYPOGRAPHY_CSS_PATH,
   global: PHOSPHOR_GLOBAL_CSS_PATH,
 } as const;
 
@@ -46,12 +50,29 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-type-h2-size",
     "--pho-type-h3-size",
     "--pho-type-h4-size",
+    "--pho-type-h5-size",
+    "--pho-type-h6-size",
+    "--pho-type-lead-size",
     "--pho-type-body-size",
+    "--pho-type-small-size",
+    "--pho-type-caption-size",
+    "--pho-type-micro-size",
+    "--pho-type-ui-xs-size",
+    "--pho-type-ui-sm-size",
+    "--pho-type-label-size",
     "--pho-type-mono-size",
+    "--pho-type-control-size",
+    "--pho-type-control-sm-size",
+    "--pho-type-control-lg-size",
+    "--pho-type-icon-sm-size",
+    "--pho-type-icon-md-size",
+    "--pho-type-icon-lg-size",
     "--pho-line-tight",
     "--pho-line-snug",
     "--pho-line-normal",
     "--pho-line-prose",
+    "--pho-line-control",
+    "--pho-line-caption",
     "--pho-tracking-tight",
     "--pho-tracking-normal",
     "--pho-tracking-wide",

@@ -5,30 +5,30 @@
   justify-content: space-between;
   margin: 2rem 0 1rem;
   padding: 0.6rem 0.8rem;
-  border-top: 1px dashed var(--phosphor-fade);
-  border-bottom: 1px dashed var(--phosphor-fade);
-  font-family: var(--font-code);
-  font-size: 0.95em;
+  border-top: 1px dashed var(--pho-color-primary-faint);
+  border-bottom: 1px dashed var(--pho-color-primary-faint);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-control-size);
 }
 
 .pho-pagination__link {
-  color: var(--magenta);
-  text-shadow: var(--glow-magenta);
+  color: var(--pho-color-accent);
+  text-shadow: var(--pho-glow-accent);
   text-decoration: none;
 }
 
 .pho-pagination__link:hover {
-  color: var(--magenta-bright);
+  color: var(--pho-color-accent-strong);
 }
 
 .pho-pagination__link.disabled {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   text-shadow: none;
   cursor: not-allowed;
 }
 
 .pho-pagination__marker {
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   font-style: italic;
 }
 
@@ -37,6 +37,6 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.8rem;
-    font-size: 0.88em;
+    font-size: var(--pho-type-control-sm-size);
   }
 }

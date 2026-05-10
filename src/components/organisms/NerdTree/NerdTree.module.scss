@@ -1,8 +1,8 @@
 .tree {
   min-width: 0;
-  border-right: 1px dashed var(--phosphor-fade);
-  font-family: var(--font-code);
-  font-size: 12px;
+  border-right: 1px dashed var(--pho-color-primary-faint);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
   position: sticky;
   top: 0;
   align-self: start;
@@ -14,14 +14,14 @@
 .panel {
   background:
     linear-gradient(180deg, rgba(44, 255, 122, 0.045), transparent 72%),
-    var(--bg-raise);
-  border: 1px solid var(--phosphor-fade);
+    var(--pho-color-background-raised);
+  border: 1px solid var(--pho-color-primary-faint);
   max-height: none;
   position: relative;
 }
 
 .compact {
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
 }
 
 .compact .body {
@@ -60,11 +60,11 @@
     min-height: 0;
     max-width: none;
     padding: 0;
-    border: 1px solid var(--phosphor-fade);
+    border: 1px solid var(--pho-color-primary-faint);
     background:
       linear-gradient(135deg, rgba(44, 255, 122, 0.16), transparent 48%),
       rgba(7, 12, 10, 0.94);
-    color: var(--phosphor);
+    color: var(--pho-color-primary);
     box-shadow:
       0 0 14px rgba(44, 255, 122, 0.18),
       inset 0 0 10px rgba(44, 255, 122, 0.06);
@@ -76,7 +76,7 @@
     background:
       linear-gradient(90deg, rgba(232, 92, 200, 0.2), transparent),
       rgba(7, 12, 10, 0.96);
-    border-color: var(--magenta);
+    border-color: var(--pho-color-accent);
     outline: none;
   }
 
@@ -90,10 +90,10 @@
   width: 100%;
   background: none;
   border: none;
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
   font: inherit;
-  font-family: var(--font-code);
-  font-size: 12px;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
   text-align: left;
   cursor: pointer;
   padding: 0.6rem 0.8rem;
@@ -109,10 +109,10 @@
 
 .toggleGlyph {
   display: block;
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
-  font-family: var(--font-code);
-  font-size: 0.82rem;
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-ui-sm-size);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.16em;
@@ -152,8 +152,8 @@
 
 .buf {
   margin: 0;
-  color: var(--phosphor-fade);
-  font-size: 10.5px;
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   display: flex;
@@ -165,30 +165,30 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--phosphor);
-  box-shadow: 0 0 4px var(--phosphor), 0 0 10px var(--phosphor);
+  background: var(--pho-color-primary);
+  box-shadow: 0 0 4px var(--pho-color-primary), 0 0 10px var(--pho-color-primary);
   animation: phosphorLedPulse 2s ease-in-out infinite;
 }
 
 .title {
   margin: 0.4rem 0 0.2rem;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  font-family: var(--pho-font-heading);
+  font-size: var(--pho-type-control-sm-size);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   letter-spacing: 0.04em;
   overflow-wrap: anywhere;
 }
 
 .status {
   margin: 0;
-  font-size: 10.5px;
-  color: var(--phosphor-fade);
+  font-size: var(--pho-type-micro-size);
+  color: var(--pho-color-primary-faint);
 }
 
 .status :global(kbd) {
-  font-family: var(--font-code);
-  border: 1px solid var(--phosphor-fade);
+  font-family: var(--pho-font-code);
+  border: 1px solid var(--pho-color-primary-faint);
   padding: 0 4px;
 }
 
@@ -213,17 +213,17 @@
 }
 
 .fold {
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
 }
 
 .dir {
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 
 .meta {
-  color: var(--phosphor-fade);
-  font-size: 10.5px;
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
   margin-left: 4px;
 }
 
@@ -239,7 +239,7 @@
 
 .link {
   display: block;
-  color: var(--ink);
+  color: var(--pho-color-text);
   text-decoration: none;
   text-shadow: none;
   filter: none;
@@ -250,44 +250,44 @@
 }
 
 .link:hover {
-  background: var(--magenta);
-  color: var(--bg);
+  background: var(--pho-color-accent);
+  color: var(--pho-color-background);
   text-shadow: none;
 }
 
 .active .link {
   background: rgba(44, 255, 122, 0.12);
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-soft-emerald);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
 }
 
 .footer {
   margin-top: 1rem;
-  border-top: 1px dashed var(--phosphor-fade);
+  border-top: 1px dashed var(--pho-color-primary-faint);
   padding-top: 0.6rem;
 }
 
 .cmd {
-  color: var(--phosphor);
-  text-shadow: var(--glow-emerald);
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
   margin: 0;
-  font-size: 11px;
+  font-size: var(--pho-type-ui-xs-size);
 }
 
 .metaFoot {
-  color: var(--phosphor-fade);
+  color: var(--pho-color-primary-faint);
   margin: 0.2rem 0 0;
-  font-size: 10.5px;
+  font-size: var(--pho-type-micro-size);
 }
 
 .drawerPanel {
-  background: var(--bg-deep);
+  background: var(--pho-color-background-deep);
   box-shadow: 0 0 28px rgba(44, 255, 122, 0.18);
 }
 
 .drawerContent {
-  font-family: var(--font-code);
-  font-size: 12px;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
   min-width: 0;
 }
 
@@ -312,7 +312,7 @@
   }
 
   .buf {
-    font-size: 10px;
+    font-size: var(--pho-type-micro-size);
     letter-spacing: 0.12em;
   }
 

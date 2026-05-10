@@ -5,7 +5,7 @@
 }
 
 .list {
-  border-bottom: 1px solid var(--phosphor-fade);
+  border-bottom: 1px solid var(--pho-color-primary-faint);
   display: flex;
   gap: 0.35rem;
   min-width: 0;
@@ -15,7 +15,7 @@
 .vertical {
   align-items: stretch;
   border-bottom: 0;
-  border-right: 1px solid var(--phosphor-fade);
+  border-right: 1px solid var(--pho-color-primary-faint);
   flex-direction: column;
   overflow-x: visible;
 }
@@ -24,11 +24,11 @@
   background: transparent;
   border: 1px solid transparent;
   border-bottom: 0;
-  color: var(--phosphor-dim);
+  color: var(--pho-color-primary-muted);
   cursor: pointer;
   flex: 0 0 auto;
-  font-family: var(--font-terminal);
-  font-size: 1.05rem;
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-control-lg-size);
   letter-spacing: 0.08em;
   padding: 0.45rem 0.75rem;
   text-transform: uppercase;
@@ -41,11 +41,11 @@
 }
 
 .tab:hover:not(:disabled) {
-  color: var(--phosphor);
+  color: var(--pho-color-primary);
 }
 
 .tab:focus-visible {
-  outline: 2px solid var(--phosphor-bright);
+  outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
 
@@ -56,14 +56,14 @@
 
 .active {
   background: rgba(44, 255, 122, 0.08);
-  border-color: var(--phosphor-fade);
-  color: var(--phosphor-bright);
-  text-shadow: var(--glow-emerald);
+  border-color: var(--pho-color-primary-faint);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 
 .panel {
-  color: var(--ink);
-  font-family: var(--font-body);
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-body);
   line-height: var(--type-line-normal);
   min-width: 0;
 }

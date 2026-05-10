@@ -6,8 +6,8 @@
   justify-content: center;
   // min-height: var(--pho-size-touch-target);
   font-family: var(--pho-font-terminal);
-  font-size: 17px;
-  line-height: 1;
+  font-size: var(--pho-type-control-size);
+  line-height: var(--pho-line-control);
   background: transparent;
   border: 1px solid var(--pho-color-primary);
   color: var(--pho-color-primary);
@@ -52,13 +52,13 @@
 }
 
 .sm {
-  font-size: 14px;
+  font-size: var(--pho-type-control-sm-size);
   // min-height: 2rem;
   padding: 4px 10px;
 }
 
 .lg {
-  font-size: 20px;
+  font-size: var(--pho-type-control-lg-size);
   // min-height: 3rem;
   padding: 8px 18px;
 }

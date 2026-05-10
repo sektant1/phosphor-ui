@@ -7,7 +7,7 @@
 .label {
   color: var(--pho-color-text-muted);
   font-family: var(--pho-font-code);
-  font-size: 0.78rem;
+  font-size: var(--pho-type-label-size);
   letter-spacing: var(--pho-tracking-wide);
   text-transform: uppercase;
 }
@@ -30,7 +30,7 @@
   color: var(--pho-color-accent);
   text-shadow: var(--pho-glow-accent);
   font-family: var(--pho-font-code);
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   flex: 0 0 auto;
 }
 .inputCell {
@@ -47,7 +47,7 @@
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   font-family: var(--pho-font-code);
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   outline: none;
   caret-color: var(--pho-color-accent-strong);
   min-width: 0;
@@ -87,7 +87,7 @@
 .cursorMirror {
   color: transparent;
   font-family: var(--pho-font-code);
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   min-width: 0;
   overflow: hidden;
   text-shadow: none;
@@ -99,7 +99,7 @@
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   font-family: var(--pho-font-code);
-  font-size: 13px;
+  font-size: var(--pho-type-control-sm-size);
   outline: none;
   caret-color: var(--pho-color-accent-strong);
 }
@@ -116,8 +116,8 @@
 .help,
 .error {
   font-family: var(--pho-font-code);
-  font-size: 0.75rem;
-  line-height: var(--pho-line-normal);
+  font-size: var(--pho-type-caption-size);
+  line-height: var(--pho-line-caption);
 }
 
 .help {
