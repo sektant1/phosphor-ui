@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sektant1/phosphor.git"
+    "url": "https://github.com/sektant1/phosphor-ui.git"
   },
   "homepage": "https://github.com/sektant1/phosphor#readme",
   "bugs": {
@@ -69,10 +69,11 @@
     "typecheck:storybook": "tsc -p tsconfig.storybook.json",
     "typecheck:tests": "tsc -p tsconfig.test.json",
     "test": "jest",
+    "audit:story-sources": "node scripts/audit-story-sources.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "validate": "npm run typecheck && npm test -- --runInBand && npm run build-storybook -- --quiet && npm run build",
-    "validate:package": "npm run typecheck && npm test -- --runInBand && npm run build",
+    "validate": "npm run typecheck && npm run audit:story-sources && npm test -- --runInBand && npm run build-storybook -- --quiet && npm run build",
+    "validate:package": "npm run typecheck && npm run audit:story-sources && npm test -- --runInBand && npm run build",
     "prepublishOnly": "npm run validate:package",
     "release": "npm publish --access public"
   },

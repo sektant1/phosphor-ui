@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Select } from "./Select";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Select> = {
   title: "Atoms/Select",
@@ -9,10 +9,92 @@ const meta: Meta<typeof Select> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { Select } from "@sektant1/phosphor-ui";
+
+const defaultProps = {
+    label: "status",
+    prompt: "mode",
+    helpText: "route content through the selected publication state",
+    defaultValue: "draft",
+    options: [
+      { label: "draft", value: "draft" },
+      { label: "review", value: "review" },
+      { label: "published", value: "published" },
+    ],
+  };
+
+export function Example() {
+  return <Select {...defaultProps} />;
+}
+`;
+
+const errorSource = tsx`
+import { Select } from "@sektant1/phosphor-ui";
+
+const errorProps = {
+    label: "clearance",
+    prompt: "auth",
+    defaultValue: "invalid",
+    error: "clearance level rejected",
+    options: [
+      { label: "guest", value: "guest" },
+      { label: "invalid", value: "invalid" },
+      { label: "operator", value: "operator" },
+    ],
+  };
+
+export function Example() {
+  return <Select {...errorProps} />;
+}
+`;
+
+const disabledSource = tsx`
+import { Select } from "@sektant1/phosphor-ui";
+
+const disabledProps = {
+    label: "uplink",
+    prompt: "lock",
+    defaultValue: "offline",
+    disabled: true,
+    helpText: "locked while synchronization is offline",
+    options: [
+      { label: "offline", value: "offline" },
+      { label: "standby", value: "standby" },
+      { label: "online", value: "online" },
+    ],
+  };
+
+export function Example() {
+  return <Select {...disabledProps} />;
+}
+`;
+
+const longValueSource = tsx`
+import { Select } from "@sektant1/phosphor-ui";
+
+
+
+const longValueProps = {
+    label: "routing profile",
+    prompt: "profile",
+    defaultValue: "field-ops-extended",
+    options: [
+      { label: "field operations extended telemetry channel", value: "field-ops-extended" },
+      { label: "quiet maintenance", value: "quiet-maintenance" },
+      { label: "diagnostics", value: "diagnostics" },
+    ],
+  };
+
+export function Example() {
+  return <Select {...longValueProps} />;
+}
+`;
+
 type Story = StoryObj<typeof Select>;
 
 export const Default: Story = {
-  parameters: { docs: { source: { code: basicUsage.Select } } },
+  parameters: { docs: { source: source(defaultSource) } },
   args: {
     label: "status",
     prompt: "mode",
@@ -27,6 +109,7 @@ export const Default: Story = {
 };
 
 export const Error: Story = {
+  parameters: { docs: { source: source(errorSource) } },
   args: {
     label: "clearance",
     prompt: "auth",
@@ -41,6 +124,7 @@ export const Error: Story = {
 };
 
 export const Disabled: Story = {
+  parameters: { docs: { source: source(disabledSource) } },
   args: {
     label: "uplink",
     prompt: "lock",
@@ -56,6 +140,7 @@ export const Disabled: Story = {
 };
 
 export const LongValue: Story = {
+  parameters: { docs: { source: source(longValueSource) } },
   args: {
     label: "routing profile",
     prompt: "profile",

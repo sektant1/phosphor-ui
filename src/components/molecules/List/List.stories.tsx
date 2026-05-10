@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { List } from "./List";
 import type { ListItem } from "./List";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const items: ListItem[] = [
   {
@@ -52,13 +52,123 @@ const meta: Meta<typeof List> = {
 
 export default meta;
 
+const defaultSource = tsx`
+import { Button, List } from "@sektant1/phosphor-ui";
+
+const defaultProps = {
+    items,
+    as: "ul",
+    variant: "ruled",
+    marker: "chevron",
+    density: "default",
+  };
+
+export function Example() {
+  return <List {...defaultProps} />;
+}
+`;
+
+const orderedSource = tsx`
+import { Button, List } from "@sektant1/phosphor-ui";
+
+const orderedProps = {
+  ...{
+    items,
+    as: "ul",
+    variant: "ruled",
+    marker: "chevron",
+    density: "default",
+  },
+  ...{
+    as: "ol",
+    marker: "index",
+  },
+};
+
+export function Example() {
+  return <List {...orderedProps} />;
+}
+`;
+
+const terminalSource = tsx`
+import { Button, List } from "@sektant1/phosphor-ui";
+
+const terminalProps = {
+  ...{
+    items,
+    as: "ul",
+    variant: "ruled",
+    marker: "chevron",
+    density: "default",
+  },
+  ...{
+    variant: "terminal",
+    marker: "dash",
+  },
+};
+
+export function Example() {
+  return <List {...terminalProps} />;
+}
+`;
+
+const compactSource = tsx`
+import { Button, List } from "@sektant1/phosphor-ui";
+
+const compactProps = {
+  ...{
+    items,
+    as: "ul",
+    variant: "ruled",
+    marker: "chevron",
+    density: "default",
+  },
+  ...{
+    density: "compact",
+    marker: "dot",
+  },
+};
+
+export function Example() {
+  return <List {...compactProps} />;
+}
+`;
+
+const customRenderSource = tsx`
+import { Button, List } from "@sektant1/phosphor-ui";
+
+
+
+const customRenderProps = {
+  ...{
+    items,
+    as: "ul",
+    variant: "ruled",
+    marker: "chevron",
+    density: "default",
+  },
+  ...{
+    renderItem: (item, index) => (
+      <span>
+        {index + 1}. {item.title}
+      </span>
+    ),
+  },
+};
+
+export function Example() {
+  return <List {...customRenderProps} />;
+}
+`;
+
 type Story = StoryObj<typeof List>;
 
 export const Default: Story = {
-  parameters: { docs: { source: { code: basicUsage.List } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };
 
 export const Ordered: Story = {
+  parameters: { docs: { source: source(orderedSource) } },
   args: {
     as: "ol",
     marker: "index",
@@ -66,6 +176,7 @@ export const Ordered: Story = {
 };
 
 export const Terminal: Story = {
+  parameters: { docs: { source: source(terminalSource) } },
   args: {
     variant: "terminal",
     marker: "dash",
@@ -73,6 +184,7 @@ export const Terminal: Story = {
 };
 
 export const Compact: Story = {
+  parameters: { docs: { source: source(compactSource) } },
   args: {
     density: "compact",
     marker: "dot",
@@ -80,6 +192,7 @@ export const Compact: Story = {
 };
 
 export const CustomRender: Story = {
+  parameters: { docs: { source: source(customRenderSource) } },
   args: {
     renderItem: (item, index) => (
       <span>

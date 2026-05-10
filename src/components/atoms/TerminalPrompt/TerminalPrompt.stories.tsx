@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { TerminalPrompt } from "./TerminalPrompt";
 import type { TerminalPromptProps } from "./TerminalPrompt";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<TerminalPromptProps> = {
   title: "Atoms/TerminalPrompt",
@@ -19,6 +19,22 @@ const meta: Meta<TerminalPromptProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { TerminalPrompt } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    prompt:  "~/$",
+    command: "decode --signal phosphor.zone",
+    cursor:  true,
+  };
+
+export function Example() {
+  return <TerminalPrompt {...defaultProps} />;
+}
+`;
+
 export const Default: StoryObj<TerminalPromptProps> = {
-  parameters: { docs: { source: { code: basicUsage.TerminalPrompt } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };

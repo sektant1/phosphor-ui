@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 import type { CheckboxProps } from "./Checkbox";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<CheckboxProps> = {
   title: "Atoms/Checkbox",
@@ -23,8 +23,49 @@ const meta: Meta<CheckboxProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { Checkbox } from "@sektant1/phosphor-ui";
+
+const defaultProps = {
+    label:          "engage shields",
+    defaultChecked: false,
+    disabled:       false,
+    error:          false,
+    strikethrough:  true,
+  };
+
+export function Example() {
+  return <Checkbox {...defaultProps} />;
+}
+`;
+
+const errorCheckedSource = tsx`
+import { Checkbox } from "@sektant1/phosphor-ui";
+
+
+
+const errorCheckedProps = {
+  ...{
+    label:          "engage shields",
+    defaultChecked: false,
+    disabled:       false,
+    error:          false,
+    strikethrough:  true,
+  },
+  ...{
+    label:          "checksum mismatch",
+    defaultChecked: true,
+    error:          true,
+  },
+};
+
+export function Example() {
+  return <Checkbox {...errorCheckedProps} />;
+}
+`;
+
 export const Default: StoryObj<CheckboxProps> = {
-  parameters: { docs: { source: { code: basicUsage.Checkbox } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };
 
 export const ErrorChecked: StoryObj<CheckboxProps> = {
@@ -35,9 +76,7 @@ export const ErrorChecked: StoryObj<CheckboxProps> = {
   },
   parameters: {
     docs: {
-      source: {
-        code: `<Checkbox label="checksum mismatch" defaultChecked error />`,
-      },
+      source: source(errorCheckedSource),
     },
   },
 };

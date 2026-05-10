@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Tag } from "./Tag";
 import type { TagProps } from "./Tag";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<TagProps> = {
   title: "Atoms/Tag",
@@ -20,6 +20,22 @@ const meta: Meta<TagProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { Tag } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    children: "intro",
+    color:    "magenta",
+    hover:    false,
+  };
+
+export function Example() {
+  return <Tag {...defaultProps} />;
+}
+`;
+
 export const Default: StoryObj<TagProps> = {
-  parameters: { docs: { source: { code: basicUsage.Tag } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };

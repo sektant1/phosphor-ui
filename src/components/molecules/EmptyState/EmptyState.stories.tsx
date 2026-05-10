@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EmptyState } from "./EmptyState";
 import type { EmptyStateProps } from "./EmptyState";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<EmptyStateProps> = {
   title: "Molecules/EmptyState",
@@ -20,6 +20,23 @@ const meta: Meta<EmptyStateProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { EmptyState } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    glyph:  "[ — ]",
+    title:  "no transmissions",
+    body:   "Nothing here yet. Start writing.",
+    action: { label: "new post", href: "#" },
+  };
+
+export function Example() {
+  return <EmptyState {...defaultProps} />;
+}
+`;
+
 export const Default: StoryObj<EmptyStateProps> = {
-  parameters: { docs: { source: { code: basicUsage.EmptyState } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };

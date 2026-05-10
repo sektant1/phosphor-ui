@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { HeaderNav } from "./HeaderNav";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof HeaderNav> = {
   title: "Molecules/BootNav",
@@ -15,11 +15,30 @@ const meta: Meta<typeof HeaderNav> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { HeaderNav } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    items: [
+      { label: "home", href: "#", active: true },
+      { label: "log", href: "#log" },
+      { label: "courses", href: "#courses" },
+      { label: "about", href: "#about", glyph: "*" },
+    ],
+  };
+
+export function Example() {
+  return <HeaderNav {...defaultProps} />;
+}
+`;
+
 type Story = StoryObj<typeof HeaderNav>;
 
 export const Default: Story = {
   name: "HeaderNav",
-  parameters: { docs: { source: { code: basicUsage.HeaderNav } } },
+  parameters: { docs: { source: source(defaultSource) } },
   args: {
     items: [
       { label: "home", href: "#", active: true },

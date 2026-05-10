@@ -7,7 +7,7 @@ import { Form } from "./Form";
 import { FormField } from "./FormField";
 import { ContentStatusBadge } from "./FormField";
 import type { FormFieldProps } from "./FormField";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<FormFieldProps> = {
   title: "Molecules/FormField",
@@ -27,8 +27,142 @@ const meta: Meta<FormFieldProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import React from "react";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  const props = {
+      label:    "Username",
+      hint:     "Letters and numbers only.",
+      error:    "",
+      required: false,
+    };
+
+  return (
+      <FormField {...props}>
+        <Input prompt="" placeholder="e.g. phosphor_user" />
+      </FormField>
+    );
+}
+`;
+
+const withTextareaSource = tsx`
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  const props = {
+    ...{
+      label:    "Username",
+      hint:     "Letters and numbers only.",
+      error:    "",
+      required: false,
+    },
+    ...{
+      label: "summary",
+      hint: "One or two short lines.",
+    },
+  };
+
+  return (
+      <FormField {...props}>
+        <Textarea rows={4} placeholder="Write a compact summary..." />
+      </FormField>
+    );
+}
+`;
+
+const withSelectSource = tsx`
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  const props = {
+    ...{
+      label:    "Username",
+      hint:     "Letters and numbers only.",
+      error:    "",
+      required: false,
+    },
+    ...{
+      label: "status",
+      required: true,
+    },
+  };
+
+  return (
+      <FormField {...props}>
+        <Select
+          prompt=""
+          defaultValue="draft"
+          options={[
+            { label: "draft", value: "draft" },
+            { label: "published", value: "published" },
+            { label: "archived", value: "archived" },
+          ]}
+        />
+      </FormField>
+    );
+}
+`;
+
+const formExampleSource = tsx`
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+      <Form
+        title="Content form"
+        description="Compact form shell using FormField internally."
+        columns={2}
+        fields={[
+          {
+            name: "title",
+            label: "title",
+            required: true,
+            inputProps: { prompt: "", placeholder: "Signal report" },
+          },
+          {
+            name: "status",
+            label: "status",
+            type: "select",
+            options: [
+              { label: "draft", value: "draft" },
+              { label: "published", value: "published" },
+            ],
+            selectProps: { prompt: "", defaultValue: "draft" },
+          },
+          {
+            name: "summary",
+            label: "summary",
+            type: "textarea",
+            hint: "Used in previews and cards.",
+            textareaProps: { rows: 4, placeholder: "Short summary..." },
+          },
+        ]}
+        actions={<Button type="submit">Save</Button>}
+      />
+    );
+}
+`;
+
+const statusBadgesSource = tsx`
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+
+
+
+export function Example() {
+  return (
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+        <ContentStatusBadge status="draft" />
+        <ContentStatusBadge status="published" />
+        <ContentStatusBadge status="archived" />
+      </div>
+    );
+}
+`;
+
 export const Default: StoryObj<FormFieldProps> = {
-  parameters: { docs: { source: { code: basicUsage.FormField } } },
+  parameters: { docs: { source: source(defaultSource) } },
   render: (args) => (
     <FormField {...args}>
       <Input prompt="" placeholder="e.g. phosphor_user" />
@@ -37,6 +171,7 @@ export const Default: StoryObj<FormFieldProps> = {
 };
 
 export const WithTextarea: StoryObj<FormFieldProps> = {
+  parameters: { docs: { source: source(withTextareaSource) } },
   args: {
     label: "summary",
     hint: "One or two short lines.",
@@ -49,6 +184,7 @@ export const WithTextarea: StoryObj<FormFieldProps> = {
 };
 
 export const WithSelect: StoryObj<FormFieldProps> = {
+  parameters: { docs: { source: source(withSelectSource) } },
   args: {
     label: "status",
     required: true,
@@ -69,7 +205,7 @@ export const WithSelect: StoryObj<FormFieldProps> = {
 };
 
 export const FormExample: StoryObj<typeof Form> = {
-  parameters: { docs: { source: { code: basicUsage.Form } } },
+  parameters: { docs: { source: source(formExampleSource) } },
   render: () => (
     <Form
       title="Content form"
@@ -106,7 +242,7 @@ export const FormExample: StoryObj<typeof Form> = {
 };
 
 export const StatusBadges: StoryObj<FormFieldProps> = {
-  parameters: { docs: { source: { code: basicUsage.ContentStatusBadge } } },
+  parameters: { docs: { source: source(statusBadgesSource) } },
 
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>

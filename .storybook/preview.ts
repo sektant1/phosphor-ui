@@ -64,7 +64,7 @@ const preview: Preview = {
     docs: {
       toc: true,
       source: {
-        type: "auto",
+        type: "code",
         excludeDecorators: true,
       },
     },

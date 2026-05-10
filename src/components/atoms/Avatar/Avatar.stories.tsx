@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar } from "./Avatar";
 import type { AvatarProps } from "./Avatar";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<AvatarProps> = {
   title: "Atoms/Avatar",
@@ -16,6 +16,21 @@ const meta: Meta<AvatarProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { Avatar } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    size: "md",
+    name: "sektant1",
+  };
+
+export function Example() {
+  return <Avatar {...defaultProps} />;
+}
+`;
+
 export const Default: StoryObj<AvatarProps> = {
-  parameters: { docs: { source: { code: basicUsage.Avatar } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };

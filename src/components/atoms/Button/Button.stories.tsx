@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import type { ButtonProps, ButtonSize, ButtonVariant } from "./Button";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const variants: ButtonVariant[] = [
   "primary",
@@ -35,11 +35,131 @@ const meta: Meta<ButtonProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+const defaultProps = {
+    children: "Engage",
+    variant:  "primary",
+    size:     "md",
+    disabled: false,
+    pressed:  false,
+  };
+
+export function Example() {
+  return <Button {...defaultProps} />;
+}
+`;
+
+const variantsSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+const variants= [
+  "primary",
+  "secondary",
+  "accent",
+  "ghost",
+  "quiet",
+  "danger",
+];
+
+export function Example() {
+  return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant}>
+            {variant}
+          </Button>
+        ))}
+      </div>
+    );
+}
+`;
+
+const sizesSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+const sizes= ["sm", "md", "lg"];
+
+export function Example() {
+  return (
+      <div style={{ alignItems: "center", display: "flex", flexWrap: "wrap", gap: 12 }}>
+        {sizes.map((size) => (
+          <Button key={size} size={size}>
+            {size}
+          </Button>
+        ))}
+      </div>
+    );
+}
+`;
+
+const statesSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        <Button pressed>Pressed</Button>
+        <Button loading>Loading</Button>
+        <Button disabled>Disabled</Button>
+        <Button variant="danger" loading>
+          Purging
+        </Button>
+      </div>
+    );
+}
+`;
+
+const linksSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        <Button href="#button-link">Anchor</Button>
+        <Button href="#disabled-link" disabled variant="ghost">
+          Disabled anchor
+        </Button>
+        <Button href="https://example.com" target="_blank" variant="accent">
+          External
+        </Button>
+      </div>
+    );
+}
+`;
+
+const fullWidthSource = tsx`
+import { Button } from "@sektant1/phosphor-ui";
+
+
+
+const fullWidthProps = {
+  ...{
+    children: "Engage",
+    variant:  "primary",
+    size:     "md",
+    disabled: false,
+    pressed:  false,
+  },
+  ...{
+    children: "Confirm transmission",
+    fullWidth: true,
+    variant: "secondary",
+  },
+};
+
+export function Example() {
+  return <Button {...fullWidthProps} />;
+}
+`;
+
 export const Default: StoryObj<ButtonProps> = {
-  parameters: { docs: { source: { code: basicUsage.Button } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };
 
 export const Variants: StoryObj<ButtonProps> = {
+  parameters: { docs: { source: source(variantsSource) } },
   render: () => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
       {variants.map((variant) => (
@@ -52,6 +172,7 @@ export const Variants: StoryObj<ButtonProps> = {
 };
 
 export const Sizes: StoryObj<ButtonProps> = {
+  parameters: { docs: { source: source(sizesSource) } },
   render: () => (
     <div style={{ alignItems: "center", display: "flex", flexWrap: "wrap", gap: 12 }}>
       {sizes.map((size) => (
@@ -64,6 +185,7 @@ export const Sizes: StoryObj<ButtonProps> = {
 };
 
 export const States: StoryObj<ButtonProps> = {
+  parameters: { docs: { source: source(statesSource) } },
   render: () => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
       <Button pressed>Pressed</Button>
@@ -77,6 +199,7 @@ export const States: StoryObj<ButtonProps> = {
 };
 
 export const Links: StoryObj<ButtonProps> = {
+  parameters: { docs: { source: source(linksSource) } },
   render: () => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
       <Button href="#button-link">Anchor</Button>
@@ -91,6 +214,7 @@ export const Links: StoryObj<ButtonProps> = {
 };
 
 export const FullWidth: StoryObj<ButtonProps> = {
+  parameters: { docs: { source: source(fullWidthSource) } },
   args: {
     children: "Confirm transmission",
     fullWidth: true,

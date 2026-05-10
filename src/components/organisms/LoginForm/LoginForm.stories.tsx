@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { LoginForm } from "./LoginForm";
 import type { LoginFormProps } from "./LoginForm";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<LoginFormProps> = {
   title: "Organisms/LoginForm",
@@ -24,17 +24,76 @@ const meta: Meta<LoginFormProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { LoginForm } from "@sektant1/phosphor-ui";
+
+const defaultProps = {
+    title:    "// access terminal",
+    subtitle: "authenticate to continue",
+    loading:  false,
+    error:    "",
+  };
+
+export function Example() {
+  return <LoginForm {...defaultProps} />;
+}
+`;
+
+const withErrorSource = tsx`
+import { LoginForm } from "@sektant1/phosphor-ui";
+
+const withErrorProps = {
+  ...{
+    title:    "// access terminal",
+    subtitle: "authenticate to continue",
+    loading:  false,
+    error:    "",
+  },
+  ...{
+    error: "authentication failed",
+  },
+};
+
+export function Example() {
+  return <LoginForm {...withErrorProps} />;
+}
+`;
+
+const loadingSource = tsx`
+import { LoginForm } from "@sektant1/phosphor-ui";
+
+
+
+const loadingProps = {
+  ...{
+    title:    "// access terminal",
+    subtitle: "authenticate to continue",
+    loading:  false,
+    error:    "",
+  },
+  ...{
+    loading: true,
+  },
+};
+
+export function Example() {
+  return <LoginForm {...loadingProps} />;
+}
+`;
+
 export const Default: StoryObj<LoginFormProps> = {
-  parameters: { docs: { source: { code: basicUsage.LoginForm } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };
 
 export const WithError: StoryObj<LoginFormProps> = {
+  parameters: { docs: { source: source(withErrorSource) } },
   args: {
     error: "authentication failed",
   },
 };
 
 export const Loading: StoryObj<LoginFormProps> = {
+  parameters: { docs: { source: source(loadingSource) } },
   args: {
     loading: true,
   },

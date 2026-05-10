@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { HeroFrame } from "./HeroFrame";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const art = [
   "      .-======-.",
@@ -18,10 +18,48 @@ const meta: Meta<typeof HeroFrame> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { HeroFrame } from "@sektant1/phosphor-ui";
+
+
+
+const art = [
+  "      .-======-.",
+  "   .- PHOSPHOR -.",
+  "  /   SIGNAL LOCK \\\\",
+  "  |    CH 0x4C    |",
+  "  \\\\_______________/",
+].join("\\\\n");
+
+export function Example() {
+  return (
+      <HeroFrame
+        art={art}
+        topHud={
+          <>
+            <HeroFrame.HudLed variant="rec" />
+            <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudText>00:42:17</HeroFrame.HudText>
+          </>
+        }
+        bottomHud={
+          <>
+            <HeroFrame.HudLabel>SIG</HeroFrame.HudLabel>
+            <HeroFrame.HudBars value={5} />
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudTape text="// PHOSPHOR ZONE //" />
+          </>
+        }
+      />
+    );
+}
+`;
+
 type Story = StoryObj<typeof HeroFrame>;
 
 export const Default: Story = {
-  parameters: { docs: { source: { code: basicUsage.HeroFrame } } },
+  parameters: { docs: { source: source(defaultSource) } },
   render: () => (
     <HeroFrame
       art={art}

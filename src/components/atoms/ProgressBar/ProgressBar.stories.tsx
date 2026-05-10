@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProgressBar } from "./ProgressBar";
 import type { ProgressBarProps } from "./ProgressBar";
-import { basicUsage } from "../../../stories/basicUsage";
+import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<ProgressBarProps> = {
   title: "Atoms/ProgressBar",
@@ -26,6 +26,25 @@ const meta: Meta<ProgressBarProps> = {
 };
 export default meta;
 
+const defaultSource = tsx`
+import { ProgressBar } from "@sektant1/phosphor-ui";
+
+
+
+const defaultProps = {
+    label:       "decode",
+    value:       42,
+    total:       100,
+    current:     false,
+    slim:        false,
+    showPercent: true,
+  };
+
+export function Example() {
+  return <ProgressBar {...defaultProps} />;
+}
+`;
+
 export const Default: StoryObj<ProgressBarProps> = {
-  parameters: { docs: { source: { code: basicUsage.ProgressBar } } },
+  parameters: { docs: { source: source(defaultSource) } },
 };
