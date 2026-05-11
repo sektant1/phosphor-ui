@@ -1,0 +1,247 @@
+.root {
+  --pho-mainframe-left-width: clamp(13.75rem, 17vw, 16.25rem);
+  --pho-mainframe-right-width: clamp(13.5rem, 17vw, var(--pho-layout-toc-width));
+  --pho-mainframe-gap: clamp(0.75rem, 1.35vw, var(--pho-space-5));
+  --pho-mainframe-prose-width: var(--pho-layout-prose-max);
+  --pho-mainframe-content-width: minmax(0, min(100%, var(--pho-mainframe-prose-width)));
+
+  display: grid;
+  gap: var(--pho-mainframe-gap);
+  min-width: 0;
+  width: 100%;
+}
+
+.variant-wiki {
+  --pho-mainframe-prose-width: 72ch;
+}
+
+.variant-course,
+.variant-admin,
+.variant-project {
+  --pho-mainframe-prose-width: var(--pho-layout-content-max);
+  --pho-mainframe-right-width: clamp(14.5rem, 20vw, 20rem);
+}
+
+.header,
+.footer {
+  min-width: 0;
+}
+
+.footer {
+  border-top: 1px dashed var(--pho-color-primary-faint);
+  padding-top: var(--pho-space-5);
+}
+
+.grid {
+  align-items: start;
+  display: grid;
+  gap: var(--pho-mainframe-gap);
+  grid-template-areas: "main";
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  width: 100%;
+}
+
+.hasLeft .grid {
+  grid-template-areas: "left main";
+  grid-template-columns:
+    minmax(12rem, var(--pho-mainframe-left-width))
+    minmax(0, 1fr);
+}
+
+.hasRight .grid {
+  grid-template-areas: "main right";
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(13rem, var(--pho-mainframe-right-width));
+}
+
+.hasLeft.hasRight .grid {
+  grid-template-areas: "left main right";
+  grid-template-columns:
+    minmax(12rem, var(--pho-mainframe-left-width))
+    minmax(0, 1fr)
+    minmax(13rem, var(--pho-mainframe-right-width));
+}
+
+.leftPanel,
+.main,
+.contextPanel {
+  min-width: 0;
+}
+
+.leftPanel {
+  grid-area: left;
+}
+
+.main {
+  display: grid;
+  gap: var(--pho-space-6);
+  grid-area: main;
+  justify-self: stretch;
+  max-width: 100%;
+  width: 100%;
+}
+
+.main > :first-child {
+  margin-top: 0;
+}
+
+.main > :last-child {
+  margin-bottom: 0;
+}
+
+.contextPanel {
+  border-left: 1px dashed var(--pho-color-primary-faint);
+  color: var(--pho-color-primary-muted);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  grid-area: right;
+  padding: 0.65rem 0 0.65rem 0.85rem;
+}
+
+.contextHeader {
+  border-bottom: 1px dashed var(--pho-color-primary-faint);
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.45rem;
+}
+
+.contextTitle {
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
+  letter-spacing: 0.22em;
+  line-height: 1.1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.contextMeta {
+  color: var(--pho-color-primary-faint);
+  font-size: var(--pho-type-micro-size);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contextBody {
+  display: grid;
+  gap: var(--pho-space-4);
+  min-width: 0;
+}
+
+.stickyPanels .leftPanel,
+.stickyPanels .contextPanel {
+  position: sticky;
+  top: var(--pho-layout-sticky-top);
+}
+
+.stickyPanels .leftPanel {
+  max-height: calc(100dvh - (var(--pho-layout-sticky-top) * 2));
+  overflow: hidden;
+}
+
+.nerdTreeShell {
+  display: flex;
+  max-height: calc(100dvh - (var(--pho-layout-sticky-top) * 2));
+  min-width: 0;
+  overflow: hidden;
+}
+
+.nerdTree {
+  max-height: inherit;
+  min-height: 0;
+  position: static;
+  width: 100%;
+}
+
+@media (max-width: 1120px) {
+  .hasLeft.hasRight .grid {
+    grid-template-areas:
+      "left main"
+      "right right";
+    grid-template-columns:
+      minmax(12rem, var(--pho-mainframe-left-width))
+      minmax(0, 1fr);
+  }
+
+  .hasLeft.hasRight .contextPanel {
+    border-left: none;
+    border-top: 1px dashed var(--pho-color-primary-faint);
+    padding: var(--pho-space-4) 0 0;
+  }
+
+  .hasLeft.hasRight.stickyPanels .contextPanel {
+    position: static;
+  }
+}
+
+@media (max-width: 960px) {
+  .hasRight:not(.hasLeft) .grid {
+    grid-template-areas:
+      "main"
+      "right";
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hasRight:not(.hasLeft) .contextPanel {
+    border-left: none;
+    border-top: 1px dashed var(--pho-color-primary-faint);
+    padding: var(--pho-space-4) 0 0;
+  }
+
+  .hasRight:not(.hasLeft).stickyPanels .contextPanel {
+    position: static;
+  }
+}
+
+@media (max-width: 880px) {
+  .hasLeft .grid,
+  .hasLeft.hasRight .grid {
+    grid-template-areas:
+      "main"
+      "right";
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .leftPanel {
+    grid-area: main;
+    width: 0;
+  }
+
+  .main {
+    width: min(100%, var(--pho-mainframe-prose-width));
+  }
+
+  .variant-course .main,
+  .variant-admin .main,
+  .variant-project .main {
+    width: 100%;
+  }
+
+  .stickyPanels .leftPanel,
+  .stickyPanels .contextPanel {
+    position: static;
+  }
+
+  .stickyPanels .leftPanel {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 620px) {
+  .root {
+    --pho-mainframe-gap: var(--pho-space-5);
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .contextPanel {
+    border: 1px dashed var(--pho-color-primary-faint);
+    padding: 0.75rem;
+  }
+}

@@ -125,6 +125,24 @@ export type { PostHeaderProps } from "./organisms/PostHeader";
 export { Post, PostTemplate } from "./templates/PostTemplate";
 export type { PostProps, PostTemplateProps } from "./templates/PostTemplate";
 
+export {
+  AdminLayout,
+  ContextPanel,
+  CourseLayout,
+  MainContent,
+  MainframeLayout,
+  NerdTreeSidebar,
+  PostLayout,
+  WikiLayout,
+} from "./templates/MainframeLayout";
+export type {
+  ContextPanelProps,
+  MainContentProps,
+  MainframeLayoutProps,
+  MainframeVariant,
+  NerdTreeSidebarProps,
+} from "./templates/MainframeLayout";
+
 export { CourseCard } from "./organisms/CourseCard";
 export type { CourseCardProps } from "./organisms/CourseCard";
 

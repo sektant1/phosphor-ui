@@ -17,135 +17,113 @@ const meta: Meta<typeof Header> = {
 
 export default meta;
 
+const hideoutNav = [
+  { label: "BLOG", href: "/blog", active: true },
+  { label: "WIKI", href: "/wiki" },
+  { label: "PROJECTS", href: "/projects" },
+  { label: "COURSE", href: "/course" },
+  { label: "ABOUT", href: "/about" },
+];
+
+const locales = [
+  { code: "en", label: "EN", href: "/", active: true },
+  { code: "pt", label: "PT", href: "/pt/" },
+];
+
 const defaultSource = tsx`
 import { Header } from "@sektant1/phosphor-ui";
 
-const defaultProps = {
-    title: "phosphor ui",
-    tagline: "// terminal-grade publishing on the magenta band",
-    align: "center",
-    variant: "masthead",
-    nav: [
-      { label: "home", href: "#", active: true },
-      { label: "posts", href: "#" },
-      { label: "projects", href: "#" },
-      { label: "tags", href: "#" },
-      { label: "about", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "ru", label: "RU", href: "/ru/" },
-      { code: "pt", label: "PT", href: "/pt/" },
-    ],
-  };
-
 export function Example() {
-  return <Header {...defaultProps} />;
+  return (
+    <Header
+      title="sektant's hideout"
+      align="center"
+      variant="terminal"
+      nav={[
+        { label: "BLOG", href: "/blog", active: true },
+        { label: "WIKI", href: "/wiki" },
+        { label: "PROJECTS", href: "/projects" },
+        { label: "COURSE", href: "/course" },
+        { label: "ABOUT", href: "/about" },
+      ]}
+      locales={[
+        { code: "en", label: "EN", href: "/", active: true },
+        { code: "pt", label: "PT", href: "/pt/" },
+      ]}
+    />
+  );
 }
 `;
 
 const minimalSource = tsx`
 import { Header } from "@sektant1/phosphor-ui";
 
-const minimalProps = {
-    title: "phosphor ui",
-    align: "center",
-    nav: [
-      { label: "home", href: "#" },
-      { label: "posts", href: "#" },
-    ],
-  };
-
 export function Example() {
-  return <Header {...minimalProps} />;
+  return (
+    <Header
+      title="sektant's hideout"
+      align="center"
+      variant="terminal"
+      nav={[
+        { label: "BLOG", href: "/blog", active: true },
+        { label: "WIKI", href: "/wiki" },
+      ]}
+    />
+  );
 }
 `;
 
 const compactSource = tsx`
 import { Header } from "@sektant1/phosphor-ui";
 
-const compactProps = {
-    title: "phosphor ui",
-    tagline: "field notes / components / courses",
-    align: "left",
-    variant: "compact",
-    nav: [
-      { label: "docs", href: "#", active: true },
-      { label: "changelog", href: "#" },
-      { label: "patterns", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "pt", label: "PT", href: "/pt/" },
-    ],
-  };
-
 export function Example() {
-  return <Header {...compactProps} />;
-}
-`;
-
-const terminalSource = tsx`
-import { Header } from "@sektant1/phosphor-ui";
-
-const terminalProps = {
-    title: "ops console",
-    tagline: "signal lock: stable",
-    align: "left",
-    variant: "terminal",
-    mobileLayout: "stack",
-    nav: [
-      { label: "overview", href: "#", active: true },
-      { label: "logs", href: "#" },
-      { label: "alerts", href: "#" },
-      { label: "settings", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "ru", label: "RU", href: "/ru/" },
-      { code: "pt", label: "PT", href: "/pt/" },
-    ],
-  };
-
-export function Example() {
-  return <Header {...terminalProps} />;
+  return (
+    <Header
+      title="sektant's hideout"
+      align="center"
+      variant="compact"
+      nav={[
+        { label: "BLOG", href: "/blog" },
+        { label: "WIKI", href: "/wiki", active: true },
+        { label: "PROJECTS", href: "/projects" },
+        { label: "COURSE", href: "/course" },
+        { label: "ABOUT", href: "/about" },
+      ]}
+    />
+  );
 }
 `;
 
 const mobileWidthSource = tsx`
 import { Header } from "@sektant1/phosphor-ui";
 
-
-
-const mobileWidthProps = {
-    ...Terminal.args,
-    title: "mobile relay",
-  };
-
 export function Example() {
-  return <Header {...mobileWidthProps} />;
+  return (
+    <Header
+      title="sektant's hideout"
+      align="center"
+      variant="terminal"
+      nav={[
+        { label: "BLOG", href: "/blog", active: true },
+        { label: "WIKI", href: "/wiki" },
+        { label: "PROJECTS", href: "/projects" },
+        { label: "COURSE", href: "/course" },
+        { label: "ABOUT", href: "/about" },
+      ]}
+    />
+  );
 }
 `;
+
 type Story = StoryObj<typeof Header>;
 
 export const Default: Story = {
   args: {
-    title: "phosphor ui",
-    tagline: "// terminal-grade publishing on the magenta band",
+    title: "sektant's hideout",
     align: "center",
-    variant: "masthead",
-    nav: [
-      { label: "home", href: "#", active: true },
-      { label: "posts", href: "#" },
-      { label: "projects", href: "#" },
-      { label: "tags", href: "#" },
-      { label: "about", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "ru", label: "RU", href: "/ru/" },
-      { code: "pt", label: "PT", href: "/pt/" },
-    ],
+    variant: "terminal",
+    nav: hideoutNav,
+    locales,
   },
   parameters: {
     docs: {
@@ -156,12 +134,10 @@ export const Default: Story = {
 
 export const Minimal: Story = {
   args: {
-    title: "phosphor ui",
+    title: "sektant's hideout",
     align: "center",
-    nav: [
-      { label: "home", href: "#" },
-      { label: "posts", href: "#" },
-    ],
+    variant: "terminal",
+    nav: hideoutNav.slice(0, 2),
   },
   parameters: {
     docs: {
@@ -173,40 +149,16 @@ export const Minimal: Story = {
 export const Compact: Story = {
   parameters: { docs: { source: source(compactSource) } },
   args: {
-    title: "phosphor ui",
-    tagline: "field notes / components / courses",
-    align: "left",
+    title: "sektant's hideout",
+    align: "center",
     variant: "compact",
+    locales,
     nav: [
-      { label: "docs", href: "#", active: true },
-      { label: "changelog", href: "#" },
-      { label: "patterns", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "pt", label: "PT", href: "/pt/" },
-    ],
-  },
-};
-
-export const Terminal: Story = {
-  parameters: { docs: { source: source(terminalSource) } },
-  args: {
-    title: "ops console",
-    tagline: "signal lock: stable",
-    align: "left",
-    variant: "terminal",
-    mobileLayout: "stack",
-    nav: [
-      { label: "overview", href: "#", active: true },
-      { label: "logs", href: "#" },
-      { label: "alerts", href: "#" },
-      { label: "settings", href: "#" },
-    ],
-    locales: [
-      { code: "en", label: "EN", href: "/", active: true },
-      { code: "ru", label: "RU", href: "/ru/" },
-      { code: "pt", label: "PT", href: "/pt/" },
+      { label: "BLOG", href: "/blog" },
+      { label: "WIKI", href: "/wiki", active: true },
+      { label: "PROJECTS", href: "/projects" },
+      { label: "COURSE", href: "/course" },
+      { label: "ABOUT", href: "/about" },
     ],
   },
 };
@@ -214,8 +166,7 @@ export const Terminal: Story = {
 export const MobileWidth: Story = {
   parameters: { docs: { source: source(mobileWidthSource) } },
   args: {
-    ...Terminal.args,
-    title: "mobile relay",
+    ...Default.args,
   },
   decorators: [
     (Story) => (

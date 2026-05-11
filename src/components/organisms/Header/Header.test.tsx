@@ -25,6 +25,20 @@ describe("Header", () => {
     expect(within(nav).getByRole("link", { name: /posts/i })).toBeTruthy();
   });
 
+  test("marks active nav item as the current page", () => {
+    render(
+      <Header
+        title="Z"
+        variant="terminal"
+        nav={[
+          { label: "Blog", href: "/blog", active: true },
+          { label: "Wiki", href: "/wiki" },
+        ]}
+      />
+    );
+    expect(screen.getAllByRole("link", { current: "page" })).toHaveLength(2);
+  });
+
   test("hides locale switch when fewer than 2 locales", () => {
     const { container } = render(
       <Header

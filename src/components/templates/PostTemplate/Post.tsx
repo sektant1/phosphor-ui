@@ -6,6 +6,7 @@ import type { PostBodyProps } from "../../content/MdxComponents";
 import { PostHeader } from "../../organisms/PostHeader";
 import type { PostHeaderProps } from "../../organisms/PostHeader";
 import type { PostFrontmatterData } from "../../content/PostFrontmatter";
+import { PostLayout } from "../MainframeLayout";
 
 export interface PostProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
@@ -22,6 +23,8 @@ export interface PostProps
   beforeBody?: React.ReactNode;
   afterBody?: React.ReactNode;
   afterContent?: React.ReactNode;
+  leftPanel?: React.ReactNode;
+  rightPanel?: React.ReactNode;
   sidebar?: React.ReactNode;
   sidebarLabel?: string;
   footer?: React.ReactNode;
@@ -46,6 +49,8 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
       beforeBody,
       afterBody,
       afterContent,
+      leftPanel,
+      rightPanel,
       sidebar,
       sidebarLabel = "post sidebar",
       footer,
@@ -57,8 +62,13 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
     },
     ref,
   ) => {
-    const hasSidebar =
-      sidebar !== null && sidebar !== undefined && sidebar !== false;
+    const resolvedRightPanel = rightPanel ?? sidebar;
+    const hasRightPanel =
+      resolvedRightPanel !== null &&
+      resolvedRightPanel !== undefined &&
+      resolvedRightPanel !== false;
+    const hasLeftPanel =
+      leftPanel !== null && leftPanel !== undefined && leftPanel !== false;
     const resolvedHeader =
       header ?? (
         <PostHeader title={title} {...headerProps}>
@@ -73,12 +83,20 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
         {...rest}
       >
         {beforeContent}
-        <div
+        <PostLayout
           className={cx(
             styles.content,
-            hasSidebar && styles.withSidebar,
+            hasLeftPanel && styles.withLeftPanel,
+            hasRightPanel && styles.withSidebar,
             contentClassName,
           )}
+          mainAs="div"
+          leftPanel={leftPanel}
+          leftPanelLabel="post navigation"
+          rightPanel={resolvedRightPanel}
+          rightPanelLabel={sidebarLabel}
+          rightPanelClassName={cx(styles.sidebar, sidebarClassName)}
+          stickyPanels={stickySidebar}
         >
           <div className={styles.main}>
             {resolvedHeader}
@@ -93,20 +111,7 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
               {children}
             </PostBody>
           </div>
-
-          {hasSidebar ? (
-            <aside
-              className={cx(
-                styles.sidebar,
-                stickySidebar && styles.stickySidebar,
-                sidebarClassName,
-              )}
-              aria-label={sidebarLabel}
-            >
-              {sidebar}
-            </aside>
-          ) : null}
-        </div>
+        </PostLayout>
         {afterContent}
         {footer ? <footer className={styles.footer}>{footer}</footer> : null}
       </article>

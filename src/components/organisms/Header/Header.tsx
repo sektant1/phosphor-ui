@@ -11,6 +11,21 @@ import type {
 } from "../../molecules/LocaleSwitch";
 import "./Header.scss";
 
+const DEFAULT_HIDEOUT_ASCII = [
+  "  ____  _____ _  _______  _    _   _ _____ _ ____    _   _ ___ ____  _____ ___  _   _ _____",
+  " / ___|| ____| |/ /_   _|/ \\  | \\ | |_   _( ) ___|  | | | |_ _|  _ \\| ____/ _ \\| | | |_   _|",
+  " \\___ \\|  _| | ' /  | | / _ \\ |  \\| | | | |/\\___ \\  | |_| || || | | |  _|| | | | | | | | |",
+  "  ___) | |___| . \\  | |/ ___ \\| |\\  | | |    ___) | |  _  || || |_| | |__| |_| | |_| | | |",
+  " |____/|_____|_|\\_\\ |_/_/   \\_\\_| \\_| |_|   |____/  |_| |_|___|____/|_____\\___/ \\___/  |_|",
+].join("\n");
+
+const normalizeAsciiArt = (art: string) =>
+  art
+    .replace(/^\n+|\n+$/g, "")
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .join("\n");
+
 export interface HeaderNavItem {
   label: React.ReactNode;
   href: string;
@@ -27,7 +42,9 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   homeHref?: string;
   bannerArt?: string;
   bannerFont?: BannerFontName;
+  showAsciiBanner?: boolean;
   tagline?: React.ReactNode;
+  status?: React.ReactNode;
   nav?: HeaderNavItem[];
   locales?: HeaderLocale[];
   navAriaLabel?: string;
@@ -45,7 +62,9 @@ const Header: React.FC<HeaderProps> = ({
   homeHref = "/",
   bannerArt,
   bannerFont = "Slant",
+  showAsciiBanner,
   tagline,
+  status,
   nav = [],
   locales,
   navAriaLabel = "primary",
@@ -59,19 +78,27 @@ const Header: React.FC<HeaderProps> = ({
   className,
   ...rest
 }) => {
-  const art = React.useMemo(
-    () => bannerArt ?? bannerSync(title, bannerFont),
-    [bannerArt, bannerFont, title],
-  );
+  const showBanner = showAsciiBanner ?? true;
+  const art = React.useMemo(() => {
+    if (bannerArt) return normalizeAsciiArt(bannerArt);
+
+    const asciiTitle = title.toUpperCase();
+    const generated = normalizeAsciiArt(bannerSync(asciiTitle, bannerFont));
+    if (generated !== asciiTitle) return generated;
+
+    return title.trim().toLowerCase() === "sektant's hideout"
+      ? DEFAULT_HIDEOUT_ASCII
+      : generated;
+  }, [bannerArt, bannerFont, title]);
   const resolvedNavVariant =
     navVariant ?? (variant === "terminal" ? "command" : variant === "compact" ? "tabs" : "plain");
-  const resolvedLocaleVariant =
-    localeVariant ?? (variant === "terminal" ? "terminal" : variant === "compact" ? "inline" : "segmented");
+  const resolvedLocaleVariant = localeVariant ?? "inline";
   const showLocales = locales && locales.length > 1;
   const mobileNavItems = nav.map((item) => ({
     ...item,
     glyph: item.active ? ">" : undefined,
   }));
+  const statusText = status;
 
   return (
     <header
@@ -84,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({
       )}
       {...rest}
     >
-      {variant === "masthead" ? (
+      {showBanner ? (
         <AsciiBanner
           art={art}
           fallback={title}
@@ -92,7 +119,9 @@ const Header: React.FC<HeaderProps> = ({
           label={`${title} home`}
           className="pho-header__banner"
         />
-      ) : (
+      ) : null}
+
+      {!showBanner && variant !== "masthead" ? (
         <a className="pho-header__brand" href={homeHref} aria-label={`${title} home`}>
           {variant === "terminal" ? (
             <span className="pho-header__prompt" aria-hidden="true">
@@ -101,7 +130,7 @@ const Header: React.FC<HeaderProps> = ({
           ) : null}
           <span className="pho-header__title">{title}</span>
         </a>
-      )}
+      ) : null}
 
       {tagline ? <p className="tagline">{tagline}</p> : null}
 
@@ -124,14 +153,20 @@ const Header: React.FC<HeaderProps> = ({
             </>
           ) : null}
 
-          {showLocales ? (
-            <LocaleSwitch
-              className="locale-switch"
-              locales={locales}
-              ariaLabel={localeAriaLabel}
-              variant={resolvedLocaleVariant}
-              size={variant === "masthead" ? "md" : "sm"}
-            />
+          {showLocales || statusText ? (
+            <div className="header-trailing">
+              {showLocales ? (
+                <LocaleSwitch
+                  className="locale-switch"
+                  locales={locales}
+                  ariaLabel={localeAriaLabel}
+                  variant={resolvedLocaleVariant}
+                  size={variant === "masthead" ? "md" : "sm"}
+                />
+              ) : null}
+
+              {statusText ? <span className="pho-header__status">{statusText}</span> : null}
+            </div>
           ) : null}
         </div>
       ) : null}
