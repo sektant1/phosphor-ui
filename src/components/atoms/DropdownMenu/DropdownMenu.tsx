@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DropdownMenu.module.scss";
 import { cx } from "../../../utils/classNames";
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { Glyph } from "../Glyph/index";
 
 export interface DropdownMenuItem {
   label: React.ReactNode;
