@@ -29,6 +29,22 @@ const MdPre: React.FC<AnyProps> = ({ children }) => {
   }
 };
 
+const renderPostChild = (child: React.ReactNode): React.ReactNode => {
+  if (!React.isValidElement(child)) return child;
+
+  if (child.type === React.Fragment) {
+    return React.cloneElement(child, {
+      children: React.Children.map(child.props.children, renderPostChild),
+    });
+  }
+
+  if (child.type === "pre") {
+    return <MdPre {...(child.props as AnyProps)} />;
+  }
+
+  return child;
+};
+
 const MdBlockquote: React.FC<AnyProps> = ({ children, ...rest }) => (
   <Callout variant="quote" {...(rest as React.HTMLAttributes<HTMLDivElement>)}>
     {children}
@@ -138,7 +154,9 @@ export const PostBody: React.FC<PostBodyProps> = ({
         />
       ) : null}
 
-      <Prose className={className}>{children}</Prose>
+      <Prose className={className}>
+        {React.Children.map(children, renderPostChild)}
+      </Prose>
       {after}
     </div>
   );
