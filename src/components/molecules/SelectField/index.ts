@@ -1,2 +1,2 @@
-export { SelectField } from "../../atoms/Select";
-export type { SelectProps as SelectFieldProps } from "../../atoms/Select";
+export { SelectField } from "../Select";
+export type { SelectProps as SelectFieldProps } from "../Select";

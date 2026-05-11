@@ -9,13 +9,17 @@ const meta: Meta<InputProps> = {
   component: Input,
   argTypes: {
     prompt:      { control: "text" },
+    command:     { control: "text" },
     placeholder: { control: "text" },
     cursor:      { control: "boolean" },
+    size:        { control: "select", options: ["sm", "md", "lg"] },
+    variant:     { control: "select", options: ["default", "terminal"] },
   },
   args: {
     prompt:      "~/$",
     placeholder: "type command",
     cursor:      true,
+    size:        "md",
   },
 };
 export default meta;
@@ -67,6 +71,21 @@ export function Example() {
 }
 `;
 
+const terminalSource = tsx`
+import { Input } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+    <Input
+      variant="terminal"
+      prompt="~/$"
+      placeholder="type command"
+      cursor
+    />
+  );
+}
+`;
+
 export const Default: StoryObj<InputProps> = {
   parameters: { docs: { source: source(defaultSource) } },
 };
@@ -85,4 +104,14 @@ export const Controls: StoryObj = {
       <TextareaControl aria-label="Transmission" rows={3} placeholder="multi-line transmission..." />
     </div>
   ),
+};
+
+export const Terminal: StoryObj<InputProps> = {
+  parameters: { docs: { source: source(terminalSource) } },
+  args: {
+    variant: "terminal",
+    prompt: "~/$",
+    placeholder: "type command",
+    cursor: true,
+  },
 };

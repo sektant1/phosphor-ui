@@ -3,8 +3,8 @@ import styles from "./Form.module.scss";
 import { cx } from "../../../utils/classNames";
 import { InputControl, TextareaControl } from "../../atoms/Input";
 import type { InputControlProps, TextareaControlProps } from "../../atoms/Input";
-import { SelectControl } from "../../atoms/Select";
-import type { SelectControlProps, SelectOption } from "../../atoms/Select";
+import { SelectControl } from "../Select";
+import type { SelectControlProps, SelectOption } from "../Select";
 import { FormField } from "./FormField";
 
 type FormFieldBase = {

@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./Select.module.scss";
 import { cx } from "../../../utils/classNames";
-import type { DataAttributes } from "../primitive";
-import { hasVisibleContent } from "../primitive";
+import { DropdownMenu } from "../../atoms/DropdownMenu";
+import type { DataAttributes } from "../../atoms/primitive";
+import { hasVisibleContent } from "../../atoms/primitive";
 
 export interface SelectOption {
   label: React.ReactNode;
@@ -29,7 +30,7 @@ export interface SelectControlProps
 export const SelectControl = React.forwardRef<HTMLSelectElement, SelectControlProps>(
   (
     {
-      prompt = "select",
+      prompt = false,
       options,
       className,
       controlClassName,
@@ -38,19 +39,62 @@ export const SelectControl = React.forwardRef<HTMLSelectElement, SelectControlPr
       disabled,
       onChange,
       onValueChange,
+      value,
+      defaultValue,
+      tabIndex,
+      "aria-describedby": ariaDescribedBy,
+      "aria-invalid": ariaInvalid,
       ...rest
     },
     ref,
   ) => {
+    const nativeRef = React.useRef<HTMLSelectElement | null>(null);
+    const [uncontrolledValue, setUncontrolledValue] = React.useState(
+      () => String(value ?? defaultValue ?? options.find((option) => !option.disabled)?.value ?? ""),
+    );
+    const generatedId = React.useId();
+    const triggerId = id ?? generatedId;
+    const selectedValue = String(value ?? uncontrolledValue);
+    const selectedOption = options.find((option) => option.value === selectedValue);
+    const promptLabel = prompt === true ? "select" : prompt;
+
+    const setRefs = (node: HTMLSelectElement | null) => {
+      nativeRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    };
+
+    React.useEffect(() => {
+      if (value !== undefined) setUncontrolledValue(String(value));
+    }, [value]);
+
+    const commitValue = (nextValue: string) => {
+      if (disabled) return;
+      if (value === undefined) setUncontrolledValue(nextValue);
+
+      const select = nativeRef.current;
+      if (select) {
+        const descriptor = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+        descriptor?.set?.call(select, nextValue);
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    };
+
     return (
       <span className={cx(styles.control, controlClassName, className)}>
-        {hasVisibleContent(prompt) ? <span className={styles.prompt}>[{prompt}]</span> : null}
         <select
-          ref={ref}
-          id={id}
-          className={cx(styles.select, selectClassName)}
+          ref={setRefs}
+          className={cx(styles.nativeSelect, selectClassName)}
           disabled={disabled}
+          tabIndex={-1}
+          value={selectedValue}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={ariaInvalid}
           onChange={(event) => {
+            setUncontrolledValue(event.currentTarget.value);
             onChange?.(event);
             onValueChange?.(event.currentTarget.value, event);
           }}
@@ -62,7 +106,29 @@ export const SelectControl = React.forwardRef<HTMLSelectElement, SelectControlPr
             </option>
           ))}
         </select>
-        <span className={styles.chev} aria-hidden="true" />
+        <DropdownMenu
+          className={styles.dropdown}
+          triggerId={triggerId}
+          triggerClassName={styles.trigger}
+          menuClassName={styles.menu}
+          label={(
+            <>
+              {hasVisibleContent(promptLabel) ? <span className={styles.prompt}>[{promptLabel}]</span> : null}
+              <span className={styles.value}>{selectedOption?.label ?? selectedValue}</span>
+            </>
+          )}
+          items={options}
+          selectedValue={selectedValue}
+          menuRole="listbox"
+          menuLabel={typeof promptLabel === "string" ? promptLabel : undefined}
+          disabled={disabled}
+          onSelect={commitValue}
+          triggerProps={{
+            "aria-describedby": ariaDescribedBy,
+            "aria-invalid": ariaInvalid,
+            tabIndex,
+          }}
+        />
       </span>
     );
   },

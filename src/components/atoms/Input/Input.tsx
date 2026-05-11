@@ -5,13 +5,18 @@ import type { DataAttributes } from "../primitive";
 import { hasVisibleContent } from "../primitive";
 
 type FieldState = "default" | "error" | "success";
+export type InputVariant = "default" | "terminal";
+export type InputSize = "sm" | "md" | "lg";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
   label?: React.ReactNode;
   helpText?: React.ReactNode;
   error?: React.ReactNode;
   prompt?: string;
+  command?: React.ReactNode;
   cursor?: boolean;
+  size?: InputSize;
+  variant?: InputVariant;
   state?: FieldState;
   inputClassName?: string;
   rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
@@ -28,7 +33,10 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
   (
     {
       prompt = "~/ $",
+      command,
       cursor = true,
+      size = "md",
+      variant = "default",
       className,
       inputClassName,
       id,
@@ -92,9 +100,34 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
       [],
     );
 
+    if (variant === "terminal" && hasVisibleContent(command)) {
+      return (
+        <span className={cx(styles.terminalPrompt, styles[size], className)}>
+          {prompt ? <span className={styles.terminalPromptText}>{prompt}</span> : null}
+          <span className={styles.terminalCommand}>{command}</span>
+          {cursor ? (
+            <span className={styles.terminalPromptCursor} aria-hidden="true">
+              ▮
+            </span>
+          ) : null}
+        </span>
+      );
+    }
+
     return (
-      <span className={cx(styles.wrap, className)}>
-        {prompt ? <span className={styles.prompt}>{prompt}</span> : null}
+      <span
+        className={cx(
+          styles.wrap,
+          styles[size],
+          variant === "terminal" && styles.terminalWrap,
+          className,
+        )}
+      >
+        {prompt ? (
+          <span className={cx(styles.prompt, variant === "terminal" && styles.terminalPromptText)}>
+            {prompt}
+          </span>
+        ) : null}
         <span className={styles.inputCell}>
           <input
             {...rest}
@@ -107,6 +140,8 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
             readOnly={readOnly}
             className={cx(
               styles.input,
+              styles[size],
+              variant === "terminal" && styles.terminalInput,
               cursor && styles.inputWithCursor,
               cursorVisible && styles.inputHidePlaceholder,
               inputClassName,
@@ -168,8 +203,23 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
               className={cx(styles.cursorLayer, cursorVisible && styles.cursorLayerActive)}
               aria-hidden="true"
             >
-              <span className={styles.cursorMirror}>{visibleValueBeforeCursor}</span>
-              <span className={cx(styles.cursor, cursorSteady && styles.cursorSteady)}>▮</span>
+              <span
+                className={cx(
+                  styles.cursorMirror,
+                  variant === "terminal" && styles.terminalCursorMirror,
+                )}
+              >
+                {visibleValueBeforeCursor}
+              </span>
+              <span
+                className={cx(
+                  styles.cursor,
+                  variant === "terminal" && styles.terminalPromptCursor,
+                  cursorSteady && styles.cursorSteady,
+                )}
+              >
+                ▮
+              </span>
             </span>
           ) : null}
         </span>
@@ -254,6 +304,7 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   helpText?: React.ReactNode;
   error?: React.ReactNode;
   cursor?: boolean;
+  size?: InputSize;
   state?: FieldState;
   textareaClassName?: string;
   rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
@@ -270,6 +321,7 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
   (
     {
       cursor = true,
+      size = "md",
       className,
       textareaClassName,
       id,
@@ -331,7 +383,7 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
     );
 
     return (
-      <span className={cx(styles.textareaCell, className)}>
+      <span className={cx(styles.textareaCell, styles[size], className)}>
         <textarea
           {...rest}
           ref={ref}
@@ -343,6 +395,7 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
           className={cx(
             styles.wrap,
             styles.textarea,
+            styles[size],
             cursor && styles.inputWithCursor,
             cursorVisible && styles.inputHidePlaceholder,
             textareaClassName,
@@ -404,7 +457,9 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
             className={cx(styles.textareaCursorLayer, cursorVisible && styles.cursorLayerActive)}
             aria-hidden="true"
           >
-            <span className={styles.textareaCursorMirror}>{visibleValueBeforeCursor}</span>
+            <span className={cx(styles.textareaCursorMirror, styles[size])}>
+              {visibleValueBeforeCursor}
+            </span>
             <span className={cx(styles.cursor, styles.textareaCursor, cursorSteady && styles.cursorSteady)}>▮</span>
           </span>
         ) : null}

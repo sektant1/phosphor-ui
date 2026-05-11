@@ -1,7 +1,6 @@
 export * from "./AuthorCard";
 export * from "./Breadcrumbs";
 export * from "./Callout";
-export * from "./DropdownMenu";
 export * from "./EmptyState";
 export * from "./Field";
 export * from "./FormField";
@@ -21,7 +20,7 @@ export type {
   SearchResultListProps,
   SearchResultProps,
 } from "./SearchResult";
-export * from "./SelectField";
+export * from "./Select";
 export * from "./ShareBar";
 export * from "./Stepper";
 export * from "./TableOfContents";

@@ -4,8 +4,14 @@ import { Select, SelectControl } from "./Select";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Select> = {
-  title: "Atoms/Select",
+  title: "Molecules/Select",
   component: Select,
+  argTypes: {
+    prompt: { control: "boolean" },
+  },
+  args: {
+    prompt: false,
+  },
 };
 export default meta;
 
@@ -14,7 +20,7 @@ import { Select } from "@sektant1/phosphor-ui";
 
 const defaultProps = {
     label: "status",
-    prompt: "mode",
+    prompt: false,
     helpText: "route content through the selected publication state",
     defaultValue: "draft",
     options: [
@@ -34,7 +40,7 @@ import { Select } from "@sektant1/phosphor-ui";
 
 const errorProps = {
     label: "clearance",
-    prompt: "auth",
+    prompt: false,
     defaultValue: "invalid",
     error: "clearance level rejected",
     options: [
@@ -54,7 +60,7 @@ import { Select } from "@sektant1/phosphor-ui";
 
 const disabledProps = {
     label: "uplink",
-    prompt: "lock",
+    prompt: false,
     defaultValue: "offline",
     disabled: true,
     helpText: "locked while synchronization is offline",
@@ -77,7 +83,7 @@ import { Select } from "@sektant1/phosphor-ui";
 
 const longValueProps = {
     label: "routing profile",
-    prompt: "profile",
+    prompt: false,
     defaultValue: "field-ops-extended",
     options: [
       { label: "field operations extended telemetry channel", value: "field-ops-extended" },
@@ -114,7 +120,7 @@ export const Default: Story = {
   parameters: { docs: { source: source(defaultSource) } },
   args: {
     label: "status",
-    prompt: "mode",
+    prompt: false,
     helpText: "route content through the selected publication state",
     defaultValue: "draft",
     options: [
@@ -129,7 +135,7 @@ export const Error: Story = {
   parameters: { docs: { source: source(errorSource) } },
   args: {
     label: "clearance",
-    prompt: "auth",
+    prompt: false,
     defaultValue: "invalid",
     error: "clearance level rejected",
     options: [
@@ -144,7 +150,7 @@ export const Disabled: Story = {
   parameters: { docs: { source: source(disabledSource) } },
   args: {
     label: "uplink",
-    prompt: "lock",
+    prompt: false,
     defaultValue: "offline",
     disabled: true,
     helpText: "locked while synchronization is offline",
@@ -160,7 +166,7 @@ export const LongValue: Story = {
   parameters: { docs: { source: source(longValueSource) } },
   args: {
     label: "routing profile",
-    prompt: "profile",
+    prompt: false,
     defaultValue: "field-ops-extended",
     options: [
       { label: "field operations extended telemetry channel", value: "field-ops-extended" },

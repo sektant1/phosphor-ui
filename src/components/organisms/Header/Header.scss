@@ -212,7 +212,7 @@
 
     .header-toolbar {
       justify-content: flex-start;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .header-nav--desktop {
@@ -222,6 +222,7 @@
     .header-nav--mobile {
       display: block;
       flex: 1 1 auto;
+      min-width: 0;
       width: 100%;
     }
 
@@ -238,6 +239,10 @@
       display: grid;
       gap: 0.45rem;
       grid-template-columns: 1fr;
+    }
+
+    &.pho-header--mobile-scroll .header-nav--mobile {
+      overflow: visible;
     }
 
     &.pho-header--mobile-stack .locale-switch {

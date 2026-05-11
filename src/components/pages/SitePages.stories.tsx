@@ -2,10 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { H2 } from "../atoms/Headings";
 import { Hr } from "../atoms/Hr";
+import { Input } from "../atoms/Input";
 import { ProgressBar } from "../atoms/ProgressBar";
 import { ReadingRail } from "../atoms/ReadingRail";
 import { Tag } from "../atoms/Tag";
-import { TerminalPrompt } from "../atoms/TerminalPrompt";
 import { Callout } from "../molecules/Callout";
 import { CourseCard } from "../organisms/CourseCard";
 import Pagination from "../molecules/Pagination";
@@ -210,7 +210,7 @@ export function Example() {
 
 const postPageSource = tsx`
 import React from "react";
-import { Callout, Pagination, Post, ProgressBar, ReadingRail, Stepper, StepperFoot, TableOfContents, TerminalPrompt, useReadingProgress } from "@sektant1/phosphor-ui";
+import { Callout, Input, Pagination, Post, ProgressBar, ReadingRail, Stepper, StepperFoot, TableOfContents, useReadingProgress } from "@sektant1/phosphor-ui";
 
 function DemoPage({ children }: { children: React.ReactNode }) {
   return <main>{children}</main>;
@@ -280,7 +280,7 @@ export function Example() {
               <>
                 <Hr />
                 <div className="pho-flicker-in">
-                  <TerminalPrompt prompt="~/zone-net/posts/0042 $" command="cat next.txt" />
+                  <Input variant="terminal" prompt="~/zone-net/posts/0042 $" command="cat next.txt" />
                 </div>
                 <StepperFoot
                   prev={{
@@ -557,7 +557,7 @@ export const PostPage: Story = {
             <>
               <Hr />
               <div className="pho-flicker-in">
-                <TerminalPrompt prompt="~/zone-net/posts/0042 $" command="cat next.txt" />
+                <Input variant="terminal" prompt="~/zone-net/posts/0042 $" command="cat next.txt" />
               </div>
               <StepperFoot
                 prev={{

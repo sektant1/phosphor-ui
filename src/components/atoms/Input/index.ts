@@ -9,6 +9,8 @@ export {
 export type {
   InputControlProps,
   InputProps,
+  InputSize,
+  InputVariant,
   TextareaControlProps,
   TextareaProps,
 } from "./Input";

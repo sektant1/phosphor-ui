@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { InputControl, TextareaControl } from "../../atoms/Input";
-import { SelectControl } from "../../atoms/Select";
+import { SelectControl } from "../Select";
 import { ControlFrame, Field, FieldError, FieldHint, FieldLabel } from "./Field";
 import type { FieldProps } from "./Field";
 import { source, tsx } from "../../../stories/source";

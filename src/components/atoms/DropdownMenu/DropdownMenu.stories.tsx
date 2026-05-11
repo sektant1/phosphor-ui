@@ -4,7 +4,7 @@ import { DropdownMenu } from "./DropdownMenu";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof DropdownMenu> = {
-  title: "Molecules/DropdownMenu",
+  title: "Atoms/DropdownMenu",
   component: DropdownMenu,
 };
 export default meta;

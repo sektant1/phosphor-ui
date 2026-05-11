@@ -1,20 +1,29 @@
 .root {
   display: inline-block;
+  max-width: 100%;
+  min-width: 0;
   position: relative;
+  width: fit-content;
 }
 
 .trigger {
   align-items: center;
-  background: transparent;
+  background: var(--pho-color-background-raised);
   border: 1px solid var(--pho-color-primary-faint);
-  color: var(--pho-color-primary);
-  cursor: pointer;
-  display: inline-flex;
-  font-family: var(--pho-font-terminal);
-  font-size: var(--pho-type-control-lg-size);
+  color: var(--pho-color-primary-strong);
+  cursor: var(--pho-cursor-pointer);
+  display: grid;
+  font-family: var(--pho-font-control);
+  font-size: var(--pho-type-control-sm-size);
   gap: 0.5rem;
-  letter-spacing: 0.08em;
-  padding: 0.35rem 0.65rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  line-height: 1.2;
+  max-width: 100%;
+  min-height: 2.35rem;
+  min-width: 0;
+  padding: 0.42rem 0.6rem;
+  text-align: left;
+  text-shadow: var(--pho-glow-primary-soft);
   text-transform: uppercase;
   transition:
     background-color var(--pho-motion-fast) var(--pho-ease-out),
@@ -22,26 +31,34 @@
     box-shadow var(--pho-motion-fast) var(--pho-ease-out),
     color var(--pho-motion-fast) var(--pho-ease-out),
     text-shadow var(--pho-motion-fast) var(--pho-ease-out);
+  width: 100%;
 }
 
 .trigger:hover,
 .open {
-  background: var(--pho-alpha-primary-08);
-  border-color: var(--pho-color-primary);
+  border-color: var(--pho-color-primary-muted);
   box-shadow: var(--pho-active-glow);
-  text-shadow: var(--pho-glow-primary);
 }
 
 .trigger:focus-visible {
+  border-color: var(--pho-color-primary);
   outline: var(--pho-focus-ring);
   outline-offset: var(--pho-focus-offset);
   box-shadow: var(--pho-focus-glow);
+}
+
+.trigger:disabled {
+  color: var(--pho-color-text-faint);
+  cursor: var(--pho-cursor-disabled);
+  text-shadow: none;
 }
 
 .chev {
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
+  line-height: 1;
+  pointer-events: none;
 }
 
 .menu {
@@ -50,10 +67,11 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32), inset 0 0 18px var(--pho-alpha-primary-05);
   display: grid;
   left: 0;
-  min-width: 12rem;
+  min-width: 100%;
   padding: 0.35rem;
   position: absolute;
   top: calc(100% + 0.35rem);
+  width: max-content;
   z-index: var(--z-drawer);
 }
 
@@ -76,21 +94,28 @@
   background: transparent;
   border: 0;
   color: var(--pho-color-primary-muted);
-  cursor: pointer;
+  cursor: var(--pho-cursor-pointer);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-sm-size);
+  min-width: 0;
+  overflow: hidden;
   padding: 0.55rem 0.65rem;
+  position: relative;
   text-align: left;
   text-decoration: none;
+  text-overflow: ellipsis;
   transition:
     background-color var(--pho-motion-fast) var(--pho-ease-out),
     color var(--pho-motion-fast) var(--pho-ease-out),
     text-shadow var(--pho-motion-fast) var(--pho-ease-out);
+  white-space: nowrap;
+  width: 100%;
 }
 
 .item:hover:not(:disabled),
 .item:focus-visible,
-.item[aria-disabled="true"]:focus-visible {
+.item[aria-disabled="true"]:focus-visible,
+.selected {
   background: var(--pho-alpha-primary-10);
   color: var(--pho-color-primary-strong);
   outline: 0;
@@ -99,7 +124,7 @@
 
 .item:disabled,
 .item[aria-disabled="true"] {
-  cursor: not-allowed;
+  cursor: var(--pho-cursor-disabled);
   opacity: 0.45;
 }
 

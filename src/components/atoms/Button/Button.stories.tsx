@@ -18,6 +18,7 @@ const meta: Meta<ButtonProps> = {
   title: "Atoms/Button",
   component: Button,
   argTypes: {
+    children: { control: "text" },
     variant:  { control: "inline-radio", options: variants },
     size:     { control: "inline-radio", options: sizes },
     disabled: { control: "boolean" },

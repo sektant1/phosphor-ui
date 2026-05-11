@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { Input, Textarea } from "../../atoms/Input";
-import { Select } from "../../atoms/Select";
+import { Select } from "../Select";
 import { Form } from "./Form";
 import { FormField } from "./FormField";
 import { ContentStatusBadge } from "./FormField";

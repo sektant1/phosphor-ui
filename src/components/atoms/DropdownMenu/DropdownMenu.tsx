@@ -12,14 +12,19 @@ export interface DropdownMenuItem {
   destructive?: boolean;
 }
 
-export interface DropdownMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+export interface DropdownMenuProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "onSelect"> {
   label: React.ReactNode;
   items: DropdownMenuItem[];
   onSelect?: (value: string, item: DropdownMenuItem) => void;
   align?: "start" | "end";
+  disabled?: boolean;
   menuLabel?: string;
+  menuRole?: "menu" | "listbox";
+  selectedValue?: string;
+  triggerId?: string;
   triggerClassName?: string;
   menuClassName?: string;
+  triggerProps?: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "className" | "disabled" | "type">;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -27,14 +32,19 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   items,
   onSelect,
   align = "start",
+  disabled,
   menuLabel,
+  menuRole = "menu",
+  selectedValue,
+  triggerId,
   triggerClassName,
   menuClassName,
+  triggerProps,
   className,
   ...rest
 }) => {
   const [open, setOpen] = React.useState(false);
-  const rootRef = React.useRef<HTMLDivElement>(null);
+  const rootRef = React.useRef<HTMLSpanElement>(null);
   const itemRefs = React.useRef<Array<HTMLAnchorElement | HTMLButtonElement | null>>([]);
   const menuId = React.useId();
   const enabledItems = React.useMemo(
@@ -60,9 +70,10 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
   React.useEffect(() => {
     if (!open) return;
-    const first = enabledItems[0]?.index;
-    if (first !== undefined) itemRefs.current[first]?.focus();
-  }, [enabledItems, open]);
+    const selectedIndex = items.findIndex((item) => item.value === selectedValue && !item.disabled);
+    const nextIndex = selectedIndex >= 0 ? selectedIndex : enabledItems[0]?.index;
+    if (nextIndex !== undefined) itemRefs.current[nextIndex]?.focus();
+  }, [enabledItems, items, open, selectedValue]);
 
   const focusByDelta = (currentIndex: number, delta: number) => {
     if (enabledItems.length === 0) return;
@@ -81,14 +92,25 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   };
 
   return (
-    <div ref={rootRef} className={cx(styles.root, className)} {...rest}>
+    <span ref={rootRef} className={cx(styles.root, className)} {...rest}>
       <button
+        {...triggerProps}
+        id={triggerId}
         type="button"
         className={cx(styles.trigger, open && styles.open, triggerClassName)}
-        aria-haspopup="menu"
+        aria-haspopup={menuRole}
         aria-expanded={open}
         aria-controls={menuId}
+        disabled={disabled}
         onClick={() => setOpen((next) => !next)}
+        onKeyDown={(event) => {
+          triggerProps?.onKeyDown?.(event);
+          if (event.defaultPrevented) return;
+          if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
       >
         <span>{label}</span>
         <span className={styles.chev} aria-hidden="true">v</span>
@@ -96,12 +118,18 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       {open ? (
         <div
           id={menuId}
-          role="menu"
+          role={menuRole}
           aria-label={menuLabel}
           className={cx(styles.menu, align === "end" && styles.end, menuClassName)}
         >
           {items.map((item, index) => {
-            const itemClassName = cx(styles.item, item.destructive && styles.destructive);
+            const selected = item.value === selectedValue;
+            const itemRole = menuRole === "listbox" ? "option" : "menuitem";
+            const itemClassName = cx(
+              styles.item,
+              item.destructive && styles.destructive,
+              selected && styles.selected,
+            );
             const onKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement | HTMLButtonElement>) => {
               if (event.key === "ArrowDown") {
                 event.preventDefault();
@@ -132,7 +160,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 <a
                   key={item.value}
                   ref={(node) => { itemRefs.current[index] = node; }}
-                  role="menuitem"
+                  role={itemRole}
+                  aria-selected={menuRole === "listbox" ? selected : undefined}
                   aria-disabled={item.disabled || undefined}
                   tabIndex={item.disabled ? -1 : 0}
                   className={itemClassName}
@@ -158,7 +187,8 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 key={item.value}
                 ref={(node) => { itemRefs.current[index] = node; }}
                 type="button"
-                role="menuitem"
+                role={itemRole}
+                aria-selected={menuRole === "listbox" ? selected : undefined}
                 disabled={item.disabled}
                 className={itemClassName}
                 onClick={() => handleItemSelect(item)}
@@ -170,6 +200,6 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
           })}
         </div>
       ) : null}
-    </div>
+    </span>
   );
 };

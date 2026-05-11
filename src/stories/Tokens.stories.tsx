@@ -83,7 +83,7 @@ const TYPE_VARIANTS: Array<{ cls: string; label: string; sample: string }> = [
   { cls: "t-caption", label: "updated 2026-05-10", sample: "Caption — --pho-type-caption-size" },
   { cls: "t-mono", label: "grep -r 'transmission' .", sample: "Mono — --pho-type-mono-size" },
   { cls: "t-code", label: "npm run validate:package", sample: "Code — --pho-type-mono-size" },
-  { cls: "t-terminal", label: "CH 0x4C · NORM", sample: "Terminal — VT323 + tracking-wider" },
+  { cls: "t-terminal", label: "CH 0x4C · NORM", sample: "Terminal — VCR OSD Mono + tracking-wider" },
   { cls: "t-stamp", label: "// LAST CONTACT //", sample: "Stamp — caption + tracking-stamp" },
   { cls: "t-prompt", label: "~/zone-net $", sample: "Prompt — terminal + accent glow" },
   { cls: "t-glow", label: "glowing emerald text", sample: "Glow — primary + token glow" },
@@ -310,11 +310,12 @@ const LINE: Array<[string, string]> = [
 ];
 
 const FONT_STACKS: Array<[string, string]> = [
-  ["--pho-font-display", "Space Mono -> JetBrains Mono -> ui-monospace"],
-  ["--pho-font-heading", "Space Mono -> JetBrains Mono -> ui-monospace"],
-  ["--pho-font-body", "JetBrains Mono -> Space Mono -> ui-monospace"],
-  ["--pho-font-code", "JetBrains Mono -> Space Mono -> ui-monospace"],
-  ["--pho-font-terminal", "VT323 -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-display", "Bender -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-heading", "Bender -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-body", "JetBrains Mono -> Bender -> ui-monospace"],
+  ["--pho-font-code", "JetBrains Mono -> Bender -> ui-monospace"],
+  ["--pho-font-terminal", "VCR OSD Mono -> JetBrains Mono -> ui-monospace"],
+  ["--pho-font-control", "Bender -> JetBrains Mono -> ui-monospace"],
 ];
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (

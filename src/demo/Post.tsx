@@ -10,7 +10,7 @@ import {
   Tag,
   Stepper,
   StepperFoot,
-  TerminalPrompt,
+  Input,
   H1,
 } from "../components";
 import {
@@ -156,7 +156,8 @@ export const Post: React.FC = () => {
         <Hr />
 
         <div className="pho-flicker-in">
-          <TerminalPrompt
+          <Input
+            variant="terminal"
             prompt="~/zone-net/posts/0042 $"
             command="cat next.txt"
           />

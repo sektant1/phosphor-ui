@@ -29,7 +29,7 @@ const PRINCIPLES: Array<[string, string]> = [
   ["No emoji", "Box-drawing glyphs only: ▌ ▸ ▾ █ ▓ ▒ ░ ☢ ◇."],
   ["Glow over shadows", "Emphasis = text-shadow: var(--glow-emerald)."],
   ["Inverted block hover", "background: var(--phosphor); color: var(--bg) — no transitions."],
-  ["Mono fonts only", "Space Mono, JetBrains Mono, VT323."],
+  ["Mono fonts only", "Bender, VCR OSD Mono, JetBrains Mono."],
 ];
 
 const Caption: React.FC<{ children: React.ReactNode }> = ({ children }) => (

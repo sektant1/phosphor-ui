@@ -1,0 +1,121 @@
+.root {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.label {
+  color: var(--pho-color-text-muted);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-ui-xs-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.control {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+  width: fit-content;
+}
+
+.dropdown {
+  max-width: 100%;
+  width: 100%;
+}
+
+.trigger {
+  background: var(--pho-color-background-raised);
+  color: var(--pho-color-primary-strong);
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.trigger > span:first-child {
+  align-items: center;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  min-width: 0;
+}
+
+.prompt {
+  color: var(--pho-color-accent);
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.value {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-control-sm-size);
+  line-height: 1.2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: var(--pho-glow-primary-soft);
+  white-space: nowrap;
+}
+
+.nativeSelect {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.trigger:disabled {
+  color: var(--pho-color-text-faint);
+  text-shadow: none;
+}
+
+.menu {
+  min-width: 100%;
+}
+
+.disabledField .trigger {
+  background: var(--pho-color-background-deep);
+  opacity: 0.64;
+}
+
+.help,
+.error {
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-caption-size);
+  line-height: var(--pho-line-normal);
+}
+
+.help {
+  color: var(--pho-color-text-faint);
+}
+
+.error {
+  color: var(--pho-color-danger);
+  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+}
+
+.errorField .label,
+.errorField .prompt,
+.errorField .value {
+  color: var(--pho-color-danger-strong);
+}
+
+.errorField .trigger {
+  border-color: var(--pho-color-danger-emphasis);
+  box-shadow: 0 0 0 1px var(--pho-color-danger-faint);
+}
+
+@media (max-width: 480px) {
+  .prompt {
+    display: none;
+  }
+
+  .trigger > span:first-child {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

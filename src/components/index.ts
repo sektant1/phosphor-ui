@@ -21,6 +21,8 @@ export {
 export type {
   InputControlProps,
   InputProps,
+  InputSize,
+  InputVariant,
   TextareaControlProps,
   TextareaProps,
 } from "./atoms/Input";
@@ -87,8 +89,8 @@ export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "./molecule
 export { Checkbox, CheckboxControl, CheckboxField } from "./atoms/Checkbox";
 export type { CheckboxControlProps, CheckboxProps } from "./atoms/Checkbox";
 
-export { Select, SelectControl, SelectField } from "./atoms/Select";
-export type { SelectControlProps, SelectOption, SelectProps } from "./atoms/Select";
+export { Select, SelectControl, SelectField } from "./molecules/Select";
+export type { SelectControlProps, SelectOption, SelectProps } from "./molecules/Select";
 
 export { Tabs } from "./molecules/Tabs";
 export type { TabItem, TabsProps } from "./molecules/Tabs";
@@ -96,8 +98,8 @@ export type { TabItem, TabsProps } from "./molecules/Tabs";
 export { Tooltip } from "./molecules/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./molecules/Tooltip";
 
-export { DropdownMenu } from "./molecules/DropdownMenu";
-export type { DropdownMenuItem, DropdownMenuProps } from "./molecules/DropdownMenu";
+export { DropdownMenu } from "./atoms/DropdownMenu";
+export type { DropdownMenuItem, DropdownMenuProps } from "./atoms/DropdownMenu";
 
 export { Breadcrumbs } from "./molecules/Breadcrumbs";
 export type { BreadcrumbItem, BreadcrumbsProps } from "./molecules/Breadcrumbs";
@@ -222,9 +224,6 @@ export type {
 
 export { TableOfContents } from "./molecules/TableOfContents";
 export type { TableOfContentsProps, TocItem } from "./molecules/TableOfContents";
-
-export { TerminalPrompt } from "./atoms/TerminalPrompt";
-export type { TerminalPromptProps } from "./atoms/TerminalPrompt";
 
 export { VideoPlayer } from "./organisms/VideoPlayer";
 export type { VideoPlayerProps, VideoSource } from "./organisms/VideoPlayer";

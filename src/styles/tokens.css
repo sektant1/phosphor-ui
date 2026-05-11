@@ -128,26 +128,30 @@
 
   /* ── typography stacks ─────────────────────────────────── */
   --font-display:
-    "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, monospace;
+    "Bender", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --font-heading:
-    "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, monospace;
+    "Bender", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --font-body:
-    "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, monospace;
+    "JetBrains Mono", "Bender", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --font-code:
-    "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, monospace;
+    "JetBrains Mono", "Bender", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
   --font-terminal:
-    "VT323", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    "VCR OSD Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
+  --font-control:
+    "Bender", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 
   --pho-font-display: var(--font-display);
   --pho-font-heading: var(--font-heading);
   --pho-font-body: var(--font-body);
   --pho-font-code: var(--font-code);
   --pho-font-terminal: var(--font-terminal);
+  --pho-font-control: var(--font-control);
 
   /* ── code-block tokens (all greens, no warm channels) ──── */
   --code-bg: #03110a;
