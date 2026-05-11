@@ -1,13 +1,3 @@
-export * as admin from "./admin";
-export * as atoms from "./atoms";
-export * as content from "./content";
-export * as legacy from "./legacy";
-export * as molecules from "./molecules";
-export * as organisms from "./organisms";
-export * as pages from "./pages";
-export * as presets from "./presets";
-export * as templates from "./templates";
-
 export { Button } from "./atoms/Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./atoms/Button";
 
@@ -96,9 +86,6 @@ export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "./molecule
 
 export { Checkbox, CheckboxControl, CheckboxField } from "./atoms/Checkbox";
 export type { CheckboxControlProps, CheckboxProps } from "./atoms/Checkbox";
-
-export { Switch, SwitchControl, SwitchField } from "./atoms/Switch";
-export type { SwitchControlProps, SwitchProps } from "./atoms/Switch";
 
 export { Select, SelectControl, SelectField } from "./atoms/Select";
 export type { SelectControlProps, SelectOption, SelectProps } from "./atoms/Select";

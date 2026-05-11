@@ -6,7 +6,7 @@ The current component library already has useful atomic folders, but the public 
 
 Primary architecture issues:
 
-- `src/components/index.ts` exports public UI components, page-level components, admin workflows, and compatibility aliases from one namespace.
+- `src/components/index.ts` exports public UI components, page-level components, and admin workflows from one namespace.
 - `content/` components (`Prose`, `MdxComponents`, `PostBody`, `CodeBlock`) function as typography foundations, molecules, and organisms but sit outside the target taxonomy.
 - The generic page template has been removed; page-level composition now lives in concrete pages such as `Post`, while generic layout primitives remain in `templates/Layout`.
 - `PostListing` exports a nested `PostRow`; `RelatedPosts`, `SeriesNav`, `StepperFoot`, and `SearchResult` also render adjacent/list-style post links.
@@ -29,7 +29,6 @@ src/
     organisms/
     templates/
     pages/
-    legacy/
 ```
 
 ## Component Classification Table
@@ -58,7 +57,6 @@ src/
 | ProgressBar | src/components/atoms/ProgressBar | Atoms | KEEP | Atoms/ProgressBar | Primitive progress indicator; several components hand-roll progress visuals and should compose it. |
 | Select | src/components/atoms/Select | Atoms | KEEP | Atoms/Select | Primitive select control. |
 | StatPill | src/components/atoms/StatPill | Molecules | MOVE | Molecules/StatPill | It composes label/value status semantics, not just a raw primitive. |
-| Switch | src/components/atoms/Switch | Atoms | KEEP | Atoms/Switch | Primitive boolean input with switch role. |
 | Tag | src/components/atoms/Tag | Atoms | KEEP | Atoms/Tag | Primitive chip/label. |
 | TerminalPrompt | src/components/atoms/TerminalPrompt | Atoms | KEEP | Atoms/TerminalPrompt | Small terminal text row; `Footer` repeats this visual behavior. |
 | Text | src/components/atoms/Text | Atoms | KEEP | Atoms/Text | Primitive text variant wrapper. |
@@ -223,7 +221,7 @@ Recommendation:
 - Make `StatusSelect` wrap canonical `Select` later.
 - Do not merge admin workflows into public molecules without proving cross-product reuse.
 
-Migration risk: medium. These are likely app-specific but exported, so backward compatibility matters.
+Migration risk: medium. These are likely app-specific and exported.
 
 ### Visual CRT / Display Overlap
 
@@ -419,12 +417,12 @@ Target categories: Molecules.
 
 | Legacy component | Replacement | Deprecation note to eventually add | Thin wrapper? |
 |---|---|---|---|
-| StatPill current atom path | Molecules/StatPill | `Import StatPill from molecules or root export; atom path is compatibility only.` | Yes. |
-| Tooltip current atom path | Molecules/Tooltip | `Tooltip is a molecule; atom path is compatibility only.` | Yes. |
-| PdaWindow current organism path | Molecules/PdaWindow | `PdaWindow is a molecule; organism path is compatibility only.` | Yes. |
-| ReadingRail current organism path | Atoms/ReadingRail | `ReadingRail is an atom; organism path is compatibility only.` | Yes. |
-| AsciiBanner current organism path | Molecules/AsciiBanner | `AsciiBanner is a molecule; organism path is compatibility only.` | Yes. |
-| BootNav current organism path | Molecules/BootNav | `BootNav is a molecule; organism path is compatibility only.` | Yes. |
+| StatPill current atom path | Molecules/StatPill | `Import StatPill from the root export.` | Yes. |
+| Tooltip current atom path | Molecules/Tooltip | `Import Tooltip from the root export.` | Yes. |
+| PdaWindow current organism path | Molecules/PdaWindow | `Import PdaWindow from the root export.` | Yes. |
+| ReadingRail current organism path | Atoms/ReadingRail | `Import ReadingRail from the root export.` | Yes. |
+| AsciiBanner current organism path | Molecules/AsciiBanner | `Import AsciiBanner from the root export.` | Yes. |
+| BootNav current organism path | Molecules/BootNav | `Import BootNav from the root export if it returns.` | Yes. |
 | SeriesNav current organism path | Molecules/SeriesNav or AdjacentNav | `SeriesNav moved to molecules; use AdjacentNav for generic prev/next navigation.` | Maybe, depending on merge choice. |
 | Glyphs current organism path | Foundations/Glyphs + Atoms/Glyph | `Glyph moved to atoms; glyph catalog moved to foundations.` | Maybe; catalog and primitive should split. |
 | admin editor exports from root | Separate admin namespace or pages | `Admin/editor components are app workflows and may move to admin exports.` | Yes, through root barrel re-exports. |
@@ -451,7 +449,7 @@ Create folders and barrel exports for `foundations`, `atoms`, `molecules`, `orga
 
 ### Phase 3
 
-Move obvious atoms/molecules with no behavior changes. Preserve files, SCSS modules, class names, CSS variables, animation names, and public exports through compatibility barrels.
+Move obvious atoms/molecules with no behavior changes. Preserve files, SCSS modules, class names, CSS variables, animation names, and root public exports.
 
 ### Phase 4
 
@@ -459,7 +457,7 @@ Keep generic layout primitives in `templates/Layout`; build page-level screens f
 
 ### Phase 5
 
-Wrap legacy components. Add deprecation comments and compatibility exports without removing names from `src/components/index.ts`.
+Remove unused wrapper components and keep only root exports that are actively used.
 
 ### Phase 6
 
@@ -467,7 +465,7 @@ Split large organisms. Start with low-risk extractions (`PostRow`, `Drawer`, `Co
 
 ### Phase 7
 
-Update Storybook taxonomy after source taxonomy exists. Stories should point at canonical categories while legacy wrappers keep minimal compatibility stories.
+Update Storybook taxonomy after source taxonomy exists. Stories should point at canonical categories.
 
 ### Phase 8
 

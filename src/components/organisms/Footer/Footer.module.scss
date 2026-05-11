@@ -124,8 +124,16 @@
   text-shadow: var(--pho-glow-accent);
 }
 .prompt .cursor {
-  color: var(--pho-color-primary);
-  animation: footerBlink 1s steps(2) infinite;
+  align-self: center;
+  background: var(--pho-color-primary);
+  box-shadow: var(--pho-caret-glow);
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  width: 0.58em;
+  animation: footerBlink var(--pho-caret-blink-duration) step-end infinite;
 }
 
 .meta {
@@ -142,7 +150,8 @@
   50%      { opacity: 1; }
 }
 @keyframes footerBlink {
-  to { opacity: 0; }
+  0%, 54% { opacity: 1; }
+  55%, 100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .led, .prompt .cursor { animation: none; }

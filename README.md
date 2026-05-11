@@ -112,16 +112,6 @@ import { SiteShell, Post, Button, Callout, TableOfContents } from "@sektant1/pho
 
 The physical folders are organized for maintainers. Consumers should prefer the stable root exports so components can move internally without breaking your site.
 
-Category subpaths are available when you want smaller, explicit imports:
-
-```tsx
-import { Button, Tag } from "@sektant1/phosphor-ui/atoms";
-import { Callout, TableOfContents } from "@sektant1/phosphor-ui/molecules";
-import { PostListing } from "@sektant1/phosphor-ui/organisms";
-import { PostBody } from "@sektant1/phosphor-ui/content";
-import { VideoPlayer } from "@sektant1/phosphor-ui/video";
-```
-
 ## Components
 
 | Group | Components |
@@ -131,7 +121,7 @@ import { VideoPlayer } from "@sektant1/phosphor-ui/video";
 | **Content** | `Prose` `PostBody` `Callout` `CodeBlock` `Hr` `Tag` `Text` `AsciiBanner` `TerminalPrompt` |
 | **Lists** | `PostListing` `PostRow` `CourseCard` `LessonRow` `ModuleAccordion` `PrereqList` `Exercise` |
 | **Nav** | `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
-| **Form** | `Button` `Input` `Textarea` `Checkbox` `Select` `Switch` `Badge` |
+| **Form** | `Button` `Input` `Textarea` `Checkbox` `Select` `DropdownMenu` `Badge` |
 | **Feedback** | `ProgressBar` `ReadingRail` `StatPill` `Toast` `Tooltip` `VideoPlayer` |
 
 ## Recipes
@@ -227,7 +217,7 @@ Included in `global.css`:
 | `.pho-fade-up` | translate + opacity fade |
 | `.pho-stagger > *` | auto-staggered children (40–520ms) |
 | `.pho-flicker-in` | multi-step CRT flicker |
-| `.pho-blink::after` | blinking cursor |
+| `.pho-blink::after` | phosphor block cursor |
 
 All respect `prefers-reduced-motion`.
 

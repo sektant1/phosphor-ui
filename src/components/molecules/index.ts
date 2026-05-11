@@ -24,7 +24,6 @@ export type {
 export * from "./SelectField";
 export * from "./ShareBar";
 export * from "./Stepper";
-export * from "./SwitchField";
 export * from "./TableOfContents";
 export * from "./Tabs";
 export * from "./TextareaField";

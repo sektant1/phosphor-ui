@@ -47,19 +47,19 @@
 .current {
   background: var(--pho-color-accent-strong);
   border-color: var(--pho-color-primary);
-  animation: pbBlink 1.2s steps(2, end) infinite;
+  animation: pbBlink var(--pho-caret-blink-duration) step-end infinite;
 }
 
 @keyframes pbBlink {
 
   0%,
-  60% {
+  54% {
     opacity: 1;
   }
 
-  61%,
+  55%,
   100% {
-    opacity: 0.45;
+    opacity: 0.58;
   }
 }
 

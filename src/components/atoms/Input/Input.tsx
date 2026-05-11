@@ -5,12 +5,6 @@ import type { DataAttributes } from "../primitive";
 import { hasVisibleContent } from "../primitive";
 
 type FieldState = "default" | "error" | "success";
-const cursorRevealKeys = new Set(["Backspace", "Delete", "Enter"]);
-
-function shouldRevealCursor(event: React.KeyboardEvent<HTMLInputElement>) {
-  if (event.metaKey || event.ctrlKey || event.altKey) return false;
-  return event.key.length === 1 || cursorRevealKeys.has(event.key);
-}
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
@@ -34,7 +28,7 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
   (
     {
       prompt = "~/ $",
-      cursor = false,
+      cursor = true,
       className,
       inputClassName,
       id,
@@ -44,34 +38,56 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
       value,
       defaultValue,
       onKeyDown,
+      onKeyUp,
+      onFocus,
       onBlur,
+      onMouseUp,
+      onSelect,
       onChange,
       onValueChange,
       ...rest
     },
     ref,
   ) => {
-    const cursorTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const idleTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
     const [cursorVisible, setCursorVisible] = React.useState(false);
+    const [cursorSteady, setCursorSteady] = React.useState(false);
+    const [cursorIndex, setCursorIndex] = React.useState(0);
     const [localValue, setLocalValue] = React.useState(() =>
       defaultValue === undefined ? "" : String(defaultValue),
     );
     const rawVisibleValue = value === undefined ? localValue : String(value);
-    const visibleValue =
-      type === "password" ? "•".repeat(rawVisibleValue.length) : rawVisibleValue;
-    const revealCursor = React.useCallback(() => {
+    const clampedCursorIndex = Math.min(cursorIndex, rawVisibleValue.length);
+    const textBeforeCursor = rawVisibleValue.slice(0, clampedCursorIndex);
+    const visibleValueBeforeCursor =
+      type === "password" ? "•".repeat(textBeforeCursor.length) : textBeforeCursor;
+
+    const updateCursorIndex = React.useCallback((input: HTMLInputElement) => {
+      setCursorIndex(input.selectionStart ?? input.value.length);
+    }, []);
+    const markCursorActive = React.useCallback(() => {
       if (!cursor || disabled || readOnly) return;
-      setCursorVisible(true);
-      if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current);
-      cursorTimeoutRef.current = setTimeout(() => {
-        setCursorVisible(false);
-        cursorTimeoutRef.current = null;
-      }, 900);
+      setCursorSteady(true);
+      if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+      idleTimeoutRef.current = setTimeout(() => {
+        setCursorSteady(false);
+        idleTimeoutRef.current = null;
+      }, 520);
     }, [cursor, disabled, readOnly]);
 
+    React.useEffect(() => {
+      if (!cursor || disabled || readOnly) {
+        setCursorVisible(false);
+        setCursorSteady(false);
+        if (idleTimeoutRef.current) {
+          clearTimeout(idleTimeoutRef.current);
+          idleTimeoutRef.current = null;
+        }
+      }
+    }, [cursor, disabled, readOnly]);
     React.useEffect(
       () => () => {
-        if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current);
+        if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
       },
       [],
     );
@@ -89,20 +105,60 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
             defaultValue={defaultValue}
             disabled={disabled}
             readOnly={readOnly}
-            className={cx(styles.input, cursor && styles.inputWithCursor, inputClassName)}
+            className={cx(
+              styles.input,
+              cursor && styles.inputWithCursor,
+              cursorVisible && styles.inputHidePlaceholder,
+              inputClassName,
+            )}
             onKeyDown={(event) => {
-              if (shouldRevealCursor(event)) revealCursor();
+              markCursorActive();
               onKeyDown?.(event);
             }}
+            onKeyUp={(event) => {
+              if (cursor) {
+                updateCursorIndex(event.currentTarget);
+                markCursorActive();
+              }
+              onKeyUp?.(event);
+            }}
+            onFocus={(event) => {
+              if (cursor && !disabled && !readOnly) {
+                updateCursorIndex(event.currentTarget);
+                setCursorVisible(true);
+                markCursorActive();
+              }
+              onFocus?.(event);
+            }}
             onBlur={(event) => {
-              if (cursorTimeoutRef.current) clearTimeout(cursorTimeoutRef.current);
-              cursorTimeoutRef.current = null;
               setCursorVisible(false);
+              setCursorSteady(false);
+              if (idleTimeoutRef.current) {
+                clearTimeout(idleTimeoutRef.current);
+                idleTimeoutRef.current = null;
+              }
               onBlur?.(event);
+            }}
+            onMouseUp={(event) => {
+              if (cursor) {
+                updateCursorIndex(event.currentTarget);
+                markCursorActive();
+              }
+              onMouseUp?.(event);
+            }}
+            onSelect={(event) => {
+              if (cursor) {
+                updateCursorIndex(event.currentTarget);
+                markCursorActive();
+              }
+              onSelect?.(event);
             }}
             onChange={(event) => {
               setLocalValue(event.currentTarget.value);
-              revealCursor();
+              if (cursor) {
+                updateCursorIndex(event.currentTarget);
+                markCursorActive();
+              }
               onChange?.(event);
               onValueChange?.(event.currentTarget.value, event);
             }}
@@ -112,8 +168,8 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
               className={cx(styles.cursorLayer, cursorVisible && styles.cursorLayerActive)}
               aria-hidden="true"
             >
-              <span className={styles.cursorMirror}>{visibleValue || "\u00a0"}</span>
-              <span className={styles.cursor}>▮</span>
+              <span className={styles.cursorMirror}>{visibleValueBeforeCursor}</span>
+              <span className={cx(styles.cursor, cursorSteady && styles.cursorSteady)}>▮</span>
             </span>
           ) : null}
         </span>
@@ -197,6 +253,7 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   label?: React.ReactNode;
   helpText?: React.ReactNode;
   error?: React.ReactNode;
+  cursor?: boolean;
   state?: FieldState;
   textareaClassName?: string;
   rootProps?: React.HTMLAttributes<HTMLLabelElement> & DataAttributes;
@@ -212,26 +269,146 @@ export interface TextareaControlProps
 export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaControlProps>(
   (
     {
+      cursor = true,
       className,
       textareaClassName,
       id,
+      disabled,
+      readOnly,
+      value,
+      defaultValue,
+      onKeyDown,
+      onKeyUp,
+      onFocus,
+      onBlur,
+      onMouseUp,
+      onSelect,
       onChange,
       onValueChange,
       ...rest
     },
     ref,
   ) => {
+    const idleTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const [cursorVisible, setCursorVisible] = React.useState(false);
+    const [cursorSteady, setCursorSteady] = React.useState(false);
+    const [cursorIndex, setCursorIndex] = React.useState(0);
+    const [localValue, setLocalValue] = React.useState(() =>
+      defaultValue === undefined ? "" : String(defaultValue),
+    );
+    const rawVisibleValue = value === undefined ? localValue : String(value);
+    const clampedCursorIndex = Math.min(cursorIndex, rawVisibleValue.length);
+    const visibleValueBeforeCursor = rawVisibleValue.slice(0, clampedCursorIndex);
+
+    const updateCursorIndex = React.useCallback((textarea: HTMLTextAreaElement) => {
+      setCursorIndex(textarea.selectionStart ?? textarea.value.length);
+    }, []);
+    const markCursorActive = React.useCallback(() => {
+      if (!cursor || disabled || readOnly) return;
+      setCursorSteady(true);
+      if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+      idleTimeoutRef.current = setTimeout(() => {
+        setCursorSteady(false);
+        idleTimeoutRef.current = null;
+      }, 520);
+    }, [cursor, disabled, readOnly]);
+
+    React.useEffect(() => {
+      if (!cursor || disabled || readOnly) {
+        setCursorVisible(false);
+        setCursorSteady(false);
+        if (idleTimeoutRef.current) {
+          clearTimeout(idleTimeoutRef.current);
+          idleTimeoutRef.current = null;
+        }
+      }
+    }, [cursor, disabled, readOnly]);
+    React.useEffect(
+      () => () => {
+        if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+      },
+      [],
+    );
+
     return (
-      <textarea
-        {...rest}
-        ref={ref}
-        id={id}
-        className={cx(styles.wrap, styles.textarea, textareaClassName, className)}
-        onChange={(event) => {
-          onChange?.(event);
-          onValueChange?.(event.currentTarget.value, event);
-        }}
-      />
+      <span className={cx(styles.textareaCell, className)}>
+        <textarea
+          {...rest}
+          ref={ref}
+          id={id}
+          value={value}
+          defaultValue={defaultValue}
+          disabled={disabled}
+          readOnly={readOnly}
+          className={cx(
+            styles.wrap,
+            styles.textarea,
+            cursor && styles.inputWithCursor,
+            cursorVisible && styles.inputHidePlaceholder,
+            textareaClassName,
+          )}
+          onKeyDown={(event) => {
+            markCursorActive();
+            onKeyDown?.(event);
+          }}
+          onKeyUp={(event) => {
+            if (cursor) {
+              updateCursorIndex(event.currentTarget);
+              markCursorActive();
+            }
+            onKeyUp?.(event);
+          }}
+          onFocus={(event) => {
+            if (cursor && !disabled && !readOnly) {
+              updateCursorIndex(event.currentTarget);
+              setCursorVisible(true);
+              markCursorActive();
+            }
+            onFocus?.(event);
+          }}
+          onBlur={(event) => {
+            setCursorVisible(false);
+            setCursorSteady(false);
+            if (idleTimeoutRef.current) {
+              clearTimeout(idleTimeoutRef.current);
+              idleTimeoutRef.current = null;
+            }
+            onBlur?.(event);
+          }}
+          onMouseUp={(event) => {
+            if (cursor) {
+              updateCursorIndex(event.currentTarget);
+              markCursorActive();
+            }
+            onMouseUp?.(event);
+          }}
+          onSelect={(event) => {
+            if (cursor) {
+              updateCursorIndex(event.currentTarget);
+              markCursorActive();
+            }
+            onSelect?.(event);
+          }}
+          onChange={(event) => {
+            setLocalValue(event.currentTarget.value);
+            if (cursor) {
+              updateCursorIndex(event.currentTarget);
+              markCursorActive();
+            }
+            onChange?.(event);
+            onValueChange?.(event.currentTarget.value, event);
+          }}
+        />
+        {cursor ? (
+          <span
+            className={cx(styles.textareaCursorLayer, cursorVisible && styles.cursorLayerActive)}
+            aria-hidden="true"
+          >
+            <span className={styles.textareaCursorMirror}>{visibleValueBeforeCursor}</span>
+            <span className={cx(styles.cursor, styles.textareaCursor, cursorSteady && styles.cursorSteady)}>▮</span>
+          </span>
+        ) : null}
+      </span>
     );
   },
 );

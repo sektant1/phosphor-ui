@@ -1,5 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { InputControl } from "../../atoms/Input";
 import {
   ContentEditor,
   EditorShell,
@@ -27,7 +28,7 @@ const meta: Meta<ContentEditorProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect, TagInput } from "@sektant1/phosphor-ui";
+import { ContentEditor, EditorShell, InputControl, PairListField, RepeaterField, StatusSelect, TagInput } from "@sektant1/phosphor-ui";
 
 const defaultProps = {
     kindLabel: "POST",
@@ -55,7 +56,7 @@ import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect,
 export function Example() {
   return (
       <EditorShell kindLabel="POST" saveLabel="save post">
-        <input placeholder="Title" />
+        <InputControl prompt="" placeholder="Title" />
       </EditorShell>
     );
 }
@@ -129,7 +130,7 @@ export const Shell: StoryObj = {
   },
   render: () => (
     <EditorShell kindLabel="POST" saveLabel="save post">
-      <input placeholder="Title" />
+      <InputControl prompt="" placeholder="Title" />
     </EditorShell>
   ),
 };

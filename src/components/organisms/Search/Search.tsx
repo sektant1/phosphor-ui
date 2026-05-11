@@ -100,7 +100,6 @@ export const Search: React.FC<SearchProps> = ({
         id={id}
         prompt={prompt}
         placeholder={placeholder}
-        cursor={false}
         value={query}
         onValueChange={setQuery}
         aria-controls={`${id}-results`}

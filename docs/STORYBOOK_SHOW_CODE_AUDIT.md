@@ -36,7 +36,7 @@ Added missing basic stories for `ContentEditor`, `CourseEditor`, `LessonEditor`,
 | ReadingRail | `src/components/organisms/ReadingRail/ReadingRail.stories.tsx` | No default story and generated source was demo-heavy. | Renamed `Idle` to `Default` and added explicit source. |
 | Select | `src/components/atoms/Select/Select.stories.tsx` | Automatic source exposed story internals. | Added explicit basic source. |
 | StatPill | `src/components/atoms/StatPill/StatPill.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
-| Switch | `src/components/atoms/Switch/Switch.stories.tsx` | Automatic source exposed story internals. | Added explicit basic source. |
+| Switch | `src/components/atoms/Switch/Switch.stories.tsx` | Removed after boolean settings moved to DropdownMenu examples. | Deleted Switch stories. |
 | Tag | `src/components/atoms/Tag/Tag.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
 | TerminalPrompt | `src/components/atoms/TerminalPrompt/TerminalPrompt.stories.tsx` | Args-only source hid package usage. | Added explicit basic source. |
 | Text | `src/components/atoms/Text/Text.stories.tsx` | No default story and bind-template source hid package usage. | Renamed `Body` to `Default` and added explicit source. |

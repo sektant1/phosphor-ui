@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ContentEditor.module.scss";
 import { Button } from "../../atoms/Button/Button";
+import { InputControl } from "../../atoms/Input/Input";
 import type { PairColumn } from "./ContentEditor";
 import { Cluster, Stack } from "../../templates/Layout";
 import Text from "../../atoms/Text";
@@ -45,9 +46,11 @@ export const PairListField: React.FC<PairListFieldProps> = ({
         <div key={index} className={styles.pairRow}>
           <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
           {columns.map((column) => (
-            <input
+            <InputControl
               key={column.key}
-              className={styles.pairInput}
+              prompt=""
+              className={styles.pairInputFrame}
+              inputClassName={styles.inlineInput}
               style={{ flex: column.flex ?? 1 }}
               aria-label={`${label} ${column.placeholder} ${index + 1}`}
               placeholder={column.placeholder}

@@ -391,7 +391,6 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
       const inputEl = (
         <InputControl
           prompt={f.prompt}
-          cursor={false}
           placeholder={f.placeholder}
           value={asString(data[f.key])}
           onChange={onChangeText}

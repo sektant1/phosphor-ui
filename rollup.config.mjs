@@ -8,15 +8,6 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 const input = {
   index: "src/index.ts",
-  "admin/index": "src/admin/index.ts",
-  "atoms/index": "src/atoms/index.ts",
-  "content/index": "src/content/index.ts",
-  "foundations/index": "src/foundations/index.ts",
-  "hooks/index": "src/hooks/index.ts",
-  "molecules/index": "src/molecules/index.ts",
-  "organisms/index": "src/organisms/index.ts",
-  "templates/index": "src/templates/index.ts",
-  "video/index": "src/video/index.ts",
 };
 
 const externalPackages = [

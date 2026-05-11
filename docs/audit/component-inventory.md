@@ -4,11 +4,11 @@ Generated during the `PLAN.md` implementation pass. Baseline source typecheck pa
 
 ## Source Tree Notes
 
-- Source components live under `src/components/{atoms,molecules,organisms,templates,content,admin,pages,presets,legacy}`.
+- Source components live under `src/components/{atoms,molecules,organisms,templates,content,admin,pages,presets}`.
 - Story files are colocated beside most public components as `*.stories.tsx`.
 - Tests are colocated for higher-risk components such as `CodeBlock`, `ContentEditor`, `Headings`, `Header`, `Link`, `Pagination`, `Post`, `PostListing`, `Prose`, `SearchResult`, and `Text`.
 - `src/components/templates/Page` exists as an empty directory and has no implementation files.
-- Current production component categories still include `pages` and `presets`; those remain compatibility categories until the folder migration phase.
+- Current production component categories still include `pages` and `presets`.
 
 ## Public Component Map
 
@@ -28,7 +28,6 @@ Generated during the `PLAN.md` implementation pass. Baseline source typecheck pa
 | `src/components/atoms/ReadingRail/ReadingRail.tsx` | `ReadingRail` | `ReadingRailProps` | Atom | `ReadingRail.module.scss` | yes | no | none | Molecule | move later |
 | `src/components/atoms/Select/Select.tsx` | `Select` | `SelectProps`, `SelectOption` | Atom | `Select.module.scss` | yes | no | none | Molecule + atom | split later |
 | `src/components/atoms/StatPill/StatPill.tsx` | `StatPill` | `StatPillProps`, `StatPillColor` | Atom | `StatPill.module.scss` | yes | no | none | Atom | keep |
-| `src/components/atoms/Switch/Switch.tsx` | `Switch` | `SwitchProps` | Atom | `Switch.module.scss` | yes | no | none | Molecule + atom | split later |
 | `src/components/atoms/Tag/Tag.tsx` | `Tag` | `TagProps` | Atom | `Tag.module.scss` | yes | no | none | Atom | keep |
 | `src/components/atoms/TerminalPrompt/TerminalPrompt.tsx` | `TerminalPrompt` | `TerminalPromptProps` | Atom | `TerminalPrompt.module.scss` | yes | no | none | Atom | keep |
 | `src/components/atoms/Text/Text.tsx` | `Text` | `TextProps`, `TextVariant` | Atom | none | yes | yes | none | Atom | harden later |
@@ -44,13 +43,12 @@ Generated during the `PLAN.md` implementation pass. Baseline source typecheck pa
 ## Confirmed Source/Package Differences
 
 - The current repo is ahead of the published package described in `PLAN.md`: source, tests, stories, Storybook config, and Rollup config are present.
-- `PageLayout`/`PostLayout` duplicates were not found as implementations. `legacy/PostLayout` is a re-export alias to `pages/Post`.
 - `src/components/templates/Page` is empty and can be removed in a cleanup phase after git intent is confirmed.
 
 ## Follow-Up Migration Queue
 
 1. Move `Post` to `templates/PostTemplate` and keep `Post` as the public alias.
-2. Move `SiteShell` to `templates/SiteShell` and keep `presets` as a compatibility namespace.
+2. Move `SiteShell` to `templates/SiteShell` when ready.
 3. Move `CourseCard` to organisms, `Tooltip` and `HeaderNav` to molecules, and `PostFrontmatter` to content.
 4. Split field-like atoms into control atoms plus field molecules.
 5. Update stories to match the new Atomic hierarchy after the source folders move.

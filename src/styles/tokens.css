@@ -1,9 +1,3 @@
-/* ─────────────────────────────────────────────────────────────
-   Zone Design System :: colors + type tokens
-   Single-channel green phosphor — Pip-Boy 3000 / STALKER GAMMA
-   Lifted verbatim from sektant1.github.io / themes/zone
-   ───────────────────────────────────────────────────────────── */
-
 :root {
   color-scheme: dark;
 
@@ -133,11 +127,21 @@
   --pho-glow-readable: var(--glow-readable);
 
   /* ── typography stacks ─────────────────────────────────── */
-  --font-display: "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-heading: "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-body: "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-code: "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-terminal: "VT323", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display:
+    "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --font-heading:
+    "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --font-body:
+    "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --font-code:
+    "JetBrains Mono", "Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --font-terminal:
+    "VT323", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
 
   --pho-font-display: var(--font-display);
   --pho-font-heading: var(--font-heading);
@@ -223,6 +227,21 @@
   --pho-motion-slow: 320ms;
   --pho-ease-out: ease-out;
   --pho-ease-terminal: steps(8);
+  --pho-caret-blink-duration: 0.78s;
+  --pho-caret-gap: 0.16em;
+  --pho-caret-idle-delay: 520ms;
+  --pho-caret-glow:
+    0 0 1px var(--pho-color-primary-strong), 0 0 5px var(--pho-alpha-primary-28);
+  --pho-placeholder-color: rgba(31, 184, 84, 0.72);
+  --pho-placeholder-opacity: 1;
+  --pho-focus-glow:
+    0 0 0 1px var(--pho-alpha-primary-18), 0 0 10px var(--pho-alpha-primary-18);
+  --pho-active-glow:
+    0 0 0 1px var(--pho-alpha-primary-22),
+    inset 0 0 14px var(--pho-alpha-primary-05);
+  --pho-scanline-opacity: 0.11;
+  --pho-scanline-size: 4px;
+  --pho-flicker-opacity-min: 0.88;
   --pho-card-border: 1px solid var(--pho-color-border);
   --pho-card-bg: var(--pho-color-surface);
   --pho-card-padding: var(--pho-space-5);
@@ -342,14 +361,18 @@
   --pho-scrollbar-thumb-active: var(--scrollbar-thumb-active);
   --pho-cursor-default:
     url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M8 1v14M1 8h14' stroke='%232cff7a' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='8' cy='8' r='4.25' stroke='%231fb854' stroke-width='.75'/%3E%3C/svg%3E")
-    8 8, default;
+      8 8,
+    default;
   --pho-cursor-pointer:
     url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M3 2l11 7-5 1.2L6.2 16 3 2z' fill='%2304140a' stroke='%232cff7a' stroke-width='1.2' stroke-linejoin='miter'/%3E%3Cpath d='M7 8.5l2.2 1.7' stroke='%23b6ffce' stroke-width='.8'/%3E%3C/svg%3E")
-    3 2, pointer;
+      3 2,
+    pointer;
   --pho-cursor-text:
     url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6 2h4M8 2v12M6 14h4' stroke='%23b6ffce' stroke-width='1.2' stroke-linecap='square'/%3E%3Cpath d='M4 8h8' stroke='%231fb854' stroke-width='.8'/%3E%3C/svg%3E")
-    8 8, text;
+      8 8,
+    text;
   --pho-cursor-disabled:
     url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Ccircle cx='9' cy='9' r='6' stroke='%231fb854' stroke-width='1'/%3E%3Cpath d='M5 13L13 5' stroke='%232cff7a' stroke-width='1.2'/%3E%3C/svg%3E")
-    9 9, not-allowed;
+      9 9,
+    not-allowed;
 }

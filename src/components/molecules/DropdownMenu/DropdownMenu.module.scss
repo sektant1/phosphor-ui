@@ -16,18 +16,26 @@
   letter-spacing: 0.08em;
   padding: 0.35rem 0.65rem;
   text-transform: uppercase;
+  transition:
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out),
+    color var(--pho-motion-fast) var(--pho-ease-out),
+    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
 }
 
 .trigger:hover,
 .open {
   background: var(--pho-alpha-primary-08);
   border-color: var(--pho-color-primary);
+  box-shadow: var(--pho-active-glow);
   text-shadow: var(--pho-glow-primary);
 }
 
 .trigger:focus-visible {
-  outline: 2px solid var(--pho-color-primary-strong);
-  outline-offset: 2px;
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
+  box-shadow: var(--pho-focus-glow);
 }
 
 .chev {
@@ -49,6 +57,16 @@
   z-index: var(--z-drawer);
 }
 
+.menu::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(182, 255, 206, 0.035) 50%, rgba(1, 6, 4, 0.12) 50%);
+  background-size: 100% var(--pho-scanline-size);
+  opacity: calc(var(--pho-scanline-opacity) * 0.75);
+}
+
 .end {
   left: auto;
   right: 0;
@@ -64,6 +82,10 @@
   padding: 0.55rem 0.65rem;
   text-align: left;
   text-decoration: none;
+  transition:
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    color var(--pho-motion-fast) var(--pho-ease-out),
+    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
 }
 
 .item:hover:not(:disabled),

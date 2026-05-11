@@ -21,10 +21,14 @@
   border: 1px solid var(--pho-color-primary-muted);
   border-radius: 0;
   min-width: 0;
+  transition:
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out);
 }
 .wrap:focus-within {
   border-color: var(--pho-color-primary);
-  box-shadow: 0 0 8px var(--pho-alpha-primary-28);
+  box-shadow: var(--pho-focus-glow);
 }
 .prompt {
   color: var(--pho-color-accent);
@@ -56,18 +60,35 @@
 .inputWithCursor {
   caret-color: transparent;
 }
-.input::placeholder { color: var(--pho-color-primary-faint); }
+.input::placeholder {
+  color: var(--pho-placeholder-color);
+  opacity: var(--pho-placeholder-opacity);
+  text-shadow: none;
+}
+.inputHidePlaceholder::placeholder {
+  color: transparent;
+  opacity: 0;
+}
 .input:disabled {
   cursor: not-allowed;
   opacity: 0.55;
   text-shadow: none;
 }
 .cursor {
-  color: var(--pho-color-primary);
-  text-shadow: var(--pho-glow-primary);
-  font-family: var(--pho-font-code);
-  animation: inputCursorBlink 0.8s step-end infinite;
+  align-self: center;
+  background: var(--pho-color-primary);
+  box-shadow: var(--pho-caret-glow);
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 1em;
+  margin-left: var(--pho-caret-gap);
+  width: 0.58em;
+  animation: inputCursorBlink var(--pho-caret-blink-duration) step-end infinite;
   line-height: 1;
+}
+.cursorSteady {
+  animation: none;
+  opacity: 1;
 }
 .cursorLayer {
   align-items: center;
@@ -91,8 +112,10 @@
   min-width: 0;
   overflow: hidden;
   text-shadow: none;
+  white-space: pre;
 }
 .textarea {
+  grid-area: 1 / 1;
   display: block;
   width: 100%;
   resize: vertical;
@@ -103,14 +126,45 @@
   outline: none;
   caret-color: var(--pho-color-accent-strong);
 }
+.textarea::placeholder {
+  color: var(--pho-placeholder-color);
+  opacity: var(--pho-placeholder-opacity);
+  text-shadow: none;
+}
 .textarea:focus {
   border-color: var(--pho-color-primary);
-  box-shadow: 0 0 8px var(--pho-alpha-primary-28);
+  box-shadow: var(--pho-focus-glow);
 }
 .textarea:disabled {
   cursor: not-allowed;
   opacity: 0.55;
   text-shadow: none;
+}
+.textareaCell {
+  display: grid;
+  min-width: 0;
+  position: relative;
+}
+.textareaCursorLayer {
+  grid-area: 1 / 1;
+  min-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0.5rem 0.7rem;
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid transparent;
+  font-family: var(--pho-font-code);
+  font-size: var(--pho-type-control-sm-size);
+  line-height: normal;
+}
+.textareaCursorMirror {
+  color: transparent;
+  text-shadow: none;
+}
+.textareaCursor {
+  vertical-align: -0.12em;
 }
 
 .help,
@@ -143,11 +197,11 @@
 
 @keyframes inputCursorBlink {
   0%,
-  45% {
+  54% {
     opacity: 1;
   }
 
-  46%,
+  55%,
   100% {
     opacity: 0;
   }

@@ -1,5 +1,6 @@
 import React, { KeyboardEvent } from "react";
 import styles from "./ContentEditor.module.scss";
+import { InputControl } from "../../atoms/Input/Input";
 import { Tag } from "../../atoms/Tag/Tag";
 import { Cluster, Stack } from "../../templates/Layout";
 import Text from "../../atoms/Text";
@@ -44,7 +45,7 @@ export const TagInput: React.FC<TagInputProps> = ({
       <Cluster className={styles.tagsRow} gap="xs">
         {value.map((tag) =>
           chip === "tag" ? (
-            <Tag key={tag} color="phosphor">
+            <Tag key={tag} color="phosphor" className={styles.editorTag}>
               {tag}
               <button
                 type="button"
@@ -67,8 +68,10 @@ export const TagInput: React.FC<TagInputProps> = ({
             </button>
           ),
         )}
-        <input
-          className={styles.tagInput}
+        <InputControl
+          prompt=""
+          className={styles.tagInputFrame}
+          inputClassName={styles.inlineInput}
           value={inputValue}
           onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={handleKeyDown}

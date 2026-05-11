@@ -12,7 +12,6 @@ export type { LinkProps } from "./Link";
 export * from "./ProgressBar";
 export * from "./ReadingRail";
 export * from "./Select";
-export * from "./Switch";
 export * from "./Tag";
 export * from "./TerminalPrompt";
 export { default as Text } from "./Text";

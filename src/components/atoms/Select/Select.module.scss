@@ -23,11 +23,20 @@
   min-height: 2.35rem;
   min-width: 0;
   padding: 0.42rem 0.6rem;
+  transition:
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out);
 }
 
 .control:focus-within {
   border-color: var(--pho-color-primary);
-  box-shadow: 0 0 0 1px var(--pho-alpha-primary-18);
+  box-shadow: var(--pho-focus-glow);
+}
+
+.control:hover {
+  border-color: var(--pho-color-primary-muted);
+  box-shadow: var(--pho-active-glow);
 }
 
 .prompt {

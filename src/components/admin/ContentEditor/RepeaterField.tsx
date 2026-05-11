@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ContentEditor.module.scss";
 import { Button } from "../../atoms/Button/Button";
+import { InputControl } from "../../atoms/Input/Input";
 import { Cluster, Stack } from "../../templates/Layout";
 import Text from "../../atoms/Text";
 
@@ -46,8 +47,10 @@ export const RepeaterField: React.FC<RepeaterFieldProps> = ({
       <div key={row.id ?? index} className={styles.listRow}>
         <span className={styles.rowIndex}>{String(index + 1).padStart(2, "0")}</span>
         {leading && <span className={styles.leading}>{leading}</span>}
-        <input
-          className={styles.listInput}
+        <InputControl
+          prompt=""
+          className={styles.listInputFrame}
+          inputClassName={styles.inlineInput}
           aria-label={`${label} item ${index + 1}`}
           placeholder={placeholder}
           value={getString(row[itemKey])}

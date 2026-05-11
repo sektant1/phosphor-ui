@@ -50,7 +50,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <span className={styles.label}>{identifierLabel}</span>
           <InputControl
             prompt=">>"
-            cursor={false}
             aria-invalid={!!error || undefined}
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
@@ -61,7 +60,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           <span className={styles.label}>{passwordLabel}</span>
           <InputControl
             prompt=">>"
-            cursor={false}
             aria-invalid={!!error || undefined}
             value={password}
             onChange={(e) => setPassword(e.target.value)}

@@ -15,8 +15,8 @@ export const TerminalPrompt: React.FC<TerminalPromptProps> = ({
   className,
 }) => (
   <div className={[styles.row, className ?? ""].join(" ")}>
-    <span className={styles.prompt}>{prompt}</span>{" "}
+    <span className={styles.prompt}>{prompt}</span>
     <span className={styles.typed}>{command}</span>
-    {cursor && <span className={styles.cursor}>▮</span>}
+    {cursor && <span className={styles.cursor} aria-hidden="true">▮</span>}
   </div>
 );

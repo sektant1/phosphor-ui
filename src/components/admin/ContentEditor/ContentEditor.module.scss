@@ -111,6 +111,18 @@
   }
 }
 
+.addInline {
+  align-items: center;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: var(--pho-editor-tag-control-height);
+  justify-content: center;
+  line-height: 1;
+  max-height: var(--pho-editor-tag-control-height);
+  min-height: var(--pho-editor-tag-control-height);
+  padding-block: 0;
+}
+
 .previewPane {
   margin: 0;
   max-height: 32rem;
@@ -263,22 +275,34 @@
 }
 
 .tagsSection {
+  --pho-editor-tag-control-height: 1.75rem;
+
   min-width: 0;
 }
 
 .tagsRow {
+  align-items: center;
   min-width: 0;
 }
 
+.editorTag,
 .tagChip {
+  align-items: center;
   background: transparent;
   color: var(--pho-color-primary-muted);
   border: var(--pho-border-dashed);
+  box-sizing: border-box;
+  display: inline-flex;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
-  padding: 1px 6px;
+  height: var(--pho-editor-tag-control-height);
+  line-height: 1;
+  max-height: var(--pho-editor-tag-control-height);
+  min-height: var(--pho-editor-tag-control-height);
+  padding: 0 6px;
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
 
   &:hover {
     color: var(--pho-color-primary);
@@ -302,22 +326,19 @@
   }
 }
 
-.tagInput {
+.tagInputFrame {
+  box-sizing: border-box;
   background: var(--pho-color-background-deep);
   border: 1px dashed var(--pho-color-primary-muted);
-  color: var(--pho-color-primary);
-  font-family: var(--pho-font-code);
-  font-size: var(--pho-type-caption-size);
-  padding: 3px 8px;
-  outline: none;
+  gap: 0;
+  height: var(--pho-editor-tag-control-height);
+  max-height: var(--pho-editor-tag-control-height);
+  min-height: var(--pho-editor-tag-control-height);
+  padding: 0 8px;
 
-  &::placeholder {
-    color: var(--pho-color-primary-faint);
-  }
-
-  &:focus {
+  &:focus-within {
     border-color: var(--pho-color-primary);
-    box-shadow: var(--pho-glow-primary);
+    box-shadow: var(--pho-focus-glow);
   }
 }
 
@@ -345,23 +366,16 @@
   padding: 0.45rem;
 }
 
-.pairInput {
+.pairInputFrame {
   background: var(--pho-color-background-deep);
   border: 1px dashed var(--pho-color-primary-muted);
-  color: var(--pho-color-primary);
-  font-family: var(--pho-font-code);
-  font-size: var(--pho-type-caption-size);
+  gap: 0;
   padding: 3px 8px;
-  outline: none;
   min-width: 0;
 
-  &::placeholder {
-    color: var(--pho-color-primary-faint);
-  }
-
-  &:focus {
+  &:focus-within {
     border-color: var(--pho-color-primary);
-    box-shadow: var(--pho-glow-primary);
+    box-shadow: var(--pho-focus-glow);
   }
 }
 
@@ -392,25 +406,24 @@
   user-select: none;
 }
 
-.listInput {
+.listInputFrame {
   background: transparent;
   border: none;
   border-bottom: var(--pho-border-dashed);
-  color: var(--pho-color-primary);
-  font-family: var(--pho-font-code);
-  font-size: var(--pho-type-caption-size);
+  gap: 0;
   flex: 1;
   min-width: 0;
   padding: 0 4px;
-  outline: none;
 
-  &::placeholder {
-    color: var(--pho-color-primary-faint);
-  }
-
-  &:focus {
+  &:focus-within {
     border-bottom-color: var(--pho-color-primary);
   }
+}
+
+.inlineInput {
+  font-size: var(--pho-type-caption-size);
+  line-height: 1;
+  text-shadow: none;
 }
 
 .removeRow {
@@ -466,7 +479,7 @@
   }
 
   .statusSelect,
-  .tagInput,
+  .tagInputFrame,
   .addInline {
     width: 100%;
   }
