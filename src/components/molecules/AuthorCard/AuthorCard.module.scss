@@ -15,7 +15,7 @@
 }
 
 .name {
-  font-family: var(--pho-font-terminal);
+  font-family: var(--pho-font-display);
   font-size: var(--pho-type-icon-md-size);
   font-weight: bold;
   color: var(--pho-color-primary-strong);
@@ -39,8 +39,9 @@
 }
 
 .links {
-  display: grid;
-  gap: 0.35rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.95rem;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   list-style: none;
@@ -57,22 +58,16 @@
 :global(.pho-link).link {
   align-items: center;
   border-bottom: 0;
-  border-left: 2px solid var(--pho-color-primary-faint);
   color: var(--pho-color-accent);
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.45rem;
   min-width: 0;
   overflow: hidden;
-  padding: 0.2rem 0.45rem;
   text-decoration: none;
   text-overflow: ellipsis;
   text-shadow: var(--pho-glow-accent);
   white-space: nowrap;
 
   &::before {
-    color: var(--pho-color-primary-faint);
-    content: ">";
+    content: "./";
   }
 
   &:hover {

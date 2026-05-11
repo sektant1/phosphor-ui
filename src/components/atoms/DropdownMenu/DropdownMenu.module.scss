@@ -54,7 +54,7 @@
 }
 
 .chev {
-  color: var(--pho-color-primary-faint);
+  // color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   line-height: 1;
@@ -95,8 +95,8 @@
   border: 0;
   color: var(--pho-color-primary-muted);
   cursor: var(--pho-cursor-pointer);
-  font-family: var(--pho-font-code);
-  font-size: var(--pho-type-ui-sm-size);
+  font-family: var(--pho-font-display);
+  font-size: var(--pho-type-icon-sm-size);
   min-width: 0;
   overflow: hidden;
   padding: 0.55rem 0.65rem;

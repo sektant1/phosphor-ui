@@ -97,7 +97,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     () => () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     },
-    []
+    [],
   );
 
   const copy = React.useCallback(async () => {
@@ -127,15 +127,12 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
         <span className={styles.identity}>
           {filename ? (
             <span className={styles.filename}>
-              <span className={styles.fileglyph} aria-hidden="true">▸</span>
+              <span className={styles.fileglyph} aria-hidden="true">
+                ▸
+              </span>
               {filename}
             </span>
-          ) : (
-            <span className={styles.filename}>
-              <span className={styles.fileglyph} aria-hidden="true">▸</span>
-              code buffer
-            </span>
-          )}
+          ) : null}
         </span>
         <span className={styles.spacer} />
         {resolvedLang !== "text" && (
@@ -154,7 +151,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       </div>
 
       <div className={styles.viewport}>
-        <span className={styles.rail} aria-hidden="true" />
         {highlightedHtml ? (
           <div
             className={styles.code}

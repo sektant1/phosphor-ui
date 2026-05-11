@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./DropdownMenu.module.scss";
 import { cx } from "../../../utils/classNames";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
 
 export interface DropdownMenuItem {
   label: React.ReactNode;
@@ -12,7 +13,10 @@ export interface DropdownMenuItem {
   destructive?: boolean;
 }
 
-export interface DropdownMenuProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "onSelect"> {
+export interface DropdownMenuProps extends Omit<
+  React.HTMLAttributes<HTMLSpanElement>,
+  "onSelect"
+> {
   label: React.ReactNode;
   items: DropdownMenuItem[];
   onSelect?: (value: string, item: DropdownMenuItem) => void;
@@ -24,7 +28,10 @@ export interface DropdownMenuProps extends Omit<React.HTMLAttributes<HTMLSpanEle
   triggerId?: string;
   triggerClassName?: string;
   menuClassName?: string;
-  triggerProps?: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "className" | "disabled" | "type">;
+  triggerProps?: Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "children" | "className" | "disabled" | "type"
+  >;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -45,10 +52,15 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const rootRef = React.useRef<HTMLSpanElement>(null);
-  const itemRefs = React.useRef<Array<HTMLAnchorElement | HTMLButtonElement | null>>([]);
+  const itemRefs = React.useRef<
+    Array<HTMLAnchorElement | HTMLButtonElement | null>
+  >([]);
   const menuId = React.useId();
   const enabledItems = React.useMemo(
-    () => items.map((item, index) => ({ item, index })).filter(({ item }) => !item.disabled),
+    () =>
+      items
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => !item.disabled),
     [items],
   );
 
@@ -70,18 +82,24 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
   React.useEffect(() => {
     if (!open) return;
-    const selectedIndex = items.findIndex((item) => item.value === selectedValue && !item.disabled);
-    const nextIndex = selectedIndex >= 0 ? selectedIndex : enabledItems[0]?.index;
+    const selectedIndex = items.findIndex(
+      (item) => item.value === selectedValue && !item.disabled,
+    );
+    const nextIndex =
+      selectedIndex >= 0 ? selectedIndex : enabledItems[0]?.index;
     if (nextIndex !== undefined) itemRefs.current[nextIndex]?.focus();
   }, [enabledItems, items, open, selectedValue]);
 
   const focusByDelta = (currentIndex: number, delta: number) => {
     if (enabledItems.length === 0) return;
-    const currentEnabledIndex = enabledItems.findIndex(({ index }) => index === currentIndex);
+    const currentEnabledIndex = enabledItems.findIndex(
+      ({ index }) => index === currentIndex,
+    );
     const nextEnabledIndex =
       currentEnabledIndex < 0
         ? 0
-        : (currentEnabledIndex + delta + enabledItems.length) % enabledItems.length;
+        : (currentEnabledIndex + delta + enabledItems.length) %
+          enabledItems.length;
     itemRefs.current[enabledItems[nextEnabledIndex].index]?.focus();
   };
 
@@ -113,14 +131,20 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         }}
       >
         <span>{label}</span>
-        <span className={styles.chev} aria-hidden="true">v</span>
+        <span className={styles.chev} aria-hidden="true">
+          <Glyph char="▾" size={22} />
+        </span>
       </button>
       {open ? (
         <div
           id={menuId}
           role={menuRole}
           aria-label={menuLabel}
-          className={cx(styles.menu, align === "end" && styles.end, menuClassName)}
+          className={cx(
+            styles.menu,
+            align === "end" && styles.end,
+            menuClassName,
+          )}
         >
           {items.map((item, index) => {
             const selected = item.value === selectedValue;
@@ -130,7 +154,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               item.destructive && styles.destructive,
               selected && styles.selected,
             );
-            const onKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+            const onKeyDown = (
+              event: React.KeyboardEvent<HTMLAnchorElement | HTMLButtonElement>,
+            ) => {
               if (event.key === "ArrowDown") {
                 event.preventDefault();
                 focusByDelta(index, 1);
@@ -142,7 +168,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
                 itemRefs.current[enabledItems[0]?.index ?? index]?.focus();
               } else if (event.key === "End") {
                 event.preventDefault();
-                itemRefs.current[enabledItems[enabledItems.length - 1]?.index ?? index]?.focus();
+                itemRefs.current[
+                  enabledItems[enabledItems.length - 1]?.index ?? index
+                ]?.focus();
               }
             };
 
@@ -159,7 +187,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
               return (
                 <a
                   key={item.value}
-                  ref={(node) => { itemRefs.current[index] = node; }}
+                  ref={(node) => {
+                    itemRefs.current[index] = node;
+                  }}
                   role={itemRole}
                   aria-selected={menuRole === "listbox" ? selected : undefined}
                   aria-disabled={item.disabled || undefined}
@@ -185,7 +215,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             return (
               <button
                 key={item.value}
-                ref={(node) => { itemRefs.current[index] = node; }}
+                ref={(node) => {
+                  itemRefs.current[index] = node;
+                }}
                 type="button"
                 role={itemRole}
                 aria-selected={menuRole === "listbox" ? selected : undefined}
