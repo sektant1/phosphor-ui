@@ -48,7 +48,7 @@ export function Example() {
   return React.createElement(
         AdminShell,
         props,
-        React.createElement(Text, { variant: "code" }, "[ select content from the tree or create a new draft ]")
+        React.createElement(Text, { variant: "display" }, "[ select content from the tree or create a new draft ]")
       );
 }
 `;
@@ -59,10 +59,13 @@ export const Default: Story = {
   parameters: { docs: { source: source(defaultSource) } },
   args: {
     title: "// admin",
-    description: "Manage drafts, published content, projects, and course modules from one operator surface.",
+    description:
+      "Manage drafts, published content, projects, and course modules from one operator surface.",
     actions: (
       <>
-        <Button size="sm" variant="ghost">new draft</Button>
+        <Button size="sm" variant="secondary">
+          new draft
+        </Button>
         <Button size="sm">publish</Button>
       </>
     ),
@@ -85,6 +88,10 @@ export const Default: Story = {
     React.createElement(
       AdminShell,
       args,
-      React.createElement(Text, { variant: "code" }, "[ select content from the tree or create a new draft ]")
+      React.createElement(
+        Text,
+        { variant: "terminal" },
+        "[ select content from the tree or create a new draft ]",
+      ),
     ),
 };

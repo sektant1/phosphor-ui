@@ -89,20 +89,34 @@ export const AdminShell: React.FC<AdminShellProps> = ({
     <div className={cx(styles.shell, className)}>
       <Stack className={styles.sidePanel} gap="none">
         <div className={styles.panelHeader}>
-          <Text variant="stamp" className={styles.panelKicker}>right rail</Text>
-          <Text variant="terminal" className={styles.panelTitle}>{treeTitle ?? title}</Text>
+          <Text variant="stamp" className={styles.panelKicker}>
+            right rail
+          </Text>
+          <Text variant="terminal" className={styles.panelTitle}>
+            {treeTitle ?? title}
+          </Text>
         </div>
 
         <div className={styles.panelStatus} aria-label="Admin rail status">
           <div className={styles.statusRow}>
-            <Text variant="caption" className={styles.statusLabel}>route</Text>
-            <Text variant="code" className={styles.statusValue}>
+            <Text variant="caption" className={styles.statusLabel}>
+              route
+            </Text>
+            <Text variant="terminal" className={styles.statusValue}>
               {activeNavItem?.label ?? "dashboard"}
             </Text>
           </div>
           <div className={styles.statusRow}>
-            <Text variant="caption" className={styles.statusLabel}>queue</Text>
-            <Text variant="code" className={cx(styles.statusValue, reviewStat?.tone === "warn" && styles.statusWarn)}>
+            <Text variant="caption" className={styles.statusLabel}>
+              queue
+            </Text>
+            <Text
+              variant="terminal"
+              className={cx(
+                styles.statusValue,
+                reviewStat?.tone === "warn" && styles.statusWarn,
+              )}
+            >
               {reviewStat ? reviewStat.value : "00"}
             </Text>
           </div>
@@ -124,12 +138,20 @@ export const AdminShell: React.FC<AdminShellProps> = ({
           <Stack className={styles.userSection} gap="sm">
             {user && (
               <Stack className={styles.userBlock} gap="xs">
-                <Text variant="caption" className={styles.userLabel}>operator</Text>
+                <Text variant="caption" className={styles.userLabel}>
+                  operator
+                </Text>
                 <div className={styles.userIdentity}>
                   <span className={styles.userPulse} aria-hidden="true" />
-                  <Text variant="code" className={styles.userName} truncate>{user.name}</Text>
+                  <Text variant="code" className={styles.userName} truncate>
+                    {user.name}
+                  </Text>
                 </div>
-                {user.role && <Text variant="caption" className={styles.userRole}>{user.role}</Text>}
+                {user.role && (
+                  <Text variant="caption" className={styles.userRole}>
+                    {user.role}
+                  </Text>
+                )}
               </Stack>
             )}
 
@@ -149,9 +171,15 @@ export const AdminShell: React.FC<AdminShellProps> = ({
       <main className={styles.main}>
         {hasHeader && (
           <Stack className={styles.mainHeader} gap="md">
-            <Cluster className={styles.mainHeaderTop} justify="space-between" gap="md">
+            <Cluster
+              className={styles.mainHeaderTop}
+              justify="space-between"
+              gap="md"
+            >
               <Stack className={styles.mainTitleBlock} gap="xs">
-                <Text variant="stamp" className={styles.eyebrow}>cms control</Text>
+                <Text variant="stamp" className={styles.eyebrow}>
+                  cms control
+                </Text>
                 {mainHeading && (
                   <Text variant="h2" as="h1" className={styles.mainTitle}>
                     {mainHeading}
@@ -163,7 +191,11 @@ export const AdminShell: React.FC<AdminShellProps> = ({
                   </Text>
                 )}
               </Stack>
-              {actions && <Cluster className={styles.mainActions} gap="sm">{actions}</Cluster>}
+              {actions && (
+                <Cluster className={styles.mainActions} gap="sm">
+                  {actions}
+                </Cluster>
+              )}
             </Cluster>
 
             {!!stats?.length && (
@@ -171,10 +203,18 @@ export const AdminShell: React.FC<AdminShellProps> = ({
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className={cx(styles.statCard, stat.tone === "good" && styles.statGood, stat.tone === "warn" && styles.statWarn)}
+                    className={cx(
+                      styles.statCard,
+                      stat.tone === "good" && styles.statGood,
+                      stat.tone === "warn" && styles.statWarn,
+                    )}
                   >
-                    <Text variant="caption" className={styles.statLabel}>{stat.label}</Text>
-                    <Text variant="code" className={styles.statValue}>{stat.value}</Text>
+                    <Text variant="small" className={styles.statLabel}>
+                      {stat.label}:
+                    </Text>
+                    <Text variant="glow" className={styles.statValue}>
+                      {stat.value}
+                    </Text>
                   </div>
                 ))}
               </div>

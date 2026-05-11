@@ -101,10 +101,13 @@
 .statusValue {
   color: var(--pho-color-primary);
   font-size: var(--pho-type-caption-size);
+  font-weight: 700;
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
+
+  color: var(--pho-color-accent-strong);
   white-space: nowrap;
 }
 
@@ -268,7 +271,6 @@
 
 .mainTitle {
   color: var(--pho-color-primary);
-  font-family: var(--pho-font-terminal);
   font-size: clamp(1.7rem, 3vw, 2.5rem);
   line-height: 0.95;
   margin: 0;
@@ -308,17 +310,20 @@
 }
 
 .statLabel {
-  color: var(--pho-color-primary-faint);
+  // color: var(--pho-color-primary-faint);
   display: block;
   font-size: var(--pho-type-micro-size);
   letter-spacing: 0.08em;
-  margin-bottom: 0.35rem;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
   text-transform: uppercase;
 }
 
 .statValue {
   color: var(--pho-color-primary);
   display: block;
+  font-weight: 700;
+  font-family: var(--pho-font-display);
   font-size: var(--pho-type-control-lg-size);
   line-height: 1.1;
 }

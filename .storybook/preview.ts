@@ -73,7 +73,9 @@ const preview: Preview = {
       storySort: {
         method: "alphabetical",
         order: [
+          "Introduction",
           "Foundations",
+          ["Design Tokens", "Typography", "Colors", "Spacing", "Effects"],
           "Atoms",
           "Molecules",
           "Organisms",
