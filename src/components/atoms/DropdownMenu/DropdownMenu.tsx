@@ -132,7 +132,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
       >
         <span>{label}</span>
         <span className={styles.chev} aria-hidden="true">
-          <Glyph name="tri-d" size={22} tone="inherit" />
+          <Glyph name="tri-d" size={22} tone="accent" boxed />
         </span>
       </button>
       {open ? (
