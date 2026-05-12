@@ -1,0 +1,30 @@
+import React from "react";
+import type { PostBodyProps } from "../../content/MdxComponents";
+import type { PostHeaderProps } from "../../organisms/PostHeader";
+import type { PostFrontmatterData } from "../../content/PostFrontmatter";
+export interface PostProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+    title: PostHeaderProps["title"];
+    children: React.ReactNode;
+    header?: React.ReactNode;
+    headerProps?: Omit<PostHeaderProps, "title" | "children">;
+    headerExtra?: React.ReactNode;
+    bodyProps?: Omit<PostBodyProps, "children">;
+    frontmatter?: PostFrontmatterData;
+    frontmatterLabel?: React.ReactNode;
+    beforeContent?: React.ReactNode;
+    betweenHeaderAndBody?: React.ReactNode;
+    beforeBody?: React.ReactNode;
+    afterBody?: React.ReactNode;
+    afterContent?: React.ReactNode;
+    leftPanel?: React.ReactNode;
+    rightPanel?: React.ReactNode;
+    sidebar?: React.ReactNode;
+    sidebarLabel?: string;
+    footer?: React.ReactNode;
+    stickySidebar?: boolean;
+    contentClassName?: string;
+    sidebarClassName?: string;
+}
+export declare const Post: React.ForwardRefExoticComponent<PostProps & React.RefAttributes<HTMLElement>>;
+export declare const PostTemplate: React.ForwardRefExoticComponent<PostProps & React.RefAttributes<HTMLElement>>;
+export type PostTemplateProps = PostProps;

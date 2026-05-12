@@ -1,6 +1,7 @@
 # Public API Inventory
 
-Generated during the `PLAN.md` implementation pass. Updated after removing category subpath exports.
+Generated during the `PLAN.md` implementation pass. Updated during the `1.0`
+release-readiness pass.
 
 ## Package Exports
 
@@ -29,13 +30,17 @@ Confirmed source imports before this pass:
 - `@mdx-js/react` was imported by `src/components/content/MdxComponents/MdxComponents.tsx`.
 - `figlet` was imported by `src/ascii.ts`, which is used by `Header`.
 - `shiki` is dynamically imported by `CodeBlock`; type-only imports are erased.
-- `video.js` and `video.js/dist/video-js.css` were imported by `VideoPlayer`.
+- `video.js` is dynamically imported by `VideoPlayer`.
+- `video.js/dist/video-js.css` is imported by `VideoPlayer` and extracted into
+  `components.css` at build time, so consumers using `phosphor.css` receive the
+  base player controls automatically.
 
 Changes made:
 
 - `PostBody` no longer imports `@mdx-js/react` at module load.
 - `bannerSync` no longer statically imports `figlet`; it attempts a runtime CommonJS load only when a banner is generated.
-- `VideoPlayer` dynamically imports `video.js` inside its effect and no longer imports `video.js/dist/video-js.css` from JS.
+- `VideoPlayer` dynamically imports `video.js` inside its effect and statically
+  imports `video.js/dist/video-js.css` for style extraction.
 - `CodeBlock` already uses dynamic `import("shiki")` for highlighting.
 
 ## CSS Output Model
@@ -56,7 +61,29 @@ Rollup now uses one JS entry point:
 
 The build emits code-split ESM and CJS directories, with shared chunks under `dist/{esm,cjs}/chunks`.
 
+## Release Smoke Coverage
+
+`npm run smoke:package` validates the built package contract after `npm run build`:
+
+1. `package.json` points `main`, `module`, `types`, and `style` at `dist`.
+2. Root and CSS subpath exports exist.
+3. `npm pack --dry-run --json` includes the expected `dist` files, README, and
+   license.
+4. The tarball file list excludes `src/` and the stale root `types/` tree.
+5. `components.css` includes both Video.js base styles and the VideoPlayer module
+   styles.
+6. The generated ESM and CJS bundles load and expose representative exports.
+
+`npm run audit:public-api` validates the source/package contract before build:
+
+1. The package exports only the supported root, CSS, and `package.json` subpaths.
+2. `main`, `module`, `types`, and `style` point at `dist`.
+3. The checked-in `types/components` snapshot follows the generated source
+   folder shape and contains no stale flattened component directories.
+4. `src/index.ts` and `types/index.d.ts` expose the same root barrels.
+
 ## Remaining Work
 
-1. Run `npm pack --dry-run` after build validation.
-2. Decide whether `video.js/dist/video-js.css` should be vendored into `components.css` or documented as a consumer import for video-specific usage.
+1. Run a visual Storybook pass on the public organisms before tagging `1.0.0`.
+2. Keep the root `types/` directory regenerated with
+   `npm run build:types:snapshot` after any public API change.

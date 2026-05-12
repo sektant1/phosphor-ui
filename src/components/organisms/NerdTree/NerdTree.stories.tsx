@@ -48,31 +48,35 @@ export function Example() {
 const compactPanelSource = tsx`
 import { NerdTree } from "@sektant1/phosphor-ui";
 
-const compactPanelProps = {
-    ...Default.args,
-    density: "compact",
-    frame: "panel",
-    title: "mission index",
-    bufferLabel: "[ops/]",
-  };
-
 export function Example() {
-  return <NerdTree {...compactPanelProps} />;
+  return (
+    <NerdTree
+      density="compact"
+      frame="panel"
+      title="mission index"
+      bufferLabel="[ops/]"
+      tree={[
+        { kind: "leaf", label: "briefing.md", href: "#", active: true },
+        { kind: "leaf", label: "targets.md", href: "#" },
+      ]}
+    />
+  );
 }
 `;
 
 const mobileDrawerSource = tsx`
 import { NerdTree } from "@sektant1/phosphor-ui";
 
-
-
-const mobileDrawerProps = {
-    ...Default.args,
-    mobileToggleLabel: "mission tree",
-  };
-
 export function Example() {
-  return <NerdTree {...mobileDrawerProps} />;
+  return (
+    <NerdTree
+      mobileToggleLabel="mission tree"
+      tree={[
+        { kind: "leaf", label: "briefing.md", href: "#", active: true },
+        { kind: "leaf", label: "targets.md", href: "#" },
+      ]}
+    />
+  );
 }
 `;
 

@@ -1,0 +1,32 @@
+export declare const PHOSPHOR_TOKEN_CSS_PATH = "styles/tokens.css";
+export declare const PHOSPHOR_FONTS_CSS_PATH = "styles/fonts.css";
+export declare const PHOSPHOR_TYPOGRAPHY_CSS_PATH = "styles/typography.css";
+export declare const PHOSPHOR_GLOBAL_CSS_PATH = "styles/global.css";
+export declare const PHOSPHOR_COMPONENTS_CSS_PATH = "styles/components.css";
+export declare const PHOSPHOR_FULL_CSS_PATH = "styles/phosphor.css";
+export declare const PHOSPHOR_CSS_ENTRYPOINTS: {
+    readonly full: "styles/phosphor.css";
+    readonly fonts: "styles/fonts.css";
+    readonly tokens: "styles/tokens.css";
+    readonly typography: "styles/typography.css";
+    readonly global: "styles/global.css";
+    readonly components: "styles/components.css";
+};
+export declare const PHOSPHOR_TOKEN_GROUPS: {
+    readonly color: readonly ["--pho-color-background", "--pho-color-background-raised", "--pho-color-background-deep", "--pho-color-text", "--pho-color-text-strong", "--pho-color-text-muted", "--pho-color-text-faint", "--pho-color-primary", "--pho-color-primary-strong", "--pho-color-primary-muted", "--pho-color-primary-faint", "--pho-color-accent", "--pho-color-accent-strong", "--pho-color-accent-muted", "--pho-color-accent-faint", "--pho-color-info", "--pho-color-success", "--pho-color-highlight", "--pho-color-link", "--pho-color-link-hover", "--pho-color-inverse", "--pho-color-selection-bg", "--pho-color-selection-text", "--pho-color-surface", "--pho-color-surface-deep", "--pho-color-border", "--pho-color-border-strong", "--pho-color-danger", "--pho-color-danger-strong", "--pho-color-danger-emphasis", "--pho-color-danger-contrast", "--pho-color-danger-muted", "--pho-color-danger-faint", "--pho-color-danger-subtle", "--pho-color-danger-glow", "--pho-color-danger-glow-soft", "--pho-color-warning", "--pho-color-warning-strong", "--pho-color-warning-muted", "--pho-color-warning-faint", "--pho-color-status-draft", "--pho-color-status-published", "--pho-color-status-archived", "--pho-color-status-locked", "--pho-color-status-current", "--pho-color-status-missing"];
+    readonly font: readonly ["--pho-font-display", "--pho-font-heading", "--pho-font-body", "--pho-font-code", "--pho-font-terminal"];
+    readonly type: readonly ["--pho-type-h1-size", "--pho-type-h2-size", "--pho-type-h3-size", "--pho-type-h4-size", "--pho-type-h5-size", "--pho-type-h6-size", "--pho-type-lead-size", "--pho-type-body-size", "--pho-type-small-size", "--pho-type-caption-size", "--pho-type-micro-size", "--pho-type-ui-xs-size", "--pho-type-ui-sm-size", "--pho-type-label-size", "--pho-type-mono-size", "--pho-type-control-size", "--pho-type-control-sm-size", "--pho-type-control-lg-size", "--pho-type-icon-sm-size", "--pho-type-icon-md-size", "--pho-type-icon-lg-size", "--pho-line-tight", "--pho-line-snug", "--pho-line-normal", "--pho-line-prose", "--pho-line-control", "--pho-line-caption", "--pho-tracking-tight", "--pho-tracking-normal", "--pho-tracking-wide", "--pho-tracking-wider", "--pho-tracking-stamp"];
+    readonly space: readonly ["--pho-space-0", "--pho-space-1", "--pho-space-2", "--pho-space-3", "--pho-space-4", "--pho-space-5", "--pho-space-6", "--pho-space-7", "--pho-size-touch-target", "--pho-size-content", "--pho-size-prose"];
+    readonly alpha: readonly ["--pho-alpha-primary-01", "--pho-alpha-primary-02", "--pho-alpha-primary-03", "--pho-alpha-primary-04", "--pho-alpha-primary-05", "--pho-alpha-primary-06", "--pho-alpha-primary-07", "--pho-alpha-primary-08", "--pho-alpha-primary-10", "--pho-alpha-primary-12", "--pho-alpha-primary-14", "--pho-alpha-primary-16", "--pho-alpha-primary-18", "--pho-alpha-primary-22", "--pho-alpha-primary-28", "--pho-alpha-primary-35", "--pho-alpha-primary-45", "--pho-alpha-accent-04", "--pho-alpha-accent-08", "--pho-alpha-accent-12", "--pho-alpha-accent-14", "--pho-alpha-surface-45", "--pho-alpha-surface-62", "--pho-alpha-surface-72", "--pho-alpha-surface-82"];
+    readonly layout: readonly ["--pho-layout-site-max", "--pho-layout-content-max", "--pho-layout-prose-max", "--pho-layout-sidebar-width", "--pho-layout-toc-width", "--pho-layout-admin-sidebar-width", "--pho-layout-gutter", "--pho-layout-sticky-top", "--pho-bp-xs", "--pho-bp-sm", "--pho-bp-md", "--pho-bp-lg", "--pho-bp-xl"];
+    readonly motion: readonly ["--pho-motion-fast", "--pho-motion-base", "--pho-motion-slow", "--pho-ease-out", "--pho-ease-terminal"];
+    readonly component: readonly ["--pho-card-border", "--pho-card-bg", "--pho-card-padding", "--pho-thumb-post-w", "--pho-thumb-post-h", "--pho-thumb-post-w-sm", "--pho-thumb-post-h-sm", "--pho-ascii-glow-pad-x", "--pho-ascii-glow-pad-y"];
+    readonly border: readonly ["--pho-border-frame", "--pho-border-line", "--pho-border-dashed", "--pho-border-dotted", "--pho-border-accent", "--pho-border-accent-dashed", "--pho-rail-strong", "--pho-rail-quote", "--pho-focus-ring", "--pho-focus-offset", "--pho-radius-none", "--pho-radius-sm", "--pho-radius-md"];
+    readonly effect: readonly ["--pho-glow-primary", "--pho-glow-accent", "--pho-glow-info", "--pho-glow-primary-soft", "--pho-glow-accent-soft", "--pho-glow-readable", "--pho-cursor-default", "--pho-cursor-pointer", "--pho-cursor-text", "--pho-cursor-disabled"];
+    readonly layer: readonly ["--pho-z-deep", "--pho-z-default", "--pho-z-raised", "--pho-z-fx-noise", "--pho-z-fx-vignette", "--pho-z-fx-frame", "--pho-z-fx-flicker", "--pho-z-shell", "--pho-z-backdrop", "--pho-z-drawer"];
+    readonly scrollbar: readonly ["--pho-scrollbar-size", "--pho-scrollbar-track", "--pho-scrollbar-thumb", "--pho-scrollbar-thumb-hover", "--pho-scrollbar-thumb-active"];
+};
+export type PhosphorTokenGroup = keyof typeof PHOSPHOR_TOKEN_GROUPS;
+export type PhosphorTokenName = (typeof PHOSPHOR_TOKEN_GROUPS)[PhosphorTokenGroup][number];
+export declare const PHOSPHOR_TOKENS: PhosphorTokenName[];
+export declare function phosphorVar(token: PhosphorTokenName, fallback?: string): string;

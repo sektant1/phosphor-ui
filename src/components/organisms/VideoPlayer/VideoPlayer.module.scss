@@ -4,6 +4,7 @@
   font-family: var(--pho-font-code);
   position: relative;
   margin: 0;
+  width: 100%;
 }
 .stage {
   position: relative;
@@ -16,13 +17,22 @@
 }
 .host :global(.video-js) {
   width: 100%;
-  height: 100%;
   background:
     repeating-linear-gradient(0deg, transparent 0 3px, rgba(44, 255, 122, 0.04) 3px 4px),
     radial-gradient(ellipse at 50% 50%, rgba(44, 255, 122, 0.08), transparent 70%),
     var(--pho-color-background-deep);
   font-family: var(--pho-font-terminal);
   color: var(--pho-color-primary);
+  font-size: 14px;
+}
+.host :global(.video-js:not(.vjs-fluid)) {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 220px;
+}
+.host :global(.vjs-poster img),
+.host :global(.vjs-tech) {
+  object-fit: cover;
 }
 .host :global(.vjs-big-play-button) {
   border: 2px solid var(--pho-color-primary);
@@ -30,12 +40,32 @@
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   box-shadow: var(--pho-glow-primary);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+.host :global(.vjs-big-play-button:hover),
+.host :global(.video-js:hover .vjs-big-play-button),
+.host :global(.vjs-big-play-button:focus-visible) {
+  border-color: var(--pho-color-primary-strong);
+  background: rgba(44, 255, 122, 0.16);
 }
 .host :global(.vjs-control-bar) {
   background: var(--pho-color-background-raised);
   border-top: 1px solid var(--pho-color-primary-faint);
   color: var(--pho-color-primary);
   font-family: var(--pho-font-terminal);
+  min-height: 3.2em;
+  padding-inline: 0.35em;
+}
+.host :global(.vjs-button > .vjs-icon-placeholder)::before,
+.host :global(.vjs-icon-placeholder)::before {
+  text-shadow: var(--pho-glow-primary);
+}
+.host :global(.vjs-button:hover),
+.host :global(.vjs-button:focus-visible) {
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary);
 }
 .host :global(.vjs-play-progress),
 .host :global(.vjs-volume-level) {
@@ -49,6 +79,7 @@
 .host :global(.vjs-progress-holder) {
   background: var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-faint);
+  margin-inline: 0.6em;
 }
 .host :global(.vjs-mute-control) {
   color: var(--pho-color-primary);
@@ -60,7 +91,7 @@
 .host :global(.vjs-volume-bar) {
   background: var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-faint);
-  margin: 1.35em 0.45em;
+  margin: 1.25em 0.45em;
 }
 .host :global(.vjs-volume-bar.vjs-slider-horizontal) {
   height: 0.45em;
@@ -90,17 +121,35 @@
 .host :global(.vjs-remaining-time) {
   color: var(--pho-color-primary-muted);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
+  min-width: auto;
+  padding-inline: 0.4em;
 }
 .host :global(.vjs-button:focus-visible) {
   outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
+@media (max-width: 640px) {
+  .host :global(.video-js) {
+    font-size: 12px;
+  }
+  .host :global(.vjs-control-bar) {
+    min-height: 3em;
+    padding-inline: 0.1em;
+  }
+  .host :global(.vjs-volume-panel),
+  .host :global(.vjs-remaining-time) {
+    display: none;
+  }
+  .host :global(.vjs-progress-control) {
+    min-width: 4em;
+  }
+}
 
 .tag {
   position: absolute; top: 8px; left: 10px;
   font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.18em; text-transform: uppercase;
+  letter-spacing: 0; text-transform: uppercase;
   color: var(--pho-color-primary-faint);
   pointer-events: none;
   z-index: 2;
@@ -108,7 +157,7 @@
 .tc {
   position: absolute; top: 8px; right: 10px;
   font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.14em;
+  letter-spacing: 0;
   color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
   font-variant-numeric: tabular-nums;
   pointer-events: none;

@@ -12,14 +12,12 @@ export default meta;
 const defaultSource = tsx`
 import { Post } from "@sektant1/phosphor-ui";
 
-
-
 export function Example() {
   return (
-      <Post title="Field notes">
-        <p>Post body content.</p>
-      </Post>
-    );
+    <Post title="Field notes">
+      <p>Post body content.</p>
+    </Post>
+  );
 }
 `;
 

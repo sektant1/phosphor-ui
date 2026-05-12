@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import type Player from "video.js/dist/types/player";
+import "video.js/dist/video-js.css";
 import styles from "./VideoPlayer.module.scss";
 import { cx } from "../../../utils/classNames";
 
@@ -17,6 +18,7 @@ export interface VideoPlayerProps {
   controls?: boolean;
   preload?: "auto" | "metadata" | "none";
   fluid?: boolean;
+  aspectRatio?: string;
   options?: Record<string, unknown>;
   onReady?: (player: Player) => void;
   tag?: React.ReactNode;
@@ -41,6 +43,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   controls = true,
   preload = "auto",
   fluid = true,
+  aspectRatio = "16:9",
   options,
   onReady,
   tag,
@@ -58,29 +61,27 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     let cancelled = false;
 
     const videoEl = document.createElement("video-js");
-    videoEl.classList.add("vjs-big-play-centered", styles.video);
+    videoEl.classList.add("vjs-big-play-centered");
     host.appendChild(videoEl);
 
     import("video.js").then(({ default: videojs }) => {
       if (cancelled) return;
-      const player = videojs(
-        videoEl,
-        {
-          controls,
-          autoplay,
-          loop,
-          muted,
-          preload,
-          fluid,
-          poster,
-          sources,
-          ...options,
-        },
-        () => {
-          onReady?.(player);
-        },
-      );
+      const player = videojs(videoEl, {
+        controls,
+        autoplay,
+        loop,
+        muted,
+        preload,
+        fluid,
+        aspectRatio,
+        poster,
+        sources,
+        ...options,
+      });
       playerRef.current = player;
+      player.ready(() => {
+        onReady?.(player);
+      });
     });
 
     return () => {
@@ -101,6 +102,18 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     player.src(sources);
     if (poster !== undefined) player.poster(poster);
   }, [sources, poster]);
+
+  useEffect(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.controls(controls);
+    player.autoplay(autoplay);
+    player.loop(loop);
+    player.muted(muted);
+    player.preload(preload);
+    player.fluid(fluid);
+    player.aspectRatio(aspectRatio);
+  }, [controls, autoplay, loop, muted, preload, fluid, aspectRatio]);
 
   return (
     <figure className={cx(styles.vp, className)}>

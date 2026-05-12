@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { FeatureList } from "./FeatureList";
+import { source, tsx } from "../../../stories/source";
 
 const FEATURES = [
   {
@@ -36,4 +37,29 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+const defaultSource = tsx`
+import { FeatureList } from "@sektant1/phosphor-ui";
+
+const items = [
+  {
+    title: "No rounded corners",
+    body: "border-radius: 0 everywhere except LED dots.",
+  },
+  {
+    title: "No emoji",
+    body: "Box-drawing glyphs only.",
+  },
+  {
+    title: "Glow over shadows",
+    body: "Emphasis = text-shadow: var(--glow-emerald).",
+  },
+];
+
+export function Example() {
+  return <FeatureList items={items} />;
+}
+`;
+
+export const Default: Story = {
+  parameters: { docs: { source: source(defaultSource) } },
+};

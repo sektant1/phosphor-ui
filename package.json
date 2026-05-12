@@ -30,7 +30,8 @@
     "url": "https://github.com/sektant1/phosphor-ui/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -60,23 +61,29 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "npm run clean && rollup -c rollup.config.mjs && npm run build:types && npm run copy-styles",
+    "build": "npm run clean && rollup -c rollup.config.mjs && npm run write-package-types && npm run build:types && npm run copy-styles",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "rollup": "rollup -c rollup.config.mjs",
+    "write-package-types": "node scripts/write-package-types.mjs",
     "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist/esm --outDir dist/esm",
+    "build:types:snapshot": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir types",
     "copy-styles": "mkdir -p dist/styles dist/styles/fonts/bender dist/styles/fonts/vcr_osd_mono && cp dist/esm/styles/components.css dist/styles/components.css && cp src/styles/fonts.css dist/styles/fonts.css && cp src/styles/tokens.css dist/styles/tokens.css && cp src/styles/typography.css dist/styles/typography.css && cp src/styles/global.css dist/styles/global.css && cp src/styles/phosphor.css dist/styles/phosphor.css && cp src/styles/fonts/bender/*.woff dist/styles/fonts/bender/ && cp src/styles/fonts/vcr_osd_mono/*.ttf dist/styles/fonts/vcr_osd_mono/",
     "typecheck": "npm run typecheck:src && npm run typecheck:storybook && npm run typecheck:tests",
     "typecheck:src": "tsc --noEmit -p tsconfig.json",
     "typecheck:storybook": "tsc -p tsconfig.storybook.json",
     "typecheck:tests": "tsc -p tsconfig.test.json",
     "test": "jest",
+    "audit:public-api": "node scripts/audit-public-api.mjs",
     "audit:story-sources": "node scripts/audit-story-sources.mjs",
+    "smoke:package": "node scripts/smoke-package.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "validate": "npm run typecheck && npm run audit:story-sources && npm test -- --runInBand && npm run build-storybook -- --quiet && npm run build",
-    "validate:package": "npm run typecheck && npm run audit:story-sources && npm test -- --runInBand && npm run build",
+    "validate:package": "npm run typecheck && npm run audit:public-api && npm run audit:story-sources && npm test -- --runInBand && npm run build && npm run smoke:package",
     "prepublishOnly": "npm run validate:package",
-    "release": "npm publish --access public"
+    "release:dev": "npm version prerelease --preid dev --no-git-tag-version && npm publish --access public --tag next",
+    "release:prod": "npm version patch --no-git-tag-version && npm publish --access public --tag latest",
+    "release": "npm run release:prod"
   },
   "peerDependencies": {
     "@mdx-js/react": "^2 || ^3",

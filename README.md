@@ -231,6 +231,37 @@ npm run build            # rollup → dist/
 npm run build-storybook  # static → storybook-static/
 ```
 
+## Release checks
+
+Before publishing a stable release, run the package validation flow:
+
+```bash
+npm run validate:package
+```
+
+This runs TypeScript checks, public API export checks, story source audits, Jest,
+the library build, and a package smoke test against the generated `dist/`
+artifacts. For public API changes, refresh the checked-in declaration snapshot:
+
+```bash
+npm run build:types:snapshot
+```
+
+The supported consumer API is the root import plus the documented CSS subpaths.
+Deep component imports are internal implementation details.
+
+## CI/CD
+
+The GitHub Actions setup uses `dev` and `prod` as long-lived branches:
+
+- `dev` validates the package and publishes prereleases to npm with the `next`
+  dist-tag.
+- `prod` validates the package, publishes the stable npm package with the
+  `latest` dist-tag, and deploys Storybook to GitHub Pages.
+
+See [docs/branching-and-deploy.md](./docs/branching-and-deploy.md) for branch
+setup, required secrets, environments, and release behavior.
+
 ## License
 
 MIT © [sektant1](https://github.com/sektant1)
