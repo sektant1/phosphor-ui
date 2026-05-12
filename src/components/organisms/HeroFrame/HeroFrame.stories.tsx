@@ -3,14 +3,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { HeroFrame } from "./HeroFrame";
 import { source, tsx } from "../../../stories/source";
 
-const art = [
-  "      .-======-.",
-  "   .- PHOSPHOR -.",
-  "  /   SIGNAL LOCK \\",
-  "  |    CH 0x4C    |",
-  "  \\_______________/",
-].join("\\n");
-
 const meta: Meta<typeof HeroFrame> = {
   title: "Organisms/HeroFrame",
   component: HeroFrame,
@@ -21,20 +13,10 @@ export default meta;
 const defaultSource = tsx`
 import { HeroFrame } from "@sektant1/phosphor-ui";
 
-
-
-const art = [
-  "      .-======-.",
-  "   .- PHOSPHOR -.",
-  "  /   SIGNAL LOCK \\\\",
-  "  |    CH 0x4C    |",
-  "  \\\\_______________/",
-].join("\\\\n");
-
 export function Example() {
   return (
       <HeroFrame
-        art={art}
+        text="PHOSPHOR"
         topHud={
           <>
             <HeroFrame.HudLed variant="rec" />
@@ -62,7 +44,7 @@ export const Default: Story = {
   parameters: { docs: { source: source(defaultSource) } },
   render: () => (
     <HeroFrame
-      art={art}
+      text="PHOSPHOR"
       topHud={
         <>
           <HeroFrame.HudLed variant="rec" />

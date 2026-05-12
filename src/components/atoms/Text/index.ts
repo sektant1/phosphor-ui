@@ -1,2 +1,8 @@
 export { default } from "./Text";
-export type { TextProps, TextVariant } from "./Text";
+export type {
+  TextAlign,
+  TextProps,
+  TextTone,
+  TextTransform,
+  TextVariant,
+} from "./Text";

@@ -18,6 +18,12 @@ export type {
   HeadingProps,
 } from "../../components/atoms/Headings";
 export { default as Text } from "../../components/atoms/Text";
-export type { TextProps, TextVariant } from "../../components/atoms/Text";
+export type {
+  TextAlign,
+  TextProps,
+  TextTone,
+  TextTransform,
+  TextVariant,
+} from "../../components/atoms/Text";
 export { default as Prose } from "../../components/content/Prose";
 export type { ProseProps } from "../../components/content/Prose";

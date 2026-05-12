@@ -92,14 +92,9 @@
     align-items: var(--pho-mobile-align, var(--pho-align));
     justify-content: var(--pho-mobile-justify, var(--pho-justify));
     flex-wrap: var(--pho-mobile-wrap, var(--pho-wrap));
-    gap: var(
-        --pho-mobile-row-gap,
-        var(--pho-mobile-gap, var(--pho-row-gap))
-      )
-      var(
-        --pho-mobile-column-gap,
-        var(--pho-mobile-gap, var(--pho-column-gap))
-      );
+    gap: var(--pho-mobile-row-gap,
+        var(--pho-mobile-gap, var(--pho-row-gap))) var(--pho-mobile-column-gap,
+        var(--pho-mobile-gap, var(--pho-column-gap)));
   }
 
   .grid {
@@ -107,14 +102,9 @@
         repeat(auto-fit, minmax(var(--pho-mobile-grid-min, var(--pho-grid-min)), 1fr)));
     align-items: var(--pho-mobile-align, var(--pho-align));
     justify-content: var(--pho-mobile-justify, var(--pho-justify));
-    gap: var(
-        --pho-mobile-row-gap,
-        var(--pho-mobile-gap, var(--pho-row-gap))
-      )
-      var(
-        --pho-mobile-column-gap,
-        var(--pho-mobile-gap, var(--pho-column-gap))
-      );
+    gap: var(--pho-mobile-row-gap,
+        var(--pho-mobile-gap, var(--pho-row-gap))) var(--pho-mobile-column-gap,
+        var(--pho-mobile-gap, var(--pho-column-gap)));
   }
 
   .container {

@@ -2,11 +2,24 @@ import React from "react";
 import styles from "./Kbd.module.scss";
 import { cx } from "../../../utils/classNames";
 
-export interface KbdProps extends React.HTMLAttributes<HTMLElement> {}
+export type KbdVariant = "default" | "accent" | "muted";
+
+export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
+  variant?: KbdVariant;
+}
 
 export const Kbd = React.forwardRef<HTMLElement, KbdProps>(
-  ({ className, ...rest }, ref) => (
-    <kbd ref={ref} className={cx(styles.kbd, className)} {...rest} />
+  ({ variant = "default", className, ...rest }, ref) => (
+    <kbd
+      ref={ref}
+      className={cx(
+        styles.kbd,
+        variant === "accent" && styles.accent,
+        variant === "muted" && styles.muted,
+        className,
+      )}
+      {...rest}
+    />
   ),
 );
 

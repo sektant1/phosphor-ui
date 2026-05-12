@@ -54,11 +54,18 @@
 }
 
 .chev {
-  // color: var(--pho-color-primary-faint);
-  font-family: var(--pho-font-code);
-  font-size: var(--pho-type-caption-size);
-  line-height: 1;
+  align-items: center;
+  color: var(--pho-color-primary-faint);
+  display: inline-flex;
+  flex: 0 0 auto;
+  inline-size: 1.25rem;
+  justify-content: center;
+  line-height: 0;
   pointer-events: none;
+}
+
+.chev > span {
+  display: block;
 }
 
 .menu {
@@ -72,7 +79,7 @@
   position: absolute;
   top: calc(100% + 0.35rem);
   width: max-content;
-  z-index: var(--z-drawer);
+  z-index: var(--pho-z-drawer);
 }
 
 .menu::before {

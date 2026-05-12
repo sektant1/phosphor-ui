@@ -47,4 +47,17 @@ describe("Text", () => {
     expect(el.className).toContain("t-truncate");
     expect(el.className).toContain("t-balance");
   });
+
+  test("supports tone, align, transform, and nowrap utility props", () => {
+    const { container } = render(
+      <Text tone="accent" align="center" transform="uppercase" nowrap>
+        signal
+      </Text>,
+    );
+    const el = container.firstChild as HTMLElement;
+    expect(el.className).toContain("t-tone-accent");
+    expect(el.className).toContain("t-align-center");
+    expect(el.className).toContain("t-uppercase");
+    expect(el.className).toContain("t-nowrap");
+  });
 });

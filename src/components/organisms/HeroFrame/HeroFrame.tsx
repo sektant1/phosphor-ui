@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./HeroFrame.module.scss";
 import { cx } from "../../../utils/classNames";
+import { bannerSync, type BannerFontName } from "../../../ascii";
 
 export interface HeroFrameProps extends React.HTMLAttributes<HTMLDivElement> {
-  art: string;
+  art?: string;
+  text?: string;
+  font?: BannerFontName;
   topHud?: React.ReactNode;
   bottomHud?: React.ReactNode;
   scanline?: boolean;
@@ -17,16 +20,20 @@ export const HeroFrame: React.FC<HeroFrameProps> & {
   HudSpacer: typeof HudSpacer;
   HudTape: typeof HudTape;
   HudBars: typeof HudBars;
-} = ({ art, topHud, bottomHud, scanline = true, className, ...rest }) => (
-  <div className={cx(styles.frame, className)} {...rest}>
-    {topHud && <Hud position="top">{topHud}</Hud>}
-    <div className={styles.artWrap}>
-      <pre className={styles.art}>{art}</pre>
-      {scanline && <span className={styles.scanline} aria-hidden="true" />}
+} = ({ art, text, font = "Slant", topHud, bottomHud, scanline = true, className, ...rest }) => {
+  const renderedArt = art ?? (text ? bannerSync(text, font) : "");
+
+  return (
+    <div className={cx(styles.frame, className)} {...rest}>
+      {topHud && <Hud position="top">{topHud}</Hud>}
+      <div className={styles.artWrap}>
+        <pre className={styles.art}>{renderedArt}</pre>
+        {scanline && <span className={styles.scanline} aria-hidden="true" />}
+      </div>
+      {bottomHud && <Hud position="bottom">{bottomHud}</Hud>}
     </div>
-    {bottomHud && <Hud position="bottom">{bottomHud}</Hud>}
-  </div>
-);
+  );
+};
 
 const Hud: React.FC<{ position?: "top" | "bottom"; children: React.ReactNode }> = ({
   position = "top",

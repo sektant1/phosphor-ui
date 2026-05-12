@@ -6,8 +6,11 @@ import { Input } from "../atoms/Input";
 import { ProgressBar } from "../atoms/ProgressBar";
 import { ReadingRail } from "../atoms/ReadingRail";
 import { Tag } from "../atoms/Tag";
+import { Cluster, Column, Grid } from "../templates/Layout";
 import { Callout } from "../molecules/Callout";
 import { CourseCard } from "../organisms/CourseCard";
+import { NerdTree } from "../organisms/NerdTree";
+import type { NerdTreeNode } from "../organisms/NerdTree";
 import Pagination from "../molecules/Pagination";
 import { Stepper, StepperFoot } from "../molecules/Stepper";
 import { TableOfContents } from "../molecules/TableOfContents";
@@ -15,13 +18,8 @@ import { AsciiBanner } from "../organisms/AsciiBanner";
 import { HeroFrame } from "../organisms/HeroFrame";
 import { PostListing, PostRow } from "../organisms/PostListing";
 import { Post } from "../templates/PostTemplate";
-import {
-  DemoCluster,
-  DemoGrid,
-  DemoSection,
-  Page as DemoPage,
-  useReadingProgress,
-} from "../../demo/shared";
+import { SiteShell } from "../templates/SiteShell";
+import { useReadingProgress } from "../../hooks";
 import type { CssVars } from "../../utils/browser";
 import { source, tsx } from "../../stories/source";
 
@@ -34,55 +32,150 @@ const meta: Meta = {
 
 export default meta;
 
+const siteNav = [
+  { label: "home", href: "#/" },
+  { label: "posts", href: "#/posts" },
+  { label: "courses", href: "#/courses" },
+  { label: "archive", href: "#/archive" },
+  { label: "contact", href: "#/contact" },
+];
+
+const buildSiteTree = (active?: string): NerdTreeNode[] => [
+  {
+    kind: "dir",
+    label: "zone-net/",
+    defaultOpen: true,
+    children: [
+      { kind: "leaf", label: "index.md", href: "#/", active: active === "home" },
+      {
+        kind: "dir",
+        label: "posts/",
+        defaultOpen: active === "posts",
+        children: [
+          {
+            kind: "leaf",
+            label: "boot-the-terminal.md",
+            href: "#/posts/boot-the-terminal",
+            active: active === "posts",
+          },
+          { kind: "leaf", label: "decode-the-signal.md", href: "#/posts/decode-the-signal" },
+          { kind: "leaf", label: "phosphor-protocol-intro.md", href: "#/posts/phosphor-protocol-intro" },
+        ],
+      },
+      {
+        kind: "dir",
+        label: "courses/",
+        defaultOpen: active === "courses",
+        children: [
+          { kind: "leaf", label: "cold-boot.md", href: "#/courses/cold-boot" },
+          { kind: "leaf", label: "signal-decoding.md", href: "#/courses/signal-decoding" },
+        ],
+      },
+    ],
+  },
+];
+
+const SitePageFrame = ({
+  active,
+  routeKey,
+  children,
+}: {
+  active: string;
+  routeKey?: string;
+  children: React.ReactNode;
+}) => (
+  <SiteShell
+    title="phosphor ui"
+    homeHref="#/"
+    tagline="// СЕКРЕТНО // single-channel transmissions"
+    nav={siteNav.map((item) => ({ ...item, active: item.label === active }))}
+    locales={[
+      { code: "en", label: "EN", href: "#/?lang=en", active: true },
+      { code: "ru", label: "RU", href: "#/?lang=ru" },
+    ]}
+    footerLinks={[
+      { label: "rss", href: "#/rss" },
+      { label: "log", href: "#/log" },
+      { label: "contact", href: "#/contact" },
+      { label: "github", href: "https://github.com" },
+    ]}
+    footerProps={{
+      year: 2026,
+      status: { label: "link", value: "STABLE" },
+      prompt: "~/phosphor-ui $",
+      command: "logout",
+    }}
+  >
+    <Grid
+      columns="minmax(220px, 260px) minmax(0, 1fr)"
+      mobileColumns="1fr"
+      gap="lg"
+      align="start"
+      style={{ marginTop: "var(--pho-space-6)" }}
+    >
+      <NerdTree
+        title="~/zone-net"
+        bufferLabel="[content/]"
+        hint="γ-2 // single-channel"
+        command=":NERDTree"
+        footerMeta="42 files · 7 dirs"
+        tree={buildSiteTree(active)}
+      />
+      <Column
+        key={routeKey ?? active}
+        as="div"
+        gap="lg"
+        className="pho-page-enter"
+        style={{ minWidth: 0, paddingBottom: "3rem" }}
+      >
+        {children}
+      </Column>
+    </Grid>
+  </SiteShell>
+);
+
 const homeSource = tsx`
 import React from "react";
-import { AsciiBanner, CourseCard, H2, HeroFrame, Hr, PostListing, PostRow, Tag } from "@sektant1/phosphor-ui";
+import { AsciiBanner, Cluster, Column, CourseCard, Grid, H2, HeroFrame, Hr, NerdTree, PostListing, PostRow, SiteShell, Tag } from "@sektant1/phosphor-ui";
 
 type CssVars = React.CSSProperties & Record<\`--\${string}\`, string | number>;
 
-function DemoPage({ children }: { children: React.ReactNode }) {
-  return <main>{children}</main>;
-}
+const siteNav = [
+  { label: "home", href: "#/" },
+  { label: "posts", href: "#/posts" },
+  { label: "courses", href: "#/courses" },
+];
 
-function DemoSection({
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLElement> & { space?: "md" | "lg" }) {
-  return <section {...props}>{children}</section>;
-}
+const siteTree = [
+  {
+    kind: "dir" as const,
+    label: "zone-net/",
+    defaultOpen: true,
+    children: [
+      { kind: "leaf" as const, label: "index.md", href: "#/", active: true },
+      { kind: "leaf" as const, label: "boot-the-terminal.md", href: "#/posts/boot-the-terminal" },
+      { kind: "leaf" as const, label: "cold-boot.md", href: "#/courses/cold-boot" },
+    ],
+  },
+];
 
-function DemoCluster({ children }: { children: React.ReactNode }) {
-  return <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>{children}</div>;
-}
-
-function DemoGrid({ children, className }: { children: React.ReactNode; className?: string }) {
+function PageFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className={className} style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
-      {children}
-    </div>
+    <SiteShell title="phosphor ui" tagline="// single-channel transmissions" nav={siteNav}>
+      <Grid columns="minmax(220px, 260px) minmax(0, 1fr)" mobileColumns="1fr" gap="lg" align="start">
+        <NerdTree tree={siteTree} title="~/zone-net" />
+        <Column gap="lg" style={{ minWidth: 0 }}>{children}</Column>
+      </Grid>
+    </SiteShell>
   );
 }
 
-const HERO_ART = \`
-███████╗ ██████╗ ███╗   ██╗███████╗   ███╗   ██╗███████╗████████╗
-╚══███╔╝██╔═══██╗████╗  ██║██╔════╝   ████╗  ██║██╔════╝╚══██╔══╝
-  ███╔╝ ██║   ██║██╔██╗ ██║█████╗     ██╔██╗ ██║█████╗     ██║
- ███╔╝  ██║   ██║██║╚██╗██║██╔══╝     ██║╚██╗██║██╔══╝     ██║
-███████╗╚██████╔╝██║ ╚████║███████╗   ██║ ╚████║███████╗   ██║
-╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝  ╚═══╝╚══════╝   ╚═╝
-\`;
-
-const SMALL_BANNER = \`
-// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ
-// CHANNEL 0x4C // γ-2 // NORM
-\`;
-
 export function Example() {
   return (
-      <DemoPage active="home" routeKey="home">
+      <PageFrame>
         <div className="pho-flicker-in">
           <HeroFrame
-            art={HERO_ART}
+            text="ZONE-NET"
             topHud={
               <>
                 <HeroFrame.HudLed variant="rec" />
@@ -104,10 +197,11 @@ export function Example() {
           />
         </div>
 
-        <DemoSection
+        <Column
+          as="section"
+          gap="md"
           className="pho-fade-up"
-          space="lg"
-          style={{ "--i": 1 } as CssVars}
+          style={{ "--i": 1, marginTop: "var(--pho-space-7)" } as CssVars}
         >
           <H2>latest transmissions</H2>
           <p className="t-body" style={{ color: "var(--pho-color-primary-muted)", margin: 0 }}>
@@ -142,7 +236,7 @@ export function Example() {
             />
           </PostListing>
           <Hr />
-          <DemoCluster>
+          <Cluster gap="sm">
             <Tag>operations</Tag>
             <Tag>signals</Tag>
             <Tag color="magenta">anomaly</Tag>
@@ -150,18 +244,19 @@ export function Example() {
             <Tag count={7} color="magenta">
               live
             </Tag>
-          </DemoCluster>
-        </DemoSection>
+          </Cluster>
+        </Column>
 
         <Hr />
 
-        <DemoSection
+        <Column
+          as="section"
+          gap="md"
           className="pho-fade-up"
-          space="lg"
-          style={{ "--i": 2 } as CssVars}
+          style={{ "--i": 2, marginTop: "var(--pho-space-7)" } as CssVars}
         >
           <H2 glyph="▸">courses on rotation</H2>
-          <DemoGrid className="pho-stagger">
+          <Grid minItemWidth="20rem" mobileColumns="1fr" className="pho-stagger">
             <CourseCard
               stamp="COURSE-01"
               coverMeta="entry · 6 modules"
@@ -191,32 +286,57 @@ export function Example() {
               locked
               cta={{ label: "LOCKED", href: "#/courses/anomaly-triage" }}
             />
-          </DemoGrid>
-        </DemoSection>
+          </Grid>
+        </Column>
 
         <Hr />
 
-        <DemoSection
+        <Column
+          as="section"
+          gap="md"
           className="pho-fade-up pho-stagger"
-          space="lg"
-          style={{ "--i": 3 } as CssVars}
+          style={{ "--i": 3, marginTop: "var(--pho-space-7)" } as CssVars}
         >
-          <AsciiBanner art={SMALL_BANNER} fallback="ZONE-NET" />
-        </DemoSection>
-      </DemoPage>
+          <AsciiBanner text="ZONE-NET" fallback="ZONE-NET" />
+        </Column>
+      </PageFrame>
     );
 }
 `;
 
 const postPageSource = tsx`
 import React from "react";
-import { Callout, Input, Pagination, Post, ProgressBar, ReadingRail, Stepper, StepperFoot, TableOfContents, useReadingProgress } from "@sektant1/phosphor-ui";
+import { Callout, Column, Grid, Hr, Input, NerdTree, Pagination, Post, ProgressBar, ReadingRail, SiteShell, Stepper, StepperFoot, TableOfContents, useReadingProgress } from "@sektant1/phosphor-ui";
 
-function DemoPage({ children }: { children: React.ReactNode }) {
-  return <main>{children}</main>;
+const siteNav = [
+  { label: "home", href: "#/" },
+  { label: "posts", href: "#/posts", active: true },
+  { label: "courses", href: "#/courses" },
+];
+
+const siteTree = [
+  {
+    kind: "dir" as const,
+    label: "zone-net/",
+    defaultOpen: true,
+    children: [
+      { kind: "leaf" as const, label: "index.md", href: "#/" },
+      { kind: "leaf" as const, label: "boot-the-terminal.md", href: "#/posts/boot-the-terminal", active: true },
+      { kind: "leaf" as const, label: "cold-boot.md", href: "#/courses/cold-boot" },
+    ],
+  },
+];
+
+function PageFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <SiteShell title="phosphor ui" tagline="// single-channel transmissions" nav={siteNav}>
+      <Grid columns="minmax(220px, 260px) minmax(0, 1fr)" mobileColumns="1fr" gap="lg" align="start">
+        <NerdTree tree={siteTree} title="~/zone-net" />
+        <Column gap="lg" style={{ minWidth: 0 }}>{children}</Column>
+      </Grid>
+    </SiteShell>
+  );
 }
-
-
 
 const TOC_ITEMS = [
   { label: "Cold start", href: "#cold-start", glyph: "▸" },
@@ -237,7 +357,7 @@ export function Example() {
   const { ref, pct } = useReadingProgress<HTMLElement>();
 
       return (
-        <DemoPage active="posts" routeKey="post">
+        <PageFrame>
           <ReadingRail value={pct} />
           <Stepper
             items={[
@@ -250,7 +370,7 @@ export function Example() {
           <Post
             ref={ref}
             title="boot the terminal"
-            className="demo-stack demo-stack--lg demo-space--md"
+            className="pho-fade-up"
             headerProps={{
               tags: ["operations", "field"],
               date: "2026-05-06",
@@ -294,9 +414,9 @@ export function Example() {
                     name: "phosphor protocol intro",
                   }}
                 />
-                <DemoSection>
+                <Column as="section">
                   <Pagination defaultPage={2} totalPages={6} />
-                </DemoSection>
+                </Column>
               </>
             }
           >
@@ -341,26 +461,12 @@ export function Example() {
               transmission window opens at 22:00 local.
             </p>
           </Post>
-        </DemoPage>
+        </PageFrame>
       );
 }
 `;
 
 type Story = StoryObj;
-
-const HERO_ART = `
-███████╗ ██████╗ ███╗   ██╗███████╗   ███╗   ██╗███████╗████████╗
-╚══███╔╝██╔═══██╗████╗  ██║██╔════╝   ████╗  ██║██╔════╝╚══██╔══╝
-  ███╔╝ ██║   ██║██╔██╗ ██║█████╗     ██╔██╗ ██║█████╗     ██║
- ███╔╝  ██║   ██║██║╚██╗██║██╔══╝     ██║╚██╗██║██╔══╝     ██║
-███████╗╚██████╔╝██║ ╚████║███████╗   ██║ ╚████║███████╗   ██║
-╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝  ╚═══╝╚══════╝   ╚═╝
-`;
-
-const SMALL_BANNER = `
-// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ
-// CHANNEL 0x4C // γ-2 // NORM
-`;
 
 const TOC_ITEMS = [
   { label: "Cold start", href: "#cold-start", glyph: "▸" },
@@ -380,10 +486,10 @@ const TOC_ITEMS = [
 export const Home: Story = {
   parameters: { docs: { source: source(homeSource) } },
   render: () => (
-    <DemoPage active="home" routeKey="home">
+    <SitePageFrame active="home" routeKey="home">
       <div className="pho-flicker-in">
         <HeroFrame
-          art={HERO_ART}
+          text="ZONE-NET"
           topHud={
             <>
               <HeroFrame.HudLed variant="rec" />
@@ -405,10 +511,11 @@ export const Home: Story = {
         />
       </div>
 
-      <DemoSection
+      <Column
+        as="section"
+        gap="md"
         className="pho-fade-up"
-        space="lg"
-        style={{ "--i": 1 } as CssVars}
+        style={{ "--i": 1, marginTop: "var(--pho-space-7)" } as CssVars}
       >
         <H2>latest transmissions</H2>
         <p className="t-body" style={{ color: "var(--pho-color-primary-muted)", margin: 0 }}>
@@ -443,7 +550,7 @@ export const Home: Story = {
           />
         </PostListing>
         <Hr />
-        <DemoCluster>
+        <Cluster gap="sm">
           <Tag>operations</Tag>
           <Tag>signals</Tag>
           <Tag color="magenta">anomaly</Tag>
@@ -451,18 +558,19 @@ export const Home: Story = {
           <Tag count={7} color="magenta">
             live
           </Tag>
-        </DemoCluster>
-      </DemoSection>
+        </Cluster>
+      </Column>
 
       <Hr />
 
-      <DemoSection
+      <Column
+        as="section"
+        gap="md"
         className="pho-fade-up"
-        space="lg"
-        style={{ "--i": 2 } as CssVars}
+        style={{ "--i": 2, marginTop: "var(--pho-space-7)" } as CssVars}
       >
         <H2 glyph="▸">courses on rotation</H2>
-        <DemoGrid className="pho-stagger">
+        <Grid minItemWidth="20rem" mobileColumns="1fr" className="pho-stagger">
           <CourseCard
             stamp="COURSE-01"
             coverMeta="entry · 6 modules"
@@ -492,19 +600,20 @@ export const Home: Story = {
             locked
             cta={{ label: "LOCKED", href: "#/courses/anomaly-triage" }}
           />
-        </DemoGrid>
-      </DemoSection>
+        </Grid>
+      </Column>
 
       <Hr />
 
-      <DemoSection
+      <Column
+        as="section"
+        gap="md"
         className="pho-fade-up pho-stagger"
-        space="lg"
-        style={{ "--i": 3 } as CssVars}
+        style={{ "--i": 3, marginTop: "var(--pho-space-7)" } as CssVars}
       >
-        <AsciiBanner art={SMALL_BANNER} fallback="ZONE-NET" />
-      </DemoSection>
-    </DemoPage>
+        <AsciiBanner text="ZONE-NET" fallback="ZONE-NET" />
+      </Column>
+    </SitePageFrame>
   ),
 };
 
@@ -514,7 +623,7 @@ export const PostPage: Story = {
     const { ref, pct } = useReadingProgress<HTMLElement>();
 
     return (
-      <DemoPage active="posts" routeKey="post">
+      <SitePageFrame active="posts" routeKey="post">
         <ReadingRail value={pct} />
         <Stepper
           items={[
@@ -527,7 +636,7 @@ export const PostPage: Story = {
         <Post
           ref={ref}
           title="boot the terminal"
-          className="demo-stack demo-stack--lg demo-space--md"
+          className="pho-fade-up"
           headerProps={{
             tags: ["operations", "field"],
             date: "2026-05-06",
@@ -571,9 +680,9 @@ export const PostPage: Story = {
                   name: "phosphor protocol intro",
                 }}
               />
-              <DemoSection>
+              <Column as="section">
                 <Pagination defaultPage={2} totalPages={6} />
-              </DemoSection>
+              </Column>
             </>
           }
         >
@@ -618,7 +727,7 @@ export const PostPage: Story = {
             transmission window opens at 22:00 local.
           </p>
         </Post>
-      </DemoPage>
+      </SitePageFrame>
     );
   },
 };

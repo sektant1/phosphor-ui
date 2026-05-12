@@ -1,2 +1,2 @@
-export { DEFAULT_GLYPHS } from "../../components/organisms/Glyphs";
-export type { GlyphItem } from "../../components/organisms/Glyphs";
+export { DEFAULT_GLYPHS, GLYPH_CHAR_BY_NAME } from "./catalog";
+export type { GlyphItem } from "./catalog";

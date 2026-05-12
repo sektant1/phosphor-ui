@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Text from "./Text";
+import { Column } from "../../templates/Layout";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta<typeof Text> = {
@@ -145,6 +146,26 @@ export function Example() {
   return <Text {...stampProps} />;
 }
 `;
+
+const utilitiesSource = tsx`
+import { Column, Text } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+    <Column gap="sm" style={{ width: "min(420px, 90vw)" }}>
+      <Text tone="accent" transform="uppercase" nowrap>
+        publish queue
+      </Text>
+      <Text tone="muted" align="center">
+        Centered muted helper text for dense CMS panels.
+      </Text>
+      <Text variant="caption" tone="danger" truncate>
+        destructive action requires an explicit confirmation token
+      </Text>
+    </Column>
+  );
+}
+`;
 type Story = StoryObj<typeof Text>;
 
 export const Default: Story = {
@@ -220,4 +241,21 @@ export const Caption: Story = {
 export const Stamp: Story = {
   parameters: { docs: { source: source(stampSource) } },
   args: { variant: "stamp", children: "// LAST CONTACT //" },
+};
+
+export const Utilities: Story = {
+  parameters: { docs: { source: source(utilitiesSource) } },
+  render: () => (
+    <Column gap="sm" style={{ width: "min(420px, 90vw)" }}>
+      <Text tone="accent" transform="uppercase" nowrap>
+        publish queue
+      </Text>
+      <Text tone="muted" align="center">
+        Centered muted helper text for dense CMS panels.
+      </Text>
+      <Text variant="caption" tone="danger" truncate>
+        destructive action requires an explicit confirmation token
+      </Text>
+    </Column>
+  ),
 };

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { CourseCard } from "../../organisms/CourseCard";
 import { Tag } from "../../atoms/Tag";
-import { Cluster, Container, Flex, Grid, Stack } from "./Layout";
+import { Cluster, Column, Container, Flex, Grid, Row, Stack } from "./Layout";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta = {
@@ -15,26 +15,26 @@ const meta: Meta = {
 export default meta;
 
 const defaultSource = tsx`
-import { Button, Cluster, Container, CourseCard, Flex, Grid, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
-      <Flex align="center" justify="center" wrap="wrap" gap="sm">
+      <Row align="center" justify="center" wrap="wrap" gap="sm">
         <Tag>react</Tag>
         <Tag>typescript</Tag>
         <Tag color="magenta">storybook</Tag>
         <Button size="sm">Engage</Button>
-      </Flex>
+      </Row>
     );
 }
 `;
 
 const flexColumnSource = tsx`
-import { Button, Cluster, Container, CourseCard, Flex, Grid, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
-      <Stack
+      <Column
         align="stretch"
         gap="md"
         style={{ width: "min(420px, 90vw)" }}
@@ -42,13 +42,43 @@ export function Example() {
         <Button>Primary action</Button>
         <Button variant="ghost">Ghost action</Button>
         <Button variant="danger">Danger action</Button>
-      </Stack>
+      </Column>
     );
 }
 `;
 
+const rowSource = tsx`
+import { Button, Row, Tag } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+    <Row align="center" justify="space-between" gap="md" mobileDirection="column" style={{ width: "min(620px, 92vw)" }}>
+      <Tag>draft</Tag>
+      <Row gap="xs" wrap="wrap">
+        <Button size="sm" variant="ghost">Preview</Button>
+        <Button size="sm">Publish</Button>
+      </Row>
+    </Row>
+  );
+}
+`;
+
+const columnSource = tsx`
+import { Button, Column, Tag } from "@sektant1/phosphor-ui";
+
+export function Example() {
+  return (
+    <Column gap="sm" align="stretch" style={{ width: "min(360px, 90vw)" }}>
+      <Tag>cms panel</Tag>
+      <Button>Save draft</Button>
+      <Button variant="ghost">Schedule</Button>
+    </Column>
+  );
+}
+`;
+
 const clusteredActionsSource = tsx`
-import { Button, Cluster, Container, CourseCard, Flex, Grid, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -63,7 +93,7 @@ export function Example() {
 `;
 
 const boundedContainerSource = tsx`
-import { Button, Cluster, Container, CourseCard, Flex, Grid, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -80,7 +110,7 @@ export function Example() {
 `;
 
 const responsiveGridSource = tsx`
-import { Button, Cluster, Container, CourseCard, Flex, Grid, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
 
 
 
@@ -133,19 +163,19 @@ type Story = StoryObj;
 export const Default: Story = {
   parameters: { docs: { source: source(defaultSource) } },
   render: () => (
-    <Flex align="center" justify="center" wrap="wrap" gap="sm">
+    <Row align="center" justify="center" wrap="wrap" gap="sm">
       <Tag>react</Tag>
       <Tag>typescript</Tag>
       <Tag color="magenta">storybook</Tag>
       <Button size="sm">Engage</Button>
-    </Flex>
+    </Row>
   ),
 };
 
 export const FlexColumn: Story = {
   parameters: { docs: { source: source(flexColumnSource) } },
   render: () => (
-    <Stack
+    <Column
       align="stretch"
       gap="md"
       style={{ width: "min(420px, 90vw)" }}
@@ -153,7 +183,37 @@ export const FlexColumn: Story = {
       <Button>Primary action</Button>
       <Button variant="ghost">Ghost action</Button>
       <Button variant="danger">Danger action</Button>
-    </Stack>
+    </Column>
+  ),
+};
+
+export const RowLayout: Story = {
+  parameters: { docs: { source: source(rowSource) } },
+  render: () => (
+    <Row
+      align="center"
+      justify="space-between"
+      gap="md"
+      mobileDirection="column"
+      style={{ width: "min(620px, 92vw)" }}
+    >
+      <Tag>draft</Tag>
+      <Row gap="xs" wrap="wrap">
+        <Button size="sm" variant="ghost">Preview</Button>
+        <Button size="sm">Publish</Button>
+      </Row>
+    </Row>
+  ),
+};
+
+export const ColumnLayout: Story = {
+  parameters: { docs: { source: source(columnSource) } },
+  render: () => (
+    <Column gap="sm" align="stretch" style={{ width: "min(360px, 90vw)" }}>
+      <Tag>cms panel</Tag>
+      <Button>Save draft</Button>
+      <Button variant="ghost">Schedule</Button>
+    </Column>
   ),
 };
 

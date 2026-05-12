@@ -119,6 +119,24 @@ export const Flex = <T extends LayoutElement = "div">({
   });
 };
 
+export type RowProps<T extends LayoutElement = "div"> = Omit<
+  FlexProps<T>,
+  "direction"
+>;
+
+export const Row = <T extends LayoutElement = "div">(
+  props: RowProps<T>,
+) => <Flex direction="row" {...props} />;
+
+export type ColumnProps<T extends LayoutElement = "div"> = Omit<
+  FlexProps<T>,
+  "direction"
+>;
+
+export const Column = <T extends LayoutElement = "div">(
+  props: ColumnProps<T>,
+) => <Flex direction="column" {...props} />;
+
 export interface GridOwnProps {
   columns?: React.CSSProperties["gridTemplateColumns"];
   minItemWidth?: React.CSSProperties["minWidth"];

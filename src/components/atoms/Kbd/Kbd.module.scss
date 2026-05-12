@@ -15,3 +15,18 @@
   text-shadow: var(--pho-glow-readable);
   vertical-align: baseline;
 }
+
+.accent {
+  border-color: var(--pho-color-accent-muted);
+  color: var(--pho-color-accent-strong);
+  box-shadow:
+    inset 0 -1px 0 var(--pho-color-accent-muted),
+    var(--pho-glow-accent-soft);
+}
+
+.muted {
+  border-color: var(--pho-color-primary-faint);
+  color: var(--pho-color-primary-muted);
+  box-shadow: inset 0 -1px 0 var(--pho-color-primary-faint);
+  text-shadow: none;
+}

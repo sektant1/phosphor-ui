@@ -152,6 +152,39 @@
 .t-balance {
   text-wrap: balance;
 }
+.t-nowrap {
+  white-space: nowrap;
+}
+.t-align-start {
+  text-align: start;
+}
+.t-align-center {
+  text-align: center;
+}
+.t-align-end {
+  text-align: end;
+}
+.t-uppercase {
+  text-transform: uppercase;
+}
+.t-lowercase {
+  text-transform: lowercase;
+}
+.t-capitalize {
+  text-transform: capitalize;
+}
+.t-tone-primary {
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
+}
+.t-tone-accent {
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent-soft);
+}
+.t-tone-danger {
+  color: var(--pho-color-danger-strong);
+  text-shadow: 0 0 10px var(--pho-color-danger-glow-soft);
+}
 .t-dim,
 .t-faded,
 .t-muted {

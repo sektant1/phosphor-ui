@@ -48,7 +48,13 @@ export type {
 } from "./content/PostFrontmatter";
 
 export { default as Text } from "./atoms/Text";
-export type { TextProps, TextVariant } from "./atoms/Text";
+export type {
+  TextAlign,
+  TextProps,
+  TextTone,
+  TextTransform,
+  TextVariant,
+} from "./atoms/Text";
 
 export { default as Pagination } from "./molecules/Pagination";
 export type { PaginationProps } from "./molecules/Pagination";
@@ -163,21 +169,23 @@ export type {
 export { Hr } from "./atoms/Hr";
 
 export { Kbd } from "./atoms/Kbd";
-export type { KbdProps } from "./atoms/Kbd";
+export type { KbdProps, KbdVariant } from "./atoms/Kbd";
 
-export { Cluster, Container, Flex, Grid, Stack } from "./templates/Layout";
+export { Cluster, Column, Container, Flex, Grid, Row, Stack } from "./templates/Layout";
 export type {
   ClusterProps,
+  ColumnProps,
   ContainerProps,
   FlexProps,
   GridProps,
   LayoutGap,
   LayoutSpace,
+  RowProps,
   StackProps,
 } from "./templates/Layout";
 
 export { Glyph } from "./atoms/Glyph";
-export type { GlyphProps } from "./atoms/Glyph";
+export type { GlyphName, GlyphProps, GlyphTone } from "./atoms/Glyph";
 export { Glyphs, DEFAULT_GLYPHS } from "./organisms/Glyphs";
 export type { GlyphsProps, GlyphItem } from "./organisms/Glyphs";
 

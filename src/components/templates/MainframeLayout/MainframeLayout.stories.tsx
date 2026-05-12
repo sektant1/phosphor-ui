@@ -7,6 +7,8 @@ import { Callout } from "../../molecules/Callout";
 import { TableOfContents } from "../../molecules/TableOfContents";
 import { ModuleAccordion } from "../../organisms/ModuleAccordion";
 import { PostListing } from "../../organisms/PostListing";
+import { PostHeader } from "../../organisms/PostHeader";
+import { PostBody } from "../../content/MdxComponents";
 import { Post } from "../PostTemplate";
 import {
   AdminLayout,
@@ -78,6 +80,21 @@ const ProjectPanel = () => (
   </ContextPanel>
 );
 
+const MainframeArticle = ({
+  title,
+  eyebrow,
+  children,
+}: {
+  title: React.ReactNode;
+  eyebrow: React.ReactNode;
+  children: React.ReactNode;
+}) => (
+  <>
+    <PostHeader title={title} eyebrow={eyebrow} />
+    <PostBody>{children}</PostBody>
+  </>
+);
+
 type Story = StoryObj<typeof MainframeLayout>;
 
 const blogPostSource = tsx`
@@ -131,7 +148,7 @@ export const BlogPostWithToc: Story = {
 };
 
 const wikiPageSource = tsx`
-import { ContextPanel, NerdTreeSidebar, PostListing, WikiLayout } from "@sektant1/phosphor-ui";
+import { ContextPanel, NerdTreeSidebar, PostBody, PostHeader, PostListing, WikiLayout } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -139,7 +156,8 @@ export function Example() {
       leftPanel={<NerdTreeSidebar tree={tree} />}
       rightPanel={<ContextPanel title="linked notes"><PostListing posts={posts} /></ContextPanel>}
     >
-      <article>Wiki body</article>
+      <PostHeader title="Signal map" eyebrow="wiki / index" />
+      <PostBody>Wiki body</PostBody>
     </WikiLayout>
   );
 }
@@ -163,21 +181,21 @@ export const WikiPageRelatedNotes: Story = {
           </ContextPanel>
         }
       >
-        <Post title="Signal map" headerProps={{ eyebrow: "wiki / index" }}>
+        <MainframeArticle title="Signal map" eyebrow="wiki / index">
           <p>
             Wiki pages use the same shell, but the right rail can mix contents, backlinks,
             and related notes instead of only a table of contents.
           </p>
           <h2>Current map</h2>
           <p>Every page keeps enough room for dense notes without losing the terminal frame.</p>
-        </Post>
+        </MainframeArticle>
       </WikiLayout>
     </div>
   ),
 };
 
 const coursePageSource = tsx`
-import { ContextPanel, CourseLayout, ModuleAccordion, NerdTreeSidebar, ProgressBar } from "@sektant1/phosphor-ui";
+import { ContextPanel, CourseLayout, ModuleAccordion, NerdTreeSidebar, PostBody, PostHeader, ProgressBar } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -185,7 +203,8 @@ export function Example() {
       leftPanel={<NerdTreeSidebar tree={tree} />}
       rightPanel={<ContextPanel title="course modules"><ProgressBar value={4} total={6} /><ModuleAccordion num="01" title="Cold boot" /></ContextPanel>}
     >
-      <article>Lesson body</article>
+      <PostHeader title="Cold-Boot Operations" eyebrow="course / lesson" />
+      <PostBody>Lesson body</PostBody>
     </CourseLayout>
   );
 }
@@ -212,19 +231,19 @@ export const CoursePageModules: Story = {
           </ContextPanel>
         }
       >
-        <Post title="Cold-Boot Operations" headerProps={{ eyebrow: "course / lesson" }}>
+        <MainframeArticle title="Cold-Boot Operations" eyebrow="course / lesson">
           <p>
             Course pages reserve the right rail for modules, lessons, and progress while the
             center column remains wide enough for exercises and embedded media.
           </p>
-        </Post>
+        </MainframeArticle>
       </CourseLayout>
     </div>
   ),
 };
 
 const adminActionSource = tsx`
-import { AdminLayout, Button, ContextPanel, NerdTreeSidebar } from "@sektant1/phosphor-ui";
+import { AdminLayout, Button, ContextPanel, NerdTreeSidebar, PostBody, PostHeader } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -232,7 +251,8 @@ export function Example() {
       leftPanel={<NerdTreeSidebar tree={tree} />}
       rightPanel={<ContextPanel title="publish controls"><Button>save draft</Button></ContextPanel>}
     >
-      <article>Editor surface</article>
+      <PostHeader title="Edit transmission" eyebrow="admin / cms" />
+      <PostBody>Editor surface</PostBody>
     </AdminLayout>
   );
 }
@@ -252,12 +272,12 @@ export const AdminActionPanel: Story = {
           </ContextPanel>
         }
       >
-        <Post title="Edit transmission" headerProps={{ eyebrow: "admin / cms" }}>
+        <MainframeArticle title="Edit transmission" eyebrow="admin / cms">
           <p>
             Admin pages use the same three-zone mainframe with status and action controls on
             the right. At tablet width the controls move below the editor surface.
           </p>
-        </Post>
+        </MainframeArticle>
       </AdminLayout>
     </div>
   ),
@@ -303,7 +323,7 @@ export const MobileReadable: Story = {
 };
 
 const projectMetadataSource = tsx`
-import { ContextPanel, MainframeLayout, NerdTreeSidebar, Tag } from "@sektant1/phosphor-ui";
+import { ContextPanel, MainframeLayout, NerdTreeSidebar, PostBody, PostHeader, Tag } from "@sektant1/phosphor-ui";
 
 export function Example() {
   return (
@@ -312,7 +332,8 @@ export function Example() {
       leftPanel={<NerdTreeSidebar tree={tree} />}
       rightPanel={<ContextPanel title="project telemetry"><Tag>react</Tag></ContextPanel>}
     >
-      <article>Project body</article>
+      <PostHeader title="Phosphor UI" eyebrow="project / library" />
+      <PostBody>Project body</PostBody>
     </MainframeLayout>
   );
 }
@@ -327,12 +348,12 @@ export const ProjectMetadata: Story = {
         leftPanel={<SideTree />}
         rightPanel={<ProjectPanel />}
       >
-        <Post title="Phosphor UI" headerProps={{ eyebrow: "project / library" }}>
+        <MainframeArticle title="Phosphor UI" eyebrow="project / library">
           <p>
             Project pages can turn the context rail into metadata, stack, external links, and
             a compact changelog without changing the left navigation or reading rules.
           </p>
-        </Post>
+        </MainframeArticle>
       </MainframeLayout>
     </div>
   ),

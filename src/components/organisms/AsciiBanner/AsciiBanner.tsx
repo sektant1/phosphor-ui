@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./AsciiBanner.module.scss";
 import { cx } from "../../../utils/classNames";
 import type { CssVars } from "../../../utils/browser";
+import { bannerSync, type BannerFontName } from "../../../ascii";
 
 type AsciiBannerStyle = React.CSSProperties &
   Record<`--${string}`, string | number | undefined>;
 
 type AsciiBannerBaseProps = {
-  art: string;
+  art?: string;
+  text?: string;
+  font?: BannerFontName;
   fallback?: string;
   label?: string;
   className?: string;
@@ -36,7 +39,9 @@ const isAnchorBanner = (
   props: AsciiBannerProps,
 ): props is AsciiBannerAnchorProps => typeof props.href === "string";
 export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
-  const { art, fallback } = props;
+  const { art, text, font = "Slant", fallback } = props;
+  const renderedArt = art ?? (text ? bannerSync(text, font) : "");
+  const readableFallback = fallback ?? text;
 
   const frameRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLPreElement>(null);
@@ -75,7 +80,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
 
     window.addEventListener("resize", updateFit);
     return () => window.removeEventListener("resize", updateFit);
-  }, [art]);
+  }, [renderedArt]);
 
   const content = (
     <>
@@ -92,19 +97,23 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
         <pre
           ref={bannerRef}
           className={styles.banner}
-          aria-hidden={fallback ? "true" : undefined}
+          aria-hidden={readableFallback ? "true" : undefined}
         >
-          {art}
+          {renderedArt}
         </pre>
       </div>
 
-      {fallback ? <span className={styles.fallback}>{fallback}</span> : null}
+      {readableFallback ? (
+        <span className={styles.fallback}>{readableFallback}</span>
+      ) : null}
     </>
   );
 
   if (isAnchorBanner(props)) {
     const {
       art: _art,
+      text: _text,
+      font: _font,
       fallback: _fallback,
       href,
       label,
@@ -128,6 +137,8 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
 
   const {
     art: _art,
+    text: _text,
+    font: _font,
     fallback: _fallback,
     label,
     className,

@@ -4,5 +4,36 @@
   display: inline-flex;
   font-family: var(--pho-font-terminal);
   justify-content: center;
+  line-height: 1;
   text-shadow: var(--pho-glow-primary);
+}
+
+.boxed {
+  block-size: 1.4em;
+  inline-size: 1.4em;
+}
+
+.tone-primary {
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+}
+
+.tone-accent {
+  color: var(--pho-color-accent-strong);
+  text-shadow: var(--pho-glow-accent);
+}
+
+.tone-danger {
+  color: var(--pho-color-danger-strong);
+  text-shadow: 0 0 10px var(--pho-color-danger-glow-soft);
+}
+
+.tone-muted {
+  color: var(--pho-color-primary-faint);
+  text-shadow: none;
+}
+
+.tone-inherit {
+  color: currentColor;
+  text-shadow: inherit;
 }
