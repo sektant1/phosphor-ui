@@ -1,0 +1,34 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  background: linear-gradient(90deg,
+      rgba(44, 255, 122, 0.05),
+      transparent 70%);
+  border-left: 2px solid var(--phosphor, var(--pho-color-primary, #2cff7a));
+  padding: 8px 12px;
+}
+
+.title {
+  color: var(--phosphor, var(--pho-color-primary, #2cff7a));
+  font-family: var(--font-heading, var(--pho-font-heading, monospace));
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-shadow: var(--glow-emerald,
+      var(--pho-glow-primary-soft, 0 0 8px currentColor));
+  text-transform: uppercase;
+}
+
+.body {
+  color: var(--ink, var(--pho-color-text, #d8ffe7));
+  font-family: var(--font-code, var(--pho-font-code, monospace));
+  font-size: 12px;
+  margin-top: 2px;
+}

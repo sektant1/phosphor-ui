@@ -59,7 +59,10 @@ export type {
 export { default as Pagination } from "./molecules/Pagination";
 export type { PaginationProps } from "./molecules/Pagination";
 
-export { default as SearchResultList, SearchResult } from "./molecules/SearchResult";
+export {
+  default as SearchResultList,
+  SearchResult,
+} from "./molecules/SearchResult";
 export type {
   SearchHit,
   SearchResultProps,
@@ -90,13 +93,21 @@ export { AsciiBanner } from "./organisms/AsciiBanner";
 export type { AsciiBannerProps } from "./organisms/AsciiBanner";
 
 export { HeaderNav } from "./molecules/HeaderNav";
-export type { HeaderNavProps, HeaderNavLink, HeaderNavVariant } from "./molecules/HeaderNav";
+export type {
+  HeaderNavProps,
+  HeaderNavLink,
+  HeaderNavVariant,
+} from "./molecules/HeaderNav";
 
 export { Checkbox, CheckboxControl, CheckboxField } from "./atoms/Checkbox";
 export type { CheckboxControlProps, CheckboxProps } from "./atoms/Checkbox";
 
 export { Select, SelectControl, SelectField } from "./molecules/Select";
-export type { SelectControlProps, SelectOption, SelectProps } from "./molecules/Select";
+export type {
+  SelectControlProps,
+  SelectOption,
+  SelectProps,
+} from "./molecules/Select";
 
 export { Tabs } from "./molecules/Tabs";
 export type { TabItem, TabsProps } from "./molecules/Tabs";
@@ -126,6 +137,13 @@ export type {
   ListProps,
   ListVariant,
 } from "./molecules/List";
+
+export { FeatureList, FeatureListItem } from "./molecules/FeatureList";
+export type {
+  FeatureListItemData,
+  FeatureListItemProps,
+  FeatureListProps,
+} from "./molecules/FeatureList";
 
 export { PostHeader } from "./organisms/PostHeader";
 export type { PostHeaderProps } from "./organisms/PostHeader";
@@ -171,7 +189,15 @@ export { Hr } from "./atoms/Hr";
 export { Kbd } from "./atoms/Kbd";
 export type { KbdProps, KbdVariant } from "./atoms/Kbd";
 
-export { Cluster, Column, Container, Flex, Grid, Row, Stack } from "./templates/Layout";
+export {
+  Cluster,
+  Column,
+  Container,
+  Flex,
+  Grid,
+  Row,
+  Stack,
+} from "./templates/Layout";
 export type {
   ClusterProps,
   ColumnProps,
@@ -205,10 +231,17 @@ export type {
 } from "./molecules/LessonRow";
 
 export { ModuleAccordion } from "./organisms/ModuleAccordion";
-export type { ModuleAccordionProps, ModuleLesson } from "./organisms/ModuleAccordion";
+export type {
+  ModuleAccordionProps,
+  ModuleLesson,
+} from "./organisms/ModuleAccordion";
 
 export { PrereqList } from "./molecules/PrereqList";
-export type { PrereqListProps, PrereqItem, PrereqStatus } from "./molecules/PrereqList";
+export type {
+  PrereqListProps,
+  PrereqItem,
+  PrereqStatus,
+} from "./molecules/PrereqList";
 
 export { ProgressBar } from "./atoms/ProgressBar";
 export type { ProgressBarProps } from "./atoms/ProgressBar";
@@ -231,7 +264,10 @@ export type {
 } from "./molecules/Stepper";
 
 export { TableOfContents } from "./molecules/TableOfContents";
-export type { TableOfContentsProps, TocItem } from "./molecules/TableOfContents";
+export type {
+  TableOfContentsProps,
+  TocItem,
+} from "./molecules/TableOfContents";
 
 export { VideoPlayer } from "./organisms/VideoPlayer";
 export type { VideoPlayerProps, VideoSource } from "./organisms/VideoPlayer";
@@ -308,7 +344,11 @@ export type {
 } from "./molecules/Field";
 
 export { AdminShell } from "./admin/AdminShell";
-export type { AdminShellProps, AdminNavItem, AdminUser } from "./admin/AdminShell";
+export type {
+  AdminShellProps,
+  AdminNavItem,
+  AdminUser,
+} from "./admin/AdminShell";
 
 export {
   ContentEditor,
