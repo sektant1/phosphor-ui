@@ -12,7 +12,7 @@ export default meta;
 
 const defaultSource = tsx`
 import React from "react";
-import { Drawer, Modal } from "@sektant1/phosphor-ui";
+import { Drawer, Modal } from "phosphor-ui";
 
 export function Example() {
   const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ export function Example() {
 
 const drawerRightSource = tsx`
 import React from "react";
-import { Drawer, Modal } from "@sektant1/phosphor-ui";
+import { Drawer, Modal } from "phosphor-ui";
 
 
 

@@ -21,7 +21,7 @@ const meta: Meta<EmptyStateProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { EmptyState } from "@sektant1/phosphor-ui";
+import { EmptyState } from "phosphor-ui";
 
 
 

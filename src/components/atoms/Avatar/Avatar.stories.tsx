@@ -17,7 +17,7 @@ const meta: Meta<AvatarProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Avatar } from "@sektant1/phosphor-ui";
+import { Avatar } from "phosphor-ui";
 
 
 

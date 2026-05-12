@@ -98,7 +98,7 @@ const MainframeArticle = ({
 type Story = StoryObj<typeof MainframeLayout>;
 
 const blogPostSource = tsx`
-import { NerdTreeSidebar, Post, TableOfContents } from "@sektant1/phosphor-ui";
+import { NerdTreeSidebar, Post, TableOfContents } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -148,7 +148,7 @@ export const BlogPostWithToc: Story = {
 };
 
 const wikiPageSource = tsx`
-import { ContextPanel, NerdTreeSidebar, PostBody, PostHeader, PostListing, WikiLayout } from "@sektant1/phosphor-ui";
+import { ContextPanel, NerdTreeSidebar, PostBody, PostHeader, PostListing, WikiLayout } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -195,7 +195,7 @@ export const WikiPageRelatedNotes: Story = {
 };
 
 const coursePageSource = tsx`
-import { ContextPanel, CourseLayout, ModuleAccordion, NerdTreeSidebar, PostBody, PostHeader, ProgressBar } from "@sektant1/phosphor-ui";
+import { ContextPanel, CourseLayout, ModuleAccordion, NerdTreeSidebar, PostBody, PostHeader, ProgressBar } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -243,7 +243,7 @@ export const CoursePageModules: Story = {
 };
 
 const adminActionSource = tsx`
-import { AdminLayout, Button, ContextPanel, NerdTreeSidebar, PostBody, PostHeader } from "@sektant1/phosphor-ui";
+import { AdminLayout, Button, ContextPanel, NerdTreeSidebar, PostBody, PostHeader } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -284,7 +284,7 @@ export const AdminActionPanel: Story = {
 };
 
 const mobileReadableSource = tsx`
-import { NerdTreeSidebar, Post, TableOfContents } from "@sektant1/phosphor-ui";
+import { NerdTreeSidebar, Post, TableOfContents } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -323,7 +323,7 @@ export const MobileReadable: Story = {
 };
 
 const projectMetadataSource = tsx`
-import { ContextPanel, MainframeLayout, NerdTreeSidebar, PostBody, PostHeader, Tag } from "@sektant1/phosphor-ui";
+import { ContextPanel, MainframeLayout, NerdTreeSidebar, PostBody, PostHeader, Tag } from "phosphor-ui";
 
 export function Example() {
   return (

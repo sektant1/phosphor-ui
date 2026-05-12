@@ -9,7 +9,7 @@ const storyFilePattern = /\.(stories\.(tsx|ts)|mdx)$/;
 const relativeImportPattern =
   /from\s+["'](?:\.{1,2}\/|\/)|import\s*\(\s*["'](?:\.{1,2}\/|\/)/;
 const packagePrivateImportPattern =
-  /(?:from\s+["']|import\s*\(\s*["'])@sektant1\/phosphor-ui\/(?:src|dist|components)(?:\/|["'])/;
+  /(?:from\s+["']|import\s*\(\s*["'])phosphor-ui\/(?:src|dist|components)(?:\/|["'])/;
 const workspacePrivateImportPattern =
   /(?:from\s+["']|import\s*\(\s*["'])(?:src|components|stories)\//;
 const cssModuleImportPattern = /\.module\.(?:css|scss|sass)\b/;

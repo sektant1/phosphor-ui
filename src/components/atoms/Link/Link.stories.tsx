@@ -11,7 +11,7 @@ const meta: Meta<typeof Link> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Link } from "@sektant1/phosphor-ui";
+import { Link } from "phosphor-ui";
 
 
 

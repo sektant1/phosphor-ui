@@ -38,7 +38,7 @@ export function useUser(id: number): User | null {
 export default meta;
 
 const defaultSource = tsx`
-import { CodeBlock } from "@sektant1/phosphor-ui";
+import { CodeBlock } from "phosphor-ui";
 
 const defaultProps = {
     lang:     "typescript",
@@ -71,7 +71,7 @@ export function Example() {
 `;
 
 const longFilenameSource = tsx`
-import { CodeBlock } from "@sektant1/phosphor-ui";
+import { CodeBlock } from "phosphor-ui";
 
 const longFilenameProps = {
   ...{
@@ -115,7 +115,7 @@ export function Example() {
 `;
 
 const noFilenameSource = tsx`
-import { CodeBlock } from "@sektant1/phosphor-ui";
+import { CodeBlock } from "phosphor-ui";
 
 const noFilenameProps = {
   ...{
@@ -158,7 +158,7 @@ export function Example() {
 `;
 
 const copyDisabledSource = tsx`
-import { CodeBlock } from "@sektant1/phosphor-ui";
+import { CodeBlock } from "phosphor-ui";
 
 const copyDisabledProps = {
   ...{
@@ -198,7 +198,7 @@ export function Example() {
 `;
 
 const preRenderedSource = tsx`
-import { CodeBlock } from "@sektant1/phosphor-ui";
+import { CodeBlock } from "phosphor-ui";
 
 
 

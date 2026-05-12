@@ -53,7 +53,7 @@ const meta: Meta<typeof List> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Button, List } from "@sektant1/phosphor-ui";
+import { Button, List } from "phosphor-ui";
 
 const defaultProps = {
     items,
@@ -69,7 +69,7 @@ export function Example() {
 `;
 
 const orderedSource = tsx`
-import { Button, List } from "@sektant1/phosphor-ui";
+import { Button, List } from "phosphor-ui";
 
 const orderedProps = {
   ...{
@@ -91,7 +91,7 @@ export function Example() {
 `;
 
 const terminalSource = tsx`
-import { Button, List } from "@sektant1/phosphor-ui";
+import { Button, List } from "phosphor-ui";
 
 const terminalProps = {
   ...{
@@ -113,7 +113,7 @@ export function Example() {
 `;
 
 const compactSource = tsx`
-import { Button, List } from "@sektant1/phosphor-ui";
+import { Button, List } from "phosphor-ui";
 
 const compactProps = {
   ...{
@@ -135,7 +135,7 @@ export function Example() {
 `;
 
 const customRenderSource = tsx`
-import { Button, List } from "@sektant1/phosphor-ui";
+import { Button, List } from "phosphor-ui";
 
 
 

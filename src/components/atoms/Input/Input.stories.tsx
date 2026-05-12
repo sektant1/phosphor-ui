@@ -25,7 +25,7 @@ const meta: Meta<InputProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Input, Textarea } from "@sektant1/phosphor-ui";
+import { Input, Textarea } from "phosphor-ui";
 
 const defaultProps = {
     prompt:      "~/$",
@@ -40,7 +40,7 @@ export function Example() {
 
 const textAreaSource = tsx`
 import React from "react";
-import { Input, Textarea } from "@sektant1/phosphor-ui";
+import { Input, Textarea } from "phosphor-ui";
 
 
 
@@ -59,7 +59,7 @@ export function Example() {
 `;
 
 const controlsSource = tsx`
-import { InputControl, TextareaControl } from "@sektant1/phosphor-ui";
+import { InputControl, TextareaControl } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -72,7 +72,7 @@ export function Example() {
 `;
 
 const terminalSource = tsx`
-import { Input } from "@sektant1/phosphor-ui";
+import { Input } from "phosphor-ui";
 
 export function Example() {
   return (

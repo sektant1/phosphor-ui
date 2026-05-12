@@ -16,7 +16,7 @@ const meta: Meta<typeof Select> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Select } from "@sektant1/phosphor-ui";
+import { Select } from "phosphor-ui";
 
 const defaultProps = {
     label: "status",
@@ -36,7 +36,7 @@ export function Example() {
 `;
 
 const errorSource = tsx`
-import { Select } from "@sektant1/phosphor-ui";
+import { Select } from "phosphor-ui";
 
 const errorProps = {
     label: "clearance",
@@ -56,7 +56,7 @@ export function Example() {
 `;
 
 const disabledSource = tsx`
-import { Select } from "@sektant1/phosphor-ui";
+import { Select } from "phosphor-ui";
 
 const disabledProps = {
     label: "uplink",
@@ -77,7 +77,7 @@ export function Example() {
 `;
 
 const longValueSource = tsx`
-import { Select } from "@sektant1/phosphor-ui";
+import { Select } from "phosphor-ui";
 
 
 
@@ -98,7 +98,7 @@ export function Example() {
 `;
 
 const controlSource = tsx`
-import { SelectControl } from "@sektant1/phosphor-ui";
+import { SelectControl } from "phosphor-ui";
 
 export function Example() {
   return (

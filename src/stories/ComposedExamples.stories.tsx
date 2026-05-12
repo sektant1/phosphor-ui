@@ -40,7 +40,7 @@ const grid = {
 } satisfies React.CSSProperties;
 
 const personalBlogSource = tsx`
-import { ArticleList, Callout, H2, SiteShell, Tag } from "@sektant1/phosphor-ui";
+import { ArticleList, Callout, H2, SiteShell, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -70,7 +70,7 @@ export function Example() {
 `;
 
 const wikiPageSource = tsx`
-import { ArticleList, H2, ProgressBar, SiteShell, Text } from "@sektant1/phosphor-ui";
+import { ArticleList, H2, ProgressBar, SiteShell, Text } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -92,7 +92,7 @@ export function Example() {
 `;
 
 const courseLandingSource = tsx`
-import { CourseCard, H2, HeroFrame, SiteShell } from "@sektant1/phosphor-ui";
+import { CourseCard, H2, HeroFrame, SiteShell } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -116,7 +116,7 @@ export function Example() {
 `;
 
 const adminDashboardSource = tsx`
-import { AdminShell, Button, StatPill } from "@sektant1/phosphor-ui";
+import { AdminShell, Button, StatPill } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -143,7 +143,7 @@ export function Example() {
 `;
 
 const adminEditorSource = tsx`
-import { AdminShell, ContentEditor } from "@sektant1/phosphor-ui";
+import { AdminShell, ContentEditor } from "phosphor-ui";
 
 export function Example() {
   return (

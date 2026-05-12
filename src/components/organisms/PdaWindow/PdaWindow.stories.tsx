@@ -10,7 +10,7 @@ const meta: Meta<typeof PdaWindow> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PdaWindow } from "@sektant1/phosphor-ui";
+import { PdaWindow } from "phosphor-ui";
 
 
 

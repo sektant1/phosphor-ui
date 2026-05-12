@@ -11,7 +11,7 @@ const meta: Meta<typeof Prose> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Prose } from "@sektant1/phosphor-ui";
+import { Prose } from "phosphor-ui";
 
 const defaultProps = {
     children: (
@@ -74,7 +74,7 @@ export function Example() {
 `;
 
 const nestedMobileWidthSource = tsx`
-import { Prose } from "@sektant1/phosphor-ui";
+import { Prose } from "phosphor-ui";
 
 
 

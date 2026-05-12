@@ -27,7 +27,7 @@ const meta: Meta<typeof LocaleSwitch> = {
 export default meta;
 
 const defaultSource = tsx`
-import { LocaleSwitch } from "@sektant1/phosphor-ui";
+import { LocaleSwitch } from "phosphor-ui";
 
 const defaultProps = {
     locales,
@@ -41,7 +41,7 @@ export function Example() {
 `;
 
 const inlineSource = tsx`
-import { LocaleSwitch } from "@sektant1/phosphor-ui";
+import { LocaleSwitch } from "phosphor-ui";
 
 const inlineProps = {
   ...{
@@ -60,7 +60,7 @@ export function Example() {
 `;
 
 const terminalSource = tsx`
-import { LocaleSwitch } from "@sektant1/phosphor-ui";
+import { LocaleSwitch } from "phosphor-ui";
 
 const terminalProps = {
   ...{
@@ -79,7 +79,7 @@ export function Example() {
 `;
 
 const mobileWidthSource = tsx`
-import { LocaleSwitch } from "@sektant1/phosphor-ui";
+import { LocaleSwitch } from "phosphor-ui";
 
 
 

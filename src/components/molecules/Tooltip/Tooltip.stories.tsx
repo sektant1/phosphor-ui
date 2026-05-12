@@ -11,7 +11,7 @@ const meta: Meta<typeof Tooltip> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Button, Tooltip } from "@sektant1/phosphor-ui";
+import { Button, Tooltip } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -23,7 +23,7 @@ export function Example() {
 `;
 
 const placementsSource = tsx`
-import { Button, Tooltip } from "@sektant1/phosphor-ui";
+import { Button, Tooltip } from "phosphor-ui";
 
 
 

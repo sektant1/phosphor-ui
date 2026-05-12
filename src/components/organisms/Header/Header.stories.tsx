@@ -31,7 +31,7 @@ const locales = [
 ];
 
 const defaultSource = tsx`
-import { Header } from "@sektant1/phosphor-ui";
+import { Header } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -56,7 +56,7 @@ export function Example() {
 `;
 
 const minimalSource = tsx`
-import { Header } from "@sektant1/phosphor-ui";
+import { Header } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -74,7 +74,7 @@ export function Example() {
 `;
 
 const compactSource = tsx`
-import { Header } from "@sektant1/phosphor-ui";
+import { Header } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -95,7 +95,7 @@ export function Example() {
 `;
 
 const mobileWidthSource = tsx`
-import { Header } from "@sektant1/phosphor-ui";
+import { Header } from "phosphor-ui";
 
 export function Example() {
   return (

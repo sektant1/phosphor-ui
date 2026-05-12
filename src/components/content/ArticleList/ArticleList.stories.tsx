@@ -30,7 +30,7 @@ const meta: Meta<typeof ArticleList> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ArticleList } from "@sektant1/phosphor-ui";
+import { ArticleList } from "phosphor-ui";
 
 
 

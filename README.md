@@ -3,8 +3,8 @@
 
 <p>Single-channel green-phosphor React UI for personal wikis, blogs, digital gardens, project logs, and second brains.</p>
 
-[![npm version](https://img.shields.io/npm/v/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
-[![npm downloads](https://img.shields.io/npm/dm/@sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/@sektant1/phosphor-ui)
+[![npm version](https://img.shields.io/npm/v/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/phosphor-ui)
+[![npm downloads](https://img.shields.io/npm/dm/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](https://www.npmjs.com/package/phosphor-ui)
 [![license](https://img.shields.io/github/license/sektant1/phosphor-ui?color=2cff7a&labelColor=03110a&style=flat-square)](./LICENSE)
 [![Storybook](https://img.shields.io/badge/storybook-live-2cff7a?labelColor=03110a&style=flat-square)](https://sektant1.github.io/phosphor)
 [![TypeScript](https://img.shields.io/badge/typescript-strict-2cff7a?labelColor=03110a&style=flat-square)](https://www.typescriptlang.org)
@@ -21,7 +21,7 @@
 ## Install
 
 ```bash
-npm install @sektant1/phosphor-ui
+npm install phosphor-ui
 ```
 
 Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.
@@ -32,7 +32,7 @@ Peer deps: `react ^17 || ^18 || ^19`, `react-dom ^17 || ^18 || ^19`.
 Import the full stylesheet once at your app root:
 
 ```tsx
-import "@sektant1/phosphor-ui/phosphor.css";
+import "phosphor-ui/phosphor.css";
 ```
 
 If you need finer control, import `tokens.css`, `global.css`, and `components.css` separately.
@@ -62,7 +62,7 @@ the stable consumer API.
 For TypeScript tooling, token names are exported from the package:
 
 ```ts
-import { PHOSPHOR_TOKEN_GROUPS, phosphorVar } from "@sektant1/phosphor-ui";
+import { PHOSPHOR_TOKEN_GROUPS, phosphorVar } from "phosphor-ui";
 
 const linkColor = phosphorVar("--pho-color-link");
 ```
@@ -70,8 +70,8 @@ const linkColor = phosphorVar("--pho-color-link");
 ## Quick start
 
 ```tsx
-import { SiteShell, Post, Callout } from "@sektant1/phosphor-ui";
-import "@sektant1/phosphor-ui/phosphor.css";
+import { SiteShell, Post, Callout } from "phosphor-ui";
+import "phosphor-ui/phosphor.css";
 
 export default function App() {
   return (
@@ -107,7 +107,7 @@ export default function App() {
 Use the root package for application code:
 
 ```tsx
-import { SiteShell, Post, Button, Callout, TableOfContents } from "@sektant1/phosphor-ui";
+import { SiteShell, Post, Button, Callout, TableOfContents } from "phosphor-ui";
 ```
 
 The physical folders are organized for maintainers. Consumers should prefer the stable root exports so components can move internally without breaking your site.
@@ -188,7 +188,7 @@ Reach for lower-level components when you need custom app structure:
 ## MDX posts
 
 ```tsx
-import { PostBody } from "@sektant1/phosphor-ui";
+import { PostBody } from "phosphor-ui";
 import PostMdx from "./posts/boot.mdx";
 
 <PostBody>
@@ -201,7 +201,7 @@ import PostMdx from "./posts/boot.mdx";
 ## Hooks
 
 ```ts
-import { useReadingProgress, useHashRoute } from "@sektant1/phosphor-ui";
+import { useReadingProgress, useHashRoute } from "phosphor-ui";
 ```
 
 - **`useReadingProgress<T>()`** → `{ ref, pct }` — tracks element scroll percentage, pair with `<ReadingRail value={pct} />`

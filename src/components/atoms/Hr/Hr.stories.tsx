@@ -10,7 +10,7 @@ const meta: Meta<typeof Hr> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Hr } from "@sektant1/phosphor-ui";
+import { Hr } from "phosphor-ui";
 
 
 

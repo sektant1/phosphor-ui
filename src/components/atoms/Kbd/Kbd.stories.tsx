@@ -11,7 +11,7 @@ const meta: Meta<typeof Kbd> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Kbd } from "@sektant1/phosphor-ui";
+import { Kbd } from "phosphor-ui";
 
 export function Example() {
   return <Kbd>Cmd K</Kbd>;
@@ -19,7 +19,7 @@ export function Example() {
 `;
 
 const sequenceSource = tsx`
-import { Kbd, Row } from "@sektant1/phosphor-ui";
+import { Kbd, Row } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -33,7 +33,7 @@ export function Example() {
 `;
 
 const variantsSource = tsx`
-import { Kbd, Row } from "@sektant1/phosphor-ui";
+import { Kbd, Row } from "phosphor-ui";
 
 export function Example() {
   return (

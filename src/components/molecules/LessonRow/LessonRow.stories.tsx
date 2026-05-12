@@ -10,7 +10,7 @@ const meta: Meta<typeof LessonRow> = {
 export default meta;
 
 const defaultSource = tsx`
-import { LessonList, LessonRow } from "@sektant1/phosphor-ui";
+import { LessonList, LessonRow } from "phosphor-ui";
 
 
 

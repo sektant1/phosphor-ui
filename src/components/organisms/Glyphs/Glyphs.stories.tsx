@@ -15,7 +15,7 @@ const meta: Meta<GlyphsProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 const defaultProps = { showLabels: true };
 
@@ -25,7 +25,7 @@ export function Example() {
 `;
 
 const noLabelsSource = tsx`
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 const noLabelsProps = { showLabels: false };
 
@@ -36,7 +36,7 @@ export function Example() {
 
 const interactiveSource = tsx`
 import React from "react";
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 export function Example() {
   const [picked, setPicked] = React.useState<string>("◈");
@@ -52,7 +52,7 @@ export function Example() {
 `;
 
 const customSource = tsx`
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 const customProps = {
     items: [
@@ -69,7 +69,7 @@ export function Example() {
 `;
 
 const inlineGlyphSource = tsx`
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -82,7 +82,7 @@ export function Example() {
 `;
 
 const catalogSource = tsx`
-import { DEFAULT_GLYPHS, Glyph, Glyphs } from "@sektant1/phosphor-ui";
+import { DEFAULT_GLYPHS, Glyph, Glyphs } from "phosphor-ui";
 
 
 

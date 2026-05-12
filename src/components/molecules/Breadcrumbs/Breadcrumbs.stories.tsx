@@ -10,7 +10,7 @@ const meta: Meta<typeof Breadcrumbs> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Breadcrumbs } from "@sektant1/phosphor-ui";
+import { Breadcrumbs } from "phosphor-ui";
 
 
 

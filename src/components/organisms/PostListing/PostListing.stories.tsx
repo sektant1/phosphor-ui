@@ -10,7 +10,7 @@ const meta: Meta<typeof PostListing> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PostListing, PostRow } from "@sektant1/phosphor-ui";
+import { PostListing, PostRow } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -54,7 +54,7 @@ export function Example() {
 `;
 
 const allFallbackSource = tsx`
-import { PostListing, PostRow } from "@sektant1/phosphor-ui";
+import { PostListing, PostRow } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -68,7 +68,7 @@ export function Example() {
 `;
 
 const fromDataSource = tsx`
-import { PostListing, PostRow } from "@sektant1/phosphor-ui";
+import { PostListing, PostRow } from "phosphor-ui";
 
 
 

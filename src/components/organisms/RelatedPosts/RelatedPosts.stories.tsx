@@ -10,7 +10,7 @@ const meta: Meta<RelatedPostsProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { RelatedPosts } from "@sektant1/phosphor-ui";
+import { RelatedPosts } from "phosphor-ui";
 
 
 

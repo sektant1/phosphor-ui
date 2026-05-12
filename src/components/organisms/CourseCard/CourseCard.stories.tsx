@@ -26,7 +26,7 @@ const meta: Meta<CourseCardProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { CourseCard } from "@sektant1/phosphor-ui";
+import { CourseCard } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -47,7 +47,7 @@ export function Example() {
 `;
 
 const lockedSource = tsx`
-import { CourseCard } from "@sektant1/phosphor-ui";
+import { CourseCard } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -66,7 +66,7 @@ export function Example() {
 `;
 
 const compactSource = tsx`
-import { CourseCard } from "@sektant1/phosphor-ui";
+import { CourseCard } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -86,7 +86,7 @@ export function Example() {
 `;
 
 const withoutArtSource = tsx`
-import { CourseCard } from "@sektant1/phosphor-ui";
+import { CourseCard } from "phosphor-ui";
 
 export function Example() {
   return (

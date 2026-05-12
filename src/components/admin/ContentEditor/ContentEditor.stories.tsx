@@ -28,7 +28,7 @@ const meta: Meta<ContentEditorProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ContentEditor, EditorShell, InputControl, PairListField, RepeaterField, StatusSelect, TagInput } from "@sektant1/phosphor-ui";
+import { ContentEditor, EditorShell, InputControl, PairListField, RepeaterField, StatusSelect, TagInput } from "phosphor-ui";
 
 const defaultProps = {
     kindLabel: "POST",
@@ -51,7 +51,7 @@ export function Example() {
 `;
 
 const shellSource = tsx`
-import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect, TagInput } from "@sektant1/phosphor-ui";
+import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect, TagInput } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -63,7 +63,7 @@ export function Example() {
 `;
 
 const fieldPartsSource = tsx`
-import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect, TagInput } from "@sektant1/phosphor-ui";
+import { ContentEditor, EditorShell, PairListField, RepeaterField, StatusSelect, TagInput } from "phosphor-ui";
 
 
 

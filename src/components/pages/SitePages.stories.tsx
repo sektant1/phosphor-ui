@@ -136,7 +136,7 @@ const SitePageFrame = ({
 
 const homeSource = tsx`
 import React from "react";
-import { AsciiBanner, Cluster, Column, CourseCard, Grid, H2, HeroFrame, Hr, NerdTree, PostListing, PostRow, SiteShell, Tag } from "@sektant1/phosphor-ui";
+import { AsciiBanner, Cluster, Column, CourseCard, Grid, H2, HeroFrame, Hr, NerdTree, PostListing, PostRow, SiteShell, Tag } from "phosphor-ui";
 
 type CssVars = React.CSSProperties & Record<\`--\${string}\`, string | number>;
 
@@ -306,7 +306,7 @@ export function Example() {
 
 const postPageSource = tsx`
 import React from "react";
-import { Callout, Column, Grid, Hr, Input, NerdTree, Pagination, Post, ProgressBar, ReadingRail, SiteShell, Stepper, StepperFoot, TableOfContents, useReadingProgress } from "@sektant1/phosphor-ui";
+import { Callout, Column, Grid, Hr, Input, NerdTree, Pagination, Post, ProgressBar, ReadingRail, SiteShell, Stepper, StepperFoot, TableOfContents, useReadingProgress } from "phosphor-ui";
 
 const siteNav = [
   { label: "home", href: "#/" },

@@ -28,7 +28,7 @@ const meta: Meta<VideoPlayerProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { VideoPlayer } from "@sektant1/phosphor-ui";
+import { VideoPlayer } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -44,7 +44,7 @@ export function Example() {
 `;
 
 const hlsStreamSource = tsx`
-import { VideoPlayer } from "@sektant1/phosphor-ui";
+import { VideoPlayer } from "phosphor-ui";
 
 export function Example() {
   return (

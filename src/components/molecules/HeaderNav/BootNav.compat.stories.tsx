@@ -16,7 +16,7 @@ const meta: Meta<typeof HeaderNav> = {
 export default meta;
 
 const defaultSource = tsx`
-import { HeaderNav } from "@sektant1/phosphor-ui";
+import { HeaderNav } from "phosphor-ui";
 
 
 

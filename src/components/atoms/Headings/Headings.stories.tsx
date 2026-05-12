@@ -21,7 +21,7 @@ const meta: Meta<HeadingProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { H1, H2, H3, H4, H5, H6, Heading } from "@sektant1/phosphor-ui";
+import { H1, H2, H3, H4, H5, H6, Heading } from "phosphor-ui";
 
 const defaultProps = {
     level: 1,
@@ -35,7 +35,7 @@ export function Example() {
 `;
 
 const levelsSource = tsx`
-import { H1, H2, H3, H4, H5, H6, Heading } from "@sektant1/phosphor-ui";
+import { H1, H2, H3, H4, H5, H6, Heading } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -52,7 +52,7 @@ export function Example() {
 `;
 
 const stackSource = tsx`
-import { H1, H2, H3, H4, H5, H6, Heading } from "@sektant1/phosphor-ui";
+import { H1, H2, H3, H4, H5, H6, Heading } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -77,7 +77,7 @@ export function Example() {
 `;
 
 const longHeadingsSource = tsx`
-import { H1, H2, H3, H4, H5, H6, Heading } from "@sektant1/phosphor-ui";
+import { H1, H2, H3, H4, H5, H6, Heading } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -96,7 +96,7 @@ export function Example() {
 `;
 
 const asOverrideSource = tsx`
-import { H1, H2, H3, H4, H5, H6, Heading } from "@sektant1/phosphor-ui";
+import { H1, H2, H3, H4, H5, H6, Heading } from "phosphor-ui";
 
 
 

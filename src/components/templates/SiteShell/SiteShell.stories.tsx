@@ -16,7 +16,7 @@ const meta = {
 export default meta;
 
 const personalWikiSource = tsx`
-import { Callout, Post, PostListing, SiteShell } from "@sektant1/phosphor-ui";
+import { Callout, Post, PostListing, SiteShell } from "phosphor-ui";
 
 
 

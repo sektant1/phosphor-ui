@@ -11,7 +11,7 @@ const meta: Meta<typeof SearchResultList> = {
 export default meta;
 
 const defaultSource = tsx`
-import { SearchResult, SearchResultList } from "@sektant1/phosphor-ui";
+import { SearchResult, SearchResultList } from "phosphor-ui";
 
 const defaultProps = {
     hits: [
@@ -42,7 +42,7 @@ export function Example() {
 `;
 
 const emptySource = tsx`
-import { SearchResult, SearchResultList } from "@sektant1/phosphor-ui";
+import { SearchResult, SearchResultList } from "phosphor-ui";
 
 const emptyProps = { hits: [] };
 
@@ -52,7 +52,7 @@ export function Example() {
 `;
 
 const singleSource = tsx`
-import { SearchResult, SearchResultList } from "@sektant1/phosphor-ui";
+import { SearchResult, SearchResultList } from "phosphor-ui";
 
 
 

@@ -25,7 +25,7 @@ const meta: Meta<ExerciseProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Exercise } from "@sektant1/phosphor-ui";
+import { Exercise } from "phosphor-ui";
 
 
 

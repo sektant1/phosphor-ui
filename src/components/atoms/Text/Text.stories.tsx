@@ -39,7 +39,7 @@ const meta: Meta<typeof Text> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 const defaultProps = { variant: "body", children: "// pool reuse open DB connections" };
 
@@ -49,7 +49,7 @@ export function Example() {
 `;
 
 const h2Source = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 const h2Props = { variant: "h2", children: "transmission log" };
 
@@ -60,7 +60,7 @@ export function Example() {
 
 const typeScaleSource = tsx`
 import React from "react";
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -91,7 +91,7 @@ export function Example() {
 `;
 
 const visualRegressionSource = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -113,7 +113,7 @@ export function Example() {
 `;
 
 const leadSource = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 const leadProps = {
     variant: "lead",
@@ -126,7 +126,7 @@ export function Example() {
 `;
 
 const captionSource = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 const captionProps = { variant: "caption", children: "updated 2026-05-09" };
 
@@ -136,7 +136,7 @@ export function Example() {
 `;
 
 const stampSource = tsx`
-import { Text } from "@sektant1/phosphor-ui";
+import { Text } from "phosphor-ui";
 
 
 
@@ -148,7 +148,7 @@ export function Example() {
 `;
 
 const utilitiesSource = tsx`
-import { Column, Text } from "@sektant1/phosphor-ui";
+import { Column, Text } from "phosphor-ui";
 
 export function Example() {
   return (

@@ -51,7 +51,7 @@ const meta: Meta<SearchProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Search } from "@sektant1/phosphor-ui";
+import { Search } from "phosphor-ui";
 
 export function Example() {
   return (

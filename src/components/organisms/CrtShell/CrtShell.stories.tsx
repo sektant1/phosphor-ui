@@ -11,7 +11,7 @@ const meta: Meta<typeof CrtShell> = {
 export default meta;
 
 const defaultSource = tsx`
-import { CrtShell } from "@sektant1/phosphor-ui";
+import { CrtShell } from "phosphor-ui";
 
 const defaultProps = {
     children: (
@@ -28,7 +28,7 @@ export function Example() {
 `;
 
 const noEffectsSource = tsx`
-import { CrtShell } from "@sektant1/phosphor-ui";
+import { CrtShell } from "phosphor-ui";
 
 
 

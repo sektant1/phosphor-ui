@@ -25,7 +25,7 @@ const meta: Meta<PostMetaProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PostMeta } from "@sektant1/phosphor-ui";
+import { PostMeta } from "phosphor-ui";
 
 
 

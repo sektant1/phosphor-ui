@@ -49,7 +49,7 @@ Set `dev` as the default branch if you want all PR work to start there.
 Configure repository secrets:
 
 - `NPM_TOKEN`: npm automation token with publish access for
-  `@sektant1/phosphor-ui`.
+  `phosphor-ui`.
 
 Configure environments:
 

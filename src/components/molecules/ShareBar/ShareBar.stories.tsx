@@ -19,7 +19,7 @@ const meta: Meta<ShareBarProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ShareBar } from "@sektant1/phosphor-ui";
+import { ShareBar } from "phosphor-ui";
 
 
 

@@ -11,7 +11,7 @@ const meta: Meta<typeof HeroFrame> = {
 export default meta;
 
 const defaultSource = tsx`
-import { HeroFrame } from "@sektant1/phosphor-ui";
+import { HeroFrame } from "phosphor-ui";
 
 export function Example() {
   return (

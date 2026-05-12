@@ -13,7 +13,7 @@ const meta: Meta<typeof HeaderNav> = {
 export default meta;
 
 const defaultSource = tsx`
-import { HeaderNav } from "@sektant1/phosphor-ui";
+import { HeaderNav } from "phosphor-ui";
 
 const defaultProps = {
     items: [
@@ -31,7 +31,7 @@ export function Example() {
 `;
 
 const tabsSource = tsx`
-import { HeaderNav } from "@sektant1/phosphor-ui";
+import { HeaderNav } from "phosphor-ui";
 
 const tabsProps = {
     variant: "tabs",
@@ -49,7 +49,7 @@ export function Example() {
 `;
 
 const commandSource = tsx`
-import { HeaderNav } from "@sektant1/phosphor-ui";
+import { HeaderNav } from "phosphor-ui";
 
 const commandProps = {
     variant: "command",
@@ -67,7 +67,7 @@ export function Example() {
 `;
 
 const mobileWidthSource = tsx`
-import { HeaderNav } from "@sektant1/phosphor-ui";
+import { HeaderNav } from "phosphor-ui";
 
 
 

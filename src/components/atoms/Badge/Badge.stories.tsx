@@ -23,7 +23,7 @@ const meta: Meta<BadgeProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Badge } from "@sektant1/phosphor-ui";
+import { Badge } from "phosphor-ui";
 
 const defaultProps = {
   children: "online",
@@ -37,7 +37,7 @@ export function Example() {
 `;
 
 const tonesSource = tsx`
-import { Badge } from "@sektant1/phosphor-ui";
+import { Badge } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -54,7 +54,7 @@ export function Example() {
 `;
 
 const sizesSource = tsx`
-import { Badge } from "@sektant1/phosphor-ui";
+import { Badge } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -67,7 +67,7 @@ export function Example() {
 `;
 
 const leadingSource = tsx`
-import { Badge } from "@sektant1/phosphor-ui";
+import { Badge } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -81,7 +81,7 @@ export function Example() {
 `;
 
 const truncationSource = tsx`
-import { Badge } from "@sektant1/phosphor-ui";
+import { Badge } from "phosphor-ui";
 
 export function Example() {
   return (

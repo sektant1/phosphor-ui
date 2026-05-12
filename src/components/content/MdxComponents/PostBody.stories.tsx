@@ -10,7 +10,7 @@ const meta: Meta<typeof PostBody> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PostBody } from "@sektant1/phosphor-ui";
+import { PostBody } from "phosphor-ui";
 
 
 

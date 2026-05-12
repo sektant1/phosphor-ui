@@ -130,10 +130,10 @@ export const Introduction = () => (
 
     <SectionTitle>Install</SectionTitle>
 
-    <Code>{`npm install @sektant1/phosphor-ui`}</Code>
+    <Code>{`npm install phosphor-ui`}</Code>
 
-    <Code>{`import "@sektant1/phosphor-ui/tokens.css"; // design tokens (CSS vars + fonts)
-import { Button, PdaWindow, PostListing } from "@sektant1/phosphor-ui";`}</Code>
+    <Code>{`import "phosphor-ui/tokens.css"; // design tokens (CSS vars + fonts)
+import { Button, PdaWindow, PostListing } from "phosphor-ui";`}</Code>
 
     <SectionTitle>Palette</SectionTitle>
 

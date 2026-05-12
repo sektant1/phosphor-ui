@@ -37,7 +37,7 @@ const meta: Meta<ButtonProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 const defaultProps = {
     children: "Engage",
@@ -53,7 +53,7 @@ export function Example() {
 `;
 
 const variantsSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 const variants= [
   "primary",
@@ -78,7 +78,7 @@ export function Example() {
 `;
 
 const sizesSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 const sizes= ["sm", "md", "lg"];
 
@@ -96,7 +96,7 @@ export function Example() {
 `;
 
 const statesSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -113,7 +113,7 @@ export function Example() {
 `;
 
 const linksSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -131,7 +131,7 @@ export function Example() {
 `;
 
 const fullWidthSource = tsx`
-import { Button } from "@sektant1/phosphor-ui";
+import { Button } from "phosphor-ui";
 
 
 

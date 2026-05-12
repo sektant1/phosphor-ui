@@ -11,7 +11,7 @@ const meta: Meta<typeof PostHeader> = {
 export default meta;
 
 const defaultSource = tsx`
-import { DropdownMenu, PostHeader } from "@sektant1/phosphor-ui";
+import { DropdownMenu, PostHeader } from "phosphor-ui";
 
 
 

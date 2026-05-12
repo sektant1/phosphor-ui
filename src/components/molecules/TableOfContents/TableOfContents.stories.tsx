@@ -10,7 +10,7 @@ const meta: Meta<typeof TableOfContents> = {
 export default meta;
 
 const defaultSource = tsx`
-import { TableOfContents } from "@sektant1/phosphor-ui";
+import { TableOfContents } from "phosphor-ui";
 
 
 

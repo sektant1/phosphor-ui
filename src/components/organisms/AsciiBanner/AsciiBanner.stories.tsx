@@ -17,7 +17,7 @@ const meta: Meta<AsciiBannerProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { AsciiBanner } from "@sektant1/phosphor-ui";
+import { AsciiBanner } from "phosphor-ui";
 
 const defaultProps = { text: "PHOSPHOR" };
 
@@ -27,7 +27,7 @@ export function Example() {
 `;
 
 const withFallbackSource = tsx`
-import { AsciiBanner } from "@sektant1/phosphor-ui";
+import { AsciiBanner } from "phosphor-ui";
 
 const withFallbackProps = {
   text: "PHOSPHOR",

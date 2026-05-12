@@ -27,7 +27,7 @@ const meta: Meta<ProgressBarProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ProgressBar } from "@sektant1/phosphor-ui";
+import { ProgressBar } from "phosphor-ui";
 
 
 

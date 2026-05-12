@@ -5,7 +5,7 @@ Use this before tagging `v1.0.0`.
 ## Public API
 
 - Public application imports must use the root package:
-  `@sektant1/phosphor-ui`.
+  `phosphor-ui`.
 - Supported CSS entrypoints are `phosphor.css`, `fonts.css`, `tokens.css`,
   `typography.css`, `global.css`, and `components.css`.
 - Deep component imports are implementation details and should not be documented

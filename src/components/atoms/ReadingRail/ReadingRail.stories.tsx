@@ -11,7 +11,7 @@ const meta: Meta<typeof ReadingRail> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ReadingRail } from "@sektant1/phosphor-ui";
+import { ReadingRail } from "phosphor-ui";
 
 
 

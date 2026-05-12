@@ -20,7 +20,7 @@ export default meta;
 
 const defaultSource = tsx`
 import React from "react";
-import { NoteEditor } from "@sektant1/phosphor-ui";
+import { NoteEditor } from "phosphor-ui";
 
 
 

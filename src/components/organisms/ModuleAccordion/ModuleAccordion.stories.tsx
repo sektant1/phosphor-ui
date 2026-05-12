@@ -26,7 +26,7 @@ const meta: Meta<ModuleAccordionProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { ModuleAccordion } from "@sektant1/phosphor-ui";
+import { ModuleAccordion } from "phosphor-ui";
 
 
 

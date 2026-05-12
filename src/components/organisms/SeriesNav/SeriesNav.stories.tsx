@@ -17,7 +17,7 @@ const meta: Meta<SeriesNavProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { SeriesNav } from "@sektant1/phosphor-ui";
+import { SeriesNav } from "phosphor-ui";
 
 
 

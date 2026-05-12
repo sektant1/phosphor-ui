@@ -22,7 +22,7 @@ const meta: Meta<FieldProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Field, InputControl } from "@sektant1/phosphor-ui";
+import { Field, InputControl } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -34,7 +34,7 @@ export function Example() {
 `;
 
 const errorSource = tsx`
-import { Field, SelectControl, TextareaControl } from "@sektant1/phosphor-ui";
+import { Field, SelectControl, TextareaControl } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -59,7 +59,7 @@ export function Example() {
 `;
 
 const anatomySource = tsx`
-import { ControlFrame, FieldError, FieldHint, FieldLabel, InputControl } from "@sektant1/phosphor-ui";
+import { ControlFrame, FieldError, FieldHint, FieldLabel, InputControl } from "phosphor-ui";
 
 export function Example() {
   return (

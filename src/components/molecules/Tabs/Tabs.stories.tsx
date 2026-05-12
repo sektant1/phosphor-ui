@@ -10,7 +10,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Tabs } from "@sektant1/phosphor-ui";
+import { Tabs } from "phosphor-ui";
 
 
 

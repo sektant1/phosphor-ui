@@ -15,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 const defaultSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -30,7 +30,7 @@ export function Example() {
 `;
 
 const flexColumnSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -48,7 +48,7 @@ export function Example() {
 `;
 
 const rowSource = tsx`
-import { Button, Row, Tag } from "@sektant1/phosphor-ui";
+import { Button, Row, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -64,7 +64,7 @@ export function Example() {
 `;
 
 const columnSource = tsx`
-import { Button, Column, Tag } from "@sektant1/phosphor-ui";
+import { Button, Column, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -78,7 +78,7 @@ export function Example() {
 `;
 
 const clusteredActionsSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -93,7 +93,7 @@ export function Example() {
 `;
 
 const boundedContainerSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -110,7 +110,7 @@ export function Example() {
 `;
 
 const responsiveGridSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "@sektant1/phosphor-ui";
+import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
 
 
 

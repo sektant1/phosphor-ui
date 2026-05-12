@@ -10,7 +10,7 @@ const meta: Meta<typeof NerdTree> = {
 export default meta;
 
 const defaultSource = tsx`
-import { NerdTree } from "@sektant1/phosphor-ui";
+import { NerdTree } from "phosphor-ui";
 
 const defaultProps = {
     title: "~/sektant's hideout",
@@ -46,7 +46,7 @@ export function Example() {
 `;
 
 const compactPanelSource = tsx`
-import { NerdTree } from "@sektant1/phosphor-ui";
+import { NerdTree } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -65,7 +65,7 @@ export function Example() {
 `;
 
 const mobileDrawerSource = tsx`
-import { NerdTree } from "@sektant1/phosphor-ui";
+import { NerdTree } from "phosphor-ui";
 
 export function Example() {
   return (

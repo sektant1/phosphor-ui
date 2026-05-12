@@ -10,7 +10,7 @@ const meta: Meta<typeof Stepper> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Stepper, StepperFoot } from "@sektant1/phosphor-ui";
+import { Stepper, StepperFoot } from "phosphor-ui";
 
 const defaultProps = {
     items: [
@@ -26,7 +26,7 @@ export function Example() {
 `;
 
 const footSource = tsx`
-import { Stepper, StepperFoot } from "@sektant1/phosphor-ui";
+import { Stepper, StepperFoot } from "phosphor-ui";
 
 
 

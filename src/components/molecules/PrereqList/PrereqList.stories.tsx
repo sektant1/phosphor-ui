@@ -10,7 +10,7 @@ const meta: Meta<typeof PrereqList> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PrereqList } from "@sektant1/phosphor-ui";
+import { PrereqList } from "phosphor-ui";
 
 
 

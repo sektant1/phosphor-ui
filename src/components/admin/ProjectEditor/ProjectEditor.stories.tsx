@@ -23,7 +23,7 @@ export default meta;
 
 const defaultSource = tsx`
 import React from "react";
-import { ProjectEditor } from "@sektant1/phosphor-ui";
+import { ProjectEditor } from "phosphor-ui";
 
 
 

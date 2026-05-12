@@ -10,7 +10,7 @@ const meta: Meta<TimelineProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Timeline } from "@sektant1/phosphor-ui";
+import { Timeline } from "phosphor-ui";
 
 
 

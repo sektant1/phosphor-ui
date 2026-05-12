@@ -25,7 +25,7 @@ const meta: Meta<AuthorCardProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { AuthorCard } from "@sektant1/phosphor-ui";
+import { AuthorCard } from "phosphor-ui";
 
 const defaultProps = {
     name: "sektant1",
@@ -43,7 +43,7 @@ export function Example() {
 `;
 
 const linkRowsSource = tsx`
-import { AuthorCard } from "@sektant1/phosphor-ui";
+import { AuthorCard } from "phosphor-ui";
 
 
 

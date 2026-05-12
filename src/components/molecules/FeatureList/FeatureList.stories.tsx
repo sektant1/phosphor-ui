@@ -38,7 +38,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultSource = tsx`
-import { FeatureList } from "@sektant1/phosphor-ui";
+import { FeatureList } from "phosphor-ui";
 
 const items = [
   {

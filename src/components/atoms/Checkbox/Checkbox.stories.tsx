@@ -24,7 +24,7 @@ const meta: Meta<CheckboxProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Checkbox } from "@sektant1/phosphor-ui";
+import { Checkbox } from "phosphor-ui";
 
 const defaultProps = {
     label:          "engage shields",
@@ -40,7 +40,7 @@ export function Example() {
 `;
 
 const errorCheckedSource = tsx`
-import { Checkbox } from "@sektant1/phosphor-ui";
+import { Checkbox } from "phosphor-ui";
 
 
 
@@ -65,7 +65,7 @@ export function Example() {
 `;
 
 const controlSource = tsx`
-import { CheckboxControl } from "@sektant1/phosphor-ui";
+import { CheckboxControl } from "phosphor-ui";
 
 export function Example() {
   return <CheckboxControl aria-label="Engage shields" defaultChecked />;

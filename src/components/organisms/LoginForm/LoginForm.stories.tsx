@@ -25,7 +25,7 @@ const meta: Meta<LoginFormProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { LoginForm } from "@sektant1/phosphor-ui";
+import { LoginForm } from "phosphor-ui";
 
 const defaultProps = {
     title:    "// access terminal",
@@ -40,7 +40,7 @@ export function Example() {
 `;
 
 const withErrorSource = tsx`
-import { LoginForm } from "@sektant1/phosphor-ui";
+import { LoginForm } from "phosphor-ui";
 
 const withErrorProps = {
   ...{
@@ -60,7 +60,7 @@ export function Example() {
 `;
 
 const loadingSource = tsx`
-import { LoginForm } from "@sektant1/phosphor-ui";
+import { LoginForm } from "phosphor-ui";
 
 
 

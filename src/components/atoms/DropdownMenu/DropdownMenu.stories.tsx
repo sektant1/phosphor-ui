@@ -10,7 +10,7 @@ const meta: Meta<typeof DropdownMenu> = {
 export default meta;
 
 const defaultSource = tsx`
-import { DropdownMenu } from "@sektant1/phosphor-ui";
+import { DropdownMenu } from "phosphor-ui";
 
 
 
@@ -30,7 +30,7 @@ export function Example() {
 `;
 
 const booleanSettingsSource = tsx`
-import { DropdownMenu } from "@sektant1/phosphor-ui";
+import { DropdownMenu } from "phosphor-ui";
 
 export function Example() {
   return (

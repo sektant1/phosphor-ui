@@ -11,7 +11,7 @@ const meta: Meta<typeof Pagination> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Pagination } from "@sektant1/phosphor-ui";
+import { Pagination } from "phosphor-ui";
 
 const defaultProps = { page: 3, totalPages: 7, prevHref: "#", nextHref: "#" };
 
@@ -21,7 +21,7 @@ export function Example() {
 `;
 
 const firstSource = tsx`
-import { Pagination } from "@sektant1/phosphor-ui";
+import { Pagination } from "phosphor-ui";
 
 const firstProps = { page: 1, totalPages: 5, nextHref: "#" };
 
@@ -31,7 +31,7 @@ export function Example() {
 `;
 
 const lastSource = tsx`
-import { Pagination } from "@sektant1/phosphor-ui";
+import { Pagination } from "phosphor-ui";
 
 const lastProps = { page: 5, totalPages: 5, prevHref: "#" };
 
@@ -41,7 +41,7 @@ export function Example() {
 `;
 
 const singleSource = tsx`
-import { Pagination } from "@sektant1/phosphor-ui";
+import { Pagination } from "phosphor-ui";
 
 const singleProps = { page: 1, totalPages: 1 };
 
@@ -51,7 +51,7 @@ export function Example() {
 `;
 
 const uncontrolledSource = tsx`
-import { Pagination } from "@sektant1/phosphor-ui";
+import { Pagination } from "phosphor-ui";
 
 
 

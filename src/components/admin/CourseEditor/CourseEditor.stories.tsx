@@ -24,7 +24,7 @@ const meta: Meta<CourseEditorProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { CourseEditor } from "@sektant1/phosphor-ui";
+import { CourseEditor } from "phosphor-ui";
 
 
 

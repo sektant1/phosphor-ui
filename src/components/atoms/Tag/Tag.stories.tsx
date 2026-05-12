@@ -21,7 +21,7 @@ const meta: Meta<TagProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Tag } from "@sektant1/phosphor-ui";
+import { Tag } from "phosphor-ui";
 
 
 

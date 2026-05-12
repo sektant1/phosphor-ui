@@ -25,7 +25,7 @@ const meta: Meta<CalloutProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 const defaultProps = {
     variant:  "info",
@@ -39,7 +39,7 @@ export function Example() {
 `;
 
 const variantsSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 const variants: Array<{
   variant: CalloutVariant;
@@ -102,7 +102,7 @@ export function Example() {
 `;
 
 const sizesSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -122,7 +122,7 @@ export function Example() {
 `;
 
 const sizeMatrixSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -146,7 +146,7 @@ export function Example() {
 `;
 
 const narrowSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 const narrowProps = {
   ...{
@@ -169,7 +169,7 @@ export function Example() {
 `;
 
 const withActionsSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 const withActionsProps = {
   ...{
@@ -196,7 +196,7 @@ export function Example() {
 `;
 
 const withoutGlyphSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 const withoutGlyphProps = {
   ...{
@@ -218,7 +218,7 @@ export function Example() {
 `;
 
 const headingSource = tsx`
-import { Callout, CalloutHeading } from "@sektant1/phosphor-ui";
+import { Callout, CalloutHeading } from "phosphor-ui";
 
 
 

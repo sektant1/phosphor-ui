@@ -10,7 +10,7 @@ const meta: Meta<typeof PostFrontmatter> = {
 export default meta;
 
 const defaultSource = tsx`
-import { PostFrontmatter } from "@sektant1/phosphor-ui";
+import { PostFrontmatter } from "phosphor-ui";
 
 const defaultProps = {
     data: {
@@ -29,7 +29,7 @@ export function Example() {
 `;
 
 const withCustomLabelSource = tsx`
-import { PostFrontmatter } from "@sektant1/phosphor-ui";
+import { PostFrontmatter } from "phosphor-ui";
 
 
 

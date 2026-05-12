@@ -29,7 +29,7 @@ export default meta;
 
 const defaultSource = tsx`
 import React from "react";
-import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "phosphor-ui";
 
 export function Example() {
   const props = {
@@ -48,7 +48,7 @@ export function Example() {
 `;
 
 const withTextareaSource = tsx`
-import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "phosphor-ui";
 
 export function Example() {
   const props = {
@@ -73,7 +73,7 @@ export function Example() {
 `;
 
 const withSelectSource = tsx`
-import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "phosphor-ui";
 
 export function Example() {
   const props = {
@@ -106,7 +106,7 @@ export function Example() {
 `;
 
 const formExampleSource = tsx`
-import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -146,7 +146,7 @@ export function Example() {
 `;
 
 const statusBadgesSource = tsx`
-import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "@sektant1/phosphor-ui";
+import { Button, ContentStatusBadge, Form, FormField, Input, Select, Textarea } from "phosphor-ui";
 
 
 

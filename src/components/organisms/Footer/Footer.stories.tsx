@@ -30,7 +30,7 @@ const meta: Meta<FooterProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Footer } from "@sektant1/phosphor-ui";
+import { Footer } from "phosphor-ui";
 
 
 

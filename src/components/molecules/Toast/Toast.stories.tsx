@@ -21,7 +21,7 @@ const meta: Meta<ToastProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Toast, useToast } from "@sektant1/phosphor-ui";
+import { Toast, useToast } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -37,7 +37,7 @@ export function Example() {
 
 const interactiveSource = tsx`
 import React from "react";
-import { Toast, useToast } from "@sektant1/phosphor-ui";
+import { Toast, useToast } from "phosphor-ui";
 
 
 

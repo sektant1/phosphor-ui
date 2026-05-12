@@ -18,7 +18,7 @@ const meta: Meta<StatPillProps> = {
 export default meta;
 
 const defaultSource = tsx`
-import { StatPill } from "@sektant1/phosphor-ui";
+import { StatPill } from "phosphor-ui";
 
 const defaultProps = {
     label: "status",
@@ -32,7 +32,7 @@ export function Example() {
 `;
 
 const tonesSource = tsx`
-import { StatPill } from "@sektant1/phosphor-ui";
+import { StatPill } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -46,7 +46,7 @@ export function Example() {
 `;
 
 const longValueSource = tsx`
-import { StatPill } from "@sektant1/phosphor-ui";
+import { StatPill } from "phosphor-ui";
 
 const longValueProps = {
   ...{
@@ -67,7 +67,7 @@ export function Example() {
 `;
 
 const statusRowSource = tsx`
-import { StatPill } from "@sektant1/phosphor-ui";
+import { StatPill } from "phosphor-ui";
 
 
 

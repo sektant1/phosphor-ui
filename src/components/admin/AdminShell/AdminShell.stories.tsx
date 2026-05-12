@@ -15,7 +15,7 @@ export default meta;
 
 const defaultSource = tsx`
 import React from "react";
-import { AdminShell, Button, Text } from "@sektant1/phosphor-ui";
+import { AdminShell, Button, Text } from "phosphor-ui";
 
 
 

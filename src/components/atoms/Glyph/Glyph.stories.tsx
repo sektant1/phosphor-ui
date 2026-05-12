@@ -11,7 +11,7 @@ const meta: Meta<typeof Glyph> = {
 export default meta;
 
 const defaultSource = tsx`
-import { Glyph } from "@sektant1/phosphor-ui";
+import { Glyph } from "phosphor-ui";
 
 
 
@@ -26,7 +26,7 @@ export function Example() {
 `;
 
 const namedSource = tsx`
-import { Glyph, Row } from "@sektant1/phosphor-ui";
+import { Glyph, Row } from "phosphor-ui";
 
 export function Example() {
   return (
