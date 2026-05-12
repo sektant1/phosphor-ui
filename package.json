@@ -139,6 +139,7 @@
   },
   "dependencies": {
     "figlet": "1.11.0",
+    "phosphor-ui": "^0.3.39",
     "shiki": "4.0.2",
     "video.js": "^8.23.7"
   }

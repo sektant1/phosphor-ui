@@ -3,6 +3,8 @@
   border: var(--pho-border-line);
   padding: 1.6rem;
   min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   position: relative;
 }
 
@@ -155,6 +157,9 @@
     var(--pho-color-background-deep);
   border: var(--pho-border-dashed);
   min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  container-type: inline-size;
   padding: 1rem;
 }
 
@@ -162,6 +167,8 @@
   border-bottom: var(--pho-border-dashed);
   margin-bottom: 1rem;
   min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   padding-bottom: 0.9rem;
   position: relative;
 }
@@ -178,8 +185,16 @@
   font-size: clamp(1.45rem, 3vw, 2.1rem);
   line-height: 1;
   margin: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   text-shadow: var(--pho-glow-primary);
   text-transform: uppercase;
+}
+
+@supports (font-size: 1cqw) {
+  .previewTitle {
+    font-size: clamp(1.25rem, 8cqw, 2.1rem);
+  }
 }
 
 .previewStatus {
@@ -198,7 +213,7 @@
 .previewGrid {
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
   min-width: 0;
 }
 

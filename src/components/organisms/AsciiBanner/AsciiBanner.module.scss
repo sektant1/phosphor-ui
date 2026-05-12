@@ -2,19 +2,25 @@
   display: block;
   position: relative;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   text-align: center;
   text-decoration: none;
   color: inherit;
   background: none;
-  max-width: 100%;
-  overflow: visible;
+  overflow: hidden;
+  container-type: inline-size;
 }
 
 .bannerFrame {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: var(--ascii-height, auto);
   min-height: 1px;
-  overflow: visible;
+  box-sizing: border-box;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -49,6 +55,11 @@
   will-change: transform, opacity, text-shadow;
 }
 
+@supports (font-size: 1cqw) {
+  .banner {
+    font-size: clamp(8px, 1.4cqw, 16px);
+  }
+}
 
 .fallback {
   position: absolute;

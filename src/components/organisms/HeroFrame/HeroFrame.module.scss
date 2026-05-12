@@ -1,8 +1,13 @@
 .frame {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  container-type: inline-size;
   border: 1px solid var(--pho-color-primary);
   background:
-    radial-gradient(ellipse 120% 70% at 50% 0%, rgba(44,255,122,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 120% 70% at 50% 0%, rgba(44, 255, 122, 0.08) 0%, transparent 70%),
     var(--pho-color-background);
   box-shadow:
     0 0 0 1px var(--pho-color-primary-faint) inset,
@@ -11,10 +16,15 @@
   overflow: hidden;
   margin-bottom: 2rem;
 }
+
 .hud {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   padding: 0.35rem 0.7rem;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-control-sm-size);
@@ -22,51 +32,123 @@
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);
   background:
-    repeating-linear-gradient(90deg, transparent 0 6px, rgba(44,255,122,0.05) 6px 7px),
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(44, 255, 122, 0.05) 6px 7px),
     var(--pho-color-background-raised);
 }
-.hudTop { border-bottom: 1px solid var(--pho-color-primary-faint); }
-.hudBot { border-top: 1px solid var(--pho-color-primary-faint); }
-.label  { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); font-weight: 700; }
-.spacer { flex: 1 1 auto; }
-.text   { color: var(--pho-color-primary-muted); font-variant-numeric: tabular-nums; }
-.bars   { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
+
+.hudTop {
+  border-bottom: 1px solid var(--pho-color-primary-faint);
+}
+
+.hudBot {
+  border-top: 1px solid var(--pho-color-primary-faint);
+}
+
+.label {
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+  font-weight: 700;
+  min-width: 0;
+}
+
+.spacer {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.text {
+  color: var(--pho-color-primary-muted);
+  font-variant-numeric: tabular-nums;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bars {
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary);
+  flex: 0 0 auto;
+}
+
 .led {
-  width: 8px; height: 8px; border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   box-shadow: 0 0 4px currentColor, 0 0 10px currentColor;
   display: inline-block;
+  flex: 0 0 auto;
 }
-.ledRec { color: var(--pho-color-accent-strong); background: currentColor; animation: phosphorHudBlink 1.4s steps(2,end) infinite; }
-.ledPwr { color: var(--pho-color-primary); background: currentColor; animation: phosphorHudPulse 2.6s ease-in-out infinite; }
+
+.ledRec {
+  color: var(--pho-color-accent-strong);
+  background: currentColor;
+  animation: phosphorHudBlink 1.4s steps(2, end) infinite;
+}
+
+.ledPwr {
+  color: var(--pho-color-primary);
+  background: currentColor;
+  animation: phosphorHudPulse 2.6s ease-in-out infinite;
+}
+
 .tape {
-  flex: 1 1 auto; min-width: 0; overflow: hidden;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   border-left: 1px dashed var(--pho-color-primary-faint);
   border-right: 1px dashed var(--pho-color-primary-faint);
   padding: 0 0.6rem;
 }
+
 .tapeRun {
-  display: inline-block; white-space: nowrap;
+  display: inline-block;
+  white-space: nowrap;
   animation: phosphorTapeRoll linear infinite;
   color: var(--pho-color-primary-faint);
   letter-spacing: 0.18em;
 }
+
 .artWrap {
+  --pho-hero-art-scale: 1;
+
   position: relative;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  container-type: inline-size;
   padding: 1.4rem 1rem;
-  display: flex; justify-content: center; align-items: center;
-  overflow: hidden; min-height: 14em; isolation: isolate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 14em;
+  isolation: isolate;
 }
+
 .art {
-  font-family: var(--pho-font-heading); font-weight: 700;
-  font-size: clamp(4px, 0.85vw, 8px);
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  font-size: calc(clamp(4px, 0.85vw, 8px) * var(--pho-hero-art-scale, 1));
   line-height: 1.15;
   margin: 0;
+  max-width: 100%;
+  min-width: 0;
   white-space: pre;
   color: var(--pho-color-primary-strong);
-  text-shadow: 0 0 1px var(--pho-color-primary), 0 0 8px rgba(44,255,122,0.55), 0 0 20px rgba(44,255,122,0.25);
+  text-shadow: 0 0 1px var(--pho-color-primary), 0 0 8px rgba(44, 255, 122, 0.55), 0 0 20px rgba(44, 255, 122, 0.25);
   animation: phosphorHeroBreathe 4.2s ease-in-out infinite;
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
 }
+
+@supports (font-size: 1cqw) {
+  .art {
+    font-size: calc(clamp(4px, 0.85cqw, 8px) * var(--pho-hero-art-scale, 1));
+  }
+}
+
 @media (max-width: 640px) {
   .hud {
     flex-wrap: wrap;
@@ -74,6 +156,7 @@
     font-size: var(--pho-type-ui-xs-size);
     padding: 0.3rem 0.5rem;
   }
+
   .tape {
     flex-basis: 100%;
     border-left: none;
@@ -81,23 +164,41 @@
     border-top: 1px dashed var(--pho-color-primary-faint);
     padding: 0.2rem 0;
   }
+
   .artWrap {
     min-height: 9em;
     padding: 1rem 0.6rem;
   }
-  .art { font-size: clamp(3.2px, 1.4vw, 6px); }
+
+  .art {
+    font-size: calc(clamp(3.2px, 1.4vw, 6px) * var(--pho-hero-art-scale, 1));
+  }
 }
+
+@supports (font-size: 1cqw) {
+  @media (max-width: 640px) {
+    .art {
+      font-size: calc(clamp(3.2px, 1.4cqw, 6px) * var(--pho-hero-art-scale, 1));
+    }
+  }
+}
+
 .scanline {
-  position: absolute; left: 0; right: 0; top: 0; height: 14%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(182,255,206,0.18) 45%,
-    rgba(44,255,122,0.28) 50%,
-    rgba(182,255,206,0.18) 55%,
-    transparent 100%
-  );
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14%;
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(182, 255, 206, 0.18) 45%,
+      rgba(44, 255, 122, 0.28) 50%,
+      rgba(182, 255, 206, 0.18) 55%,
+      transparent 100%);
   mix-blend-mode: screen;
   animation: phosphorHeroScan 3.8s linear infinite;
-  pointer-events: none; transform: translateY(-120%); will-change: transform, opacity; z-index: 2;
+  pointer-events: none;
+  transform: translateY(-120%);
+  will-change: transform, opacity;
+  z-index: 2;
 }
