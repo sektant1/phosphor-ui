@@ -106,13 +106,13 @@
   color: var(--pho-color-text-strong);
 }
 .t-terminal {
-  font-family: var(--pho-font-terminal);
+  font-family: var(--pho-font-terminal-display);
   font-size: 1.3em;
   letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
 }
 .t-stamp {
-  font-family: var(--pho-font-terminal);
+  font-family: var(--pho-font-terminal-display);
   font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-stamp);
   text-transform: uppercase;
@@ -169,6 +169,12 @@
 }
 .t-lowercase {
   text-transform: lowercase;
+}
+.t-terminal.t-lowercase,
+.t-stamp.t-lowercase {
+  font-family: var(--pho-font-terminal);
+  font-size: 1em;
+  letter-spacing: var(--pho-tracking-wide);
 }
 .t-capitalize {
   text-transform: capitalize;

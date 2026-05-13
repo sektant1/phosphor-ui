@@ -28,6 +28,9 @@ const gapVar: Record<LayoutGap, string> = {
 const toCssLength = (value: string | number) =>
   typeof value === "number" ? `${value}px` : value;
 
+const toResponsiveMin = (value: string | number) =>
+  `min(100%, ${toCssLength(value)})`;
+
 const isLayoutGap = (value: unknown): value is LayoutGap =>
   typeof value === "string" && value in gapClass;
 
@@ -183,14 +186,16 @@ export const Grid = <T extends LayoutElement = "div">({
   const isTokenGap = isLayoutGap(gap);
   const vars: CssVars = {};
   if (columns) vars["--pho-grid-columns"] = columns;
-  if (minItemWidth) vars["--pho-grid-min"] = minItemWidth;
+  if (minItemWidth) vars["--pho-grid-min"] = toResponsiveMin(minItemWidth);
   if (align) vars["--pho-align"] = align;
   if (justify) vars["--pho-justify"] = justify;
   if (!isTokenGap) applySpaceVar(vars, "--pho-gap", gap);
   applySpaceVar(vars, "--pho-row-gap", rowGap);
   applySpaceVar(vars, "--pho-column-gap", columnGap);
   if (mobileColumns) vars["--pho-mobile-grid-columns"] = mobileColumns;
-  if (mobileMinItemWidth) vars["--pho-mobile-grid-min"] = mobileMinItemWidth;
+  if (mobileMinItemWidth) {
+    vars["--pho-mobile-grid-min"] = toResponsiveMin(mobileMinItemWidth);
+  }
   if (mobileAlign) vars["--pho-mobile-align"] = mobileAlign;
   if (mobileJustify) vars["--pho-mobile-justify"] = mobileJustify;
   applySpaceVar(vars, "--pho-mobile-gap", mobileGap);

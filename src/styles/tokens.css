@@ -140,6 +140,9 @@
     "JetBrains Mono", "Bender", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
   --font-terminal:
+    "JetBrains Mono", "Bender", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  --font-terminal-display:
     "VCR OSD Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
   --font-control:
@@ -151,6 +154,7 @@
   --pho-font-body: var(--font-body);
   --pho-font-code: var(--font-code);
   --pho-font-terminal: var(--font-terminal);
+  --pho-font-terminal-display: var(--font-terminal-display);
   --pho-font-control: var(--font-control);
 
   /* ── code-block tokens (all greens, no warm channels) ──── */

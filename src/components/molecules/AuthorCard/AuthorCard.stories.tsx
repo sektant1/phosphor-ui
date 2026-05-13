@@ -7,9 +7,9 @@ const meta: Meta<AuthorCardProps> = {
   title: "Molecules/AuthorCard",
   component: AuthorCard,
   argTypes: {
-    name:      { control: "text" },
-    role:      { control: "text" },
-    bio:       { control: "text" },
+    name: { control: "text" },
+    role: { control: "text" },
+    bio: { control: "text" },
     avatarSrc: { control: "text" },
   },
   args: {
@@ -18,7 +18,7 @@ const meta: Meta<AuthorCardProps> = {
     bio: "Writing about systems, algorithms, and the terminal aesthetic.",
     links: [
       { label: "github", href: "#" },
-      { label: "rss",    href: "#" },
+      { label: "rss", href: "#" },
     ],
   },
 };
@@ -64,13 +64,17 @@ const linkRowsProps = {
     links: [
       { label: "github", href: "#" },
       { label: "field notes archive", href: "#" },
-      { label: "very long telemetry profile link that should stay in one row", href: "#long" },
+      { label: "very long telemetry profile link that should wrap without overflow", href: "#long" },
     ],
   },
 };
 
 export function Example() {
-  return <AuthorCard {...linkRowsProps} />;
+  return (
+    <div style={{ width: "min(22rem, 100%)" }}>
+      <AuthorCard {...linkRowsProps} />
+    </div>
+  );
 }
 `;
 
@@ -87,12 +91,16 @@ export const LinkRows: StoryObj<AuthorCardProps> = {
     links: [
       { label: "github", href: "#" },
       { label: "field notes archive", href: "#" },
-      { label: "very long telemetry profile link that should stay in one row", href: "#long" },
+      {
+        label:
+          "very long telemetry profile link that should wrap without overflow",
+        href: "#long",
+      },
     ],
   },
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: "22rem" }}>
+      <div>
         <Story />
       </div>
     ),

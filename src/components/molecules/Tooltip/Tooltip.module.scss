@@ -1,17 +1,21 @@
 .root {
   display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
   position: relative;
 }
 
 .tip {
   background: var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-muted);
+  box-sizing: border-box;
   color: var(--pho-color-primary-strong);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   line-height: 1.35;
   max-width: min(18rem, calc(100vw - 2rem));
   opacity: 0;
+  overflow-wrap: anywhere;
   padding: 0.4rem 0.55rem;
   pointer-events: none;
   text-shadow: var(--pho-glow-primary);

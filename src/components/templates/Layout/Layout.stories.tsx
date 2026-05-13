@@ -158,6 +158,26 @@ export function Example() {
 }
 `;
 
+const narrowGridSource = tsx`
+import { Grid, Stack, Tag } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <Stack gap="sm" style={{ width: "min(18rem, 100%)" }}>
+      <Tag>narrow parent</Tag>
+      <Grid minItemWidth="20rem" gap="sm">
+        <div style={{ border: "1px dashed var(--pho-color-primary-faint)", padding: "var(--pho-space-3)" }}>
+          A custom grid min should collapse to the parent width instead of forcing horizontal scroll.
+        </div>
+        <div style={{ border: "1px dashed var(--pho-color-primary-faint)", padding: "var(--pho-space-3)" }}>
+          The second item stacks cleanly below it.
+        </div>
+      </Grid>
+    </Stack>
+  );
+}
+`;
+
 type Story = StoryObj;
 
 export const Default: Story = {
@@ -284,5 +304,32 @@ export const ResponsiveGrid: Story = {
         cta={{ label: "LOCKED", href: "#" }}
       />
     </Grid>
+  ),
+};
+
+export const NarrowNestedGrid: Story = {
+  parameters: { docs: { source: source(narrowGridSource) } },
+  render: () => (
+    <Stack gap="sm" style={{ width: "min(18rem, 100%)" }}>
+      <Tag>narrow parent</Tag>
+      <Grid minItemWidth="20rem" gap="sm">
+        <div
+          style={{
+            border: "1px dashed var(--pho-color-primary-faint)",
+            padding: "var(--pho-space-3)",
+          }}
+        >
+          A custom grid min should collapse to the parent width instead of forcing horizontal scroll.
+        </div>
+        <div
+          style={{
+            border: "1px dashed var(--pho-color-primary-faint)",
+            padding: "var(--pho-space-3)",
+          }}
+        >
+          The second item stacks cleanly below it.
+        </div>
+      </Grid>
+    </Stack>
   ),
 };

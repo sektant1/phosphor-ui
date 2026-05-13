@@ -1,5 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { Container } from "../../templates/Layout";
 import { HeroFrame } from "./HeroFrame";
 import { source, tsx } from "../../../stories/source";
 
@@ -38,6 +39,27 @@ export function Example() {
 }
 `;
 
+const constrainedSource = tsx`
+import { Container, HeroFrame } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <Container width="28rem">
+      <HeroFrame
+        text="PHOSPHOR"
+        bottomHud={
+          <>
+            <HeroFrame.HudLabel>SIG</HeroFrame.HudLabel>
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudTape text="// RESPONSIVE HERO FRAME //" />
+          </>
+        }
+      />
+    </Container>
+  );
+}
+`;
+
 type Story = StoryObj<typeof HeroFrame>;
 
 export const Default: Story = {
@@ -62,5 +84,23 @@ export const Default: Story = {
         </>
       }
     />
+  ),
+};
+
+export const ConstrainedContainer: Story = {
+  parameters: { docs: { source: source(constrainedSource) } },
+  render: () => (
+    <Container width="28rem">
+      <HeroFrame
+        text="PHOSPHOR"
+        bottomHud={
+          <>
+            <HeroFrame.HudLabel>SIG</HeroFrame.HudLabel>
+            <HeroFrame.HudSpacer />
+            <HeroFrame.HudTape text="// RESPONSIVE HERO FRAME //" />
+          </>
+        }
+      />
+    </Container>
   ),
 };

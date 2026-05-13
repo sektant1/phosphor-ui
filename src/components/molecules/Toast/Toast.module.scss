@@ -11,7 +11,8 @@
   gap: 0.7rem;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
-  max-width: 320px;
+  box-sizing: border-box;
+  max-width: min(320px, calc(100vw - 2.8rem));
   transform: translateY(0);
   opacity: 1;
   transition: transform var(--pho-motion-base) var(--pho-ease-out), opacity var(--pho-motion-base) var(--pho-ease-out);
@@ -43,7 +44,7 @@
 .error   { border-color: var(--pho-color-danger-emphasis); color: var(--pho-color-danger); }
 
 .glyph   { font-weight: bold; flex-shrink: 0; }
-.message { flex: 1; min-width: 0; }
+.message { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 
 .dismiss {
   background: none;
@@ -56,4 +57,13 @@
   line-height: 1;
 
   &:hover { color: var(--pho-color-accent); }
+}
+
+@media (max-width: 420px) {
+  .toast {
+    bottom: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+    right: 0.75rem;
+  }
 }

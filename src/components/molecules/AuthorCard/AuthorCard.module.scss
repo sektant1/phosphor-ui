@@ -1,6 +1,9 @@
 .card {
   border: var(--pho-border-dashed);
   background: var(--pho-color-background-raised);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   padding: 1rem;
 }
 
@@ -19,6 +22,7 @@
   font-size: var(--pho-type-icon-md-size);
   font-weight: bold;
   color: var(--pho-color-primary-strong);
+  overflow-wrap: anywhere;
   text-shadow: var(--pho-glow-primary);
   line-height: 1.2;
 }
@@ -36,12 +40,14 @@
   font-size: var(--pho-type-caption-size);
   color: var(--pho-color-text);
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .links {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 0.95rem;
+  gap: 0.35rem 0.95rem;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   list-style: none;

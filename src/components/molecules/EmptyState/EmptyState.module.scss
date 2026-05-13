@@ -1,5 +1,8 @@
 .root {
   text-align: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   padding: 2.4rem 1.2rem;
   border: var(--pho-border-dashed);
   background: var(--pho-color-background-raised);
@@ -17,6 +20,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-icon-md-size);
   letter-spacing: 0.16em;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);
   margin: 0;
@@ -26,6 +30,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
   color: var(--pho-color-primary-faint);
+  overflow-wrap: anywhere;
 }
 
 .action {

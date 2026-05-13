@@ -1,6 +1,7 @@
 .root {
   display: grid;
   gap: 0.35rem;
+  max-width: 100%;
   min-width: 0;
 }
 
@@ -10,6 +11,8 @@
   font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
   line-height: 1.2;
+  min-width: 0;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -111,6 +114,10 @@
 }
 
 @media (max-width: 480px) {
+  .control {
+    width: 100%;
+  }
+
   .prompt {
     display: none;
   }

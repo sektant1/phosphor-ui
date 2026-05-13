@@ -1,5 +1,7 @@
 .flex,
 .grid {
+  box-sizing: border-box;
+  max-width: 100%;
   min-width: 0;
 }
 
@@ -43,6 +45,8 @@
 }
 
 .stack {
+  box-sizing: border-box;
+  max-width: 100%;
   min-width: 0;
 }
 

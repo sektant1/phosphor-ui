@@ -1,6 +1,7 @@
 .pho-search-list {
   margin-top: 1rem;
   list-style: none;
+  min-width: 0;
   padding: 0;
 }
 
@@ -10,8 +11,9 @@
 
 .pho-search-hit a {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.6rem;
+  min-width: 0;
   padding: 0.4rem 0;
   border-bottom: 1px dashed var(--pho-color-primary-faint);
   text-decoration: none;
@@ -24,12 +26,17 @@
 
 .pho-search-hit .hit-title {
   color: var(--pho-color-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
   text-shadow: var(--pho-glow-primary);
 }
 
 .pho-search-hit .hit-tags {
   color: var(--pho-color-accent);
   font-size: var(--pho-type-ui-sm-size);
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
 }
 
 .pho-search-hit .hit-snippet {
@@ -38,6 +45,8 @@
   color: var(--pho-color-primary-muted);
   font-size: var(--pho-type-control-sm-size);
   line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .pho-search-hit mark {
@@ -54,7 +63,7 @@
 }
 
 @media (max-width: 520px) {
-  .pho-search-hit a { grid-template-columns: 1fr auto; }
+  .pho-search-hit a { grid-template-columns: minmax(0, 1fr) auto; }
   .pho-search-hit .hit-date { display: none; }
   .pho-search-hit .hit-snippet { grid-column: 1 / -1; }
 }

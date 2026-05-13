@@ -69,6 +69,7 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-font-body",
     "--pho-font-code",
     "--pho-font-terminal",
+    "--pho-font-terminal-display",
   ],
   type: [
     "--pho-type-h1-size",
