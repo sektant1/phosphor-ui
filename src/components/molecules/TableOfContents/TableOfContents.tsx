@@ -121,7 +121,9 @@ const TocLi: React.FC<TocLiProps> = ({
           <span className={styles.foldSpacer} aria-hidden="true" />
         )}
         <a href={item.href} onClick={onClick}>
-          <span className={styles.glyph}>{item.glyph ?? (sub ? "·" : "▌")}</span>
+          <span className={styles.glyph} aria-hidden={showToggle || undefined}>
+            {showToggle ? "" : (item.glyph ?? (sub ? "·" : "▌"))}
+          </span>
           <span>{item.label}</span>
         </a>
       </div>
