@@ -6,7 +6,7 @@ import { cx } from "../../../utils/classNames";
 export interface TocItem {
   label: React.ReactNode;
   href: string;
-  glyph?: string;
+  glyph?: string | null;
   state?: "default" | "active" | "done";
   children?: TocItem[];
 }
@@ -33,6 +33,19 @@ export interface TableOfContentsProps {
    * When true (and `collapsible`), parent items start collapsed. Default: false.
    */
   defaultCollapsed?: boolean;
+  /**
+   * Render the glyph column. Set false to hide glyphs entirely.
+   * Per-item `glyph: null` also suppresses an individual glyph. Default: true.
+   */
+  showGlyphs?: boolean;
+  /**
+   * Default glyph for top-level items. Overridden by `TocItem.glyph`. Default: "▌".
+   */
+  glyph?: string;
+  /**
+   * Default glyph for nested items. Overridden by `TocItem.glyph`. Default: "·".
+   */
+  subGlyph?: string;
 }
 
 const collectIds = (items: TocItem[], out: string[] = []): string[] => {
@@ -51,6 +64,9 @@ interface TocLiProps {
   index: number;
   collapsible: boolean;
   defaultCollapsed: boolean;
+  showGlyphs: boolean;
+  glyph: string;
+  subGlyph: string;
 }
 
 const TocLi: React.FC<TocLiProps> = ({
@@ -61,6 +77,9 @@ const TocLi: React.FC<TocLiProps> = ({
   index,
   collapsible,
   defaultCollapsed,
+  showGlyphs,
+  glyph,
+  subGlyph,
 }) => {
   const id = item.href.startsWith("#") ? item.href.slice(1) : null;
   const hasExplicit = item.state === "active" || item.state === "done";
@@ -121,9 +140,11 @@ const TocLi: React.FC<TocLiProps> = ({
           <span className={styles.foldSpacer} aria-hidden="true" />
         )}
         <a href={item.href} onClick={onClick}>
-          <span className={styles.glyph} aria-hidden={showToggle || undefined}>
-            {showToggle ? "" : (item.glyph ?? (sub ? "·" : "▌"))}
-          </span>
+          {showGlyphs && item.glyph !== null && (
+            <span className={styles.glyph} aria-hidden={showToggle || undefined}>
+              {showToggle ? "" : (item.glyph ?? (sub ? subGlyph : glyph))}
+            </span>
+          )}
           <span>{item.label}</span>
         </a>
       </div>
@@ -139,6 +160,9 @@ const TocLi: React.FC<TocLiProps> = ({
               index={index + i + 1}
               collapsible={collapsible}
               defaultCollapsed={defaultCollapsed}
+              showGlyphs={showGlyphs}
+              glyph={glyph}
+              subGlyph={subGlyph}
             />
           ))}
         </ul>
@@ -157,6 +181,9 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   spyOffset,
   collapsible = true,
   defaultCollapsed = false,
+  showGlyphs = true,
+  glyph = "▌",
+  subGlyph = "·",
 }) => {
   const ids = useMemo(() => collectIds(items), [items]);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -201,6 +228,9 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
             index={i}
             collapsible={collapsible}
             defaultCollapsed={defaultCollapsed}
+            showGlyphs={showGlyphs}
+            glyph={glyph}
+            subGlyph={subGlyph}
           />
         ))}
       </ul>
