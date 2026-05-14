@@ -24,6 +24,15 @@ export interface TableOfContentsProps {
    * crosses above this offset. Default: 25% of viewport height.
    */
   spyOffset?: number;
+  /**
+   * When true, parent items with children render a fold toggle and can be
+   * collapsed. Default: true.
+   */
+  collapsible?: boolean;
+  /**
+   * When true (and `collapsible`), parent items start collapsed. Default: false.
+   */
+  defaultCollapsed?: boolean;
 }
 
 const collectIds = (items: TocItem[], out: string[] = []): string[] => {
@@ -34,37 +43,54 @@ const collectIds = (items: TocItem[], out: string[] = []): string[] => {
   return out;
 };
 
-const flattenWithIndex = (
-  items: TocItem[],
-  start = 0,
-  out: Array<{ item: TocItem; i: number }> = []
-): { items: Array<{ item: TocItem; i: number }>; next: number } => {
-  let i = start;
-  for (const it of items) {
-    out.push({ item: it, i: i++ });
-    if (it.children) {
-      const r = flattenWithIndex(it.children, i);
-      i = r.next;
-    }
-  }
-  return { items: out, next: i };
-};
-
 interface TocLiProps {
   item: TocItem;
   sub?: boolean;
   activeId: string | null;
   smoothScroll: boolean;
   index: number;
+  collapsible: boolean;
+  defaultCollapsed: boolean;
 }
 
-const TocLi: React.FC<TocLiProps> = ({ item, sub, activeId, smoothScroll, index }) => {
+const TocLi: React.FC<TocLiProps> = ({
+  item,
+  sub,
+  activeId,
+  smoothScroll,
+  index,
+  collapsible,
+  defaultCollapsed,
+}) => {
   const id = item.href.startsWith("#") ? item.href.slice(1) : null;
   const hasExplicit = item.state === "active" || item.state === "done";
   const isActive =
     item.state === "active" ||
     (!hasExplicit && id !== null && id === activeId);
-  const cls = cx(styles.li, isActive && styles.active, item.state === "done" && styles.done);
+  const hasChildren = !!(item.children && item.children.length > 0);
+  const [open, setOpen] = useState<boolean>(!defaultCollapsed);
+
+  useEffect(() => {
+    if (!collapsible || !hasChildren) return;
+    if (!activeId) return;
+    const descendantIds: string[] = [];
+    const walk = (list: TocItem[]) => {
+      for (const c of list) {
+        if (c.href.startsWith("#")) descendantIds.push(c.href.slice(1));
+        if (c.children) walk(c.children);
+      }
+    };
+    walk(item.children!);
+    if (descendantIds.includes(activeId)) setOpen(true);
+  }, [activeId, collapsible, hasChildren, item.children]);
+
+  const cls = cx(
+    styles.li,
+    isActive && styles.active,
+    item.state === "done" && styles.done,
+    hasChildren && styles.hasChildren,
+    hasChildren && collapsible && !open && styles.collapsed,
+  );
 
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!smoothScroll || !id) return;
@@ -76,15 +102,32 @@ const TocLi: React.FC<TocLiProps> = ({ item, sub, activeId, smoothScroll, index 
     if (window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
   };
 
+  const showToggle = hasChildren && collapsible;
+
   return (
     <li className={cls} style={{ "--i": index } as CssVars}>
-      <a href={item.href} onClick={onClick}>
-        <span className={styles.glyph}>{item.glyph ?? (sub ? "·" : "▌")}</span>
-        <span>{item.label}</span>
-      </a>
-      {item.children && item.children.length > 0 && (
-        <ul className={cx(styles.list, styles.subList)}>
-          {item.children.map((c, i) => (
+      <div className={styles.row}>
+        {showToggle ? (
+          <button
+            type="button"
+            className={styles.fold}
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-label={open ? "Collapse section" : "Expand section"}
+          >
+            <span aria-hidden="true">{open ? "▾" : "▸"}</span>
+          </button>
+        ) : (
+          <span className={styles.foldSpacer} aria-hidden="true" />
+        )}
+        <a href={item.href} onClick={onClick}>
+          <span className={styles.glyph}>{item.glyph ?? (sub ? "·" : "▌")}</span>
+          <span>{item.label}</span>
+        </a>
+      </div>
+      {hasChildren && (
+        <ul className={cx(styles.list, styles.subList)} hidden={collapsible && !open}>
+          {item.children!.map((c, i) => (
             <TocLi
               key={c.href + i}
               item={c}
@@ -92,6 +135,8 @@ const TocLi: React.FC<TocLiProps> = ({ item, sub, activeId, smoothScroll, index 
               activeId={activeId}
               smoothScroll={smoothScroll}
               index={index + i + 1}
+              collapsible={collapsible}
+              defaultCollapsed={defaultCollapsed}
             />
           ))}
         </ul>
@@ -108,6 +153,8 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
   spy = true,
   smoothScroll = true,
   spyOffset,
+  collapsible = true,
+  defaultCollapsed = false,
 }) => {
   const ids = useMemo(() => collectIds(items), [items]);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -150,6 +197,8 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
             activeId={activeId}
             smoothScroll={smoothScroll}
             index={i}
+            collapsible={collapsible}
+            defaultCollapsed={defaultCollapsed}
           />
         ))}
       </ul>
