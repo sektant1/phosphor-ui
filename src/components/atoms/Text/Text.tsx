@@ -27,6 +27,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   truncate?: boolean;
   balance?: boolean;
   nowrap?: boolean;
+  animate?: boolean;
 }
 
 const toneClass: Record<TextTone, string | undefined> = {
@@ -63,6 +64,7 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
       truncate,
       balance,
       nowrap,
+      animate = true,
       className,
       children,
       ...rest
@@ -78,6 +80,7 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
     truncate && "t-truncate",
     balance && "t-balance",
     nowrap && "t-nowrap",
+    !animate && "t-no-anim",
     className,
   );
     return React.createElement(Tag, { ref, className: cls, ...rest }, children);

@@ -58,9 +58,20 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
     ref,
   ) => {
     const idleTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const setRefs = React.useCallback(
+      (node: HTMLInputElement | null) => {
+        inputRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+      },
+      [ref],
+    );
     const [cursorVisible, setCursorVisible] = React.useState(false);
     const [cursorSteady, setCursorSteady] = React.useState(false);
     const [cursorIndex, setCursorIndex] = React.useState(0);
+    const [hasSelection, setHasSelection] = React.useState(false);
+    const [isComposing, setIsComposing] = React.useState(false);
     const [localValue, setLocalValue] = React.useState(() =>
       defaultValue === undefined ? "" : String(defaultValue),
     );
@@ -69,9 +80,13 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
     const textBeforeCursor = rawVisibleValue.slice(0, clampedCursorIndex);
     const visibleValueBeforeCursor =
       type === "password" ? "•".repeat(textBeforeCursor.length) : textBeforeCursor;
+    const showBlock = cursor && cursorVisible && !hasSelection && !isComposing;
 
-    const updateCursorIndex = React.useCallback((input: HTMLInputElement) => {
-      setCursorIndex(input.selectionStart ?? input.value.length);
+    const syncSelection = React.useCallback((input: HTMLInputElement) => {
+      const start = input.selectionStart ?? input.value.length;
+      const end = input.selectionEnd ?? start;
+      setCursorIndex(start);
+      setHasSelection(start !== end);
     }, []);
     const markCursorActive = React.useCallback(() => {
       if (!cursor || disabled || readOnly) return;
@@ -99,17 +114,23 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
       },
       [],
     );
+    React.useEffect(() => {
+      if (!cursor || !cursorVisible) return;
+      const handler = () => {
+        const node = inputRef.current;
+        if (!node || document.activeElement !== node) return;
+        syncSelection(node);
+      };
+      document.addEventListener("selectionchange", handler);
+      return () => document.removeEventListener("selectionchange", handler);
+    }, [cursor, cursorVisible, syncSelection]);
 
     if (variant === "terminal" && hasVisibleContent(command)) {
       return (
         <span className={cx(styles.terminalPrompt, styles[size], className)}>
           {prompt ? <span className={styles.terminalPromptText}>{prompt}</span> : null}
           <span className={styles.terminalCommand}>{command}</span>
-          {cursor ? (
-            <span className={styles.terminalPromptCursor} aria-hidden="true">
-              ▮
-            </span>
-          ) : null}
+          {cursor ? <span className={styles.terminalPromptCursor} aria-hidden="true" /> : null}
         </span>
       );
     }
@@ -131,7 +152,7 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
         <span className={styles.inputCell}>
           <input
             {...rest}
-            ref={ref}
+            ref={setRefs}
             id={id}
             type={type}
             value={value}
@@ -142,8 +163,8 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
               styles.input,
               styles[size],
               variant === "terminal" && styles.terminalInput,
-              cursor && styles.inputWithCursor,
-              cursorVisible && styles.inputHidePlaceholder,
+              showBlock && styles.inputWithCursor,
+              showBlock && styles.inputHidePlaceholder,
               inputClassName,
             )}
             onKeyDown={(event) => {
@@ -152,14 +173,14 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
             }}
             onKeyUp={(event) => {
               if (cursor) {
-                updateCursorIndex(event.currentTarget);
+                syncSelection(event.currentTarget);
                 markCursorActive();
               }
               onKeyUp?.(event);
             }}
             onFocus={(event) => {
               if (cursor && !disabled && !readOnly) {
-                updateCursorIndex(event.currentTarget);
+                syncSelection(event.currentTarget);
                 setCursorVisible(true);
                 markCursorActive();
               }
@@ -168,30 +189,45 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
             onBlur={(event) => {
               setCursorVisible(false);
               setCursorSteady(false);
+              setHasSelection(false);
+              setIsComposing(false);
               if (idleTimeoutRef.current) {
                 clearTimeout(idleTimeoutRef.current);
                 idleTimeoutRef.current = null;
               }
               onBlur?.(event);
             }}
+            onMouseDown={(event) => {
+              if (cursor) markCursorActive();
+              rest.onMouseDown?.(event);
+            }}
             onMouseUp={(event) => {
               if (cursor) {
-                updateCursorIndex(event.currentTarget);
+                syncSelection(event.currentTarget);
                 markCursorActive();
               }
               onMouseUp?.(event);
             }}
             onSelect={(event) => {
               if (cursor) {
-                updateCursorIndex(event.currentTarget);
+                syncSelection(event.currentTarget);
                 markCursorActive();
               }
               onSelect?.(event);
             }}
+            onCompositionStart={(event) => {
+              setIsComposing(true);
+              rest.onCompositionStart?.(event);
+            }}
+            onCompositionEnd={(event) => {
+              setIsComposing(false);
+              if (cursor) syncSelection(event.currentTarget);
+              rest.onCompositionEnd?.(event);
+            }}
             onChange={(event) => {
               setLocalValue(event.currentTarget.value);
               if (cursor) {
-                updateCursorIndex(event.currentTarget);
+                syncSelection(event.currentTarget);
                 markCursorActive();
               }
               onChange?.(event);
@@ -200,7 +236,7 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
           />
           {cursor ? (
             <span
-              className={cx(styles.cursorLayer, cursorVisible && styles.cursorLayerActive)}
+              className={cx(styles.cursorLayer, showBlock && styles.cursorLayerActive)}
               aria-hidden="true"
             >
               <span
@@ -217,9 +253,7 @@ export const InputControl = React.forwardRef<HTMLInputElement, InputControlProps
                   variant === "terminal" && styles.terminalPromptCursor,
                   cursorSteady && styles.cursorSteady,
                 )}
-              >
-                ▮
-              </span>
+              />
             </span>
           ) : null}
         </span>
@@ -342,18 +376,33 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
     ref,
   ) => {
     const idleTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
+    const setRefs = React.useCallback(
+      (node: HTMLTextAreaElement | null) => {
+        textareaRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
+      },
+      [ref],
+    );
     const [cursorVisible, setCursorVisible] = React.useState(false);
     const [cursorSteady, setCursorSteady] = React.useState(false);
     const [cursorIndex, setCursorIndex] = React.useState(0);
+    const [hasSelection, setHasSelection] = React.useState(false);
+    const [isComposing, setIsComposing] = React.useState(false);
     const [localValue, setLocalValue] = React.useState(() =>
       defaultValue === undefined ? "" : String(defaultValue),
     );
     const rawVisibleValue = value === undefined ? localValue : String(value);
     const clampedCursorIndex = Math.min(cursorIndex, rawVisibleValue.length);
     const visibleValueBeforeCursor = rawVisibleValue.slice(0, clampedCursorIndex);
+    const showBlock = cursor && cursorVisible && !hasSelection && !isComposing;
 
-    const updateCursorIndex = React.useCallback((textarea: HTMLTextAreaElement) => {
-      setCursorIndex(textarea.selectionStart ?? textarea.value.length);
+    const syncSelection = React.useCallback((textarea: HTMLTextAreaElement) => {
+      const start = textarea.selectionStart ?? textarea.value.length;
+      const end = textarea.selectionEnd ?? start;
+      setCursorIndex(start);
+      setHasSelection(start !== end);
     }, []);
     const markCursorActive = React.useCallback(() => {
       if (!cursor || disabled || readOnly) return;
@@ -381,12 +430,22 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
       },
       [],
     );
+    React.useEffect(() => {
+      if (!cursor || !cursorVisible) return;
+      const handler = () => {
+        const node = textareaRef.current;
+        if (!node || document.activeElement !== node) return;
+        syncSelection(node);
+      };
+      document.addEventListener("selectionchange", handler);
+      return () => document.removeEventListener("selectionchange", handler);
+    }, [cursor, cursorVisible, syncSelection]);
 
     return (
       <span className={cx(styles.textareaCell, styles[size], className)}>
         <textarea
           {...rest}
-          ref={ref}
+          ref={setRefs}
           id={id}
           value={value}
           defaultValue={defaultValue}
@@ -396,8 +455,8 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
             styles.wrap,
             styles.textarea,
             styles[size],
-            cursor && styles.inputWithCursor,
-            cursorVisible && styles.inputHidePlaceholder,
+            showBlock && styles.inputWithCursor,
+            showBlock && styles.inputHidePlaceholder,
             textareaClassName,
           )}
           onKeyDown={(event) => {
@@ -406,14 +465,14 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
           }}
           onKeyUp={(event) => {
             if (cursor) {
-              updateCursorIndex(event.currentTarget);
+              syncSelection(event.currentTarget);
               markCursorActive();
             }
             onKeyUp?.(event);
           }}
           onFocus={(event) => {
             if (cursor && !disabled && !readOnly) {
-              updateCursorIndex(event.currentTarget);
+              syncSelection(event.currentTarget);
               setCursorVisible(true);
               markCursorActive();
             }
@@ -422,30 +481,45 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
           onBlur={(event) => {
             setCursorVisible(false);
             setCursorSteady(false);
+            setHasSelection(false);
+            setIsComposing(false);
             if (idleTimeoutRef.current) {
               clearTimeout(idleTimeoutRef.current);
               idleTimeoutRef.current = null;
             }
             onBlur?.(event);
           }}
+          onMouseDown={(event) => {
+            if (cursor) markCursorActive();
+            rest.onMouseDown?.(event);
+          }}
           onMouseUp={(event) => {
             if (cursor) {
-              updateCursorIndex(event.currentTarget);
+              syncSelection(event.currentTarget);
               markCursorActive();
             }
             onMouseUp?.(event);
           }}
           onSelect={(event) => {
             if (cursor) {
-              updateCursorIndex(event.currentTarget);
+              syncSelection(event.currentTarget);
               markCursorActive();
             }
             onSelect?.(event);
           }}
+          onCompositionStart={(event) => {
+            setIsComposing(true);
+            rest.onCompositionStart?.(event);
+          }}
+          onCompositionEnd={(event) => {
+            setIsComposing(false);
+            if (cursor) syncSelection(event.currentTarget);
+            rest.onCompositionEnd?.(event);
+          }}
           onChange={(event) => {
             setLocalValue(event.currentTarget.value);
             if (cursor) {
-              updateCursorIndex(event.currentTarget);
+              syncSelection(event.currentTarget);
               markCursorActive();
             }
             onChange?.(event);
@@ -454,13 +528,19 @@ export const TextareaControl = React.forwardRef<HTMLTextAreaElement, TextareaCon
         />
         {cursor ? (
           <span
-            className={cx(styles.textareaCursorLayer, cursorVisible && styles.cursorLayerActive)}
+            className={cx(styles.textareaCursorLayer, showBlock && styles.cursorLayerActive)}
             aria-hidden="true"
           >
             <span className={cx(styles.textareaCursorMirror, styles[size])}>
               {visibleValueBeforeCursor}
             </span>
-            <span className={cx(styles.cursor, styles.textareaCursor, cursorSteady && styles.cursorSteady)}>▮</span>
+            <span
+              className={cx(
+                styles.cursor,
+                styles.textareaCursor,
+                cursorSteady && styles.cursorSteady,
+              )}
+            />
           </span>
         ) : null}
       </span>

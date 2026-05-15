@@ -51,7 +51,7 @@
   padding: var(--pho-input-padding-y) var(--pho-input-padding-x);
 }
 .terminalWrap {
-  align-items: baseline;
+  align-items: center;
   background: transparent;
   border: 0;
   box-shadow: none;
@@ -59,6 +59,7 @@
   font-size: var(--pho-input-font-size);
   gap: 0.32rem;
   line-height: 1.15;
+  height: 1.15em;
   min-height: 1.15em;
   padding: 0;
 }
@@ -80,8 +81,9 @@
   position: relative;
 }
 .terminalWrap .inputCell {
-  align-items: baseline;
+  align-items: center;
   line-height: 1.15;
+  height: 1.15em;
   min-height: 1.15em;
 }
 
@@ -136,9 +138,12 @@
   flex: 0 0 auto;
   height: 1em;
   margin-left: var(--pho-caret-gap);
-  width: 0.58em;
+  width: 1ch;
   animation: inputCursorBlink var(--pho-caret-blink-duration) step-end infinite;
+  animation-delay: 420ms;
   line-height: 1;
+  transition: background-color 120ms var(--pho-ease-out);
+  will-change: opacity;
 }
 .cursorSteady {
   animation: none;
@@ -210,7 +215,7 @@
   height: 1em;
   line-height: 1;
   margin-left: var(--pho-caret-gap);
-  width: 0.58em;
+  width: 1ch;
   animation: inputCursorBlink var(--pho-caret-blink-duration) step-end infinite;
 }
 .textarea {

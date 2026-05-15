@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "./PostListing.module.scss";
 import { cx } from "../../../utils/classNames";
+import { hasVisibleContent } from "../../atoms/primitive";
 import { EmptyState } from "../../molecules/EmptyState";
 
 export interface PostRowProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>, "title"> {
   date?: React.ReactNode;
   dateTime?: string;
   title: React.ReactNode;
+  description?: React.ReactNode;
+  showDescription?: boolean;
   meta?: React.ReactNode;
   href: string;
   glyph?: React.ReactNode;
@@ -20,6 +23,7 @@ export interface PostListingProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   posts?: PostRowProps[];
   headerLabels?: { glyph?: string; date?: string; post?: string; length?: string; thumb?: string };
+  showDescription?: boolean;
   emptyMessage?: React.ReactNode;
   emptyState?: React.ReactNode;
   getPostKey?: (post: PostRowProps, index: number) => React.Key;
@@ -31,6 +35,7 @@ export const PostListing: React.FC<PostListingProps> = ({
   posts,
   className,
   headerLabels,
+  showDescription,
   emptyMessage = "no posts found.",
   emptyState,
   getPostKey = (post, index) => post.href || index,
@@ -53,7 +58,7 @@ export const PostListing: React.FC<PostListingProps> = ({
       <div className={styles.header}>
         <span className={styles.hGlyph}>{labels.glyph}</span>
         <span className={styles.hThumb}>{labels.thumb}</span>
-        <span>{labels.post}</span>
+        <span className={styles.hPost}>{labels.post}</span>
         <span className={styles.hLen}>{labels.length}</span>
         <span className={styles.hDate}>{labels.date}</span>
       </div>
@@ -70,8 +75,9 @@ export const PostListing: React.FC<PostListingProps> = ({
                 ) : (
                   <PostRow
                     key={getPostKey(post, index)}
-                    index={post.index ?? index}
                     {...post}
+                    index={post.index ?? index}
+                    showDescription={post.showDescription ?? showDescription}
                   />
                 ),
               )
@@ -86,6 +92,8 @@ export const PostRow: React.FC<PostRowProps> = ({
   date,
   dateTime,
   title,
+  description,
+  showDescription,
   meta,
   href,
   glyph = "▌",
@@ -115,7 +123,12 @@ export const PostRow: React.FC<PostRowProps> = ({
       <a href={href}>
         <span className={styles.glyph}>{glyph}</span>
         <span className={styles.thumb}>{thumbContent}</span>
-        <span className={styles.title}>{title}</span>
+        <span className={styles.titleCell}>
+          <span className={styles.title}>{title}</span>
+          {showDescription && hasVisibleContent(description) ? (
+            <span className={styles.description}>{description}</span>
+          ) : null}
+        </span>
         {meta && <span className={styles.meta}>{meta}</span>}
         {date ? (
           <time className={styles.date} dateTime={dateTime}>

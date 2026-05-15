@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { PostListing, PostRow } from "./PostListing";
 import { source, tsx } from "../../../stories/source";
@@ -64,6 +63,76 @@ export function Example() {
         <PostRow date="2026-05-01" title="phosphor protocol intro" meta="9m" href="#" index={2} glyph="▶" />
       </PostListing>
     );
+}
+`;
+
+const withDescriptionSource = tsx`
+import { PostListing } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <PostListing
+      showDescription
+      posts={[
+        {
+          date: "2026-05-06",
+          title: "boot the terminal",
+          description: "Wake the CRT, calibrate the phosphor decay, and bring the deck online.",
+          meta: "6m",
+          href: "#boot",
+          thumbSrc: "https://picsum.photos/seed/zone-boot/320/200",
+        },
+        {
+          date: "2026-05-04",
+          title: "decode the signal",
+          description: "A field guide to spectral interference and recovering broadcasts from the noise floor.",
+          meta: "12m",
+          href: "#signal",
+          glyph: "◈",
+        },
+        {
+          date: "2026-05-01",
+          title: "phosphor protocol intro",
+          description: "Why the zone runs green: history, hardware, and the look we're after.",
+          meta: "9m",
+          href: "#protocol",
+        },
+      ]}
+    />
+  );
+}
+`;
+
+const searchHitsSource = tsx`
+import { PostListing } from "phosphor-ui";
+
+// Consumer search layer feeds <mark> highlighted snippets as description.
+export function Example() {
+  return (
+    <PostListing
+      showDescription
+      posts={[
+        {
+          date: "2026-05-06",
+          title: "boot the terminal",
+          description: (
+            <>... wake the <mark>phosphor</mark> stack and calibrate the decay curve ...</>
+          ),
+          meta: "6m",
+          href: "#boot",
+        },
+        {
+          date: "2026-05-01",
+          title: "phosphor protocol intro",
+          description: (
+            <>... why the zone runs green: <mark>phosphor</mark> history and hardware ...</>
+          ),
+          meta: "9m",
+          href: "#protocol",
+        },
+      ]}
+    />
+  );
 }
 `;
 
@@ -155,6 +224,71 @@ export const AllFallback: Story = {
       <PostRow date="2026-05-01" title="phosphor protocol intro" meta="9m" href="#" index={2} glyph="▶" />
     </PostListing>
   ),
+};
+
+export const WithDescription: Story = {
+  parameters: { docs: { source: source(withDescriptionSource) } },
+  args: {
+    showDescription: true,
+    posts: [
+      {
+        date: "2026-05-06",
+        title: "boot the terminal",
+        description: "Wake the CRT, calibrate the phosphor decay, and bring the deck online.",
+        meta: "6m",
+        href: "#boot",
+        thumbSrc: "https://picsum.photos/seed/zone-boot/320/200",
+        thumbAlt: "boot screen",
+      },
+      {
+        date: "2026-05-04",
+        title: "decode the signal",
+        description:
+          "A field guide to spectral interference and recovering broadcasts from the noise floor.",
+        meta: "12m",
+        href: "#signal",
+        glyph: "◈",
+      },
+      {
+        date: "2026-05-01",
+        title: "phosphor protocol intro",
+        description: "Why the zone runs green: history, hardware, and the look we're after.",
+        meta: "9m",
+        href: "#protocol",
+      },
+    ],
+  },
+};
+
+export const SearchHits: Story = {
+  parameters: { docs: { source: source(searchHitsSource) } },
+  args: {
+    showDescription: true,
+    posts: [
+      {
+        date: "2026-05-06",
+        title: "boot the terminal",
+        description: (
+          <>
+            ... wake the <mark>phosphor</mark> stack and calibrate the decay curve ...
+          </>
+        ),
+        meta: "6m",
+        href: "#boot",
+      },
+      {
+        date: "2026-05-01",
+        title: "phosphor protocol intro",
+        description: (
+          <>
+            ... why the zone runs green: <mark>phosphor</mark> history and hardware ...
+          </>
+        ),
+        meta: "9m",
+        href: "#protocol",
+      },
+    ],
+  },
 };
 
 export const FromData: Story = {
