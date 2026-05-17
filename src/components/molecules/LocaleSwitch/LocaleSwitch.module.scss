@@ -43,8 +43,8 @@
   color: var(--pho-color-primary-muted);
   display: inline-flex;
   justify-content: center;
-  min-height: 2rem;
-  min-width: 2.2rem;
+  min-height: var(--pho-size-touch-target);
+  min-width: var(--pho-size-touch-target);
   padding: 0.2rem 0.52rem;
   text-decoration: none;
   text-transform: uppercase;
@@ -143,8 +143,8 @@
 }
 
 .sm .link {
-  min-height: 1.65rem;
-  min-width: 1.9rem;
+  min-height: 2.15rem;
+  min-width: 2.15rem;
   padding-inline: 0.42rem;
 }
 

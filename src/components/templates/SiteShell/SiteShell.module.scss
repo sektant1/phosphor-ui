@@ -1,5 +1,7 @@
 .shell {
   min-height: 100vh;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .frame {
@@ -9,6 +11,7 @@
   min-width: 0;
   margin-inline: auto;
   padding: var(--pho-site-padding, var(--pho-layout-gutter));
+  overflow: clip;
 }
 
 .skipLink {
@@ -49,6 +52,6 @@
 
 @media (max-width: 520px) {
   .frame {
-    padding: var(--pho-site-padding-mobile, 0.8rem);
+    padding: var(--pho-site-padding-mobile, 0.75rem);
   }
 }

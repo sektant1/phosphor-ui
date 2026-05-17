@@ -26,7 +26,7 @@
   color: var(--pho-color-primary-muted);
   display: inline-flex;
   gap: 0.18rem;
-  min-height: 2rem;
+  min-height: var(--pho-size-touch-target);
   min-width: 0;
   max-width: 100%;
   padding: 0.24rem 0.42rem;
@@ -207,7 +207,7 @@
   background: transparent;
   border: 0;
   justify-content: flex-end;
-  min-height: 2rem;
+  min-height: var(--pho-size-touch-target);
   padding-block: 0.24rem;
   padding-inline: 0.42rem 0;
   text-align: right;
@@ -271,6 +271,20 @@
   .label {
     font-size: var(--pho-type-caption-size);
     letter-spacing: var(--pho-tracking-terminal);
+  }
+
+  .plain .list {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .plain .item {
+    flex: 1 1 min(9rem, 100%);
+  }
+
+  .plain .link {
+    justify-content: center;
+    width: 100%;
   }
 
   .tabs .list {

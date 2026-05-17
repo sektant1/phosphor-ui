@@ -4,6 +4,9 @@
   --row-cols: 2ch var(--thumb-w) 1fr 7ch 11ch;
   --row-gap: 1.1ch;
   --row-pad-x: 0.7rem;
+  max-width: 100%;
+  min-width: 0;
+  container: postListing / inline-size;
 }
 
 .header {
@@ -46,6 +49,7 @@
   align-items: center;
   gap: var(--row-gap);
   padding: 0.55rem var(--row-pad-x);
+  min-height: var(--pho-size-touch-target);
   text-decoration: none;
   color: var(--pho-color-text);
   font-family: var(--pho-font-code);
@@ -178,4 +182,62 @@
   .thumb { grid-column: 1; }
   .titleCell { grid-column: 2; }
   .title { white-space: normal; font-size: var(--pho-type-control-sm-size); }
+}
+
+@media (max-width: 360px) {
+  .wrap {
+    --thumb-w: 72px;
+    --thumb-h: 48px;
+    --row-gap: 0.65ch;
+  }
+
+  .row > a {
+    padding-inline: 0.45rem;
+  }
+}
+
+@container postListing (max-width: 34rem) {
+  .header {
+    display: none;
+  }
+
+  .row > a {
+    gap: 0.8ch;
+    grid-template-columns: var(--pho-thumb-post-w-sm) minmax(0, 1fr);
+    padding: 0.5rem 0.6rem;
+  }
+
+  .glyph,
+  .meta,
+  .date {
+    display: none;
+  }
+
+  .thumb {
+    grid-column: 1;
+    height: var(--pho-thumb-post-h-sm);
+    width: var(--pho-thumb-post-w-sm);
+  }
+
+  .titleCell {
+    grid-column: 2;
+  }
+
+  .title {
+    font-size: var(--pho-type-control-sm-size);
+    white-space: normal;
+  }
+}
+
+@container postListing (max-width: 18rem) {
+  .row > a {
+    gap: 0.65ch;
+    grid-template-columns: 72px minmax(0, 1fr);
+    padding-inline: 0.45rem;
+  }
+
+  .thumb {
+    height: 48px;
+    width: 72px;
+  }
 }

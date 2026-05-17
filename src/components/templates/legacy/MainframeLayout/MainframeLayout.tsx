@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./MainframeLayout.module.scss";
-import { cx } from "../../../utils/classNames";
-import { NerdTree } from "../../organisms/NerdTree";
-import type { NerdTreeProps } from "../../organisms/NerdTree";
+import { cx } from "../../../../utils/classNames";
+import { NerdTree } from "../../../organisms/NerdTree";
+import type { NerdTreeProps } from "../../../organisms/NerdTree";
 
 export type MainframeVariant = "post" | "wiki" | "course" | "project" | "admin";
 
@@ -23,6 +23,11 @@ export interface MainframeLayoutProps
   stickyPanels?: boolean;
 }
 
+/**
+ * @deprecated Prefer `PageShell` plus `SidebarLayout`, `ContentFrame`, and
+ * `Panel` for new layouts. `MainframeLayout` remains available as a
+ * compatibility/template wrapper for older blog/wiki/course/admin examples.
+ */
 export const MainframeLayout = React.forwardRef<HTMLDivElement, MainframeLayoutProps>(
   (
     {
@@ -118,6 +123,9 @@ export interface ContextPanelProps
   as?: "aside" | "section" | "div";
 }
 
+/**
+ * @deprecated Prefer `Panel` for reusable framed right-rail content.
+ */
 export const ContextPanel = React.forwardRef<HTMLElement, ContextPanelProps>(
   ({ as: Tag = "aside", title, meta, className, children, ...rest }, ref) => (
     <Tag
@@ -142,6 +150,10 @@ export interface NerdTreeSidebarProps extends NerdTreeProps {
   shellClassName?: string;
 }
 
+/**
+ * @deprecated Prefer composing `NerdTree` inside the `left` slot of
+ * `SidebarLayout`; keep this wrapper for existing Mainframe examples.
+ */
 export const NerdTreeSidebar = React.forwardRef<HTMLDivElement, NerdTreeSidebarProps>(
   ({ className, shellClassName, frame = "rail", density = "default", ...rest }, ref) => (
     <div ref={ref} className={cx(styles.nerdTreeShell, shellClassName)}>
@@ -159,21 +171,34 @@ NerdTreeSidebar.displayName = "NerdTreeSidebar";
 
 type VariantLayoutProps = Omit<MainframeLayoutProps, "variant">;
 
+/**
+ * @deprecated Prefer `PageShell` plus `SidebarLayout`.
+ */
 export const PostLayout = React.forwardRef<HTMLDivElement, VariantLayoutProps>(
   (props, ref) => <MainframeLayout ref={ref} variant="post" {...props} />,
 );
 PostLayout.displayName = "PostLayout";
 
+/**
+ * @deprecated Prefer `PageShell` plus `SidebarLayout`.
+ */
 export const WikiLayout = React.forwardRef<HTMLDivElement, VariantLayoutProps>(
   (props, ref) => <MainframeLayout ref={ref} variant="wiki" {...props} />,
 );
 WikiLayout.displayName = "WikiLayout";
 
+/**
+ * @deprecated Prefer a course recipe built from `PageShell`, `SidebarLayout`,
+ * `ContentFrame`, and `Panel`.
+ */
 export const CourseLayout = React.forwardRef<HTMLDivElement, VariantLayoutProps>(
   (props, ref) => <MainframeLayout ref={ref} variant="course" {...props} />,
 );
 CourseLayout.displayName = "CourseLayout";
 
+/**
+ * @deprecated Prefer `AppShell`, `PageShell`, `DashboardGrid`, and `Panel`.
+ */
 export const AdminLayout = React.forwardRef<HTMLDivElement, VariantLayoutProps>(
   (props, ref) => <MainframeLayout ref={ref} variant="admin" {...props} />,
 );

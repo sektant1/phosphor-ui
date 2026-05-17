@@ -71,8 +71,8 @@ export type { HeaderMobileLayout, HeaderProps, HeaderNavItem, HeaderLocale, Head
 export { Hr } from "./atoms/Hr";
 export { Kbd } from "./atoms/Kbd";
 export type { KbdProps, KbdVariant } from "./atoms/Kbd";
-export { Cluster, Column, Container, Flex, Grid, Row, Stack, } from "./templates/Layout";
-export type { ClusterProps, ColumnProps, ContainerProps, FlexProps, GridProps, LayoutGap, LayoutSpace, RowProps, StackProps, } from "./templates/Layout";
+export { AppShell, AutoGrid, Cluster, Column, Container, ContentFrame, ContentShell, ContentWidth, DashboardGrid, Flex, Grid, Inline, PageShell, Panel, Row, ResponsiveColumns, Section, SidebarLayout, SplitLayout, SplitPane, Stack, } from "./templates/Layout";
+export type { AppShellProps, AutoGridProps, ClusterProps, ColumnProps, ContainerProps, ContentFrameProps, ContentShellProps, ContentWidthProps, DashboardGridProps, FlexProps, GridProps, InlineProps, LayoutBreakpoint, LayoutDensity, LayoutElement, LayoutGap, LayoutSpace, LayoutWidth, PageShellProps, PanelProps, PanelTone, ResponsiveColumnsProps, RowProps, SectionProps, SidebarLayoutProps, SplitLayoutProps, SplitPaneProps, StackProps, } from "./templates/Layout";
 export { Glyph } from "./atoms/Glyph";
 export type { GlyphName, GlyphProps, GlyphTone } from "./atoms/Glyph";
 export { Glyphs, DEFAULT_GLYPHS } from "./organisms/Glyphs";

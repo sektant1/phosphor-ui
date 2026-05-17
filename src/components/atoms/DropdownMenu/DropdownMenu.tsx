@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./DropdownMenu.module.scss";
 import { cx } from "../../../utils/classNames";
 import { Glyph } from "../Glyph/index";
+import { getSafeExternalRel } from "../../../utils/browser";
 
 export interface DropdownMenuItem {
   label: React.ReactNode;
@@ -175,14 +176,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
             };
 
             if (item.href) {
-              const rel =
-                item.target === "_blank"
-                  ? item.rel?.includes("noopener")
-                    ? item.rel
-                    : item.rel
-                      ? `${item.rel} noopener noreferrer`
-                      : "noopener noreferrer"
-                  : item.rel;
+              const rel = getSafeExternalRel(item.target, item.rel);
 
               return (
                 <a

@@ -151,23 +151,41 @@ export type { PostHeaderProps } from "./organisms/PostHeader";
 export { Post, PostTemplate } from "./templates/PostTemplate";
 export type { PostProps, PostTemplateProps } from "./templates/PostTemplate";
 
+export { ThreePanelLayout } from "./templates/ThreePanelLayout";
+export type { ThreePanelLayoutProps } from "./templates/ThreePanelLayout";
+
+export { NerdTreeNav } from "./molecules/NerdTreeNav";
+export type {
+  NerdTreeNavItem,
+  NerdTreeNavProps,
+} from "./molecules/NerdTreeNav";
+
+export { ContentPanel, ContextPanel } from "./templates/Layout";
+export type {
+  ContentPanelProps,
+  ContextPanelProps,
+} from "./templates/Layout";
+
+/**
+ * Legacy layouts retained for backward compatibility. Prefer
+ * `ThreePanelLayout` plus primitives from `templates/Layout` for new work.
+ * @deprecated
+ */
 export {
   AdminLayout,
-  ContextPanel,
   CourseLayout,
   MainContent,
   MainframeLayout,
   NerdTreeSidebar,
   PostLayout,
   WikiLayout,
-} from "./templates/MainframeLayout";
+} from "./templates/legacy/MainframeLayout";
 export type {
-  ContextPanelProps,
   MainContentProps,
   MainframeLayoutProps,
   MainframeVariant,
   NerdTreeSidebarProps,
-} from "./templates/MainframeLayout";
+} from "./templates/legacy/MainframeLayout";
 
 export { CourseCard } from "./organisms/CourseCard";
 export type { CourseCardProps } from "./organisms/CourseCard";
@@ -190,23 +208,56 @@ export { Kbd } from "./atoms/Kbd";
 export type { KbdProps, KbdVariant } from "./atoms/Kbd";
 
 export {
+  AppShell,
+  AutoGrid,
   Cluster,
   Column,
   Container,
+  ContentFrame,
+  ContentShell,
+  ContentWidth,
+  DashboardGrid,
   Flex,
   Grid,
+  Inline,
+  PageShell,
+  Panel,
   Row,
+  ResponsiveColumns,
+  Section,
+  SidebarLayout,
+  SplitLayout,
+  SplitPane,
   Stack,
 } from "./templates/Layout";
 export type {
+  AppShellProps,
+  AutoGridProps,
   ClusterProps,
   ColumnProps,
   ContainerProps,
+  ContentFrameProps,
+  ContentShellProps,
+  ContentWidthProps,
+  DashboardGridProps,
   FlexProps,
   GridProps,
+  InlineProps,
+  LayoutBreakpoint,
+  LayoutDensity,
+  LayoutElement,
   LayoutGap,
   LayoutSpace,
+  LayoutWidth,
+  PageShellProps,
+  PanelProps,
+  PanelTone,
+  ResponsiveColumnsProps,
   RowProps,
+  SectionProps,
+  SidebarLayoutProps,
+  SplitLayoutProps,
+  SplitPaneProps,
   StackProps,
 } from "./templates/Layout";
 

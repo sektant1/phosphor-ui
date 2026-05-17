@@ -52,6 +52,7 @@
   --pho-color-selection-text: var(--pho-color-background);
   --pho-color-surface: var(--pho-color-background-raised);
   --pho-color-surface-deep: var(--pho-color-background-deep);
+  --pho-color-panel-tint: rgba(8, 36, 22, 0.25);
   --pho-color-border: var(--pho-color-primary-faint);
   --pho-color-border-strong: var(--pho-color-primary-muted);
   --pho-color-danger: #ff6a6a;
@@ -223,7 +224,7 @@
   --pho-layout-sidebar-width: 18rem;
   --pho-layout-toc-width: 17.5rem;
   --pho-layout-admin-sidebar-width: clamp(18rem, 24vw, 22rem);
-  --pho-layout-gutter: clamp(1rem, 2vw, 1.75rem);
+  --pho-layout-gutter: clamp(0.75rem, 2vw, 1.75rem);
   --pho-layout-sticky-top: 1rem;
   --pho-bp-xs: 360px;
   --pho-bp-sm: 520px;

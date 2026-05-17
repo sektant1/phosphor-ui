@@ -8,14 +8,26 @@ Phosphor UI is a single-channel green-phosphor React component library with a re
 
 ## Importing Styles
 
-Applications should load the design tokens before global defaults:
+For application code, load the full stylesheet once unless you intentionally own
+global typography, cursors, and effects yourself:
+
+```ts
+import "phosphor-ui/phosphor.css";
+```
+
+For granular setup, load tokens before global defaults and component styles:
 
 ```ts
 import "phosphor-ui/tokens.css";
 import "phosphor-ui/global.css";
+import "phosphor-ui/components.css";
 ```
 
-Storybook imports the source equivalents globally from `.storybook/preview.ts`:
+The stable consumer token API is the semantic `--pho-*` namespace. Raw tokens
+such as `--phosphor`, `--magenta`, and `--bg` exist for compatibility but should
+not be used in new app examples.
+
+Storybook imports source equivalents globally from `.storybook/preview.ts`:
 
 ```ts
 import "../src/styles/tokens.css";

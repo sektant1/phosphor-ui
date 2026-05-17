@@ -37,6 +37,19 @@ import "phosphor-ui/phosphor.css";
 
 If you need finer control, import `tokens.css`, `global.css`, and `components.css` separately.
 
+### CSS import matrix
+
+| Import | Use when |
+|---|---|
+| `phosphor-ui/phosphor.css` | You want the full default theme: fonts, tokens, typography, global defaults, effects, and component styles. |
+| `phosphor-ui/tokens.css` | You only need the public `--pho-*` design tokens. |
+| `phosphor-ui/fonts.css` | You want the bundled Bender, JetBrains Mono, and VCR OSD fonts. |
+| `phosphor-ui/typography.css` | You want typography utility classes without all globals. |
+| `phosphor-ui/global.css` | You want element defaults, cursors, scrollbars, focus helpers, and effect utility classes. |
+| `phosphor-ui/components.css` | You are composing React components and need their styles. |
+
+For app code, prefer `phosphor.css` first. Use granular imports only when your app owns global typography, fonts, cursors, or decorative effects.
+
 ## Tokens
 
 Use the `--pho-*` tokens for app-level customization. The older raw tokens
@@ -117,7 +130,8 @@ The physical folders are organized for maintainers. Consumers should prefer the 
 | Group | Components |
 |---|---|
 | **Presets** | `SiteShell` |
-| **Layout** | `CrtShell` `Header` `Footer` `HeroFrame` `NerdTree` `PdaWindow` `Post` |
+| **Layout** | `AppShell` `PageShell` `SidebarLayout` `SplitLayout` `SplitPane` `Section` `Panel` `ContentShell` `ContentFrame` `ContentWidth` `Container` `Stack` `Inline` `Cluster` `Grid` `AutoGrid` `ResponsiveColumns` `DashboardGrid` `Row` `Column` |
+| **Chrome** | `CrtShell` `Header` `Footer` `HeroFrame` `NerdTree` `PdaWindow` `Post` |
 | **Content** | `Prose` `PostBody` `Callout` `CodeBlock` `Hr` `Tag` `Text` `AsciiBanner` `TerminalPrompt` |
 | **Lists** | `PostListing` `PostRow` `CourseCard` `LessonRow` `ModuleAccordion` `PrereqList` `Exercise` |
 | **Nav** | `Breadcrumbs` `Pagination` `SeriesNav` `Stepper` `TableOfContents` `Link` |
@@ -184,6 +198,73 @@ Reach for lower-level components when you need custom app structure:
   <Footer brand="lab" />
 </CrtShell>
 ```
+
+## Layout primitives
+
+Use layout primitives before writing custom page CSS. They cover the common app shapes for blogs, wikis, portfolios, course pages, and admin dashboards.
+
+```tsx
+import {
+  AutoGrid,
+  ContentFrame,
+  Inline,
+  PageShell,
+  Panel,
+  Section,
+  SidebarLayout,
+  Stack,
+  Tag,
+} from "phosphor-ui";
+
+export function WikiPage({ nav, toc, children }) {
+  return (
+    <PageShell
+      eyebrow="wiki"
+      title="Packet capture checklist"
+      description="Reusable runbook for tracing a failing ingestion job."
+      actions={<Inline><Tag>runbook</Tag><Tag>ops</Tag></Inline>}
+    >
+      <SidebarLayout
+        left={nav}
+        sidebarLabel="content tree"
+        right={toc}
+        asideLabel="table of contents"
+        collapseAt="lg"
+      >
+        <ContentFrame>
+          {children}
+        </ContentFrame>
+      </SidebarLayout>
+    </PageShell>
+  );
+}
+```
+
+For listing pages, combine `Section`, `AutoGrid`, and `Panel`:
+
+```tsx
+<Section title="Projects" description="Active builds and field notes.">
+  <AutoGrid minItemWidth="18rem">
+    <Panel title="Terminal CMS" meta="active">
+      <p>Admin publishing tools and content workflows.</p>
+    </Panel>
+    <Panel title="Course Platform" meta="draft">
+      <p>Modules, lessons, progress, and media playback.</p>
+    </Panel>
+  </AutoGrid>
+</Section>
+```
+
+For dashboards, use `DashboardGrid` so cards align consistently:
+
+```tsx
+<DashboardGrid minItemWidth="14rem">
+  <Panel title="Drafts" meta="12">Waiting for review.</Panel>
+  <Panel title="Published" meta="48" tone="accent">Live entries.</Panel>
+</DashboardGrid>
+```
+
+`SidebarLayout` accepts both the legacy `sidebar`/`aside` props and the preferred `left`/`main`/`right` slot names. New code should use `left`, `main` or children, and `right`.
 
 ## MDX posts
 

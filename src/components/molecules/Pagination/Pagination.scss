@@ -9,13 +9,17 @@
   border-bottom: 1px dashed var(--pho-color-primary-faint);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-size);
+  min-width: 0;
 }
 
 .pho-pagination__link {
   color: var(--pho-color-accent);
   text-shadow: var(--pho-glow-accent);
   text-decoration: none;
-  padding: 0.1rem 0.25rem;
+  min-height: var(--pho-size-touch-target);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
   transition: var(--pho-hover-transition);
 }
 

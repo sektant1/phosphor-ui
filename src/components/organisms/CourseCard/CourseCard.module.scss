@@ -351,6 +351,28 @@
   }
 }
 
+@container courseCard (max-width: 320px) {
+  .body {
+    padding: 0.8rem;
+  }
+
+  .foot {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .progress {
+    flex-basis: auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .cta {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cc {
     transition: none;

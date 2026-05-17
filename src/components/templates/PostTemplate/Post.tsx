@@ -6,7 +6,7 @@ import type { PostBodyProps } from "../../content/MdxComponents";
 import { PostHeader } from "../../organisms/PostHeader";
 import type { PostHeaderProps } from "../../organisms/PostHeader";
 import type { PostFrontmatterData } from "../../content/PostFrontmatter";
-import { PostLayout } from "../MainframeLayout";
+import { ThreePanelLayout } from "../ThreePanelLayout";
 
 export interface PostProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
@@ -83,7 +83,7 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
         {...rest}
       >
         {beforeContent}
-        <PostLayout
+        <ThreePanelLayout
           className={cx(
             styles.content,
             hasLeftPanel && styles.withLeftPanel,
@@ -91,27 +91,28 @@ export const Post = React.forwardRef<HTMLElement, PostProps>(
             contentClassName,
           )}
           mainAs="div"
-          leftPanel={leftPanel}
-          leftPanelLabel="post navigation"
-          rightPanel={resolvedRightPanel}
-          rightPanelLabel={sidebarLabel}
-          rightPanelClassName={cx(styles.sidebar, sidebarClassName)}
-          stickyPanels={stickySidebar}
-        >
-          <div className={styles.main}>
-            {resolvedHeader}
-            {betweenHeaderAndBody}
-            <PostBody
-              frontmatter={frontmatter}
-              frontmatterLabel={frontmatterLabel}
-              before={beforeBody}
-              after={afterBody}
-              {...bodyProps}
-            >
-              {children}
-            </PostBody>
-          </div>
-        </PostLayout>
+          left={leftPanel}
+          leftLabel="post navigation"
+          right={resolvedRightPanel}
+          rightLabel={sidebarLabel}
+          rightClassName={cx(styles.sidebar, sidebarClassName)}
+          sticky={stickySidebar}
+          main={
+            <div className={styles.main}>
+              {resolvedHeader}
+              {betweenHeaderAndBody}
+              <PostBody
+                frontmatter={frontmatter}
+                frontmatterLabel={frontmatterLabel}
+                before={beforeBody}
+                after={afterBody}
+                {...bodyProps}
+              >
+                {children}
+              </PostBody>
+            </div>
+          }
+        />
         {afterContent}
         {footer ? <footer className={styles.footer}>{footer}</footer> : null}
       </article>

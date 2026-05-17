@@ -122,6 +122,7 @@
     min-width: 0;
     padding: var(--pho-space-2) var(--pho-space-3);
     width: 100%;
+    max-width: 100%;
   }
 
   &.pho-header--left .header-toolbar {
@@ -221,8 +222,13 @@
     }
 
     .header-toolbar {
+      align-items: stretch;
+      display: grid;
+      gap: 0.45rem;
+      grid-template-columns: minmax(0, 1fr);
       justify-content: flex-start;
       overflow: visible;
+      padding-inline: var(--pho-space-2);
     }
 
     .header-nav--desktop {
@@ -236,12 +242,20 @@
       width: 100%;
     }
 
-    .locale-switch {
-      display: none;
+    .header-trailing {
+      align-items: stretch;
+      display: grid;
+      gap: 0.4rem;
+      margin-inline-start: 0;
+      width: 100%;
     }
 
-    .header-trailing {
-      display: none;
+    .locale-switch {
+      width: 100%;
+    }
+
+    .pho-header__status {
+      justify-self: end;
     }
 
     &.pho-header--mobile-stack .header-toolbar {

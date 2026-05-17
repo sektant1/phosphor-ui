@@ -30,6 +30,7 @@
   font-family: var(--pho-font-control);
   font-size: var(--pho-type-control-lg-size);
   letter-spacing: var(--pho-tracking-terminal);
+  min-height: var(--pho-size-touch-target);
   padding: 0.45rem 0.75rem;
   text-transform: uppercase;
   transition: var(--pho-hover-transition);

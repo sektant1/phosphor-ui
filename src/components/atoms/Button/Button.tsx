@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Button.module.scss";
 import { cx } from "../../../utils/classNames";
+import { getSafeExternalRel } from "../../../utils/browser";
 
 export type ButtonVariant =
   | "primary"
@@ -94,14 +95,7 @@ export const Button = React.forwardRef<
       ...anchorProps
     } = props;
 
-    const safeRel =
-      target === "_blank"
-        ? rel?.includes("noopener")
-          ? rel
-          : rel
-            ? `${rel} noopener noreferrer`
-            : "noopener noreferrer"
-        : rel;
+    const safeRel = getSafeExternalRel(target, rel);
 
     return (
       <a

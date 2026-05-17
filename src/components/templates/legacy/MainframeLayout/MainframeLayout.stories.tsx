@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Button } from "../../atoms/Button";
-import { ProgressBar } from "../../atoms/ProgressBar";
-import { Tag } from "../../atoms/Tag";
-import { Callout } from "../../molecules/Callout";
-import { TableOfContents } from "../../molecules/TableOfContents";
-import { ModuleAccordion } from "../../organisms/ModuleAccordion";
-import { PostListing } from "../../organisms/PostListing";
-import { PostHeader } from "../../organisms/PostHeader";
-import { PostBody } from "../../content/MdxComponents";
-import { Post } from "../PostTemplate";
+import { Button } from "../../../atoms/Button";
+import { ProgressBar } from "../../../atoms/ProgressBar";
+import { Tag } from "../../../atoms/Tag";
+import { Callout } from "../../../molecules/Callout";
+import { TableOfContents } from "../../../molecules/TableOfContents";
+import { ModuleAccordion } from "../../../organisms/ModuleAccordion";
+import { PostListing } from "../../../organisms/PostListing";
+import { PostHeader } from "../../../organisms/PostHeader";
+import { PostBody } from "../../../content/MdxComponents";
+import { Post } from "../../PostTemplate";
 import {
   AdminLayout,
   ContextPanel,
@@ -18,10 +18,10 @@ import {
   NerdTreeSidebar,
   WikiLayout,
 } from "./MainframeLayout";
-import { source, tsx } from "../../../stories/source";
+import { source, tsx } from "../../../../stories/source";
 
 const meta: Meta<typeof MainframeLayout> = {
-  title: "Templates/MainframeLayout",
+  title: "Legacy/MainframeLayout",
   component: MainframeLayout,
   parameters: {
     layout: "fullscreen",

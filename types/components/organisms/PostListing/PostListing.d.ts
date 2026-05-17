@@ -3,6 +3,8 @@ export interface PostRowProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>
     date?: React.ReactNode;
     dateTime?: string;
     title: React.ReactNode;
+    description?: React.ReactNode;
+    showDescription?: boolean;
     meta?: React.ReactNode;
     href: string;
     glyph?: React.ReactNode;
@@ -21,6 +23,7 @@ export interface PostListingProps extends React.HTMLAttributes<HTMLDivElement> {
         length?: string;
         thumb?: string;
     };
+    showDescription?: boolean;
     emptyMessage?: React.ReactNode;
     emptyState?: React.ReactNode;
     getPostKey?: (post: PostRowProps, index: number) => React.Key;

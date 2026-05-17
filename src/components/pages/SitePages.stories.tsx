@@ -176,24 +176,7 @@ export function Example() {
         <div className="pho-flicker-in">
           <HeroFrame
             text="ZONE-NET"
-            topHud={
-              <>
-                <HeroFrame.HudLed variant="rec" />
-                <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
-                <HeroFrame.HudText>CH 0x4C · γ-2 · NORM</HeroFrame.HudText>
-                <HeroFrame.HudSpacer />
-                <HeroFrame.HudBars value={5} />
-                <HeroFrame.HudLabel>5/7</HeroFrame.HudLabel>
-              </>
-            }
-            bottomHud={
-              <>
-                <HeroFrame.HudLed variant="pwr" />
-                <HeroFrame.HudLabel>PWR</HeroFrame.HudLabel>
-                <HeroFrame.HudSpacer />
-                <HeroFrame.HudTape text="// СЕКРЕТНО // single-channel transmissions //" />
-              </>
-            }
+            subtitle="// СЕКРЕТНО // single-channel transmissions"
           />
         </div>
 
@@ -490,24 +473,7 @@ export const Home: Story = {
       <div className="pho-flicker-in">
         <HeroFrame
           text="ZONE-NET"
-          topHud={
-            <>
-              <HeroFrame.HudLed variant="rec" />
-              <HeroFrame.HudLabel>REC</HeroFrame.HudLabel>
-              <HeroFrame.HudText>CH 0x4C · γ-2 · NORM</HeroFrame.HudText>
-              <HeroFrame.HudSpacer />
-              <HeroFrame.HudBars value={5} />
-              <HeroFrame.HudLabel>5/7</HeroFrame.HudLabel>
-            </>
-          }
-          bottomHud={
-            <>
-              <HeroFrame.HudLed variant="pwr" />
-              <HeroFrame.HudLabel>PWR</HeroFrame.HudLabel>
-              <HeroFrame.HudSpacer />
-              <HeroFrame.HudTape text="// СЕКРЕТНО // single-channel transmissions //" />
-            </>
-          }
+          subtitle="// СЕКРЕТНО // single-channel transmissions"
         />
       </div>
 

@@ -7,6 +7,9 @@ export interface PrereqItem {
   title: React.ReactNode;
   sub?: React.ReactNode;
   status: PrereqStatus;
+  href?: string;
+  download?: boolean | string;
+  external?: boolean;
 }
 
 export interface PrereqListProps {
@@ -41,7 +44,19 @@ export const PrereqList: React.FC<PrereqListProps> = ({ heading, stamp, items, c
             {it.status === "soft" && "opt"}
           </span>
           <span className={styles.name}>
-            <span className={styles.title}>{it.title}</span>
+            {it.href ? (
+              <a
+                className={styles.title}
+                href={it.href}
+                download={it.download as never}
+                target={it.external ? "_blank" : undefined}
+                rel={it.external ? "noopener noreferrer" : undefined}
+              >
+                {it.title}
+              </a>
+            ) : (
+              <span className={styles.title}>{it.title}</span>
+            )}
             {it.sub && <span className={styles.sub}>{it.sub}</span>}
           </span>
           <span className={styles.statusLabel} aria-hidden="true">

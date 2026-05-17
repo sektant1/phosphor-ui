@@ -12,7 +12,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
   box-sizing: border-box;
-  max-width: min(320px, calc(100vw - 2.8rem));
+  max-width: min(320px, calc(100dvw - 2.8rem));
   transform: translateY(0);
   opacity: 1;
   transition: transform var(--pho-motion-base) var(--pho-ease-out), opacity var(--pho-motion-base) var(--pho-ease-out);

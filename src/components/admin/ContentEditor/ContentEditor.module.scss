@@ -533,3 +533,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 420px) {
+  .card,
+  .compact {
+    padding: 0.85rem;
+  }
+
+  .pairRow,
+  .listRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rowIndex,
+  .leading {
+    display: none;
+  }
+
+  .removeRow {
+    justify-self: stretch;
+    min-height: var(--pho-size-touch-target);
+    width: 100%;
+  }
+
+  .previewSurface,
+  .previewPane {
+    padding: 0.75rem;
+  }
+}

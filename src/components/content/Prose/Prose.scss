@@ -22,6 +22,7 @@
   font-family: var(--pho-font-body);
   min-width: 0;
   overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .pho-prose h1,
@@ -40,6 +41,7 @@
   position: relative;
   padding-left: 0.2em;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .pho-prose h1 {
@@ -71,6 +73,7 @@
   display: flex;
   align-items: center;
   gap: 0.6ch;
+  min-width: 0;
 }
 
 .pho-prose h2::before {
@@ -204,6 +207,7 @@
 
 .pho-prose img {
   max-width: 100%;
+  height: auto;
   border: 1px solid var(--pho-color-accent-muted);
 }
 
@@ -288,6 +292,7 @@
 
 .pho-prose table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   margin: 1.4rem 0;
   font-size: var(--pho-type-small-size);
@@ -307,6 +312,43 @@
 }
 
 @media (max-width: 600px) {
+  .pho-post-body {
+    gap: var(--pho-space-4);
+  }
+
+  .pho-prose {
+    font-size: max(16px, var(--pho-type-body-size));
+  }
+
+  .pho-prose h1,
+  .pho-prose h2,
+  .pho-prose h3,
+  .pho-prose h4,
+  .pho-prose h5,
+  .pho-prose h6 {
+    margin-top: 1.8rem;
+    padding-left: 0;
+  }
+
+  .pho-prose h2::before,
+  .pho-prose h2::after {
+    content: none;
+  }
+
+  .pho-prose ul li,
+  .pho-prose ol li {
+    padding-left: 2.4ch;
+    text-indent: -2.4ch;
+  }
+
+  .pho-prose blockquote {
+    padding-inline: 0.75rem;
+  }
+
+  .pho-prose pre {
+    padding: 0.75rem;
+  }
+
   .pho-prose table {
     display: block;
     overflow-x: auto;

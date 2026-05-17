@@ -4,7 +4,8 @@
   display: inline-flex;
   gap: 0.45rem;
   justify-content: center;
-  // min-height: var(--pho-size-touch-target);
+  min-height: var(--pho-size-touch-target);
+  max-width: 100%;
   font-family: var(--pho-font-control);
   font-size: var(--pho-type-control-size);
   line-height: var(--pho-line-control);
@@ -24,6 +25,7 @@
     transform var(--pho-motion-fast) var(--pho-ease-out);
   user-select: none;
   white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .btn:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -48,13 +50,13 @@
 
 .sm {
   font-size: var(--pho-type-control-sm-size);
-  // min-height: 2rem;
+  min-height: 2.25rem;
   padding: 4px 10px;
 }
 
 .lg {
   font-size: var(--pho-type-control-lg-size);
-  // min-height: 3rem;
+  min-height: 3rem;
   padding: 8px 18px;
 }
 

@@ -200,14 +200,14 @@
   .hasLeft .grid,
   .hasLeft.hasRight .grid {
     grid-template-areas:
+      "left"
       "main"
       "right";
     grid-template-columns: minmax(0, 1fr);
   }
 
   .leftPanel {
-    grid-area: main;
-    width: 0;
+    width: 100%;
   }
 
   .main {
@@ -226,6 +226,11 @@
   }
 
   .stickyPanels .leftPanel {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .nerdTreeShell {
     max-height: none;
     overflow: visible;
   }

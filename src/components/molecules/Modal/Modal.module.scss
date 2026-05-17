@@ -15,8 +15,8 @@
   box-shadow: 0 0 32px rgba(44, 255, 122, 0.2);
   padding: 0;
   width: min(100%, 560px);
-  max-width: min(92vw, 560px);
-  max-height: 85vh;
+  max-width: min(calc(100dvw - 2rem), 560px);
+  max-height: min(85dvh, calc(100dvh - 2rem));
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -50,6 +50,8 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
   cursor: pointer;
+  min-height: 2.25rem;
+  min-width: 2.25rem;
   padding: 0 4px;
   transition: var(--pho-hover-transition);
 
@@ -71,6 +73,7 @@
   flex: 1;
   overflow: auto;
   padding: 1rem;
+  min-width: 0;
 }
 
 .description {
@@ -115,7 +118,8 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  width: min(var(--drawer-width, 320px), 100vw);
+  width: min(var(--drawer-width, 320px), 100dvw);
+  max-width: 100dvw;
   background: var(--pho-color-background-raised);
   display: flex;
   flex-direction: column;

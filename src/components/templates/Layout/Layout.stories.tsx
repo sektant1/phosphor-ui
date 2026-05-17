@@ -2,7 +2,25 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { CourseCard } from "../../organisms/CourseCard";
 import { Tag } from "../../atoms/Tag";
-import { Cluster, Column, Container, Flex, Grid, Row, Stack } from "./Layout";
+import {
+  AutoGrid,
+  ContentFrame,
+  ContentShell,
+  Cluster,
+  Column,
+  Container,
+  DashboardGrid,
+  Flex,
+  Grid,
+  Inline,
+  PageShell,
+  Panel,
+  Row,
+  Section,
+  SidebarLayout,
+  SplitLayout,
+  Stack,
+} from "./Layout";
 import { source, tsx } from "../../../stories/source";
 
 const meta: Meta = {
@@ -52,9 +70,9 @@ import { Button, Row, Tag } from "phosphor-ui";
 
 export function Example() {
   return (
-    <Row align="center" justify="space-between" gap="md" mobileDirection="column" style={{ width: "min(620px, 92vw)" }}>
+    <Row align="center" justify="space-between" gap="md" stackOnMobile fullWidth style={{ maxWidth: "620px" }}>
       <Tag>draft</Tag>
-      <Row gap="xs" wrap="wrap">
+      <Row gap="xs" wrap="wrap" fullWidth>
         <Button size="sm" variant="ghost">Preview</Button>
         <Button size="sm">Publish</Button>
       </Row>
@@ -110,16 +128,15 @@ export function Example() {
 `;
 
 const responsiveGridSource = tsx`
-import { Button, Cluster, Column, Container, CourseCard, Flex, Grid, Row, Stack, Tag } from "phosphor-ui";
+import { AutoGrid, CourseCard } from "phosphor-ui";
 
 
 
 export function Example() {
   return (
-      <Grid
+      <AutoGrid
         minItemWidth="18rem"
         gap="lg"
-        mobileColumns="1fr"
         style={{ width: "min(980px, 92vw)" }}
       >
         <CourseCard
@@ -153,7 +170,7 @@ export function Example() {
           locked
           cta={{ label: "LOCKED", href: "#" }}
         />
-      </Grid>
+      </AutoGrid>
     );
 }
 `;
@@ -174,6 +191,86 @@ export function Example() {
         </div>
       </Grid>
     </Stack>
+  );
+}
+`;
+
+const pageShellSource = tsx`
+import { ContentFrame, Inline, PageShell, Panel, SidebarLayout, Stack, Tag } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <PageShell
+      eyebrow="wiki"
+      title="Packet capture checklist"
+      description="A reusable runbook with navigation and local context."
+      actions={<Inline gap="xs"><Tag>ops</Tag><Tag>runbook</Tag></Inline>}
+    >
+      <SidebarLayout
+        left={<Panel density="compact" title="Tree">notes / packets / capture</Panel>}
+        sidebarLabel="content tree"
+        right={<Panel density="compact" title="On this page">inputs / transforms / publish</Panel>}
+        asideLabel="table of contents"
+        collapseAt="lg"
+        mobileLayout="main-first"
+      >
+        <ContentFrame framed padding="md">
+          <Stack gap="sm">
+            <h2>Validate source clock</h2>
+            <p>Confirm payload shape, source identity, and publish timing before indexing.</p>
+          </Stack>
+        </ContentFrame>
+      </SidebarLayout>
+    </PageShell>
+  );
+}
+`;
+
+const sectionPanelSource = tsx`
+import { DashboardGrid, Panel, Section } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <Section title="Dashboard" description="Reusable panels for admin and portfolio pages.">
+      <DashboardGrid minItemWidth="14rem">
+        <Panel title="Drafts" meta="12">Waiting for review.</Panel>
+        <Panel title="Published" meta="48" tone="accent">Live entries.</Panel>
+        <Panel title="Alerts" meta="03" tone="danger">Needs operator attention.</Panel>
+      </DashboardGrid>
+    </Section>
+  );
+}
+`;
+
+const splitPaneSource = tsx`
+import { Panel, SplitLayout } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <SplitLayout
+      startWidth="minmax(0, 1.15fr)"
+      start={<Panel title="Editor">Markdown controls and form fields.</Panel>}
+      end={<Panel title="Preview">Rendered post preview.</Panel>}
+    />
+  );
+}
+`;
+
+const contentShellSource = tsx`
+import { ContentShell, Stack, Tag } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <ContentShell
+      eyebrow="article"
+      title="Readable command log"
+      description="A prose-width shell for posts, wiki notes, and docs pages."
+    >
+      <Stack gap="sm">
+        <Tag>content</Tag>
+        <p>Body content keeps a readable max-width without custom page CSS.</p>
+      </Stack>
+    </ContentShell>
   );
 }
 `;
@@ -214,11 +311,12 @@ export const RowLayout: Story = {
       align="center"
       justify="space-between"
       gap="md"
-      mobileDirection="column"
-      style={{ width: "min(620px, 92vw)" }}
+      stackOnMobile
+      fullWidth
+      style={{ maxWidth: "620px" }}
     >
       <Tag>draft</Tag>
-      <Row gap="xs" wrap="wrap">
+      <Row gap="xs" wrap="wrap" fullWidth>
         <Button size="sm" variant="ghost">Preview</Button>
         <Button size="sm">Publish</Button>
       </Row>
@@ -266,11 +364,10 @@ export const BoundedContainer: Story = {
 export const ResponsiveGrid: Story = {
   parameters: { docs: { source: source(responsiveGridSource) } },
   render: () => (
-    <Grid
+    <AutoGrid
       minItemWidth="18rem"
       gap="lg"
-      mobileColumns="1fr"
-      style={{ width: "min(980px, 92vw)" }}
+      style={{ width: "min(980px, calc(100dvw - 2rem))" }}
     >
       <CourseCard
         stamp="COURSE-01"
@@ -303,7 +400,7 @@ export const ResponsiveGrid: Story = {
         locked
         cta={{ label: "LOCKED", href: "#" }}
       />
-    </Grid>
+    </AutoGrid>
   ),
 };
 
@@ -331,5 +428,85 @@ export const NarrowNestedGrid: Story = {
         </div>
       </Grid>
     </Stack>
+  ),
+};
+
+export const PageComposition: Story = {
+  parameters: { docs: { source: source(pageShellSource) } },
+  render: () => (
+    <PageShell
+      eyebrow="wiki"
+      title="Packet capture checklist"
+      description="A reusable runbook with navigation and local context."
+      actions={(
+        <Inline gap="xs">
+          <Tag>ops</Tag>
+          <Tag>runbook</Tag>
+        </Inline>
+      )}
+      style={{ width: "min(980px, 92vw)" }}
+    >
+      <SidebarLayout
+        left={<Panel density="compact" title="Tree">notes / packets / capture</Panel>}
+        sidebarLabel="content tree"
+        right={<Panel density="compact" title="On this page">inputs / transforms / publish</Panel>}
+        asideLabel="table of contents"
+        collapseAt="lg"
+        mobileLayout="main-first"
+      >
+        <ContentFrame framed padding="md">
+          <Stack gap="sm">
+            <h2>Validate source clock</h2>
+            <p>Confirm payload shape, source identity, and publish timing before indexing.</p>
+          </Stack>
+        </ContentFrame>
+      </SidebarLayout>
+    </PageShell>
+  ),
+};
+
+export const SectionPanels: Story = {
+  parameters: { docs: { source: source(sectionPanelSource) } },
+  render: () => (
+    <Section
+      title="Dashboard"
+      description="Reusable panels for admin and portfolio pages."
+      style={{ width: "min(860px, 92vw)" }}
+    >
+      <DashboardGrid minItemWidth="14rem">
+        <Panel title="Drafts" meta="12">Waiting for review.</Panel>
+        <Panel title="Published" meta="48" tone="accent">Live entries.</Panel>
+        <Panel title="Alerts" meta="03" tone="danger">Needs operator attention.</Panel>
+      </DashboardGrid>
+    </Section>
+  ),
+};
+
+export const EditorSplitPane: Story = {
+  parameters: { docs: { source: source(splitPaneSource) } },
+  render: () => (
+    <SplitLayout
+      startWidth="minmax(0, 1.15fr)"
+      style={{ width: "min(760px, 92vw)" }}
+      start={<Panel title="Editor">Markdown controls and form fields.</Panel>}
+      end={<Panel title="Preview">Rendered post preview.</Panel>}
+    />
+  ),
+};
+
+export const ArticleContentShell: Story = {
+  parameters: { docs: { source: source(contentShellSource) } },
+  render: () => (
+    <ContentShell
+      eyebrow="article"
+      title="Readable command log"
+      description="A prose-width shell for posts, wiki notes, and docs pages."
+      style={{ width: "min(680px, 92vw)" }}
+    >
+      <Stack gap="sm">
+        <Tag>content</Tag>
+        <p>Body content keeps a readable max-width without custom page CSS.</p>
+      </Stack>
+    </ContentShell>
   ),
 };

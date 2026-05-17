@@ -8,6 +8,7 @@ import {
   ContentEditor,
   CourseCard,
   Form,
+  Grid,
   H2,
   HeroFrame,
   ProgressBar,
@@ -31,12 +32,6 @@ export default meta;
 const pageFrame = {
   padding: "1.5rem",
   minHeight: "100vh",
-} satisfies React.CSSProperties;
-
-const grid = {
-  display: "grid",
-  gap: "1rem",
-  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
 } satisfies React.CSSProperties;
 
 const personalBlogSource = tsx`
@@ -99,7 +94,7 @@ export function Example() {
     <SiteShell title="cold boot academy" tagline="course terminal" crt={false}>
       <HeroFrame
         art={"COURSE//01\\nMEMORY MAPS"}
-        bottomHud={<HeroFrame.HudText>Cold boot operations</HeroFrame.HudText>}
+        subtitle="Cold boot operations"
       />
       <H2>Modules</H2>
       <CourseCard
@@ -116,7 +111,7 @@ export function Example() {
 `;
 
 const adminDashboardSource = tsx`
-import { AdminShell, Button, StatPill } from "phosphor-ui";
+import { AdminShell, Button, Grid, StatPill } from "phosphor-ui";
 
 export function Example() {
   return (
@@ -133,10 +128,10 @@ export function Example() {
       ]}
       actions={<Button size="sm">New packet</Button>}
     >
-      <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+      <Grid minItemWidth="12rem" gap="sm">
         <StatPill label="published" value="48" />
         <StatPill label="warnings" value="03" color="magenta" />
-      </div>
+      </Grid>
     </AdminShell>
   );
 }
@@ -227,7 +222,7 @@ export const CourseLanding: StoryObj = {
         <Stack>
           <HeroFrame
             art={"COURSE//01\nMEMORY MAPS"}
-            bottomHud={<HeroFrame.HudText>Cold boot operations</HeroFrame.HudText>}
+            subtitle="Cold boot operations"
           />
           <H2>Modules</H2>
           <CourseCard
@@ -261,11 +256,11 @@ export const AdminDashboard: StoryObj = {
         ]}
         actions={<Button size="sm">New packet</Button>}
       >
-        <div style={grid}>
+        <Grid minItemWidth="12rem" gap="sm">
           <StatPill label="published" value="48" />
           <StatPill label="warnings" value="03" color="magenta" />
           <StatPill label="scheduled" value="07" color="dim" />
-        </div>
+        </Grid>
       </AdminShell>
     </div>
   ),
