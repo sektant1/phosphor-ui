@@ -11,7 +11,7 @@
 
 .date {
   color: var(--pho-color-primary-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   font-variant-numeric: tabular-nums;
 }
 
@@ -41,7 +41,7 @@
 .updBadge {
   color: var(--pho-color-accent);
   text-shadow: var(--pho-glow-accent);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--pho-tracking-normal);
 }
 
 .tags {
@@ -52,7 +52,7 @@
   font-size: var(--pho-type-ui-xs-size);
   color: var(--pho-color-accent);
   font-family: var(--pho-font-code);
-  letter-spacing: 0.03em;
+  letter-spacing: var(--pho-tracking-normal);
   text-decoration: none;
   transition: var(--pho-hover-transition);
 }

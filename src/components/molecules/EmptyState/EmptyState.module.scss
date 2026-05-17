@@ -12,14 +12,14 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-icon-lg-size);
   color: var(--pho-color-primary-faint);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-terminal);
   display: block;
 }
 
 .title {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-icon-md-size);
-  letter-spacing: 0.16em;
+  letter-spacing: var(--pho-tracking-wider);
   overflow-wrap: anywhere;
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);

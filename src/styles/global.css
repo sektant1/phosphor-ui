@@ -9,6 +9,47 @@ body {
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--pho-font-heading);
+  font-weight: 700;
+  line-height: var(--pho-line-snug);
+  letter-spacing: var(--pho-tracking-heading);
+  color: var(--pho-color-text-strong);
+}
+
+h1 {
+  font-size: var(--pho-type-h1-size);
+}
+
+h2 {
+  font-size: var(--pho-type-h2-size);
+}
+
+h3 {
+  font-size: var(--pho-type-h3-size);
+}
+
+h4 {
+  font-size: var(--pho-type-h4-size);
+}
+
+h5 {
+  font-size: var(--pho-type-h5-size);
+}
+
+h6 {
+  font-size: var(--pho-type-h6-size);
+}
+
+p {
+  line-height: var(--pho-line-prose);
+}
+
 body {
   cursor: var(--pho-cursor-default);
 }
@@ -56,8 +97,25 @@ pre,
 kbd,
 samp {
   font-family: var(--pho-font-code);
+  font-size: var(--pho-type-mono-size);
+  line-height: var(--pho-line-normal);
   background: var(--code-bg);
   color: var(--code-var);
+  text-shadow: none;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--pho-placeholder-color);
+  opacity: var(--pho-placeholder-opacity);
+  text-shadow: none;
 }
 
 ::selection {

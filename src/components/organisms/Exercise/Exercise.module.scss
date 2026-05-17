@@ -36,7 +36,7 @@
 .badge {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.22em;
+  letter-spacing: var(--pho-tracking-stamp);
   text-transform: uppercase;
   color: var(--pho-color-background);
   background: var(--pho-color-primary);
@@ -57,7 +57,7 @@
 .num {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-caption-size);
-  letter-spacing: 0.2em;
+  letter-spacing: var(--pho-tracking-stamp);
   color: var(--pho-color-primary-muted);
   white-space: nowrap;
 }
@@ -66,7 +66,7 @@
   font-family: var(--pho-font-heading);
   font-weight: 700;
   font-size: var(--pho-type-control-sm-size);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   text-transform: uppercase;
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary);
@@ -80,7 +80,7 @@
 .progress {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
   color: var(--pho-color-primary-muted);
   white-space: nowrap;
   flex-shrink: 0;

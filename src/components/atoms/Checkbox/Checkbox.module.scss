@@ -101,7 +101,7 @@
 }
 .errorRow.checkedRow .label {
   color: var(--pho-color-danger-strong);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }
 .errorRow.strikethroughRow .label {
   text-decoration-color: var(--pho-color-danger-muted);

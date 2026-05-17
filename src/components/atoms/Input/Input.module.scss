@@ -58,7 +58,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-input-font-size);
   gap: 0.32rem;
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   height: 1.15em;
   min-height: 1.15em;
   padding: 0;
@@ -82,7 +82,7 @@
 }
 .terminalWrap .inputCell {
   align-items: center;
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   height: 1.15em;
   min-height: 1.15em;
 }
@@ -125,7 +125,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
   height: 1.15em;
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   min-height: 1.15em;
   padding: 0;
   text-shadow: var(--pho-glow-primary-soft);
@@ -181,7 +181,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
   gap: 0.32rem;
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   margin: 0;
   min-width: 0;
   padding: 0;
@@ -192,7 +192,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
   font-weight: 700;
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   text-shadow: var(--pho-glow-accent-soft);
 }
 .terminalCommand {
@@ -204,7 +204,7 @@
 .terminalCursorMirror {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
 }
 .terminalPromptCursor {
   align-self: center;
@@ -228,7 +228,7 @@
   text-shadow: var(--pho-glow-primary);
   font-family: var(--pho-font-code);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
-  line-height: normal;
+  line-height: var(--pho-line-normal);
   outline: none;
   caret-color: var(--pho-color-accent-strong);
   z-index: 1;
@@ -274,7 +274,7 @@
   border: 1px solid transparent;
   font-family: var(--pho-font-code);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
-  line-height: normal;
+  line-height: var(--pho-line-normal);
   position: absolute;
   z-index: 2;
 }
@@ -285,7 +285,7 @@
   color: transparent;
   font-family: var(--pho-font-code);
   font-size: var(--pho-input-font-size, var(--pho-type-control-sm-size));
-  line-height: normal;
+  line-height: var(--pho-line-normal);
   text-shadow: none;
   white-space: pre-wrap;
 }
@@ -308,7 +308,7 @@
 
 .error {
   color: var(--pho-color-danger);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }
 
 .errorField .wrap {

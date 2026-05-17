@@ -16,7 +16,7 @@
   padding: 0.35rem 0.7rem;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-control-sm-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);
   background: var(--pho-color-background-raised);
@@ -32,4 +32,4 @@
 .pwr { color: var(--pho-color-primary);       background: currentColor; }
 .title { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); font-weight: 700; flex: 1; }
 .meta  { color: var(--pho-color-primary-muted); }
-.body  { padding: 14px 16px; font-family: var(--pho-font-code); font-size: var(--pho-type-caption-size); color: var(--pho-color-text); line-height: 1.5; }
+.body  { padding: 14px 16px; font-family: var(--pho-font-code); font-size: var(--pho-type-caption-size); color: var(--pho-color-text); line-height: var(--pho-line-normal); }

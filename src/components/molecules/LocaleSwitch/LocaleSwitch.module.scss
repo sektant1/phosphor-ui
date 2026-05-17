@@ -151,7 +151,7 @@
 .sm .code,
 .sm .prompt {
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--pho-tracking-normal);
 }
 
 @media (max-width: 560px) {

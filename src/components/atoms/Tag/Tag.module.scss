@@ -4,7 +4,7 @@
   border: 1px dashed var(--pho-color-accent-muted);
   padding: 2px 8px;
   font-size: var(--pho-type-caption-size);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--pho-tracking-terminal);
   font-family: var(--pho-font-code);
   text-decoration: none;
   cursor: default;

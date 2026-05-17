@@ -18,20 +18,21 @@
 }
 
 .title {
-  color: var(--phosphor, var(--pho-color-primary, #2cff7a));
-  font-family: var(--font-heading, var(--pho-font-heading, monospace));
-  font-size: 13px;
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-heading);
+  font-size: var(--pho-type-label-size);
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-shadow: var(--glow-emerald,
-      var(--pho-glow-primary-soft, 0 0 8px currentColor));
+  letter-spacing: var(--pho-tracking-heading);
+  line-height: var(--pho-line-caption);
+  text-shadow: var(--pho-glow-primary-soft);
   text-transform: uppercase;
 }
 
 .body {
-  color: var(--ink, var(--pho-color-text, #d8ffe7));
-  font-family: var(--font-code, var(--pho-font-code, monospace));
-  font-size: 12px;
+  color: var(--pho-color-text);
+  font-family: var(--pho-font-body);
+  font-size: var(--pho-type-small-size);
+  line-height: var(--pho-line-normal);
   margin-top: 2px;
   overflow-wrap: anywhere;
 }

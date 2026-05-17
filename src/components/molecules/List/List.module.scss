@@ -126,7 +126,7 @@ a.title:focus-visible {
 
 .compact .description {
   font-size: var(--pho-type-caption-size);
-  line-height: 1.35;
+  line-height: var(--pho-line-caption);
 }
 
 .markerDot .marker::before {

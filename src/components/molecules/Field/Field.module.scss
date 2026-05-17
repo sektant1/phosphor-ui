@@ -16,7 +16,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-label-size);
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -31,7 +31,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-micro-size);
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1;
+  line-height: var(--pho-line-control);
   padding: 0.14rem 0.32rem 0.1rem;
   text-transform: uppercase;
 }
@@ -58,5 +58,5 @@
 
 .error {
   color: var(--pho-color-danger);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }

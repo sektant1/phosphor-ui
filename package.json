@@ -67,7 +67,7 @@
     "write-package-types": "node scripts/write-package-types.mjs",
     "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist/esm --outDir dist/esm",
     "build:types:snapshot": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir types",
-    "copy-styles": "mkdir -p dist/styles dist/styles/fonts/bender dist/styles/fonts/vcr_osd_mono && cp dist/esm/styles/components.css dist/styles/components.css && cp src/styles/fonts.css dist/styles/fonts.css && cp src/styles/tokens.css dist/styles/tokens.css && cp src/styles/typography.css dist/styles/typography.css && cp src/styles/global.css dist/styles/global.css && cp src/styles/phosphor.css dist/styles/phosphor.css && cp src/styles/fonts/bender/*.woff dist/styles/fonts/bender/ && cp src/styles/fonts/vcr_osd_mono/*.ttf dist/styles/fonts/vcr_osd_mono/",
+    "copy-styles": "mkdir -p dist/styles dist/styles/fonts/bender dist/styles/fonts/jbmono dist/styles/fonts/vcr_osd_mono && cp dist/esm/styles/components.css dist/styles/components.css && cp src/styles/fonts.css dist/styles/fonts.css && cp src/styles/tokens.css dist/styles/tokens.css && cp src/styles/typography.css dist/styles/typography.css && cp src/styles/global.css dist/styles/global.css && cp src/styles/phosphor.css dist/styles/phosphor.css && cp src/styles/fonts/bender/*.woff dist/styles/fonts/bender/ && cp src/styles/fonts/jbmono/*.woff2 dist/styles/fonts/jbmono/ && cp src/styles/fonts/vcr_osd_mono/*.ttf dist/styles/fonts/vcr_osd_mono/",
     "typecheck": "npm run typecheck:src && npm run typecheck:storybook && npm run typecheck:tests",
     "typecheck:src": "tsc --noEmit -p tsconfig.json",
     "typecheck:storybook": "tsc -p tsconfig.storybook.json",

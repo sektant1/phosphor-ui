@@ -15,7 +15,10 @@
   border: 1px solid var(--pho-color-primary-faint);
   border-bottom: none;
   color: var(--pho-color-primary-muted);
-  font-size: var(--pho-type-caption-size); letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: var(--pho-tracking-wider);
+  line-height: var(--pho-line-caption);
+  text-transform: uppercase;
   font-family: var(--pho-font-code);
 }
 .hGlyph, .hSep { visibility: hidden; }
@@ -56,21 +59,18 @@
 .row > a:hover .glyph,
 .row > a:hover .date,
 .row > a:hover .sep,
-<<<<<<< HEAD
 .row > a:hover .description,
 .row > a:hover .description mark,
-.row > a:hover .meta { color: var(--pho-color-background-raised); text-shadow: none; }
-.row > a:hover .thumb { border-color: var(--pho-color-background-raised); }
-=======
 .row > a:hover .meta,
 .row > a:focus-visible .title,
 .row > a:focus-visible .glyph,
 .row > a:focus-visible .date,
 .row > a:focus-visible .sep,
+.row > a:focus-visible .description,
+.row > a:focus-visible .description mark,
 .row > a:focus-visible .meta { color: var(--pho-hover-row-muted-text); text-shadow: none; }
 .row > a:hover .thumb,
 .row > a:focus-visible .thumb { border-color: var(--pho-hover-row-muted-text); }
->>>>>>> 261b67a (0.3.48)
 
 .glyph { grid-column: 1; color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
 .date  { grid-column: 5; color: var(--pho-color-primary-muted); font-size: var(--pho-type-control-sm-size); font-variant-numeric: tabular-nums; text-align: right; }
@@ -83,14 +83,15 @@
   min-width: 0;
 }
 .title {
-  color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
-  letter-spacing: 0.04em;
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
+  letter-spacing: var(--pho-tracking-terminal);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
 }
 .description {
   color: var(--pho-color-text-faint);
   font-size: var(--pho-type-ui-sm-size);
-  line-height: 1.35;
+  line-height: var(--pho-line-caption);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -148,7 +149,7 @@
   font-size: var(--pho-type-h2-size);
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
-  letter-spacing: 0.18em;
+  letter-spacing: var(--pho-tracking-wider);
 }
 .row > a:hover .thumbFallback,
 .row > a:focus-visible .thumbFallback { background: var(--pho-hover-row-muted-text); }

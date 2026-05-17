@@ -54,7 +54,7 @@
   display: block;
   color: var(--pho-color-primary-faint);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.22em;
+  letter-spacing: var(--pho-tracking-stamp);
   margin-bottom: 0.25rem;
 }
 
@@ -63,7 +63,7 @@
   display: block;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-h2-size);
-  line-height: 0.85;
+  line-height: var(--pho-line-tight);
   text-transform: uppercase;
   text-shadow: var(--pho-glow-primary);
 }
@@ -93,7 +93,7 @@
 .statusLabel {
   color: var(--pho-color-primary-faint);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.16em;
+  letter-spacing: var(--pho-tracking-wider);
   margin-bottom: 0.25rem;
   text-transform: uppercase;
 }
@@ -102,7 +102,7 @@
   color: var(--pho-color-primary);
   font-size: var(--pho-type-caption-size);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
@@ -153,7 +153,7 @@
 .userLabel {
   color: var(--pho-color-primary-faint);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.16em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
 }
 
@@ -178,14 +178,14 @@
 .userName {
   color: var(--pho-color-primary-strong);
   font-size: var(--pho-type-caption-size);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--pho-tracking-terminal);
   min-width: 0;
 }
 
 .userRole {
   font-size: var(--pho-type-micro-size);
   color: var(--pho-color-primary-faint);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-terminal);
   text-transform: uppercase;
 }
 
@@ -201,7 +201,7 @@
   font-size: var(--pho-type-ui-xs-size);
   color: var(--pho-color-primary-faint);
   padding: 0.55rem 0 0;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   transition: var(--pho-hover-transition);
 }
 
@@ -279,8 +279,8 @@
 
 .mainTitle {
   color: var(--pho-color-primary);
-  font-size: clamp(1.7rem, 3vw, 2.5rem);
-  line-height: 0.95;
+  font-size: var(--pho-type-h1-size);
+  line-height: var(--pho-line-tight);
   margin: 0;
   text-shadow: var(--pho-glow-primary);
   text-transform: uppercase;
@@ -321,7 +321,7 @@
   // color: var(--pho-color-primary-faint);
   display: block;
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-terminal);
   font-weight: 700;
   margin-bottom: 0.65rem;
   text-transform: uppercase;
@@ -333,7 +333,7 @@
   font-weight: 700;
   font-family: var(--pho-font-display);
   font-size: var(--pho-type-control-lg-size);
-  line-height: 1.1;
+  line-height: var(--pho-line-snug);
 }
 
 @media (max-width: 880px) {

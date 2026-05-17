@@ -10,7 +10,7 @@
   margin-bottom: 4px;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-caption-size);
-  letter-spacing: 0.12em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   color: var(--pho-color-primary-faint);
 }

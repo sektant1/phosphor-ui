@@ -13,7 +13,7 @@
 .seriesLabel {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.12em;
+  letter-spacing: var(--pho-tracking-wider);
   color: var(--pho-color-primary-faint);
   text-transform: uppercase;
   flex-shrink: 0;
@@ -31,7 +31,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
   color: var(--pho-color-primary-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
   margin-left: auto;
@@ -80,7 +80,7 @@
 .dir {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   color: var(--pho-color-primary-faint);
 }
 

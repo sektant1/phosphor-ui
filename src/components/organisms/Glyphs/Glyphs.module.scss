@@ -52,7 +52,7 @@
   font-size: var(--pho-type-micro-size);
   color: var(--pho-color-primary-muted);
   text-shadow: none;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-terminal);
   text-transform: uppercase;
 }
 

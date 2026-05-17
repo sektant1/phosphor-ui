@@ -1,0 +1,28 @@
+[12:44:24.372] [INFO] storybook v10.3.6
+[12:44:25.534] [DEBUG] Getting package.json info for /home/sektant1/Projects/phosphor/package.json...
+[12:44:26.616] [INFO] Starting...
+[12:44:27.254] [DEBUG] Starting preview..
+[12:44:27.274] [INFO] Addon-docs: using MDX3
+[12:44:27.302] [INFO] Using implicit CSS loaders
+[12:44:27.309] [INFO] => [@storybook/addon-styling-webpack] Applying custom Storybook webpack configuration styling.
+[12:44:27.310] [INFO] Using default Webpack5 setup
+[12:44:27.854] [DEBUG] Using tsconfig paths for react-docgen
+[12:44:31.642] [WARN] Failed to parse /home/sektant1/Projects/phosphor/src/components/organisms/PostListing/PostListing.tsx with react-docgen. Rerun Storybook with --loglevel=debug to get more info.
+[12:44:32.275] [WARN] Failed to parse /home/sektant1/Projects/phosphor/src/components/organisms/AsciiBanner/AsciiBanner.tsx with react-docgen. Rerun Storybook with --loglevel=debug to get more info.
+[12:44:33.162] [WARN] Failed to parse /home/sektant1/Projects/phosphor/src/components/atoms/Text/Text.tsx with react-docgen. Rerun Storybook with --loglevel=debug to get more info.
+[12:44:37.973] [ERROR] Failed to build the preview
+[12:44:37.976] [WARN] Force closed preview build
+[12:44:37.977] [ERROR] [38;2;241;97;97mSB_BUILDER-WEBPACK5_0003 (WebpackCompilationError): There were problems when compiling your code with Webpack.
+Run Storybook with --debug-webpack for more information.[39m
+    at starter (file://./node_modules/@storybook/builder-webpack5/dist/index.js:799:11)
+    at starter.next (<anonymous>)
+    at Module.start (file://./node_modules/@storybook/builder-webpack5/dist/index.js:857:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async storybookDevServer (file://./node_modules/storybook/dist/core-server/index.js:7503:83)
+    at async buildOrThrow (file://./node_modules/storybook/dist/core-server/index.js:4508:12)
+    at async buildDevStandalone (file://./node_modules/storybook/dist/core-server/index.js:8033:41)
+    at async withTelemetry (file://./node_modules/storybook/dist/_node-chunks/chunk-UYONHJJP.js:225:12)
+    at async dev (file://./node_modules/storybook/dist/bin/core.js:2736:3)
+    at async _Command.<anonymous> (file://./node_modules/storybook/dist/bin/core.js:2806:92)
+[12:44:37.979] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

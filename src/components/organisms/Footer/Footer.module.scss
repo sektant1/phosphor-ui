@@ -53,7 +53,7 @@
   gap: 0.6rem;
   min-width: 0;
   font-family: var(--pho-font-terminal);
-  letter-spacing: 0.2em;
+  letter-spacing: var(--pho-tracking-stamp);
   text-transform: uppercase;
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary);
@@ -73,7 +73,7 @@
 .year {
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-code);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-terminal);
 }
 
 .links {
@@ -90,7 +90,7 @@
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   text-decoration: none;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   padding: 2px 4px;
   border-bottom: 1px dashed transparent;
   transition: var(--pho-hover-transition);
@@ -112,7 +112,7 @@
 .status {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.18em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   color: var(--pho-color-primary-faint);
   display: inline-flex;
@@ -133,7 +133,7 @@
   margin: 0.8rem auto 0;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-caption-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
   color: var(--pho-color-primary-muted);
   border-top: 1px dashed var(--pho-color-primary-faint);
   padding-top: 0.5rem;
@@ -223,16 +223,16 @@
   }
 
   .brand {
-    letter-spacing: 0.1em;
+    letter-spacing: var(--pho-tracking-terminal);
   }
 
   .status {
-    letter-spacing: 0.1em;
+    letter-spacing: var(--pho-tracking-terminal);
   }
 
   .prompt {
     flex-wrap: wrap;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--pho-tracking-terminal);
     justify-content: center;
   }
 }

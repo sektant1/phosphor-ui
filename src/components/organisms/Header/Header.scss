@@ -102,7 +102,7 @@
     color: var(--pho-color-primary-strong);
     font-family: var(--pho-font-terminal);
     font-size: var(--pho-type-control-size);
-    letter-spacing: 0.18em;
+    letter-spacing: var(--pho-tracking-wider);
     margin: 0;
     max-width: 100%;
     overflow-wrap: anywhere;
@@ -215,8 +215,8 @@
 
     .tagline {
       font-size: var(--pho-type-ui-sm-size);
-      letter-spacing: 0.12em;
-      line-height: 1.25;
+      letter-spacing: var(--pho-tracking-wider);
+      line-height: var(--pho-line-caption);
       padding-inline: 0.2em;
     }
 

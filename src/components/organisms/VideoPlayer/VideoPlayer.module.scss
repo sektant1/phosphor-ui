@@ -23,7 +23,7 @@
     var(--pho-color-background-deep);
   font-family: var(--pho-font-terminal);
   color: var(--pho-color-primary);
-  font-size: 14px;
+  font-size: var(--pho-type-control-sm-size);
 }
 .host :global(.video-js:not(.vjs-fluid)) {
   aspect-ratio: 16 / 9;
@@ -131,7 +131,7 @@
 }
 @media (max-width: 640px) {
   .host :global(.video-js) {
-    font-size: 12px;
+    font-size: var(--pho-type-caption-size);
   }
   .host :global(.vjs-control-bar) {
     min-height: 3em;

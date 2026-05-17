@@ -112,8 +112,8 @@
   color: var(--pho-color-primary-faint);
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.22em;
-  line-height: 1.1;
+  letter-spacing: var(--pho-tracking-stamp);
+  line-height: var(--pho-line-snug);
   margin: 0;
   text-transform: uppercase;
 }
@@ -121,7 +121,7 @@
 .contextMeta {
   color: var(--pho-color-primary-faint);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.12em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
 }
 

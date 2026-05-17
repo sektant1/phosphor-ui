@@ -55,13 +55,13 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-micro-size);
   color: var(--pho-color-primary-faint);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-terminal);
 }
 
 .title {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
-  line-height: 1.35;
+  line-height: var(--pho-line-caption);
   text-decoration: none;
 }
 

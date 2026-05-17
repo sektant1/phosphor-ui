@@ -183,7 +183,7 @@
   font-size: var(--pho-type-ui-xs-size);
   gap: 0.45rem 0.75rem;
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   margin: 0;
   position: relative;
   text-transform: uppercase;
@@ -231,7 +231,7 @@
 .lockBadge {
   border-color: var(--pho-color-danger-muted);
   color: var(--pho-color-danger-strong);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }
 
 .main {
@@ -246,7 +246,7 @@
   font-size: clamp(1rem, 2.2cqi, 1.25rem);
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 1.14;
+  line-height: var(--pho-line-snug);
   margin: 0;
   overflow-wrap: anywhere;
   text-shadow: var(--pho-glow-primary-soft);
@@ -256,7 +256,7 @@
 .desc {
   color: var(--pho-color-text);
   font-size: var(--pho-type-ui-sm-size);
-  line-height: 1.58;
+  line-height: var(--pho-line-normal);
   margin: 0;
 }
 
@@ -269,7 +269,7 @@
   font-size: var(--pho-type-caption-size);
   gap: 0.45rem 0.9rem;
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.25;
+  line-height: var(--pho-line-caption);
   margin: 0.05rem 0 0;
   padding-top: 0.6rem;
 }

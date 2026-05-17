@@ -13,12 +13,8 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.6rem;
-<<<<<<< HEAD
   min-width: 0;
-  padding: 0.4rem 0;
-=======
   padding: 0.4rem 0.5rem;
->>>>>>> 261b67a (0.3.48)
   border-bottom: 1px dashed var(--pho-color-primary-faint);
   text-decoration: none;
   transition: var(--pho-hover-transition);

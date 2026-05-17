@@ -19,6 +19,7 @@
   color: var(--pho-color-text);
   font-size: var(--pho-type-body-size);
   line-height: var(--pho-line-prose);
+  font-family: var(--pho-font-body);
   min-width: 0;
   overflow-wrap: break-word;
 }
@@ -32,9 +33,9 @@
   font-family: var(--pho-font-display);
   font-weight: 700;
   color: var(--pho-color-accent-strong);
-  text-shadow: var(--pho-glow-accent);
+  text-shadow: var(--pho-glow-accent-soft);
   margin: 2.4rem 0 1rem;
-  letter-spacing: var(--pho-tracking-wide);
+  letter-spacing: var(--pho-tracking-heading);
   line-height: var(--pho-line-snug);
   position: relative;
   padding-left: 0.2em;
@@ -102,7 +103,7 @@
 
 .pho-prose a {
   color: var(--pho-color-accent-strong);
-  text-shadow: var(--pho-glow-accent);
+  text-shadow: none;
   text-decoration: none;
   border-bottom: 1px dashed var(--pho-color-accent);
   padding-bottom: 1px;
@@ -125,16 +126,16 @@
 
 .pho-prose strong {
   color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  text-shadow: var(--pho-glow-primary-soft);
   font-weight: 700;
 }
 
 .pho-prose em {
   color: var(--pho-color-highlight);
-  text-shadow: var(--pho-glow-primary-soft);
-  font-family: var(--pho-font-code);
+  text-shadow: none;
+  font-family: inherit;
   font-style: italic;
-  font-size: var(--pho-type-small-size);
+  font-size: inherit;
 }
 
 .pho-prose blockquote {
@@ -143,9 +144,10 @@
   border-left: 3px solid var(--pho-color-accent);
   background: color-mix(in srgb, var(--pho-color-accent-faint) 30%, transparent);
   color: var(--pho-color-primary-strong);
-  font-family: var(--pho-font-code);
+  font-family: var(--pho-font-body);
   font-style: italic;
-  font-size: var(--pho-type-small-size);
+  font-size: var(--pho-type-body-size);
+  line-height: var(--pho-line-prose);
 }
 
 .pho-prose blockquote::before {
@@ -239,7 +241,7 @@
   font-size: var(--pho-type-mono-size);
   background: var(--pho-color-background-raised);
   color: var(--pho-color-primary-strong);
-  text-shadow: 0 0 6px rgba(44, 255, 122, 0.18);
+  text-shadow: none;
   padding: 0.1em 0.42em;
   border: 1px solid var(--pho-color-primary-faint);
   box-shadow: inset 0 0 0 1px rgba(44, 255, 122, 0.04);

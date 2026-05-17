@@ -29,7 +29,7 @@
   flex: 0 0 auto;
   font-family: var(--pho-font-control);
   font-size: var(--pho-type-control-lg-size);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-terminal);
   padding: 0.45rem 0.75rem;
   text-transform: uppercase;
   transition: var(--pho-hover-transition);

@@ -10,7 +10,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   min-width: 0;
   overflow-wrap: anywhere;
   text-transform: uppercase;
@@ -47,14 +47,14 @@
   color: var(--pho-color-accent);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
-  line-height: 1;
+  line-height: var(--pho-line-control);
   text-transform: uppercase;
 }
 
 .value {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-sm-size);
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -99,7 +99,7 @@
 
 .error {
   color: var(--pho-color-danger);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }
 
 .errorField .label,

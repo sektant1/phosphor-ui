@@ -23,14 +23,14 @@
   font-weight: bold;
   color: var(--pho-color-primary-strong);
   overflow-wrap: anywhere;
-  text-shadow: var(--pho-glow-primary);
-  line-height: 1.2;
+  text-shadow: var(--pho-glow-primary-soft);
+  line-height: var(--pho-line-snug);
 }
 
 .role {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   color: var(--pho-color-primary-faint);
 }
@@ -39,7 +39,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   color: var(--pho-color-text);
-  line-height: 1.5;
+  line-height: var(--pho-line-normal);
   overflow-wrap: anywhere;
 }
 

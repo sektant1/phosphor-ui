@@ -105,7 +105,7 @@
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   gap: 0.35rem;
-  letter-spacing: 0;
+  letter-spacing: var(--pho-tracking-normal);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -136,7 +136,7 @@
   height: var(--code-chip-height);
   justify-content: center;
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1;
+  line-height: var(--pho-line-control);
   padding: 0 0.45rem;
   text-transform: uppercase;
   white-space: nowrap;
@@ -156,7 +156,7 @@
   height: var(--code-chip-height);
   justify-content: center;
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1;
+  line-height: var(--pho-line-control);
   min-width: 0;
   outline: none;
   overflow: hidden;
@@ -236,7 +236,7 @@
 .code :global(pre) {
   font-family: var(--pho-font-code) !important;
   font-size: var(--pho-type-ui-sm-size);
-  line-height: 1.0;
+  line-height: var(--pho-line-normal);
   margin: 0;
   overflow-x: auto;
   padding: 1.4rem 1.1rem;
@@ -250,7 +250,7 @@
   display: block;
   font-family: inherit;
   font-size: inherit;
-  line-height: 0;
+  line-height: inherit;
   padding: 0;
 }
 
@@ -271,7 +271,7 @@
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-sm-size);
-  line-height: 1.42;
+  line-height: var(--pho-line-normal);
   margin: 0;
   min-width: 0;
   overflow-x: auto;

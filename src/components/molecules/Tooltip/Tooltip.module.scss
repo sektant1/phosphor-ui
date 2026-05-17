@@ -12,7 +12,7 @@
   color: var(--pho-color-primary-strong);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
-  line-height: 1.35;
+  line-height: var(--pho-line-caption);
   max-width: min(18rem, calc(100vw - 2rem));
   opacity: 0;
   overflow-wrap: anywhere;

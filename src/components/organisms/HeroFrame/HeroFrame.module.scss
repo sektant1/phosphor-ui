@@ -28,7 +28,7 @@
   padding: 0.35rem 0.7rem;
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-control-sm-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);
   background:
@@ -107,7 +107,7 @@
   white-space: nowrap;
   animation: phosphorTapeRoll linear infinite;
   color: var(--pho-color-primary-faint);
-  letter-spacing: 0.18em;
+  letter-spacing: var(--pho-tracking-wider);
 }
 
 .artWrap {
@@ -131,13 +131,13 @@
   font-family: var(--pho-font-heading);
   font-weight: 700;
   font-size: calc(clamp(4px, 0.85vw, 8px) * var(--pho-hero-art-scale, 1));
-  line-height: 1.15;
+  line-height: var(--pho-line-snug);
   margin: 0;
   max-width: 100%;
   min-width: 0;
   white-space: pre;
   color: var(--pho-color-primary-strong);
-  text-shadow: 0 0 1px var(--pho-color-primary), 0 0 8px rgba(44, 255, 122, 0.55), 0 0 20px rgba(44, 255, 122, 0.25);
+  text-shadow: var(--pho-glow-primary-soft);
   animation: phosphorHeroBreathe 4.2s ease-in-out infinite;
   position: relative;
   z-index: 1;

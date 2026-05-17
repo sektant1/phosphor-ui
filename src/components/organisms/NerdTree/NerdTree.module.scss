@@ -35,7 +35,7 @@
 
 .compact .link,
 .compact .foldBtn {
-  line-height: 1.35;
+  line-height: var(--pho-line-caption);
 }
 
 @media (max-width: 880px) {
@@ -100,7 +100,7 @@
   min-height: 2.5rem;
   gap: 8px;
   align-items: center;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   transition: var(--pho-hover-transition);
 }
 
@@ -164,7 +164,7 @@
   margin: 0;
   color: var(--pho-color-primary-faint);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.18em;
+  letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -186,7 +186,7 @@
   font-size: var(--pho-type-control-sm-size);
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--pho-tracking-normal);
   overflow-wrap: anywhere;
 }
 
@@ -328,7 +328,7 @@
 
   .buf {
     font-size: var(--pho-type-micro-size);
-    letter-spacing: 0.12em;
+    letter-spacing: var(--pho-tracking-wider);
   }
 
   .children {
@@ -338,7 +338,7 @@
   .foldBtn,
   .link {
     min-height: 1.75rem;
-    line-height: 1.35;
+    line-height: var(--pho-line-caption);
   }
 
   .link {

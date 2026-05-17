@@ -33,7 +33,7 @@
 .title {
   font-family: var(--pho-font-heading);
   font-size: var(--pho-type-icon-md-size);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-heading);
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary);
   margin: 0 0 0.2rem;
@@ -60,7 +60,7 @@
 .label {
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-terminal);
   text-transform: uppercase;
   color: var(--pho-color-primary-muted);
   margin-bottom: 0.25rem;
@@ -72,7 +72,8 @@
   color: var(--pho-color-danger-strong);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
+  line-height: var(--pho-line-caption);
   margin: 0.15rem 0 0;
   padding: 0.55rem 0.7rem;
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }

@@ -307,6 +307,12 @@
   --type-h6-size: 0.88rem;
   --type-lead-size: clamp(1.05rem, 0.3vw + 1rem, 1.2rem);
   --type-body-size: clamp(16px, 0.4vw + 14px, 18px);
+  --text-xs: 0.72rem;
+  --text-sm: 0.875rem;
+  --text-base: var(--type-body-size);
+  --text-lg: var(--type-lead-size);
+  --text-xl: var(--type-h3-size);
+  --text-2xl: var(--type-h2-size);
   --type-small-size: 0.875rem;
   --type-caption-size: 0.78rem;
   --type-micro-size: 0.68rem;
@@ -325,6 +331,9 @@
   --type-line-snug: 1.15;
   --type-line-normal: 1.6;
   --type-line-prose: 1.7;
+  --line-tight: var(--type-line-snug);
+  --line-normal: var(--type-line-normal);
+  --line-relaxed: var(--type-line-prose);
   --type-line-control: 1;
   --type-line-caption: 1.35;
 
@@ -333,6 +342,8 @@
   --tracking-wide: 0.06em;
   --tracking-wider: 0.14em;
   --tracking-stamp: 0.22em;
+  --tracking-terminal: var(--tracking-wide);
+  --tracking-heading: var(--tracking-wide);
 
   --pho-type-h1-size: var(--type-h1-size);
   --pho-type-h2-size: var(--type-h2-size);
@@ -355,10 +366,17 @@
   --pho-type-icon-sm-size: var(--type-icon-sm-size);
   --pho-type-icon-md-size: var(--type-icon-md-size);
   --pho-type-icon-lg-size: var(--type-icon-lg-size);
+  --pho-text-xs: var(--text-xs);
+  --pho-text-sm: var(--text-sm);
+  --pho-text-base: var(--text-base);
+  --pho-text-lg: var(--text-lg);
+  --pho-text-xl: var(--text-xl);
+  --pho-text-2xl: var(--text-2xl);
   --pho-line-tight: var(--type-line-tight);
   --pho-line-snug: var(--type-line-snug);
   --pho-line-normal: var(--type-line-normal);
   --pho-line-prose: var(--type-line-prose);
+  --pho-line-relaxed: var(--line-relaxed);
   --pho-line-control: var(--type-line-control);
   --pho-line-caption: var(--type-line-caption);
   --pho-tracking-tight: var(--tracking-tight);
@@ -366,6 +384,8 @@
   --pho-tracking-wide: var(--tracking-wide);
   --pho-tracking-wider: var(--tracking-wider);
   --pho-tracking-stamp: var(--tracking-stamp);
+  --pho-tracking-terminal: var(--tracking-terminal);
+  --pho-tracking-heading: var(--tracking-heading);
 
   /* ── scrollbar ─────────────────────────────────────────── */
   --scrollbar-size: 8px;

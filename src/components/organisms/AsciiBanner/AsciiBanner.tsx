@@ -10,10 +10,7 @@ type AsciiBannerStyle = React.CSSProperties &
 type AsciiBannerBaseProps = {
   art?: string;
   text?: string;
-<<<<<<< HEAD
   font?: BannerFontName;
-=======
->>>>>>> 261b67a (0.3.48)
   fallback?: string;
   label?: string;
   className?: string;
@@ -42,14 +39,9 @@ const isAnchorBanner = (
   props: AsciiBannerProps,
 ): props is AsciiBannerAnchorProps => typeof props.href === "string";
 export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
-<<<<<<< HEAD
   const { art, text, font = "Slant", fallback } = props;
   const renderedArt = art ?? (text ? bannerSync(text, font) : "");
   const readableFallback = fallback ?? text;
-=======
-  const { fallback } = props;
-  const art = props.art ?? props.text ?? fallback ?? "";
->>>>>>> 261b67a (0.3.48)
 
   const frameRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLPreElement>(null);
@@ -121,10 +113,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
     const {
       art: _art,
       text: _text,
-<<<<<<< HEAD
       font: _font,
-=======
->>>>>>> 261b67a (0.3.48)
       fallback: _fallback,
       href,
       label,
@@ -149,10 +138,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
   const {
     art: _art,
     text: _text,
-<<<<<<< HEAD
     font: _font,
-=======
->>>>>>> 261b67a (0.3.48)
     fallback: _fallback,
     label,
     className,

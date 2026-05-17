@@ -17,7 +17,7 @@
   font-size: var(--pho-type-control-sm-size);
   gap: 0.7rem;
   grid-template-columns: minmax(0, 1fr) auto;
-  line-height: 1.2;
+  line-height: var(--pho-line-caption);
   max-width: 100%;
   min-height: 2.35rem;
   min-width: 0;

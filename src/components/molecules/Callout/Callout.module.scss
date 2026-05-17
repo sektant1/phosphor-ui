@@ -25,7 +25,7 @@
   font-size: var(--pho-type-caption-size);
   gap: var(--callout-gap);
   grid-template-columns: var(--callout-glyph-size) minmax(0, 1fr);
-  line-height: 1.55;
+  line-height: var(--pho-line-normal);
   min-width: 0;
   overflow: hidden;
   padding: var(--callout-pad-block) var(--callout-pad-inline);
@@ -65,7 +65,7 @@
   --callout-gap: 0.45rem;
   --callout-glyph-size: 1rem;
   font-size: var(--pho-type-ui-xs-size);
-  line-height: 1.45;
+  line-height: var(--pho-line-normal);
 }
 
 .lg {
@@ -74,7 +74,7 @@
   --callout-gap: 0.75rem;
   --callout-glyph-size: 1.55rem;
   font-size: var(--pho-type-ui-sm-size);
-  line-height: 1.65;
+  line-height: var(--pho-line-prose);
 }
 
 .glyph {
@@ -84,12 +84,12 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-control-size);
   justify-items: center;
-  line-height: 1;
+  line-height: var(--pho-line-control);
   min-width: 0;
   min-height: var(--callout-glyph-size);
   position: relative;
   text-align: center;
-  text-shadow: 0 0 1px var(--callout-accent), 0 0 8px var(--callout-glow);
+  text-shadow: none;
   z-index: 1;
 }
 
@@ -129,9 +129,9 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-ui-sm-size);
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.05;
+  line-height: var(--pho-line-tight);
   overflow-wrap: anywhere;
-  text-shadow: 0 0 1px var(--callout-accent), 0 0 7px var(--callout-glow);
+  text-shadow: none;
   text-transform: uppercase;
 }
 

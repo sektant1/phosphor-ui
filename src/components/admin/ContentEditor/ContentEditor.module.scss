@@ -96,7 +96,7 @@
   cursor: pointer;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-xs-size);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   padding: 0.25rem 0.55rem;
   text-transform: uppercase;
   transition: var(--pho-hover-transition);
@@ -137,7 +137,7 @@
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
-  line-height: 1.55;
+  line-height: var(--pho-line-normal);
   padding: 1rem;
   white-space: pre-wrap;
   word-break: break-word;
@@ -151,7 +151,7 @@
 
 .rawError {
   color: var(--pho-color-danger);
-  text-shadow: 0 0 1px var(--pho-color-danger-emphasis), 0 0 6px var(--pho-color-danger-muted);
+  text-shadow: none;
 }
 
 .previewSurface {
@@ -185,8 +185,8 @@
 .previewTitle {
   color: var(--pho-color-primary);
   font-family: var(--pho-font-terminal);
-  font-size: clamp(1.45rem, 3vw, 2.1rem);
-  line-height: 1;
+  font-size: var(--pho-type-h2-size);
+  line-height: var(--pho-line-tight);
   margin: 0;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -196,7 +196,7 @@
 
 @supports (font-size: 1cqw) {
   .previewTitle {
-    font-size: clamp(1.25rem, 8cqw, 2.1rem);
+    font-size: clamp(var(--pho-type-h3-size), 8cqw, var(--pho-type-h2-size));
   }
 }
 
@@ -205,7 +205,7 @@
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--pho-tracking-terminal);
   padding: 0.2rem 0.45rem;
   position: absolute;
   right: 0;
@@ -230,7 +230,7 @@
   color: var(--pho-color-text);
   font-family: var(--pho-font-body);
   font-size: var(--pho-type-control-sm-size);
-  line-height: 1.55;
+  line-height: var(--pho-line-normal);
   margin-top: 0.4rem;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -466,7 +466,7 @@
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-micro-size);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--pho-tracking-terminal);
   padding: 0.25rem 0.4rem;
   cursor: pointer;
   line-height: 1;

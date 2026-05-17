@@ -61,7 +61,7 @@
   font-size: var(--pho-type-ui-sm-size);
   font-weight: 700;
   letter-spacing: var(--pho-tracking-wide);
-  line-height: 1.1;
+  line-height: var(--pho-line-snug);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -270,7 +270,7 @@
 
   .label {
     font-size: var(--pho-type-caption-size);
-    letter-spacing: 0.06em;
+    letter-spacing: var(--pho-tracking-terminal);
   }
 
   .tabs .list {

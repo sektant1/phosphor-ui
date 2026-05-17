@@ -67,7 +67,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-control-sm-size);
   color: var(--pho-color-primary-muted);
-  letter-spacing: 0.14em;
+  letter-spacing: var(--pho-tracking-wider);
 }
 
 .title {
@@ -76,7 +76,7 @@
   font-size: var(--pho-type-control-sm-size);
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--pho-tracking-normal);
   text-transform: uppercase;
   min-width: 0;
   overflow-wrap: anywhere;
@@ -165,7 +165,7 @@
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-caption-size);
   color: var(--pho-color-primary-faint);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-terminal);
 }
 
 .li a {

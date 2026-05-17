@@ -48,9 +48,10 @@
   text-shadow: var(--pho-glow-accent);
 }
 
-.num { font-family: var(--pho-font-terminal); font-size: var(--pho-type-control-sm-size); color: var(--pho-color-primary-faint); letter-spacing: 0.1em; }
+.num { font-family: var(--pho-font-terminal); font-size: var(--pho-type-control-sm-size); color: var(--pho-color-primary-faint); letter-spacing: var(--pho-tracking-terminal); }
 .title {
-  color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
+  color: var(--pho-color-primary-strong);
+  text-shadow: var(--pho-glow-primary-soft);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,7 +68,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--pho-tracking-terminal);
   text-align: center;
   white-space: nowrap;
 }
