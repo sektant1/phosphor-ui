@@ -9,7 +9,10 @@ export interface PostRowProps extends Omit<React.LiHTMLAttributes<HTMLLIElement>
   dateTime?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
+<<<<<<< HEAD
   showDescription?: boolean;
+=======
+>>>>>>> 261b67a (0.3.48)
   meta?: React.ReactNode;
   href: string;
   glyph?: React.ReactNode;
@@ -92,8 +95,12 @@ export const PostRow: React.FC<PostRowProps> = ({
   date,
   dateTime,
   title,
+<<<<<<< HEAD
   description,
   showDescription,
+=======
+  description: _description,
+>>>>>>> 261b67a (0.3.48)
   meta,
   href,
   glyph = "▌",

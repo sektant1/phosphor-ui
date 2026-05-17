@@ -11,6 +11,7 @@
   gap: 0.35rem;
   min-width: 0;
   padding: 0.7rem 0.85rem;
+  transition: var(--pho-hover-transition);
 }
 
 .link {
@@ -26,8 +27,27 @@
   text-shadow: var(--pho-glow-primary);
 }
 
-.link:hover {
-  color: var(--pho-color-primary);
+.item:hover,
+.item:focus-within {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+}
+
+.link:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
+}
+
+.item:hover .link,
+.item:hover .glyph,
+.item:hover .meta,
+.item:hover .description,
+.item:focus-within .link,
+.item:focus-within .glyph,
+.item:focus-within .meta,
+.item:focus-within .description {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
 }
 
 .glyph {

@@ -162,19 +162,22 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+  transition: var(--pho-hover-transition);
   white-space: nowrap;
   width: fit-content;
 }
 
-.copy:hover {
-  background: rgba(44, 255, 122, 0.08);
-  border-color: var(--pho-color-primary-muted);
-  color: var(--pho-color-primary-strong);
+.copy:hover,
+.copy:focus-visible {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  text-shadow: none;
 }
 
 .copy:focus-visible {
-  box-shadow: inset 0 0 0 1px var(--pho-color-primary-strong);
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .copied {

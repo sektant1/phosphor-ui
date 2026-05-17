@@ -51,9 +51,19 @@
   font-size: var(--pho-type-control-sm-size);
   cursor: pointer;
   padding: 0 4px;
+  transition: var(--pho-hover-transition);
 
-  &:hover {
-    color: var(--pho-color-accent);
+  &:hover,
+  &:focus-visible {
+    background: var(--pho-hover-row-bg);
+    color: var(--pho-hover-row-text);
+    outline: none;
+    text-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: var(--pho-focus-ring);
+    outline-offset: var(--pho-focus-offset);
   }
 }
 

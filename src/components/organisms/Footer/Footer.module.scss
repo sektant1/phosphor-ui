@@ -93,16 +93,20 @@
   letter-spacing: 0.06em;
   padding: 2px 4px;
   border-bottom: 1px dashed transparent;
-  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  transition: var(--pho-hover-transition);
 }
 
 .links a:hover,
 .links a:focus-visible {
-  background: var(--pho-color-accent);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
   outline: none;
-  border-bottom-color: var(--pho-color-accent-strong);
+  border-bottom-color: var(--pho-hover-row-border);
+}
+.links a:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .status {

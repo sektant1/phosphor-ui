@@ -247,6 +247,21 @@
   --pho-active-glow:
     0 0 0 1px var(--pho-alpha-primary-22),
     inset 0 0 14px var(--pho-alpha-primary-05);
+  --pho-hover-row-bg: var(--pho-color-accent);
+  --pho-hover-row-text: var(--pho-color-background);
+  --pho-hover-row-muted-text: var(--pho-color-background-raised);
+  --pho-hover-row-border: var(--pho-color-accent-strong);
+  --pho-hover-subtle-bg: var(--pho-alpha-primary-08);
+  --pho-hover-subtle-border: var(--pho-color-primary);
+  --pho-hover-subtle-text: var(--pho-color-primary-strong);
+  --pho-hover-subtle-shadow: var(--pho-active-glow);
+  --pho-hover-transition:
+    background-color var(--pho-motion-fast) var(--pho-ease-out),
+    background var(--pho-motion-fast) var(--pho-ease-out),
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out),
+    color var(--pho-motion-fast) var(--pho-ease-out),
+    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
   --pho-scanline-opacity: 0.11;
   --pho-scanline-size: 4px;
   --pho-flicker-opacity-min: 0.88;

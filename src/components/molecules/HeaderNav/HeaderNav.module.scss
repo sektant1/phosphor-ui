@@ -32,11 +32,7 @@
   padding: 0.24rem 0.42rem;
   text-decoration: none;
   text-transform: uppercase;
-  transition:
-    background-color var(--pho-motion-fast) var(--pho-ease-out),
-    border-color var(--pho-motion-fast) var(--pho-ease-out),
-    color var(--pho-motion-fast) var(--pho-ease-out),
-    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
+  transition: var(--pho-hover-transition);
 }
 
 .link::before,
@@ -74,10 +70,22 @@
 
 .link:hover,
 .link:focus-visible {
-  background: var(--pho-alpha-primary-05);
-  color: var(--pho-color-primary-strong);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: none;
-  text-shadow: var(--pho-glow-primary-soft);
+  text-shadow: none;
+}
+
+.link:hover .glyph,
+.link:hover .label,
+.link:focus-visible .glyph,
+.link:focus-visible .label,
+.link:hover::before,
+.link:hover::after,
+.link:focus-visible::before,
+.link:focus-visible::after {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
 }
 
 .link:focus-visible {
@@ -86,9 +94,9 @@
 }
 
 .active .link {
-  background: transparent;
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .active .glyph,
@@ -96,7 +104,7 @@
 .active .link::before,
 .active .link::after {
   color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  text-shadow: none;
 }
 
 .plain .glyph:empty {
@@ -136,22 +144,20 @@
 
 .tabs .link:hover,
 .tabs .link:focus-visible {
-  background: transparent;
+  background: var(--pho-hover-row-bg);
   outline: none;
-  outline-offset: 0;
 }
 
 .tabs .active .link {
-  background: transparent;
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .tabs .active .link:hover,
 .tabs .active .link:focus-visible {
-  background: transparent;
+  background: var(--pho-hover-row-bg);
   outline: none;
-  outline-offset: 0;
 }
 
 .command .list {
@@ -172,14 +178,14 @@
 
 .command .link:hover,
 .command .link:focus-visible {
-  border-color: transparent;
+  border-color: var(--pho-hover-row-border);
 }
 
 .command .active .link {
-  background: transparent;
-  border-color: transparent;
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  background: var(--pho-hover-subtle-bg);
+  border-color: var(--pho-hover-subtle-border);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .mobile .list {
@@ -222,9 +228,9 @@
 }
 
 .mobile .active .link {
-  background: transparent;
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 @media (max-width: 560px) {

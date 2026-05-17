@@ -59,14 +59,33 @@
   padding: 2px 4px;
   color: var(--pho-color-primary-muted);
   border-left: 2px solid transparent;
-  transition: color 140ms ease, background 140ms ease, border-left-color 140ms ease, text-shadow 140ms ease;
+  transition: var(--pho-hover-transition);
 }
+<<<<<<< HEAD
 .li > .row > a:hover { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); }
 .active > .row > a {
   color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary);
+=======
+.li > a:hover,
+.li > a:focus-visible {
+  background: var(--pho-hover-row-bg);
+  border-left-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+.li > a:hover .glyph,
+.li > a:focus-visible .glyph {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
+}
+.li > a:focus-visible { outline: var(--pho-focus-ring); outline-offset: var(--pho-focus-offset); }
+.active > a {
+  color: var(--pho-hover-subtle-text); text-shadow: none;
+>>>>>>> 261b67a (0.3.48)
   border-left-color: var(--pho-color-primary);
-  background: rgba(44, 255, 122, 0.08);
-  box-shadow: inset 2px 0 6px -2px var(--pho-color-primary);
+  background: var(--pho-hover-subtle-bg);
+  box-shadow: inset 2px 0 0 var(--pho-color-primary);
 }
 .active > .row > a .glyph {
   animation: tocActiveBlink 1.6s steps(2) infinite;
@@ -86,11 +105,12 @@
 .done > .row > a { color: var(--pho-color-primary-faint); }
 .done > .row > a > span:last-child { text-decoration: line-through; text-decoration-color: var(--pho-color-primary-faint); }
 .glyph { color: var(--pho-color-accent); font-family: var(--pho-font-terminal); font-size: var(--pho-type-caption-size); }
-.active .glyph { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
+.active .glyph { color: var(--pho-hover-subtle-text); text-shadow: none; }
 .done .glyph { color: var(--pho-color-primary-faint); }
 
 .subList { padding-left: 18px; }
 .subList .li { font-size: var(--pho-type-ui-xs-size); }
+<<<<<<< HEAD
 .subList .li > .row > a { color: var(--pho-color-primary-faint); }
 .subList .active > .row > a { color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); border-left-color: var(--pho-color-primary); }
 .collapsed > ul.subList { display: none; }
@@ -102,6 +122,10 @@
 @media (prefers-reduced-motion: reduce) {
   .hasChildren:not(.collapsed) > ul.subList { animation: none; }
 }
+=======
+.subList .li > a { color: var(--pho-color-primary-faint); }
+.subList .active > a { color: var(--pho-hover-subtle-text); text-shadow: none; border-left-color: var(--pho-color-primary); }
+>>>>>>> 261b67a (0.3.48)
 
 .foot {
   margin-top: 10px;

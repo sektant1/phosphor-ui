@@ -15,16 +15,34 @@
   color: var(--pho-color-accent);
   text-shadow: var(--pho-glow-accent);
   text-decoration: none;
+  padding: 0.1rem 0.25rem;
+  transition: var(--pho-hover-transition);
 }
 
-.pho-pagination__link:hover {
-  color: var(--pho-color-accent-strong);
+.pho-pagination__link:hover,
+.pho-pagination__link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+
+.pho-pagination__link:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .pho-pagination__link.disabled {
   color: var(--pho-color-primary-faint);
   text-shadow: none;
   cursor: not-allowed;
+}
+
+.pho-pagination__link.disabled:hover,
+.pho-pagination__link.disabled:focus-visible {
+  background: transparent;
+  color: var(--pho-color-primary-faint);
+  outline: none;
 }
 
 .pho-pagination__marker {

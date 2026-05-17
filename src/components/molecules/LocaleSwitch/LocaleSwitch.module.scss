@@ -48,6 +48,7 @@
   padding: 0.2rem 0.52rem;
   text-decoration: none;
   text-transform: uppercase;
+  transition: var(--pho-hover-transition);
 }
 
 .code {
@@ -58,9 +59,10 @@
 
 .link:hover,
 .link:focus-visible {
-  background: rgba(44, 255, 122, 0.1);
-  color: var(--pho-color-primary-strong);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: none;
+  text-shadow: none;
 }
 
 .link:focus-visible {
@@ -69,8 +71,9 @@
 }
 
 .active {
-  color: var(--pho-color-accent-strong);
-  text-shadow: var(--pho-glow-accent-soft);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .segmented .list {
@@ -84,7 +87,7 @@
 
 .segmented .link:hover,
 .segmented .link:focus-visible {
-  background: transparent;
+  background: var(--pho-hover-row-bg);
 }
 
 .segmented .item:last-child .link {
@@ -92,14 +95,15 @@
 }
 
 .segmented .active {
-  background: var(--pho-color-primary-muted);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
   text-shadow: none;
 }
 
 .segmented .active:hover,
 .segmented .active:focus-visible {
-  background: var(--pho-color-primary-muted);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
 }
 
 .inline .list {
@@ -119,8 +123,7 @@
 
 .inline .active {
   color: var(--pho-color-primary-strong);
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
+  text-decoration: none;
 }
 
 .terminal {
@@ -135,8 +138,8 @@
 }
 
 .terminal .active {
-  background: rgba(98, 255, 154, 0.14);
-  color: var(--pho-color-accent-strong);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
 }
 
 .sm .link {

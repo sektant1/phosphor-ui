@@ -27,12 +27,29 @@
     var(--pho-color-background-raised);
   min-height: 7rem;
   text-decoration: none;
-  transition: border-color 120ms, background 120ms, box-shadow 120ms;
+  transition: var(--pho-hover-transition);
 
-  &:hover {
-    border-color: var(--pho-color-primary);
-    background: rgba(44, 255, 122, 0.06);
-    box-shadow: 0 0 12px rgba(44, 255, 122, 0.1);
+  &:hover,
+  &:focus-visible {
+    border-color: var(--pho-hover-row-border);
+    background: var(--pho-hover-row-bg);
+    box-shadow: none;
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--pho-focus-ring);
+    outline-offset: var(--pho-focus-offset);
+  }
+
+  &:hover .date,
+  &:hover .title,
+  &:hover .tag,
+  &:focus-visible .date,
+  &:focus-visible .title,
+  &:focus-visible .tag {
+    color: var(--pho-hover-row-muted-text);
+    text-shadow: none;
   }
 }
 

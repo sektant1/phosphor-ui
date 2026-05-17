@@ -19,10 +19,7 @@
   border-radius: 0;
   text-decoration: none;
   transition:
-    background-color var(--pho-motion-fast) var(--pho-ease-out),
-    border-color var(--pho-motion-fast) var(--pho-ease-out),
-    box-shadow var(--pho-motion-fast) var(--pho-ease-out),
-    color var(--pho-motion-fast) var(--pho-ease-out),
+    var(--pho-hover-transition),
     opacity var(--pho-motion-fast) var(--pho-ease-out),
     transform var(--pho-motion-fast) var(--pho-ease-out);
   user-select: none;
@@ -30,9 +27,7 @@
 }
 
 .btn:hover:not(:disabled):not([aria-disabled="true"]) {
-  box-shadow:
-    inset 0 0 0 1px currentColor,
-    var(--pho-active-glow);
+  box-shadow: var(--pho-hover-subtle-shadow);
 }
 
 .btn:active:not(:disabled):not([aria-disabled="true"]) {
@@ -77,8 +72,9 @@
 
 .primary:hover:not(:disabled):not([aria-disabled="true"]),
 .primary.pressed {
-  background: var(--pho-color-primary);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
 }
 
@@ -93,9 +89,9 @@
 
 .secondary:hover:not(:disabled):not([aria-disabled="true"]),
 .secondary.pressed {
-  border-color: var(--pho-color-primary);
-  background: var(--pho-alpha-primary-18);
-  color: var(--pho-color-primary-strong);
+  border-color: var(--pho-hover-subtle-border);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
 }
 
 .accent {
@@ -106,8 +102,9 @@
 
 .accent:hover:not(:disabled):not([aria-disabled="true"]),
 .accent.pressed {
-  background: var(--pho-color-info);
-  color: var(--pho-color-background-deep);
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
 }
 
@@ -119,8 +116,9 @@
 
 .ghost:hover:not(:disabled):not([aria-disabled="true"]),
 .ghost.pressed {
-  background: var(--pho-color-primary-muted);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
 }
 
 .quiet {
@@ -131,9 +129,9 @@
 
 .quiet:hover:not(:disabled):not([aria-disabled="true"]),
 .quiet.pressed {
-  background: var(--pho-alpha-primary-08);
-  border-color: var(--pho-color-primary-faint);
-  color: var(--pho-color-primary);
+  background: var(--pho-hover-subtle-bg);
+  border-color: var(--pho-hover-subtle-border);
+  color: var(--pho-hover-subtle-text);
 }
 
 .danger {

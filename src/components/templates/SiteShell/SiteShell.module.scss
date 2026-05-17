@@ -17,9 +17,9 @@
   left: 0.75rem;
   z-index: 10000;
   transform: translateY(-150%);
-  background: var(--pho-color-primary);
-  border: 1px solid var(--pho-color-primary-strong);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  border: 1px solid var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-sm-size);
   padding: 0.45rem 0.65rem;
@@ -29,8 +29,8 @@
 }
 
 .skipLink:focus-visible {
-  outline: 2px solid var(--pho-color-accent-strong);
-  outline-offset: 2px;
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
   transform: translateY(0);
 }
 
@@ -43,7 +43,7 @@
 }
 
 .main:focus-visible {
-  outline: 1px dashed var(--pho-color-primary-muted);
+  outline: var(--pho-focus-ring);
   outline-offset: 0.5rem;
 }
 

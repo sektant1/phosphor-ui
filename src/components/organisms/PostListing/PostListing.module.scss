@@ -47,16 +47,30 @@
   color: var(--pho-color-text);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-control-size);
+  transition: var(--pho-hover-transition);
 }
-.row > a:hover { background: var(--pho-color-accent); color: var(--pho-color-background); text-shadow: none; outline: none; }
+.row > a:hover,
+.row > a:focus-visible { background: var(--pho-hover-row-bg); color: var(--pho-hover-row-text); text-shadow: none; outline: none; }
+.row > a:focus-visible { outline: var(--pho-focus-ring); outline-offset: calc(-1 * var(--pho-focus-offset)); }
 .row > a:hover .title,
 .row > a:hover .glyph,
 .row > a:hover .date,
 .row > a:hover .sep,
+<<<<<<< HEAD
 .row > a:hover .description,
 .row > a:hover .description mark,
 .row > a:hover .meta { color: var(--pho-color-background-raised); text-shadow: none; }
 .row > a:hover .thumb { border-color: var(--pho-color-background-raised); }
+=======
+.row > a:hover .meta,
+.row > a:focus-visible .title,
+.row > a:focus-visible .glyph,
+.row > a:focus-visible .date,
+.row > a:focus-visible .sep,
+.row > a:focus-visible .meta { color: var(--pho-hover-row-muted-text); text-shadow: none; }
+.row > a:hover .thumb,
+.row > a:focus-visible .thumb { border-color: var(--pho-hover-row-muted-text); }
+>>>>>>> 261b67a (0.3.48)
 
 .glyph { grid-column: 1; color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary); }
 .date  { grid-column: 5; color: var(--pho-color-primary-muted); font-size: var(--pho-type-control-sm-size); font-variant-numeric: tabular-nums; text-align: right; }
@@ -136,8 +150,10 @@
   text-shadow: var(--pho-glow-primary);
   letter-spacing: 0.18em;
 }
-.row > a:hover .thumbFallback { background: var(--pho-color-background-raised); }
-.row > a:hover .thumbFallbackGlyph { color: var(--pho-color-background-raised); text-shadow: none; }
+.row > a:hover .thumbFallback,
+.row > a:focus-visible .thumbFallback { background: var(--pho-hover-row-muted-text); }
+.row > a:hover .thumbFallbackGlyph,
+.row > a:focus-visible .thumbFallbackGlyph { color: var(--pho-hover-row-muted-text); text-shadow: none; }
 
 @media (max-width: 720px) {
   .wrap {

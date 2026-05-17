@@ -23,7 +23,14 @@
 
   .pho-header__banner:hover pre,
   .pho-header__banner:focus-visible pre {
-    color: var(--pho-color-primary-strong);
+    background: var(--pho-hover-row-bg);
+    color: var(--pho-hover-row-text);
+    text-shadow: none;
+  }
+
+  .pho-header__banner:focus-visible {
+    outline: var(--pho-focus-ring);
+    outline-offset: var(--pho-focus-offset);
   }
 
   .pho-header__brand {
@@ -36,17 +43,20 @@
     min-width: 0;
     text-decoration: none;
     text-shadow: none;
+    transition: var(--pho-hover-transition);
   }
 
   .pho-header__brand:hover,
   .pho-header__brand:focus-visible {
-    color: var(--pho-color-accent-strong);
+    background: var(--pho-hover-row-bg);
+    color: var(--pho-hover-row-text);
     outline: none;
-    text-shadow: var(--pho-glow-accent);
+    text-shadow: none;
   }
 
   .pho-header__brand:focus-visible {
-    box-shadow: 0 0 0 1px var(--pho-color-primary);
+    outline: var(--pho-focus-ring);
+    outline-offset: var(--pho-focus-offset);
   }
 
   .pho-header__prompt {

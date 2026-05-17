@@ -21,6 +21,20 @@ const externalPackages = [
 ];
 
 const isExternal = (id) => externalPackages.some((pattern) => pattern.test(id));
+const clientDirective = '"use client";';
+
+function preserveClientDirective() {
+  return {
+    name: "preserve-client-directive",
+    generateBundle(_options, bundle) {
+      for (const output of Object.values(bundle)) {
+        if (output.type !== "chunk" || !output.isEntry) continue;
+        if (output.code.startsWith(clientDirective)) continue;
+        output.code = `${clientDirective}\n${output.code}`;
+      }
+    },
+  };
+}
 
 export default [
   {
@@ -65,6 +79,7 @@ export default [
       }),
 
       terser(),
+      preserveClientDirective(),
     ],
   },
 ];

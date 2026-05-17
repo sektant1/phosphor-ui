@@ -25,10 +25,15 @@
   color: var(--pho-color-primary);
   cursor: pointer;
   min-height: 1.45rem;
+  transition: var(--pho-hover-transition);
 
-  &:hover {
-    border-color: var(--pho-color-primary);
-    background: rgba(44, 255, 122, 0.08);
+  &:hover,
+  &:focus-visible {
+    border-color: var(--pho-hover-row-border);
+    background: var(--pho-hover-row-bg);
+    color: var(--pho-hover-row-text);
+    outline: none;
+    text-shadow: none;
   }
 }
 
@@ -48,10 +53,14 @@
   min-height: 1.45rem;
   display: inline-flex;
   align-items: center;
+  transition: var(--pho-hover-transition);
 
-  &:hover {
-    background: var(--pho-color-accent);
-    color: var(--pho-color-background);
+  &:hover,
+  &:focus-visible {
+    background: var(--pho-hover-row-bg);
+    border-color: var(--pho-hover-row-border);
+    color: var(--pho-hover-row-text);
+    outline: none;
     text-shadow: none;
   }
 }

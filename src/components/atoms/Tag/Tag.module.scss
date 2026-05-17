@@ -10,6 +10,7 @@
   cursor: default;
   background: rgba(98, 255, 154, 0.04);
   white-space: nowrap;
+  transition: var(--pho-hover-transition);
 }
 
 .link { cursor: pointer; }
@@ -31,17 +32,19 @@
   text-shadow: none;
 }
 
-.tag:hover,
+.link:hover,
+.link:focus-visible,
 .hover {
-  background: var(--pho-color-accent);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
-  border-color: var(--pho-color-accent-strong);
+  border-color: var(--pho-hover-row-border);
 }
 
-.tag:hover .count,
+.link:hover .count,
+.link:focus-visible .count,
 .hover .count {
-  color: var(--pho-color-background);
+  color: var(--pho-hover-row-text);
 }
 
 .count {
@@ -61,9 +64,14 @@
   margin: 0 0 0 6px;
   padding: 0;
   text-transform: uppercase;
+  transition: var(--pho-hover-transition);
 }
 
+.remove:hover,
 .remove:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: var(--pho-focus-ring);
   outline-offset: 2px;
+  text-shadow: none;
 }

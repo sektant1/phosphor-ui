@@ -54,11 +54,20 @@
   font-family: var(--pho-font-code);
   letter-spacing: 0.03em;
   text-decoration: none;
+  transition: var(--pho-hover-transition);
 }
 
-a.tag:hover {
-  color: var(--pho-color-accent-strong);
-  text-shadow: var(--pho-glow-accent);
+a.tag:hover,
+a.tag:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+
+a.tag:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 @media (max-width: 520px) {

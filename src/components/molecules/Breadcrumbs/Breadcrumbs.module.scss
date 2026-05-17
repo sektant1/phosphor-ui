@@ -26,13 +26,15 @@
   color: inherit;
   overflow-wrap: anywhere;
   text-decoration: none;
+  transition: var(--pho-hover-transition);
 }
 
 a.item:hover,
 a.item:focus-visible {
-  color: var(--pho-color-primary-strong);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: 0;
-  text-shadow: var(--pho-glow-primary);
+  text-shadow: none;
 }
 
 a.item:focus-visible {
@@ -41,8 +43,9 @@ a.item:focus-visible {
 }
 
 .current {
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  background: var(--pho-hover-subtle-bg);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .sep {

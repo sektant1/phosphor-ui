@@ -13,10 +13,41 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.6rem;
+<<<<<<< HEAD
   min-width: 0;
   padding: 0.4rem 0;
+=======
+  padding: 0.4rem 0.5rem;
+>>>>>>> 261b67a (0.3.48)
   border-bottom: 1px dashed var(--pho-color-primary-faint);
   text-decoration: none;
+  transition: var(--pho-hover-transition);
+}
+
+.pho-search-hit a:hover,
+.pho-search-hit a:focus-visible {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+
+.pho-search-hit a:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
+}
+
+.pho-search-hit a:hover .hit-date,
+.pho-search-hit a:hover .hit-title,
+.pho-search-hit a:hover .hit-tags,
+.pho-search-hit a:hover .hit-snippet,
+.pho-search-hit a:focus-visible .hit-date,
+.pho-search-hit a:focus-visible .hit-title,
+.pho-search-hit a:focus-visible .hit-tags,
+.pho-search-hit a:focus-visible .hit-snippet {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
 }
 
 .pho-search-hit .hit-date {

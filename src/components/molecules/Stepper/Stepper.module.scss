@@ -15,7 +15,7 @@
   min-height: 1.65rem;
 }
 .done { color: var(--pho-color-primary-muted); }
-.current { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); }
+.current { background: var(--pho-hover-subtle-bg); color: var(--pho-hover-subtle-text); text-shadow: none; }
 .current::before { content: "▸ "; color: var(--pho-color-primary); }
 .num {
   font-family: var(--pho-font-heading); font-weight: 700;
@@ -44,8 +44,26 @@
   border: 1px solid var(--pho-color-primary-faint);
   padding: 10px 12px;
   background: var(--pho-color-background-raised);
+  transition: var(--pho-hover-transition);
 }
-.foot a:hover { border-color: var(--pho-color-primary); background: rgba(44, 255, 122, 0.08); }
+.foot a:hover,
+.foot a:focus-visible {
+  border-color: var(--pho-hover-row-border);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+.foot a:focus-visible { outline: var(--pho-focus-ring); outline-offset: var(--pho-focus-offset); }
+.foot a:hover .arrow,
+.foot a:hover .kind,
+.foot a:hover .name,
+.foot a:focus-visible .arrow,
+.foot a:focus-visible .kind,
+.foot a:focus-visible .name {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
+}
 .arrow {
   font-family: var(--pho-font-terminal); font-size: var(--pho-type-icon-md-size);
   color: var(--pho-color-primary); text-shadow: var(--pho-glow-primary);

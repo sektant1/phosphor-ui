@@ -32,6 +32,7 @@
   letter-spacing: 0.08em;
   padding: 0.45rem 0.75rem;
   text-transform: uppercase;
+  transition: var(--pho-hover-transition);
 }
 
 .vertical .tab {
@@ -40,13 +41,17 @@
   text-align: left;
 }
 
-.tab:hover:not(:disabled) {
-  color: var(--pho-color-primary);
+.tab:hover:not(:disabled),
+.tab:focus-visible:not(:disabled) {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  text-shadow: none;
 }
 
 .tab:focus-visible {
-  outline: 2px solid var(--pho-color-primary-strong);
-  outline-offset: 2px;
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .tab:disabled {
@@ -55,10 +60,10 @@
 }
 
 .active {
-  background: rgba(44, 255, 122, 0.08);
+  background: var(--pho-hover-subtle-bg);
   border-color: var(--pho-color-primary-faint);
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary);
+  color: var(--pho-hover-subtle-text);
+  text-shadow: none;
 }
 
 .panel {

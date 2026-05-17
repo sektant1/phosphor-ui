@@ -25,19 +25,15 @@
   text-align: left;
   text-shadow: var(--pho-glow-primary-soft);
   text-transform: uppercase;
-  transition:
-    background-color var(--pho-motion-fast) var(--pho-ease-out),
-    border-color var(--pho-motion-fast) var(--pho-ease-out),
-    box-shadow var(--pho-motion-fast) var(--pho-ease-out),
-    color var(--pho-motion-fast) var(--pho-ease-out),
-    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
+  transition: var(--pho-hover-transition);
   width: 100%;
 }
 
-.trigger:hover,
+.trigger:hover:not(:disabled):not([aria-disabled="true"]),
 .open {
-  border-color: var(--pho-color-primary-muted);
-  box-shadow: var(--pho-active-glow);
+  background: var(--pho-hover-subtle-bg);
+  border-color: var(--pho-hover-subtle-border);
+  box-shadow: var(--pho-hover-subtle-shadow);
 }
 
 .trigger:focus-visible {
@@ -110,22 +106,23 @@
   text-align: left;
   text-decoration: none;
   text-overflow: ellipsis;
-  transition:
-    background-color var(--pho-motion-fast) var(--pho-ease-out),
-    color var(--pho-motion-fast) var(--pho-ease-out),
-    text-shadow var(--pho-motion-fast) var(--pho-ease-out);
+  transition: var(--pho-hover-transition);
   white-space: nowrap;
   width: 100%;
 }
 
-.item:hover:not(:disabled),
-.item:focus-visible,
-.item[aria-disabled="true"]:focus-visible,
+.item:hover:not(:disabled):not([aria-disabled="true"]),
+.item:focus-visible:not(:disabled):not([aria-disabled="true"]),
 .selected {
-  background: var(--pho-alpha-primary-10);
-  color: var(--pho-color-primary-strong);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: 0;
-  text-shadow: var(--pho-glow-primary);
+  text-shadow: none;
+}
+
+.item:focus-visible:not(:disabled):not([aria-disabled="true"]) {
+  outline: var(--pho-focus-ring);
+  outline-offset: calc(-1 * var(--pho-focus-offset));
 }
 
 .item:disabled,

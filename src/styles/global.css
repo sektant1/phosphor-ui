@@ -194,6 +194,67 @@ samp {
   box-shadow: var(--pho-focus-glow);
 }
 
+.pho-hover-highlight,
+.pho-interactive-row,
+.pho-interactive-surface,
+.pho-interactive-inline {
+  transition: var(--pho-hover-transition);
+}
+
+.pho-hover-highlight:is(:hover, :focus-visible),
+.pho-hover-highlight:is([aria-current="page"], [aria-current="true"], [data-active="true"]),
+.pho-interactive-row:is(:hover, :focus-visible),
+.pho-interactive-row:is([aria-current="page"], [aria-current="true"], [data-active="true"]) {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  text-shadow: none;
+}
+
+.pho-hover-highlight:focus-visible,
+.pho-interactive-row:focus-visible,
+.pho-interactive-surface:focus-visible,
+.pho-interactive-inline:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
+}
+
+.pho-interactive-surface:is(:hover, :focus-visible),
+.pho-interactive-surface:is([aria-current="page"], [aria-current="true"], [data-active="true"]) {
+  background: var(--pho-hover-subtle-bg);
+  border-color: var(--pho-hover-subtle-border);
+  color: var(--pho-hover-subtle-text);
+  box-shadow: var(--pho-hover-subtle-shadow);
+}
+
+.pho-interactive-inline:is(:hover, :focus-visible),
+.pho-interactive-inline:is([aria-current="page"], [aria-current="true"], [data-active="true"]) {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+  text-shadow: none;
+}
+
+.pho-hover-highlight:is(:disabled, [aria-disabled="true"]),
+.pho-interactive-row:is(:disabled, [aria-disabled="true"]),
+.pho-interactive-surface:is(:disabled, [aria-disabled="true"]),
+.pho-interactive-inline:is(:disabled, [aria-disabled="true"]) {
+  background: inherit;
+  box-shadow: none;
+  color: inherit;
+  cursor: var(--pho-cursor-disabled);
+  text-shadow: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pho-hover-highlight,
+  .pho-interactive-row,
+  .pho-interactive-surface,
+  .pho-interactive-inline {
+    transition: none;
+  }
+}
+
 .pho-crt::before {
   animation: phosphorShellFlicker 5.6s steps(8) infinite;
 }

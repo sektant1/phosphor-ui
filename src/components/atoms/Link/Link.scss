@@ -7,14 +7,19 @@
   border-bottom: 1px dashed var(--pho-color-link);
   padding-bottom: 1px;
   cursor: pointer;
-  transition: none;
+  transition: var(--pho-hover-transition);
 }
 
 .pho-link:hover,
 .pho-link:focus-visible {
-  background: var(--pho-color-link);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
-  border-bottom: 1px solid var(--pho-color-link-hover);
+  border-bottom: 1px solid var(--pho-hover-row-border);
   outline: none;
+}
+
+.pho-link:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }

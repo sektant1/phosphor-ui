@@ -21,7 +21,7 @@
   text-align: center;
   text-shadow: var(--pho-glow-primary);
   cursor: default;
-  transition: background 0.08s linear, border-color 0.08s linear, color 0.08s linear;
+  transition: var(--pho-hover-transition);
 }
 
 .interactive {
@@ -30,11 +30,16 @@
 
 .interactive:hover,
 .interactive:focus-visible {
-  background: var(--pho-color-primary);
-  color: var(--pho-color-background);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   text-shadow: none;
-  border-color: var(--pho-color-primary-strong);
+  border-color: var(--pho-hover-row-border);
   outline: none;
+}
+
+.interactive:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .glyph {

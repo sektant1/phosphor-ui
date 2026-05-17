@@ -48,19 +48,21 @@
   overflow-wrap: anywhere;
   text-decoration: none;
   text-shadow: var(--pho-glow-primary-soft);
+  transition: var(--pho-hover-transition);
 }
 
 a.title:hover,
 a.title:focus-visible {
-  color: var(--pho-color-accent-strong);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: none;
-  text-decoration: underline;
-  text-shadow: var(--pho-glow-accent-soft);
-  text-underline-offset: 0.22em;
+  text-decoration: none;
+  text-shadow: none;
 }
 
 a.title:focus-visible {
-  box-shadow: 0 1px 0 var(--pho-color-accent);
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .meta {

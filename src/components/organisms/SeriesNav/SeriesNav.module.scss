@@ -52,12 +52,29 @@
   padding: 0.5rem 0.7rem;
   background: var(--pho-color-background-raised);
   text-decoration: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition: var(--pho-hover-transition);
 }
 
-.link:hover {
-  border-color: var(--pho-color-primary);
-  background: rgba(44, 255, 122, 0.06);
+.link:hover,
+.link:focus-visible {
+  border-color: var(--pho-hover-row-border);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+
+.link:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
+}
+
+.link:hover .dir,
+.link:hover .linkTitle,
+.link:focus-visible .dir,
+.link:focus-visible .linkTitle {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
 }
 
 .dir {

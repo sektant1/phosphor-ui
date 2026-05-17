@@ -202,12 +202,20 @@
   color: var(--pho-color-primary-faint);
   padding: 0.55rem 0 0;
   letter-spacing: 0.06em;
+  transition: var(--pho-hover-transition);
 }
 
 .logoutBtn:hover,
 .logoutBtn:focus-visible {
-  color: var(--pho-color-accent);
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
   outline: none;
+  text-shadow: none;
+}
+
+.logoutBtn:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .main {

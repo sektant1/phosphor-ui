@@ -14,7 +14,7 @@
   min-width: 0;
   overflow: hidden;
   position: relative;
-  transition: border-color var(--pho-motion-base) var(--pho-ease-out), box-shadow var(--pho-motion-base) var(--pho-ease-out), transform var(--pho-motion-base) var(--pho-ease-out);
+  transition: var(--pho-hover-transition);
 }
 
 .noCover {
@@ -50,11 +50,13 @@
 }
 
 .cc:hover {
-  border-color: var(--pho-color-primary-strong);
+  border-color: var(--pho-hover-subtle-border);
+  background:
+    linear-gradient(90deg, var(--pho-alpha-primary-12), transparent 46%),
+    var(--pho-color-background-deep);
   box-shadow:
-    inset 0 0 0 1px var(--pho-alpha-primary-28),
-    0 0 20px var(--pho-alpha-primary-16);
-  transform: translateY(-1px);
+    inset 0 0 0 1px var(--pho-alpha-primary-18),
+    inset 3px 0 0 var(--pho-hover-subtle-border);
 }
 
 .cover {
@@ -352,9 +354,5 @@
 @media (prefers-reduced-motion: reduce) {
   .cc {
     transition: none;
-  }
-
-  .cc:hover {
-    transform: none;
   }
 }

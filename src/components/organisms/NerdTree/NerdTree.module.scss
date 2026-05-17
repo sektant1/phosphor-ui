@@ -74,10 +74,9 @@
 
   .toggleBtn:hover,
   .toggleBtn:focus-visible {
-    background:
-      linear-gradient(90deg, rgba(232, 92, 200, 0.2), transparent),
-      rgba(7, 12, 10, 0.96);
-    border-color: var(--pho-color-accent);
+    background: var(--pho-hover-subtle-bg);
+    border-color: var(--pho-hover-subtle-border);
+    box-shadow: var(--pho-hover-subtle-shadow);
     outline: none;
   }
 
@@ -102,10 +101,19 @@
   gap: 8px;
   align-items: center;
   letter-spacing: 0.06em;
+  transition: var(--pho-hover-transition);
 }
 
-.toggleBtn:hover {
-  background: rgba(44, 255, 122, 0.06);
+.toggleBtn:hover,
+.toggleBtn:focus-visible {
+  background: var(--pho-hover-subtle-bg);
+  border-color: var(--pho-hover-subtle-border);
+  outline: none;
+}
+
+.toggleBtn:focus-visible {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .toggleGlyph {
@@ -249,18 +257,23 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: var(--pho-hover-transition);
 }
 
-.link:hover {
-  background: var(--pho-color-accent);
-  color: var(--pho-color-background);
+.link:hover,
+.link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
   text-shadow: none;
 }
 
 .active .link {
-  background: rgba(44, 255, 122, 0.12);
-  color: var(--pho-color-primary-strong);
-  text-shadow: var(--pho-glow-primary-soft);
+  background: var(--pho-hover-subtle-bg);
+  border-left: 2px solid var(--pho-hover-subtle-border);
+  color: var(--pho-hover-subtle-text);
+  padding-left: 2px;
+  text-shadow: none;
 }
 
 .footer {

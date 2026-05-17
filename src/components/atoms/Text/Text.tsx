@@ -20,6 +20,7 @@ export type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize";
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;
+  tone?: "default" | "muted" | "accent" | "danger" | "success";
   as?: keyof JSX.IntrinsicElements;
   tone?: TextTone;
   align?: TextAlign;
@@ -30,6 +31,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   animate?: boolean;
 }
 
+<<<<<<< HEAD
 const toneClass: Record<TextTone, string | undefined> = {
   default: undefined,
   primary: "t-tone-primary",
@@ -71,22 +73,64 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
     },
     ref,
   ) => {
+=======
+const Text: React.FC<TextProps> = ({
+  variant = "body",
+  tone = "default",
+  as,
+  truncate,
+  balance,
+  className,
+  style,
+  children,
+  ...rest
+}) => {
+>>>>>>> 261b67a (0.3.48)
   const Tag = (as ?? TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT[variant]) as keyof JSX.IntrinsicElements;
+  const toneClass =
+    tone === "muted"
+      ? "t-muted"
+      : tone === "accent"
+        ? "t-glow-pale"
+        : tone === "danger"
+          ? "t-faded"
+          : undefined;
+  const toneStyle =
+    tone === "accent"
+      ? { color: "var(--pho-color-accent)" }
+      : tone === "danger"
+        ? { color: "var(--pho-color-danger)" }
+        : tone === "success"
+          ? { color: "var(--pho-color-success)" }
+          : undefined;
   const cls = cx(
     TYPOGRAPHY_CLASS_BY_VARIANT[variant],
+<<<<<<< HEAD
     toneClass[tone],
     align && alignClass[align],
     transform && transformClass[transform],
+=======
+    toneClass,
+>>>>>>> 261b67a (0.3.48)
     truncate && "t-truncate",
     balance && "t-balance",
     nowrap && "t-nowrap",
     !animate && "t-no-anim",
     className,
   );
+<<<<<<< HEAD
     return React.createElement(Tag, { ref, className: cls, ...rest }, children);
   },
 );
 
 Text.displayName = "Text";
+=======
+  return React.createElement(
+    Tag,
+    { className: cls, style: { ...toneStyle, ...style }, ...rest },
+    children,
+  );
+};
+>>>>>>> 261b67a (0.3.48)
 
 export default Text;
