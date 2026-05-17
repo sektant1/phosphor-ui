@@ -1,11 +1,16 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ReadingRail } from "./ReadingRail";
+import type { ReadingRailProps } from "./ReadingRail";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof ReadingRail> = {
+const meta: Meta<ReadingRailProps> = {
   title: "Atoms/ReadingRail",
   component: ReadingRail,
+  argTypes: {
+    value: { control: { type: "range", min: 0, max: 1, step: 0.01 } },
+  },
+  args: { value: 0.35 },
 };
 
 export default meta;

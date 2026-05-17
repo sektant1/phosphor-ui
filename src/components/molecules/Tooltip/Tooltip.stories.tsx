@@ -2,11 +2,21 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "../../atoms/Button";
 import { Tooltip } from "./Tooltip";
+import type { TooltipProps } from "./Tooltip";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Tooltip> = {
+const meta: Meta<TooltipProps> = {
   title: "Molecules/Tooltip",
   component: Tooltip,
+  argTypes: {
+    content: { control: "text" },
+    placement: {
+      control: "inline-radio",
+      options: ["top", "right", "bottom", "left"],
+    },
+    offset: { control: "number" },
+  },
+  args: { placement: "top", offset: 8 },
 };
 export default meta;
 

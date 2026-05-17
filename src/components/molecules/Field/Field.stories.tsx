@@ -9,6 +9,14 @@ import { source, tsx } from "../../../stories/source";
 const meta: Meta<FieldProps> = {
   title: "Molecules/Field",
   component: Field,
+  argTypes: {
+    label: { control: "text" },
+    hint: { control: "text" },
+    error: { control: "text" },
+    required: { control: "boolean" },
+    htmlFor: { control: "text" },
+  },
+  args: { label: "Command", hint: "Press enter to transmit.", required: false },
   parameters: {
     docs: {
       description: {

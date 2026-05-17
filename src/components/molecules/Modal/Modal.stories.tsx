@@ -7,6 +7,21 @@ import { source, tsx } from "../../../stories/source";
 const meta: Meta<ModalProps> = {
   title: "Molecules/Modal",
   component: Modal,
+  argTypes: {
+    open: { control: "boolean" },
+    title: { control: "text" },
+    description: { control: "text" },
+    closeLabel: { control: "text" },
+    closeOnEscape: { control: "boolean" },
+    closeOnOverlayClick: { control: "boolean" },
+  },
+  args: {
+    open: false,
+    title: "// transmission",
+    closeLabel: "close",
+    closeOnEscape: true,
+    closeOnOverlayClick: true,
+  },
 };
 export default meta;
 

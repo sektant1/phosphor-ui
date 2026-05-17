@@ -1,11 +1,17 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import SearchResultList, { SearchResult } from "./SearchResult";
+import type { SearchResultListProps } from "./SearchResult";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof SearchResultList> = {
+const meta: Meta<SearchResultListProps> = {
   title: "Molecules/SearchResult",
   component: SearchResultList,
+  argTypes: {
+    hits: { control: "object" },
+    emptyMessage: { control: "text" },
+  },
+  args: { emptyMessage: "no matches found." },
 };
 
 export default meta;

@@ -1,11 +1,26 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { DropdownMenu } from "./DropdownMenu";
+import type { DropdownMenuProps } from "./DropdownMenu";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof DropdownMenu> = {
+const meta: Meta<DropdownMenuProps> = {
   title: "Atoms/DropdownMenu",
   component: DropdownMenu,
+  argTypes: {
+    align: { control: "inline-radio", options: ["start", "end"] },
+    menuRole: { control: "inline-radio", options: ["menu", "listbox"] },
+    disabled: { control: "boolean" },
+    label: { control: "text" },
+    menuLabel: { control: "text" },
+    selectedValue: { control: "text" },
+    items: { control: "object" },
+  },
+  args: {
+    align: "start",
+    menuRole: "menu",
+    disabled: false,
+  },
 };
 export default meta;
 

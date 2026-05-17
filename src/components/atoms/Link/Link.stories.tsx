@@ -1,11 +1,20 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Link from "./Link";
+import type { LinkProps } from "./Link";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Link> = {
+const meta: Meta<LinkProps> = {
   title: "Atoms/Link",
   component: Link,
+  argTypes: {
+    href: { control: "text" },
+    children: { control: "text" },
+    external: { control: "boolean" },
+    target: { control: "text" },
+    rel: { control: "text" },
+  },
+  args: { href: "#", external: false },
 };
 
 export default meta;

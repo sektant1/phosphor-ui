@@ -6,6 +6,9 @@ import { source, tsx } from "../../../stories/source";
 const meta: Meta<TimelineProps> = {
   title: "Molecules/Timeline",
   component: Timeline,
+  argTypes: {
+    items: { control: "object" },
+  },
 };
 export default meta;
 

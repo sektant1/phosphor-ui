@@ -1,11 +1,24 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TableOfContents } from "./TableOfContents";
+import type { TableOfContentsProps } from "./TableOfContents";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof TableOfContents> = {
+const meta: Meta<TableOfContentsProps> = {
   title: "Molecules/TableOfContents",
   component: TableOfContents,
+  argTypes: {
+    heading: { control: "text" },
+    items: { control: "object" },
+    foot: { control: "text" },
+    spy: { control: "boolean" },
+    smoothScroll: { control: "boolean" },
+    spyOffset: { control: "number" },
+    collapsible: { control: "boolean" },
+    defaultCollapsed: { control: "boolean" },
+    showGlyphs: { control: "boolean" },
+  },
+  args: { spy: true, collapsible: true, showGlyphs: true },
 };
 export default meta;
 

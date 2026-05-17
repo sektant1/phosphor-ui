@@ -6,6 +6,11 @@ import { source, tsx } from "../../../stories/source";
 const meta: Meta<ShareBarProps> = {
   title: "Molecules/ShareBar",
   component: ShareBar,
+  argTypes: {
+    label: { control: "text" },
+    url: { control: "text" },
+    links: { control: "object" },
+  },
   args: {
     label: "share",
     url: "https://example.com/posts/boot-the-terminal",

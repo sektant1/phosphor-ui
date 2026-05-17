@@ -1,11 +1,17 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Stepper, StepperFoot } from "./Stepper";
+import type { StepperProps } from "./Stepper";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Stepper> = {
+const meta: Meta<StepperProps> = {
   title: "Molecules/Stepper",
   component: Stepper,
+  argTypes: {
+    items: { control: "object" },
+    separator: { control: "text" },
+    ariaLabel: { control: "text" },
+  },
 };
 export default meta;
 

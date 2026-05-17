@@ -9,6 +9,14 @@ const meta: Meta<typeof HeroFrame> = {
   title: "Organisms/HeroFrame",
   component: HeroFrame,
   parameters: { layout: "fullscreen" },
+  argTypes: {
+    text: { control: "text" },
+    subtitle: { control: "text" },
+    art: { control: "text" },
+    font: { control: "text" },
+    align: { control: "inline-radio", options: ["center", "start"] },
+    scanline: { control: "boolean" },
+  },
 };
 export default meta;
 
@@ -49,11 +57,34 @@ export const Default: Story = {
   ),
 };
 
+const textOnlySource = tsx`
+import { HeroFrame } from "phosphor-ui";
+
+export function Example() {
+  return <HeroFrame text="ZONE" />;
+}
+`;
+
 export const TextOnly: Story = {
+  parameters: { docs: { source: source(textOnlySource) } },
   render: () => <HeroFrame text="ZONE" />,
 };
 
+const withSubtitleSource = tsx`
+import { HeroFrame } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <HeroFrame
+      text="SECTOR 7"
+      subtitle="single-channel transmissions · CH 0x4C"
+    />
+  );
+}
+`;
+
 export const WithSubtitle: Story = {
+  parameters: { docs: { source: source(withSubtitleSource) } },
   render: () => (
     <HeroFrame
       text="SECTOR 7"
@@ -62,7 +93,18 @@ export const WithSubtitle: Story = {
   ),
 };
 
+const customArtSource = tsx`
+import { HeroFrame } from "phosphor-ui";
+
+const art = \`  ___  _  _  ___  ___ \\n / _ \\\\| || |/ _ \\\\/ __|\\n| (_) | || | (_) \\\\__ \\\\\\n \\\\___/ \\\\__/ \\\\___/|___/\`;
+
+export function Example() {
+  return <HeroFrame art={art} subtitle="raw ASCII passthrough" />;
+}
+`;
+
 export const CustomArt: Story = {
+  parameters: { docs: { source: source(customArtSource) } },
   render: () => (
     <HeroFrame
       art={`  ___  _  _  ___  ___ \n / _ \\| || |/ _ \\/ __|\n| (_) | || | (_) \\__ \\\n \\___/ \\__/ \\___/|___/`}

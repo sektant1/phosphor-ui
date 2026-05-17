@@ -1,11 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Kbd } from "./Kbd";
+import type { KbdProps } from "./Kbd";
 import { Row } from "../../templates/Layout";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Kbd> = {
+const meta: Meta<KbdProps> = {
   title: "Atoms/Kbd",
   component: Kbd,
+  argTypes: {
+    variant: { control: "inline-radio", options: ["default", "accent", "muted"] },
+    children: { control: "text" },
+  },
+  args: { variant: "default", children: "Cmd K" },
 };
 
 export default meta;

@@ -28,6 +28,9 @@ const FEATURES = [
 const meta = {
   title: "Molecules/FeatureList",
   component: FeatureList,
+  argTypes: {
+    items: { control: "object" },
+  },
   args: {
     items: FEATURES,
   },

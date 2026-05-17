@@ -1,4 +1,8 @@
-.list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--pho-color-primary-faint); }
+.list {
+  container: lessonRow / inline-size;
+  list-style: none; margin: 0; padding: 0;
+  border: 1px solid var(--pho-color-primary-faint);
+}
 .lr {
   box-sizing: border-box;
   display: grid;
@@ -113,7 +117,7 @@
 .lr:hover:not(.locked) .tag,
 .lr:focus-visible:not(.locked) .tag { border-color: var(--pho-hover-row-muted-text); }
 
-@media (max-width: 640px) {
+@container lessonRow (max-width: 28rem) {
   .lr {
     grid-template-columns: 1rem 1.35rem 4ch minmax(0, 1fr) auto;
     gap: 8px;
@@ -125,11 +129,11 @@
 @media (prefers-reduced-motion: reduce) {
   .current .title::after { animation: none; }
 }
-@media (max-width: 380px) {
+@container lessonRow (max-width: 20rem) {
   .lr {
     grid-template-columns: 1rem minmax(0, 1fr) auto;
     row-gap: 4px;
   }
-  .icon, .num { display: none; }
-  .title { white-space: normal; }
+  .icon, .num, .len { display: none; }
+  .title { white-space: normal; overflow-wrap: anywhere; }
 }

@@ -1,11 +1,18 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Breadcrumbs } from "./Breadcrumbs";
+import type { BreadcrumbsProps } from "./Breadcrumbs";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Breadcrumbs> = {
+const meta: Meta<BreadcrumbsProps> = {
   title: "Molecules/Breadcrumbs",
   component: Breadcrumbs,
+  argTypes: {
+    items: { control: "object" },
+    separator: { control: "text" },
+    ariaLabel: { control: "text" },
+  },
+  args: { separator: "/", ariaLabel: "breadcrumbs" },
 };
 export default meta;
 

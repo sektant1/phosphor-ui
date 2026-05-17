@@ -1,11 +1,17 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { PrereqList } from "./PrereqList";
+import type { PrereqListProps } from "./PrereqList";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof PrereqList> = {
+const meta: Meta<PrereqListProps> = {
   title: "Molecules/PrereqList",
   component: PrereqList,
+  argTypes: {
+    heading: { control: "text" },
+    stamp: { control: "text" },
+    items: { control: "object" },
+  },
 };
 export default meta;
 

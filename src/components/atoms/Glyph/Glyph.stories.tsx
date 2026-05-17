@@ -1,11 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Glyph } from "./";
+import type { GlyphProps } from "./Glyph";
 import { Row } from "../../templates/Layout";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Glyph> = {
+const meta: Meta<GlyphProps> = {
   title: "Atoms/Glyph",
   component: Glyph,
+  argTypes: {
+    char: { control: "text" },
+    name: { control: "text" },
+    label: { control: "text" },
+    tone: {
+      control: "inline-radio",
+      options: ["primary", "accent", "danger", "muted", "inherit"],
+    },
+    boxed: { control: "boolean" },
+    decorative: { control: "boolean" },
+    size: { control: "number" },
+  },
+  args: { char: "◆", size: 24, tone: "primary" },
 };
 
 export default meta;

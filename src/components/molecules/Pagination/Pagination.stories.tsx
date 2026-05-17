@@ -1,11 +1,23 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Pagination from "./Pagination";
+import type { PaginationProps } from "./Pagination";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Pagination> = {
+const meta: Meta<PaginationProps> = {
   title: "Molecules/Pagination",
   component: Pagination,
+  argTypes: {
+    page: { control: "number" },
+    defaultPage: { control: "number" },
+    totalPages: { control: "number" },
+    prevHref: { control: "text" },
+    nextHref: { control: "text" },
+    prevLabel: { control: "text" },
+    nextLabel: { control: "text" },
+    marker: { control: "text" },
+  },
+  args: { page: 3, totalPages: 7, prevHref: "#", nextHref: "#" },
 };
 
 export default meta;

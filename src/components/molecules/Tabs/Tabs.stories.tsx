@@ -1,11 +1,21 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Tabs } from "./Tabs";
+import type { TabsProps } from "./Tabs";
 import { source, tsx } from "../../../stories/source";
 
-const meta: Meta<typeof Tabs> = {
+const meta: Meta<TabsProps> = {
   title: "Molecules/Tabs",
   component: Tabs,
+  argTypes: {
+    items: { control: "object" },
+    value: { control: "text" },
+    defaultValue: { control: "text" },
+    ariaLabel: { control: "text" },
+    orientation: { control: "inline-radio", options: ["horizontal", "vertical"] },
+    lazy: { control: "boolean" },
+  },
+  args: { orientation: "horizontal", lazy: true, ariaLabel: "tabs" },
 };
 export default meta;
 
