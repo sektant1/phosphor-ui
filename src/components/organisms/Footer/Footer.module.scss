@@ -14,7 +14,7 @@
   color: var(--footer-fg);
   border-top: 1px dashed var(--pho-color-primary-faint);
   background:
-    repeating-linear-gradient(90deg, transparent 0 8px, rgba(44, 255, 122, 0.03) 8px 9px),
+    repeating-linear-gradient(90deg, transparent 0 8px, var(--pho-alpha-primary-03) 8px 9px),
     var(--pho-color-background-deep);
   position: relative;
 }
@@ -30,7 +30,7 @@
       transparent,
       var(--footer-accent) 50%,
       transparent);
-  box-shadow: 0 0 6px rgba(44, 255, 122, 0.5);
+  box-shadow: 0 0 6px var(--pho-alpha-primary-45);
 }
 
 .row {

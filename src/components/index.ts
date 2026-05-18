@@ -75,6 +75,24 @@ export type { SearchProps } from "./organisms/Search";
 export { CrtShell } from "./organisms/CrtShell";
 export type { CrtShellProps } from "./organisms/CrtShell";
 
+export { CRTOverlay, CRTScreen } from "./foundations/CRT";
+export type { CRTOverlayProps, CRTScreenProps } from "./foundations/CRT";
+
+export {
+  getInitialThemeScript,
+  PHOSPHOR_THEMES,
+  PHOSPHOR_THEME_STORAGE_KEY,
+  ThemeProvider,
+  ThemeToggle,
+  useTheme,
+} from "./foundations/Theme";
+export type {
+  PhosphorTheme,
+  ThemeContextValue,
+  ThemeProviderProps,
+  ThemeToggleProps,
+} from "./foundations/Theme";
+
 export { default as Prose } from "./content/Prose";
 export type { ProseProps } from "./content/Prose";
 

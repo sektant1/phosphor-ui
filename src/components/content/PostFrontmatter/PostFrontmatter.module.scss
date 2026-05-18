@@ -1,9 +1,9 @@
 .root {
   border: 1px dashed var(--pho-color-primary-faint);
   background:
-    linear-gradient(180deg, rgba(44, 255, 122, 0.045), transparent 70%),
+    linear-gradient(180deg, var(--pho-alpha-primary-05), transparent 70%),
     rgba(7, 12, 10, 0.78);
-  box-shadow: inset 0 0 18px rgba(44, 255, 122, 0.05);
+  box-shadow: inset 0 0 18px var(--pho-alpha-primary-05);
   color: var(--pho-color-text);
   font-family: var(--pho-font-code);
   margin-bottom: 0.85rem;

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./CrtShell.module.scss";
 import { cx } from "../../../utils/classNames";
+import { CRTOverlay } from "../../foundations/CRT";
 
 export interface CrtShellProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -22,11 +23,15 @@ export const CrtShell: React.FC<CrtShellProps> = ({
   ...rest
 }) => (
   <div className={cx(styles.shell, className)} {...rest}>
-    {!disableNoise && <div className={styles.noise} aria-hidden="true" />}
-    {!disableScanlines && <div className={styles.scanlines} aria-hidden="true" />}
-    {!disableVignette && <div className={styles.vignette} aria-hidden="true" />}
+    <CRTOverlay
+      className={styles.overlay}
+      noise={!disableNoise}
+      scanlines={!disableScanlines}
+      vignette={!disableVignette}
+      flicker={!disableTick}
+      glow
+    />
     {!disableFrame && <div className={styles.frame} aria-hidden="true" />}
-    {!disableTick && <div className={styles.tick} aria-hidden="true" />}
     {children}
   </div>
 );

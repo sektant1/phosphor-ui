@@ -113,7 +113,7 @@
 
   .header-toolbar {
     align-items: center;
-    background: rgba(44, 255, 122, 0.04);
+    background: var(--pho-alpha-primary-04);
     border-bottom: 1px dashed var(--pho-color-primary-faint);
     border-top: 1px dashed var(--pho-color-primary-faint);
     display: flex;
@@ -206,7 +206,7 @@
   }
 
   &.pho-header--terminal .header-toolbar {
-    background: rgba(44, 255, 122, 0.04);
+    background: var(--pho-alpha-primary-04);
     border-bottom: 1px dashed var(--pho-color-primary-faint);
     border-top: 1px dashed var(--pho-color-primary-faint);
   }

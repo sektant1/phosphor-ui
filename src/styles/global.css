@@ -240,6 +240,7 @@ textarea::placeholder {
 }
 
 .pho-crt,
+.pho-crt-screen,
 .pho-scanlines,
 .pho-noise,
 .pho-vignette {
@@ -247,8 +248,10 @@ textarea::placeholder {
 }
 
 .pho-crt::before,
+.pho-crt-screen::before,
 .pho-scanlines::before,
 .pho-crt::after,
+.pho-crt-screen::after,
 .pho-noise::before,
 .pho-vignette::after {
   content: "";
@@ -258,11 +261,12 @@ textarea::placeholder {
 }
 
 .pho-crt::before,
+.pho-crt-screen::before,
 .pho-scanlines::before {
   z-index: var(--pho-z-fx-noise);
   background:
-    linear-gradient(rgba(182, 255, 206, 0.045) 50%, rgba(1, 6, 4, 0.18) 50%),
-    linear-gradient(90deg, rgba(44, 255, 122, 0.035), rgba(98, 255, 154, 0.02), rgba(44, 255, 122, 0.035));
+    linear-gradient(var(--pho-crt-scanline-color) 50%, var(--pho-alpha-surface-45) 50%),
+    linear-gradient(90deg, var(--pho-crt-rgb-shift-start), var(--pho-crt-rgb-shift-mid), var(--pho-crt-rgb-shift-start));
   background-size: 100% var(--pho-scanline-size), 6px 100%;
   mix-blend-mode: screen;
   opacity: var(--pho-scanline-opacity);
@@ -335,26 +339,26 @@ textarea::placeholder {
   }
 }
 
-.pho-crt::before {
+.pho-crt::before,
+.pho-crt-screen::before {
   animation: phosphorShellFlicker 5.6s steps(8) infinite;
 }
 
 .pho-crt::after,
+.pho-crt-screen::after,
 .pho-vignette::after {
   z-index: var(--pho-z-fx-vignette);
-  background:
-    radial-gradient(circle at center, transparent 45%, rgba(1, 6, 4, 0.42) 100%),
-    linear-gradient(rgba(44, 255, 122, 0.08), transparent 18%, transparent 82%, rgba(44, 255, 122, 0.08));
-  box-shadow: inset 0 0 42px rgba(1, 6, 4, 0.74);
+  background: var(--pho-crt-vignette);
+  box-shadow: var(--pho-crt-vignette-shadow);
 }
 
 .pho-noise::before {
   z-index: var(--pho-z-fx-noise);
   opacity: 0.16;
   background-image:
-    radial-gradient(circle at 18% 24%, rgba(182, 255, 206, 0.7) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 78% 34%, rgba(44, 255, 122, 0.45) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 42% 74%, rgba(98, 255, 154, 0.42) 0 1px, transparent 1.5px);
+    radial-gradient(circle at 18% 24%, var(--pho-crt-noise-color-strong) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 34%, var(--pho-crt-noise-color) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 42% 74%, var(--pho-crt-noise-color) 0 1px, transparent 1.5px);
   background-size: 31px 29px, 43px 41px, 67px 61px;
   animation: phosphorNoiseShift 620ms steps(3) infinite;
   mix-blend-mode: screen;
@@ -556,8 +560,8 @@ textarea::placeholder {
     opacity: 1;
     text-shadow:
       0 0 1px var(--pho-color-primary),
-      0 0 14px rgba(44, 255, 122, 0.85),
-      0 0 28px rgba(44, 255, 122, 0.4);
+      0 0 14px var(--pho-alpha-primary-45),
+      0 0 28px var(--pho-alpha-primary-45);
   }
 }
 @keyframes phosphorHeroScan {
@@ -608,6 +612,31 @@ textarea::placeholder {
   }
 }
 
+@keyframes phosphorScreenFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  7% {
+    opacity: 0.96;
+  }
+  8% {
+    opacity: 1;
+  }
+  42% {
+    opacity: 0.985;
+  }
+  43% {
+    opacity: var(--pho-flicker-opacity-min);
+  }
+  44% {
+    opacity: 1;
+  }
+  76% {
+    opacity: 0.98;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pho-page-enter,
   .pho-fade-up,
@@ -615,13 +644,16 @@ textarea::placeholder {
   .pho-flicker-in,
   .pho-blink::after,
   .pho-crt::before,
+  .pho-crt-screen::before,
+  .pho-crt-screen::after,
   .pho-noise::before,
   .pho-hsync,
   .pho-bootline,
   .pho-led-pulse,
   .pho-hud-blink,
   .pho-hud-pulse,
-  .pho-geiger-tick {
+  .pho-geiger-tick,
+  .pho-crt::after {
     animation: none !important;
   }
 }

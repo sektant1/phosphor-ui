@@ -1,0 +1,19 @@
+.toggle {
+  min-width: 0;
+}
+
+.indicator {
+  display: inline-block;
+  width: 0.72em;
+  height: 0.72em;
+  border: 1px solid currentColor;
+  background: var(--pho-color-primary);
+  box-shadow: var(--pho-glow-primary-soft);
+}
+
+.label {
+  display: inline-block;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

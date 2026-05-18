@@ -10,7 +10,7 @@
 
 .item {
   background: linear-gradient(90deg,
-      rgba(44, 255, 122, 0.05),
+      var(--pho-alpha-primary-05),
       transparent 70%);
   border-left: 2px solid var(--phosphor, var(--pho-color-primary, #2cff7a));
   min-width: 0;

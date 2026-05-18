@@ -28,8 +28,8 @@
   color: var(--pho-color-primary-strong);
   text-shadow:
     0 0 6px var(--pho-color-primary),
-    0 0 16px rgba(44, 255, 122, 0.55),
-    0 0 32px rgba(44, 255, 122, 0.3);
+    0 0 16px var(--pho-alpha-primary-45),
+    0 0 32px var(--pho-alpha-primary-28);
   animation: pho-hero-breathe 4.2s ease-in-out infinite;
 }
 
@@ -62,7 +62,7 @@
     to bottom,
     transparent 0%,
     rgba(182, 255, 206, 0.18) 45%,
-    rgba(44, 255, 122, 0.28) 50%,
+    var(--pho-alpha-primary-28) 50%,
     rgba(182, 255, 206, 0.18) 55%,
     transparent 100%
   );
@@ -77,14 +77,14 @@
   0%, 100% {
     text-shadow:
       0 0 6px var(--pho-color-primary),
-      0 0 16px rgba(44, 255, 122, 0.55),
-      0 0 32px rgba(44, 255, 122, 0.3);
+      0 0 16px var(--pho-alpha-primary-45),
+      0 0 32px var(--pho-alpha-primary-28);
     opacity: 0.95;
   }
   50% {
     text-shadow:
       0 0 8px var(--pho-color-primary),
-      0 0 22px rgba(44, 255, 122, 0.7),
+      0 0 22px var(--pho-alpha-primary-45),
       0 0 48px rgba(44, 255, 122, 0.45);
     opacity: 1;
   }

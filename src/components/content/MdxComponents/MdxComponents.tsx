@@ -13,8 +13,8 @@ import type { PostFrontmatterData } from "../../content/PostFrontmatter";
 
 type AnyProps = React.HTMLAttributes<HTMLElement>;
 
-const Pass = <K extends keyof JSX.IntrinsicElements>(tag: K) => {
-  const C = (props: JSX.IntrinsicElements[K]) =>
+const Pass = <K extends keyof React.JSX.IntrinsicElements>(tag: K) => {
+  const C = (props: React.JSX.IntrinsicElements[K]) =>
     React.createElement(tag, props);
   C.displayName = `Md${String(tag)}`;
   return C;
@@ -33,8 +33,10 @@ const renderPostChild = (child: React.ReactNode): React.ReactNode => {
   if (!React.isValidElement(child)) return child;
 
   if (child.type === React.Fragment) {
-    return React.cloneElement(child, {
-      children: React.Children.map(child.props.children, renderPostChild),
+    const fragment = child as React.ReactElement<{ children?: React.ReactNode }>;
+
+    return React.cloneElement(fragment, {
+      children: React.Children.map(fragment.props.children, renderPostChild),
     });
   }
 

@@ -15,7 +15,7 @@ import { CrtShell } from "phosphor-ui";
 
 const defaultProps = {
     children: (
-      <div style={{ padding: "4rem", color: "#a8ff60", fontFamily: "monospace" }}>
+      <div style={{ padding: "4rem", color: "var(--pho-color-primary)", fontFamily: "var(--pho-font-terminal)" }}>
         <h1>~/zone-net $</h1>
         <p>signal locked. phosphor stable.</p>
       </div>
@@ -38,7 +38,7 @@ const noEffectsProps = {
     disableVignette: true,
     disableTick: true,
     children: (
-      <div style={{ padding: "4rem", color: "#a8ff60", fontFamily: "monospace" }}>
+      <div style={{ padding: "4rem", color: "var(--pho-color-primary)", fontFamily: "var(--pho-font-terminal)" }}>
         plain shell
       </div>
     ),
@@ -55,7 +55,7 @@ export const Default: Story = {
   parameters: { docs: { source: source(defaultSource) } },
   args: {
     children: (
-      <div style={{ padding: "4rem", color: "#a8ff60", fontFamily: "monospace" }}>
+      <div style={{ padding: "4rem", color: "var(--pho-color-primary)", fontFamily: "var(--pho-font-terminal)" }}>
         <h1>~/zone-net $</h1>
         <p>signal locked. phosphor stable.</p>
       </div>
@@ -71,9 +71,35 @@ export const NoEffects: Story = {
     disableVignette: true,
     disableTick: true,
     children: (
-      <div style={{ padding: "4rem", color: "#a8ff60", fontFamily: "monospace" }}>
+      <div style={{ padding: "4rem", color: "var(--pho-color-primary)", fontFamily: "var(--pho-font-terminal)" }}>
         plain shell
       </div>
     ),
   },
+};
+
+export const Amber: Story = {
+  args: {
+    children: (
+      <div
+        data-theme="amber"
+        style={{
+          minHeight: "100vh",
+          padding: "4rem",
+          color: "var(--pho-color-primary)",
+          fontFamily: "var(--pho-font-terminal)",
+        }}
+      >
+        <h1>CRT TERMINAL</h1>
+        <p>amber channel online. scanlines, glow, and vignette remain readable.</p>
+      </div>
+    ),
+  },
+  decorators: [
+    (Story) => (
+      <div data-theme="amber">
+        <Story />
+      </div>
+    ),
+  ],
 };

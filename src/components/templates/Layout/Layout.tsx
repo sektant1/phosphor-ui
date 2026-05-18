@@ -3,7 +3,7 @@ import styles from "./Layout.module.scss";
 import { cx } from "../../../utils/classNames";
 import type { CssVars } from "../../../utils/browser";
 
-type LayoutElement = keyof JSX.IntrinsicElements;
+type LayoutElement = keyof React.JSX.IntrinsicElements;
 type LayoutGap = "none" | "xs" | "sm" | "md" | "lg" | "xl";
 type LayoutSpace = LayoutGap | string | number;
 type LayoutBreakpoint = "sm" | "md" | "lg";

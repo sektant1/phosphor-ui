@@ -37,8 +37,8 @@
   50% {
     text-shadow:
       0 0 2px var(--pho-color-primary-strong),
-      0 0 10px rgba(98, 255, 154, 0.55),
-      0 0 22px rgba(98, 255, 154, 0.3);
+      0 0 10px var(--pho-alpha-accent-14),
+      0 0 22px var(--pho-alpha-accent-14);
     opacity: 0.97;
   }
 }
@@ -50,8 +50,8 @@
   50% {
     text-shadow:
       0 0 1.5px var(--pho-color-primary-strong),
-      0 0 8px rgba(98, 255, 154, 0.45),
-      0 0 18px rgba(98, 255, 154, 0.22);
+      0 0 8px var(--pho-alpha-accent-14),
+      0 0 18px var(--pho-alpha-accent-14);
     opacity: 0.98;
   }
 }

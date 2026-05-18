@@ -45,7 +45,7 @@ export const TYPOGRAPHY_CLASS_BY_VARIANT: Record<TypographyVariant, string> = {
 
 export const TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT: Record<
   TypographyVariant,
-  keyof JSX.IntrinsicElements
+  keyof React.JSX.IntrinsicElements
 > = {
   h1: "h1",
   h2: "h2",

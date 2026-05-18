@@ -8,7 +8,7 @@
   font-family: var(--pho-font-code);
   text-decoration: none;
   cursor: default;
-  background: rgba(98, 255, 154, 0.04);
+  background: var(--pho-alpha-accent-04);
   white-space: nowrap;
   transition: var(--pho-hover-transition);
 }

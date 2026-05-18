@@ -1,5 +1,6 @@
 export const PHOSPHOR_EFFECT_CLASS_NAMES = {
   crt: "pho-crt",
+  crtScreen: "pho-crt-screen",
   scanlines: "pho-scanlines",
   noise: "pho-noise",
   vignette: "pho-vignette",

@@ -18,8 +18,8 @@
 .host :global(.video-js) {
   width: 100%;
   background:
-    repeating-linear-gradient(0deg, transparent 0 3px, rgba(44, 255, 122, 0.04) 3px 4px),
-    radial-gradient(ellipse at 50% 50%, rgba(44, 255, 122, 0.08), transparent 70%),
+    repeating-linear-gradient(0deg, transparent 0 3px, var(--pho-alpha-primary-04) 3px 4px),
+    radial-gradient(ellipse at 50% 50%, var(--pho-alpha-primary-08), transparent 70%),
     var(--pho-color-background-deep);
   font-family: var(--pho-font-terminal);
   color: var(--pho-color-primary);
@@ -36,7 +36,7 @@
 }
 .host :global(.vjs-big-play-button) {
   border: 2px solid var(--pho-color-primary);
-  background: rgba(44, 255, 122, 0.06);
+  background: var(--pho-alpha-primary-06);
   color: var(--pho-color-primary);
   text-shadow: var(--pho-glow-primary);
   box-shadow: var(--pho-glow-primary);
@@ -48,7 +48,7 @@
 .host :global(.video-js:hover .vjs-big-play-button),
 .host :global(.vjs-big-play-button:focus-visible) {
   border-color: var(--pho-color-primary-strong);
-  background: rgba(44, 255, 122, 0.16);
+  background: var(--pho-alpha-primary-16);
 }
 .host :global(.vjs-control-bar) {
   background: var(--pho-color-background-raised);
@@ -74,7 +74,7 @@
 }
 .host :global(.vjs-load-progress),
 .host :global(.vjs-load-progress div) {
-  background: rgba(44, 255, 122, 0.15);
+  background: var(--pho-alpha-primary-14);
 }
 .host :global(.vjs-progress-holder) {
   background: var(--pho-color-background-deep);

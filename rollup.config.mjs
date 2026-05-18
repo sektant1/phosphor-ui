@@ -8,6 +8,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
 const input = {
   index: "src/index.ts",
+  server: "src/server.ts",
 };
 
 const externalPackages = [
@@ -28,7 +29,7 @@ function preserveClientDirective() {
     name: "preserve-client-directive",
     generateBundle(_options, bundle) {
       for (const output of Object.values(bundle)) {
-        if (output.type !== "chunk" || !output.isEntry) continue;
+        if (output.type !== "chunk" || !output.isEntry || output.name !== "index") continue;
         if (output.code.startsWith(clientDirective)) continue;
         output.code = `${clientDirective}\n${output.code}`;
       }

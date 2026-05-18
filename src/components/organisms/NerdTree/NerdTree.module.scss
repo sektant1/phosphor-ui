@@ -65,12 +65,12 @@
     padding: 0;
     border: 1px solid var(--pho-color-primary-faint);
     background:
-      linear-gradient(135deg, rgba(44, 255, 122, 0.16), transparent 48%),
+      linear-gradient(135deg, var(--pho-alpha-primary-16), transparent 48%),
       rgba(7, 12, 10, 0.94);
     color: var(--pho-color-primary);
     box-shadow:
-      0 0 14px rgba(44, 255, 122, 0.18),
-      inset 0 0 10px rgba(44, 255, 122, 0.06);
+      0 0 14px var(--pho-alpha-primary-18),
+      inset 0 0 10px var(--pho-alpha-primary-06);
     backdrop-filter: blur(6px);
   }
 
@@ -308,7 +308,7 @@
 
 .drawerPanel {
   background: var(--pho-color-background-deep);
-  box-shadow: 0 0 28px rgba(44, 255, 122, 0.18);
+  box-shadow: 0 0 28px var(--pho-alpha-primary-18);
 }
 
 .drawerContent {

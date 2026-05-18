@@ -100,7 +100,7 @@ a.title:focus-visible {
     repeating-linear-gradient(
       90deg,
       transparent 0 7px,
-      rgba(44, 255, 122, 0.035) 7px 8px
+      var(--pho-alpha-primary-04) 7px 8px
     ),
     rgba(1, 6, 4, 0.42);
   border: var(--pho-border-line);

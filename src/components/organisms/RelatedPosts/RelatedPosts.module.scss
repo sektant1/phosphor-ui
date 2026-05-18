@@ -23,7 +23,7 @@
   padding: 0.6rem 0.8rem;
   border: var(--pho-border-dashed);
   background:
-    linear-gradient(180deg, rgba(44, 255, 122, 0.045), transparent 68%),
+    linear-gradient(180deg, var(--pho-alpha-primary-05), transparent 68%),
     var(--pho-color-background-raised);
   min-height: 7rem;
   text-decoration: none;

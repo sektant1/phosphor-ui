@@ -3,7 +3,7 @@ import "./Prose.scss";
 import { cx } from "../../../utils/classNames";
 
 export interface ProseProps extends React.HTMLAttributes<HTMLDivElement> {
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 const Prose: React.FC<ProseProps> = ({

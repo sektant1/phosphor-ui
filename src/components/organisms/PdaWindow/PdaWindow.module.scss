@@ -1,7 +1,7 @@
 .pda {
   border: 1px solid var(--pho-color-primary);
   background: var(--pho-color-background);
-  box-shadow: inset 0 0 0 1px var(--pho-color-primary-faint), 0 0 24px rgba(44, 255, 122, 0.18);
+  box-shadow: inset 0 0 0 1px var(--pho-color-primary-faint), 0 0 24px var(--pho-alpha-primary-18);
   position: relative;
   overflow: hidden;
 }

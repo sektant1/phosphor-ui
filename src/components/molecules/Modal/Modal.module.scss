@@ -12,7 +12,7 @@
 .dialog {
   background: var(--pho-color-background-raised);
   border: 1px solid var(--pho-color-primary);
-  box-shadow: 0 0 32px rgba(44, 255, 122, 0.2);
+  box-shadow: 0 0 32px var(--pho-alpha-primary-22);
   padding: 0;
   width: min(100%, 560px);
   max-width: min(calc(100dvw - 2rem), 560px);

@@ -112,7 +112,7 @@
 }
 
 .tabs .list {
-  background: rgba(44, 255, 122, 0.04);
+  background: var(--pho-alpha-primary-04);
   border: 1px solid var(--pho-color-primary-faint);
   max-width: 100%;
   min-width: 0;

@@ -7,12 +7,11 @@ const preview: Preview = {
   decorators: [
     withThemeByDataAttribute({
       themes: {
-        tube: "tube",
-        raised: "raised",
-        deep: "deep",
+        phosphor: "phosphor",
+        amber: "amber",
       },
-      defaultTheme: "tube",
-      attributeName: "data-phosphor-theme",
+      defaultTheme: "phosphor",
+      attributeName: "data-theme",
     }),
   ],
 
@@ -20,9 +19,8 @@ const preview: Preview = {
     actions: { argTypesRegex: "^on[A-Z].*" },
     backgrounds: {
       options: {
-        tube: { name: "tube", value: "#04140a" },
-        raised: { name: "raised", value: "#082416" },
-        deep: { name: "deep", value: "#010604" },
+        phosphor: { name: "phosphor", value: "#04140a" },
+        amber: { name: "amber", value: "#0b0702" },
       },
     },
     controls: {
@@ -90,9 +88,9 @@ const preview: Preview = {
 
   initialGlobals: {
     backgrounds: {
-      value: "tube",
+      value: "phosphor",
     },
-    theme: "tube",
+    theme: "phosphor",
   },
 };
 

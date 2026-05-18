@@ -5,7 +5,7 @@
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--pho-color-primary) 0%, var(--pho-color-accent) 100%);
-  box-shadow: 0 0 8px var(--pho-color-primary), 0 0 14px rgba(98, 255, 154, 0.4);
+  box-shadow: 0 0 8px var(--pho-color-primary), 0 0 14px var(--pho-alpha-accent-14);
   transform-origin: 0 0;
   z-index: var(--pho-z-drawer);
   pointer-events: none;

@@ -83,7 +83,7 @@
 .secondary {
   border-color: var(--pho-color-primary-muted);
   background:
-    linear-gradient(90deg, rgba(44, 255, 122, 0.12), transparent 70%),
+    linear-gradient(90deg, var(--pho-alpha-primary-12), transparent 70%),
     var(--pho-alpha-primary-04);
   color: var(--pho-color-primary-strong);
   text-shadow: var(--pho-glow-primary-soft);

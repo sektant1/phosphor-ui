@@ -1,6 +1,6 @@
 .root {
   background:
-    linear-gradient(90deg, rgba(44, 255, 122, 0.055), transparent 72%),
+    linear-gradient(90deg, var(--pho-alpha-primary-06), transparent 72%),
     var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-faint);
   padding: var(--pho-space-4);

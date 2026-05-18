@@ -21,7 +21,7 @@ export type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize";
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextVariant;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   tone?: TextTone;
   align?: TextAlign;
   transform?: TextTransform;
@@ -74,7 +74,7 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
     },
     ref,
   ) => {
-    const Tag = (as ?? TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT[variant]) as keyof JSX.IntrinsicElements;
+    const Tag = (as ?? TYPOGRAPHY_DEFAULT_TAG_BY_VARIANT[variant]) as keyof React.JSX.IntrinsicElements;
     const toneStyle =
       tone === "accent"
         ? { color: "var(--pho-color-accent)" }

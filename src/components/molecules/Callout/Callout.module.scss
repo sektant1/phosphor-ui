@@ -232,9 +232,9 @@
   --callout-accent: var(--pho-color-accent-strong);
   --callout-accent-bright: var(--pho-color-accent-strong);
   --callout-accent-muted: var(--pho-color-accent-muted);
-  --callout-accent-fade: rgba(98, 255, 154, 0.28);
+  --callout-accent-fade: var(--pho-alpha-accent-14);
   --callout-bg: rgba(98, 255, 154, 0.045);
-  --callout-glow: rgba(98, 255, 154, 0.36);
+  --callout-glow: var(--pho-alpha-accent-14);
   color: var(--pho-color-text-strong);
   font-style: italic;
 }

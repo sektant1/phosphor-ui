@@ -7,13 +7,13 @@ export type HeadingGlyphPosition = "start" | "end";
 
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level?: HeadingLevel;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   glyph?: React.ReactNode;
   glyphPosition?: HeadingGlyphPosition;
   children?: React.ReactNode;
 }
 
-const levelTag: Record<HeadingLevel, keyof JSX.IntrinsicElements> = {
+const levelTag: Record<HeadingLevel, keyof React.JSX.IntrinsicElements> = {
   1: "h1",
   2: "h2",
   3: "h3",
@@ -31,7 +31,7 @@ export const Heading: React.FC<HeadingProps> = ({
   children,
   ...rest
 }) => {
-  const Tag = (as ?? levelTag[level]) as keyof JSX.IntrinsicElements;
+  const Tag = (as ?? levelTag[level]) as keyof React.JSX.IntrinsicElements;
   const typeClass = TYPOGRAPHY_CLASS_BY_VARIANT[`h${level}`];
   const hasGlyph = glyph !== undefined && glyph !== null && glyph !== false;
   const cls = cx(typeClass, hasGlyph && "pho-heading", className);
