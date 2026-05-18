@@ -107,6 +107,24 @@
   text-shadow: none;
 }
 
+.active .link:hover,
+.active .link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+}
+
+.active .link:hover .glyph,
+.active .link:hover .label,
+.active .link:focus-visible .glyph,
+.active .link:focus-visible .label,
+.active .link:hover::before,
+.active .link:hover::after,
+.active .link:focus-visible::before,
+.active .link:focus-visible::after {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
+}
+
 .plain .glyph:empty {
   display: none;
 }
@@ -188,6 +206,13 @@
   text-shadow: none;
 }
 
+.command .active .link:hover,
+.command .active .link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  border-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
+}
+
 .mobile .list {
   align-items: flex-end;
   display: flex;
@@ -231,6 +256,12 @@
   background: var(--pho-hover-subtle-bg);
   color: var(--pho-hover-subtle-text);
   text-shadow: none;
+}
+
+.mobile .active .link:hover,
+.mobile .active .link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
 }
 
 @media (max-width: 560px) {

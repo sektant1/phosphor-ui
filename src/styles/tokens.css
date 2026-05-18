@@ -60,6 +60,8 @@
   --pho-color-accent-hover: var(--pho-color-accent-strong);
   --pho-color-hover: var(--pho-hover-subtle-bg);
   --pho-color-focus: var(--pho-color-primary-strong);
+  --pho-mdx-link: var(--pho-color-primary);
+  --pho-mdx-link-hover: var(--pho-color-primary-strong);
   --pho-color-danger: #ff6a6a;
   --pho-color-danger-strong: #ff8a8a;
   --pho-color-danger-emphasis: #ff3a3a;
@@ -517,8 +519,8 @@
   --pho-mdx-heading: #fff1cc;
   --pho-mdx-heading-muted: #b56d00;
   --pho-mdx-heading-marker: #ffc247;
-  --pho-mdx-link: #ffe08a;
-  --pho-mdx-link-hover: #fff6dc;
+  --pho-mdx-link: var(--pho-color-primary);
+  --pho-mdx-link-hover: var(--pho-color-primary-strong);
   --pho-mdx-emphasis: #ffd166;
   --pho-mdx-strong: #fff2cc;
   --pho-mdx-quote: #ffdf85;

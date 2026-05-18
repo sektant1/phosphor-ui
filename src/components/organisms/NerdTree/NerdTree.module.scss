@@ -222,10 +222,31 @@
   background: none;
   border: none;
   color: inherit;
+  display: block;
   padding: 0;
   cursor: pointer;
   font: inherit;
   text-align: left;
+  transition: var(--pho-hover-transition);
+  width: 100%;
+}
+
+.foldBtn:hover,
+.foldBtn:focus-visible {
+  background: var(--pho-hover-row-bg);
+  color: var(--pho-hover-row-text);
+  outline: none;
+  text-shadow: none;
+}
+
+.foldBtn:hover .fold,
+.foldBtn:hover .dir,
+.foldBtn:hover .meta,
+.foldBtn:focus-visible .fold,
+.foldBtn:focus-visible .dir,
+.foldBtn:focus-visible .meta {
+  color: var(--pho-hover-row-muted-text);
+  text-shadow: none;
 }
 
 .fold {
@@ -280,6 +301,13 @@
   color: var(--pho-hover-subtle-text);
   padding-left: 2px;
   text-shadow: none;
+}
+
+.active .link:hover,
+.active .link:focus-visible {
+  background: var(--pho-hover-row-bg);
+  border-left-color: var(--pho-hover-row-border);
+  color: var(--pho-hover-row-text);
 }
 
 .footer {
