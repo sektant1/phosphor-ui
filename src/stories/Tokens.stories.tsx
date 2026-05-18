@@ -9,7 +9,9 @@ export default {
   title: "Foundations/Tokens",
 } satisfies Meta;
 
-const COLORS: Array<[label: string, group: string, vars: Array<[string, string]>]> = [
+type ColorGroup = [label: string, group: string, vars: Array<[string, string]>];
+
+const PHOSPHOR_COLORS: ColorGroup[] = [
   [
     "Phosphor",
     "primary tube column",
@@ -66,6 +68,67 @@ const COLORS: Array<[label: string, group: string, vars: Array<[string, string]>
       ["--code-attr", "#aaff66"],
       ["--code-builtin", "#5cf5d4"],
       ["--code-operator", "#b6ffce"],
+    ],
+  ],
+];
+
+const AMBER_COLORS: ColorGroup[] = [
+  [
+    "Amber",
+    "primary tube column",
+    [
+      ["--phosphor", "#ffb000"],
+      ["--phosphor-bright", "#ffecb3"],
+      ["--phosphor-dim", "#cc7a00"],
+      ["--phosphor-fade", "#664000"],
+    ],
+  ],
+  [
+    "Warm accent",
+    "secondary amber column",
+    [
+      ["--magenta", "#ffd166"],
+      ["--magenta-bright", "#fff2cc"],
+      ["--magenta-deep", "#996000"],
+      ["--magenta-fade", "#3d2600"],
+    ],
+  ],
+  [
+    "Extras",
+    "extra single-channel hues",
+    [
+      ["--moss", "#ffbf33"],
+      ["--spring", "#ffd166"],
+      ["--rose", "#ffe08a"],
+    ],
+  ],
+  [
+    "Surfaces",
+    "tube body / surfaces / ink",
+    [
+      ["--bg", "#0b0702"],
+      ["--bg-raise", "#140d04"],
+      ["--bg-deep", "#050301"],
+      ["--ink", "#ffe4a3"],
+    ],
+  ],
+  [
+    "Code tokens",
+    "syntax highlight palette",
+    [
+      ["--code-bg", "#090602"],
+      ["--code-fn", "#ffecb3"],
+      ["--code-comment", "#8a5c17"],
+      ["--code-keyword", "#ffbf33"],
+      ["--code-string", "#ffd166"],
+      ["--code-number", "#ffe08a"],
+      ["--code-var", "#ffe4a3"],
+      ["--code-type", "#ffcf66"],
+      ["--code-punct", "#996000"],
+      ["--code-tag", "#ffbf33"],
+      ["--code-attr", "#ffd166"],
+      ["--code-builtin", "#ffcf66"],
+      ["--code-operator", "#ffecb3"],
     ],
   ],
 ];
@@ -373,8 +436,9 @@ const Cell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" }> = ({ children, theme }) => (
   <div
+    data-theme={theme}
     style={{
       padding: 24,
       background: "var(--pho-color-background)",
@@ -387,8 +451,12 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-export const All = () => (
-  <Page>
+const TokenOverview: React.FC<{
+  colors: ColorGroup[];
+  theme?: "phosphor" | "amber";
+  caption: string;
+}> = ({ colors, theme, caption }) => (
+  <Page theme={theme}>
     <h1
       style={{
         fontFamily: "var(--pho-font-heading)",
@@ -402,9 +470,9 @@ export const All = () => (
     >
       Zone Design System :: Tokens
     </h1>
-    <Caption>// СЕКРЕТНО // single-channel green phosphor</Caption>
+    <Caption>{caption}</Caption>
 
-    {COLORS.map(([label, group, vars]) => (
+    {colors.map(([label, group, vars]) => (
       <div key={label}>
         <SectionTitle>{`Color · ${label}`}</SectionTitle>
         <Caption>{group}</Caption>
@@ -426,7 +494,7 @@ export const All = () => (
         <Cell key={name}>
           <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
           <div style={{ color: "var(--phosphor-dim)", marginTop: 4 }}>{stack}</div>
-              <div style={{ fontFamily: `var(${name})`, color: "var(--pho-color-text)", marginTop: 8, fontSize: "var(--pho-type-control-sm-size)" }}>
+          <div style={{ fontFamily: `var(${name})`, color: "var(--pho-color-text)", marginTop: 8, fontSize: "var(--pho-type-control-sm-size)" }}>
             The quick brown fox 0123456789 // СЕКРЕТНО
           </div>
         </Cell>
@@ -542,6 +610,21 @@ export const All = () => (
   </Page>
 );
 
+export const All = () => (
+  <TokenOverview
+    colors={PHOSPHOR_COLORS}
+    caption="// СЕКРЕТНО // single-channel green phosphor"
+  />
+);
+
+export const Amber = () => (
+  <TokenOverview
+    theme="amber"
+    colors={AMBER_COLORS}
+    caption="// СЕКРЕТНО // single-channel amber phosphor"
+  />
+);
+
 export const Scrollbar = () => (
   <Page>
     <SectionTitle>Scrollbar</SectionTitle>
@@ -570,21 +653,33 @@ export const Scrollbar = () => (
   </Page>
 );
 
-export const Colors = () => <Page>{COLORS.map(([label, group, vars]) => (
-  <div key={label}>
-    <SectionTitle>{label}</SectionTitle>
-    <Caption>{group}</Caption>
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 8 }}>
-      {vars.map(([name, hex]) => (
-        <Cell key={name}>
-          <div style={{ background: hex, height: 56, marginBottom: 8, border: "1px solid var(--phosphor-fade)" }} />
-          <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
-          <div style={{ color: "var(--phosphor-fade)" }}>{hex}</div>
-        </Cell>
-      ))}
-    </div>
-  </div>
-))}</Page>;
+const ColorPalette: React.FC<{ colors: ColorGroup[] }> = ({ colors }) => (
+  <>
+    {colors.map(([label, group, vars]) => (
+      <div key={label}>
+        <SectionTitle>{label}</SectionTitle>
+        <Caption>{group}</Caption>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 8 }}>
+          {vars.map(([name, hex]) => (
+            <Cell key={name}>
+              <div style={{ background: hex, height: 56, marginBottom: 8, border: "1px solid var(--phosphor-fade)" }} />
+              <div style={{ color: "var(--phosphor)", textShadow: "var(--glow-emerald)" }}>{name}</div>
+              <div style={{ color: "var(--phosphor-fade)" }}>{hex}</div>
+            </Cell>
+          ))}
+        </div>
+      </div>
+    ))}
+  </>
+);
+
+export const Colors = () => <Page><ColorPalette colors={PHOSPHOR_COLORS} /></Page>;
+
+export const ColorsAmber = () => (
+  <Page theme="amber">
+    <ColorPalette colors={AMBER_COLORS} />
+  </Page>
+);
 
 export const Typography = () => (
   <Page>
