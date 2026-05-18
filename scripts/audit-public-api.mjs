@@ -13,6 +13,20 @@ function assert(condition, message) {
   }
 }
 
+function hasDeclarationFiles(dirPath) {
+  for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
+    const entryPath = path.join(dirPath, entry.name);
+    if (entry.isDirectory() && hasDeclarationFiles(entryPath)) {
+      return true;
+    }
+    if (entry.isFile() && entry.name.endsWith(".d.ts")) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 const packageJson = readJson(path.join(root, "package.json"));
 
 const expectedExports = new Set([
@@ -55,8 +69,9 @@ const allowedTypeDirs = new Set([
 if (fs.existsSync(typeComponentRoot)) {
   for (const entry of fs.readdirSync(typeComponentRoot, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
+    const entryPath = path.join(typeComponentRoot, entry.name);
     assert(
-      allowedTypeDirs.has(entry.name),
+      allowedTypeDirs.has(entry.name) || !hasDeclarationFiles(entryPath),
       `Stale flattened type snapshot found: types/components/${entry.name}`,
     );
   }

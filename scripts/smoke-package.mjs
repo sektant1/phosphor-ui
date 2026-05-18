@@ -32,11 +32,16 @@ function dryRunPackFiles() {
       ? ["pack", "--dry-run", "--json"]
       : [npmCli, "pack", "--dry-run", "--json"];
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "phosphor-pack-"));
+  const cacheDir = path.join(tempDir, "npm-cache");
   const outputPath = path.join(tempDir, "pack.json");
   const outputFd = fs.openSync(outputPath, "w");
   const result = spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
+    env: {
+      ...process.env,
+      npm_config_cache: cacheDir,
+    },
     stdio: ["ignore", outputFd, "pipe"],
   });
   fs.closeSync(outputFd);
