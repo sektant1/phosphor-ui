@@ -240,7 +240,7 @@
   padding: 4px 0 2px;
 }
 
-.pho-prose code {
+.pho-prose code:not(pre code, .code-block code, figure code) {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-mono-size);
   background: var(--pho-mdx-inline-code-bg, var(--code-bg, var(--pho-color-background-raised)));
@@ -251,8 +251,8 @@
   box-shadow: inset 0 0 0 1px var(--pho-alpha-primary-04);
 }
 
-.pho-prose pre,
-.pho-prose .code-block {
+.pho-prose > pre,
+.pho-prose > .code-block {
   margin: 1.4rem 0;
   border: 1px solid var(--pho-mdx-code-frame, var(--code-punct, var(--pho-color-accent-muted)));
   background: var(--code-bg, var(--pho-color-background-raised));
@@ -273,7 +273,7 @@
   text-transform: uppercase;
 }
 
-.pho-prose pre {
+.pho-prose > pre {
   padding: 0.85rem 1rem;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-mono-size);
@@ -282,8 +282,8 @@
   text-shadow: none;
 }
 
-.pho-prose pre code,
-.pho-prose .code-block code {
+.pho-prose > pre code,
+.pho-prose > .code-block code {
   background: transparent;
   border: none;
   padding: 0;
@@ -345,7 +345,7 @@
     padding-inline: 0.75rem;
   }
 
-  .pho-prose pre {
+  .pho-prose > pre {
     padding: 0.75rem;
   }
 

@@ -11,7 +11,7 @@
     inset 0 0 0 1px var(--pho-mdx-code-hairline, rgba(216, 255, 231, 0.025)),
     0 0 18px var(--pho-alpha-primary-06);
   font-family: var(--pho-font-code);
-  margin: 1.4rem 0;
+  margin: 0.8rem 0;
   min-width: 0;
   overflow: hidden;
   position: relative;
@@ -234,14 +234,40 @@
 }
 
 .code :global(pre) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit;
   font-family: var(--pho-font-code) !important;
   font-size: var(--pho-type-ui-sm-size);
-  line-height: var(--pho-line-normal);
+  line-height: 1.45;
   margin: 0;
   overflow-x: auto;
-  padding: 1.4rem 1.1rem;
+  overflow-y: hidden;
+  padding: 0;
   tab-size: 4;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pho-color-primary-faint) transparent;
+}
+
+.code :global(pre)::-webkit-scrollbar {
+  height: 6px;
+  width: 0;
+}
+
+.code :global(pre)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code :global(pre)::-webkit-scrollbar-thumb {
+  background: var(--pho-color-primary-faint);
+  border-radius: 0;
+}
+
+.code :global(pre)::-webkit-scrollbar-thumb:hover {
+  background: var(--pho-color-primary-muted);
 }
 
 .code :global(code) {
@@ -251,17 +277,21 @@
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  margin: 0;
   padding: 0;
+  white-space: normal;
 }
 
 .code :global(.line) {
   display: block;
   line-height: inherit;
-  min-height: 1.42em;
+  margin: 0;
+  min-height: 0;
+  white-space: pre;
 }
 
-.code :global(.line:empty::before) {
-  content: " ";
+.code :global(.line:last-child:empty) {
+  display: none;
 }
 
 .fallback {
