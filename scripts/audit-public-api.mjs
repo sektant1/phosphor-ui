@@ -17,6 +17,7 @@ const packageJson = readJson(path.join(root, "package.json"));
 
 const expectedExports = new Set([
   ".",
+  "./server",
   "./phosphor.css",
   "./fonts.css",
   "./tokens.css",

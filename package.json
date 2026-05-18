@@ -88,7 +88,10 @@
     "prepublishOnly": "npm run validate:package",
     "release:dev": "npm version prerelease --preid dev --no-git-tag-version && npm publish --access public --tag next",
     "release:prod": "npm version patch --no-git-tag-version && npm publish --access public --tag latest",
-    "release": "npm run release:prod"
+    "release": "npm run release:prod",
+    "publish:gh": "gh workflow run publish.yml --ref prod -f dist-tag=latest -f version=patch",
+    "publish:gh:prod": "gh workflow run publish.yml --ref prod -f dist-tag=latest -f version=patch",
+    "publish:gh:dev": "gh workflow run publish.yml --ref dev -f dist-tag=next -f version=prerelease"
   },
   "peerDependencies": {
     "@mdx-js/react": "^2 || ^3",

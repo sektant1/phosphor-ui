@@ -1,6 +1,7 @@
-import { execFileSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -24,11 +25,26 @@ function assertFile(relativePath) {
 }
 
 function dryRunPackFiles() {
-  const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
+  const npmCli = process.env.npm_execpath ?? "npm";
+  const command = npmCli === "npm" ? "npm" : process.execPath;
+  const args =
+    npmCli === "npm"
+      ? ["pack", "--dry-run", "--json"]
+      : [npmCli, "pack", "--dry-run", "--json"];
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "phosphor-pack-"));
+  const outputPath = path.join(tempDir, "pack.json");
+  const outputFd = fs.openSync(outputPath, "w");
+  const result = spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
+    stdio: ["ignore", outputFd, "pipe"],
   });
+  fs.closeSync(outputFd);
+
+  assert(result.status === 0, result.stderr || "npm pack --dry-run --json failed");
+  const output = fs.readFileSync(outputPath, "utf8");
+  fs.rmSync(tempDir, { recursive: true, force: true });
+  assert(output.trim(), "npm pack --dry-run --json returned no output");
   const [pack] = JSON.parse(output);
   return new Set(pack.files.map((file) => file.path));
 }
@@ -42,6 +58,7 @@ assert(packageJson.style === "dist/styles/phosphor.css", "package.json style mus
 
 const requiredExports = [
   ".",
+  "./server",
   "./phosphor.css",
   "./fonts.css",
   "./tokens.css",
@@ -57,9 +74,12 @@ for (const key of requiredExports) {
 
 const requiredFiles = [
   "dist/cjs/index.js",
+  "dist/cjs/server.js",
   "dist/cjs/package.json",
   "dist/esm/index.js",
   "dist/esm/index.d.ts",
+  "dist/esm/server.js",
+  "dist/esm/server.d.ts",
   "dist/esm/package.json",
   "dist/styles/phosphor.css",
   "dist/styles/components.css",

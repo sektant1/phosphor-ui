@@ -49,6 +49,30 @@ export function Example() {
 }
 `;
 
+const amberSource = tsx`
+import { CrtShell } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <div data-theme="amber">
+      <CrtShell>
+        <div
+          style={{
+            minHeight: "100vh",
+            padding: "4rem",
+            color: "var(--pho-color-primary)",
+            fontFamily: "var(--pho-font-terminal)",
+          }}
+        >
+          <h1>CRT TERMINAL</h1>
+          <p>amber channel online. scanlines, glow, and vignette remain readable.</p>
+        </div>
+      </CrtShell>
+    </div>
+  );
+}
+`;
+
 type Story = StoryObj<typeof CrtShell>;
 
 export const Default: Story = {
@@ -79,6 +103,7 @@ export const NoEffects: Story = {
 };
 
 export const Amber: Story = {
+  parameters: { docs: { source: source(amberSource) } },
   args: {
     children: (
       <div
