@@ -1,32 +1,82 @@
 import type { ThemeRegistration } from "shiki";
 
-/*
-  Phosphor palette — 6 distinct visual bands:
+export type CodeBlockThemeName = "phosphor" | "amber";
 
-  #2cff7a  pure phosphor   keywords, tags          (hot, saturated)
-  #8effc4  mint            functions               (bright, soft)
-  #62ff9a  medium green    operators               (secondary)
-  #00e8c8  teal            strings                 (cool hue shift)
-  #38eed8  cyan            types, builtins         (even cooler)
-  #c8ff44  lime            numbers, constants      (warm hue shift)
-  #b8ffd6  pale green      variables               (near default)
-  #2d6640  dim green       comments                (suppressed)
-  #243d2c  very dim        punctuation             (structural noise)
-*/
+type CodePalette = {
+  name: CodeBlockThemeName;
+  bg: string;
+  fg: string;
+  selection: string;
+  lineHighlight: string;
+  keyword: string;
+  string: string;
+  number: string;
+  fn: string;
+  variable: string;
+  type: string;
+  operator: string;
+  comment: string;
+  punct: string;
+  tag: string;
+  attr: string;
+  builtin: string;
+  invalid: string;
+};
 
-export const phosphorTheme: ThemeRegistration = {
+export const phosphorCodePalette: CodePalette = {
   name: "phosphor",
-  type: "dark",
   bg: "#03110a",
   fg: "#d8ffe7",
+  selection: "#1fb85440",
+  lineHighlight: "#071c0f",
+  keyword: "#62ff9a",
+  string: "#00d4b5",
+  number: "#aaff66",
+  fn: "#b6ffce",
+  variable: "#d6ffe2",
+  type: "#5cf5d4",
+  operator: "#b6ffce",
+  comment: "#3a7a52",
+  punct: "#4d8a6e",
+  tag: "#62ff9a",
+  attr: "#aaff66",
+  builtin: "#5cf5d4",
+  invalid: "#ff5555",
+};
+
+export const amberCodePalette: CodePalette = {
+  name: "amber",
+  bg: "#090602",
+  fg: "#ffe4a3",
+  selection: "#cc7a0040",
+  lineHighlight: "#140d04",
+  keyword: "#ffbf33",
+  string: "#ffd166",
+  number: "#ffe08a",
+  fn: "#ffecb3",
+  variable: "#ffe4a3",
+  type: "#ffcf66",
+  operator: "#ffecb3",
+  comment: "#8a5c17",
+  punct: "#996000",
+  tag: "#ffbf33",
+  attr: "#ffd166",
+  builtin: "#ffcf66",
+  invalid: "#ff6a6a",
+};
+
+const createCodeTheme = (palette: CodePalette): ThemeRegistration => ({
+  name: palette.name,
+  type: "dark",
+  bg: palette.bg,
+  fg: palette.fg,
   colors: {
-    "editor.background": "#03110a",
-    "editor.foreground": "#d8ffe7",
-    "editor.selectionBackground": "#1fb85440",
-    "editor.lineHighlightBackground": "#071c0f",
+    "editor.background": palette.bg,
+    "editor.foreground": palette.fg,
+    "editor.selectionBackground": palette.selection,
+    "editor.lineHighlightBackground": palette.lineHighlight,
   },
   tokenColors: [
-    /* ── suppressed ─────────────────────────────────────── */
     {
       scope: [
         "comment",
@@ -34,7 +84,7 @@ export const phosphorTheme: ThemeRegistration = {
         "comment.block",
         "punctuation.definition.comment",
       ],
-      settings: { foreground: "#2d6640", fontStyle: "italic" },
+      settings: { foreground: palette.comment, fontStyle: "italic" },
     },
     {
       scope: [
@@ -46,10 +96,8 @@ export const phosphorTheme: ThemeRegistration = {
         "meta.brace",
         "meta.delimiter",
       ],
-      settings: { foreground: "#243d2c" },
+      settings: { foreground: palette.punct },
     },
-
-    /* ── pure phosphor — keywords ────────────────────────── */
     {
       scope: [
         "keyword",
@@ -68,10 +116,8 @@ export const phosphorTheme: ThemeRegistration = {
         "storage.type",
         "storage.modifier",
       ],
-      settings: { foreground: "#2cff7a" },
+      settings: { foreground: palette.keyword },
     },
-
-    /* ── teal — strings ──────────────────────────────────── */
     {
       scope: [
         "string",
@@ -82,10 +128,8 @@ export const phosphorTheme: ThemeRegistration = {
         "string.regexp",
         "punctuation.definition.string",
       ],
-      settings: { foreground: "#00e8c8" },
+      settings: { foreground: palette.string },
     },
-
-    /* ── lime — numbers, booleans, constants ─────────────── */
     {
       scope: [
         "constant.numeric",
@@ -97,10 +141,8 @@ export const phosphorTheme: ThemeRegistration = {
         "variable.other.constant",
         "support.constant",
       ],
-      settings: { foreground: "#c8ff44" },
+      settings: { foreground: palette.number },
     },
-
-    /* ── mint — function names ───────────────────────────── */
     {
       scope: [
         "entity.name.function",
@@ -108,10 +150,8 @@ export const phosphorTheme: ThemeRegistration = {
         "meta.function-call entity.name.function",
         "variable.function",
       ],
-      settings: { foreground: "#8effc4" },
+      settings: { foreground: palette.fn },
     },
-
-    /* ── pale green — variables ──────────────────────────── */
     {
       scope: [
         "variable",
@@ -122,10 +162,8 @@ export const phosphorTheme: ThemeRegistration = {
         "variable.language.this",
         "variable.language.self",
       ],
-      settings: { foreground: "#b8ffd6" },
+      settings: { foreground: palette.variable },
     },
-
-    /* ── cyan — types, classes, interfaces ───────────────── */
     {
       scope: [
         "entity.name.type",
@@ -138,10 +176,8 @@ export const phosphorTheme: ThemeRegistration = {
         "support.function.builtin",
         "storage.type.class",
       ],
-      settings: { foreground: "#38eed8" },
+      settings: { foreground: palette.type },
     },
-
-    /* ── medium green — operators ────────────────────────── */
     {
       scope: [
         "keyword.operator",
@@ -155,42 +191,50 @@ export const phosphorTheme: ThemeRegistration = {
         "keyword.operator.ternary",
         "keyword.operator.optional",
       ],
-      settings: { foreground: "#62ff9a" },
+      settings: { foreground: palette.operator },
     },
-
-    /* ── tags & attributes (HTML/JSX) ────────────────────── */
     {
       scope: [
         "entity.name.tag",
         "meta.tag entity.name.tag",
         "support.class.component",
       ],
-      settings: { foreground: "#2cff7a" },
+      settings: { foreground: palette.tag },
     },
     {
       scope: ["entity.other.attribute-name"],
-      settings: { foreground: "#c8ff44" },
+      settings: { foreground: palette.attr },
     },
-
-    /* ── template expressions — inherit default ───────────── */
+    {
+      scope: [
+        "support.function.builtin",
+        "support.type.builtin",
+        "support.constant",
+      ],
+      settings: { foreground: palette.builtin },
+    },
     {
       scope: [
         "meta.template.expression",
         "punctuation.definition.template-expression",
       ],
-      settings: { foreground: "#d8ffe7" },
+      settings: { foreground: palette.fg },
     },
-
-    /* ── decorators ──────────────────────────────────────── */
     {
       scope: ["meta.decorator", "punctuation.decorator"],
-      settings: { foreground: "#62ff9a", fontStyle: "italic" },
+      settings: { foreground: palette.operator, fontStyle: "italic" },
     },
-
-    /* ── invalid ─────────────────────────────────────────── */
     {
       scope: ["invalid", "invalid.illegal"],
-      settings: { foreground: "#ff5555", fontStyle: "underline" },
+      settings: { foreground: palette.invalid, fontStyle: "underline" },
     },
   ],
+});
+
+export const phosphorTheme = createCodeTheme(phosphorCodePalette);
+export const amberTheme = createCodeTheme(amberCodePalette);
+
+export const codeBlockThemes: Record<CodeBlockThemeName, ThemeRegistration> = {
+  phosphor: phosphorTheme,
+  amber: amberTheme,
 };

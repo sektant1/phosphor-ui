@@ -33,7 +33,7 @@
 .pho-prose h6 {
   font-family: var(--pho-font-display);
   font-weight: 700;
-  color: var(--pho-color-accent-strong);
+  color: var(--pho-mdx-heading, var(--pho-color-accent-strong));
   text-shadow: var(--pho-glow-accent-soft);
   margin: 2.4rem 0 1rem;
   letter-spacing: var(--pho-tracking-heading);
@@ -66,7 +66,7 @@
 
 .pho-prose h6 {
   font-size: var(--pho-type-h6-size);
-  color: var(--pho-color-text-muted);
+  color: var(--pho-mdx-heading-muted, var(--pho-color-text-muted));
 }
 
 .pho-prose h2 {
@@ -78,14 +78,14 @@
 
 .pho-prose h2::before {
   content: "┌─[";
-  color: var(--pho-color-accent-muted);
+  color: var(--pho-mdx-heading-muted, var(--pho-color-accent-muted));
   text-shadow: none;
   font-family: var(--pho-font-code);
 }
 
 .pho-prose h2::after {
   content: "]──";
-  color: var(--pho-color-accent-muted);
+  color: var(--pho-mdx-heading-muted, var(--pho-color-accent-muted));
   text-shadow: none;
   font-family: var(--pho-font-code);
   flex: 1;
@@ -95,7 +95,7 @@
 
 .pho-prose h3::before {
   content: "▸ ";
-  color: var(--pho-color-primary-strong);
+  color: var(--pho-mdx-heading-marker, var(--pho-color-primary-strong));
   text-shadow: var(--pho-glow-primary);
   font-family: var(--pho-font-code);
 }
@@ -105,10 +105,10 @@
 }
 
 .pho-prose a {
-  color: var(--pho-color-accent-strong);
+  color: var(--pho-mdx-link, var(--pho-color-accent-strong));
   text-shadow: none;
   text-decoration: none;
-  border-bottom: 1px dashed var(--pho-color-accent);
+  border-bottom: 1px dashed var(--pho-mdx-link-hover, var(--pho-color-accent));
   padding-bottom: 1px;
   transition: var(--pho-hover-transition);
 }
@@ -128,13 +128,13 @@
 }
 
 .pho-prose strong {
-  color: var(--pho-color-primary-strong);
+  color: var(--pho-mdx-strong, var(--pho-color-primary-strong));
   text-shadow: var(--pho-glow-primary-soft);
   font-weight: 700;
 }
 
 .pho-prose em {
-  color: var(--pho-color-highlight);
+  color: var(--pho-mdx-emphasis, var(--pho-color-highlight));
   text-shadow: none;
   font-family: inherit;
   font-style: italic;
@@ -144,9 +144,9 @@
 .pho-prose blockquote {
   margin: 1.4rem 0;
   padding: 0.6rem 1rem;
-  border-left: 3px solid var(--pho-color-accent);
-  background: color-mix(in srgb, var(--pho-color-accent-faint) 30%, transparent);
-  color: var(--pho-color-primary-strong);
+  border-left: 3px solid var(--pho-mdx-quote-accent, var(--pho-color-accent));
+  background: var(--pho-mdx-quote-bg, color-mix(in srgb, var(--pho-color-accent-faint) 30%, transparent));
+  color: var(--pho-mdx-quote, var(--pho-color-primary-strong));
   font-family: var(--pho-font-body);
   font-style: italic;
   font-size: var(--pho-type-body-size);
@@ -155,7 +155,7 @@
 
 .pho-prose blockquote::before {
   content: "│ ";
-  color: var(--pho-color-accent);
+  color: var(--pho-mdx-quote-accent, var(--pho-color-accent));
   font-style: normal;
 }
 
@@ -173,7 +173,7 @@
 
 .pho-prose ul li::before {
   content: "▪   ";
-  color: var(--pho-color-accent);
+  color: var(--pho-mdx-list-marker, var(--pho-color-accent));
   text-shadow: var(--pho-glow-accent);
 }
 
@@ -187,7 +187,7 @@
 
 .pho-prose ol li::before {
   content: "[" counter(item, decimal-leading-zero) "] ";
-  color: var(--pho-color-accent);
+  color: var(--pho-mdx-list-marker, var(--pho-color-accent));
   text-shadow: var(--pho-glow-accent);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
@@ -196,7 +196,7 @@
 .pho-prose hr {
   border: none;
   text-align: center;
-  color: var(--pho-color-accent-muted);
+  color: var(--pho-mdx-rule, var(--pho-color-accent-muted));
   font-family: var(--pho-font-code);
   margin: 2rem 0;
 }
@@ -208,14 +208,14 @@
 .pho-prose img {
   max-width: 100%;
   height: auto;
-  border: 1px solid var(--pho-color-accent-muted);
+  border: 1px solid var(--pho-mdx-figure-border, var(--pho-color-accent-muted));
 }
 
 .pho-prose figure,
 .pho-prose .pho-mdx-figure {
   margin: 1.6rem 0;
-  border: 1px solid var(--pho-color-primary-faint);
-  background: var(--pho-color-background-deep);
+  border: 1px solid var(--pho-mdx-figure-border, var(--pho-color-primary-faint));
+  background: var(--pho-mdx-figure-bg, var(--pho-color-background-deep));
   padding: 6px;
   display: grid;
   gap: 6px;
@@ -235,7 +235,7 @@
   font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-wider);
   text-transform: uppercase;
-  color: var(--pho-color-primary-faint);
+  color: var(--pho-mdx-figure-caption, var(--pho-color-primary-faint));
   text-align: center;
   padding: 4px 0 2px;
 }
@@ -243,32 +243,32 @@
 .pho-prose code {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-mono-size);
-  background: var(--pho-color-background-raised);
-  color: var(--pho-color-primary-strong);
+  background: var(--pho-mdx-inline-code-bg, var(--code-bg, var(--pho-color-background-raised)));
+  color: var(--pho-mdx-inline-code, var(--code-fn, var(--pho-color-primary-strong)));
   text-shadow: none;
   padding: 0.1em 0.42em;
-  border: 1px solid var(--pho-color-primary-faint);
+  border: 1px solid var(--pho-mdx-inline-code-border, var(--code-punct, var(--pho-color-primary-faint)));
   box-shadow: inset 0 0 0 1px var(--pho-alpha-primary-04);
 }
 
 .pho-prose pre,
 .pho-prose .code-block {
   margin: 1.4rem 0;
-  border: 1px solid var(--pho-color-accent-muted);
-  background: var(--pho-color-background-raised);
+  border: 1px solid var(--pho-mdx-code-frame, var(--code-punct, var(--pho-color-accent-muted)));
+  background: var(--code-bg, var(--pho-color-background-raised));
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .pho-prose .code-bar {
-  background: var(--pho-color-accent-faint);
-  color: var(--pho-color-accent-strong);
+  background: var(--pho-mdx-code-bar-bg, var(--code-bg, var(--pho-color-accent-faint)));
+  color: var(--pho-mdx-code-bar-text, var(--code-fn, var(--pho-color-accent-strong)));
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   letter-spacing: var(--pho-tracking-stamp);
   padding: 0.25rem 0.6rem;
-  border-bottom: 1px solid var(--pho-color-accent-muted);
+  border-bottom: 1px solid var(--pho-mdx-code-frame, var(--code-punct, var(--pho-color-accent-muted)));
   text-shadow: none;
   text-transform: uppercase;
 }
@@ -300,14 +300,14 @@
 
 .pho-prose th,
 .pho-prose td {
-  border: 1px solid var(--pho-color-accent-muted);
+  border: 1px solid var(--pho-mdx-table-border, var(--pho-color-accent-muted));
   padding: 0.4rem 0.6rem;
   text-align: left;
 }
 
 .pho-prose th {
-  background: var(--pho-color-accent-faint);
-  color: var(--pho-color-accent-strong);
+  background: var(--pho-mdx-table-heading-bg, var(--pho-color-accent-faint));
+  color: var(--pho-mdx-table-heading-text, var(--pho-color-accent-strong));
   text-shadow: var(--pho-glow-accent);
 }
 

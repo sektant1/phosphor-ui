@@ -13,11 +13,11 @@
   align-items: stretch;
   background:
     linear-gradient(90deg, var(--callout-bg), transparent 64%),
-    linear-gradient(180deg, rgba(216, 255, 231, 0.035), transparent 58%),
+    linear-gradient(180deg, var(--pho-mdx-callout-wash, rgba(216, 255, 231, 0.035)), transparent 58%),
     var(--pho-color-background-deep);
   border: 1px solid var(--callout-accent-fade);
   box-shadow:
-    inset 0 0 0 1px rgba(216, 255, 231, 0.025),
+    inset 0 0 0 1px var(--pho-mdx-callout-hairline, rgba(216, 255, 231, 0.025)),
     0 0 16px var(--pho-alpha-primary-06);
   color: var(--pho-color-text);
   display: grid;
@@ -38,8 +38,8 @@
 
 .frame::before {
   background: repeating-linear-gradient(180deg,
-      rgba(216, 255, 231, 0.05) 0,
-      rgba(216, 255, 231, 0.05) 1px,
+      var(--pho-mdx-callout-scanline, rgba(216, 255, 231, 0.05)) 0,
+      var(--pho-mdx-callout-scanline, rgba(216, 255, 231, 0.05)) 1px,
       transparent 1px,
       transparent 4px);
   content: "";
@@ -184,30 +184,30 @@
 .info {}
 
 .note {
-  --callout-accent: var(--pho-color-info);
-  --callout-accent-bright: #9ffffa;
-  --callout-accent-muted: rgba(0, 206, 200, 0.58);
-  --callout-accent-fade: rgba(0, 206, 200, 0.3);
-  --callout-bg: rgba(0, 206, 200, 0.055);
-  --callout-glow: rgba(0, 206, 200, 0.42);
+  --callout-accent: var(--pho-mdx-callout-note, var(--pho-color-info));
+  --callout-accent-bright: var(--pho-mdx-callout-note-bright, #9ffffa);
+  --callout-accent-muted: var(--pho-mdx-callout-note-muted, rgba(0, 206, 200, 0.58));
+  --callout-accent-fade: var(--pho-mdx-callout-note-fade, rgba(0, 206, 200, 0.3));
+  --callout-bg: var(--pho-mdx-callout-note-bg, rgba(0, 206, 200, 0.055));
+  --callout-glow: var(--pho-mdx-callout-note-muted, rgba(0, 206, 200, 0.42));
 }
 
 .tip {
-  --callout-accent: var(--pho-color-success);
-  --callout-accent-bright: #c6ffd9;
-  --callout-accent-muted: rgba(0, 255, 127, 0.58);
-  --callout-accent-fade: rgba(0, 255, 127, 0.3);
-  --callout-bg: rgba(0, 255, 127, 0.055);
-  --callout-glow: rgba(0, 255, 127, 0.38);
+  --callout-accent: var(--pho-mdx-callout-tip, var(--pho-color-success));
+  --callout-accent-bright: var(--pho-mdx-callout-tip-bright, #c6ffd9);
+  --callout-accent-muted: var(--pho-mdx-callout-tip-muted, rgba(0, 255, 127, 0.58));
+  --callout-accent-fade: var(--pho-mdx-callout-tip-fade, rgba(0, 255, 127, 0.3));
+  --callout-bg: var(--pho-mdx-callout-tip-bg, rgba(0, 255, 127, 0.055));
+  --callout-glow: var(--pho-mdx-callout-tip-muted, rgba(0, 255, 127, 0.38));
 }
 
 .success {
-  --callout-accent: var(--pho-color-primary-strong);
-  --callout-accent-bright: #effff4;
-  --callout-accent-muted: rgba(182, 255, 206, 0.64);
-  --callout-accent-fade: rgba(182, 255, 206, 0.32);
-  --callout-bg: rgba(182, 255, 206, 0.05);
-  --callout-glow: rgba(182, 255, 206, 0.36);
+  --callout-accent: var(--pho-mdx-callout-success, var(--pho-color-primary-strong));
+  --callout-accent-bright: var(--pho-mdx-callout-success-bright, #effff4);
+  --callout-accent-muted: var(--pho-mdx-callout-success-muted, rgba(182, 255, 206, 0.64));
+  --callout-accent-fade: var(--pho-mdx-callout-success-fade, rgba(182, 255, 206, 0.32));
+  --callout-bg: var(--pho-mdx-callout-success-bg, rgba(182, 255, 206, 0.05));
+  --callout-glow: var(--pho-mdx-callout-success-muted, rgba(182, 255, 206, 0.36));
 }
 
 .warn {
@@ -233,7 +233,7 @@
   --callout-accent-bright: var(--pho-color-accent-strong);
   --callout-accent-muted: var(--pho-color-accent-muted);
   --callout-accent-fade: var(--pho-alpha-accent-14);
-  --callout-bg: rgba(98, 255, 154, 0.045);
+  --callout-bg: var(--pho-mdx-callout-quote-bg, rgba(98, 255, 154, 0.045));
   --callout-glow: var(--pho-alpha-accent-14);
   color: var(--pho-color-text-strong);
   font-style: italic;
@@ -249,7 +249,7 @@
   --callout-accent-bright: var(--pho-color-primary-strong);
   --callout-accent-muted: var(--pho-color-primary-muted);
   --callout-accent-fade: var(--pho-color-primary-faint);
-  --callout-bg: var(--pho-alpha-primary-07);
+  --callout-bg: var(--pho-mdx-callout-terminal-bg, var(--pho-alpha-primary-07));
   --callout-glow: var(--pho-alpha-primary-45);
   border-style: dashed;
   font-size: var(--pho-type-ui-sm-size);

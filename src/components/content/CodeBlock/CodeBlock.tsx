@@ -1,7 +1,8 @@
 import React from "react";
 import type { BundledLanguage } from "shiki";
 import styles from "./CodeBlock.module.scss";
-import { phosphorTheme } from "./phosphorTheme";
+import { codeBlockThemes } from "./phosphorTheme";
+import type { CodeBlockThemeName } from "./phosphorTheme";
 import { copyText } from "../../../utils/browser";
 import { cx } from "../../../utils/classNames";
 
@@ -12,14 +13,28 @@ type HighlightState = {
 
 const highlightCache = new Map<string, Promise<string>>();
 
-const getHighlightKey = (code: string, lang: string) => `${lang}\u0000${code}`;
+export type CodeBlockThemeMode = CodeBlockThemeName | "auto";
+
+const getHighlightKey = (code: string, lang: string, theme: CodeBlockThemeName) =>
+  `${theme}\u0000${lang}\u0000${code}`;
+
+const resolveCodeBlockTheme = (
+  theme: CodeBlockThemeMode,
+  element?: HTMLElement | null,
+): CodeBlockThemeName => {
+  if (theme !== "auto") return theme;
+  const themedElement = element?.closest<HTMLElement>("[data-theme]");
+  const themeName = themedElement?.dataset.theme ?? document.documentElement.dataset.theme;
+  return themeName === "amber" ? "amber" : "phosphor";
+};
 
 export async function codeToPhosphorHtml(
   code: string,
   lang = "text",
+  theme: CodeBlockThemeName = "phosphor",
 ): Promise<string> {
   const normalizedLang = lang || "text";
-  const key = getHighlightKey(code, normalizedLang);
+  const key = getHighlightKey(code, normalizedLang, theme);
   const cached = highlightCache.get(key);
   if (cached) return cached;
 
@@ -27,7 +42,7 @@ export async function codeToPhosphorHtml(
     .then(({ codeToHtml }) =>
       codeToHtml(code, {
         lang: normalizedLang as BundledLanguage,
-        theme: phosphorTheme,
+        theme: codeBlockThemes[theme],
       }),
     )
     .catch((error) => {
@@ -46,6 +61,7 @@ export interface CodeBlockProps {
   filename?: string;
   /** Pre-rendered Shiki HTML (for SSR/SSG — skips client-side highlight). */
   html?: string;
+  theme?: CodeBlockThemeMode;
   copyable?: boolean;
   copyLabel?: React.ReactNode;
   copiedLabel?: React.ReactNode;
@@ -59,6 +75,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   language,
   filename,
   html: htmlProp,
+  theme = "auto",
   copyable = true,
   copyLabel = "⎘ copy",
   copiedLabel = "✓ copied",
@@ -72,6 +89,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
   });
   const [copied, setCopied] = React.useState(false);
 
+  const blockRef = React.useRef<HTMLElement | null>(null);
   const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useEffect(() => {
@@ -80,8 +98,9 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       return;
     }
     let cancelled = false;
+    const resolvedTheme = resolveCodeBlockTheme(theme, blockRef.current);
     setHighlight({ html: "", failed: false });
-    codeToPhosphorHtml(code, resolvedLang)
+    codeToPhosphorHtml(code, resolvedLang, resolvedTheme)
       .then((result) => {
         if (!cancelled) setHighlight({ html: result, failed: false });
       })
@@ -91,7 +110,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [code, resolvedLang, htmlProp]);
+  }, [code, resolvedLang, htmlProp, theme]);
 
   React.useEffect(
     () => () => {
@@ -117,7 +136,11 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       .join(" ");
 
   return (
-    <figure className={cx(styles.block, className)} aria-label={regionLabel}>
+    <figure
+      ref={blockRef}
+      className={cx(styles.block, className)}
+      aria-label={regionLabel}
+    >
       <div className={styles.bar}>
         <span className={styles.leds} aria-hidden="true">
           <span className={styles.led} />

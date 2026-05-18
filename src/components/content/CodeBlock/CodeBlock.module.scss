@@ -1,14 +1,14 @@
 .block {
-  --code-frame-edge: var(--pho-color-primary-faint);
+  --code-frame-edge: var(--pho-mdx-code-frame, var(--code-punct, var(--pho-color-primary-faint)));
   --code-frame-glow: var(--pho-alpha-primary-22);
   --code-chip-height: 1.1rem;
   background:
     linear-gradient(90deg, var(--pho-alpha-primary-10), transparent 38%),
-    linear-gradient(180deg, rgba(0, 232, 200, 0.04), transparent 42%),
-    var(--pho-color-background-deep);
+    linear-gradient(180deg, var(--pho-mdx-code-wash, rgba(0, 232, 200, 0.04)), transparent 42%),
+    var(--code-bg, var(--pho-color-background-deep));
   border: 1px solid var(--code-frame-edge);
   box-shadow:
-    inset 0 0 0 1px rgba(216, 255, 231, 0.025),
+    inset 0 0 0 1px var(--pho-mdx-code-hairline, rgba(216, 255, 231, 0.025)),
     0 0 18px var(--pho-alpha-primary-06);
   font-family: var(--pho-font-code);
   margin: 1.4rem 0;
@@ -19,8 +19,8 @@
 
 .block::before {
   background: repeating-linear-gradient(180deg,
-      rgba(216, 255, 231, 0.045) 0,
-      rgba(216, 255, 231, 0.045) 1px,
+      var(--pho-mdx-code-scanline, rgba(216, 255, 231, 0.045)) 0,
+      var(--pho-mdx-code-scanline, rgba(216, 255, 231, 0.045)) 1px,
       transparent 1px,
       transparent 4px);
   content: "";
@@ -47,8 +47,8 @@
   align-items: center;
   background:
     repeating-linear-gradient(90deg, transparent 0 0.45rem, var(--pho-alpha-primary-04) 0.45rem 0.5rem),
-    linear-gradient(180deg, rgba(216, 255, 231, 0.065), rgba(0, 232, 200, 0.025)),
-    var(--pho-color-background-raised);
+    linear-gradient(180deg, var(--pho-mdx-code-scanline, rgba(216, 255, 231, 0.065)), var(--pho-mdx-code-wash, rgba(0, 232, 200, 0.025))),
+    var(--pho-mdx-code-bar-bg, var(--pho-color-background-raised));
   border-bottom: 1px solid var(--code-frame-edge);
   display: grid;
   gap: 0.65rem;
@@ -77,7 +77,7 @@
 
 .led {
   background: var(--pho-color-primary-faint);
-  border: 1px solid rgba(216, 255, 231, 0.12);
+  border: 1px solid var(--pho-mdx-code-led-border, rgba(216, 255, 231, 0.12));
   box-shadow: none;
   display: block;
   height: 0.48rem;
@@ -91,7 +91,7 @@
 
 .leds .led:nth-child(2) {
   background: var(--pho-color-primary-muted);
-  box-shadow: 0 0 4px rgba(31, 184, 84, 0.5);
+  box-shadow: 0 0 4px var(--pho-mdx-code-led-muted-glow, rgba(31, 184, 84, 0.5));
 }
 
 .identity {
@@ -100,7 +100,7 @@
 
 .filename {
   align-items: center;
-  color: var(--pho-color-primary-strong);
+  color: var(--code-fn, var(--pho-color-primary-strong));
   display: flex;
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
@@ -114,7 +114,7 @@
 }
 
 .fileglyph {
-  color: var(--pho-color-accent);
+  color: var(--code-tag, var(--pho-color-accent));
   flex-shrink: 0;
   text-shadow: var(--pho-glow-accent);
 }
@@ -125,9 +125,9 @@
 
 .lang {
   align-items: center;
-  background: rgba(0, 232, 200, 0.055);
-  border: 1px solid rgba(0, 232, 200, 0.28);
-  color: var(--pho-color-accent);
+  background: var(--pho-mdx-code-chip-bg, rgba(0, 232, 200, 0.055));
+  border: 1px solid var(--pho-mdx-code-chip-border, rgba(0, 232, 200, 0.28));
+  color: var(--pho-mdx-code-chip-text, var(--pho-color-accent));
   display: inline-grid;
   flex-shrink: 0;
   font-family: var(--pho-font-display);
@@ -144,9 +144,9 @@
 
 .copy {
   align-items: center;
-  background: rgba(1, 6, 4, 0.45);
-  border: 1px solid var(--pho-color-primary-faint);
-  color: var(--pho-color-primary-muted);
+  background: var(--pho-alpha-surface-45);
+  border: 1px solid var(--code-frame-edge);
+  color: var(--code-comment, var(--pho-color-primary-muted));
   cursor: pointer;
   display: inline-grid;
   flex-shrink: 0;
@@ -181,15 +181,15 @@
 }
 
 .copied {
-  border-color: var(--pho-color-primary);
-  color: var(--pho-color-primary-strong);
+  border-color: var(--code-keyword, var(--pho-color-primary));
+  color: var(--code-fn, var(--pho-color-primary-strong));
   text-shadow: var(--pho-glow-primary-soft);
   animation: copiedFlash 200ms ease-out;
 }
 
 @keyframes copiedFlash {
   0% {
-    box-shadow: 0 0 0 rgba(44, 255, 122, 0);
+    box-shadow: 0 0 0 transparent;
   }
 
   40% {
@@ -223,8 +223,8 @@
   background: repeating-linear-gradient(to bottom,
       transparent 0,
       transparent 3px,
-      rgba(3, 17, 10, 0.08) 3px,
-      rgba(3, 17, 10, 0.08) 4px);
+      var(--pho-mdx-code-line-shade, rgba(3, 17, 10, 0.08)) 3px,
+      var(--pho-mdx-code-line-shade, rgba(3, 17, 10, 0.08)) 4px);
   content: "";
   inset: 0;
   mix-blend-mode: multiply;
@@ -267,8 +267,8 @@
 .fallback {
   background:
     linear-gradient(90deg, var(--pho-alpha-primary-05), transparent 56%),
-    var(--pho-color-background-deep);
-  color: var(--pho-color-primary-muted);
+    var(--code-bg, var(--pho-color-background-deep));
+  color: var(--code-comment, var(--pho-color-primary-muted));
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-ui-sm-size);
   line-height: var(--pho-line-normal);

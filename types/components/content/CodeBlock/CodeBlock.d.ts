@@ -1,5 +1,7 @@
 import React from "react";
-export declare function codeToPhosphorHtml(code: string, lang?: string): Promise<string>;
+import type { CodeBlockThemeName } from "./phosphorTheme";
+export type CodeBlockThemeMode = CodeBlockThemeName | "auto";
+export declare function codeToPhosphorHtml(code: string, lang?: string, theme?: CodeBlockThemeName): Promise<string>;
 export interface CodeBlockProps {
     code: string;
     lang?: string;
@@ -7,6 +9,7 @@ export interface CodeBlockProps {
     filename?: string;
     /** Pre-rendered Shiki HTML (for SSR/SSG — skips client-side highlight). */
     html?: string;
+    theme?: CodeBlockThemeMode;
     copyable?: boolean;
     copyLabel?: React.ReactNode;
     copiedLabel?: React.ReactNode;

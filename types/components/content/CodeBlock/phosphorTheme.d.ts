@@ -1,2 +1,28 @@
 import type { ThemeRegistration } from "shiki";
+export type CodeBlockThemeName = "phosphor" | "amber";
+type CodePalette = {
+    name: CodeBlockThemeName;
+    bg: string;
+    fg: string;
+    selection: string;
+    lineHighlight: string;
+    keyword: string;
+    string: string;
+    number: string;
+    fn: string;
+    variable: string;
+    type: string;
+    operator: string;
+    comment: string;
+    punct: string;
+    tag: string;
+    attr: string;
+    builtin: string;
+    invalid: string;
+};
+export declare const phosphorCodePalette: CodePalette;
+export declare const amberCodePalette: CodePalette;
 export declare const phosphorTheme: ThemeRegistration;
+export declare const amberTheme: ThemeRegistration;
+export declare const codeBlockThemes: Record<CodeBlockThemeName, ThemeRegistration>;
+export {};
