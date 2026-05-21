@@ -50,6 +50,16 @@ If you need finer control, import `tokens.css`, `global.css`, and `components.cs
 
 For app code, prefer `phosphor.css` first. Use granular imports only when your app owns global typography, fonts, cursors, or decorative effects.
 
+### Themes
+
+The default theme is green phosphor. Alternate CRT palettes are included in `tokens.css` and work by setting `data-theme` on a wrapper or on `<html>`:
+
+```html
+<html data-theme="cyan">
+```
+
+Supported values are `phosphor`, `amber`, and `cyan`.
+
 ## Tokens
 
 Use the `--pho-*` tokens for app-level customization. The older raw tokens

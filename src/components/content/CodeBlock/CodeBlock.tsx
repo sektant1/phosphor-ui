@@ -25,7 +25,7 @@ const resolveCodeBlockTheme = (
   if (theme !== "auto") return theme;
   const themedElement = element?.closest<HTMLElement>("[data-theme]");
   const themeName = themedElement?.dataset.theme ?? document.documentElement.dataset.theme;
-  return themeName === "amber" ? "amber" : "phosphor";
+  return themeName === "amber" || themeName === "cyan" ? themeName : "phosphor";
 };
 
 export async function codeToPhosphorHtml(

@@ -708,3 +708,252 @@
   --pho-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
   --pho-scrollbar-thumb-active: var(--scrollbar-thumb-active);
 }
+
+
+[data-theme="cyan"] {
+  color-scheme: dark;
+
+  --phosphor: #19f7ff;
+  --phosphor-bright: #c8fbff;
+  --phosphor-dim: #00aeca;
+  --phosphor-fade: #005064;
+
+  --magenta: #7dfcff;
+  --magenta-bright: #e5feff;
+  --magenta-deep: #008aa3;
+  --magenta-fade: #003344;
+
+  --moss: #31d7ff;
+  --spring: #5fffff;
+  --rose: #a8f8ff;
+
+  --bg: #020b10;
+  --bg-raise: #061923;
+  --bg-deep: #000407;
+  --ink: #d6fbff;
+
+  --pho-color-background: var(--bg);
+  --pho-color-background-raised: var(--bg-raise);
+  --pho-color-background-deep: var(--bg-deep);
+  --pho-color-text: var(--ink);
+  --pho-color-text-strong: var(--phosphor-bright);
+  --pho-color-text-muted: #65c8d6;
+  --pho-color-text-faint: var(--phosphor-fade);
+  --pho-color-primary: var(--phosphor);
+  --pho-color-primary-strong: var(--phosphor-bright);
+  --pho-color-primary-muted: var(--phosphor-dim);
+  --pho-color-primary-faint: var(--phosphor-fade);
+  --pho-color-accent: var(--magenta);
+  --pho-color-accent-strong: var(--magenta-bright);
+  --pho-color-accent-muted: var(--magenta-deep);
+  --pho-color-accent-faint: var(--magenta-fade);
+  --pho-color-info: var(--moss);
+  --pho-color-success: var(--spring);
+  --pho-color-highlight: var(--rose);
+  --pho-color-link: var(--pho-color-accent);
+  --pho-color-link-hover: var(--pho-color-accent-strong);
+  --pho-color-inverse: var(--bg);
+  --pho-color-selection-bg: var(--pho-color-primary);
+  --pho-color-selection-text: var(--pho-color-background);
+  --pho-color-surface: var(--pho-color-background-raised);
+  --pho-color-surface-deep: var(--pho-color-background-deep);
+  --pho-color-panel: var(--pho-alpha-surface-72);
+  --pho-color-panel-tint: rgba(25, 247, 255, 0.08);
+  --pho-color-border: var(--pho-color-primary-faint);
+  --pho-color-border-strong: var(--pho-color-primary-muted);
+  --pho-color-accent-hover: var(--pho-color-accent-strong);
+  --pho-color-hover: var(--pho-hover-subtle-bg);
+  --pho-color-focus: var(--pho-color-primary-strong);
+
+  --pho-mdx-heading: #e5feff;
+  --pho-mdx-heading-muted: #4bbdce;
+  --pho-mdx-heading-marker: #19f7ff;
+  --pho-mdx-link: var(--pho-color-primary);
+  --pho-mdx-link-hover: var(--pho-color-primary-strong);
+  --pho-mdx-emphasis: #7dfcff;
+  --pho-mdx-strong: #e5feff;
+  --pho-mdx-quote: #a8f8ff;
+  --pho-mdx-quote-accent: #31d7ff;
+  --pho-mdx-quote-bg: rgba(49, 215, 255, 0.075);
+  --pho-mdx-list-marker: #5fffff;
+  --pho-mdx-rule: #006f86;
+  --pho-mdx-figure-border: #005064;
+  --pho-mdx-figure-bg: #01070b;
+  --pho-mdx-figure-caption: #5fbccb;
+  --pho-mdx-inline-code: var(--code-fn);
+  --pho-mdx-inline-code-bg: var(--code-bg);
+  --pho-mdx-inline-code-border: var(--code-punct);
+  --pho-mdx-code-frame: var(--code-punct);
+  --pho-mdx-code-bar-bg: var(--code-bg);
+  --pho-mdx-code-bar-text: var(--code-fn);
+  --pho-mdx-code-chip-bg: rgba(49, 215, 255, 0.08);
+  --pho-mdx-code-chip-border: rgba(49, 215, 255, 0.32);
+  --pho-mdx-code-chip-text: var(--code-string);
+  --pho-mdx-code-wash: rgba(49, 215, 255, 0.045);
+  --pho-mdx-code-scanline: rgba(200, 251, 255, 0.045);
+  --pho-mdx-code-hairline: rgba(200, 251, 255, 0.03);
+  --pho-mdx-code-led-border: rgba(200, 251, 255, 0.12);
+  --pho-mdx-code-led-muted-glow: rgba(0, 174, 202, 0.52);
+  --pho-mdx-code-line-shade: rgba(2, 11, 16, 0.16);
+  --pho-mdx-table-border: #006f86;
+  --pho-mdx-table-heading-bg: #082331;
+  --pho-mdx-table-heading-text: #d6fbff;
+  --pho-mdx-callout-wash: rgba(200, 251, 255, 0.035);
+  --pho-mdx-callout-hairline: rgba(200, 251, 255, 0.028);
+  --pho-mdx-callout-scanline: rgba(200, 251, 255, 0.05);
+  --pho-mdx-callout-note: #31d7ff;
+  --pho-mdx-callout-note-bright: #d6fbff;
+  --pho-mdx-callout-note-muted: rgba(49, 215, 255, 0.58);
+  --pho-mdx-callout-note-fade: rgba(49, 215, 255, 0.28);
+  --pho-mdx-callout-note-bg: rgba(49, 215, 255, 0.06);
+  --pho-mdx-callout-tip: #5fffff;
+  --pho-mdx-callout-tip-bright: #e5feff;
+  --pho-mdx-callout-tip-muted: rgba(95, 255, 255, 0.58);
+  --pho-mdx-callout-tip-fade: rgba(95, 255, 255, 0.28);
+  --pho-mdx-callout-tip-bg: rgba(95, 255, 255, 0.055);
+  --pho-mdx-callout-success: #c8fbff;
+  --pho-mdx-callout-success-bright: #effeff;
+  --pho-mdx-callout-success-muted: rgba(200, 251, 255, 0.62);
+  --pho-mdx-callout-success-fade: rgba(200, 251, 255, 0.3);
+  --pho-mdx-callout-success-bg: rgba(200, 251, 255, 0.05);
+  --pho-mdx-callout-quote-bg: rgba(125, 252, 255, 0.052);
+  --pho-mdx-callout-terminal-bg: rgba(25, 247, 255, 0.07);
+
+  --pho-alpha-primary-01: rgba(25, 247, 255, 0.01);
+  --pho-alpha-primary-02: rgba(25, 247, 255, 0.02);
+  --pho-alpha-primary-03: rgba(25, 247, 255, 0.03);
+  --pho-alpha-primary-04: rgba(25, 247, 255, 0.04);
+  --pho-alpha-primary-05: rgba(25, 247, 255, 0.05);
+  --pho-alpha-primary-06: rgba(25, 247, 255, 0.06);
+  --pho-alpha-primary-07: rgba(25, 247, 255, 0.07);
+  --pho-alpha-primary-08: rgba(25, 247, 255, 0.08);
+  --pho-alpha-primary-10: rgba(25, 247, 255, 0.1);
+  --pho-alpha-primary-12: rgba(25, 247, 255, 0.12);
+  --pho-alpha-primary-14: rgba(25, 247, 255, 0.14);
+  --pho-alpha-primary-16: rgba(25, 247, 255, 0.16);
+  --pho-alpha-primary-18: rgba(25, 247, 255, 0.18);
+  --pho-alpha-primary-22: rgba(25, 247, 255, 0.22);
+  --pho-alpha-primary-28: rgba(25, 247, 255, 0.28);
+  --pho-alpha-primary-35: rgba(25, 247, 255, 0.35);
+  --pho-alpha-primary-45: rgba(25, 247, 255, 0.45);
+  --pho-alpha-accent-04: rgba(125, 252, 255, 0.04);
+  --pho-alpha-accent-08: rgba(125, 252, 255, 0.08);
+  --pho-alpha-accent-12: rgba(125, 252, 255, 0.12);
+  --pho-alpha-accent-14: rgba(125, 252, 255, 0.14);
+  --pho-alpha-surface-45: rgba(0, 4, 7, 0.45);
+  --pho-alpha-surface-62: rgba(1, 8, 12, 0.62);
+  --pho-alpha-surface-72: rgba(2, 11, 16, 0.72);
+  --pho-alpha-surface-82: rgba(5, 18, 26, 0.82);
+
+  --glow-emerald:
+    0 0 1px var(--phosphor), 0 0 7px rgba(25, 247, 255, 0.62),
+    0 0 20px rgba(25, 247, 255, 0.28);
+  --glow-magenta:
+    0 0 1px var(--magenta), 0 0 8px rgba(125, 252, 255, 0.5),
+    0 0 18px rgba(125, 252, 255, 0.18);
+  --glow-amber:
+    0 0 1px var(--moss), 0 0 8px rgba(49, 215, 255, 0.5);
+  --glow-soft-emerald:
+    0 0 1px rgba(25, 247, 255, 0.42), 0 0 5px rgba(25, 247, 255, 0.24);
+  --glow-soft-magenta:
+    0 0 1px rgba(125, 252, 255, 0.36), 0 0 5px rgba(125, 252, 255, 0.18);
+
+  --pho-glow-primary: var(--glow-emerald);
+  --pho-glow-accent: var(--glow-magenta);
+  --pho-glow-info: var(--glow-amber);
+  --pho-glow-primary-soft: var(--glow-soft-emerald);
+  --pho-glow-accent-soft: var(--glow-soft-magenta);
+
+  --code-bg: #021016;
+  --code-fn: #c8fbff;
+  --code-comment: #32798a;
+  --code-keyword: #31d7ff;
+  --code-string: #7dfcff;
+  --code-number: #a8f8ff;
+  --code-var: #d6fbff;
+  --code-type: #5fffff;
+  --code-punct: #008aa3;
+  --code-tag: #31d7ff;
+  --code-attr: #7dfcff;
+  --code-builtin: #5fffff;
+  --code-operator: #c8fbff;
+
+  --border-frame: 2px solid var(--phosphor-dim);
+  --border-line: 1px solid var(--phosphor-fade);
+  --border-dash: 1px dashed var(--phosphor-fade);
+  --border-dot: 1px dotted var(--phosphor-fade);
+  --rail-strong: 2px solid var(--phosphor);
+  --rail-quote: 3px double var(--phosphor);
+  --border-magenta-strong: 1.5px solid var(--magenta);
+  --border-magenta-dash: 1px dashed var(--magenta-deep);
+
+  --pho-border-frame: var(--border-frame);
+  --pho-border-line: var(--border-line);
+  --pho-border-dashed: var(--border-dash);
+  --pho-border-dotted: var(--border-dot);
+  --pho-border-accent: var(--border-magenta-strong);
+  --pho-border-accent-dashed: var(--border-magenta-dash);
+  --pho-rail-strong: var(--rail-strong);
+  --pho-rail-quote: var(--rail-quote);
+  --pho-focus-ring: 2px solid var(--pho-color-focus);
+  --pho-caret-glow:
+    0 0 1px var(--pho-color-primary-strong), 0 0 5px var(--pho-alpha-primary-28);
+  --pho-placeholder-color: rgba(101, 200, 214, 0.72);
+  --pho-focus-glow:
+    0 0 0 1px var(--pho-alpha-primary-18), 0 0 10px var(--pho-alpha-primary-18);
+  --pho-active-glow:
+    0 0 0 1px var(--pho-alpha-primary-22),
+    inset 0 0 14px var(--pho-alpha-primary-05);
+  --pho-hover-row-bg: var(--pho-color-accent);
+  --pho-hover-row-text: var(--pho-color-background);
+  --pho-hover-row-muted-text: var(--pho-color-background-raised);
+  --pho-hover-row-border: var(--pho-color-accent-strong);
+  --pho-hover-subtle-bg: var(--pho-alpha-primary-08);
+  --pho-hover-subtle-border: var(--pho-color-primary);
+  --pho-hover-subtle-text: var(--pho-color-primary-strong);
+  --pho-hover-subtle-shadow: var(--pho-active-glow);
+
+  --pho-scanline-opacity: 0.14;
+  --pho-flicker-opacity-min: 0.9;
+  --pho-crt-flicker-opacity-min: var(--pho-flicker-opacity-min);
+  --pho-crt-scanline-color: rgba(25, 247, 255, 0.08);
+  --pho-crt-rgb-shift-start: rgba(25, 247, 255, 0.035);
+  --pho-crt-rgb-shift-mid: rgba(125, 252, 255, 0.024);
+  --pho-crt-screen-bg:
+    linear-gradient(180deg, rgba(25, 247, 255, 0.06), rgba(25, 247, 255, 0.015)),
+    var(--pho-color-background-raised);
+  --pho-crt-shell-bg:
+    radial-gradient(
+      circle at center,
+      #082637 0%,
+      var(--pho-color-background-raised) 42%,
+      var(--pho-color-background-deep) 100%
+    );
+  --pho-crt-screen-glow:
+    radial-gradient(circle at 50% 24%, rgba(25, 247, 255, 0.1) 0%, rgba(25, 247, 255, 0.04) 32%, transparent 72%),
+    linear-gradient(180deg, rgba(25, 247, 255, 0.04) 0%, transparent 28%, rgba(25, 247, 255, 0.018) 100%);
+  --pho-crt-vignette:
+    radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.42) 100%),
+    linear-gradient(90deg, rgba(200, 251, 255, 0.04), transparent 12%, transparent 88%, rgba(200, 251, 255, 0.03));
+  --pho-crt-vignette-shadow: inset 0 0 100px rgba(0, 4, 7, 0.78);
+  --pho-crt-shadow:
+    0 0 22px rgba(25, 247, 255, 0.22),
+    0 0 76px rgba(25, 247, 255, 0.08),
+    inset 0 0 30px rgba(25, 247, 255, 0.12);
+  --pho-crt-noise-color: rgba(25, 247, 255, 0.34);
+  --pho-crt-noise-color-strong: rgba(200, 251, 255, 0.58);
+  --pho-crt-noise-opacity: 0.04;
+
+  --scrollbar-track: var(--bg-deep);
+  --scrollbar-track-border: 1px dashed var(--phosphor-fade);
+  --scrollbar-thumb: var(--phosphor-fade);
+  --scrollbar-thumb-edge: var(--phosphor-dim);
+  --scrollbar-thumb-hover: var(--phosphor-dim);
+  --scrollbar-thumb-active: var(--phosphor);
+  --scrollbar-glow: 0 0 6px rgba(25, 247, 255, 0.42);
+
+  --pho-scrollbar-track: var(--scrollbar-track);
+  --pho-scrollbar-thumb: var(--scrollbar-thumb);
+  --pho-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
+  --pho-scrollbar-thumb-active: var(--scrollbar-thumb-active);
+}

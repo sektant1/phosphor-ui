@@ -1,5 +1,5 @@
 import type { ThemeRegistration } from "shiki";
-export type CodeBlockThemeName = "phosphor" | "amber";
+export type CodeBlockThemeName = "phosphor" | "amber" | "cyan";
 type CodePalette = {
     name: CodeBlockThemeName;
     bg: string;
@@ -22,7 +22,9 @@ type CodePalette = {
 };
 export declare const phosphorCodePalette: CodePalette;
 export declare const amberCodePalette: CodePalette;
+export declare const cyanCodePalette: CodePalette;
 export declare const phosphorTheme: ThemeRegistration;
 export declare const amberTheme: ThemeRegistration;
+export declare const cyanTheme: ThemeRegistration;
 export declare const codeBlockThemes: Record<CodeBlockThemeName, ThemeRegistration>;
 export {};

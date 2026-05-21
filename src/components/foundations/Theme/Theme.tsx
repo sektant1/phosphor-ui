@@ -4,9 +4,9 @@ import type { ButtonSize, ButtonVariant } from "../../atoms/Button";
 import { cx } from "../../../utils/classNames";
 import styles from "./Theme.module.scss";
 
-export type PhosphorTheme = "phosphor" | "amber";
+export type PhosphorTheme = "phosphor" | "amber" | "cyan";
 
-export const PHOSPHOR_THEMES = ["phosphor", "amber"] as const;
+export const PHOSPHOR_THEMES = ["phosphor", "amber", "cyan"] as const;
 export const PHOSPHOR_THEME_STORAGE_KEY = "phosphor-theme";
 
 export interface ThemeContextValue {
@@ -27,7 +27,7 @@ export interface ThemeProviderProps {
 
 export interface ThemeToggleProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick"> {
-  labels?: Record<PhosphorTheme, React.ReactNode>;
+  labels?: Partial<Record<PhosphorTheme, React.ReactNode>>;
   showLabel?: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -37,7 +37,7 @@ export interface ThemeToggleProps
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
 function isTheme(value: string | null | undefined): value is PhosphorTheme {
-  return value === "phosphor" || value === "amber";
+  return value === "phosphor" || value === "amber" || value === "cyan";
 }
 
 function getTarget(explicitTarget?: HTMLElement | null) {
@@ -75,7 +75,7 @@ function applyTheme(target: HTMLElement | null, theme: PhosphorTheme) {
 export function getInitialThemeScript(storageKey = PHOSPHOR_THEME_STORAGE_KEY) {
   const key = JSON.stringify(storageKey);
 
-  return `(function(){try{var k=${key};var t=localStorage.getItem(k);if(t!=="amber"&&t!=="phosphor")t="phosphor";document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme="phosphor";}})();`;
+  return `(function(){try{var k=${key};var t=localStorage.getItem(k);if(t!=="amber"&&t!=="cyan"&&t!=="phosphor")t="phosphor";document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme="phosphor";}})();`;
 }
 
 export function ThemeProvider({
@@ -118,7 +118,9 @@ export function ThemeProvider({
   );
 
   const toggleTheme = React.useCallback(() => {
-    setTheme(theme === "amber" ? "phosphor" : "amber");
+    const currentIndex = PHOSPHOR_THEMES.indexOf(theme);
+    const nextTheme = PHOSPHOR_THEMES[(currentIndex + 1) % PHOSPHOR_THEMES.length];
+    setTheme(nextTheme);
   }, [setTheme, theme]);
 
   const context = React.useMemo<ThemeContextValue>(
@@ -139,7 +141,7 @@ export function useTheme() {
 }
 
 export function ThemeToggle({
-  labels = { phosphor: "phosphor", amber: "amber" },
+  labels = { phosphor: "phosphor", amber: "amber", cyan: "cyan" },
   showLabel = true,
   className,
   variant = "ghost",
@@ -148,7 +150,7 @@ export function ThemeToggle({
   ...props
 }: ThemeToggleProps) {
   const { theme, toggleTheme, mounted } = useTheme();
-  const nextTheme = theme === "amber" ? "phosphor" : "amber";
+  const nextTheme = PHOSPHOR_THEMES[(PHOSPHOR_THEMES.indexOf(theme) + 1) % PHOSPHOR_THEMES.length];
 
   return (
     <Button
@@ -157,7 +159,7 @@ export function ThemeToggle({
       variant={variant}
       size={size}
       type="button"
-      pressed={theme === "amber"}
+      pressed={theme !== "phosphor"}
       data-theme-toggle={theme}
       aria-label={ariaLabel ?? `Switch to ${nextTheme} theme`}
       onClick={toggleTheme}
@@ -165,7 +167,7 @@ export function ThemeToggle({
       <span className={styles.indicator} aria-hidden="true" />
       {showLabel ? (
         <span className={styles.label} suppressHydrationWarning>
-          {mounted ? labels[theme] : labels.phosphor}
+          {mounted ? (labels[theme] ?? theme) : (labels.phosphor ?? "phosphor")}
         </span>
       ) : null}
     </Button>
