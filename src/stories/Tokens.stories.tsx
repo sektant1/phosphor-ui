@@ -133,6 +133,68 @@ const AMBER_COLORS: ColorGroup[] = [
   ],
 ];
 
+
+const CYAN_COLORS: ColorGroup[] = [
+  [
+    "Cyan",
+    "primary tube column",
+    [
+      ["--phosphor", "#19f7ff"],
+      ["--phosphor-bright", "#c8fbff"],
+      ["--phosphor-dim", "#00aeca"],
+      ["--phosphor-fade", "#005064"],
+    ],
+  ],
+  [
+    "Cool accent",
+    "secondary cyan column",
+    [
+      ["--magenta", "#7dfcff"],
+      ["--magenta-bright", "#e5feff"],
+      ["--magenta-deep", "#008aa3"],
+      ["--magenta-fade", "#003344"],
+    ],
+  ],
+  [
+    "Extras",
+    "extra single-channel hues",
+    [
+      ["--moss", "#31d7ff"],
+      ["--spring", "#5fffff"],
+      ["--rose", "#a8f8ff"],
+    ],
+  ],
+  [
+    "Surfaces",
+    "tube body / surfaces / ink",
+    [
+      ["--bg", "#020b10"],
+      ["--bg-raise", "#061923"],
+      ["--bg-deep", "#000407"],
+      ["--ink", "#d6fbff"],
+    ],
+  ],
+  [
+    "Code tokens",
+    "syntax highlight palette",
+    [
+      ["--code-bg", "#021016"],
+      ["--code-fn", "#c8fbff"],
+      ["--code-comment", "#32798a"],
+      ["--code-keyword", "#31d7ff"],
+      ["--code-string", "#7dfcff"],
+      ["--code-number", "#a8f8ff"],
+      ["--code-var", "#d6fbff"],
+      ["--code-type", "#5fffff"],
+      ["--code-punct", "#008aa3"],
+      ["--code-tag", "#31d7ff"],
+      ["--code-attr", "#7dfcff"],
+      ["--code-builtin", "#5fffff"],
+      ["--code-operator", "#c8fbff"],
+    ],
+  ],
+];
+
 const TYPE_VARIANTS: Array<{ cls: string; label: string; sample: string }> = [
   { cls: "t-h1", label: "// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ", sample: "Display heading — --pho-type-h1-size" },
   { cls: "t-h2", label: "transmission log", sample: "Section heading — --pho-type-h2-size" },
@@ -436,7 +498,7 @@ const Cell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" }> = ({ children, theme }) => (
+const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" | "cyan" }> = ({ children, theme }) => (
   <div
     data-theme={theme}
     style={{
@@ -453,7 +515,7 @@ const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" }
 
 const TokenOverview: React.FC<{
   colors: ColorGroup[];
-  theme?: "phosphor" | "amber";
+  theme?: "phosphor" | "amber" | "cyan";
   caption: string;
 }> = ({ colors, theme, caption }) => (
   <Page theme={theme}>
@@ -625,6 +687,14 @@ export const Amber = () => (
   />
 );
 
+export const Cyan = () => (
+  <TokenOverview
+    theme="cyan"
+    colors={CYAN_COLORS}
+    caption="// СЕКРЕТНО // single-channel cyan CRT"
+  />
+);
+
 export const Scrollbar = () => (
   <Page>
     <SectionTitle>Scrollbar</SectionTitle>
@@ -678,6 +748,12 @@ export const Colors = () => <Page><ColorPalette colors={PHOSPHOR_COLORS} /></Pag
 export const ColorsAmber = () => (
   <Page theme="amber">
     <ColorPalette colors={AMBER_COLORS} />
+  </Page>
+);
+
+export const ColorsCyan = () => (
+  <Page theme="cyan">
+    <ColorPalette colors={CYAN_COLORS} />
   </Page>
 );
 

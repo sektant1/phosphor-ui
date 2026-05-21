@@ -1,6 +1,7 @@
 export {
   amberTheme,
   codeToPhosphorHtml,
+  cyanTheme,
   codeBlockThemes,
   extractMdxCode,
   phosphorTheme,

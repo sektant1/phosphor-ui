@@ -348,6 +348,7 @@ export {
   CodeBlock,
   amberTheme,
   codeToPhosphorHtml,
+  cyanTheme,
   codeBlockThemes,
   extractMdxCode,
   phosphorTheme,

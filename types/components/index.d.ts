@@ -101,7 +101,7 @@ export { VideoPlayer } from "./organisms/VideoPlayer";
 export type { VideoPlayerProps, VideoSource } from "./organisms/VideoPlayer";
 export { Exercise } from "./organisms/Exercise";
 export type { ExerciseProps, ExerciseTask } from "./organisms/Exercise";
-export { CodeBlock, amberTheme, codeToPhosphorHtml, codeBlockThemes, extractMdxCode, phosphorTheme, } from "./content/CodeBlock";
+export { CodeBlock, amberTheme, codeToPhosphorHtml, cyanTheme, codeBlockThemes, extractMdxCode, phosphorTheme, } from "./content/CodeBlock";
 export type { CodeBlockProps, CodeBlockThemeMode, CodeBlockThemeName, } from "./content/CodeBlock";
 export { AuthorCard } from "./molecules/AuthorCard";
 export type { AuthorCardProps, AuthorLink } from "./molecules/AuthorCard";
