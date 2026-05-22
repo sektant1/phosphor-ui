@@ -87,12 +87,12 @@
     "validate": "npm run typecheck && npm run audit:story-sources && npm test -- --runInBand && npm run build-storybook -- --quiet && npm run build",
     "validate:package": "npm run typecheck && npm run audit:public-api && npm run audit:story-sources && npm test -- --runInBand && npm run build && npm run smoke:package",
     "prepublishOnly": "npm run validate:package",
-    "release:dev": "npm version prerelease --preid dev --no-git-tag-version && npm publish --access public --tag next",
-    "release:prod": "npm version patch --no-git-tag-version && npm publish --access public --tag latest",
+    "release:dev": "npm version prerelease --preid dev --no-git-tag-version && npm run validate:package && npm publish --dry-run --access public --tag next --ignore-scripts && npm publish --access public --tag next",
+    "release:prod": "npm version patch --no-git-tag-version && npm run validate:package && npm publish --dry-run --access public --tag latest --ignore-scripts && npm publish --access public --tag latest",
     "release": "npm run release:prod",
-    "publish:gh": "gh workflow run publish.yml --ref prod -f dist-tag=latest -f version=patch",
-    "publish:gh:prod": "gh workflow run publish.yml --ref prod -f dist-tag=latest -f version=patch",
-    "publish:gh:dev": "gh workflow run publish.yml --ref dev -f dist-tag=next -f version=prerelease"
+    "publish:gh": "gh workflow run publish.yml --ref prod -f channel=production -f version=patch",
+    "publish:gh:prod": "gh workflow run publish.yml --ref prod -f channel=production -f version=patch",
+    "publish:gh:dev": "gh workflow run publish.yml --ref dev -f channel=development -f version=prerelease"
   },
   "peerDependencies": {
     "@mdx-js/react": "^2 || ^3",

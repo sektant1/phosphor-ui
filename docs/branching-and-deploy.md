@@ -20,6 +20,16 @@ Short-lived branches should target `dev`:
 2. Merge `dev` into `prod` when ready to release.
 3. The `prod` push publishes the npm package and deploys Storybook.
 
+Enable the tracked release hook once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Before a push to `prod`, the hook runs the same package validation used by CI,
+checks that the next prod patch version is still available on npm, and runs an
+`npm publish --dry-run`. Non-`prod` pushes skip this preflight.
+
 ## Automatic Versioning
 
 The publish workflow updates `package.json` and `package-lock.json` before
@@ -31,9 +41,12 @@ publishing:
   `--tag latest`.
 
 The version bump is committed back to the source branch with
-`[skip ci] [skip publish]` to avoid workflow loops.
+`[skip ci] [skip publish]` to avoid workflow loops. The workflow publishes before
+committing that bump, so a package that npm refuses to publish does not advance
+the branch version.
 
-Manual dispatch supports custom `dist-tag` and version bump strategy.
+Manual dispatch supports production and development channels plus a custom
+version bump strategy.
 
 ## Required GitHub Setup
 

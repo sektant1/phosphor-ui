@@ -92,14 +92,33 @@ if (!pushTargetsProd(stdin)) {
   process.exit(0);
 }
 
-const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+const packageJsonPath = path.join(root, "package.json");
+const packageLockPath = path.join(root, "package-lock.json");
+const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 const registry = packageJson.publishConfig?.registry ?? "https://registry.npmjs.org/";
 const prodVersion = nextPatchVersion(packageJson.version);
+const originalFiles = new Map(
+  [packageJsonPath, packageLockPath]
+    .filter((filePath) => fs.existsSync(filePath))
+    .map((filePath) => [filePath, fs.readFileSync(filePath)]),
+);
+
+function restoreOriginalFiles() {
+  for (const [filePath, contents] of originalFiles) {
+    fs.writeFileSync(filePath, contents);
+  }
+}
 
 console.log(`Running prod npm publish preflight for ${packageJson.name}@${prodVersion}.`);
 
 assertVersionAvailable(packageJson.name, prodVersion, registry);
-run("npm", ["run", "validate:package"]);
-run("npm", ["publish", "--dry-run", "--access", "public", "--tag", "latest", "--ignore-scripts"]);
+
+try {
+  run("npm", ["version", "patch", "--no-git-tag-version"]);
+  run("npm", ["run", "validate:package"]);
+  run("npm", ["publish", "--dry-run", "--access", "public", "--tag", "latest", "--ignore-scripts"]);
+} finally {
+  restoreOriginalFiles();
+}
 
 console.log("Prod npm publish preflight passed.");
