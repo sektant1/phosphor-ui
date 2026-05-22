@@ -92,8 +92,31 @@ jobs:
       - name: Validate package
         run: npm run validate:package
 
+      - name: Configure npm auth
+        shell: bash
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "NPM_TOKEN is not available to this workflow environment."
+            echo "Add an npm automation token named NPM_TOKEN to the selected GitHub environment or repository secrets."
+            exit 1
+          fi
+          cat > "$RUNNER_TEMP/.npmrc" <<'NPMRC'
+          registry=https://registry.npmjs.org/
+          //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}
+          always-auth=true
+          NPMRC
+          echo "NPM_CONFIG_USERCONFIG=$RUNNER_TEMP/.npmrc" >> "$GITHUB_ENV"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Verify npm auth
-        run: npm whoami --registry https://registry.npmjs.org/
+        shell: bash
+        run: |
+          if ! npm whoami --registry https://registry.npmjs.org/; then
+            echo "npm authentication failed. Regenerate NPM_TOKEN as an npm automation token with publish access to phosphor-ui."
+            echo "If this job uses a GitHub environment, add or update NPM_TOKEN in that environment."
+            exit 1
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

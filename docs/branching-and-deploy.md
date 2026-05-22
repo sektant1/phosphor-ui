@@ -59,16 +59,25 @@ git push origin master:prod
 
 Set `dev` as the default branch if you want all PR work to start there.
 
-Configure repository secrets:
+Configure repository secrets, or environment secrets on both npm environments:
 
 - `NPM_TOKEN`: npm automation token with publish access for
-  `phosphor-ui`.
+  `phosphor-ui`. Do not use a read-only token. If 2FA is enabled on npm, use an
+  automation token.
+
+Use `.npmrc.example` as the local template if you need to publish from your
+machine. Keep the real token in your shell environment as `NPM_TOKEN`; do not
+commit a real `.npmrc`.
 
 Configure environments:
 
 - `npm-development`: used by prerelease publishes from `dev`.
 - `npm-production`: used by stable publishes from `prod`.
 - `github-pages`: used by Storybook production deploy.
+
+If GitHub Actions fails at `npm whoami` with `E401`, the selected environment
+does not have a valid `NPM_TOKEN` available, or the npm token no longer has
+publish access. Regenerate the token in npm and update the GitHub secret.
 
 Recommended branch protection:
 
