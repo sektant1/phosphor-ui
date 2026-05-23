@@ -7,18 +7,18 @@ on:
       - prod
   workflow_dispatch:
     inputs:
-      dist-tag:
-        description: "npm dist-tag to publish"
+      channel:
+        description: "Release channel"
         required: true
-        default: next
+        default: production
         type: choice
         options:
-          - next
-          - latest
+          - production
+          - development
       version:
         description: "npm version bump strategy"
         required: true
-        default: prerelease
+        default: patch
         type: choice
         options:
           - prerelease
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip publish]')
     environment:
-      name: ${{ github.ref_name == 'prod' && 'npm-production' || 'npm-development' }}
+      name: ${{ ((github.event_name == 'workflow_dispatch' && inputs.channel == 'production') || github.ref_name == 'prod') && 'npm-production' || 'npm-development' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,46 +57,104 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Validate package
-        run: npm run validate:package
-
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Resolve release channel
         id: release
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "dist_tag=${{ inputs['dist-tag'] }}" >> "$GITHUB_OUTPUT"
+            if [ "${{ inputs.channel }}" = "production" ]; then
+              echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+              echo "preid=" >> "$GITHUB_OUTPUT"
+            else
+              echo "dist_tag=next" >> "$GITHUB_OUTPUT"
+              echo "preid=dev" >> "$GITHUB_OUTPUT"
+            fi
             echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.ref_name }}" = "prod" ]; then
             echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
             echo "version=patch" >> "$GITHUB_OUTPUT"
+            echo "preid=" >> "$GITHUB_OUTPUT"
           else
             echo "dist_tag=next" >> "$GITHUB_OUTPUT"
             echo "version=prerelease" >> "$GITHUB_OUTPUT"
+            echo "preid=dev" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Bump package version
         shell: bash
         run: |
           if [ "${{ steps.release.outputs.version }}" = "prerelease" ]; then
-            npm version prerelease --preid dev --no-git-tag-version
+            npm version prerelease --preid "${{ steps.release.outputs.preid || 'dev' }}" --no-git-tag-version
           else
             npm version "${{ steps.release.outputs.version }}" --no-git-tag-version
           fi
 
-      - name: Commit version bump
+      - name: Validate package
+        run: npm run validate:package
+
+      - name: Configure npm auth
         shell: bash
         run: |
-          git add package.json package-lock.json
-          git commit -m "chore(release): bump version [skip ci] [skip publish]"
-          git push origin "HEAD:${{ github.ref_name }}"
+          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
+            echo "NPM_TOKEN is not available to this workflow environment."
+            echo "Add an npm automation token named NPM_TOKEN to the selected GitHub environment or repository secrets."
+            exit 1
+          fi
+          cat > "$RUNNER_TEMP/.npmrc" <<'NPMRC'
+          registry=https://registry.npmjs.org/
+          //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}
+          always-auth=true
+          NPMRC
+          echo "NPM_CONFIG_USERCONFIG=$RUNNER_TEMP/.npmrc" >> "$GITHUB_ENV"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Verify npm auth
+        shell: bash
+        run: |
+          if ! npm whoami --registry https://registry.npmjs.org/; then
+            echo "npm authentication failed. Regenerate NPM_TOKEN as an npm automation token with publish access to phosphor-ui."
+            echo "If this job uses a GitHub environment, add or update NPM_TOKEN in that environment."
+            exit 1
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Check npm version availability
+        shell: bash
+        run: |
+          PACKAGE_NAME="$(node -p "require('./package.json').name")"
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          set +e
+          NPM_VIEW_OUTPUT="$(npm view "${PACKAGE_NAME}@${PACKAGE_VERSION}" version --registry https://registry.npmjs.org/ 2>&1)"
+          NPM_VIEW_STATUS=$?
+          set -e
+          if [ "$NPM_VIEW_STATUS" -eq 0 ]; then
+            echo "${PACKAGE_NAME}@${PACKAGE_VERSION} already exists on npm."
+            exit 1
+          fi
+          if ! echo "$NPM_VIEW_OUTPUT" | grep -q "E404"; then
+            echo "Could not verify npm availability for ${PACKAGE_NAME}@${PACKAGE_VERSION}."
+            echo "$NPM_VIEW_OUTPUT"
+            exit 1
+          fi
+
+      - name: Dry-run publish
+        run: npm publish --dry-run --access public --tag "${{ steps.release.outputs.dist_tag }}" --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish package
         run: npm publish --access public --provenance --tag "${{ steps.release.outputs.dist_tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit published version
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          VERSION="$(node -p "require('./package.json').version")"
+          git add package.json package-lock.json
+          git commit -m "chore(release): publish ${VERSION} [skip ci] [skip publish]"
+          git push origin "HEAD:${{ github.ref_name }}"

@@ -338,6 +338,17 @@ artifacts. For public API changes, refresh the checked-in declaration snapshot:
 npm run build:types:snapshot
 ```
 
+Pushes to `prod` are protected by the tracked `pre-push` hook in `.githooks/`.
+Enable it once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The hook runs the package validation flow, checks that the next prod patch
+version is not already on npm, and runs `npm publish --dry-run` before allowing
+the push that triggers the real GitHub Actions publish.
+
 The supported consumer API is the root import plus the documented CSS subpaths.
 Deep component imports are internal implementation details.
 

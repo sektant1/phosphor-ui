@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./ShareBar.module.scss";
-import { copyText, getCurrentHref } from "../../../utils/browser";
+import { copyText, getCurrentHref, getSafeExternalRel } from "../../../utils/browser";
 import { cx } from "../../../utils/classNames";
 
 export interface ShareLink {
@@ -57,7 +57,7 @@ export const ShareBar: React.FC<ShareBarProps> = ({
           className={styles.link}
           href={link.href}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={getSafeExternalRel("_blank")}
         >
           {link.label}
         </a>

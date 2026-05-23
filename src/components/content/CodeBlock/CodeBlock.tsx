@@ -11,7 +11,16 @@ type HighlightState = {
   failed: boolean;
 };
 
+const HIGHLIGHT_CACHE_MAX = 128;
 const highlightCache = new Map<string, Promise<string>>();
+
+const setCachedHighlight = (key: string, promise: Promise<string>) => {
+  highlightCache.set(key, promise);
+  if (highlightCache.size > HIGHLIGHT_CACHE_MAX) {
+    const oldest = highlightCache.keys().next().value;
+    if (oldest !== undefined) highlightCache.delete(oldest);
+  }
+};
 
 export type CodeBlockThemeMode = CodeBlockThemeName | "auto";
 
@@ -25,7 +34,9 @@ const resolveCodeBlockTheme = (
   if (theme !== "auto") return theme;
   const themedElement = element?.closest<HTMLElement>("[data-theme]");
   const themeName = themedElement?.dataset.theme ?? document.documentElement.dataset.theme;
-  return themeName === "amber" || themeName === "cyan" ? themeName : "phosphor";
+  return themeName && themeName in codeBlockThemes
+    ? (themeName as CodeBlockThemeName)
+    : "phosphor";
 };
 
 export async function codeToPhosphorHtml(
@@ -50,7 +61,7 @@ export async function codeToPhosphorHtml(
       throw error;
     });
 
-  highlightCache.set(key, promise);
+  setCachedHighlight(key, promise);
   return promise;
 }
 

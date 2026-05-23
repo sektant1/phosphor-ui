@@ -352,6 +352,7 @@ export {
   codeBlockThemes,
   extractMdxCode,
   phosphorTheme,
+  redTheme,
 } from "./content/CodeBlock";
 export type {
   CodeBlockProps,
