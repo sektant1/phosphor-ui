@@ -4,9 +4,9 @@ import type { ButtonSize, ButtonVariant } from "../../atoms/Button";
 import { cx } from "../../../utils/classNames";
 import styles from "./Theme.module.scss";
 
-export type PhosphorTheme = "phosphor" | "amber" | "cyan";
+export type PhosphorTheme = "phosphor" | "amber" | "cyan" | "red";
 
-export const PHOSPHOR_THEMES = ["phosphor", "amber", "cyan"] as const;
+export const PHOSPHOR_THEMES = ["phosphor", "amber", "cyan", "red"] as const;
 export const PHOSPHOR_THEME_STORAGE_KEY = "phosphor-theme";
 
 export interface ThemeContextValue {
@@ -37,7 +37,7 @@ export interface ThemeToggleProps
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
 function isTheme(value: string | null | undefined): value is PhosphorTheme {
-  return value === "phosphor" || value === "amber" || value === "cyan";
+  return (PHOSPHOR_THEMES as readonly string[]).includes(value ?? "");
 }
 
 function getTarget(explicitTarget?: HTMLElement | null) {
@@ -74,8 +74,9 @@ function applyTheme(target: HTMLElement | null, theme: PhosphorTheme) {
 
 export function getInitialThemeScript(storageKey = PHOSPHOR_THEME_STORAGE_KEY) {
   const key = JSON.stringify(storageKey);
+  const themes = JSON.stringify(PHOSPHOR_THEMES);
 
-  return `(function(){try{var k=${key};var t=localStorage.getItem(k);if(t!=="amber"&&t!=="cyan"&&t!=="phosphor")t="phosphor";document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme="phosphor";}})();`;
+  return `(function(){try{var k=${key};var T=${themes};var t=localStorage.getItem(k);if(T.indexOf(t)===-1)t=T[0];document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme=${JSON.stringify(PHOSPHOR_THEMES[0])};}})();`;
 }
 
 export function ThemeProvider({
@@ -141,7 +142,7 @@ export function useTheme() {
 }
 
 export function ThemeToggle({
-  labels = { phosphor: "phosphor", amber: "amber", cyan: "cyan" },
+  labels = { phosphor: "phosphor", amber: "amber", cyan: "cyan", red: "red" },
   showLabel = true,
   className,
   variant = "ghost",

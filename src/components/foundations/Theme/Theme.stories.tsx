@@ -22,7 +22,7 @@ type Story = StoryObj<typeof ThemeProvider>;
 const comparisonSource = tsx`
 import { Badge, Button, Callout, CRTScreen, H2, Input } from "phosphor-ui";
 
-function ThemeSample({ theme }: { theme?: "phosphor" | "amber" | "cyan" }) {
+function ThemeSample({ theme }: { theme?: "phosphor" | "amber" | "cyan" | "red" }) {
   return (
     <div
       data-theme={theme}
@@ -64,6 +64,7 @@ export function Example() {
       <ThemeSample theme="phosphor" />
       <ThemeSample theme="amber" />
       <ThemeSample theme="cyan" />
+      <ThemeSample theme="red" />
     </div>
   );
 }
@@ -91,7 +92,7 @@ export function Example() {
 }
 `;
 
-function ThemeSample({ theme }: { theme?: "phosphor" | "amber" | "cyan" }) {
+function ThemeSample({ theme }: { theme?: "phosphor" | "amber" | "cyan" | "red" }) {
   return (
     <div
       data-theme={theme}
@@ -134,6 +135,7 @@ export const Comparison: Story = {
       <ThemeSample theme="phosphor" />
       <ThemeSample theme="amber" />
       <ThemeSample theme="cyan" />
+      <ThemeSample theme="red" />
     </div>
   ),
 };

@@ -12,6 +12,7 @@ import { slugify } from "../../../foundations/utils";
 import { Stack } from "../../templates/Layout";
 import Text from "../../atoms/Text";
 import Prose from "../../content/Prose";
+import { copyText } from "../../../utils/browser";
 
 export type ContentStatus = "draft" | "published" | "archived";
 type EditorState = Record<string, unknown>;
@@ -355,11 +356,20 @@ export function ContentEditor<T extends object = Record<string, unknown>>({
     onSave?.(payload);
   };
 
+  const copyResetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(
+    () => () => {
+      if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
+    },
+    [],
+  );
+
   const copyRaw = async () => {
-    if (typeof navigator === "undefined" || !navigator.clipboard) return;
-    await navigator.clipboard.writeText(rawJson);
+    const ok = await copyText(rawJson);
+    if (!ok) return;
     setCopiedRaw(true);
-    window.setTimeout(() => setCopiedRaw(false), 1200);
+    if (copyResetTimer.current) clearTimeout(copyResetTimer.current);
+    copyResetTimer.current = setTimeout(() => setCopiedRaw(false), 1200);
   };
 
   const updateRawDraft = (value: string) => {

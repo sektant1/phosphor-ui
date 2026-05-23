@@ -9,6 +9,8 @@ const preview: Preview = {
       themes: {
         phosphor: "phosphor",
         amber: "amber",
+        cyan: "cyan",
+        red: "red",
       },
       defaultTheme: "phosphor",
       attributeName: "data-theme",
@@ -21,6 +23,8 @@ const preview: Preview = {
       options: {
         phosphor: { name: "phosphor", value: "#04140a" },
         amber: { name: "amber", value: "#0b0702" },
+        cyan: { name: "cyan", value: "#020b10" },
+        red: { name: "red", value: "#100303" },
       },
     },
     controls: {

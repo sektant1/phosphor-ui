@@ -1,6 +1,6 @@
 import type { ThemeRegistration } from "shiki";
 
-export type CodeBlockThemeName = "phosphor" | "amber" | "cyan";
+export type CodeBlockThemeName = "phosphor" | "amber" | "cyan" | "red";
 
 type CodePalette = {
   name: CodeBlockThemeName;
@@ -252,12 +252,35 @@ const createCodeTheme = (palette: CodePalette): ThemeRegistration => ({
   ],
 });
 
+export const redCodePalette: CodePalette = {
+  name: "red",
+  bg: "#110303",
+  fg: "#ffdada",
+  selection: "#c4181840",
+  lineHighlight: "#1c0707",
+  keyword: "#ff4d4d",
+  string: "#ff8080",
+  number: "#ffb3b3",
+  fn: "#ffb8b8",
+  variable: "#ffdada",
+  type: "#ff6b6b",
+  operator: "#ffb8b8",
+  comment: "#8a3a3a",
+  punct: "#991010",
+  tag: "#ff4d4d",
+  attr: "#ff8080",
+  builtin: "#ff6b6b",
+  invalid: "#ffea00",
+};
+
 export const phosphorTheme = createCodeTheme(phosphorCodePalette);
 export const amberTheme = createCodeTheme(amberCodePalette);
 export const cyanTheme = createCodeTheme(cyanCodePalette);
+export const redTheme = createCodeTheme(redCodePalette);
 
 export const codeBlockThemes: Record<CodeBlockThemeName, ThemeRegistration> = {
   phosphor: phosphorTheme,
   amber: amberTheme,
   cyan: cyanTheme,
+  red: redTheme,
 };

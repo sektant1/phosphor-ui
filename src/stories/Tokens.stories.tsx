@@ -195,6 +195,67 @@ const CYAN_COLORS: ColorGroup[] = [
   ],
 ];
 
+const RED_COLORS: ColorGroup[] = [
+  [
+    "Red",
+    "primary tube column",
+    [
+      ["--phosphor", "#ff2a2a"],
+      ["--phosphor-bright", "#ffb8b8"],
+      ["--phosphor-dim", "#c41818"],
+      ["--phosphor-fade", "#5a0a0a"],
+    ],
+  ],
+  [
+    "Crimson accent",
+    "secondary red column",
+    [
+      ["--magenta", "#ff6b6b"],
+      ["--magenta-bright", "#ffd1d1"],
+      ["--magenta-deep", "#991010"],
+      ["--magenta-fade", "#3d0606"],
+    ],
+  ],
+  [
+    "Extras",
+    "extra single-channel hues",
+    [
+      ["--moss", "#ff4d4d"],
+      ["--spring", "#ff8080"],
+      ["--rose", "#ffb3b3"],
+    ],
+  ],
+  [
+    "Surfaces",
+    "tube body / surfaces / ink",
+    [
+      ["--bg", "#100303"],
+      ["--bg-raise", "#1c0707"],
+      ["--bg-deep", "#060101"],
+      ["--ink", "#ffdada"],
+    ],
+  ],
+  [
+    "Code tokens",
+    "syntax highlight palette",
+    [
+      ["--code-bg", "#110303"],
+      ["--code-fn", "#ffb8b8"],
+      ["--code-comment", "#8a3a3a"],
+      ["--code-keyword", "#ff4d4d"],
+      ["--code-string", "#ff8080"],
+      ["--code-number", "#ffb3b3"],
+      ["--code-var", "#ffdada"],
+      ["--code-type", "#ff6b6b"],
+      ["--code-punct", "#991010"],
+      ["--code-tag", "#ff4d4d"],
+      ["--code-attr", "#ff8080"],
+      ["--code-builtin", "#ff6b6b"],
+      ["--code-operator", "#ffb8b8"],
+    ],
+  ],
+];
+
 const TYPE_VARIANTS: Array<{ cls: string; label: string; sample: string }> = [
   { cls: "t-h1", label: "// SECTOR-7 // АНОМАЛЬНАЯ АКТИВНОСТЬ", sample: "Display heading — --pho-type-h1-size" },
   { cls: "t-h2", label: "transmission log", sample: "Section heading — --pho-type-h2-size" },
@@ -291,7 +352,7 @@ type GlowSpec = {
 const GLOWS_FULL: GlowSpec[] = [
   { token: "--glow-emerald", label: "EMERALD", textColor: "var(--phosphor)", textShadow: "var(--glow-emerald)" },
   { token: "--glow-magenta", label: "ACCENT", textColor: "#62ff9a", textShadow: "var(--glow-magenta)" },
-  { token: "--glow-amber", label: "MOSS", textColor: "var(--moss)", textShadow: "var(--glow-amber)" },
+  { token: "--pho-glow-info", label: "MOSS", textColor: "var(--pho-color-info)", textShadow: "var(--pho-glow-info)" },
   {
     token: "inset bloom",
     label: "INSET",
@@ -498,7 +559,7 @@ const Cell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" | "cyan" }> = ({ children, theme }) => (
+const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" | "cyan" | "red" }> = ({ children, theme }) => (
   <div
     data-theme={theme}
     style={{
@@ -515,7 +576,7 @@ const Page: React.FC<{ children: React.ReactNode; theme?: "phosphor" | "amber" |
 
 const TokenOverview: React.FC<{
   colors: ColorGroup[];
-  theme?: "phosphor" | "amber" | "cyan";
+  theme?: "phosphor" | "amber" | "cyan" | "red";
   caption: string;
 }> = ({ colors, theme, caption }) => (
   <Page theme={theme}>
@@ -695,6 +756,14 @@ export const Cyan = () => (
   />
 );
 
+export const Red = () => (
+  <TokenOverview
+    theme="red"
+    colors={RED_COLORS}
+    caption="// СЕКРЕТНО // single-channel red phosphor — alert channel"
+  />
+);
+
 export const Scrollbar = () => (
   <Page>
     <SectionTitle>Scrollbar</SectionTitle>
@@ -754,6 +823,12 @@ export const ColorsAmber = () => (
 export const ColorsCyan = () => (
   <Page theme="cyan">
     <ColorPalette colors={CYAN_COLORS} />
+  </Page>
+);
+
+export const ColorsRed = () => (
+  <Page theme="red">
+    <ColorPalette colors={RED_COLORS} />
   </Page>
 );
 

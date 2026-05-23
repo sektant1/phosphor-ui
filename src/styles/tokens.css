@@ -62,6 +62,57 @@
   --pho-color-focus: var(--pho-color-primary-strong);
   --pho-mdx-link: var(--pho-color-primary);
   --pho-mdx-link-hover: var(--pho-color-primary-strong);
+  --pho-mdx-heading: #e8ffd9;
+  --pho-mdx-heading-muted: #4d9966;
+  --pho-mdx-heading-marker: #2cff7a;
+  --pho-mdx-emphasis: #62ff9a;
+  --pho-mdx-strong: #d6ffe2;
+  --pho-mdx-quote: #88ffae;
+  --pho-mdx-quote-accent: #1fb854;
+  --pho-mdx-quote-bg: rgba(98, 255, 154, 0.075);
+  --pho-mdx-list-marker: #62ff9a;
+  --pho-mdx-rule: #1a6e34;
+  --pho-mdx-figure-border: #0a4d22;
+  --pho-mdx-figure-bg: #02110a;
+  --pho-mdx-figure-caption: #4d9966;
+  --pho-mdx-inline-code: var(--code-fn);
+  --pho-mdx-inline-code-bg: var(--code-bg);
+  --pho-mdx-inline-code-border: var(--code-punct);
+  --pho-mdx-code-frame: var(--code-punct);
+  --pho-mdx-code-bar-bg: var(--code-bg);
+  --pho-mdx-code-bar-text: var(--code-fn);
+  --pho-mdx-code-chip-bg: rgba(98, 255, 154, 0.08);
+  --pho-mdx-code-chip-border: rgba(98, 255, 154, 0.32);
+  --pho-mdx-code-chip-text: var(--code-string);
+  --pho-mdx-code-wash: rgba(98, 255, 154, 0.045);
+  --pho-mdx-code-scanline: rgba(216, 255, 231, 0.045);
+  --pho-mdx-code-hairline: rgba(216, 255, 231, 0.03);
+  --pho-mdx-code-led-border: rgba(216, 255, 231, 0.12);
+  --pho-mdx-code-led-muted-glow: rgba(31, 184, 84, 0.52);
+  --pho-mdx-code-line-shade: rgba(4, 20, 10, 0.16);
+  --pho-mdx-table-border: #157a3b;
+  --pho-mdx-table-heading-bg: #082416;
+  --pho-mdx-table-heading-text: #d8ffe7;
+  --pho-mdx-callout-wash: rgba(216, 255, 231, 0.035);
+  --pho-mdx-callout-hairline: rgba(216, 255, 231, 0.028);
+  --pho-mdx-callout-scanline: rgba(216, 255, 231, 0.05);
+  --pho-mdx-callout-note: #62ff9a;
+  --pho-mdx-callout-note-bright: #d6ffe2;
+  --pho-mdx-callout-note-muted: rgba(98, 255, 154, 0.58);
+  --pho-mdx-callout-note-fade: rgba(98, 255, 154, 0.28);
+  --pho-mdx-callout-note-bg: rgba(98, 255, 154, 0.06);
+  --pho-mdx-callout-tip: #00ff7f;
+  --pho-mdx-callout-tip-bright: #d6ffe2;
+  --pho-mdx-callout-tip-muted: rgba(0, 255, 127, 0.58);
+  --pho-mdx-callout-tip-fade: rgba(0, 255, 127, 0.28);
+  --pho-mdx-callout-tip-bg: rgba(0, 255, 127, 0.055);
+  --pho-mdx-callout-success: #b6ffce;
+  --pho-mdx-callout-success-bright: #e5ffec;
+  --pho-mdx-callout-success-muted: rgba(182, 255, 206, 0.62);
+  --pho-mdx-callout-success-fade: rgba(182, 255, 206, 0.3);
+  --pho-mdx-callout-success-bg: rgba(182, 255, 206, 0.05);
+  --pho-mdx-callout-quote-bg: rgba(98, 255, 154, 0.052);
+  --pho-mdx-callout-terminal-bg: rgba(44, 255, 122, 0.07);
   --pho-color-danger: #ff6a6a;
   --pho-color-danger-strong: #ff8a8a;
   --pho-color-danger-emphasis: #ff3a3a;
@@ -951,6 +1002,255 @@
   --scrollbar-thumb-hover: var(--phosphor-dim);
   --scrollbar-thumb-active: var(--phosphor);
   --scrollbar-glow: 0 0 6px rgba(25, 247, 255, 0.42);
+
+  --pho-scrollbar-track: var(--scrollbar-track);
+  --pho-scrollbar-thumb: var(--scrollbar-thumb);
+  --pho-scrollbar-thumb-hover: var(--scrollbar-thumb-hover);
+  --pho-scrollbar-thumb-active: var(--scrollbar-thumb-active);
+}
+
+
+[data-theme="red"] {
+  color-scheme: dark;
+
+  --phosphor: #ff2a2a;
+  --phosphor-bright: #ffb8b8;
+  --phosphor-dim: #c41818;
+  --phosphor-fade: #5a0a0a;
+
+  --magenta: #ff6b6b;
+  --magenta-bright: #ffd1d1;
+  --magenta-deep: #991010;
+  --magenta-fade: #3d0606;
+
+  --moss: #ff4d4d;
+  --spring: #ff8080;
+  --rose: #ffb3b3;
+
+  --bg: #100303;
+  --bg-raise: #1c0707;
+  --bg-deep: #060101;
+  --ink: #ffdada;
+
+  --pho-color-background: var(--bg);
+  --pho-color-background-raised: var(--bg-raise);
+  --pho-color-background-deep: var(--bg-deep);
+  --pho-color-text: var(--ink);
+  --pho-color-text-strong: var(--phosphor-bright);
+  --pho-color-text-muted: #c46a6a;
+  --pho-color-text-faint: var(--phosphor-fade);
+  --pho-color-primary: var(--phosphor);
+  --pho-color-primary-strong: var(--phosphor-bright);
+  --pho-color-primary-muted: var(--phosphor-dim);
+  --pho-color-primary-faint: var(--phosphor-fade);
+  --pho-color-accent: var(--magenta);
+  --pho-color-accent-strong: var(--magenta-bright);
+  --pho-color-accent-muted: var(--magenta-deep);
+  --pho-color-accent-faint: var(--magenta-fade);
+  --pho-color-info: var(--moss);
+  --pho-color-success: var(--spring);
+  --pho-color-highlight: var(--rose);
+  --pho-color-link: var(--pho-color-accent);
+  --pho-color-link-hover: var(--pho-color-accent-strong);
+  --pho-color-inverse: var(--bg);
+  --pho-color-selection-bg: var(--pho-color-primary);
+  --pho-color-selection-text: var(--pho-color-background);
+  --pho-color-surface: var(--pho-color-background-raised);
+  --pho-color-surface-deep: var(--pho-color-background-deep);
+  --pho-color-panel: var(--pho-alpha-surface-72);
+  --pho-color-panel-tint: rgba(255, 42, 42, 0.08);
+  --pho-color-border: var(--pho-color-primary-faint);
+  --pho-color-border-strong: var(--pho-color-primary-muted);
+  --pho-color-accent-hover: var(--pho-color-accent-strong);
+  --pho-color-hover: var(--pho-hover-subtle-bg);
+  --pho-color-focus: var(--pho-color-primary-strong);
+
+  --pho-mdx-heading: #ffd6d6;
+  --pho-mdx-heading-muted: #b54040;
+  --pho-mdx-heading-marker: #ff4747;
+  --pho-mdx-link: var(--pho-color-primary);
+  --pho-mdx-link-hover: var(--pho-color-primary-strong);
+  --pho-mdx-emphasis: #ff6b6b;
+  --pho-mdx-strong: #ffd6d6;
+  --pho-mdx-quote: #ffb3b3;
+  --pho-mdx-quote-accent: #ff4d4d;
+  --pho-mdx-quote-bg: rgba(255, 77, 77, 0.075);
+  --pho-mdx-list-marker: #ff5757;
+  --pho-mdx-rule: #8a1010;
+  --pho-mdx-figure-border: #6a0c0c;
+  --pho-mdx-figure-bg: #080202;
+  --pho-mdx-figure-caption: #b06060;
+  --pho-mdx-inline-code: var(--code-fn);
+  --pho-mdx-inline-code-bg: var(--code-bg);
+  --pho-mdx-inline-code-border: var(--code-punct);
+  --pho-mdx-code-frame: var(--code-punct);
+  --pho-mdx-code-bar-bg: var(--code-bg);
+  --pho-mdx-code-bar-text: var(--code-fn);
+  --pho-mdx-code-chip-bg: rgba(255, 77, 77, 0.08);
+  --pho-mdx-code-chip-border: rgba(255, 77, 77, 0.32);
+  --pho-mdx-code-chip-text: var(--code-string);
+  --pho-mdx-code-wash: rgba(255, 77, 77, 0.045);
+  --pho-mdx-code-scanline: rgba(255, 184, 184, 0.045);
+  --pho-mdx-code-hairline: rgba(255, 184, 184, 0.03);
+  --pho-mdx-code-led-border: rgba(255, 184, 184, 0.12);
+  --pho-mdx-code-led-muted-glow: rgba(196, 24, 24, 0.52);
+  --pho-mdx-code-line-shade: rgba(16, 3, 3, 0.16);
+  --pho-mdx-table-border: #7a1010;
+  --pho-mdx-table-heading-bg: #2a0808;
+  --pho-mdx-table-heading-text: #ffdada;
+  --pho-mdx-callout-wash: rgba(255, 184, 184, 0.035);
+  --pho-mdx-callout-hairline: rgba(255, 184, 184, 0.028);
+  --pho-mdx-callout-scanline: rgba(255, 184, 184, 0.05);
+  --pho-mdx-callout-note: #ff4d4d;
+  --pho-mdx-callout-note-bright: #ffdada;
+  --pho-mdx-callout-note-muted: rgba(255, 77, 77, 0.58);
+  --pho-mdx-callout-note-fade: rgba(255, 77, 77, 0.28);
+  --pho-mdx-callout-note-bg: rgba(255, 77, 77, 0.06);
+  --pho-mdx-callout-tip: #ff8080;
+  --pho-mdx-callout-tip-bright: #ffe5e5;
+  --pho-mdx-callout-tip-muted: rgba(255, 128, 128, 0.58);
+  --pho-mdx-callout-tip-fade: rgba(255, 128, 128, 0.28);
+  --pho-mdx-callout-tip-bg: rgba(255, 128, 128, 0.055);
+  --pho-mdx-callout-success: #ffb8b8;
+  --pho-mdx-callout-success-bright: #ffe5e5;
+  --pho-mdx-callout-success-muted: rgba(255, 184, 184, 0.62);
+  --pho-mdx-callout-success-fade: rgba(255, 184, 184, 0.3);
+  --pho-mdx-callout-success-bg: rgba(255, 184, 184, 0.05);
+  --pho-mdx-callout-quote-bg: rgba(255, 107, 107, 0.052);
+  --pho-mdx-callout-terminal-bg: rgba(255, 42, 42, 0.07);
+
+  --pho-alpha-primary-01: rgba(255, 42, 42, 0.01);
+  --pho-alpha-primary-02: rgba(255, 42, 42, 0.02);
+  --pho-alpha-primary-03: rgba(255, 42, 42, 0.03);
+  --pho-alpha-primary-04: rgba(255, 42, 42, 0.04);
+  --pho-alpha-primary-05: rgba(255, 42, 42, 0.05);
+  --pho-alpha-primary-06: rgba(255, 42, 42, 0.06);
+  --pho-alpha-primary-07: rgba(255, 42, 42, 0.07);
+  --pho-alpha-primary-08: rgba(255, 42, 42, 0.08);
+  --pho-alpha-primary-10: rgba(255, 42, 42, 0.1);
+  --pho-alpha-primary-12: rgba(255, 42, 42, 0.12);
+  --pho-alpha-primary-14: rgba(255, 42, 42, 0.14);
+  --pho-alpha-primary-16: rgba(255, 42, 42, 0.16);
+  --pho-alpha-primary-18: rgba(255, 42, 42, 0.18);
+  --pho-alpha-primary-22: rgba(255, 42, 42, 0.22);
+  --pho-alpha-primary-28: rgba(255, 42, 42, 0.28);
+  --pho-alpha-primary-35: rgba(255, 42, 42, 0.35);
+  --pho-alpha-primary-45: rgba(255, 42, 42, 0.45);
+  --pho-alpha-accent-04: rgba(255, 107, 107, 0.04);
+  --pho-alpha-accent-08: rgba(255, 107, 107, 0.08);
+  --pho-alpha-accent-12: rgba(255, 107, 107, 0.12);
+  --pho-alpha-accent-14: rgba(255, 107, 107, 0.14);
+  --pho-alpha-surface-45: rgba(6, 1, 1, 0.45);
+  --pho-alpha-surface-62: rgba(10, 2, 2, 0.62);
+  --pho-alpha-surface-72: rgba(16, 3, 3, 0.72);
+  --pho-alpha-surface-82: rgba(20, 4, 4, 0.82);
+
+  --glow-emerald:
+    0 0 1px var(--phosphor), 0 0 7px rgba(255, 42, 42, 0.62),
+    0 0 20px rgba(255, 42, 42, 0.28);
+  --glow-magenta:
+    0 0 1px var(--magenta), 0 0 8px rgba(255, 107, 107, 0.5),
+    0 0 18px rgba(255, 107, 107, 0.18);
+  --glow-amber:
+    0 0 1px var(--moss), 0 0 8px rgba(255, 77, 77, 0.5);
+  --glow-soft-emerald:
+    0 0 1px rgba(255, 42, 42, 0.42), 0 0 5px rgba(255, 42, 42, 0.24);
+  --glow-soft-magenta:
+    0 0 1px rgba(255, 107, 107, 0.36), 0 0 5px rgba(255, 107, 107, 0.18);
+
+  --pho-glow-primary: var(--glow-emerald);
+  --pho-glow-accent: var(--glow-magenta);
+  --pho-glow-info: var(--glow-amber);
+  --pho-glow-primary-soft: var(--glow-soft-emerald);
+  --pho-glow-accent-soft: var(--glow-soft-magenta);
+
+  --code-bg: #110303;
+  --code-fn: #ffb8b8;
+  --code-comment: #8a3a3a;
+  --code-keyword: #ff4d4d;
+  --code-string: #ff8080;
+  --code-number: #ffb3b3;
+  --code-var: #ffdada;
+  --code-type: #ff6b6b;
+  --code-punct: #991010;
+  --code-tag: #ff4d4d;
+  --code-attr: #ff8080;
+  --code-builtin: #ff6b6b;
+  --code-operator: #ffb8b8;
+
+  --border-frame: 2px solid var(--phosphor-dim);
+  --border-line: 1px solid var(--phosphor-fade);
+  --border-dash: 1px dashed var(--phosphor-fade);
+  --border-dot: 1px dotted var(--phosphor-fade);
+  --rail-strong: 2px solid var(--phosphor);
+  --rail-quote: 3px double var(--phosphor);
+  --border-magenta-strong: 1.5px solid var(--magenta);
+  --border-magenta-dash: 1px dashed var(--magenta-deep);
+
+  --pho-border-frame: var(--border-frame);
+  --pho-border-line: var(--border-line);
+  --pho-border-dashed: var(--border-dash);
+  --pho-border-dotted: var(--border-dot);
+  --pho-border-accent: var(--border-magenta-strong);
+  --pho-border-accent-dashed: var(--border-magenta-dash);
+  --pho-rail-strong: var(--rail-strong);
+  --pho-rail-quote: var(--rail-quote);
+  --pho-focus-ring: 2px solid var(--pho-color-focus);
+  --pho-caret-glow:
+    0 0 1px var(--pho-color-primary-strong), 0 0 5px var(--pho-alpha-primary-28);
+  --pho-placeholder-color: rgba(196, 106, 106, 0.72);
+  --pho-focus-glow:
+    0 0 0 1px var(--pho-alpha-primary-18), 0 0 10px var(--pho-alpha-primary-18);
+  --pho-active-glow:
+    0 0 0 1px var(--pho-alpha-primary-22),
+    inset 0 0 14px var(--pho-alpha-primary-05);
+  --pho-hover-row-bg: var(--pho-color-accent);
+  --pho-hover-row-text: var(--pho-color-background);
+  --pho-hover-row-muted-text: var(--pho-color-background-raised);
+  --pho-hover-row-border: var(--pho-color-accent-strong);
+  --pho-hover-subtle-bg: var(--pho-alpha-primary-08);
+  --pho-hover-subtle-border: var(--pho-color-primary);
+  --pho-hover-subtle-text: var(--pho-color-primary-strong);
+  --pho-hover-subtle-shadow: var(--pho-active-glow);
+
+  --pho-scanline-opacity: 0.16;
+  --pho-flicker-opacity-min: 0.9;
+  --pho-crt-flicker-opacity-min: var(--pho-flicker-opacity-min);
+  --pho-crt-scanline-color: rgba(255, 42, 42, 0.09);
+  --pho-crt-rgb-shift-start: rgba(255, 42, 42, 0.04);
+  --pho-crt-rgb-shift-mid: rgba(255, 107, 107, 0.025);
+  --pho-crt-screen-bg:
+    linear-gradient(180deg, rgba(255, 42, 42, 0.07), rgba(255, 42, 42, 0.018)),
+    var(--pho-color-background-raised);
+  --pho-crt-shell-bg:
+    radial-gradient(
+      circle at center,
+      #2a0808 0%,
+      var(--pho-color-background-raised) 42%,
+      var(--pho-color-background-deep) 100%
+    );
+  --pho-crt-screen-glow:
+    radial-gradient(circle at 50% 24%, rgba(255, 42, 42, 0.1) 0%, rgba(255, 42, 42, 0.04) 32%, transparent 72%),
+    linear-gradient(180deg, rgba(255, 42, 42, 0.045) 0%, transparent 28%, rgba(255, 42, 42, 0.018) 100%);
+  --pho-crt-vignette:
+    radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.5) 100%),
+    linear-gradient(90deg, rgba(255, 184, 184, 0.04), transparent 12%, transparent 88%, rgba(255, 184, 184, 0.03));
+  --pho-crt-vignette-shadow: inset 0 0 100px rgba(0, 0, 0, 0.82);
+  --pho-crt-shadow:
+    0 0 22px rgba(255, 42, 42, 0.24),
+    0 0 78px rgba(255, 42, 42, 0.1),
+    inset 0 0 30px rgba(255, 42, 42, 0.14);
+  --pho-crt-noise-color: rgba(255, 42, 42, 0.34);
+  --pho-crt-noise-color-strong: rgba(255, 184, 184, 0.58);
+  --pho-crt-noise-opacity: 0.042;
+
+  --scrollbar-track: var(--bg-deep);
+  --scrollbar-track-border: 1px dashed var(--phosphor-fade);
+  --scrollbar-thumb: var(--phosphor-fade);
+  --scrollbar-thumb-edge: var(--phosphor-dim);
+  --scrollbar-thumb-hover: var(--phosphor-dim);
+  --scrollbar-thumb-active: var(--phosphor);
+  --scrollbar-glow: 0 0 6px rgba(255, 42, 42, 0.45);
 
   --pho-scrollbar-track: var(--scrollbar-track);
   --pho-scrollbar-thumb: var(--scrollbar-thumb);
