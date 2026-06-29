@@ -109,6 +109,13 @@ function restoreOriginalFiles() {
   }
 }
 
+for (const signal of ["SIGINT", "SIGTERM"]) {
+  process.once(signal, () => {
+    restoreOriginalFiles();
+    process.exit(signal === "SIGINT" ? 130 : 143);
+  });
+}
+
 console.log(`Running prod npm publish preflight for ${packageJson.name}@${prodVersion}.`);
 
 assertVersionAvailable(packageJson.name, prodVersion, registry);

@@ -1,26 +1,39 @@
+"use client";
+
 import React from "react";
 import { Button } from "../../atoms/Button";
 import type { ButtonSize, ButtonVariant } from "../../atoms/Button";
 import { cx } from "../../../utils/classNames";
 import styles from "./Theme.module.scss";
+import type { SlotClassNames } from "../../../types/slots";
+import {
+  getInitialThemeScript,
+  PHOSPHOR_THEMES,
+  PHOSPHOR_THEME_STORAGE_KEY,
+  type InitialThemeScriptOptions,
+  type PhosphorTheme,
+} from "./ThemeScript";
 
-export type PhosphorTheme = "phosphor" | "amber" | "cyan" | "red";
-
-export const PHOSPHOR_THEMES = ["phosphor", "amber", "cyan", "red"] as const;
-export const PHOSPHOR_THEME_STORAGE_KEY = "phosphor-theme";
+export type ThemeToggleSlot = "root" | "indicator" | "label";
+export { getInitialThemeScript, PHOSPHOR_THEMES, PHOSPHOR_THEME_STORAGE_KEY };
+export type { InitialThemeScriptOptions, PhosphorTheme };
 
 export interface ThemeContextValue {
   theme: PhosphorTheme;
   setTheme: (theme: PhosphorTheme) => void;
   toggleTheme: () => void;
   mounted: boolean;
+  themes: readonly PhosphorTheme[];
 }
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
+  themes?: readonly PhosphorTheme[];
   defaultTheme?: PhosphorTheme;
   storageKey?: string;
   attributeTarget?: HTMLElement | null;
+  switchingAttribute?: string;
+  switchingDurationMs?: number;
   value?: PhosphorTheme;
   onChange?: (theme: PhosphorTheme) => void;
 }
@@ -28,6 +41,9 @@ export interface ThemeProviderProps {
 export interface ThemeToggleProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick"> {
   labels?: Partial<Record<PhosphorTheme, React.ReactNode>>;
+  themes?: readonly PhosphorTheme[];
+  slotClassNames?: SlotClassNames<ThemeToggleSlot>;
+  shape?: "dot" | "switch" | "chip";
   showLabel?: boolean;
   variant?: ButtonVariant;
   size?: ButtonSize;
@@ -36,8 +52,12 @@ export interface ThemeToggleProps
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
-function isTheme(value: string | null | undefined): value is PhosphorTheme {
-  return (PHOSPHOR_THEMES as readonly string[]).includes(value ?? "");
+function normalizeThemes(themes: readonly PhosphorTheme[] | undefined) {
+  return themes?.length ? themes : PHOSPHOR_THEMES;
+}
+
+function isTheme(value: string | null | undefined, themes: readonly PhosphorTheme[] = PHOSPHOR_THEMES): value is PhosphorTheme {
+  return (themes as readonly string[]).includes(value ?? "");
 }
 
 function getTarget(explicitTarget?: HTMLElement | null) {
@@ -46,12 +66,12 @@ function getTarget(explicitTarget?: HTMLElement | null) {
   return document.documentElement;
 }
 
-function getStoredTheme(storageKey: string) {
+function getStoredTheme(storageKey: string, themes: readonly PhosphorTheme[]) {
   if (typeof window === "undefined") return null;
 
   try {
     const stored = window.localStorage.getItem(storageKey);
-    return isTheme(stored) ? stored : null;
+    return isTheme(stored, themes) ? stored : null;
   } catch {
     return null;
   }
@@ -72,30 +92,28 @@ function applyTheme(target: HTMLElement | null, theme: PhosphorTheme) {
   target.dataset.theme = theme;
 }
 
-export function getInitialThemeScript(storageKey = PHOSPHOR_THEME_STORAGE_KEY) {
-  const key = JSON.stringify(storageKey);
-  const themes = JSON.stringify(PHOSPHOR_THEMES);
-
-  return `(function(){try{var k=${key};var T=${themes};var t=localStorage.getItem(k);if(T.indexOf(t)===-1)t=T[0];document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme=${JSON.stringify(PHOSPHOR_THEMES[0])};}})();`;
-}
-
 export function ThemeProvider({
   children,
+  themes,
   defaultTheme = "phosphor",
   storageKey = PHOSPHOR_THEME_STORAGE_KEY,
   attributeTarget,
+  switchingAttribute,
+  switchingDurationMs = 360,
   value,
   onChange,
 }: ThemeProviderProps) {
+  const allowedThemes = React.useMemo(() => normalizeThemes(themes), [themes]);
+  const safeDefault = isTheme(defaultTheme, allowedThemes) ? defaultTheme : allowedThemes[0];
   const controlled = value !== undefined;
-  const [themeState, setThemeState] = React.useState<PhosphorTheme>(defaultTheme);
+  const [themeState, setThemeState] = React.useState<PhosphorTheme>(safeDefault);
   const [mounted, setMounted] = React.useState(false);
-  const theme = value ?? themeState;
+  const theme = isTheme(value ?? themeState, allowedThemes) ? (value ?? themeState) : safeDefault;
 
   React.useEffect(() => {
     const target = getTarget(attributeTarget);
-    const stored = controlled ? null : getStoredTheme(storageKey);
-    const nextTheme = value ?? stored ?? defaultTheme;
+    const stored = controlled ? null : getStoredTheme(storageKey, allowedThemes);
+    const nextTheme = isTheme(value, allowedThemes) ? value : stored ?? safeDefault;
 
     if (!controlled) {
       setThemeState(nextTheme);
@@ -103,30 +121,37 @@ export function ThemeProvider({
 
     applyTheme(target, nextTheme);
     setMounted(true);
-  }, [attributeTarget, controlled, defaultTheme, storageKey, value]);
+  }, [allowedThemes, attributeTarget, controlled, safeDefault, storageKey, value]);
 
   const setTheme = React.useCallback(
     (nextTheme: PhosphorTheme) => {
+      if (!isTheme(nextTheme, allowedThemes)) return;
+      const target = getTarget(attributeTarget);
       if (!controlled) {
         setThemeState(nextTheme);
       }
 
-      applyTheme(getTarget(attributeTarget), nextTheme);
+      if (switchingAttribute && target) {
+        target.setAttribute(switchingAttribute, "true");
+        window.setTimeout(() => target.removeAttribute(switchingAttribute), switchingDurationMs);
+      }
+
+      applyTheme(target, nextTheme);
       persistTheme(storageKey, nextTheme);
       onChange?.(nextTheme);
     },
-    [attributeTarget, controlled, onChange, storageKey],
+    [allowedThemes, attributeTarget, controlled, onChange, storageKey, switchingAttribute, switchingDurationMs],
   );
 
   const toggleTheme = React.useCallback(() => {
-    const currentIndex = PHOSPHOR_THEMES.indexOf(theme);
-    const nextTheme = PHOSPHOR_THEMES[(currentIndex + 1) % PHOSPHOR_THEMES.length];
+    const currentIndex = allowedThemes.indexOf(theme);
+    const nextTheme = allowedThemes[(currentIndex + 1) % allowedThemes.length];
     setTheme(nextTheme);
-  }, [setTheme, theme]);
+  }, [allowedThemes, setTheme, theme]);
 
   const context = React.useMemo<ThemeContextValue>(
-    () => ({ theme, setTheme, toggleTheme, mounted }),
-    [mounted, setTheme, theme, toggleTheme],
+    () => ({ theme, setTheme, toggleTheme, mounted, themes: allowedThemes }),
+    [allowedThemes, mounted, setTheme, theme, toggleTheme],
   );
 
   return <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>;
@@ -143,6 +168,9 @@ export function useTheme() {
 
 export function ThemeToggle({
   labels = { phosphor: "phosphor", amber: "amber", cyan: "cyan", red: "red" },
+  themes,
+  slotClassNames,
+  shape = "dot",
   showLabel = true,
   className,
   variant = "ghost",
@@ -150,25 +178,30 @@ export function ThemeToggle({
   "aria-label": ariaLabel,
   ...props
 }: ThemeToggleProps) {
-  const { theme, toggleTheme, mounted } = useTheme();
-  const nextTheme = PHOSPHOR_THEMES[(PHOSPHOR_THEMES.indexOf(theme) + 1) % PHOSPHOR_THEMES.length];
+  const context = useTheme();
+  const allowedThemes = normalizeThemes(themes ?? context.themes);
+  const theme = isTheme(context.theme, allowedThemes) ? context.theme : allowedThemes[0];
+  const nextTheme = allowedThemes[(allowedThemes.indexOf(theme) + 1) % allowedThemes.length];
 
   return (
     <Button
       {...props}
-      className={cx(styles.toggle, className)}
+      className={cx(styles.toggle, styles[`shape-${shape}`], slotClassNames?.root, className)}
       variant={variant}
       size={size}
       type="button"
       pressed={theme !== "phosphor"}
+      data-pho-component="ThemeToggle"
+      data-pho-slot="root"
+      data-pho-shape={shape}
       data-theme-toggle={theme}
       aria-label={ariaLabel ?? `Switch to ${nextTheme} theme`}
-      onClick={toggleTheme}
+      onClick={() => context.setTheme(nextTheme)}
     >
-      <span className={styles.indicator} aria-hidden="true" />
+      <span className={cx(styles.indicator, slotClassNames?.indicator)} aria-hidden="true" data-pho-slot="indicator" />
       {showLabel ? (
-        <span className={styles.label} suppressHydrationWarning>
-          {mounted ? (labels[theme] ?? theme) : (labels.phosphor ?? "phosphor")}
+        <span className={cx(styles.label, slotClassNames?.label)} suppressHydrationWarning data-pho-slot="label">
+          {context.mounted ? (labels[theme] ?? theme) : (labels[allowedThemes[0]] ?? allowedThemes[0])}
         </span>
       ) : null}
     </Button>

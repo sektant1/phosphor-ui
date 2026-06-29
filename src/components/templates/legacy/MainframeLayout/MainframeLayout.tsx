@@ -3,8 +3,21 @@ import styles from "./MainframeLayout.module.scss";
 import { cx } from "../../../../utils/classNames";
 import { NerdTree } from "../../../organisms/NerdTree";
 import type { NerdTreeProps } from "../../../organisms/NerdTree";
+import type { SlotClassNames } from "../../../../types/slots";
 
 export type MainframeVariant = "post" | "wiki" | "course" | "project" | "admin";
+export type MainframeLayoutSlot =
+  | "root"
+  | "header"
+  | "grid"
+  | "leftPanel"
+  | "main"
+  | "rightPanel"
+  | "rightPanelHeader"
+  | "rightPanelTitle"
+  | "rightPanelMeta"
+  | "rightPanelBody"
+  | "footer";
 
 export interface MainframeLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,6 +33,8 @@ export interface MainframeLayoutProps
   mainClassName?: string;
   leftPanelClassName?: string;
   rightPanelClassName?: string;
+  gridClassName?: string;
+  slotClassNames?: SlotClassNames<MainframeLayoutSlot>;
   stickyPanels?: boolean;
 }
 
@@ -45,6 +60,8 @@ export const MainframeLayout = React.forwardRef<HTMLDivElement, MainframeLayoutP
       mainClassName,
       leftPanelClassName,
       rightPanelClassName,
+      gridClassName,
+      slotClassNames,
       ...rest
     },
     ref,
@@ -61,36 +78,50 @@ export const MainframeLayout = React.forwardRef<HTMLDivElement, MainframeLayoutP
           hasLeftPanel && styles.hasLeft,
           hasRightPanel && styles.hasRight,
           stickyPanels && styles.stickyPanels,
+          slotClassNames?.root,
           className,
         )}
         data-mainframe-variant={variant}
+        data-pho-component="MainframeLayout"
+        data-pho-slot="root"
+        data-pho-variant={variant}
         {...rest}
       >
-        {header ? <div className={styles.header}>{header}</div> : null}
+        {header ? (
+          <div className={cx(styles.header, slotClassNames?.header)} data-pho-slot="header">
+            {header}
+          </div>
+        ) : null}
 
-        <div className={styles.grid}>
+        <div className={cx(styles.grid, gridClassName, slotClassNames?.grid)} data-pho-slot="grid">
           {hasLeftPanel ? (
             <aside
-              className={cx(styles.leftPanel, leftPanelClassName)}
+              className={cx(styles.leftPanel, slotClassNames?.leftPanel, leftPanelClassName)}
               aria-label={leftPanelLabel}
+              data-pho-slot="leftPanel"
             >
               {leftPanel}
             </aside>
           ) : null}
 
-          <MainContent as={mainAs} className={mainClassName}>{children}</MainContent>
+          <MainContent as={mainAs} className={cx(slotClassNames?.main, mainClassName)}>{children}</MainContent>
 
           {hasRightPanel ? (
             <ContextPanel
-              className={rightPanelClassName}
+              className={cx(slotClassNames?.rightPanel, rightPanelClassName)}
               aria-label={rightPanelLabel}
+              slotClassNames={slotClassNames}
             >
               {rightPanel}
             </ContextPanel>
           ) : null}
         </div>
 
-        {footer ? <footer className={styles.footer}>{footer}</footer> : null}
+        {footer ? (
+          <footer className={cx(styles.footer, slotClassNames?.footer)} data-pho-slot="footer">
+            {footer}
+          </footer>
+        ) : null}
       </div>
     );
   },
@@ -107,6 +138,7 @@ export const MainContent = React.forwardRef<HTMLElement, MainContentProps>(
     <Tag
       ref={ref as React.ForwardedRef<never>}
       className={cx(styles.main, className)}
+      data-pho-slot="main"
       {...rest}
     >
       {children}
@@ -121,25 +153,27 @@ export interface ContextPanelProps
   title?: React.ReactNode;
   meta?: React.ReactNode;
   as?: "aside" | "section" | "div";
+  slotClassNames?: SlotClassNames<MainframeLayoutSlot>;
 }
 
 /**
  * @deprecated Prefer `Panel` for reusable framed right-rail content.
  */
 export const ContextPanel = React.forwardRef<HTMLElement, ContextPanelProps>(
-  ({ as: Tag = "aside", title, meta, className, children, ...rest }, ref) => (
+  ({ as: Tag = "aside", title, meta, className, children, slotClassNames, ...rest }, ref) => (
     <Tag
       ref={ref as React.ForwardedRef<never>}
       className={cx(styles.contextPanel, className)}
+      data-pho-slot="rightPanel"
       {...rest}
     >
       {title || meta ? (
-        <header className={styles.contextHeader}>
-          {title ? <h2 className={styles.contextTitle}>{title}</h2> : null}
-          {meta ? <div className={styles.contextMeta}>{meta}</div> : null}
+        <header className={cx(styles.contextHeader, slotClassNames?.rightPanelHeader)} data-pho-slot="rightPanelHeader">
+          {title ? <h2 className={cx(styles.contextTitle, slotClassNames?.rightPanelTitle)} data-pho-slot="rightPanelTitle">{title}</h2> : null}
+          {meta ? <div className={cx(styles.contextMeta, slotClassNames?.rightPanelMeta)} data-pho-slot="rightPanelMeta">{meta}</div> : null}
         </header>
       ) : null}
-      <div className={styles.contextBody}>{children}</div>
+      <div className={cx(styles.contextBody, slotClassNames?.rightPanelBody)} data-pho-slot="rightPanelBody">{children}</div>
     </Tag>
   ),
 );

@@ -1,0 +1,188 @@
+.card {
+  --pho-content-card-bg: var(--pho-color-background-deep);
+  --pho-content-card-border: 1px solid var(--pho-color-primary-muted);
+  --pho-content-card-shadow: 0 0 18px var(--pho-alpha-primary-06);
+  --pho-content-card-padding: 0.95rem 1rem;
+  --pho-content-card-cover-width: 34%;
+
+  container: contentCard / inline-size;
+  background:
+    linear-gradient(90deg, var(--pho-alpha-primary-08), transparent 46%),
+    var(--pho-content-card-bg);
+  border: var(--pho-content-card-border);
+  box-shadow: var(--pho-content-card-shadow);
+  display: grid;
+  font-family: var(--pho-font-code);
+  grid-template-columns: minmax(0, var(--pho-content-card-cover-width)) minmax(0, 1fr);
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  transition: var(--pho-hover-transition);
+}
+
+.card:hover {
+  border-color: var(--pho-hover-subtle-border);
+  box-shadow:
+    inset 0 0 0 1px var(--pho-alpha-primary-18),
+    inset 3px 0 0 var(--pho-hover-subtle-border);
+}
+
+.noCover,
+.variant-compact {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.chrome-minimal,
+.chrome-bare {
+  --pho-content-card-bg: transparent;
+  --pho-content-card-shadow: none;
+}
+
+.chrome-bare {
+  --pho-content-card-border: 0;
+}
+
+.cover {
+  align-content: space-between;
+  background:
+    radial-gradient(ellipse at 52% 32%, var(--pho-alpha-primary-18), transparent 64%),
+    var(--pho-color-background-deep);
+  border-right: 1px solid var(--pho-color-primary-faint);
+  display: grid;
+  gap: var(--pho-space-3);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 11rem;
+  min-width: 0;
+  overflow: hidden;
+  padding: var(--pho-space-3);
+  position: relative;
+}
+
+.coverRail {
+  background: var(--pho-color-primary);
+  box-shadow: 0 0 10px var(--pho-alpha-primary-35);
+  inset: 0 auto 0 0;
+  opacity: 0.9;
+  position: absolute;
+  width: 3px;
+  z-index: 1;
+}
+
+.stamp,
+.tag {
+  border: 1px solid var(--pho-color-primary-muted);
+  color: var(--pho-color-primary);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: 1;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0.22rem 0.48rem;
+  position: relative;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.thumb {
+  background: var(--pho-color-background-deep);
+  display: block;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 0;
+}
+
+.thumb img,
+.thumb svg {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.coverMeta {
+  color: var(--pho-color-primary-faint);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-ui-xs-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: var(--pho-line-caption);
+  margin: 0;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.body {
+  align-content: start;
+  display: grid;
+  gap: var(--pho-space-3);
+  min-width: 0;
+  padding: var(--pho-content-card-padding);
+  position: relative;
+  z-index: 1;
+}
+
+.header,
+.footer {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pho-space-2);
+  min-width: 0;
+}
+
+.title {
+  color: var(--pho-color-primary-strong);
+  font-family: var(--pho-font-heading);
+  font-size: var(--pho-type-h4-size);
+  letter-spacing: 0;
+  line-height: var(--pho-line-snug);
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-shadow: var(--pho-glow-primary-soft);
+  text-transform: uppercase;
+}
+
+.description {
+  color: var(--pho-color-text);
+  font-size: var(--pho-type-ui-sm-size);
+  line-height: var(--pho-line-normal);
+  margin: 0;
+}
+
+.stats,
+.footer {
+  border-top: 1px dashed var(--pho-color-primary-faint);
+  padding-top: var(--pho-space-2);
+}
+
+.stats {
+  color: var(--pho-color-primary-muted);
+  font-family: var(--pho-font-terminal);
+  font-size: var(--pho-type-caption-size);
+  letter-spacing: var(--pho-tracking-wide);
+  line-height: var(--pho-line-caption);
+  margin: 0;
+}
+
+@container contentCard (max-width: 420px) {
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cover {
+    border-bottom: 1px solid var(--pho-color-primary-faint);
+    border-right: 0;
+    min-height: 8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

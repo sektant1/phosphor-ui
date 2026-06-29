@@ -1,14 +1,43 @@
 .toggle {
+  --pho-theme-toggle-indicator-size: 0.72em;
+  --pho-theme-toggle-indicator-bg: var(--pho-color-primary);
+  --pho-theme-toggle-indicator-border: 1px solid currentColor;
+  --pho-theme-toggle-indicator-shadow: var(--pho-glow-primary-soft);
+
   min-width: 0;
 }
 
 .indicator {
   display: inline-block;
-  width: 0.72em;
-  height: 0.72em;
-  border: 1px solid currentColor;
-  background: var(--pho-color-primary);
-  box-shadow: var(--pho-glow-primary-soft);
+  width: var(--pho-theme-toggle-indicator-size);
+  height: var(--pho-theme-toggle-indicator-size);
+  border: var(--pho-theme-toggle-indicator-border);
+  background: var(--pho-theme-toggle-indicator-bg);
+  box-shadow: var(--pho-theme-toggle-indicator-shadow);
+}
+
+.shape-switch .indicator {
+  width: calc(var(--pho-theme-toggle-indicator-size) * 2.1);
+  border-radius: 999px;
+  position: relative;
+  background: transparent;
+}
+
+.shape-switch .indicator::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  width: calc(var(--pho-theme-toggle-indicator-size) * 0.58);
+  height: calc(var(--pho-theme-toggle-indicator-size) * 0.58);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: var(--pho-theme-toggle-indicator-bg);
+  box-shadow: var(--pho-theme-toggle-indicator-shadow);
+}
+
+.shape-chip .indicator {
+  border-radius: 2px;
 }
 
 .label {

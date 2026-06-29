@@ -75,9 +75,11 @@ export const SiteShell = React.forwardRef<HTMLDivElement, SiteShellProps>(
         ref={ref}
         className={cx(styles.frame, frameClassName)}
         style={{ ...vars, ...style }}
+        data-pho-component="SiteShell"
+        data-pho-slot="frame"
         {...rest}
       >
-        <a className={styles.skipLink} href={`#${contentId}`}>
+        <a className={styles.skipLink} href={`#${contentId}`} data-pho-slot="skipLink">
           {skipLinkLabel}
         </a>
         {header ?? (
@@ -90,7 +92,7 @@ export const SiteShell = React.forwardRef<HTMLDivElement, SiteShellProps>(
             {...headerProps}
           />
         )}
-        <main id={contentId} className={cx(styles.main, mainClassName)} tabIndex={-1}>
+        <main id={contentId} className={cx(styles.main, mainClassName)} tabIndex={-1} data-pho-slot="main">
           {children}
         </main>
         {footer !== undefined
@@ -106,11 +108,11 @@ export const SiteShell = React.forwardRef<HTMLDivElement, SiteShellProps>(
     );
 
     if (!crt) {
-      return <div className={cx(styles.shell, className)}>{content}</div>;
+      return <div className={cx(styles.shell, className)} data-pho-component="SiteShell" data-pho-slot="root">{content}</div>;
     }
 
     return (
-      <CrtShell className={cx(styles.shell, className)} {...crtProps}>
+      <CrtShell className={cx(styles.shell, className)} data-pho-component="SiteShell" data-pho-slot="root" {...crtProps}>
         {content}
       </CrtShell>
     );

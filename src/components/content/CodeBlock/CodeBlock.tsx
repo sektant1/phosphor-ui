@@ -151,26 +151,28 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
       ref={blockRef}
       className={cx(styles.block, className)}
       aria-label={regionLabel}
+      data-pho-component="CodeBlock"
+      data-pho-slot="root"
     >
-      <div className={styles.bar}>
-        <span className={styles.leds} aria-hidden="true">
-          <span className={styles.led} />
-          <span className={styles.led} />
-          <span className={styles.led} />
+      <div className={styles.bar} data-pho-slot="bar">
+        <span className={styles.leds} aria-hidden="true" data-pho-slot="leds">
+          <span className={styles.led} data-pho-slot="led" />
+          <span className={styles.led} data-pho-slot="led" />
+          <span className={styles.led} data-pho-slot="led" />
         </span>
-        <span className={styles.identity}>
+        <span className={styles.identity} data-pho-slot="identity">
           {filename ? (
-            <span className={styles.filename}>
-              <span className={styles.fileglyph} aria-hidden="true">
+            <span className={styles.filename} data-pho-slot="filename">
+              <span className={styles.fileglyph} aria-hidden="true" data-pho-slot="fileGlyph">
                 ▸
               </span>
               {filename}
             </span>
           ) : null}
         </span>
-        <span className={styles.spacer} />
+        <span className={styles.spacer} data-pho-slot="spacer" />
         {resolvedLang !== "text" && (
-          <span className={styles.lang}>{resolvedLang}</span>
+          <span className={styles.lang} data-pho-slot="language">{resolvedLang}</span>
         )}
         {copyable ? (
           <button
@@ -178,22 +180,25 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({
             className={cx(styles.copy, copied && styles.copied)}
             onClick={copy}
             aria-label={copied ? "Copied" : "Copy code"}
+            data-pho-slot="copy"
           >
             {copied ? copiedLabel : copyLabel}
           </button>
         ) : null}
       </div>
 
-      <div className={styles.viewport}>
+      <div className={styles.viewport} data-pho-slot="viewport">
         {highlightedHtml ? (
           <div
             className={styles.code}
+            data-pho-slot="code"
             dangerouslySetInnerHTML={{ __html: highlightedHtml }}
           />
         ) : (
           <pre
             className={cx(styles.fallback, isHighlighting && styles.loading)}
             aria-busy={isHighlighting || undefined}
+            data-pho-slot="fallback"
           >
             <code>{code}</code>
           </pre>

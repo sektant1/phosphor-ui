@@ -11,6 +11,7 @@ export {
 export type {
   ContextPanelProps,
   MainContentProps,
+  MainframeLayoutSlot,
   MainframeLayoutProps,
   MainframeVariant,
   NerdTreeSidebarProps,

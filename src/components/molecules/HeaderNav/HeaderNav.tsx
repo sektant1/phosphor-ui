@@ -34,23 +34,29 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
   <nav
     className={cx(styles.nav, variantClass[variant], className)}
     aria-label={ariaLabel}
+    data-pho-component="HeaderNav"
+    data-pho-slot="root"
+    data-pho-variant={variant}
     {...rest}
   >
-    <ul className={styles.list}>
+    <ul className={styles.list} data-pho-slot="list">
       {items.map((it, i) => (
         <li
           key={`${it.href}-${i}`}
           className={cx(styles.item, it.active && styles.active)}
+          data-pho-slot="item"
+          data-pho-active={it.active ? "true" : undefined}
         >
           <a
             className={styles.link}
             href={it.href}
+            data-pho-slot="link"
             aria-current={it.active ? "page" : undefined}
           >
-            <span className={styles.glyph} aria-hidden="true">
+            <span className={styles.glyph} aria-hidden="true" data-pho-slot="glyph">
               {it.glyph ?? (variant === "command" ? ">" : null)}
             </span>
-            <span className={styles.label}>{it.label}</span>
+            <span className={styles.label} data-pho-slot="label">{it.label}</span>
           </a>
         </li>
       ))}

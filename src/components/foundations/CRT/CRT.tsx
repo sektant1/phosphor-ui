@@ -28,16 +28,17 @@ export function CRTOverlay({
     <div
       className={cx(
         styles.overlay,
-        scanlines && styles.scanlines,
-        vignette && styles.vignette,
-        glow && styles.glow,
-        noise && styles.noise,
         flicker && styles.flicker,
         className,
       )}
       aria-hidden="true"
       {...rest}
-    />
+    >
+      {glow && <div className={cx(styles.layer, styles.glow)} />}
+      {scanlines && <div className={cx(styles.layer, styles.scanlines)} />}
+      {noise && <div className={cx(styles.layer, styles.noise)} />}
+      {vignette && <div className={cx(styles.layer, styles.vignette)} />}
+    </div>
   );
 }
 
