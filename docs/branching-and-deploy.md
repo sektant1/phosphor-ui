@@ -46,7 +46,14 @@ committing that bump, so a package that npm refuses to publish does not advance
 the branch version.
 
 Manual dispatch supports production and development channels plus a custom
-version bump strategy.
+version bump strategy. Production dispatches may use `patch`, `minor`, or
+`major`; prerelease bumps are reserved for the development channel so a `-dev`
+build cannot be published with the `latest` dist-tag.
+
+Before publishing, the workflow verifies the target version is not already on
+npm and checks that `GITHUB_TOKEN` can push the post-publish version commit back
+to the source branch. This prevents publishing a package that the repository
+cannot record afterward.
 
 ## Required GitHub Setup
 
@@ -59,15 +66,18 @@ git push origin master:prod
 
 Set `dev` as the default branch if you want all PR work to start there.
 
-Configure repository secrets, or environment secrets on both npm environments:
+Create an npm automation token with publish access for `phosphor-ui`, then add
+it as `NPM_TOKEN` to both GitHub environments:
 
-- `NPM_TOKEN`: npm automation token with publish access for
-  `phosphor-ui`. Do not use a read-only token. If 2FA is enabled on npm, use an
-  automation token.
+- `npm-production`
+- `npm-development`
 
-Use `.npmrc.example` as the local template if you need to publish from your
-machine. Keep the real token in your shell environment as `NPM_TOKEN`; do not
-commit a real `.npmrc`.
+The publish workflow passes that secret to npm as `NODE_AUTH_TOKEN` for
+`npm whoami`, `npm publish --dry-run`, and `npm publish --provenance`.
+
+Use `.npmrc.example` as the local template only if you need to publish from your
+machine with a token. Keep the real token in your shell environment as
+`NODE_AUTH_TOKEN`; do not commit a real token in `.npmrc`.
 
 Configure environments:
 
@@ -75,9 +85,14 @@ Configure environments:
 - `npm-production`: used by stable publishes from `prod`.
 - `github-pages`: used by Storybook production deploy.
 
-If GitHub Actions fails at `npm whoami` with `E401`, the selected environment
-does not have a valid `NPM_TOKEN` available, or the npm token no longer has
-publish access. Regenerate the token in npm and update the GitHub secret.
+Allow the workflow bot to push version commits to `dev` and `prod`, or the
+publish workflow will fail before npm publish. If branch protection blocks that,
+grant `github-actions[bot]` bypass rights or use a dedicated release token.
+
+If GitHub Actions fails at `npm whoami` with `E401` or `E403`, regenerate the
+npm automation token and update `NPM_TOKEN` in both GitHub environments. If it
+fails during `npm publish --provenance`, keep `id-token: write` enabled in the
+workflow permissions.
 
 Recommended branch protection:
 

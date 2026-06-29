@@ -135,6 +135,20 @@ import { SiteShell, Post, Button, Callout, TableOfContents } from "phosphor-ui";
 
 The physical folders are organized for maintainers. Consumers should prefer the stable root exports so components can move internally without breaking your site.
 
+## Styling Hooks
+
+Components expose stable `data-pho-component` and `data-pho-slot` attributes for app-level composition. Use these hooks, exported props, and `--pho-*` variables instead of targeting generated CSS-module class names.
+
+```css
+.postList [data-pho-component="PostRow"] [data-pho-slot="title"] {
+  color: var(--pho-color-primary-strong);
+}
+
+.header [data-pho-component="HeaderNav"] [data-pho-active="true"] [data-pho-slot="link"] {
+  border-color: var(--pho-color-primary);
+}
+```
+
 ## Components
 
 | Group | Components |
@@ -362,7 +376,7 @@ The GitHub Actions setup uses `dev` and `prod` as long-lived branches:
   `latest` dist-tag, and deploys Storybook to GitHub Pages.
 
 See [docs/branching-and-deploy.md](./docs/branching-and-deploy.md) for branch
-setup, required secrets, environments, and release behavior.
+setup, npm token secrets, environments, and release behavior.
 
 ## License
 

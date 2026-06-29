@@ -4,6 +4,12 @@
   --pho-mainframe-gap: clamp(0.75rem, 1.35vw, var(--pho-space-5));
   --pho-mainframe-prose-width: var(--pho-layout-prose-max);
   --pho-mainframe-content-width: minmax(0, min(100%, var(--pho-mainframe-prose-width)));
+  --pho-mainframe-panel-border: 1px dashed var(--pho-color-primary-faint);
+  --pho-mainframe-panel-bg: transparent;
+  --pho-mainframe-panel-shadow: none;
+  --pho-mainframe-panel-padding: 0.65rem 0 0.65rem 0.85rem;
+  --pho-mainframe-left-overflow: hidden;
+  --pho-mainframe-right-overflow: visible;
 
   display: grid;
   gap: var(--pho-mainframe-gap);
@@ -92,12 +98,15 @@
 }
 
 .contextPanel {
-  border-left: 1px dashed var(--pho-color-primary-faint);
+  background: var(--pho-mainframe-panel-bg);
+  border-left: var(--pho-mainframe-panel-border);
+  box-shadow: var(--pho-mainframe-panel-shadow);
   color: var(--pho-color-primary-muted);
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
   grid-area: right;
-  padding: 0.65rem 0 0.65rem 0.85rem;
+  overflow: var(--pho-mainframe-right-overflow);
+  padding: var(--pho-mainframe-panel-padding);
 }
 
 .contextHeader {
@@ -139,7 +148,7 @@
 
 .stickyPanels .leftPanel {
   max-height: calc(100dvh - (var(--pho-layout-sticky-top) * 2));
-  overflow: hidden;
+  overflow: var(--pho-mainframe-left-overflow);
 }
 
 .nerdTreeShell {
@@ -168,7 +177,7 @@
 
   .hasLeft.hasRight .contextPanel {
     border-left: none;
-    border-top: 1px dashed var(--pho-color-primary-faint);
+    border-top: var(--pho-mainframe-panel-border);
     padding: var(--pho-space-4) 0 0;
   }
 
@@ -187,7 +196,7 @@
 
   .hasRight:not(.hasLeft) .contextPanel {
     border-left: none;
-    border-top: 1px dashed var(--pho-color-primary-faint);
+    border-top: var(--pho-mainframe-panel-border);
     padding: var(--pho-space-4) 0 0;
   }
 
@@ -246,7 +255,7 @@
   }
 
   .contextPanel {
-    border: 1px dashed var(--pho-color-primary-faint);
+    border: var(--pho-mainframe-panel-border);
     padding: 0.75rem;
   }
 }

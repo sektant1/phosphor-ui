@@ -54,18 +54,18 @@ export const PostListing: React.FC<PostListingProps> = ({
   const isEmpty = hasPosts && posts.length === 0;
 
   return (
-    <div className={cx(styles.wrap, className)} {...rest}>
-      <div className={styles.header}>
-        <span className={styles.hGlyph}>{labels.glyph}</span>
-        <span className={styles.hThumb}>{labels.thumb}</span>
-        <span className={styles.hPost}>{labels.post}</span>
-        <span className={styles.hLen}>{labels.length}</span>
-        <span className={styles.hDate}>{labels.date}</span>
+    <div className={cx(styles.wrap, className)} data-pho-component="PostListing" data-pho-slot="root" {...rest}>
+      <div className={styles.header} data-pho-slot="header">
+        <span className={styles.hGlyph} data-pho-slot="headerGlyph">{labels.glyph}</span>
+        <span className={styles.hThumb} data-pho-slot="headerThumb">{labels.thumb}</span>
+        <span className={styles.hPost} data-pho-slot="headerTitle">{labels.post}</span>
+        <span className={styles.hLen} data-pho-slot="headerMeta">{labels.length}</span>
+        <span className={styles.hDate} data-pho-slot="headerDate">{labels.date}</span>
       </div>
       {isEmpty ? (
         emptyState ?? <EmptyState glyph="[ 0 ]" title={emptyMessage} status />
       ) : (
-        <ul className={styles.list}>
+        <ul className={styles.list} data-pho-slot="list">
           {hasPosts
             ? posts.map((post, index) =>
                 renderPost ? (
@@ -118,20 +118,22 @@ export const PostRow: React.FC<PostRowProps> = ({
     <li
       className={cx(styles.row, className)}
       style={{ ...style, ["--i" as string]: index }}
+      data-pho-component="PostRow"
+      data-pho-slot="row"
       {...rest}
     >
-      <a href={href}>
-        <span className={styles.glyph}>{glyph}</span>
-        <span className={styles.thumb}>{thumbContent}</span>
-        <span className={styles.titleCell}>
-          <span className={styles.title}>{title}</span>
+      <a href={href} data-pho-slot="link">
+        <span className={styles.glyph} data-pho-slot="glyph">{glyph}</span>
+        <span className={styles.thumb} data-pho-slot="thumb">{thumbContent}</span>
+        <span className={styles.titleCell} data-pho-slot="titleCell">
+          <span className={styles.title} data-pho-slot="title">{title}</span>
           {showDescription && hasVisibleContent(description) ? (
-            <span className={styles.description}>{description}</span>
+            <span className={styles.description} data-pho-slot="description">{description}</span>
           ) : null}
         </span>
-        {meta && <span className={styles.meta}>{meta}</span>}
+        {meta && <span className={styles.meta} data-pho-slot="meta">{meta}</span>}
         {date ? (
-          <time className={styles.date} dateTime={dateTime}>
+          <time className={styles.date} dateTime={dateTime} data-pho-slot="date">
             {date}
           </time>
         ) : null}

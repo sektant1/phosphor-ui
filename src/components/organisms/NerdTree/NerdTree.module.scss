@@ -1,7 +1,22 @@
 .tree {
+  --pho-nerdtree-bg: var(--pho-color-panel-tint);
+  --pho-nerdtree-border: 1px dashed var(--pho-color-primary-faint);
+  --pho-nerdtree-shadow: none;
+  --pho-nerdtree-padding: var(--pho-space-3) var(--pho-space-4) var(--pho-space-4) var(--pho-space-3);
+  --pho-nerdtree-body-overflow: auto;
+  --pho-nerdtree-link-bg-hover: var(--pho-hover-row-bg);
+  --pho-nerdtree-link-text-hover: var(--pho-hover-row-text);
+  --pho-nerdtree-active-bg: var(--pho-color-primary);
+  --pho-nerdtree-active-border: var(--pho-color-primary);
+  --pho-nerdtree-mobile-toggle-top: max(0.65rem, env(safe-area-inset-top));
+  --pho-nerdtree-mobile-toggle-left: max(0.65rem, env(safe-area-inset-left));
+  --pho-nerdtree-mobile-toggle-width: 2.35rem;
+  --pho-nerdtree-mobile-toggle-height: 2.35rem;
+
   min-width: 0;
-  border-right: 1px dashed var(--pho-color-primary-faint);
-  background: var(--pho-color-panel-tint);
+  border-right: var(--pho-nerdtree-border);
+  background: var(--pho-nerdtree-bg);
+  box-shadow: var(--pho-nerdtree-shadow);
   font-family: var(--pho-font-terminal);
   font-size: var(--pho-type-caption-size);
   line-height: var(--pho-line-normal);
@@ -15,11 +30,23 @@
 }
 
 .panel {
-  background: var(--pho-color-panel-tint);
+  background: var(--pho-nerdtree-bg);
   border: none;
-  border-right: 1px dashed var(--pho-color-primary-faint);
+  border-right: var(--pho-nerdtree-border);
   max-height: none;
   position: relative;
+}
+
+.bare,
+.transparent,
+.noChrome {
+  --pho-nerdtree-bg: transparent;
+  --pho-nerdtree-shadow: none;
+}
+
+.bare,
+.noChrome {
+  --pho-nerdtree-border: 0;
 }
 
 .compact {
@@ -55,11 +82,11 @@
     display: grid !important;
     place-items: center;
     position: fixed;
-    top: max(0.65rem, env(safe-area-inset-top));
-    left: max(0.65rem, env(safe-area-inset-left));
+    top: var(--pho-nerdtree-mobile-toggle-top);
+    left: var(--pho-nerdtree-mobile-toggle-left);
     z-index: 80;
-    width: 2.35rem;
-    height: 2.35rem;
+    width: var(--pho-nerdtree-mobile-toggle-width);
+    height: var(--pho-nerdtree-mobile-toggle-height);
     min-height: 0;
     max-width: none;
     padding: 0;
@@ -83,6 +110,18 @@
   }
 
   .desktopBody {
+    display: none;
+  }
+
+  .mobileInline {
+    width: 100%;
+  }
+
+  .mobileInline .desktopBody {
+    display: block;
+  }
+
+  .mobileHidden {
     display: none;
   }
 }
@@ -152,9 +191,9 @@
 .body {
   flex: 1;
   min-height: 0;
-  overflow: auto;
+  overflow: var(--pho-nerdtree-body-overflow);
   overscroll-behavior: contain;
-  padding: var(--pho-space-3) var(--pho-space-4) var(--pho-space-4) var(--pho-space-3);
+  padding: var(--pho-nerdtree-padding);
   min-width: 0;
 }
 
@@ -233,8 +272,8 @@
 
 .foldBtn:hover,
 .foldBtn:focus-visible {
-  background: var(--pho-hover-row-bg);
-  color: var(--pho-hover-row-text);
+  background: var(--pho-nerdtree-link-bg-hover);
+  color: var(--pho-nerdtree-link-text-hover);
   outline: none;
   text-shadow: none;
 }

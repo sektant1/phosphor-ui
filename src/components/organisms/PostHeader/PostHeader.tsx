@@ -43,38 +43,40 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
   const resolvedTags = tags ?? meta?.tags;
 
   return (
-    <Stack as="header" gap="sm" className={cx(styles.root, className)} {...rest}>
+    <Stack as="header" gap="sm" className={cx(styles.root, className)} data-pho-component="PostHeader" data-pho-slot="root" {...rest}>
       <Grid
         className={styles.top}
+        data-pho-slot="top"
         columns="minmax(0, 1fr) auto"
         gap="md"
         mobileColumns="1fr"
         mobileGap="sm"
         align="start"
       >
-        <Stack gap="sm" className={styles.copy}>
-          {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
+        <Stack gap="sm" className={styles.copy} data-pho-slot="copy">
+          {eyebrow ? <p className={styles.eyebrow} data-pho-slot="eyebrow">{eyebrow}</p> : null}
           {resolvedTags && resolvedTags.length > 0 ? (
-            <Cluster className={styles.tags} gap="0.45rem">
+            <Cluster className={styles.tags} gap="0.45rem" data-pho-slot="tags">
               {resolvedTags.map((tag, index) => (
                 <Tag key={tag} color={index % 2 === 0 ? "phosphor" : "magenta"}>{tag}</Tag>
               ))}
             </Cluster>
           ) : null}
-          <H1 className={styles.title}>{title}</H1>
-          {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+          <H1 className={styles.title} data-pho-slot="title">{title}</H1>
+          {subtitle ? <p className={styles.subtitle} data-pho-slot="subtitle">{subtitle}</p> : null}
         </Stack>
-        {actions ? <Cluster className={styles.actions} gap="sm">{actions}</Cluster> : null}
+        {actions ? <Cluster className={styles.actions} gap="sm" data-pho-slot="actions">{actions}</Cluster> : null}
       </Grid>
 
       <PostMeta
         className={styles.meta}
+        data-pho-slot="meta"
         date={date ?? meta?.date}
         readTime={readTime ?? meta?.readTime}
         wordCount={wordCount ?? meta?.wordCount}
         updated={updated ?? meta?.updated}
       />
-      {children ? <div className={styles.extra}>{children}</div> : null}
+      {children ? <div className={styles.extra} data-pho-slot="extra">{children}</div> : null}
     </Stack>
   );
 };

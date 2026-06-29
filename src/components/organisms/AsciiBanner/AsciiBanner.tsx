@@ -87,6 +87,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
       <div
         ref={frameRef}
         className={styles.bannerFrame}
+        data-pho-slot="frame"
         style={
           {
             "--ascii-scale": fit.scale,
@@ -97,6 +98,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
         <pre
           ref={bannerRef}
           className={styles.banner}
+          data-pho-slot="art"
           aria-hidden={readableFallback ? "true" : undefined}
         >
           {renderedArt}
@@ -104,7 +106,7 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
       </div>
 
       {readableFallback ? (
-        <span className={styles.fallback}>{readableFallback}</span>
+        <span className={styles.fallback} data-pho-slot="fallback">{readableFallback}</span>
       ) : null}
     </>
   );
@@ -128,6 +130,8 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
         className={cx(styles.link, className)}
         style={style}
         aria-label={label}
+        data-pho-component="AsciiBanner"
+        data-pho-slot="root"
         {...anchorProps}
       >
         {content}
@@ -151,6 +155,8 @@ export const AsciiBanner: React.FC<AsciiBannerProps> = (props) => {
       className={cx(styles.link, className)}
       style={style}
       aria-label={label}
+      data-pho-component="AsciiBanner"
+      data-pho-slot="root"
       {...divProps}
     >
       {content}

@@ -88,8 +88,10 @@ export {
 } from "./foundations/Theme";
 export type {
   PhosphorTheme,
+  InitialThemeScriptOptions,
   ThemeContextValue,
   ThemeProviderProps,
+  ThemeToggleSlot,
   ThemeToggleProps,
 } from "./foundations/Theme";
 
@@ -105,6 +107,7 @@ export type {
   NerdTreeNode,
   NerdTreeDir,
   NerdTreeLeaf,
+  NerdTreeSlot,
 } from "./organisms/NerdTree";
 
 export { AsciiBanner } from "./organisms/AsciiBanner";
@@ -200,6 +203,7 @@ export {
 } from "./templates/legacy/MainframeLayout";
 export type {
   MainContentProps,
+  MainframeLayoutSlot,
   MainframeLayoutProps,
   MainframeVariant,
   NerdTreeSidebarProps,
@@ -207,6 +211,14 @@ export type {
 
 export { CourseCard } from "./organisms/CourseCard";
 export type { CourseCardProps } from "./organisms/CourseCard";
+
+export { ContentCard } from "./organisms/ContentCard";
+export type {
+  ContentCardAction,
+  ContentCardMedia,
+  ContentCardProps,
+  ContentCardSlot,
+} from "./organisms/ContentCard";
 
 export { HeroFrame } from "./organisms/HeroFrame";
 export type { HeroFrameProps } from "./organisms/HeroFrame";

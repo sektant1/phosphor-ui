@@ -1,5 +1,6 @@
 export * from "./AsciiBanner";
 export * from "./CourseCard";
+export * from "./ContentCard";
 export * from "./CrtShell";
 export * from "./Exercise";
 export * from "./Footer";

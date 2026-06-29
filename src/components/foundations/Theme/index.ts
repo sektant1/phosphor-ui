@@ -8,7 +8,9 @@ export {
 } from "./Theme";
 export type {
   PhosphorTheme,
+  InitialThemeScriptOptions,
   ThemeContextValue,
+  ThemeToggleSlot,
   ThemeProviderProps,
   ThemeToggleProps,
 } from "./Theme";
