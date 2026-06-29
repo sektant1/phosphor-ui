@@ -12,6 +12,7 @@ export { default as Link } from "./Link";
 export type { LinkProps } from "./Link";
 export * from "./ProgressBar";
 export * from "./ReadingRail";
+export * from "./Switch";
 export * from "./Tag";
 export { default as Text } from "./Text";
 export type { TextProps, TextVariant } from "./Text";
