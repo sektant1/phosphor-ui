@@ -456,7 +456,69 @@ export interface PanelOwnProps extends ResponsiveVisibilityProps {
 export type PanelProps<T extends LayoutElement = "section"> =
   LayoutPolymorphicProps<T, PanelOwnProps>;
 
-export const Panel = <T extends LayoutElement = "section">({
+export interface PanelSlotProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export interface PanelTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+export interface PanelFooterProps extends React.HTMLAttributes<HTMLElement> {}
+
+export const PanelHeader = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <header ref={ref} className={cx(styles.panelHeader, className)} {...rest} />
+  ),
+);
+
+PanelHeader.displayName = "Panel.Header";
+
+export const PanelTitleBlock = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelTitleBlock, className)} {...rest} />
+  ),
+);
+
+PanelTitleBlock.displayName = "Panel.TitleBlock";
+
+export const PanelTitle = React.forwardRef<HTMLHeadingElement, PanelTitleProps>(
+  ({ className, ...rest }, ref) => (
+    <h2 ref={ref} className={cx(styles.panelTitle, className)} {...rest} />
+  ),
+);
+
+PanelTitle.displayName = "Panel.Title";
+
+export const PanelMeta = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelMeta, className)} {...rest} />
+  ),
+);
+
+PanelMeta.displayName = "Panel.Meta";
+
+export const PanelActions = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelActions, className)} {...rest} />
+  ),
+);
+
+PanelActions.displayName = "Panel.Actions";
+
+export const PanelBody = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelBody, className)} {...rest} />
+  ),
+);
+
+PanelBody.displayName = "Panel.Body";
+
+export const PanelFooter = React.forwardRef<HTMLElement, PanelFooterProps>(
+  ({ className, ...rest }, ref) => (
+    <footer ref={ref} className={cx(styles.panelFooter, className)} {...rest} />
+  ),
+);
+
+PanelFooter.displayName = "Panel.Footer";
+
+const PanelRoot = <T extends LayoutElement = "section">({
   as,
   title,
   meta,
@@ -499,17 +561,27 @@ export const Panel = <T extends LayoutElement = "section">({
       {hasHeader ? (
         <header className={styles.panelHeader}>
           <div className={styles.panelTitleBlock}>
-            {title ? <h2 className={styles.panelTitle}>{title}</h2> : null}
-            {meta ? <div className={styles.panelMeta}>{meta}</div> : null}
+            {title ? <PanelTitle>{title}</PanelTitle> : null}
+            {meta ? <PanelMeta>{meta}</PanelMeta> : null}
           </div>
-          {actions ? <div className={styles.panelActions}>{actions}</div> : null}
+          {actions ? <PanelActions>{actions}</PanelActions> : null}
         </header>
       ) : null}
-      <div className={styles.panelBody}>{children}</div>
-      {footer ? <footer className={styles.panelFooter}>{footer}</footer> : null}
+      <PanelBody>{children}</PanelBody>
+      {footer ? <PanelFooter>{footer}</PanelFooter> : null}
     </>,
   );
 };
+
+export const Panel = Object.assign(PanelRoot, {
+  Header: PanelHeader,
+  TitleBlock: PanelTitleBlock,
+  Title: PanelTitle,
+  Meta: PanelMeta,
+  Actions: PanelActions,
+  Body: PanelBody,
+  Footer: PanelFooter,
+});
 
 export interface SectionOwnProps {
   title?: React.ReactNode;

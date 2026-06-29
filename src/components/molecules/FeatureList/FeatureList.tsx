@@ -12,16 +12,17 @@ export interface FeatureListItemProps extends Omit<
   React.LiHTMLAttributes<HTMLLIElement>,
   "title"
 > {
-  title: React.ReactNode;
-  body: React.ReactNode;
+  title?: React.ReactNode;
+  body?: React.ReactNode;
 }
 
 export interface FeatureListProps extends Omit<
   React.HTMLAttributes<HTMLUListElement>,
   "children"
 > {
-  items: FeatureListItemData[];
+  items?: FeatureListItemData[];
   renderItem?: (item: FeatureListItemData, index: number) => React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const getFeatureListItemKey = (
@@ -36,25 +37,54 @@ const getFeatureListItemKey = (
   return index;
 };
 
-export const FeatureListItem = React.forwardRef<
+const FeatureListItemRoot = React.forwardRef<
   HTMLLIElement,
   FeatureListItemProps
->(({ title, body, className, ...rest }, ref) => {
+>(({ title, body, className, children, ...rest }, ref) => {
   return (
     <li ref={ref} className={cx(styles.item, className)} {...rest}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.body}>{body}</div>
+      {children ?? (
+        <>
+          {title ? <div className={styles.title}>{title}</div> : null}
+          {body ? <div className={styles.body}>{body}</div> : null}
+        </>
+      )}
     </li>
   );
 });
 
-FeatureListItem.displayName = "FeatureListItem";
+FeatureListItemRoot.displayName = "FeatureList.Item";
 
-export const FeatureList = React.forwardRef<HTMLUListElement, FeatureListProps>(
-  ({ items, renderItem, className, ...rest }, ref) => {
+export interface FeatureListItemTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export interface FeatureListItemBodyProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const FeatureListItemTitle = React.forwardRef<HTMLDivElement, FeatureListItemTitleProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.title, className)} {...rest} />
+  ),
+);
+
+FeatureListItemTitle.displayName = "FeatureList.ItemTitle";
+
+const FeatureListItemBody = React.forwardRef<HTMLDivElement, FeatureListItemBodyProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.body, className)} {...rest} />
+  ),
+);
+
+FeatureListItemBody.displayName = "FeatureList.ItemBody";
+
+export const FeatureListItem = Object.assign(FeatureListItemRoot, {
+  Title: FeatureListItemTitle,
+  Body: FeatureListItemBody,
+});
+
+const FeatureListRoot = React.forwardRef<HTMLUListElement, FeatureListProps>(
+  ({ items, renderItem, className, children, ...rest }, ref) => {
     return (
       <ul ref={ref} className={cx(styles.list, className)} {...rest}>
-        {items.map((item, index) =>
+        {items?.map((item, index) =>
           renderItem ? (
             <React.Fragment key={getFeatureListItemKey(item, index)}>
               {renderItem(item, index)}
@@ -67,9 +97,16 @@ export const FeatureList = React.forwardRef<HTMLUListElement, FeatureListProps>(
             />
           ),
         )}
+        {!items ? children : null}
       </ul>
     );
   },
 );
 
-FeatureList.displayName = "FeatureList";
+FeatureListRoot.displayName = "FeatureList";
+
+export const FeatureList = Object.assign(FeatureListRoot, {
+  Item: FeatureListItem,
+  ItemTitle: FeatureListItemTitle,
+  ItemBody: FeatureListItemBody,
+});

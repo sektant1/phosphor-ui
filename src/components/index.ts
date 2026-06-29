@@ -131,7 +131,14 @@ export type {
 } from "./molecules/Select";
 
 export { Tabs } from "./molecules/Tabs";
-export type { TabItem, TabsProps } from "./molecules/Tabs";
+export type {
+  TabItem,
+  TabsListProps,
+  TabsPanelProps,
+  TabsPanelsProps,
+  TabsProps,
+  TabsTriggerProps,
+} from "./molecules/Tabs";
 
 export { Tooltip } from "./molecules/Tooltip";
 export type { TooltipPlacement, TooltipProps } from "./molecules/Tooltip";
@@ -154,6 +161,7 @@ export { List } from "./molecules/List";
 export type {
   ListDensity,
   ListItem,
+  ListItemProps,
   ListMarker,
   ListProps,
   ListVariant,
@@ -162,7 +170,9 @@ export type {
 export { FeatureList, FeatureListItem } from "./molecules/FeatureList";
 export type {
   FeatureListItemData,
+  FeatureListItemBodyProps,
   FeatureListItemProps,
+  FeatureListItemTitleProps,
   FeatureListProps,
 } from "./molecules/FeatureList";
 

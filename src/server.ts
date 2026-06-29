@@ -5,6 +5,7 @@ export {
   codeBlockThemes,
   extractMdxCode,
   phosphorTheme,
+  redTheme,
 } from "./components/content/CodeBlock";
 export type { CodeBlockThemeName } from "./components/content/CodeBlock";
 export { getInitialThemeScript } from "./components/foundations/Theme/ThemeScript";
