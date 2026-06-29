@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .shell {
   display: flex;
   flex-direction: row-reverse;
@@ -341,7 +343,7 @@
   line-height: var(--pho-line-snug);
 }
 
-@media (max-width: 880px) {
+@include bp.down("lg") {
   .shell {
     display: block;
     flex-direction: initial;
@@ -397,7 +399,7 @@
   }
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .main {
     padding: 0.75rem;
   }

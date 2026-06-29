@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .tree {
   --pho-nerdtree-bg: var(--pho-color-panel-tint);
   --pho-nerdtree-border: 1px dashed var(--pho-color-primary-faint);
@@ -67,7 +69,7 @@
   line-height: var(--pho-line-caption);
 }
 
-@media (max-width: 880px) {
+@include bp.down("lg") {
   .tree {
     position: static;
     max-height: none;
@@ -384,7 +386,7 @@
   min-width: 0;
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .toggleBtn {
     top: max(0.5rem, env(safe-area-inset-top));
     left: max(0.5rem, env(safe-area-inset-left));
@@ -426,7 +428,7 @@
   }
 }
 
-@media (max-width: 360px) {
+@include bp.down("xs") {
   .toggleLabel {
     display: none;
   }

@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .frame {
   --callout-accent: var(--pho-color-primary);
   --callout-accent-bright: var(--pho-color-primary-strong);
@@ -302,7 +304,7 @@
   text-shadow: var(--pho-glow-primary);
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .frame {
     --callout-glyph-size: 1.15rem;
     grid-template-columns: var(--callout-glyph-size) minmax(0, 1fr);

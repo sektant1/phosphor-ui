@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .pq {
   border: 1px solid var(--pho-color-primary-faint);
   background: var(--pho-color-background-raised);
@@ -78,7 +80,7 @@
 .missing .statusLabel { color: var(--pho-color-danger-strong); text-shadow: none; }
 .soft .statusLabel { color: var(--pho-color-primary-faint); }
 
-@media (max-width: 480px) {
+@include bp.down(480px) {
   .li { grid-template-columns: 3.2rem minmax(0, 1fr); }
   .stamp { margin-left: 0; }
   .statusLabel { display: none; }

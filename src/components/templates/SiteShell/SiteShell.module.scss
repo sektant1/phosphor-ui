@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .shell {
   min-height: 100vh;
   min-width: 0;
@@ -50,7 +52,7 @@
   outline-offset: 0.5rem;
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .frame {
     padding: var(--pho-site-padding-mobile, 0.75rem);
   }

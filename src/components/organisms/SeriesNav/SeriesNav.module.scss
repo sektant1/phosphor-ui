@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   background:
     linear-gradient(90deg, var(--pho-alpha-primary-06), transparent 72%),
@@ -97,7 +99,7 @@
   text-align: right;
 }
 
-@media (max-width: 540px) {
+@include bp.down(540px) {
   .header {
     align-items: flex-start;
   }

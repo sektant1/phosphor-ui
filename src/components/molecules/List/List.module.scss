@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .list {
   display: grid;
   font-family: var(--pho-font-code);
@@ -173,7 +175,7 @@ a.title:focus-visible {
   grid-column: 1;
 }
 
-@media (max-width: 560px) {
+@include bp.down(560px) {
   .item {
     grid-template-columns: auto minmax(0, 1fr);
   }

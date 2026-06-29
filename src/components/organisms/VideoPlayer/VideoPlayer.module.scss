@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .vp {
   border: 1px solid var(--pho-color-primary);
   background: var(--pho-color-background-deep);
@@ -129,7 +131,7 @@
   outline: 2px solid var(--pho-color-primary-strong);
   outline-offset: 2px;
 }
-@media (max-width: 640px) {
+@include bp.down(640px) {
   .host :global(.video-js) {
     font-size: var(--pho-type-caption-size);
   }

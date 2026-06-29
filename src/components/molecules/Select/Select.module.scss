@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   display: grid;
   gap: 0.35rem;
@@ -113,7 +115,7 @@
   box-shadow: 0 0 0 1px var(--pho-color-danger-faint);
 }
 
-@media (max-width: 480px) {
+@include bp.down(480px) {
   .control {
     width: 100%;
   }

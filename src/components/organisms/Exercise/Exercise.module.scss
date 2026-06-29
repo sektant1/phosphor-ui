@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .ex {
   border: 1px solid var(--pho-color-primary);
   border-left: 3px solid var(--pho-color-primary);
@@ -114,7 +116,7 @@
   .allDone .badge { animation: none; }
 }
 
-@media (max-width: 480px) {
+@include bp.down(480px) {
   .head { gap: 0.5rem; padding: 6px 10px; }
   .num  { display: none; }
   .body { padding: 10px 12px; }

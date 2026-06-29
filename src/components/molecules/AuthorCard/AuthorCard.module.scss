@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .card {
   border: var(--pho-border-dashed);
   background: var(--pho-color-background-raised);
@@ -91,7 +93,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include bp.down(480px) {
   .card {
     --pho-flex-direction: column;
   }

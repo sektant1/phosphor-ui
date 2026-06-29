@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .switcher {
   align-items: center;
   color: var(--pho-color-primary-muted);
@@ -154,7 +156,7 @@
   letter-spacing: var(--pho-tracking-normal);
 }
 
-@media (max-width: 560px) {
+@include bp.down(560px) {
   .switcher {
     width: 100%;
   }

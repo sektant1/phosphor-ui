@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   font-family: var(--pho-font-code);
   font-size: var(--pho-type-caption-size);
@@ -70,7 +72,7 @@ a.tag:focus-visible {
   outline-offset: var(--pho-focus-offset);
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .root {
     --pho-row-gap: 0.4ch;
     --pho-column-gap: 0.8ch;

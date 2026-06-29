@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .flex,
 .grid {
   box-sizing: border-box;
@@ -458,7 +460,7 @@
   min-width: 0;
 }
 
-@media (max-width: 720px) {
+@include bp.down("md") {
   .flex {
     flex-direction: var(--pho-mobile-flex-direction, var(--pho-flex-direction));
     align-items: var(--pho-mobile-align, var(--pho-align));
@@ -566,7 +568,7 @@
   }
 }
 
-@media (max-width: 880px) {
+@include bp.down("lg") {
   .sidebarLayout.collapseLg,
   .sidebarLayout.hasSidebar.collapseLg,
   .sidebarLayout.hasAside.collapseLg,

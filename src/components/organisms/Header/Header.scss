@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .pho-header {
   display: grid;
   gap: var(--pho-space-2);
@@ -211,7 +213,7 @@
     border-top: 1px dashed var(--pho-color-primary-faint);
   }
 
-  @media (max-width: 640px) {
+  @include bp.down(640px) {
     margin-bottom: 1.4rem;
 
     .tagline {

@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   --pho-three-panel-gap: clamp(0.75rem, 1.35vw, var(--pho-space-5));
   --pho-three-panel-left-min: 13rem;
@@ -166,7 +168,7 @@
   top: var(--pho-three-panel-sticky-top);
 }
 
-@media (max-width: 1120px) {
+@include bp.down("xl") {
   .hasLeft.hasRight .grid {
     grid-template-areas:
       "left main"
@@ -184,7 +186,8 @@
   }
 }
 
-@media (max-width: 960px) {
+// 960px: non-canonical reflow point tuned for the 2-column → stacked aside.
+@include bp.down(960px) {
   .hasRight:not(.hasLeft) .grid {
     grid-template-areas:
       "main"
@@ -197,7 +200,7 @@
   }
 }
 
-@media (max-width: 880px) {
+@include bp.down("lg") {
   .hasLeft .grid,
   .hasLeft.hasRight .grid {
     grid-template-areas:
@@ -220,13 +223,14 @@
   }
 }
 
-@media (max-width: 620px) {
+// 620px: non-canonical gap tightening between sm and md.
+@include bp.down(620px) {
   .root {
     --pho-three-panel-gap: var(--pho-space-5);
   }
 }
 
-@media (max-width: 360px) {
+@include bp.down("xs") {
   .root {
     --pho-three-panel-gap: var(--pho-space-4);
   }

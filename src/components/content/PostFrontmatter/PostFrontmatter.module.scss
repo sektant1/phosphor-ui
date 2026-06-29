@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   border: 1px dashed var(--pho-color-primary-faint);
   background:
@@ -69,7 +71,7 @@
   text-shadow: var(--pho-glow-primary);
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;

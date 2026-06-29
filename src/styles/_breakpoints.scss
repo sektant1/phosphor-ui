@@ -1,0 +1,42 @@
+@use "sass:map";
+
+// Canonical responsive breakpoint scale.
+//
+// Mirrors the `--pho-bp-*` custom properties declared in `tokens.css`. CSS
+// custom properties cannot be evaluated inside `@media` conditions, so the
+// authoritative values for media queries live here as Sass values while the
+// tokens stay as the documented, runtime-readable reference for consumers.
+//
+// Usage:
+//   @use "../../../styles/breakpoints" as bp;
+//   @include bp.down("md") { ... }   // max-width: 720px
+//   @include bp.up("lg")  { ... }    // min-width: 880px
+//
+// A raw length may be passed for intentional one-off breakpoints that are not
+// part of the canonical scale, e.g. `@include bp.down(960px) { ... }`.
+$breakpoints: (
+  "xs": 360px,
+  "sm": 520px,
+  "md": 720px,
+  "lg": 880px,
+  "xl": 1120px,
+);
+
+@function resolve($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @return map.get($breakpoints, $bp);
+  }
+  @return $bp;
+}
+
+@mixin down($bp) {
+  @media (max-width: resolve($bp)) {
+    @content;
+  }
+}
+
+@mixin up($bp) {
+  @media (min-width: resolve($bp)) {
+    @content;
+  }
+}

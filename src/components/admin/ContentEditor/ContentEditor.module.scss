@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .card {
   background: var(--pho-color-background-raised);
   border: var(--pho-border-line);
@@ -495,7 +497,7 @@
   padding-top: 0.9rem;
 }
 
-@media (max-width: 560px) {
+@include bp.down(560px) {
   .card {
     padding: 1rem;
   }
@@ -534,7 +536,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@include bp.down(420px) {
   .card,
   .compact {
     padding: 0.85rem;

@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .form {
   background: var(--pho-color-background-deep);
   border: 1px solid var(--pho-color-primary-faint);
@@ -58,7 +60,7 @@
   padding-top: 0.85rem;
 }
 
-@media (max-width: 640px) {
+@include bp.down(640px) {
   .form {
     padding: 0.85rem;
   }

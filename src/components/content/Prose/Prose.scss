@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .pho-post-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -311,7 +313,7 @@
   text-shadow: var(--pho-glow-accent);
 }
 
-@media (max-width: 600px) {
+@include bp.down(600px) {
   .pho-post-body {
     gap: var(--pho-space-4);
   }

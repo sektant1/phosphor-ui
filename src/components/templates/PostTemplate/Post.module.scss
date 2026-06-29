@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .root {
   display: grid;
   gap: var(--pho-space-6);
@@ -36,7 +38,8 @@
   min-width: 0;
 }
 
-@media (max-width: 960px) {
+// 960px: non-canonical reflow for the prose column.
+@include bp.down(960px) {
   .content {
     --pho-mainframe-prose-width: min(100%, var(--pho-layout-prose-max));
   }

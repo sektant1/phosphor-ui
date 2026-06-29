@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .wrap {
   --thumb-w: var(--pho-thumb-post-w);
   --thumb-h: var(--pho-thumb-post-h);
@@ -160,7 +162,7 @@
 .row > a:hover .thumbFallbackGlyph,
 .row > a:focus-visible .thumbFallbackGlyph { color: var(--pho-hover-row-muted-text); text-shadow: none; }
 
-@media (max-width: 720px) {
+@include bp.down("md") {
   .wrap {
     --thumb-w: 120px;
     --thumb-h: 76px;
@@ -169,7 +171,7 @@
   .header { font-size: var(--pho-type-micro-size); }
   .hDate, .date { display: none; }
 }
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .wrap {
     --thumb-w: var(--pho-thumb-post-w-sm);
     --thumb-h: var(--pho-thumb-post-h-sm);
@@ -184,7 +186,7 @@
   .title { white-space: normal; font-size: var(--pho-type-control-sm-size); }
 }
 
-@media (max-width: 360px) {
+@include bp.down("xs") {
   .wrap {
     --thumb-w: 72px;
     --thumb-h: 48px;

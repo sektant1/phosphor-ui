@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .footer {
   --footer-fg: var(--pho-color-primary-muted);
   --footer-accent: var(--pho-color-primary);
@@ -203,7 +205,7 @@
   }
 }
 
-@media (max-width: 540px) {
+@include bp.down(540px) {
   .row {
     display: flex;
     flex-direction: column;
@@ -237,7 +239,7 @@
   }
 }
 
-@media (max-width: 380px) {
+@include bp.down(380px) {
   .footer {
     padding: 0.8rem 0.7rem;
     font-size: var(--pho-type-caption-size);

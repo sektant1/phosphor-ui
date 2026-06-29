@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .pho-search-list {
   margin-top: 1rem;
   list-style: none;
@@ -89,7 +91,7 @@
   font-family: var(--pho-font-code);
 }
 
-@media (max-width: 520px) {
+@include bp.down("sm") {
   .pho-search-hit a { grid-template-columns: minmax(0, 1fr) auto; }
   .pho-search-hit .hit-date { display: none; }
   .pho-search-hit .hit-snippet { grid-column: 1 / -1; }

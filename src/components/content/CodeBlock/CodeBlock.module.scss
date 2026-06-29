@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .block {
   --code-frame-edge: var(--pho-mdx-code-frame, var(--code-punct, var(--pho-color-primary-faint)));
   --code-frame-glow: var(--pho-alpha-primary-22);
@@ -320,7 +322,7 @@
   color: var(--pho-color-text-faint);
 }
 
-@media (max-width: 560px) {
+@include bp.down(560px) {
   .bar {
     gap: 0.45rem;
     grid-template-columns: auto minmax(0, 1fr) auto;

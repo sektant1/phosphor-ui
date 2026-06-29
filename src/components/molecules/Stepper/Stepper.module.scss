@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .stp {
   display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem;
   font-family: var(--pho-font-terminal);
@@ -76,7 +78,7 @@
 .kind { font-family: var(--pho-font-terminal); font-size: var(--pho-type-ui-xs-size); letter-spacing: var(--pho-tracking-wider); text-transform: uppercase; color: var(--pho-color-primary-faint); }
 .name { font-family: var(--pho-font-heading); font-weight: 700; font-size: var(--pho-type-control-sm-size); color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); letter-spacing: var(--pho-tracking-normal); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-@media (max-width: 480px) {
+@include bp.down(480px) {
   .foot { grid-template-columns: minmax(0, 1fr); }
   .foot { gap: 8px; margin-top: 12px; }
   .foot a { padding: 8px 10px; gap: 6px; }

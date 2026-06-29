@@ -63,6 +63,18 @@ type LayoutPolymorphicProps<
   OwnProps extends object,
 > = Omit<PolymorphicProps<T>, keyof OwnProps> & OwnProps;
 
+/**
+ * Generic polymorphic component that also forwards a ref. The render function
+ * is declared with a generic `T`, which `React.forwardRef` erases to its
+ * default; the returned cast restores the generic so callers keep full
+ * polymorphic typing alongside `ref`.
+ */
+type PolymorphicForwardRef<DefaultTag extends LayoutElement, OwnProps> = <
+  T extends LayoutElement = DefaultTag,
+>(
+  props: PolymorphicProps<T> & OwnProps & { ref?: React.Ref<Element> },
+) => React.ReactElement | null;
+
 export interface FlexOwnProps {
   direction?: React.CSSProperties["flexDirection"];
   align?: React.CSSProperties["alignItems"];
@@ -88,31 +100,34 @@ export interface FlexOwnProps {
 export type FlexProps<T extends LayoutElement = "div"> = PolymorphicProps<T> &
   FlexOwnProps;
 
-export const Flex = <T extends LayoutElement = "div">({
-  as,
-  direction,
-  align,
-  justify,
-  wrap,
-  gap = "md",
-  rowGap,
-  columnGap,
-  inline,
-  mobileDirection,
-  mobileAlign,
-  mobileJustify,
-  mobileWrap,
-  mobileGap,
-  mobileRowGap,
-  mobileColumnGap,
-  stackOnMobile,
-  hideOnMobile,
-  showOnMobile,
-  fullWidth,
-  className,
-  style,
-  ...rest
-}: FlexProps<T>): React.ReactElement => {
+const FlexBase = <T extends LayoutElement = "div">(
+  {
+    as,
+    direction,
+    align,
+    justify,
+    wrap,
+    gap = "md",
+    rowGap,
+    columnGap,
+    inline,
+    mobileDirection,
+    mobileAlign,
+    mobileJustify,
+    mobileWrap,
+    mobileGap,
+    mobileRowGap,
+    mobileColumnGap,
+    stackOnMobile,
+    hideOnMobile,
+    showOnMobile,
+    fullWidth,
+    className,
+    style,
+    ...rest
+  }: FlexProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "div") as LayoutElement;
   const isTokenGap = isLayoutGap(gap);
   const vars: CssVars = {};
@@ -136,6 +151,7 @@ export const Flex = <T extends LayoutElement = "div">({
   applySpaceVar(vars, "--pho-mobile-column-gap", mobileColumnGap);
 
   return React.createElement(Tag, {
+    ref,
     className: cx(
       styles.flex,
       inline && styles.inline,
@@ -150,23 +166,40 @@ export const Flex = <T extends LayoutElement = "div">({
   });
 };
 
+export const Flex = React.forwardRef(FlexBase) as PolymorphicForwardRef<
+  "div",
+  FlexOwnProps
+>;
+
 export type RowProps<T extends LayoutElement = "div"> = Omit<
   FlexProps<T>,
   "direction"
 >;
 
-export const Row = <T extends LayoutElement = "div">(
+const RowBase = <T extends LayoutElement = "div">(
   props: RowProps<T>,
-): React.ReactElement => <Flex direction="row" {...props} />;
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => <Flex ref={ref} direction="row" {...props} />;
+
+export const Row = React.forwardRef(RowBase) as PolymorphicForwardRef<
+  "div",
+  Omit<FlexOwnProps, "direction">
+>;
 
 export type ColumnProps<T extends LayoutElement = "div"> = Omit<
   FlexProps<T>,
   "direction"
 >;
 
-export const Column = <T extends LayoutElement = "div">(
+const ColumnBase = <T extends LayoutElement = "div">(
   props: ColumnProps<T>,
-): React.ReactElement => <Flex direction="column" {...props} />;
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => <Flex ref={ref} direction="column" {...props} />;
+
+export const Column = React.forwardRef(ColumnBase) as PolymorphicForwardRef<
+  "div",
+  Omit<FlexOwnProps, "direction">
+>;
 
 export interface GridOwnProps {
   columns?: GridColumns;
@@ -192,30 +225,33 @@ export interface GridOwnProps {
 export type GridProps<T extends LayoutElement = "div"> = PolymorphicProps<T> &
   GridOwnProps;
 
-export const Grid = <T extends LayoutElement = "div">({
-  as,
-  columns,
-  minItemWidth,
-  align,
-  justify,
-  gap = "md",
-  rowGap,
-  columnGap,
-  inline,
-  mobileColumns,
-  mobileMinItemWidth,
-  mobileAlign,
-  mobileJustify,
-  mobileGap,
-  mobileRowGap,
-  mobileColumnGap,
-  hideOnMobile,
-  showOnMobile,
-  fullWidth,
-  className,
-  style,
-  ...rest
-}: GridProps<T>): React.ReactElement => {
+const GridBase = <T extends LayoutElement = "div">(
+  {
+    as,
+    columns,
+    minItemWidth,
+    align,
+    justify,
+    gap = "md",
+    rowGap,
+    columnGap,
+    inline,
+    mobileColumns,
+    mobileMinItemWidth,
+    mobileAlign,
+    mobileJustify,
+    mobileGap,
+    mobileRowGap,
+    mobileColumnGap,
+    hideOnMobile,
+    showOnMobile,
+    fullWidth,
+    className,
+    style,
+    ...rest
+  }: GridProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "div") as LayoutElement;
   const isTokenGap = isLayoutGap(gap);
   const vars: CssVars = {};
@@ -245,6 +281,7 @@ export const Grid = <T extends LayoutElement = "div">({
   applySpaceVar(vars, "--pho-mobile-column-gap", mobileColumnGap);
 
   return React.createElement(Tag, {
+    ref,
     className: cx(
       styles.grid,
       inline && styles.inline,
@@ -259,22 +296,36 @@ export const Grid = <T extends LayoutElement = "div">({
   });
 };
 
+export const Grid = React.forwardRef(GridBase) as PolymorphicForwardRef<
+  "div",
+  GridOwnProps
+>;
+
 export type AutoGridProps<T extends LayoutElement = "div"> = Omit<
   GridProps<T>,
   "columns"
 >;
 
-export const AutoGrid = <T extends LayoutElement = "div">({
-  minItemWidth = "14rem",
-  mobileColumns = "1fr",
-  ...rest
-}: AutoGridProps<T>): React.ReactElement => (
+const AutoGridBase = <T extends LayoutElement = "div">(
+  {
+    minItemWidth = "14rem",
+    mobileColumns = "1fr",
+    ...rest
+  }: AutoGridProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => (
   <Grid
+    ref={ref}
     minItemWidth={minItemWidth}
     mobileColumns={mobileColumns}
     {...rest}
   />
 );
+
+export const AutoGrid = React.forwardRef(AutoGridBase) as PolymorphicForwardRef<
+  "div",
+  Omit<GridOwnProps, "columns">
+>;
 
 export interface ResponsiveColumnsOwnProps extends Omit<GridOwnProps, "columns"> {
   columns?: GridColumns;
@@ -284,11 +335,14 @@ export interface ResponsiveColumnsOwnProps extends Omit<GridOwnProps, "columns">
 export type ResponsiveColumnsProps<T extends LayoutElement = "div"> =
   PolymorphicProps<T> & ResponsiveColumnsOwnProps;
 
-export const ResponsiveColumns = <T extends LayoutElement = "div">({
-  columns = 2,
-  mobileColumns = "1fr",
-  ...rest
-}: ResponsiveColumnsProps<T>): React.ReactElement => {
+const ResponsiveColumnsBase = <T extends LayoutElement = "div">(
+  {
+    columns = 2,
+    mobileColumns = "1fr",
+    ...rest
+  }: ResponsiveColumnsProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const resolvedColumns =
     typeof columns === "number"
       ? `repeat(${columns}, minmax(0, 1fr))`
@@ -296,6 +350,7 @@ export const ResponsiveColumns = <T extends LayoutElement = "div">({
 
   return (
     <Grid
+      ref={ref}
       columns={resolvedColumns}
       mobileColumns={mobileColumns}
       {...rest}
@@ -303,16 +358,24 @@ export const ResponsiveColumns = <T extends LayoutElement = "div">({
   );
 };
 
+export const ResponsiveColumns = React.forwardRef(
+  ResponsiveColumnsBase,
+) as PolymorphicForwardRef<"div", ResponsiveColumnsOwnProps>;
+
 export type DashboardGridProps<T extends LayoutElement = "div"> =
   AutoGridProps<T>;
 
-export const DashboardGrid = <T extends LayoutElement = "div">({
-  className,
-  minItemWidth = "14rem",
-  gap = "md",
-  ...rest
-}: DashboardGridProps<T>): React.ReactElement => (
+const DashboardGridBase = <T extends LayoutElement = "div">(
+  {
+    className,
+    minItemWidth = "14rem",
+    gap = "md",
+    ...rest
+  }: DashboardGridProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => (
   <AutoGrid
+    ref={ref}
     className={cx(styles.dashboardGrid, className)}
     minItemWidth={minItemWidth}
     gap={gap}
@@ -320,18 +383,22 @@ export const DashboardGrid = <T extends LayoutElement = "div">({
   />
 );
 
+export const DashboardGrid = React.forwardRef(
+  DashboardGridBase,
+) as PolymorphicForwardRef<"div", Omit<GridOwnProps, "columns">>;
+
 export type StackProps<T extends LayoutElement = "div"> = Omit<
   FlexProps<T>,
   "direction" | "mobileDirection"
 >;
 
-export const Stack = <T extends LayoutElement = "div">({
-  className,
-  style,
-  ...rest
-}: StackProps<T>): React.ReactElement => {
+const StackBase = <T extends LayoutElement = "div">(
+  { className, style, ...rest }: StackProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   return (
     <Flex
+      ref={ref}
       direction="column"
       className={cx(styles.stack, className)}
       style={style}
@@ -340,23 +407,44 @@ export const Stack = <T extends LayoutElement = "div">({
   );
 };
 
+export const Stack = React.forwardRef(StackBase) as PolymorphicForwardRef<
+  "div",
+  Omit<FlexOwnProps, "direction" | "mobileDirection">
+>;
+
 export type ClusterProps<T extends LayoutElement = "div"> = Omit<
   FlexProps<T>,
   "wrap" | "mobileWrap"
 >;
 
-export const Cluster = <T extends LayoutElement = "div">(
+const ClusterBase = <T extends LayoutElement = "div">(
   props: ClusterProps<T>,
-): React.ReactElement => <Flex wrap="wrap" align="center" {...props} />;
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => (
+  <Flex ref={ref} wrap="wrap" align="center" {...props} />
+);
+
+export const Cluster = React.forwardRef(ClusterBase) as PolymorphicForwardRef<
+  "div",
+  Omit<FlexOwnProps, "wrap" | "mobileWrap">
+>;
 
 export type InlineProps<T extends LayoutElement = "div"> = Omit<
   FlexProps<T>,
   "direction" | "inline"
 >;
 
-export const Inline = <T extends LayoutElement = "div">(
+const InlineBase = <T extends LayoutElement = "div">(
   props: InlineProps<T>,
-): React.ReactElement => <Flex inline direction="row" align="center" {...props} />;
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => (
+  <Flex ref={ref} inline direction="row" align="center" {...props} />
+);
+
+export const Inline = React.forwardRef(InlineBase) as PolymorphicForwardRef<
+  "div",
+  Omit<FlexOwnProps, "direction" | "inline">
+>;
 
 export interface ContainerOwnProps {
   width?: "content" | "prose" | "full" | string | number;
@@ -456,23 +544,88 @@ export interface PanelOwnProps extends ResponsiveVisibilityProps {
 export type PanelProps<T extends LayoutElement = "section"> =
   LayoutPolymorphicProps<T, PanelOwnProps>;
 
-export const Panel = <T extends LayoutElement = "section">({
-  as,
-  title,
-  meta,
-  actions,
-  footer,
-  tone = "default",
-  density = "default",
-  maxWidth,
-  fullWidth,
-  hideOnMobile,
-  showOnMobile,
-  className,
-  style,
-  children,
-  ...rest
-}: PanelProps<T>): React.ReactElement => {
+export interface PanelSlotProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export interface PanelTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+export interface PanelFooterProps extends React.HTMLAttributes<HTMLElement> {}
+
+export const PanelHeader = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <header ref={ref} className={cx(styles.panelHeader, className)} {...rest} />
+  ),
+);
+
+PanelHeader.displayName = "Panel.Header";
+
+export const PanelTitleBlock = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelTitleBlock, className)} {...rest} />
+  ),
+);
+
+PanelTitleBlock.displayName = "Panel.TitleBlock";
+
+export const PanelTitle = React.forwardRef<HTMLHeadingElement, PanelTitleProps>(
+  ({ className, ...rest }, ref) => (
+    <h2 ref={ref} className={cx(styles.panelTitle, className)} {...rest} />
+  ),
+);
+
+PanelTitle.displayName = "Panel.Title";
+
+export const PanelMeta = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelMeta, className)} {...rest} />
+  ),
+);
+
+PanelMeta.displayName = "Panel.Meta";
+
+export const PanelActions = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelActions, className)} {...rest} />
+  ),
+);
+
+PanelActions.displayName = "Panel.Actions";
+
+export const PanelBody = React.forwardRef<HTMLDivElement, PanelSlotProps>(
+  ({ className, ...rest }, ref) => (
+    <div ref={ref} className={cx(styles.panelBody, className)} {...rest} />
+  ),
+);
+
+PanelBody.displayName = "Panel.Body";
+
+export const PanelFooter = React.forwardRef<HTMLElement, PanelFooterProps>(
+  ({ className, ...rest }, ref) => (
+    <footer ref={ref} className={cx(styles.panelFooter, className)} {...rest} />
+  ),
+);
+
+PanelFooter.displayName = "Panel.Footer";
+
+const PanelRootBase = <T extends LayoutElement = "section">(
+  {
+    as,
+    title,
+    meta,
+    actions,
+    footer,
+    tone = "default",
+    density = "default",
+    maxWidth,
+    fullWidth,
+    hideOnMobile,
+    showOnMobile,
+    className,
+    style,
+    children,
+    ...rest
+  }: PanelProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "section") as LayoutElement;
   const vars: CssVars = {};
   applyWidthVar(vars, "--pho-panel-max-width", fullWidth ? "full" : maxWidth);
@@ -481,6 +634,7 @@ export const Panel = <T extends LayoutElement = "section">({
   return React.createElement(
     Tag,
     {
+      ref,
       className: cx(
         styles.panel,
         tone === "accent" && styles.panelAccent,
@@ -499,17 +653,32 @@ export const Panel = <T extends LayoutElement = "section">({
       {hasHeader ? (
         <header className={styles.panelHeader}>
           <div className={styles.panelTitleBlock}>
-            {title ? <h2 className={styles.panelTitle}>{title}</h2> : null}
-            {meta ? <div className={styles.panelMeta}>{meta}</div> : null}
+            {title ? <PanelTitle>{title}</PanelTitle> : null}
+            {meta ? <PanelMeta>{meta}</PanelMeta> : null}
           </div>
-          {actions ? <div className={styles.panelActions}>{actions}</div> : null}
+          {actions ? <PanelActions>{actions}</PanelActions> : null}
         </header>
       ) : null}
-      <div className={styles.panelBody}>{children}</div>
-      {footer ? <footer className={styles.panelFooter}>{footer}</footer> : null}
+      <PanelBody>{children}</PanelBody>
+      {footer ? <PanelFooter>{footer}</PanelFooter> : null}
     </>,
   );
 };
+
+const PanelRoot = React.forwardRef(PanelRootBase) as PolymorphicForwardRef<
+  "section",
+  PanelOwnProps
+>;
+
+export const Panel = Object.assign(PanelRoot, {
+  Header: PanelHeader,
+  TitleBlock: PanelTitleBlock,
+  Title: PanelTitle,
+  Meta: PanelMeta,
+  Actions: PanelActions,
+  Body: PanelBody,
+  Footer: PanelFooter,
+});
 
 export interface SectionOwnProps {
   title?: React.ReactNode;
@@ -524,20 +693,23 @@ export interface SectionOwnProps {
 export type SectionProps<T extends LayoutElement = "section"> =
   LayoutPolymorphicProps<T, SectionOwnProps>;
 
-export const Section = <T extends LayoutElement = "section">({
-  as,
-  title,
-  eyebrow,
-  description,
-  actions,
-  gap = "md",
-  paddingBlock = "lg",
-  width = "content",
-  className,
-  style,
-  children,
-  ...rest
-}: SectionProps<T>): React.ReactElement => {
+const SectionBase = <T extends LayoutElement = "section">(
+  {
+    as,
+    title,
+    eyebrow,
+    description,
+    actions,
+    gap = "md",
+    paddingBlock = "lg",
+    width = "content",
+    className,
+    style,
+    children,
+    ...rest
+  }: SectionProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "section") as LayoutElement;
   const vars: CssVars = {};
   applySpaceVar(vars, "--pho-section-gap", gap);
@@ -552,6 +724,7 @@ export const Section = <T extends LayoutElement = "section">({
   return React.createElement(
     Tag,
     {
+      ref,
       className: cx(styles.section, className),
       style: { ...vars, ...style },
       ...rest,
@@ -574,6 +747,11 @@ export const Section = <T extends LayoutElement = "section">({
   );
 };
 
+export const Section = React.forwardRef(SectionBase) as PolymorphicForwardRef<
+  "section",
+  SectionOwnProps
+>;
+
 export interface ContentFrameOwnProps {
   width?: LayoutWidth;
   padding?: LayoutSpace;
@@ -583,26 +761,34 @@ export interface ContentFrameOwnProps {
 export type ContentFrameProps<T extends LayoutElement = "article"> =
   PolymorphicProps<T> & ContentFrameOwnProps;
 
-export const ContentFrame = <T extends LayoutElement = "article">({
-  as,
-  width = "prose",
-  padding = "none",
-  framed = false,
-  className,
-  style,
-  ...rest
-}: ContentFrameProps<T>): React.ReactElement => {
+const ContentFrameBase = <T extends LayoutElement = "article">(
+  {
+    as,
+    width = "prose",
+    padding = "none",
+    framed = false,
+    className,
+    style,
+    ...rest
+  }: ContentFrameProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "article") as LayoutElement;
   const vars: CssVars = {};
   applyWidthVar(vars, "--pho-content-frame-width", width);
   applySpaceVar(vars, "--pho-content-frame-padding", padding);
 
   return React.createElement(Tag, {
+    ref,
     className: cx(styles.contentFrame, framed && styles.framed, className),
     style: { ...vars, ...style },
     ...rest,
   });
 };
+
+export const ContentFrame = React.forwardRef(
+  ContentFrameBase,
+) as PolymorphicForwardRef<"article", ContentFrameOwnProps>;
 
 export interface ContentWidthOwnProps {
   width?: LayoutWidth;
@@ -612,24 +798,32 @@ export interface ContentWidthOwnProps {
 export type ContentWidthProps<T extends LayoutElement = "div"> =
   PolymorphicProps<T> & ContentWidthOwnProps;
 
-export const ContentWidth = <T extends LayoutElement = "div">({
-  as,
-  width = "prose",
-  center = true,
-  className,
-  style,
-  ...rest
-}: ContentWidthProps<T>): React.ReactElement => {
+const ContentWidthBase = <T extends LayoutElement = "div">(
+  {
+    as,
+    width = "prose",
+    center = true,
+    className,
+    style,
+    ...rest
+  }: ContentWidthProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "div") as LayoutElement;
   const vars: CssVars = {};
   applyWidthVar(vars, "--pho-content-width", width);
 
   return React.createElement(Tag, {
+    ref,
     className: cx(styles.contentWidth, center && styles.center, className),
     style: { ...vars, ...style },
     ...rest,
   });
 };
+
+export const ContentWidth = React.forwardRef(
+  ContentWidthBase,
+) as PolymorphicForwardRef<"div", ContentWidthOwnProps>;
 
 export interface ContentShellOwnProps {
   eyebrow?: React.ReactNode;
@@ -644,20 +838,23 @@ export interface ContentShellOwnProps {
 export type ContentShellProps<T extends LayoutElement = "section"> =
   LayoutPolymorphicProps<T, ContentShellOwnProps>;
 
-export const ContentShell = <T extends LayoutElement = "section">({
-  as,
-  eyebrow,
-  title,
-  description,
-  actions,
-  width = "prose",
-  gap = "md",
-  paddingBlock = "none",
-  className,
-  style,
-  children,
-  ...rest
-}: ContentShellProps<T>): React.ReactElement => {
+const ContentShellBase = <T extends LayoutElement = "section">(
+  {
+    as,
+    eyebrow,
+    title,
+    description,
+    actions,
+    width = "prose",
+    gap = "md",
+    paddingBlock = "none",
+    className,
+    style,
+    children,
+    ...rest
+  }: ContentShellProps<T>,
+  ref: React.ForwardedRef<Element>,
+): React.ReactElement => {
   const Tag = (as ?? "section") as LayoutElement;
   const vars: CssVars = {};
   applyWidthVar(vars, "--pho-content-shell-width", width);
@@ -672,6 +869,7 @@ export const ContentShell = <T extends LayoutElement = "section">({
   return React.createElement(
     Tag,
     {
+      ref,
       className: cx(styles.contentShell, className),
       style: { ...vars, ...style },
       ...rest,
@@ -694,14 +892,22 @@ export const ContentShell = <T extends LayoutElement = "section">({
   );
 };
 
+export const ContentShell = React.forwardRef(
+  ContentShellBase,
+) as PolymorphicForwardRef<"section", ContentShellOwnProps>;
+
 export interface SidebarLayoutProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+  /** Sidebar content. Preferred alias for {@link SidebarLayoutProps.sidebar}. */
   left?: React.ReactNode;
   main?: React.ReactNode;
+  /** Aside content. Preferred alias for {@link SidebarLayoutProps.aside}. */
   right?: React.ReactNode;
+  /** @deprecated Use `left` instead. */
   sidebar?: React.ReactNode;
   sidebarLabel?: string;
   sidebarWidth?: string | number;
+  /** @deprecated Use `right` instead. */
   aside?: React.ReactNode;
   asideLabel?: string;
   asideWidth?: string | number;

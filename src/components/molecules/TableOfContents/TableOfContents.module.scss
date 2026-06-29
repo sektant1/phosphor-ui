@@ -1,3 +1,5 @@
+@use "../../../styles/breakpoints" as bp;
+
 .toc {
   border-left: 1px dashed var(--pho-color-primary-faint);
   padding: var(--pho-space-3) var(--pho-space-3) var(--pho-space-4) var(--pho-space-4);
@@ -140,7 +142,7 @@
 }
 .foot :global(b) { color: var(--pho-color-primary-strong); text-shadow: var(--pho-glow-primary); font-weight: 700; }
 
-@media (max-width: 720px) {
+@include bp.down("md") {
   .toc {
     border-left: 0;
     border-top: 1px dashed var(--pho-color-primary-faint);
