@@ -14,7 +14,7 @@ import {
   type PhosphorTheme,
 } from "./ThemeScript";
 
-export type ThemeToggleSlot = "root" | "indicator" | "label";
+export type ThemeToggleSlot = "root" | "indicator" | "label" | "cell" | "led";
 export { getInitialThemeScript, PHOSPHOR_THEMES, PHOSPHOR_THEME_STORAGE_KEY };
 export type { InitialThemeScriptOptions, PhosphorTheme };
 
@@ -177,6 +177,7 @@ export function ThemeToggle({
   size = "sm",
   style,
   "aria-label": ariaLabel,
+  onKeyDown,
   ...props
 }: ThemeToggleProps) {
   const context = useTheme();
@@ -185,15 +186,48 @@ export function ThemeToggle({
   const activeIndex = Math.max(allowedThemes.indexOf(theme), 0);
   const nextTheme = allowedThemes[(activeIndex + 1) % allowedThemes.length];
 
-  // Drive the switch thumb position from the active theme index instead of
-  // hard-coded per-theme offsets, so any number of themes spaces evenly.
+  // Drive the switch marker position from the active theme index instead of
+  // hard-coded per-theme offsets, so any number of themes spaces evenly. The
+  // active swatch color tints the marker to preview the selected channel.
   const switchStyle =
     shape === "switch"
       ? ({
           "--pho-theme-toggle-index": activeIndex,
           "--pho-theme-toggle-count": allowedThemes.length,
+          "--pho-theme-toggle-active-color": `var(--pho-theme-swatch-${theme}, currentColor)`,
         } as React.CSSProperties)
       : undefined;
+
+  const stepTheme = (delta: number) => {
+    const nextIndex = (activeIndex + delta + allowedThemes.length) % allowedThemes.length;
+    context.setTheme(allowedThemes[nextIndex]);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    onKeyDown?.(event);
+    if (event.defaultPrevented) return;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        event.preventDefault();
+        stepTheme(1);
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        event.preventDefault();
+        stepTheme(-1);
+        break;
+      case "Home":
+        event.preventDefault();
+        context.setTheme(allowedThemes[0]);
+        break;
+      case "End":
+        event.preventDefault();
+        context.setTheme(allowedThemes[allowedThemes.length - 1]);
+        break;
+    }
+  };
 
   return (
     <Button
@@ -209,16 +243,36 @@ export function ThemeToggle({
       variant={variant}
       size={size}
       type="button"
-      pressed={theme !== "phosphor"}
+      pressed={shape === "switch" ? undefined : theme !== allowedThemes[0]}
       data-pho-component="ThemeToggle"
       data-pho-slot="root"
       data-pho-shape={shape}
       data-pho-size={size}
       data-theme-toggle={theme}
-      aria-label={ariaLabel ?? `Switch to ${nextTheme} theme`}
+      aria-label={ariaLabel ?? `Theme: ${theme}. Switch to ${nextTheme} theme`}
       onClick={() => context.setTheme(nextTheme)}
+      onKeyDown={handleKeyDown}
     >
-      <span className={cx(styles.indicator, slotClassNames?.indicator)} aria-hidden="true" data-pho-slot="indicator" />
+      <span className={cx(styles.indicator, slotClassNames?.indicator)} aria-hidden="true" data-pho-slot="indicator">
+        {shape === "switch"
+          ? allowedThemes.map((cellTheme, index) => (
+              <span
+                key={cellTheme}
+                className={cx(styles.cell, slotClassNames?.cell)}
+                data-pho-slot="cell"
+                data-cell-theme={cellTheme}
+                data-active={index === activeIndex || undefined}
+                style={
+                  {
+                    "--pho-theme-cell-color": `var(--pho-theme-swatch-${cellTheme}, currentColor)`,
+                  } as React.CSSProperties
+                }
+              >
+                <span className={cx(styles.led, slotClassNames?.led)} data-pho-slot="led" />
+              </span>
+            ))
+          : null}
+      </span>
       {showLabel ? (
         <span className={cx(styles.label, slotClassNames?.label)} suppressHydrationWarning data-pho-slot="label">
           {context.mounted ? (labels[theme] ?? theme) : (labels[allowedThemes[0]] ?? allowedThemes[0])}

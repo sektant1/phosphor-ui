@@ -133,6 +133,14 @@
   --pho-color-status-current: var(--pho-color-primary);
   --pho-color-status-missing: var(--pho-color-danger-strong);
 
+  /* ── theme channel swatches ───────────────────────────────
+     Stable per-channel preview colors. These stay constant in
+     every theme so pickers can show each channel's true hue. */
+  --pho-theme-swatch-phosphor: #2cff7a;
+  --pho-theme-swatch-amber: #ffb000;
+  --pho-theme-swatch-cyan: #19f7ff;
+  --pho-theme-swatch-red: #ff2a2a;
+
   /* ── alpha overlays ───────────────────────────────────── */
   --pho-alpha-primary-01: rgba(44, 255, 122, 0.01);
   --pho-alpha-primary-02: rgba(44, 255, 122, 0.02);

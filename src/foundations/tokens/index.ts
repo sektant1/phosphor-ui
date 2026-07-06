@@ -67,6 +67,10 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-color-status-locked",
     "--pho-color-status-current",
     "--pho-color-status-missing",
+    "--pho-theme-swatch-phosphor",
+    "--pho-theme-swatch-amber",
+    "--pho-theme-swatch-cyan",
+    "--pho-theme-swatch-red",
   ],
   font: [
     "--pho-font-display",

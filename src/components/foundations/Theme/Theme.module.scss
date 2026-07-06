@@ -16,99 +16,194 @@
   box-shadow: var(--pho-theme-toggle-indicator-shadow);
 }
 
-// The switch presents as an N-cell segmented track: one cell per theme, with a
-// marker lighting the active cell. The button chrome is stripped so it reads as
-// a switch rather than a bordered button.
+// ── Channel switch ──────────────────────────────────────────
+// The switch presents as a hardware channel selector: one cell per theme,
+// each holding an LED in that channel's swatch color, with a framed marker
+// that slides to the active cell and takes on its hue. The button chrome is
+// stripped so it reads as a control, not a bordered button.
 .toggle.shape-switch {
-  gap: 0.5rem;
+  gap: 0.6rem;
   min-height: 0;
   padding: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
+  color: var(--pho-color-primary);
+  text-shadow: var(--pho-glow-primary-soft);
 }
 
-.toggle.shape-switch:hover,
+.toggle.shape-switch:hover:not(:disabled):not([aria-disabled="true"]),
 .toggle.shape-switch:focus-visible {
   background: transparent;
   box-shadow: none;
+  color: var(--pho-color-primary-strong);
+}
+
+// Focus hugs the track instead of the whole control so the ring reads as
+// part of the switch bezel.
+.toggle.shape-switch:focus-visible {
+  outline: none;
+}
+
+.toggle.shape-switch:focus-visible .indicator {
+  outline: var(--pho-focus-ring);
+  outline-offset: var(--pho-focus-offset);
 }
 
 .shape-switch {
-  // Track sizing is variable-driven (see size tiers). Cell width and the marker
-  // derive from the track + theme count, so any number of themes spaces evenly
-  // with no hard-coded positions.
-  --pho-theme-switch-track: 3.4rem;
-  --pho-theme-switch-height: 1.25rem;
-  --pho-theme-switch-inset: calc(var(--pho-theme-switch-height) * 0.16);
+  // Track sizing is variable-driven (see size tiers). Cell width and the
+  // marker derive from the track + theme count, so any number of themes
+  // spaces evenly with no hard-coded positions. The 2px subtraction keeps
+  // cell math aligned with the track's content box (1px border each side).
+  --pho-theme-switch-track: 4.6rem;
+  --pho-theme-switch-height: 1.3rem;
+  --pho-theme-switch-inset: calc(var(--pho-theme-switch-height) * 0.18);
   --pho-theme-switch-cell: calc(
-    var(--pho-theme-switch-track) / max(var(--pho-theme-toggle-count, 1), 1)
+    (var(--pho-theme-switch-track) - 2px) / max(var(--pho-theme-toggle-count, 1), 1)
   );
+  --pho-theme-switch-active: var(--pho-theme-toggle-active-color, var(--pho-color-primary));
 }
 
 .shape-switch.size-sm {
-  --pho-theme-switch-track: 2.8rem;
-  --pho-theme-switch-height: 1.05rem;
+  --pho-theme-switch-track: 3.8rem;
+  --pho-theme-switch-height: 1.1rem;
 }
 
 .shape-switch.size-md {
-  --pho-theme-switch-track: 3.4rem;
-  --pho-theme-switch-height: 1.25rem;
+  --pho-theme-switch-track: 4.6rem;
+  --pho-theme-switch-height: 1.3rem;
 }
 
 .shape-switch.size-lg {
-  --pho-theme-switch-track: 4.2rem;
-  --pho-theme-switch-height: 1.5rem;
+  --pho-theme-switch-track: 5.6rem;
+  --pho-theme-switch-height: 1.55rem;
 }
 
 .shape-switch.size-xl {
-  --pho-theme-switch-track: 5rem;
-  --pho-theme-switch-height: 1.75rem;
+  --pho-theme-switch-track: 6.6rem;
+  --pho-theme-switch-height: 1.8rem;
 }
 
+// Track: recessed bezel with a faint inner phosphor wash.
 .shape-switch .indicator {
   position: relative;
+  display: flex;
+  align-items: stretch;
   box-sizing: border-box;
   width: var(--pho-theme-switch-track);
   height: var(--pho-theme-switch-height);
   border: 1px solid color-mix(in srgb, var(--pho-color-primary) 45%, transparent);
   border-radius: 999px;
   overflow: hidden;
-  // One divider per cell boundary renders the discrete theme "places".
   background:
-    repeating-linear-gradient(
-      to right,
-      transparent 0,
-      transparent calc(var(--pho-theme-switch-cell) - 1px),
-      color-mix(in srgb, var(--pho-color-primary) 30%, transparent)
-        calc(var(--pho-theme-switch-cell) - 1px),
-      color-mix(in srgb, var(--pho-color-primary) 30%, transparent)
-        var(--pho-theme-switch-cell)
-    ),
-    var(--pho-alpha-primary-04);
-  box-shadow: inset 0 0 8px var(--pho-alpha-primary-10);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 60%),
+    var(--pho-alpha-surface-62);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.55),
+    inset 0 0 10px var(--pho-alpha-primary-08);
+  transition:
+    border-color var(--pho-motion-fast) var(--pho-ease-out),
+    box-shadow var(--pho-motion-fast) var(--pho-ease-out);
 }
 
-// Active cell marker: fills the current theme's cell and slides between them.
-.shape-switch .indicator::before {
+.toggle.shape-switch:hover:not(:disabled):not([aria-disabled="true"]) .indicator {
+  border-color: color-mix(in srgb, var(--pho-color-primary) 70%, transparent);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.55),
+    inset 0 0 10px var(--pho-alpha-primary-10),
+    0 0 10px var(--pho-alpha-primary-14);
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+// Hairline dividers mark the cell boundaries between channels.
+.cell + .cell::before {
+  content: "";
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--pho-color-primary) 22%, transparent);
+}
+
+// Channel LEDs: dim when idle, lit with a phosphor glow when active.
+.led {
+  width: calc(var(--pho-theme-switch-height) * 0.3);
+  height: calc(var(--pho-theme-switch-height) * 0.3);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--pho-theme-cell-color, currentColor) 30%, transparent);
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4);
+  transition:
+    background var(--pho-motion-base) var(--pho-ease-out),
+    box-shadow var(--pho-motion-base) var(--pho-ease-out),
+    transform var(--pho-motion-base) var(--pho-ease-out);
+}
+
+.toggle.shape-switch:hover:not(:disabled):not([aria-disabled="true"])
+  .cell:not([data-active])
+  .led {
+  background: color-mix(in srgb, var(--pho-theme-cell-color, currentColor) 48%, transparent);
+}
+
+.cell[data-active] .led {
+  background: var(--pho-theme-cell-color, currentColor);
+  box-shadow:
+    0 0 1px var(--pho-theme-cell-color, currentColor),
+    0 0 6px color-mix(in srgb, var(--pho-theme-cell-color, currentColor) 60%, transparent),
+    0 0 12px color-mix(in srgb, var(--pho-theme-cell-color, currentColor) 30%, transparent);
+  transform: scale(1.1);
+}
+
+// Sliding marker: frames the active cell and previews its channel color.
+.shape-switch .indicator::after {
   content: "";
   position: absolute;
   top: calc(var(--pho-theme-switch-inset) / 2);
+  bottom: calc(var(--pho-theme-switch-inset) / 2);
   left: calc(
     var(--pho-theme-switch-cell) * var(--pho-theme-toggle-index, 0) +
       var(--pho-theme-switch-inset) / 2
   );
   width: calc(var(--pho-theme-switch-cell) - var(--pho-theme-switch-inset));
-  height: calc(var(--pho-theme-switch-height) - var(--pho-theme-switch-inset));
+  border: 1px solid color-mix(in srgb, var(--pho-theme-switch-active) 75%, transparent);
   border-radius: 999px;
-  background: var(--pho-theme-toggle-indicator-bg);
-  box-shadow: var(--pho-theme-toggle-indicator-shadow);
-  transition: left var(--pho-motion-fast) var(--pho-ease-out);
+  background: color-mix(in srgb, var(--pho-theme-switch-active) 10%, transparent);
+  box-shadow:
+    0 0 6px color-mix(in srgb, var(--pho-theme-switch-active) 28%, transparent),
+    inset 0 0 4px color-mix(in srgb, var(--pho-theme-switch-active) 18%, transparent);
+  pointer-events: none;
+  transition:
+    left var(--pho-motion-base) var(--pho-ease-out),
+    border-color var(--pho-motion-base) var(--pho-ease-out),
+    background var(--pho-motion-base) var(--pho-ease-out),
+    box-shadow var(--pho-motion-base) var(--pho-ease-out);
+}
+
+// Reserve room for the longest default channel name so cycling themes
+// doesn't shift the layout.
+.shape-switch .label {
+  min-width: 8ch;
+  text-align: left;
+  letter-spacing: var(--pho-tracking-wider);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .shape-switch .indicator::before {
+  .shape-switch .indicator,
+  .shape-switch .indicator::after,
+  .led {
     transition: none;
+  }
+
+  .cell[data-active] .led {
+    transform: none;
   }
 }
 
