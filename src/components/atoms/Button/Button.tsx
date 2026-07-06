@@ -10,7 +10,7 @@ export type ButtonVariant =
   | "ghost"
   | "quiet"
   | "danger";
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
 type ButtonBaseProps = {
   variant?: ButtonVariant;
@@ -67,6 +67,7 @@ function getClassName(
     variantClass[variant],
     size === "sm" && styles.sm,
     size === "lg" && styles.lg,
+    size === "xl" && styles.xl,
     pressed && styles.pressed,
     fullWidth && styles.fullWidth,
     className,

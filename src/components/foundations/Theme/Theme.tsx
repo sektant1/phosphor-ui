@@ -175,18 +175,37 @@ export function ThemeToggle({
   className,
   variant = "ghost",
   size = "sm",
+  style,
   "aria-label": ariaLabel,
   ...props
 }: ThemeToggleProps) {
   const context = useTheme();
   const allowedThemes = normalizeThemes(themes ?? context.themes);
   const theme = isTheme(context.theme, allowedThemes) ? context.theme : allowedThemes[0];
-  const nextTheme = allowedThemes[(allowedThemes.indexOf(theme) + 1) % allowedThemes.length];
+  const activeIndex = Math.max(allowedThemes.indexOf(theme), 0);
+  const nextTheme = allowedThemes[(activeIndex + 1) % allowedThemes.length];
+
+  // Drive the switch thumb position from the active theme index instead of
+  // hard-coded per-theme offsets, so any number of themes spaces evenly.
+  const switchStyle =
+    shape === "switch"
+      ? ({
+          "--pho-theme-toggle-index": activeIndex,
+          "--pho-theme-toggle-count": allowedThemes.length,
+        } as React.CSSProperties)
+      : undefined;
 
   return (
     <Button
       {...props}
-      className={cx(styles.toggle, styles[`shape-${shape}`], slotClassNames?.root, className)}
+      className={cx(
+        styles.toggle,
+        styles[`shape-${shape}`],
+        styles[`size-${size}`],
+        slotClassNames?.root,
+        className,
+      )}
+      style={{ ...switchStyle, ...style }}
       variant={variant}
       size={size}
       type="button"
@@ -194,6 +213,7 @@ export function ThemeToggle({
       data-pho-component="ThemeToggle"
       data-pho-slot="root"
       data-pho-shape={shape}
+      data-pho-size={size}
       data-theme-toggle={theme}
       aria-label={ariaLabel ?? `Switch to ${nextTheme} theme`}
       onClick={() => context.setTheme(nextTheme)}

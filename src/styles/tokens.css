@@ -321,13 +321,13 @@
     box-shadow var(--pho-motion-fast) var(--pho-ease-out),
     color var(--pho-motion-fast) var(--pho-ease-out),
     text-shadow var(--pho-motion-fast) var(--pho-ease-out);
-  --pho-scanline-opacity: 0.11;
+  --pho-scanline-opacity: 0.14;
   --pho-scanline-size: 4px;
   --pho-flicker-opacity-min: 0.88;
   --pho-crt-flicker-opacity-min: var(--pho-flicker-opacity-min);
-  --pho-crt-scanline-color: var(--pho-alpha-primary-10);
-  --pho-crt-rgb-shift-start: var(--pho-alpha-primary-04);
-  --pho-crt-rgb-shift-mid: var(--pho-alpha-accent-04);
+  --pho-crt-scanline-color: rgba(44, 255, 122, 0.08);
+  --pho-crt-rgb-shift-start: transparent;
+  --pho-crt-rgb-shift-mid: transparent;
   --pho-crt-screen-bg:
     linear-gradient(180deg, var(--pho-alpha-primary-06), var(--pho-alpha-primary-02)),
     var(--pho-color-background);
@@ -415,6 +415,7 @@
   --type-control-size: 0.95rem;
   --type-control-sm-size: 0.875rem;
   --type-control-lg-size: 1.1rem;
+  --type-control-xl-size: 1.3rem;
   --type-icon-sm-size: 1rem;
   --type-icon-md-size: 1.25rem;
   --type-icon-lg-size: 1.65rem;
@@ -455,6 +456,7 @@
   --pho-type-control-size: var(--type-control-size);
   --pho-type-control-sm-size: var(--type-control-sm-size);
   --pho-type-control-lg-size: var(--type-control-lg-size);
+  --pho-type-control-xl-size: var(--type-control-xl-size);
   --pho-type-icon-sm-size: var(--type-icon-sm-size);
   --pho-type-icon-md-size: var(--type-icon-md-size);
   --pho-type-icon-lg-size: var(--type-icon-lg-size);
@@ -736,7 +738,8 @@
     linear-gradient(180deg, rgba(255, 176, 0, 0.04) 0%, transparent 28%, rgba(255, 176, 0, 0.018) 100%);
   --pho-crt-vignette:
     radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.4) 100%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.03));
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.03)),
+    repeating-linear-gradient(135deg, rgba(255, 176, 0, 0.04) 0, rgba(255, 176, 0, 0.04) 2px, transparent 2px, transparent 8px);
   --pho-crt-vignette-shadow: inset 0 0 100px rgba(0, 0, 0, 0.75);
   --pho-crt-shadow:
     0 0 20px rgba(255, 176, 0, 0.2),
@@ -985,7 +988,8 @@
     linear-gradient(180deg, rgba(25, 247, 255, 0.04) 0%, transparent 28%, rgba(25, 247, 255, 0.018) 100%);
   --pho-crt-vignette:
     radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.42) 100%),
-    linear-gradient(90deg, rgba(200, 251, 255, 0.04), transparent 12%, transparent 88%, rgba(200, 251, 255, 0.03));
+    linear-gradient(90deg, rgba(200, 251, 255, 0.04), transparent 12%, transparent 88%, rgba(200, 251, 255, 0.03)),
+    repeating-linear-gradient(135deg, rgba(25, 247, 255, 0.04) 0, rgba(25, 247, 255, 0.04) 2px, transparent 2px, transparent 8px);
   --pho-crt-vignette-shadow: inset 0 0 100px rgba(0, 4, 7, 0.78);
   --pho-crt-shadow:
     0 0 22px rgba(25, 247, 255, 0.22),
@@ -1234,7 +1238,8 @@
     linear-gradient(180deg, rgba(255, 42, 42, 0.045) 0%, transparent 28%, rgba(255, 42, 42, 0.018) 100%);
   --pho-crt-vignette:
     radial-gradient(circle at center, transparent 48%, rgba(0, 0, 0, 0.5) 100%),
-    linear-gradient(90deg, rgba(255, 184, 184, 0.04), transparent 12%, transparent 88%, rgba(255, 184, 184, 0.03));
+    linear-gradient(90deg, rgba(255, 184, 184, 0.04), transparent 12%, transparent 88%, rgba(255, 184, 184, 0.03)),
+    repeating-linear-gradient(135deg, rgba(255, 42, 42, 0.04) 0, rgba(255, 42, 42, 0.04) 2px, transparent 2px, transparent 8px);
   --pho-crt-vignette-shadow: inset 0 0 100px rgba(0, 0, 0, 0.82);
   --pho-crt-shadow:
     0 0 22px rgba(255, 42, 42, 0.24),

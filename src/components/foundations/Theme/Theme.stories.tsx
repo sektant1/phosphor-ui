@@ -92,6 +92,22 @@ export function Example() {
 }
 `;
 
+const switchSizesSource = tsx`
+import { ThemeProvider, ThemeToggle } from "phosphor-ui";
+
+export function Example() {
+  return (
+    <ThemeProvider storageKey="phosphor-story-theme">
+      <div style={{ display: "flex", flexDirection: "column", gap: 20, alignItems: "flex-start" }}>
+        {(["sm", "md", "lg", "xl"] as const).map((size) => (
+          <ThemeToggle key={size} shape="switch" size={size} />
+        ))}
+      </div>
+    </ThemeProvider>
+  );
+}
+`;
+
 function ThemeSample({ theme }: { theme?: "phosphor" | "amber" | "cyan" | "red" }) {
   return (
     <div
@@ -137,6 +153,30 @@ export const Comparison: Story = {
       <ThemeSample theme="cyan" />
       <ThemeSample theme="red" />
     </div>
+  ),
+};
+
+export const SwitchSizes: Story = {
+  parameters: { docs: { source: source(switchSizesSource) } },
+  render: () => (
+    <ThemeProvider storageKey="phosphor-story-theme">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 20,
+          alignItems: "flex-start",
+          minHeight: "100vh",
+          padding: 32,
+          background: "var(--pho-crt-shell-bg)",
+          color: "var(--pho-color-text)",
+        }}
+      >
+        {(["sm", "md", "lg", "xl"] as const).map((size) => (
+          <ThemeToggle key={size} shape="switch" size={size} />
+        ))}
+      </div>
+    </ThemeProvider>
   ),
 };
 

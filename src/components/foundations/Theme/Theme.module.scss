@@ -16,24 +16,100 @@
   box-shadow: var(--pho-theme-toggle-indicator-shadow);
 }
 
-.shape-switch .indicator {
-  width: calc(var(--pho-theme-toggle-indicator-size) * 2.1);
-  border-radius: 999px;
-  position: relative;
+// The switch presents as an N-cell segmented track: one cell per theme, with a
+// marker lighting the active cell. The button chrome is stripped so it reads as
+// a switch rather than a bordered button.
+.toggle.shape-switch {
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 0;
+  border: 0;
   background: transparent;
+  box-shadow: none;
 }
 
+.toggle.shape-switch:hover,
+.toggle.shape-switch:focus-visible {
+  background: transparent;
+  box-shadow: none;
+}
+
+.shape-switch {
+  // Track sizing is variable-driven (see size tiers). Cell width and the marker
+  // derive from the track + theme count, so any number of themes spaces evenly
+  // with no hard-coded positions.
+  --pho-theme-switch-track: 3.4rem;
+  --pho-theme-switch-height: 1.25rem;
+  --pho-theme-switch-inset: calc(var(--pho-theme-switch-height) * 0.16);
+  --pho-theme-switch-cell: calc(
+    var(--pho-theme-switch-track) / max(var(--pho-theme-toggle-count, 1), 1)
+  );
+}
+
+.shape-switch.size-sm {
+  --pho-theme-switch-track: 2.8rem;
+  --pho-theme-switch-height: 1.05rem;
+}
+
+.shape-switch.size-md {
+  --pho-theme-switch-track: 3.4rem;
+  --pho-theme-switch-height: 1.25rem;
+}
+
+.shape-switch.size-lg {
+  --pho-theme-switch-track: 4.2rem;
+  --pho-theme-switch-height: 1.5rem;
+}
+
+.shape-switch.size-xl {
+  --pho-theme-switch-track: 5rem;
+  --pho-theme-switch-height: 1.75rem;
+}
+
+.shape-switch .indicator {
+  position: relative;
+  box-sizing: border-box;
+  width: var(--pho-theme-switch-track);
+  height: var(--pho-theme-switch-height);
+  border: 1px solid color-mix(in srgb, var(--pho-color-primary) 45%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+  // One divider per cell boundary renders the discrete theme "places".
+  background:
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(var(--pho-theme-switch-cell) - 1px),
+      color-mix(in srgb, var(--pho-color-primary) 30%, transparent)
+        calc(var(--pho-theme-switch-cell) - 1px),
+      color-mix(in srgb, var(--pho-color-primary) 30%, transparent)
+        var(--pho-theme-switch-cell)
+    ),
+    var(--pho-alpha-primary-04);
+  box-shadow: inset 0 0 8px var(--pho-alpha-primary-10);
+}
+
+// Active cell marker: fills the current theme's cell and slides between them.
 .shape-switch .indicator::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 18%;
-  width: calc(var(--pho-theme-toggle-indicator-size) * 0.58);
-  height: calc(var(--pho-theme-toggle-indicator-size) * 0.58);
-  transform: translateY(-50%);
-  border-radius: 50%;
+  top: calc(var(--pho-theme-switch-inset) / 2);
+  left: calc(
+    var(--pho-theme-switch-cell) * var(--pho-theme-toggle-index, 0) +
+      var(--pho-theme-switch-inset) / 2
+  );
+  width: calc(var(--pho-theme-switch-cell) - var(--pho-theme-switch-inset));
+  height: calc(var(--pho-theme-switch-height) - var(--pho-theme-switch-inset));
+  border-radius: 999px;
   background: var(--pho-theme-toggle-indicator-bg);
   box-shadow: var(--pho-theme-toggle-indicator-shadow);
+  transition: left var(--pho-motion-fast) var(--pho-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape-switch .indicator::before {
+    transition: none;
+  }
 }
 
 .shape-chip .indicator {

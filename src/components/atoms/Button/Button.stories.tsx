@@ -12,7 +12,7 @@ const variants: ButtonVariant[] = [
   "danger",
 ];
 
-const sizes: ButtonSize[] = ["sm", "md", "lg"];
+const sizes: ButtonSize[] = ["sm", "md", "lg", "xl"];
 
 const meta: Meta<ButtonProps> = {
   title: "Atoms/Button",
@@ -80,7 +80,7 @@ export function Example() {
 const sizesSource = tsx`
 import { Button } from "phosphor-ui";
 
-const sizes= ["sm", "md", "lg"];
+const sizes= ["sm", "md", "lg", "xl"];
 
 export function Example() {
   return (

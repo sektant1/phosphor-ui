@@ -95,6 +95,7 @@ export const PHOSPHOR_TOKEN_GROUPS = {
     "--pho-type-control-size",
     "--pho-type-control-sm-size",
     "--pho-type-control-lg-size",
+    "--pho-type-control-xl-size",
     "--pho-type-icon-sm-size",
     "--pho-type-icon-md-size",
     "--pho-type-icon-lg-size",
